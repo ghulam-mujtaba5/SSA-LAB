@@ -21,7 +21,7 @@ Dr. Junaid Akram is an Assistant Professor, HEC-approved PhD supervisor, former 
 - [About](/about)
 - [Research](/research)
 - [Publications](/publications)
-- [Alumni and FYP Supervision](/alumni)
+- [FYP Supervision](/alumni)
 - [Learning Resources](/resources)
 - [Team](/team)
 - [Events](/events)

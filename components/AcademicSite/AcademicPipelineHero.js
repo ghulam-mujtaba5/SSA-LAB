@@ -82,7 +82,7 @@ const STAGES = [
   },
   {
     id: "alumni",
-    label: "5. FYP & Alumni",
+    label: "5. FYP Supervision",
     desc: "Supervised BS/MS/PhD student platforms & career placement",
   },
 ];
@@ -307,7 +307,7 @@ export default function AcademicPipelineHero() {
             <div className={styles.monoLine}>25+ Papers Published</div>
           </FloatCard>
 
-          {/* Outcome 3: Alumni & FYP */}
+          {/* Outcome 3: Supervision & FYP */}
           <FloatCard
             delay={1.0}
             floatDuration={5.0}
@@ -317,7 +317,7 @@ export default function AcademicPipelineHero() {
             <div className={styles.cardHeader}>
               <GraduationCap size={15} color="#1d6685" />
               <strong className={styles.cardTitle}>Supervision & FYP</strong>
-              <span className={styles.cardMeta}>ALUMNI</span>
+              <span className={styles.cardMeta}>PROJECTS</span>
             </div>
             <p className={styles.cardBody}>
               BS, MS & PhD Student Security Platforms

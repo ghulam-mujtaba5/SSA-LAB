@@ -31,7 +31,7 @@ const impactStats = [
   { value: "152,823+", label: "Repositories Analyzed", detail: "Open-source C/C++ & Java projects" },
   { value: "324B+", label: "Lines of Code Indexed", detail: "Code clone & vulnerability detection" },
   { value: "25+", label: "Journal Publications", detail: "Q1 Applied Soft Computing, IEEE & IJICS" },
-  { value: "40+", label: "Supervised Researchers", detail: "BS, MS & PhD students & FYP alumni" },
+  { value: "40+", label: "Supervised Researchers", detail: "BS, MS & PhD students & FYP projects" },
 ];
 
 export default function AcademicHome() {
@@ -62,7 +62,7 @@ export default function AcademicHome() {
                 Explore Research <ArrowRight size={17} />
               </Link>
               <Link href="/alumni" className={styles.secondaryButton}>
-                Supervision & FYP Alumni
+                Supervision & FYP Projects
               </Link>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function AcademicHome() {
         <div>
           <GraduationCap size={23} />
           <span>Impact</span>
-          <strong>Student projects & alumni</strong>
+          <strong>Student projects & research</strong>
         </div>
       </section>
 
@@ -187,12 +187,12 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* Supervised FYP & Alumni Work */}
+      {/* Supervised FYP Work */}
       <section className={styles.section}>
         <div className={styles.sectionHeading}>
           <div>
             <p className={styles.eyebrow}>Student work</p>
-            <h2>Supervision, FYPs, and alumni projects</h2>
+            <h2>Supervision, FYPs, and student projects</h2>
           </div>
           <Link href="/alumni" className={styles.textLink}>
             Explore supervision <ArrowRight size={16} />

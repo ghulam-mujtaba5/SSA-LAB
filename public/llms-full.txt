@@ -26,13 +26,13 @@ Dr. Junaid Akram works on source-code security assessment, software vulnerabilit
 
 ## Supervision
 
-The Alumni and FYP page combines verified supervised projects and internship outcomes from the professor's previous website with current FYP ideas published by the COMSATS Lahore Computer Science department.
+The FYP Supervision page combines verified supervised projects and internship outcomes from the professor's previous website with current FYP ideas published by the COMSATS Lahore Computer Science department.
 
 ## Links
 
 - Research: /research
 - Publications: /publications
-- Alumni and FYP: /alumni
+- FYP Supervision: /alumni
 - Learning resources: /resources
 - Team: /team
 - Events: /events

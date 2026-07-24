@@ -184,7 +184,7 @@ export function navigationSchema() {
     ["About", "/about"],
     ["Research", "/research"],
     ["Publications", "/publications"],
-    ["Alumni and FYP", "/alumni"],
+    ["FYP Supervision", "/alumni"],
     ["Team", "/team"],
     ["Contact", "/contact"],
   ];

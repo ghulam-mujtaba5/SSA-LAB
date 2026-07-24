@@ -145,7 +145,7 @@ export default function AcademicFypListing({ projects = [] }) {
 
                 <p className={styles.fypCardSummary}>{project.summary}</p>
 
-                {/* Students list with Alumni Profile links */}
+                {/* Students list with profile links */}
                 <div className={styles.fypCardStudents}>
                   <Users size={14} className={styles.metaIcon} />
                   <span>

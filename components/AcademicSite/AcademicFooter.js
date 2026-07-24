@@ -97,9 +97,9 @@ export default function AcademicFooter() {
             ))}
           </nav>
 
-          {/* Nav Column 2: Supervision & Alumni */}
+          {/* Nav Column 2: Supervision & Projects */}
           <nav className={styles.navCol} aria-label="Supervision links">
-            <strong className={styles.colTitle}>Supervision & Alumni</strong>
+            <strong className={styles.colTitle}>FYP Supervision</strong>
             {ALUMNI_LINKS.map(({ href, label, external }) =>
               external ? (
                 <a

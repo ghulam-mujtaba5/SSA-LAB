@@ -22,7 +22,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
             The requested final-year project case study does not exist or may have been updated.
           </p>
           <Link href="/alumni" className={styles.primaryButton}>
-            <ArrowLeft size={16} /> Return to Alumni & FYP List
+            <ArrowLeft size={16} /> Return to FYP Supervision List
           </Link>
         </div>
       </AcademicSiteLayout>
@@ -39,7 +39,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       <div className={styles.detailBreadcrumbBand}>
         <div className={styles.breadcrumbInner}>
           <Link href="/alumni" className={styles.breadcrumbBack}>
-            <ArrowLeft size={16} /> Back to Alumni & Supervised FYP List
+            <ArrowLeft size={16} /> Back to Supervised FYP List
           </Link>
           <div className={styles.breadcrumbMeta}>
             <span>{project.session || "COMSATS FYP"}</span>

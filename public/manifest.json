@@ -30,9 +30,9 @@
       "description": "View selected publications"
     },
     {
-      "name": "Alumni and FYP",
+      "name": "FYP Supervision",
       "url": "/alumni",
-      "description": "View supervised student projects and alumni"
+      "description": "View supervised student projects and research"
     }
   ]
 }
