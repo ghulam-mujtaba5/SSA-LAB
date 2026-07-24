@@ -1,76 +1,50 @@
-import dbConnect from "../lib/mongoose";
-import Article from "../models/Article";
-
-const esc = (s) =>
-  String(s || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+const entries = [
+  {
+    title: "Research Projects and Tools",
+    path: "/research",
+    description:
+      "Current and completed SCSA Lab research in software security, vulnerability detection, testing, malware, and code analysis.",
+  },
+  {
+    title: "Selected Publications",
+    path: "/publications",
+    description:
+      "Selected journal and conference publications by Dr. Junaid Akram.",
+  },
+  {
+    title: "Alumni and FYP Supervision",
+    path: "/alumni",
+    description:
+      "Selected supervised student projects and internship outcomes.",
+  },
+];
 
 export async function getServerSideProps({ res }) {
-  await dbConnect();
-  const articles = await Article.find({ published: true })
-    .sort({ createdAt: -1 })
-    .limit(50)
-    .lean();
-
-  const base = "https://ghulammujtaba.com";
-
-  const items = articles
-    .map((a) => {
-      const url = `${base}/insights/${a.slug}`;
-      const tags = Array.isArray(a.tags)
-        ? a.tags.map((t) => `      <category>${esc(t)}</category>`).join("\n")
-        : "";
-      const image = a.coverImage
-        ? `      <enclosure url="${esc(a.coverImage)}" type="image/jpeg" length="0" />`
-        : "";
-      const updated = a.updatedAt
-        ? `      <lastBuildDate>${new Date(a.updatedAt).toUTCString()}</lastBuildDate>`
-        : "";
-
-      return `    <item>
-      <title><![CDATA[${a.title}]]></title>
-      <link>${url}</link>
-      <description><![CDATA[${a.excerpt || a.description || ""}]]></description>
-      <content:encoded><![CDATA[${a.excerpt || a.description || ""}]]></content:encoded>
-      <author>ghulammujtaba1005@gmail.com (Ghulam Mujtaba)</author>
-      <pubDate>${new Date(a.createdAt).toUTCString()}</pubDate>
-      <guid isPermaLink="true">${url}</guid>
-${tags}
-${image}
-${updated}
-    </item>`;
-    })
-    .join("\n");
-
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://sites.google.com/view/temporaryr";
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-  xmlns:atom="http://www.w3.org/2005/Atom"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0">
   <channel>
-    <title>Ghulam Mujtaba — Insights</title>
-    <link>${base}/insights</link>
-    <description>Technical articles on Full Stack Development, AI, Data Science and startups by Ghulam Mujtaba — Founder of Megicode &amp; CampusAxis.</description>
+    <title>Junaid Akram — SCSA Research Lab</title>
+    <link>${base}</link>
+    <description>Research, publications, and supervision updates from the Source Code Security Assessment Lab.</description>
     <language>en-us</language>
-    <managingEditor>ghulammujtaba1005@gmail.com (Ghulam Mujtaba)</managingEditor>
-    <webMaster>ghulammujtaba1005@gmail.com (Ghulam Mujtaba)</webMaster>
-    <image>
-      <url>${base}/og-image.png</url>
-      <title>Ghulam Mujtaba</title>
-      <link>${base}/insights</link>
-    </image>
-    <atom:link href="${base}/feed.xml" rel="self" type="application/rss+xml"/>
-${items}
+${entries
+  .map(
+    (entry) => `    <item>
+      <title><![CDATA[${entry.title}]]></title>
+      <link>${base}${entry.path}</link>
+      <description><![CDATA[${entry.description}]]></description>
+      <guid isPermaLink="true">${base}${entry.path}</guid>
+    </item>`,
+  )
+  .join("\n")}
   </channel>
 </rss>`;
 
-  res.setHeader("Content-Type", "application/xml; charset=utf-8");
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=3600, stale-while-revalidate=600"
-  );
+  res.setHeader("Content-Type", "application/rss+xml; charset=utf-8");
+  res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
   res.write(xml);
   res.end();
   return { props: {} };
@@ -79,3 +53,4 @@ ${items}
 export default function Feed() {
   return null;
 }
+

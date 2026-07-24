@@ -1,0 +1,145 @@
+.form {
+  display: grid;
+  gap: 22px;
+  max-width: 1120px;
+  padding-bottom: 72px;
+}
+
+.section {
+  display: grid;
+  gap: 22px;
+  padding: 28px;
+  border: 1px solid rgba(116, 142, 170, 0.2);
+  border-radius: 14px;
+  background: var(--admin-card-bg, rgba(18, 28, 40, 0.78));
+  box-shadow: 0 20px 50px rgba(3, 10, 20, 0.08);
+}
+
+.sectionHeading p {
+  margin: 0 0 6px;
+  color: #54d6e8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  color: var(--admin-text, #edf4fa);
+  font-size: 1.2rem;
+}
+
+.twoColumns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  color: var(--admin-text, #edf4fa);
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgba(116, 142, 170, 0.28);
+  border-radius: 9px;
+  background: var(--admin-input-bg, rgba(7, 16, 28, 0.55));
+  color: var(--admin-text, #edf4fa);
+  font: inherit;
+  font-weight: 400;
+  line-height: 1.55;
+  outline: none;
+  padding: 12px 13px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field textarea {
+  min-height: 108px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #54d6e8;
+  box-shadow: 0 0 0 3px rgba(84, 214, 232, 0.12);
+}
+
+.field small {
+  color: var(--admin-text-muted, #91a2b4);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+.toggles {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 48px;
+  color: var(--admin-text, #edf4fa);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.toggles label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggles input {
+  width: 17px;
+  height: 17px;
+  accent-color: #54d6e8;
+}
+
+.actions {
+  position: sticky;
+  bottom: 18px;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 5;
+}
+
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid #54d6e8;
+  border-radius: 9px;
+  background: #0f3144;
+  color: #f5fbff;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 16px 35px rgba(0, 12, 24, 0.26);
+}
+
+.actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+@media (max-width: 780px) {
+  .section {
+    padding: 20px;
+  }
+
+  .twoColumns {
+    grid-template-columns: 1fr;
+  }
+
+  .toggles {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+

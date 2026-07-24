@@ -237,7 +237,7 @@ function MyApp({ Component, pageProps, session }) {
       </Head>
 
       {/* Google Analytics - Production only with Consent Mode */}
-      {process.env.NODE_ENV === "production" && (
+      {process.env.NODE_ENV === "production" && gtag.GA_TRACKING_ID && (
         <>
           <Script
             id="google-analytics"
@@ -256,7 +256,7 @@ function MyApp({ Component, pageProps, session }) {
               gtag('config', '${gtag.GA_TRACKING_ID}', {
                 page_path: window.location.pathname,
                 anonymize_ip: true,
-                cookie_domain: 'ghulammujtaba.com',
+                cookie_domain: 'auto',
                 cookie_flags: 'SameSite=None; Secure'
               });
             `}

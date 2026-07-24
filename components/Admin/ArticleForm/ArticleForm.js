@@ -737,7 +737,7 @@ export default function ArticleForm({
         </label>
         <input
           id="ctaLabel"
-          placeholder="e.g. See the CampusAxis case study"
+          placeholder="e.g. See the related research project"
           {...register("ctaLabel")}
           className={`${styles.input} ${styles.input}`}
         />
@@ -757,7 +757,7 @@ export default function ArticleForm({
         </label>
         <input
           id="ctaUrl"
-          placeholder="/projects/campusaxis-university-portal"
+          placeholder="/research"
           {...register("ctaUrl")}
           className={`${styles.input} ${styles.input}`}
         />

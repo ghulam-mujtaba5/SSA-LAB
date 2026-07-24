@@ -3,42 +3,64 @@
 
 :root {
   /* ==============================================
-     BRAND COLORS (Unified across all pages)
+     BRAND COLOR SHADES (Unified Electric Indigo Palette)
      ============================================== */
-  
-  /* Primary Brand Blue - The main accent color */
-  --brand-primary: #4573df;
-  --brand-primary-hover: #3b5fc7;
-  --brand-primary-active: #2f4db5;
-  --brand-primary-light: #5a86e6;
-  --brand-primary-muted: rgba(69, 115, 223, 0.1);
-  --brand-primary-shadow: rgba(69, 115, 223, 0.25);
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+  --color-primary-950: #1e1b4b;
+
+  /* ==============================================
+     SLATE NEUTRAL SHADES (High-perception contrast)
+     ============================================== */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #090d16;
+
+  /* Primary Brand - Electric Indigo Main Accent */
+  --brand-primary: #4f46e5;
+  --brand-primary-hover: #4338ca;
+  --brand-primary-active: #3730a3;
+  --brand-primary-light: #6366f1;
+  --brand-primary-muted: rgba(79, 70, 229, 0.08);
+  --brand-primary-shadow: rgba(79, 70, 229, 0.25);
   
   /* ==============================================
-     PAGE BACKGROUNDS (Unified light/dark)
+     PAGE BACKGROUNDS & SURFACES
      ============================================== */
-  
-  /* Light mode page backgrounds */
-  --bg-page: #f7f9fc;
+  --bg-page: #f8fafc;
   --bg-elevated: #ffffff;
-  --bg-subtle: #e8ebee;
-  --bg-muted: #f2f5f9;
+  --bg-subtle: #f1f5f9;
+  --bg-muted: #e2e8f0;
   
   /* ==============================================
-     TEXT COLORS (Unified)
+     TEXT COLORS
      ============================================== */
-  
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-tertiary: #6b7280;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-tertiary: #64748b;
   
   /* ==============================================
      BORDER COLORS
      ============================================== */
-  
-  --border-default: #dbe2ea;
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-focus: #4573df;
+  --border-default: #e2e8f0;
+  --border-subtle: rgba(15, 23, 42, 0.06);
+  --border-focus: #4f46e5;
   
   /* Typography */
   --font-primary: "Open Sans", sans-serif;
@@ -78,11 +100,11 @@
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-  --shadow-xl: 0 16px 32px rgba(0,0,0,0.15);
+  /* Shadows - Refined Multi-layer */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 4px 14px -1px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+  --shadow-xl: 0 24px 48px -12px rgba(15, 23, 42, 0.18);
 
   /* Z-index */
   --z-dropdown: 20;
@@ -99,95 +121,100 @@
   --duration-normal: 200ms;
   --duration-slow: 320ms;
 
-  /* Safe areas (responsive, notch-aware) */
+  /* Safe areas */
   --safe-area-right: env(safe-area-inset-right, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 
-  /* Floating Action Button safe padding envelope (approx button size + gap) */
+  /* Floating Action Button safe envelope */
   --fab-safe: clamp(56px, 12vw, 96px);
 
-  /* Base (semantic) colors, will be overridden per theme */
-  --bg: #0f141a;
-  --bg-elev-1: #141a22;
-  --bg-elev-2: #181f29;
-  --surface: #1d2633;
-  --border: #2a3442;
-  --text: #e6edf3;
-  --text-muted: #9fb1c3;
+  /* Base (semantic) colors */
+  --bg: #090d16;
+  --bg-elev-1: #111827;
+  --bg-elev-2: #1e293b;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
 
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
   --primary-foreground: #ffffff;
   --success: #10b981;
   --success-dark: #059669;
   --warning: #f59e0b;
   --warning-dark: #d97706;
-  --danger: #ef4444;
-  --danger-dark: #dc2626;
+  --danger: #f43f5e;
+  --danger-dark: #e11d48;
   --info: #06b6d4;
-  --info-dark: #0891b2;
+  --info-dark: #0284c7;
 
-  --focus-ring: 0 0 0 2px rgba(59, 130, 246, 0.55);
-  --focus-ring-strong: 0 0 0 3px rgba(59, 130, 246, 0.75);
+  --focus-ring: 0 0 0 2px rgba(79, 70, 229, 0.55);
+  --focus-ring-strong: 0 0 0 3px rgba(79, 70, 229, 0.75);
 
-  /* Shadows for modern 2025 design */
-  --input-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --input-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  --btn-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --btn-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.08);
+  /* Element shadows */
+  --input-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --input-shadow-hover: 0 4px 14px rgba(15, 23, 42, 0.08);
+  --btn-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  --btn-shadow-hover: 0 4px 14px rgba(15, 23, 42, 0.12);
+  --btn-shadow-active: 0 1px 4px rgba(15, 23, 42, 0.06);
   
-  /* Button-specific shadows */
-  --btn-primary-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-  --btn-primary-shadow-hover: 0 6px 16px rgba(59, 130, 246, 0.35);
-  --btn-primary-shadow-active: 0 2px 8px rgba(59, 130, 246, 0.2);
+  /* Primary Button Shadows */
+  --btn-primary-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+  --btn-primary-shadow-hover: 0 6px 20px rgba(79, 70, 229, 0.42);
+  --btn-primary-shadow-active: 0 2px 8px rgba(79, 70, 229, 0.25);
   
-  --btn-secondary-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  --btn-secondary-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --btn-secondary-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --btn-secondary-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  --btn-secondary-shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.1);
+  --btn-secondary-shadow-active: 0 1px 4px rgba(15, 23, 42, 0.06);
   
-  --btn-danger-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
-  --btn-danger-shadow-hover: 0 6px 16px rgba(239, 68, 68, 0.35);
-  --btn-danger-shadow-active: 0 2px 8px rgba(239, 68, 68, 0.2);
+  --btn-danger-shadow: 0 4px 14px rgba(244, 63, 94, 0.3);
+  --btn-danger-shadow-hover: 0 6px 20px rgba(244, 63, 94, 0.42);
+  --btn-danger-shadow-active: 0 2px 8px rgba(244, 63, 94, 0.25);
   
-  --btn-success-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-  --btn-success-shadow-hover: 0 6px 16px rgba(16, 185, 129, 0.35);
-  --btn-success-shadow-active: 0 2px 8px rgba(16, 185, 129, 0.2);
+  --btn-success-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+  --btn-success-shadow-hover: 0 6px 20px rgba(16, 185, 129, 0.42);
+  --btn-success-shadow-active: 0 2px 8px rgba(16, 185, 129, 0.25);
   
-  --btn-outline-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  --btn-outline-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --btn-outline-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.05);
+  --btn-outline-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  --btn-outline-shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --btn-outline-shadow-active: 0 1px 4px rgba(15, 23, 42, 0.04);
   
-  --btn-ghost-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --btn-ghost-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.1);
-  --btn-ghost-shadow-active: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --btn-ghost-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --btn-ghost-shadow-hover: 0 2px 6px rgba(15, 23, 42, 0.08);
+  --btn-ghost-shadow-active: 0 1px 3px rgba(15, 23, 42, 0.04);
   
-  --btn-icon-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  --btn-icon-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --btn-icon-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --btn-icon-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  --btn-icon-shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.1);
+  --btn-icon-shadow-active: 0 1px 4px rgba(15, 23, 42, 0.06);
   
-  --btn-group-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --btn-group-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
 
   /* ==============================================
-     PREMIUM UPGRADE TOKENS (founder-engineer system)
+     PREMIUM UPGRADE TOKENS
      ============================================== */
 
-  /* Display ink — deep navy authority for headings */
-  --ink-display: #0f1b33;
+  /* Display ink — deep authority heading color */
+  --ink-display: #0f172a;
 
-  /* Conversion accent — ONLY for the primary conversion CTA
-     ("Start a Project") and the Launch node of the pipeline motif. */
-  --cta-accent: #d9480f;
+  /* Conversion accent — Sunset Amber/Coral */
+  --cta-accent: #ea580c;
   --cta-accent-hover: #c2410c;
-  --cta-accent-muted: rgba(217, 72, 15, 0.1);
-  --cta-accent-shadow: rgba(217, 72, 15, 0.28);
+  --cta-accent-muted: rgba(234, 88, 12, 0.08);
+  --cta-accent-shadow: rgba(234, 88, 12, 0.25);
 
-  /* Dark contrast band (contact section, featured spotlight) */
-  --bg-ink: #0e1526;
-  --bg-ink-elevated: #141d33;
+  /* Dark contrast band */
+  --bg-ink: #0f172a;
+  --bg-ink-elevated: #1e293b;
 
   /* Availability signal */
-  --signal-available: #16a34a;
+  --signal-available: #10b981;
+
+  /* Gradient definitions */
+  --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%);
+  --gradient-accent: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  --gradient-subtle: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(99, 102, 241, 0.02) 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.45) 100%);
 
   /* Display type scale */
   --text-display: clamp(2.35rem, 1.2rem + 4.2vw, 3.9rem);
@@ -201,16 +228,16 @@
   --container-pad: clamp(16px, 4vw, 32px);
   --section-gap: clamp(56px, 10vw, 96px);
 
-  /* Premium card shadows */
-  --shadow-card: 0 1px 2px rgba(15, 27, 51, 0.06), 0 8px 24px rgba(15, 27, 51, 0.08);
-  --shadow-card-hover: 0 2px 4px rgba(15, 27, 51, 0.08), 0 16px 40px rgba(15, 27, 51, 0.14);
+  /* Premium card shadows & border radius */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.05), 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  --shadow-card-hover: 0 4px 6px -1px rgba(79, 70, 229, 0.1), 0 20px 40px -8px rgba(15, 23, 42, 0.14);
   --radius-card: 16px;
 
-  /* Admin-specific design tokens for consistent styling */
+  /* Admin-specific design tokens */
   --admin-card-radius: var(--radius-lg);
   --admin-card-border: 1px solid var(--border);
-  --admin-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --admin-card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --admin-card-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --admin-card-shadow-hover: 0 10px 30px rgba(15, 23, 42, 0.12);
   
   --admin-btn-radius: var(--radius-md);
   --admin-input-radius: var(--radius-md);
@@ -220,193 +247,187 @@
 /* Light Theme */
 :root[data-theme="light"] {
   /* Page backgrounds */
-  --bg-page: #f7f9fc;
+  --bg-page: #f8fafc;
   --bg-elevated: #ffffff;
-  --bg-subtle: #e8ebee;
-  --bg-muted: #f2f5f9;
+  --bg-subtle: #f1f5f9;
+  --bg-muted: #e2e8f0;
   
   /* Text colors */
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-tertiary: #6b7280;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-tertiary: #64748b;
   
   /* Border colors */
-  --border-default: #dbe2ea;
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-focus: #4573df;
+  --border-default: #e2e8f0;
+  --border-subtle: rgba(15, 23, 42, 0.06);
+  --border-focus: #4f46e5;
   
-  /* Brand colors (light adjustments) */
-  --brand-primary: #4573df;
-  --brand-primary-hover: #3b5fc7;
-  --brand-primary-active: #2f4db5;
-  --brand-primary-light: #5a86e6;
-  --brand-primary-muted: rgba(69, 115, 223, 0.1);
-  --brand-primary-shadow: rgba(69, 115, 223, 0.25);
+  /* Brand colors */
+  --brand-primary: #4f46e5;
+  --brand-primary-hover: #4338ca;
+  --brand-primary-active: #3730a3;
+  --brand-primary-light: #6366f1;
+  --brand-primary-muted: rgba(79, 70, 229, 0.08);
+  --brand-primary-shadow: rgba(79, 70, 229, 0.22);
   
-  --bg: #f7f9fc;
+  --bg: #f8fafc;
   --bg-elev-1: #ffffff;
-  --bg-elev-2: #f2f5f9;
+  --bg-elev-2: #f1f5f9;
   --surface: #ffffff;
-  --border: #dbe2ea;
-  --text: #0f141a;
-  --text-muted: #5b7187;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --text-muted: #64748b;
 
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
   --primary-foreground: #ffffff;
   --success: #059669;
   --success-dark: #047857;
   --warning: #d97706;
   --warning-dark: #b45309;
-  --danger: #dc2626;
-  --danger-dark: #b91c1c;
-  --info: #0891b2;
-  --info-dark: #0e7490;
+  --danger: #e11d48;
+  --danger-dark: #be123c;
+  --info: #0284c7;
+  --info-dark: #0369a1;
 
-  --focus-ring: 0 0 0 2px rgba(37, 99, 235, 0.55);
-  --focus-ring-strong: 0 0 0 3px rgba(37, 99, 235, 0.75);
+  --focus-ring: 0 0 0 2px rgba(79, 70, 229, 0.55);
+  --focus-ring-strong: 0 0 0 3px rgba(79, 70, 229, 0.75);
+
+  --cta-accent: #ea580c;
+  --cta-accent-hover: #c2410c;
+  --cta-accent-muted: rgba(234, 88, 12, 0.08);
+  --cta-accent-shadow: rgba(234, 88, 12, 0.25);
+  --ink-display: #0f172a;
+
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.45) 100%);
 
   /* Light theme shadows */
-  --input-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --input-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  --btn-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --btn-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --input-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --input-shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --btn-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  --btn-shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.1);
+  --btn-shadow-active: 0 1px 4px rgba(15, 23, 42, 0.06);
   
-  --btn-primary-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-  --btn-primary-shadow-hover: 0 6px 16px rgba(37, 99, 235, 0.3);
-  --btn-primary-shadow-active: 0 2px 8px rgba(37, 99, 235, 0.15);
+  --btn-primary-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+  --btn-primary-shadow-hover: 0 6px 18px rgba(79, 70, 229, 0.38);
+  --btn-primary-shadow-active: 0 2px 8px rgba(79, 70, 229, 0.2);
   
-  --btn-secondary-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  --btn-secondary-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --btn-secondary-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --btn-secondary-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  --btn-secondary-shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.1);
+  --btn-secondary-shadow-active: 0 1px 4px rgba(15, 23, 42, 0.06);
   
-  --btn-danger-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
-  --btn-danger-shadow-hover: 0 6px 16px rgba(220, 38, 38, 0.3);
-  --btn-danger-shadow-active: 0 2px 8px rgba(220, 38, 38, 0.15);
+  --btn-danger-shadow: 0 4px 14px rgba(225, 29, 72, 0.22);
+  --btn-danger-shadow-hover: 0 6px 18px rgba(225, 29, 72, 0.35);
+  --btn-danger-shadow-active: 0 2px 8px rgba(225, 29, 72, 0.18);
   
-  --btn-success-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
-  --btn-success-shadow-hover: 0 6px 16px rgba(5, 150, 105, 0.3);
-  --btn-success-shadow-active: 0 2px 8px rgba(5, 150, 105, 0.15);
+  --btn-success-shadow: 0 4px 14px rgba(5, 150, 105, 0.22);
+  --btn-success-shadow-hover: 0 6px 18px rgba(5, 150, 105, 0.35);
+  --btn-success-shadow-active: 0 2px 8px rgba(5, 150, 105, 0.18);
   
-  --btn-outline-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  --btn-outline-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --btn-outline-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.05);
-  
-  --btn-ghost-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --btn-ghost-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.1);
-  --btn-ghost-shadow-active: 0 1px 3px rgba(0, 0, 0, 0.05);
-  
-  --btn-icon-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  --btn-icon-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --btn-icon-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.06);
-  
-  --btn-group-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-/* Light theme premium tokens */
-:root[data-theme="light"] {
-  --ink-display: #0f1b33;
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.05), 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  --shadow-card-hover: 0 4px 6px -1px rgba(79, 70, 229, 0.1), 0 20px 40px -8px rgba(15, 23, 42, 0.14);
 }
 
 /* Dark Theme */
 :root[data-theme="dark"] {
   /* Premium upgrade tokens (dark adjustments) */
-  --ink-display: #eef2f9;
-  --cta-accent: #e8590c;
-  --cta-accent-hover: #f76707;
-  --cta-accent-muted: rgba(232, 89, 12, 0.14);
-  --cta-accent-shadow: rgba(232, 89, 12, 0.32);
+  --ink-display: #f8fafc;
+  --cta-accent: #f97316;
+  --cta-accent-hover: #fb923c;
+  --cta-accent-muted: rgba(249, 115, 22, 0.18);
+  --cta-accent-shadow: rgba(249, 115, 22, 0.35);
   --signal-available: #34d399;
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.45), 0 16px 40px rgba(0, 0, 0, 0.45);
+  
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.4), 0 12px 30px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 8px 24px rgba(99, 102, 241, 0.2), 0 20px 48px rgba(0, 0, 0, 0.5);
 
   /* Page backgrounds */
-  --bg-page: #0b0f14;
-  --bg-elevated: #19212c;
-  --bg-subtle: #151b24;
-  --bg-muted: #11161d;
+  --bg-page: #090d16;
+  --bg-elevated: #111827;
+  --bg-subtle: #1e293b;
+  --bg-muted: #0f172a;
   
   /* Text colors */
-  --text-primary: #e6edf3;
-  --text-secondary: #b8c5d3;
-  --text-tertiary: #94a7ba;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
   
   /* Border colors */
-  --border-default: #263241;
+  --border-default: #1e293b;
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-focus: #4f8cff;
+  --border-focus: #6366f1;
   
-  /* Brand colors (dark adjustments for better visibility) */
-  --brand-primary: #4f8cff;
-  --brand-primary-hover: #5a96ff;
-  --brand-primary-active: #6ba0ff;
-  --brand-primary-light: #7eb3ff;
-  --brand-primary-muted: rgba(79, 140, 255, 0.15);
-  --brand-primary-shadow: rgba(79, 140, 255, 0.3);
+  /* Brand colors */
+  --brand-primary: #6366f1;
+  --brand-primary-hover: #818cf8;
+  --brand-primary-active: #a5b4fc;
+  --brand-primary-light: #a5b4fc;
+  --brand-primary-muted: rgba(99, 102, 241, 0.16);
+  --brand-primary-shadow: rgba(99, 102, 241, 0.35);
   
-  --bg: #0b0f14;
-  --bg-elev-1: #11161d;
-  --bg-elev-2: #151b24;
-  --surface: #19212c;
-  --border: #263241;
-  --text: #e6edf3;
-  --text-muted: #94a7ba;
+  --bg: #090d16;
+  --bg-elev-1: #111827;
+  --bg-elev-2: #1e293b;
+  --surface: #111827;
+  --border: #1e293b;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
 
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
   --primary-foreground: #ffffff;
   --success: #10b981;
   --success-dark: #059669;
   --warning: #f59e0b;
   --warning-dark: #d97706;
-  --danger: #ef4444;
-  --danger-dark: #dc2626;
-  --info: #06b6d4;
-  --info-dark: #0891b2;
+  --danger: #f43f5e;
+  --danger-dark: #e11d48;
+  --info: #38bdf8;
+  --info-dark: #0284c7;
 
-  --focus-ring: 0 0 0 2px rgba(59, 130, 246, 0.55);
-  --focus-ring-strong: 0 0 0 3px rgba(59, 130, 246, 0.75);
+  --focus-ring: 0 0 0 2px rgba(99, 102, 241, 0.55);
+  --focus-ring-strong: 0 0 0 3px rgba(99, 102, 241, 0.75);
 
   /* Dark theme shadows */
-  --input-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --input-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  --btn-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --btn-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.2);
+  --input-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --input-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --btn-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --btn-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.25);
   
-  --btn-primary-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-  --btn-primary-shadow-hover: 0 6px 16px rgba(59, 130, 246, 0.4);
-  --btn-primary-shadow-active: 0 2px 8px rgba(59, 130, 246, 0.25);
+  --btn-primary-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  --btn-primary-shadow-hover: 0 6px 20px rgba(99, 102, 241, 0.48);
+  --btn-primary-shadow-active: 0 2px 8px rgba(99, 102, 241, 0.3);
   
-  --btn-secondary-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  --btn-secondary-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --btn-secondary-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.2);
+  --btn-secondary-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --btn-secondary-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --btn-secondary-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.25);
   
-  --btn-danger-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-  --btn-danger-shadow-hover: 0 6px 16px rgba(239, 68, 68, 0.4);
-  --btn-danger-shadow-active: 0 2px 8px rgba(239, 68, 68, 0.25);
+  --btn-danger-shadow: 0 4px 14px rgba(244, 63, 94, 0.35);
+  --btn-danger-shadow-hover: 0 6px 20px rgba(244, 63, 94, 0.48);
+  --btn-danger-shadow-active: 0 2px 8px rgba(244, 63, 94, 0.3);
   
-  --btn-success-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-  --btn-success-shadow-hover: 0 6px 16px rgba(16, 185, 129, 0.4);
-  --btn-success-shadow-active: 0 2px 8px rgba(16, 185, 129, 0.25);
+  --btn-success-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  --btn-success-shadow-hover: 0 6px 20px rgba(16, 185, 129, 0.48);
+  --btn-success-shadow-active: 0 2px 8px rgba(16, 185, 129, 0.3);
   
-  --btn-outline-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  --btn-outline-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.25);
-  --btn-outline-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.15);
+  --btn-outline-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --btn-outline-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --btn-outline-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.2);
   
-  --btn-ghost-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  --btn-ghost-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.25);
-  --btn-ghost-shadow-active: 0 1px 3px rgba(0, 0, 0, 0.15);
+  --btn-ghost-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --btn-ghost-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --btn-ghost-shadow-active: 0 1px 3px rgba(0, 0, 0, 0.2);
   
-  --btn-icon-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  --btn-icon-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --btn-icon-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.2);
+  --btn-icon-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --btn-icon-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --btn-icon-shadow-active: 0 1px 4px rgba(0, 0, 0, 0.25);
   
-  --btn-group-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  --btn-group-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-/* Utility classes (minimal, shared) */
+/* Utility classes */
 .srOnly {
   position: absolute !important;
   width: 1px; height: 1px;
@@ -428,14 +449,12 @@
               transform var(--duration-normal) var(--ease-standard);
 }
 
-/* Base element defaults that can be composed in modules */
 :root {
   --btn-height: 44px;
   --btn-radius: var(--radius-md);
   --input-height: 44px;
   --card-radius: var(--radius-lg);
 
-  /* CSS Anchor Positioning tokens */
   --anchor-offset-x: 0;
   --anchor-offset-y: 0;
   --anchor-align: center;
@@ -443,14 +462,12 @@
   --popover-offset-y: 8px;
 }
 
-/* Small screens: larger touch targets and compact FAB envelope */
 @media (max-width: 480px) {
   :root {
     --input-height: 48px;
     --btn-height: 48px;
     --fab-safe: 64px;
     
-    /* Adjusted spacing for mobile */
     --space-8: 24px;
     --space-6: 20px;
     --space-4: 12px;

@@ -25,7 +25,7 @@ const displayUrl = (project) => {
       /* fall through */
     }
   }
-  return project?.slug ? `ghulammujtaba.com/projects/${project.slug}` : "";
+  return project?.slug ? "SCSA research archive" : "";
 };
 
 const resolveImage = (project) => {

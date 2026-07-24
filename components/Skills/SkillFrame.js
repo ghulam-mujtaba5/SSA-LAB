@@ -6,7 +6,7 @@ import lightStyles from "./SkillFrame.module.css";
 import darkStyles from "./SkillFrameDark.module.css";
 import SectionHeader from "../AnimatedUI/SectionHeader";
 
-// Skills curated for Ghulam's profile: Full Stack + AI + Mobile founder
+// Legacy skills data retained for compatibility with the original template.
 // Only primary, differentiating tools are shown — not every dependency
 const SKILL_CATEGORIES = [
   {

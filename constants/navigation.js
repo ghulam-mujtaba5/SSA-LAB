@@ -3,11 +3,13 @@
  * Single source of truth for NavBar (desktop & mobile) section links.
  */
 export const MAIN_SECTIONS = [
-  { label: "Home", route: "/#home-section" },
+  { label: "Home", route: "/" },
   { label: "About", route: "/about" },
-  { label: "Resume", route: "/resume" },
-  { label: "Projects", route: "/projects" },
-  { label: "Services", route: "/services" },
-  { label: "Insights", route: "/insights" },
-  { label: "Contact", route: "/#contact-section" },
+  { label: "Research", route: "/research" },
+  { label: "Publications", route: "/publications" },
+  { label: "Alumni & FYP", route: "/alumni" },
+  { label: "Resources", route: "/resources" },
+  { label: "Team", route: "/team" },
+  { label: "Events", route: "/events" },
+  { label: "Contact", route: "/contact" },
 ];

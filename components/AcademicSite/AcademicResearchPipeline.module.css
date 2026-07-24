@@ -1,0 +1,144 @@
+.pipeline {
+  position: relative;
+  padding: clamp(28px, 5vw, 52px);
+  overflow: hidden;
+  border: 1px solid var(--academic-line);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(66, 196, 232, 0.12), transparent 36%),
+    var(--academic-paper);
+}
+
+.pipelineLine {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 79px;
+  height: 2px;
+  overflow: hidden;
+  background: var(--academic-line);
+}
+
+.pipelineLine span {
+  position: absolute;
+  top: -2px;
+  width: 46px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--academic-cyan);
+  box-shadow: 0 0 18px rgba(66, 196, 232, 0.65);
+  animation: pipelinePulse 5.8s ease-in-out infinite;
+}
+
+.stageGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.stageGrid article {
+  min-width: 0;
+  padding: 0 6px;
+}
+
+.iconBox {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+  border: 1px solid var(--academic-line);
+  border-radius: 9px;
+  background: var(--academic-paper);
+  color: var(--academic-blue);
+  box-shadow: 0 10px 26px rgba(18, 40, 54, 0.08);
+}
+
+.stageGrid article > span {
+  color: var(--academic-blue);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stageGrid h3 {
+  margin: 8px 0 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+
+.stageGrid p {
+  margin: 0;
+  color: var(--academic-muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.codeMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 34px;
+  color: var(--academic-muted);
+  font-size: 0.72rem;
+}
+
+@keyframes pipelinePulse {
+  0% {
+    left: -46px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 840px) {
+  .pipelineLine {
+    display: none;
+  }
+
+  .stageGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .stageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .stageGrid article {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    column-gap: 14px;
+  }
+
+  .iconBox {
+    grid-row: 1 / span 3;
+    margin: 0;
+  }
+
+  .stageGrid article > span,
+  .stageGrid h3,
+  .stageGrid p {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pipelineLine span {
+    animation: none;
+    left: 45%;
+  }
+}

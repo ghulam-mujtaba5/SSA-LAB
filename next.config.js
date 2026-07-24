@@ -22,14 +22,6 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "ghulammujtaba.com",
-      },
-      {
-        protocol: "https",
-        hostname: "www.ghulammujtaba.com",
-      },
-      {
-        protocol: "https",
         hostname: "img.freepik.com",
       },
       {
@@ -78,6 +70,76 @@ const nextConfig = {
 
   async redirects() {
     return [
+      {
+        source: "/resume",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/advance-learning",
+        destination: "/resources",
+        permanent: true,
+      },
+      {
+        source: "/research-projects",
+        destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/project-portfolio",
+        destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/supervision",
+        destination: "/alumni",
+        permanent: true,
+      },
+      {
+        source: "/our-team",
+        destination: "/team",
+        permanent: true,
+      },
+      {
+        source: "/contact-us",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/projects",
+        destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/projects/:slug*",
+        destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/services",
+        destination: "/research",
+        permanent: true,
+      },
+      {
+        source: "/insights",
+        destination: "/publications",
+        permanent: true,
+      },
+      {
+        source: "/insights/:slug*",
+        destination: "/publications",
+        permanent: true,
+      },
+      {
+        source: "/uses",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/search",
+        destination: "/research",
+        permanent: true,
+      },
       // Consolidate /portfolio to / — prevents duplicate content
       // These are external 301 redirects that Google will follow.
       {
@@ -107,12 +169,12 @@ const nextConfig = {
       },
       {
         source: "/articles",
-        destination: "/insights",
+        destination: "/publications",
         permanent: true,
       },
       {
         source: "/articles/:slug*",
-        destination: "/insights/:slug*",
+        destination: "/publications",
         permanent: true,
       },
       // Redirect old static sitemap URL to the canonical sitemap

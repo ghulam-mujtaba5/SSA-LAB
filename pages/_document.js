@@ -71,14 +71,6 @@ class MyDocument extends Document {
             />
           </noscript>
 
-          {/* RSS feed auto-discovery — lets feed readers and AI crawlers find articles */}
-          <link
-            rel="alternate"
-            type="application/rss+xml"
-            title="Ghulam Mujtaba — Articles"
-            href="https://ghulammujtaba.com/feed.xml"
-          />
-
           {/* Security headers hint */}
           <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
           <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -102,8 +94,11 @@ class MyDocument extends Document {
             name="apple-mobile-web-app-status-bar-style"
             content="black-translucent"
           />
-          <meta name="apple-mobile-web-app-title" content="GM Portfolio" />
-          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <meta name="apple-mobile-web-app-title" content="SCSA Lab" />
+          <link
+            rel="apple-touch-icon"
+            href="/academic/scsa-research-group-logo.png"
+          />
           <link rel="manifest" href="/manifest.json" />
 
           {/* Mobile optimization */}

@@ -45,6 +45,7 @@ const BREADCRUMB_LABELS = {
   dashboard: 'Dashboard',
   articles: 'Articles',
   projects: 'Projects',
+  fyp: 'FYP Supervision',
   resume: 'Resume',
   media: 'Media Library',
   users: 'Users',
@@ -161,6 +162,7 @@ export default function AdminLayoutPremium({ children, title }) {
           children: [
             { href: '/admin/articles', label: 'Articles' },
             { href: '/admin/projects', label: 'Projects' },
+            { href: '/admin/fyp', label: 'FYP Supervision' },
             { href: '/admin/resume', label: 'Resume' },
           ],
         },
@@ -241,14 +243,14 @@ export default function AdminLayoutPremium({ children, title }) {
           <Link href="/admin/dashboard" className={styles.logo}>
             <div className={styles.logoIcon}>
               <img
-                src={theme === 'dark' ? '/personal-gm-monogram-on-dark.png' : '/personal-gm-monogram-on-light.png'}
-                alt="GM Logo"
+                src="/academic/scsa-research-group-logo.png"
+                alt="SCSA Research Lab"
                 width={24}
                 height={24}
                 className={styles.logoImg}
               />
             </div>
-            <span>Admin</span>
+            <span>SCSA Admin</span>
           </Link>
           <div className={styles.sidebarHeaderActions}>
             <motion.button
@@ -519,6 +521,17 @@ export default function AdminLayoutPremium({ children, title }) {
               <Icons.projects />
             </div>
             <span className={styles.quickCreateOptionLabel}>New Project</span>
+          </motion.div>
+          <motion.div
+            className={styles.quickCreateOption}
+            onClick={() => { setIsQuickCreateOpen(false); router.push('/admin/fyp/new'); }}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className={styles.quickCreateOptionIcon}>
+              <Icons.projects />
+            </div>
+            <span className={styles.quickCreateOptionLabel}>New FYP Record</span>
           </motion.div>
           <motion.div
             className={styles.quickCreateOption}

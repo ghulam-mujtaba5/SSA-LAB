@@ -1,112 +1,56 @@
-import dbConnect from "../lib/mongoose";
-import Article from "../models/Article";
-import Project from "../models/Project";
-
-// Only skip DB if there is no configured connection string.
-const skipDb = !process.env.MONGODB_URI;
-
-// Static pages that should always appear in the sitemap
 const STATIC_PAGES = [
   { path: "/", changefreq: "weekly", priority: 1.0 },
   { path: "/about", changefreq: "monthly", priority: 0.9 },
-  { path: "/resume", changefreq: "monthly", priority: 0.8 },
-  { path: "/projects", changefreq: "weekly", priority: 0.9 },
-  { path: "/insights", changefreq: "weekly", priority: 0.9 },
-  { path: "/privacy-policy", changefreq: "yearly", priority: 0.3 },
+  { path: "/research", changefreq: "monthly", priority: 0.95 },
+  { path: "/publications", changefreq: "monthly", priority: 0.9 },
+  { path: "/alumni", changefreq: "monthly", priority: 0.9 },
+  { path: "/resources", changefreq: "monthly", priority: 0.75 },
+  { path: "/team", changefreq: "monthly", priority: 0.8 },
+  { path: "/events", changefreq: "monthly", priority: 0.7 },
+  { path: "/contact", changefreq: "yearly", priority: 0.7 },
 ];
 
-export async function getServerSideProps({ res }) {
-  try {
-    const base = "https://ghulammujtaba.com";
-    const now = new Date().toISOString();
+export async function getServerSideProps({ req, res }) {
+  const forwardedHost = req.headers["x-forwarded-host"];
+  const host = forwardedHost || req.headers.host;
+  const forwardedProtocol = req.headers["x-forwarded-proto"];
+  const protocol =
+    forwardedProtocol || (host?.startsWith("localhost") ? "http" : "https");
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+    `${protocol}://${host}`;
+  const now = new Date().toISOString();
+  const urls = STATIC_PAGES.map((page) => ({
+    loc: `${base}${page.path}`,
+    lastmod: now,
+    changefreq: page.changefreq,
+    priority: page.priority,
+  }));
 
-    // Always include static pages with a fresh lastmod
-    const urls = STATIC_PAGES.map((p) => ({
-      loc: `${base}${p.path}`,
-      lastmod: now,
-      changefreq: p.changefreq,
-      priority: p.priority,
-    }));
-
-    if (!skipDb) {
-      await dbConnect();
-
-      const [articles, projects] = await Promise.all([
-        Article.find({ published: true }, { slug: 1, updatedAt: 1 }).lean(),
-        Project.find({ published: true }, { slug: 1, updatedAt: 1 }).lean(),
-      ]);
-
-      for (const a of articles || []) {
-        urls.push({
-          loc: `${base}/insights/${a.slug}`,
-          lastmod: a.updatedAt
-            ? new Date(a.updatedAt).toISOString()
-            : now,
-          changefreq: "weekly",
-          priority: 0.8,
-        });
-      }
-      for (const p of projects || []) {
-        urls.push({
-          loc: `${base}/projects/${p.slug}`,
-          lastmod: p.updatedAt
-            ? new Date(p.updatedAt).toISOString()
-            : now,
-          changefreq: "weekly",
-          priority: 0.8,
-        });
-      }
-    }
-
-    const xml = buildSitemapXml(urls);
-    sendXml(res, xml);
-  } catch (e) {
-    // On error, return sitemap with at least static pages
-    const base = "https://ghulammujtaba.com";
-    const now = new Date().toISOString();
-    const urls = STATIC_PAGES.map((p) => ({
-      loc: `${base}${p.path}`,
-      lastmod: now,
-      changefreq: p.changefreq,
-      priority: p.priority,
-    }));
-    const xml = buildSitemapXml(urls);
-    sendXml(res, xml);
-  }
-
-  return { props: {} };
-}
-
-function buildSitemapXml(urls) {
-  return (
+  const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
     urls
       .map(
-        (u) =>
+        (url) =>
           `<url>` +
-          `<loc>${u.loc}</loc>` +
-          (u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : "") +
-          `<changefreq>${u.changefreq}</changefreq>` +
-          `<priority>${u.priority}</priority>` +
-          `</url>`
+          `<loc>${url.loc}</loc>` +
+          `<lastmod>${url.lastmod}</lastmod>` +
+          `<changefreq>${url.changefreq}</changefreq>` +
+          `<priority>${url.priority}</priority>` +
+          `</url>`,
       )
       .join("") +
-    `</urlset>`
-  );
-}
+    `</urlset>`;
 
-function sendXml(res, xml) {
   res.setHeader("Content-Type", "application/xml");
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=3600, stale-while-revalidate=1800"
-  );
-  res.statusCode = 200;
+  res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
   res.write(xml);
   res.end();
+
+  return { props: {} };
 }
 
-export default function SiteMap() {
+export default function Sitemap() {
   return null;
 }

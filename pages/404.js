@@ -11,10 +11,10 @@ export default function Custom404() {
   return (
     <div className={styles.wrapper} data-theme={theme}>
       <Head>
-        <title>Page Not Found — Ghulam Mujtaba</title>
+        <title>Page Not Found — Junaid Akram</title>
         <meta
           name="description"
-          content="This page doesn't exist. Explore Ghulam Mujtaba's projects, insights, or get in touch."
+          content="This page does not exist. Explore Dr. Junaid Akram's research, publications, supervision, or contact information."
         />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
@@ -25,13 +25,9 @@ export default function Custom404() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Image
-          src={
-            theme === "dark"
-              ? "/personal-gm-monogram-on-dark.png"
-              : "/personal-gm-monogram-on-light.png"
-          }
-          alt="GM Logo"
-          width={80}
+          src="/academic/scsa-research-group-logo.png"
+          alt="SCSA Research Lab"
+          width={68}
           height={80}
           className={styles.logo}
           priority
@@ -51,9 +47,9 @@ export default function Custom404() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
       >
-        Oops! The page you are looking for doesn’t exist or has been moved.
+        The page you are looking for does not exist or has been moved.
         <br />
-        Let’s get you back to something awesome.
+        Return to the academic profile or explore the lab&apos;s work.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -72,11 +68,11 @@ export default function Custom404() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.8 }}
       >
-        <Link href="/projects" className={styles.quickLink}>
-          View Projects
+        <Link href="/research" className={styles.quickLink}>
+          View Research
         </Link>
-        <Link href="/insights" className={styles.quickLink}>
-          Read Insights
+        <Link href="/publications" className={styles.quickLink}>
+          Publications
         </Link>
         <Link href="/contact" className={styles.quickLink}>
           Contact

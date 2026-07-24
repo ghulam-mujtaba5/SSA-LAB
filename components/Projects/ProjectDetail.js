@@ -21,7 +21,7 @@ const displayUrl = (project) => {
       /* fall through */
     }
   }
-  return project?.slug ? `ghulammujtaba.com/projects/${project.slug}` : "";
+  return project?.slug ? "SCSA research archive" : "";
 };
 
 const ProjectDetail = ({ project }) => {
@@ -304,18 +304,18 @@ const ProjectDetail = ({ project }) => {
       {/* ── Conversion band ── */}
       <section className={styles.ctaBand} aria-labelledby="cta-heading">
         <h2 className={styles.ctaTitle} id="cta-heading">
-          Want something like this built?
+          Interested in related research?
         </h2>
         <p className={styles.ctaDesc}>
-          I take on serious projects through Megicode — from scope to shipped
-          product. Or browse the rest of the proof first.
+          Discuss research collaboration, funded projects, or student
+          supervision opportunities with the SCSA Lab.
         </p>
         <div className={styles.ctaActions}>
           <Link href="/contact" className={`${styles.btn} ${styles.btnCta}`}>
-            Start a Project
+            Contact the Lab
           </Link>
-          <Link href="/projects" className={`${styles.btn} ${styles.btnGhost}`}>
-            View all projects
+          <Link href="/research" className={`${styles.btn} ${styles.btnGhost}`}>
+            View research
           </Link>
         </div>
       </section>

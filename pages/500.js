@@ -11,7 +11,7 @@ export default function Custom500() {
   return (
     <div className={styles.wrapper} data-theme={theme}>
       <Head>
-        <title>Something Went Wrong — Ghulam Mujtaba</title>
+        <title>Something Went Wrong — Junaid Akram</title>
         <meta
           name="description"
           content="An unexpected error occurred. Please try again in a moment."
@@ -25,13 +25,9 @@ export default function Custom500() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Image
-          src={
-            theme === "dark"
-              ? "/personal-gm-monogram-on-dark.png"
-              : "/personal-gm-monogram-on-light.png"
-          }
-          alt="GM Logo"
-          width={80}
+          src="/academic/scsa-research-group-logo.png"
+          alt="SCSA Research Lab"
+          width={68}
           height={80}
           className={styles.logo}
           priority
@@ -71,11 +67,11 @@ export default function Custom500() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.8 }}
       >
-        <Link href="/projects" className={styles.quickLink}>
-          View Projects
+        <Link href="/research" className={styles.quickLink}>
+          View Research
         </Link>
-        <Link href="/insights" className={styles.quickLink}>
-          Read Insights
+        <Link href="/publications" className={styles.quickLink}>
+          Publications
         </Link>
         <Link href="/contact" className={styles.quickLink}>
           Contact

@@ -1,68 +1,46 @@
-# MyPortfolio
+# Dr. Junaid Akram Academic Website
 
-A modern, responsive developer portfolio built with Next.js. This project showcases my skills, projects, and experience in web development, data science, and UI/UX design.
+A restrained, responsive academic website for Dr. Junaid Akram and the
+Software and Cyber Security Analytics (SCSA) Research Lab.
 
-## 🚀 Live Demo
+The implementation reuses the proven Next.js foundation of the previous
+portfolio while replacing its public identity, content, routes, imagery, and
+metadata with verified academic information.
 
-[View Portfolio Live](https://ghulammujtaba.com)
+## Main sections
 
-## ✨ Features
+- Academic profile and institutional background
+- Research areas and funded projects
+- Selected publications
+- FYP supervision and alumni outcomes
+- Research team, collaborators, and events
+- Contact information and academic profile links
 
-- Responsive design for desktop and mobile
-- Light and dark theme support
-- Project and experience showcase
-- Downloadable resume
-- Contact form
-- Animated UI elements
+## Authentic assets
 
-## 🖼️ Screenshots
+The professor portrait, lab logo, team photographs, research figures, and
+institutional logos in `public/academic/` were sourced from the supplied
+Google Site. No generated portraits or synthetic academic imagery are used.
 
-![Home Page](public/project-2.png)
+## Local development
 
-## 🛠️ Tech Stack
-
-- Next.js
-- React
-- CSS Modules
-- JavaScript
-- HTML5 & CSS3
-
-## 📁 Folder Structure
-
-```
-components/         # Reusable UI components
-context/            # React context (e.g., ThemeContext)
-lib/                # Utility libraries (e.g., gtag.js)
-pages/              # Next.js pages
-public/             # Static assets (images, icons, etc.)
+```sh
+npm install
+npm run dev
 ```
 
-## 🏁 Getting Started
+Open [http://localhost:3000](http://localhost:3000).
 
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/ghulam-mujtaba5/MyPortfolio.git
-   cd MyPortfolio
-   ```
-2. **Install dependencies:**
-   ```sh
-   npm install
-   ```
-3. **Run the development server:**
-   ```sh
-   npm run dev
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Environment
 
-## ⏳ Loading animations
+Set these variables before production deployment:
 
-- Use the reusable inline loader at `components/LoadingAnimation/InlineSpinner.js` for buttons, headers, and table cells.
-- A demo page exists at `/temp-loading` (linked in the Admin sidebar in non‑production) showcasing patterns and sizes.
+```text
+NEXT_PUBLIC_SITE_URL=https://your-final-domain.example
+MONGODB_URI=your-mongodb-connection-string
+NEXT_PUBLIC_GA_ID=optional-google-analytics-id
+```
 
-## 🙋‍♂️ Contact
-
-Feel free to reach out via [LinkedIn](https://www.linkedin.com/in/ghulamujtabaofficial/)
-
----
-
-> Designed & built by [Ghulam Mujtaba].
+The public academic pages work without MongoDB. The existing administration
+and database foundation remains available for future managed publications,
+projects, and alumni records.

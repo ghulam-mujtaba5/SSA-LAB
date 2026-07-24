@@ -1,61 +1,67 @@
 # Color Consistency Guide
 
-This guide establishes a unified color system for the portfolio to ensure visual consistency across all pages while maintaining the intended UI/UX design.
+This guide establishes a unified high-perception color system for the portfolio to ensure visual consistency across all pages while maintaining a premium, modern aesthetic.
 
 ## Core Brand Colors
 
-### Primary Brand Color: Blue
-The primary brand color used throughout the app is a professional blue:
+### Primary Brand Color: Electric Indigo
+The primary brand color used throughout the app is a premium electric indigo-royal:
 
 | Token Name | Light Mode | Dark Mode | Usage |
 |------------|------------|-----------|-------|
-| `--brand-primary` | `#4573df` | `#4f8cff` | Primary buttons, links, accents |
-| `--brand-primary-hover` | `#3b5fc7` | `#5a96ff` | Hover states |
-| `--brand-primary-active` | `#2f4db5` | `#6ba0ff` | Active/pressed states |
-| `--brand-primary-muted` | `rgba(69, 115, 223, 0.1)` | `rgba(79, 140, 255, 0.15)` | Subtle backgrounds |
+| `--brand-primary` | `#4f46e5` | `#6366f1` | Primary buttons, links, active accents |
+| `--brand-primary-hover` | `#4338ca` | `#818cf8` | Hover states |
+| `--brand-primary-active` | `#3730a3` | `#a5b4fc` | Active/pressed states |
+| `--brand-primary-muted` | `rgba(79, 70, 229, 0.08)` | `rgba(99, 102, 241, 0.16)` | Subtle badge & card backgrounds |
+
+### Secondary Accent: Sunset Coral
+| Token Name | Light Mode | Dark Mode | Usage |
+|------------|------------|-----------|-------|
+| `--cta-accent` | `#ea580c` | `#f97316` | High-conversion CTAs, special feature nodes |
+| `--cta-accent-hover` | `#c2410c` | `#fb923c` | CTA hover states |
 
 ### Semantic Colors
 
 | Token Name | Light Mode | Dark Mode | Usage |
 |------------|------------|-----------|-------|
-| `--success` | `#10b981` | `#10b981` | Success messages, positive actions |
-| `--warning` | `#f59e0b` | `#f59e0b` | Warning states, cautions |
-| `--danger` | `#dc2626` | `#ef4444` | Errors, destructive actions |
-| `--info` | `#0891b2` | `#06b6d4` | Informational states |
+| `--success` | `#059669` | `#10b981` | Success messages, positive actions |
+| `--warning` | `#d97706` | `#f59e0b` | Warning states, cautions |
+| `--danger` | `#e11d48` | `#f43f5e` | Errors, destructive actions |
+| `--info` | `#0284c7` | `#38bdf8` | Informational states |
 
 ## Background Colors
 
 ### Light Mode Backgrounds
 | Token Name | Value | Usage |
 |------------|-------|-------|
-| `--bg-page` | `#f7f9fc` | Main page background |
+| `--bg-page` | `#f8fafc` | Main page background (Slate 50) |
 | `--bg-elevated` | `#ffffff` | Cards, modals, elevated surfaces |
-| `--bg-subtle` | `#e8ebee` | Secondary sections, form backgrounds |
-| `--bg-muted` | `#f2f5f9` | Muted areas, disabled states |
+| `--bg-subtle` | `#f1f5f9` | Secondary sections, form backgrounds (Slate 100) |
+| `--bg-muted` | `#e2e8f0` | Muted areas, disabled states (Slate 200) |
 
 ### Dark Mode Backgrounds
 | Token Name | Value | Usage |
 |------------|-------|-------|
-| `--bg-page` | `#0b0f14` | Main page background |
-| `--bg-elevated` | `#19212c` | Cards, modals, elevated surfaces |
-| `--bg-subtle` | `#151b24` | Secondary sections |
-| `--bg-muted` | `#11161d` | Muted areas |
+| `--bg-page` | `#090d16` | Deep midnight obsidian page background |
+| `--bg-elevated` | `#111827` | Cards, modals, elevated surfaces (Slate 900) |
+| `--bg-subtle` | `#1e293b` | Secondary sections (Slate 800) |
+| `--bg-muted` | `#0f172a` | Muted background panels |
 
 ## Text Colors
 
 ### Light Mode Text
 | Token Name | Value | Usage |
 |------------|-------|-------|
-| `--text-primary` | `#1f2937` | Main content, headings |
-| `--text-secondary` | `#4b5563` | Secondary text, descriptions |
-| `--text-muted` | `#6b7280` | Placeholder, hints, metadata |
+| `--text-primary` | `#0f172a` | Main content, headings (Slate 900) |
+| `--text-secondary` | `#334155` | Secondary text, descriptions (Slate 700) |
+| `--text-muted` | `#64748b` | Placeholder, hints, metadata (Slate 500) |
 
 ### Dark Mode Text
 | Token Name | Value | Usage |
 |------------|-------|-------|
-| `--text-primary` | `#e6edf3` | Main content, headings |
-| `--text-secondary` | `#b8c5d3` | Secondary text, descriptions |
-| `--text-muted` | `#94a7ba` | Placeholder, hints, metadata |
+| `--text-primary` | `#f8fafc` | Main content, crisp headings (Slate 50) |
+| `--text-secondary` | `#cbd5e1` | Secondary text, descriptions (Slate 300) |
+| `--text-muted` | `#94a3b8` | Placeholder, hints, metadata (Slate 400) |
 
 ## Border Colors
 

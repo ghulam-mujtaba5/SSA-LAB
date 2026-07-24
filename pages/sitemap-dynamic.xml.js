@@ -3,7 +3,10 @@
 // Redirect to the canonical sitemap URL to avoid 404s for any cached references.
 
 export async function getServerSideProps({ res }) {
-  res.setHeader("Location", "https://ghulammujtaba.com/sitemap.xml");
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://sites.google.com/view/temporaryr";
+  res.setHeader("Location", `${base}/sitemap.xml`);
   res.statusCode = 301;
   res.end();
   return { props: {} };

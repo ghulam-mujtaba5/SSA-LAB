@@ -34,8 +34,8 @@ export default function PlexusCanvas({
   const { theme } = useTheme();
 
   const colors = useMemo(() => {
-    const brandPrimary = "#4573df";
-    const brandAccentWeak = "#667eea";
+    const brandPrimary = "#1d6685";
+    const brandAccentWeak = "#42c4e8";
     return theme === "dark" ? {
       node: brandAccentWeak, line: brandPrimary, nodeAlpha: 0.9, lineAlpha: 0.5 // Increased visibility
     } : {
@@ -76,6 +76,35 @@ export default function PlexusCanvas({
         vy: (Math.random() - 0.5) * speed,
         size: Math.random() * 2 + 1,
       }));
+    };
+
+    const drawStatic = () => {
+      ctx.clearRect(0, 0, w, h);
+      for (const node of nodes) {
+        ctx.fillStyle = hexToRgba(colors.node, 0.65);
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const distance = Math.hypot(
+            nodes[i].x - nodes[j].x,
+            nodes[i].y - nodes[j].y,
+          );
+          if (distance < maxDistance) {
+            ctx.strokeStyle = hexToRgba(
+              colors.line,
+              Math.max(0, 1 - distance / maxDistance) * 0.24,
+            );
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
     };
 
     const step = () => {
@@ -173,7 +202,22 @@ export default function PlexusCanvas({
       if (running) animationRef.current = requestAnimationFrame(step);
     };
 
+    const prefersReduced =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     resize();
+
+    if (prefersReduced) {
+      drawStatic();
+      const resizeStatic = () => {
+        resize();
+        drawStatic();
+      };
+      window.addEventListener("resize", resizeStatic);
+      return () => window.removeEventListener("resize", resizeStatic);
+    }
+
     step();
 
     window.addEventListener("resize", resize);
@@ -190,34 +234,6 @@ export default function PlexusCanvas({
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
   }, [colors, maxNodes, maxDistance, speed, interaction, intensity, hoverBoost]);
-
-  // Respect prefers-reduced-motion: render a static frame if user prefers reduced motion
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReduced) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
-    canvas.width = Math.floor(rect.width * dpr);
-    canvas.height = Math.floor(rect.height * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, rect.width, rect.height);
-    // Simple static dots background
-    const count = 60;
-    for (let i = 0; i < count; i++) {
-      const x = Math.random() * rect.width;
-      const y = Math.random() * rect.height;
-      const r = Math.random() * 2 + 1;
-      ctx.fillStyle = hexToRgba(colors.node, 0.6);
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }, [colors]);
 
   return <canvas ref={canvasRef} className={styles.plexusCanvas} />;
 }

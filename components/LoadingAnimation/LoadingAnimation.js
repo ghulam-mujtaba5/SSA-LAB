@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { ShieldCheck } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import styles from "./LoadingAnimation.module.css";
 
@@ -97,7 +98,9 @@ const LoadingAnimation = ({
                 <div className={styles.electron}></div>
               </div>
             </div>
-            <div className={styles.centralCore}></div>
+            <div className={styles.centralCore} aria-hidden="true">
+              <ShieldCheck size={25} strokeWidth={1.8} />
+            </div>
           </div>
         </>
       )}

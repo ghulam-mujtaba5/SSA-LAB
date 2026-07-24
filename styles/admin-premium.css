@@ -6,13 +6,13 @@
 /* ========== ADMIN CSS CUSTOM PROPERTIES ========== */
 :root {
   /* Primary Brand Colors */
-  --admin-primary: #4573df;
-  --admin-primary-light: rgba(69, 115, 223, 0.12);
-  --admin-primary-dark: #3461c7;
-  --admin-primary-darker: #2a4fa6;
-  --admin-primary-rgb: 69, 115, 223;
-  --admin-primary-gradient: linear-gradient(135deg, #4573df 0%, #6366f1 100%);
-  --admin-primary-gradient-vivid: linear-gradient(135deg, #4573df 0%, #818cf8 50%, #a78bfa 100%);
+  --admin-primary: #4f46e5;
+  --admin-primary-light: rgba(79, 70, 229, 0.12);
+  --admin-primary-dark: #4338ca;
+  --admin-primary-darker: #3730a3;
+  --admin-primary-rgb: 79, 70, 229;
+  --admin-primary-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  --admin-primary-gradient-vivid: linear-gradient(135deg, #4f46e5 0%, #818cf8 50%, #a5b4fc 100%);
   
   /* Secondary/Accent Colors */
   --admin-secondary: #8b5cf6;

@@ -195,7 +195,10 @@ const ArticleDetail = ({ article, relatedArticles = [] }) => {
   }
 
   const { title, content, coverImage, tags, categories, excerpt, readingTime, updatedAt, createdAt, publishAt, ctaLabel, ctaUrl } = article;
-  const articleUrl = `https://ghulammujtaba.com/insights/${article.slug}`;
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://sites.google.com/view/temporaryr";
+  const articleUrl = `${siteUrl}/publications`;
 
   // Combine styles based on theme
   const themeStyles = theme === "dark" ? darkStyles : lightStyles;

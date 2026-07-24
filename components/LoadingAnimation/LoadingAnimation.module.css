@@ -1,10 +1,10 @@
 .container {
   --loader-bg: rgba(255, 255, 255, 0.88);
   /* Light mode palette: vibrant yet soft blues for visibility on white */
-  --orbit-color-1: #3c6eea; /* Brand Blue vib */
-  --orbit-color-2: #6fa2ff; /* Light Blue */
-  --orbit-color-3: #b7cdf8; /* Softest Blue (slightly darker for contrast) */
-  --core-color: #3c6eea; /* Blue core for light mode */
+  --orbit-color-1: #1d6685;
+  --orbit-color-2: #42c4e8;
+  --orbit-color-3: #b7dfe9;
+  --core-color: #173b51;
 
   position: fixed;
   top: 0;
@@ -30,9 +30,9 @@
 
 .container[data-theme="dark"] {
   --loader-bg: rgba(29, 33, 39, 0.8);
-  --orbit-color-1: #4573df; /* Brand Blue */
-  --orbit-color-2: #7aa0e8; /* Lighter Blue */
-  --orbit-color-3: #a8c0f0; /* Lightest Blue */
+  --orbit-color-1: #78cce4;
+  --orbit-color-2: #42c4e8;
+  --orbit-color-3: #84aebc;
   --core-color: #ffffff;
 }
 
@@ -196,12 +196,21 @@
 }
 
 .centralCore {
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(circle at 35% 35%, #ffffff88 0%, var(--core-color) 35%, color-mix(in srgb, var(--core-color) 40%, #000) 100%);
-  border-radius: 50%;
-  box-shadow: 0 0 14px var(--core-color), 0 0 28px color-mix(in srgb, var(--core-color) 60%, transparent);
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  color: var(--core-color);
+  border: 1px solid color-mix(in srgb, var(--orbit-color-1) 45%, transparent);
+  border-radius: 12px;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--orbit-color-2) 45%, transparent);
   animation: pulse-core 2.5s ease-in-out infinite;
+}
+
+.container[data-theme="dark"] .centralCore {
+  background: #173b51;
+  color: #e9f8fb;
 }
 
 @keyframes spin {

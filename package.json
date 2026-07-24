@@ -1,12 +1,16 @@
 {
+  "name": "junaid-akram-academic-site",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "migrate:projects": "node scripts/migrate-projects.js",
     "db:seed": "node scripts/seed-projects.js",
+    "db:seed:fyp": "node scripts/seed-fyp-projects.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "node scripts/generate-sitemap-paths.js && next-sitemap --config next-sitemap-config.js",
+    "postbuild": "node scripts/generate-sitemap-paths.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },

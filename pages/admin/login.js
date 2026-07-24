@@ -48,7 +48,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Admin Login | Ghulam Mujtaba</title>
+        <title>Admin Login | SCSA Research Lab</title>
       </Head>
       <motion.div 
         className={`${styles.loginContainer}`}
@@ -219,7 +219,7 @@ export default function LoginPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          Ghulam Mujtaba &middot; Admin Portal
+          SCSA Research Lab &middot; Admin Portal
         </motion.p>
       </motion.div>
     </>
