@@ -27,9 +27,9 @@ const RESEARCH_LINKS = [
 ];
 
 const ALUMNI_LINKS = [
-  { href: "/alumni", label: "FYP Supervision Projects" },
-  { href: "/alumni#fyp-projects", label: "Student Capstone Projects" },
-  { href: "/team", label: "Research Team & Scholars" },
+  { href: "/supervision", label: "FYP Supervision Projects" },
+  { href: "/supervision#projects", label: "Student Capstone Projects" },
+  { href: "/team", label: "People & Partners" },
   { href: academicProfile.officialFypIdeas, label: "COMSATS FYP Ideas", external: true },
 ];
 

@@ -7,12 +7,7 @@ import {
   GraduationCap,
   Microscope,
   ShieldCheck,
-  Cpu,
-  Layers,
-  Database,
-  Award,
   ExternalLink,
-  Code2,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import AcademicImageLightbox from "./AcademicImageLightbox";
@@ -28,27 +23,26 @@ import {
 import styles from "./AcademicSite.module.css";
 
 const impactStats = [
-  { value: "152,823+", label: "Repositories Analyzed", detail: "Open-source C/C++ & Java projects" },
-  { value: "324B+", label: "Lines of Code Indexed", detail: "Code clone & vulnerability detection" },
-  { value: "25+", label: "Journal Publications", detail: "Q1 Applied Soft Computing, IEEE & IJICS" },
-  { value: "40+", label: "Supervised Researchers", detail: "BS, MS & PhD students & FYP projects" },
+  { value: "324B+", label: "Lines of Code Indexed", detail: "Hadoop IBFET code-clone analysis study" },
+  { value: "152,823+", label: "Repositories Analyzed", detail: "SQVDT open-source vulnerability platform" },
+  { value: "30,500+", label: "Android Apps Analyzed", detail: "DroidSD similarity detection evaluation" },
 ];
 
 export default function AcademicHome() {
   return (
     <AcademicSiteLayout
-      description="Academic profile of Dr. Junaid Akram, Assistant Professor at COMSATS University Islamabad, Lahore Campus, and lead of the Source Code Security Assessment Lab."
+      description="Advancing software security through source-code analysis, testing, and vulnerability research. Led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus."
     >
-      {/* Hero Section */}
+      {/* 1. Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>Software security research & supervision</p>
             <h1>
-              Building safer software through research, testing, and code analysis.
+              Advancing software security through source-code analysis, testing, and vulnerability research.
             </h1>
             <p className={styles.heroLead}>
-              {academicProfile.name} is an Assistant Professor at COMSATS University Islamabad, Lahore Campus, and leads research in source code security assessment, vulnerability detection, software testing, and malware analysis.
+              Led by Dr Junaid Akram at COMSATS University Islamabad, Lahore Campus, the SCSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
             </p>
             <ul className={styles.credentialList}>
               {academicProfile.credentials.map((credential) => (
@@ -57,19 +51,43 @@ export default function AcademicHome() {
                 </li>
               ))}
             </ul>
+
+            {/* Profile quick buttons */}
+            <div className={styles.profileBadgeRow} style={{ margin: "16px 0", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+              <a
+                href={academicProfile.googleScholar}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.secondaryButton}
+                style={{ padding: "6px 14px", fontSize: "0.85rem" }}
+              >
+                Google Scholar <ExternalLink size={13} />
+              </a>
+              <a
+                href={academicProfile.officialProfile}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.secondaryButton}
+                style={{ padding: "6px 14px", fontSize: "0.85rem" }}
+              >
+                COMSATS Profile <ExternalLink size={13} />
+              </a>
+            </div>
+
             <div className={styles.actions}>
               <Link href="/research" className={styles.primaryButton}>
                 Explore Research <ArrowRight size={17} />
               </Link>
-              <Link href="/alumni" className={styles.secondaryButton}>
-                Supervision & FYP Projects
+              <Link href="/supervision" className={styles.secondaryButton}>
+                Supervision Directory
               </Link>
             </div>
           </div>
+
           <div className={styles.heroPortrait}>
             <AcademicImageLightbox
               src="/academic/junaid-akram-professor.jpg"
-              alt="Dr. Junaid Akram at a research event"
+              alt="Dr. Junaid Akram"
               width={755}
               height={716}
               priority
@@ -86,25 +104,9 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* SVG Animated Research & Security Pipeline Section */}
-      <section className={styles.pipelineSection} aria-label="SCSA Research Pipeline">
-        <div className={styles.pipelineContainer}>
-          <div className={styles.pipelineHeader}>
-            <span className={styles.eyebrow}>Interactive Research Workflow</span>
-            <h2>SCSA Security Analysis & Outcome Pipeline</h2>
-            <p>
-              How our lab transforms source code repositories, patch data, and test suites into verified security benchmarks, published research, and student production systems.
-            </p>
-          </div>
-          <div className={styles.pipelineVisualizer}>
-            <AcademicPipelineHero />
-          </div>
-        </div>
-      </section>
-
-      {/* Live Impact Statistics Bar (Simula Style) */}
+      {/* 2. Verified Research Impact Statistics Bar */}
       <section className={styles.impactStrip} aria-label="Research Impact Statistics">
-        <div className={styles.impactGrid}>
+        <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
           {impactStats.map((stat) => (
             <div key={stat.label} className={styles.impactItem}>
               <strong>{stat.value}</strong>
@@ -115,26 +117,7 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* Core Focus Strip */}
-      <section className={styles.introStrip} aria-label="Academic focus">
-        <div>
-          <Microscope size={23} />
-          <span>Research</span>
-          <strong>Source code security</strong>
-        </div>
-        <div>
-          <BookOpen size={23} />
-          <span>Education</span>
-          <strong>BS, MS & PhD supervision</strong>
-        </div>
-        <div>
-          <GraduationCap size={23} />
-          <span>Impact</span>
-          <strong>Student projects & research</strong>
-        </div>
-      </section>
-
-      {/* Core Research Domains */}
+      {/* 3. Main Research Domains */}
       <section className={styles.section} id="domains">
         <div className={styles.sectionHeading}>
           <div>
@@ -156,11 +139,32 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* Featured Research Projects & Security Tools */}
+      {/* Interactive Workflow Preview */}
+      <section className={styles.pipelineSection} aria-label="SCSA Research Pipeline Preview">
+        <div className={styles.pipelineContainer}>
+          <div className={styles.pipelineHeader}>
+            <span className={styles.eyebrow}>Research Methodology</span>
+            <h2>How Our Research Works</h2>
+            <p>
+              How our lab transforms source code repositories, patch data, and test suites into verified security benchmarks, published research, and student production systems.
+            </p>
+          </div>
+          <div className={styles.pipelineVisualizer}>
+            <AcademicPipelineHero />
+          </div>
+          <div style={{ textAlign: "center", marginTop: "24px" }}>
+            <Link href="/research" className={styles.textLink}>
+              View complete research architecture <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Featured Research Project */}
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Selected work & software</p>
+            <p className={styles.eyebrow}>Featured work</p>
             <h2>Research platforms and security tools</h2>
           </div>
         </div>
@@ -181,21 +185,45 @@ export default function AcademicHome() {
             <p>{researchProjects[4].summary}</p>
             <small>{researchProjects[4].collaboration}</small>
             <Link href="/research" className={styles.textLink}>
-              Read about projects & tools <ArrowRight size={16} />
+              Read about all projects & tools <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Supervised FYP Work */}
+      {/* 5. Selected Publications */}
       <section className={styles.section}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Student work</p>
-            <h2>Supervision, FYPs, and student projects</h2>
+            <p className={styles.eyebrow}>Publications</p>
+            <h2>Selected research output</h2>
           </div>
-          <Link href="/alumni" className={styles.textLink}>
-            Explore supervision <ArrowRight size={16} />
+          <Link href="/publications" className={styles.textLink}>
+            View all publications <ArrowRight size={16} />
+          </Link>
+        </div>
+        <div className={styles.compactList}>
+          {publications.slice(0, 4).map((publication) => (
+            <article key={publication.title}>
+              <span>{publication.year}</span>
+              <div>
+                <h3>{publication.title}</h3>
+                <p>{publication.venue}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* 6. Supervision & FYPs Preview */}
+      <section className={`${styles.section} ${styles.softSection}`}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Supervision</p>
+            <h2>FYP supervision and student projects</h2>
+          </div>
+          <Link href="/supervision" className={styles.textLink}>
+            Explore supervision directory <ArrowRight size={16} />
           </Link>
         </div>
         <div className={styles.studentGrid}>
@@ -210,44 +238,7 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* Publications & Opportunity Callout */}
-      <section className={`${styles.section} ${styles.splitSection}`}>
-        <div>
-          <div className={styles.sectionHeading}>
-            <div>
-              <p className={styles.eyebrow}>Publications</p>
-              <h2>Selected research output</h2>
-            </div>
-          </div>
-          <div className={styles.compactList}>
-            {publications.slice(0, 4).map((publication) => (
-              <article key={publication.title}>
-                <span>{publication.year}</span>
-                <div>
-                  <h3>{publication.title}</h3>
-                  <p>{publication.venue}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <Link href="/publications" className={styles.textLink}>
-            View all publications <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        <div className={styles.opportunityPanel}>
-          <p className={styles.eyebrow}>Join the lab</p>
-          <h2>Interested in research or an FYP?</h2>
-          <p>
-            The SCSA Lab welcomes motivated BS, MS, and PhD students interested in cyber security, software testing, vulnerability analysis, malware detection, and code analysis.
-          </p>
-          <Link href="/contact" className={styles.primaryButton}>
-            Discuss an opportunity <ArrowRight size={17} />
-          </Link>
-        </div>
-      </section>
-
-      {/* Partner Affiliations */}
+      {/* 7. Academic Partners */}
       <section className={styles.partners}>
         <p>Academic and research affiliations</p>
         <div>
@@ -263,6 +254,20 @@ export default function AcademicHome() {
               </a>
             </figure>
           ))}
+        </div>
+      </section>
+
+      {/* 8. Final Contact CTA */}
+      <section className={styles.ctaBand} style={{ textAlign: "center", padding: "48px 24px" }}>
+        <div>
+          <p className={styles.eyebrow}>Collaborate with SCSA Lab</p>
+          <h2>Interested in software security research or FYP supervision?</h2>
+          <p style={{ maxWidth: "640px", margin: "12px auto 24px" }}>
+            Dr Junaid Akram supervises BS, MS, and PhD students in software vulnerability detection, automated testing, malware analysis, and code clone research.
+          </p>
+          <Link href="/contact" className={styles.primaryButton}>
+            Contact the lab <ArrowRight size={17} />
+          </Link>
         </div>
       </section>
     </AcademicSiteLayout>

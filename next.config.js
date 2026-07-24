@@ -91,8 +91,18 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/supervision",
-        destination: "/alumni",
+        source: "/alumni",
+        destination: "/supervision",
+        permanent: true,
+      },
+      {
+        source: "/alumni/case-study/:slug*",
+        destination: "/supervision/projects/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/dsa-visualization",
+        destination: "/resources",
         permanent: true,
       },
       {

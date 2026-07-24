@@ -1,9 +1,9 @@
-import { AlumniPage } from "../components/AcademicSite/AcademicContentPage";
+import { SupervisionPage } from "../components/AcademicSite/AcademicContentPage";
 import { defaultFypProjects } from "../data/fypProjects";
 import dbConnect from "../lib/mongoose";
 import FypProject from "../models/FypProject";
 
-export default AlumniPage;
+export default SupervisionPage;
 
 export async function getServerSideProps() {
   try {
@@ -20,7 +20,7 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.error("Alumni FYP data fallback:", error?.message || error);
+    console.error("Alumni fallback:", error?.message || error);
     return {
       props: {
         fypProjects: defaultFypProjects,

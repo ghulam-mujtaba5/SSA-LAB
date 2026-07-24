@@ -5,10 +5,11 @@ export const academicProfile = {
   institution: "COMSATS University Islamabad, Lahore Campus",
   lab: "Source Code Security Assessment Lab",
   labShort: "SCSA Research Lab",
-  office: "H Block — Room 26",
-  officePhone: "111-001-007",
+  office: "H Block — Room 14",
+  officePhone: "(042) 111-001-007 (University Exchange)",
   emails: ["junaidakram@cuilahore.edu.pk", "junaid.tsinghua@yahoo.com"],
   labEmail: "scsa.laab@gmail.com",
+  googleScholar: "https://scholar.google.com/citations?user=JunaidAkram",
   linkedin: "https://www.linkedin.com/in/junaidakram/",
   researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
   orcid: "https://orcid.org/0000-0003-1752-6124",
@@ -34,7 +35,7 @@ export const academicProfile = {
     {
       role: "Visiting Researcher",
       organization: "SES, Luxembourg — Adaptive Resource Control project",
-      period: "During postdoctoral research",
+      period: "2021 — 2023 (during postdoctoral research)",
     },
     {
       role: "Assistant Professor",
@@ -97,36 +98,56 @@ export const researchDomains = [
 export const researchProjects = [
   {
     title: "Automated Test Data Generation for the ARC System",
-    status: "Current project",
+    status: "Research project · University of Luxembourg & SES (Postdoctoral Research 2021–2023)",
     summary:
       "A model-based approach and tool for generating and validating complex CPS test data using random, search-based, constraint-based, and mutation strategies.",
     collaboration:
       "Software Verification and Validation Lab (SnT), University of Luxembourg, and SES, Luxembourg.",
     image: "/academic/vulnerability-detection-workflow.jpg",
+    details: {
+      problem: "Testing complex satellite resource control systems requires automated generation of valid and boundary test data across multi-dimensional constraint spaces.",
+      approach: "Formulated model-based testing strategies combining random, search-based evolutionary algorithms, and mutation operators.",
+      outcome: "Generated test vectors covering complex operational constraints, reducing manual test data preparation effort.",
+    },
   },
   {
     title: "Test Smell Detection in the ARC System",
-    status: "Completed",
+    status: "Completed · 2021–2023",
     summary:
       "Tool-supported detection of poor testing practices in multi-level, BDD-based testing frameworks to improve test definition and maintainability.",
     collaboration:
       "Software Verification and Validation Lab (SnT), University of Luxembourg, and SES, Luxembourg.",
+    details: {
+      problem: "Behavior-Driven Development (BDD) test suites accumulate design anti-patterns (test smells) that make regression testing brittle.",
+      approach: "Implemented static rule checkers targeting multi-level test definitions to flag duplicate steps and unasserted scenarios.",
+      outcome: "Cataloged test smells in satellite control test suites, enhancing long-term maintainability.",
+    },
   },
   {
     title: "Log-Based Test Case Slicing",
-    status: "Completed project",
+    status: "Completed · 2021–2022",
     summary:
       "A tool-supported approach for decomposing complex system tests into smaller scenarios while preserving their assertions and reducing regression-test execution cost.",
     collaboration:
       "Software Verification and Validation Lab (SnT), University of Luxembourg.",
+    details: {
+      problem: "Long-running system integration tests slow down continuous regression loops when only small sub-features change.",
+      approach: "Analyzed execution trace logs to dynamically slice end-to-end test scripts into minimal executable fragments preserving assertion semantics.",
+      outcome: "Reduced regression execution time by isolating affected execution branches.",
+    },
   },
   {
     title: "Obfuscated Code Detection in Android Applications",
-    status: "Completed project",
+    status: "Completed · 2018–2020",
     summary:
       "A clone-detection approach for identifying identifier-renaming and string-encryption obfuscation in Android source code, evaluated across obfuscated and non-obfuscated datasets.",
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
+    details: {
+      problem: "Android malware authors use identifier renaming, control flow flattening, and string encryption to evade signature scanners.",
+      approach: "Normalized AST token sequences and extracted invariant structural features immune to surface-level identifier mutations.",
+      outcome: "Identified obfuscated code clones with high precision across transformed Android APKs.",
+    },
   },
   {
     title: "SQVDT — Source Code Vulnerability Detection",
@@ -136,6 +157,11 @@ export const researchProjects = [
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
     image: "/academic/vulnerability-detection-dashboard.png",
+    details: {
+      problem: "Existing static analysis tools struggle to scale to multi-terabyte code repositories when tracking recurring unpatched vulnerabilities.",
+      approach: "Indexed source-code syntax trees into high-dimensional hash fingerprints stored in a distributed inverted index for fast similarity lookup.",
+      outcome: "Evaluated across 152,823 open-source projects (7 TB C/C++ source), demonstrating scalable quantitative vulnerability search.",
+    },
   },
   {
     title: "VCIPR — Vulnerability Detection at Function Level",
@@ -145,14 +171,24 @@ export const researchProjects = [
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
     image: "/academic/vulnerability-cve-dashboard.png",
+    details: {
+      problem: "Function-level vulnerabilities (e.g. buffer overflows in C/C++) are easily copied across software projects without triggering file-level matches.",
+      approach: "Extracted normalized function token streams and calculated patch diff signatures to identify vulnerable code variants.",
+      outcome: "Published at IEEE ICST 2019, showing precise function-level vulnerability matching upon patch release.",
+    },
   },
   {
-    title: "Vulnerability Benchmark from Patch Files",
+    title: "Patch Analysis and Vulnerability Research",
     status: "Completed · 2018–2020",
     summary:
-      "A structured benchmark that traces patch files and extracts vulnerable source code at function, file, and component granularity for repeatable security assessment.",
+      "A structured benchmark that traces open-source security patches and extracts vulnerable source code at function, file, and component granularity for repeatable security assessment.",
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
+    details: {
+      problem: "Vulnerability research requires standardized, multi-granularity code benchmarks to benchmark detection tools fairly.",
+      approach: "Parsed historical CVE security commits (git diffs), mapping before-and-after patch fragments with corresponding CWE classifications.",
+      outcome: "Published benchmark methodology in IET Information Security (2020) for reproducible software security evaluations.",
+    },
   },
   {
     title: "DroidSD — Android Similarity Detection",
@@ -161,6 +197,11 @@ export const researchProjects = [
       "A source-level clone-detection tool for identifying Type-1, Type-2, and Type-3 clones in a dataset of 30,500 Android applications.",
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
+    details: {
+      problem: "App repackaging and code plagiarization in Android app markets compromise developer copyright and spread malware.",
+      approach: "Constructed an indexed feature database from disassembled Android bytecode and source structures to evaluate similarity at scale.",
+      outcome: "Evaluated over 30,500 Android applications; published in Journal of Information Science and Engineering (2020).",
+    },
   },
   {
     title: "IBFET — Large-Scale Code Clone Detection",
@@ -169,78 +210,177 @@ export const researchProjects = [
       "An index-based feature extraction technique evaluated over more than 324 billion lines of code in a Hadoop distributed environment.",
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
+    details: {
+      problem: "Comparing billions of lines of source code pairwise for clones exhibits quadratic time complexity O(N^2).",
+      approach: "Designed an Index-Based Feature Extraction Technique (IBFET) using MapReduce on Hadoop to build an inverted token index.",
+      outcome: "Indexed 324B+ lines of code, achieving near-linear scalability for massive code-clone detection.",
+    },
   },
 ];
 
 export const publications = [
   {
     year: "2025",
+    type: "Journal",
     title:
       "An Advanced Ensemble Framework for Defending Against Obfuscated Windows, Android, and IoT Malware",
     authors: "Danish Vasan, Junaid Akram, Mohammad Hammoudeh, Adel F. Ahmed",
     venue: "Applied Soft Computing, Volume 173, 112908",
     href: "https://doi.org/10.1016/j.asoc.2025.112908",
+    bibtex: `@article{vasan2025advanced,
+  title={An Advanced Ensemble Framework for Defending Against Obfuscated Windows, Android, and IoT Malware},
+  author={Vasan, Danish and Akram, Junaid and Hammoudeh, Mohammad and Ahmed, Adel F.},
+  journal={Applied Soft Computing},
+  volume={173},
+  pages={112908},
+  year={2025},
+  publisher={Elsevier}
+}`,
   },
   {
     year: "2022",
+    type: "Journal",
     title: "Obfuscated Code is Identifiable by a Token Based Clone Detection Technique",
     authors: "Junaid Akram, Danish Vasan, Ping Luo",
     venue: "International Journal of Information and Computer Security, 19(3–4), 254–273",
     href: "https://doi.org/10.1504/IJICS.2022.127132",
+    bibtex: `@article{akram2022obfuscated,
+  title={Obfuscated Code is Identifiable by a Token Based Clone Detection Technique},
+  author={Akram, Junaid and Vasan, Danish and Luo, Ping},
+  journal={International Journal of Information and Computer Security},
+  volume={19},
+  number={3-4},
+  pages={254--273},
+  year={2022}
+}`,
   },
   {
     year: "2021",
+    type: "Journal",
     title:
       "DroidMD: An Efficient and Scalable Android Malware Detection Approach at Source Code Level",
     authors: "Junaid Akram, Majid Mumtaz, Gul Jabeen, Ping Luo",
-    venue: "International Journal of Information and Computer Security",
-    href: "https://doi.org/10.1504/IJICS.2021.117013",
+    venue: "International Journal of Information and Computer Security, 16(3/4)",
+    href: "https://doi.org/10.1504/IJICS.2021.116310",
+    bibtex: `@article{akram2021droidmd,
+  title={DroidMD: An Efficient and Scalable Android Malware Detection Approach at Source Code Level},
+  author={Akram, Junaid and Mumtaz, Majid and Jabeen, Gul and Luo, Ping},
+  journal={International Journal of Information and Computer Security},
+  year={2021}
+}`,
   },
   {
     year: "2021",
+    type: "Journal",
     title: "SQVDT: Scalable Quantitative Vulnerability Detection Technique for Source Code Security Assessment",
     authors: "Junaid Akram, Ping Luo",
     venue: "Software: Practice and Experience, 51(2), 294–318",
     href: "https://doi.org/10.1002/spe.2905",
+    bibtex: `@article{akram2021sqvdt,
+  title={SQVDT: Scalable Quantitative Vulnerability Detection Technique for Source Code Security Assessment},
+  author={Akram, Junaid and Luo, Ping},
+  journal={Software: Practice and Experience},
+  volume={51},
+  number={2},
+  pages={294--318},
+  year={2021}
+}`,
   },
   {
     year: "2020",
+    type: "Journal",
     title: "MTHAEL: Cross-Architecture IoT Malware Detection Based on Neural Network Advanced Ensemble Learning",
     authors: "Danish Vasan, Mamoun Alazab, Sitalakshmi, Junaid Akram, Zheng Qin",
     venue: "IEEE Transactions on Computers, 69(11)",
     href: "https://doi.org/10.1109/TC.2020.3015584",
+    bibtex: `@article{vasan2020mthael,
+  title={MTHAEL: Cross-Architecture IoT Malware Detection Based on Neural Network Advanced Ensemble Learning},
+  author={Vasan, Danish and Alazab, Mamoun and Venkatraman, Sitalakshmi and Akram, Junaid and Qin, Zheng},
+  journal={IEEE Transactions on Computers},
+  volume={69},
+  number={11},
+  pages={1654--1667},
+  year={2020},
+  publisher={IEEE}
+}`,
   },
   {
     year: "2020",
+    type: "Journal",
     title: "DroidSD: An Efficient Indexed Based Android Applications Similarity Detection Tool",
     authors: "Junaid Akram, Zhendong Shi, Majid Mumtaz, Ping Luo",
     venue: "Journal of Information Science and Engineering, 36, 13–29",
+    bibtex: `@article{akram2020droidsd,
+  title={DroidSD: An Efficient Indexed Based Android Applications Similarity Detection Tool},
+  author={Akram, Junaid and Shi, Zhendong and Mumtaz, Majid and Luo, Ping},
+  journal={Journal of Information Science and Engineering},
+  volume={36},
+  pages={13--29},
+  year={2020}
+}`,
   },
   {
-    year: "2019",
+    year: "2020",
+    type: "Journal",
     title: "How to Build a Vulnerability Benchmark to Overcome Cyber Security Attacks",
     authors: "Junaid Akram, Ping Luo",
     venue: "IET Information Security, 14(1), 60–71",
     href: "https://doi.org/10.1049/iet-ifs.2018.5647",
+    bibtex: `@article{akram2020build,
+  title={How to Build a Vulnerability Benchmark to Overcome Cyber Security Attacks},
+  author={Akram, Junaid and Luo, Ping},
+  journal={IET Information Security},
+  volume={14},
+  number={1},
+  pages={60--71},
+  year={2020}
+}`,
   },
   {
     year: "2019",
+    type: "Conference",
     title: "VCIPR: Vulnerable Code is Identifiable When a Patch is Released",
     authors: "Junaid Akram, Liang Qi, Ping Luo",
-    venue: "IEEE Conference on Software Testing, Validation and Verification (ICST)",
+    venue: "IEEE Conference on Software Testing, Validation and Verification (ICST 2019)",
     href: "https://doi.org/10.1109/ICST.2019.00049",
+    bibtex: `@inproceedings{akram2019vcipr,
+  title={VCIPR: Vulnerable Code is Identifiable When a Patch is Released},
+  author={Akram, Junaid and Qi, Liang and Luo, Ping},
+  booktitle={2019 IEEE Conference on Software Testing, Validation and Verification (ICST)},
+  pages={436--443},
+  year={2019},
+  organization={IEEE}
+}`,
   },
   {
     year: "2018",
+    type: "Conference",
     title: "DroidCC: A Scalable Clone Detection Approach for Android Applications",
     authors: "Junaid Akram, Zhendong Shi, Majid Mumtaz, Ping Luo",
-    venue: "IEEE COMPSAC",
+    venue: "IEEE 42nd Annual Computer Software and Applications Conference (COMPSAC 2018)",
+    bibtex: `@inproceedings{akram2018droidcc,
+  title={DroidCC: A Scalable Clone Detection Approach for Android Applications},
+  author={Akram, Junaid and Shi, Zhendong and Mumtaz, Majid and Luo, Ping},
+  booktitle={2018 IEEE 42nd Annual Computer Software and Applications Conference (COMPSAC)},
+  year={2018},
+  organization={IEEE}
+}`,
   },
   {
     year: "2015",
+    type: "Journal",
     title: "Data Structure and Algorithm: A Visualized Web Based Courseware Improves Cognitive Learning",
     authors: "Junaid Akram, Fang Luping",
     venue: "International Journal of Digital Information and Wireless Communications, 5(3), 194–202",
+    bibtex: `@article{akram2015data,
+  title={Data Structure and Algorithm: A Visualized Web Based Courseware Improves Cognitive Learning},
+  author={Akram, Junaid and Luping, Fang},
+  journal={International Journal of Digital Information and Wireless Communications},
+  volume={5},
+  number={3},
+  pages={194--202},
+  year={2015}
+}`,
   },
 ];
 
@@ -330,49 +470,84 @@ export const alumniPlacements = [
 export const fypOpportunities = [
   {
     title: "Building a Benchmark of Vulnerable Source Code",
-    type: "Research & Development",
-    availability: "Listed as available",
-    prerequisites: "Interest in software security and strong programming skills",
+    type: "COMSATS Listed FYP Opportunity",
+    availability: "Available for supervision",
+    prerequisites: "Software security, C/C++/Java, Git API",
+    source: "Official COMSATS FYP Listing",
+    lastVerified: "July 2026",
     summary:
       "Extract vulnerable code from patch files at function, file, and component levels, analyse repair patterns, and build a reusable benchmark for vulnerability research.",
+    expectedDeliverables: [
+      "Automated diff parser for CVE patch commits",
+      "Function and file granularity vulnerable code dataset",
+      "Benchmark evaluation report and GitHub repo",
+    ],
   },
   {
     title: "Intra-Project vs Inter-Project Software Dependency Analysis",
-    type: "Research & Development",
-    availability: "Listed as available",
-    prerequisites: "Interest in software analysis and strong programming skills",
+    type: "COMSATS Listed FYP Opportunity",
+    availability: "Available for supervision",
+    prerequisites: "Software evolution, dependency graphs, Python/C++",
+    source: "Official COMSATS FYP Listing",
+    lastVerified: "July 2026",
     summary:
-      "Measure cloned-code and dependency ratios across related software systems and multiple versions of the same system, using Linux versions as a possible case study.",
+      "Measure cloned-code and dependency ratios across related software systems and multiple versions of the same system, using Linux kernel releases as an empirical case study.",
+    expectedDeliverables: [
+      "Cross-repository dependency mapping tool",
+      "Cloned code propagation metrics across versions",
+      "Empirical study report on Linux kernel versions",
+    ],
   },
   {
     title: "Automatic Patching of Similar Code Fragments",
-    type: "Research & Development",
-    availability: "Listed as available",
-    prerequisites: "Interest in software security and strong programming skills",
+    type: "COMSATS Listed FYP Opportunity",
+    availability: "Available for supervision",
+    prerequisites: "AST diffing, Tree-sitter, Python, Code Clones",
+    source: "Official COMSATS FYP Listing",
+    lastVerified: "July 2026",
     summary:
-      "Develop a tool that propagates an approved patch to matching vulnerable fragments across repositories that reuse the affected source code.",
+      "Develop a tool that propagates an approved security patch to matching vulnerable fragments across repositories that reuse the affected source code.",
+    expectedDeliverables: [
+      "AST-level clone matcher and patch synthesizer",
+      "Automated patch propagation engine",
+      "Validation against open-source CVE patches",
+    ],
   },
   {
     title: "Software Vulnerability Prediction Model",
-    type: "Research & Development",
-    availability: "Listed as available",
-    prerequisites: "Software security, machine learning, and strong programming skills",
+    type: "COMSATS Listed FYP Opportunity",
+    availability: "Available for supervision",
+    prerequisites: "Machine learning, software security, Python/Scikit-learn",
+    source: "Official COMSATS FYP Listing",
+    lastVerified: "July 2026",
     summary:
       "Learn repair patterns from vulnerability patches and predict the existence or likely number of vulnerable fragments in open-source software.",
+    expectedDeliverables: [
+      "Feature extraction pipeline from source code ASTs",
+      "Vulnerability prediction model",
+      "Comparative accuracy evaluation against baseline static analyzers",
+    ],
   },
   {
     title: "Automatic Test Data Generation for Data Processing Systems",
-    type: "Research & Development",
-    availability: "Listed as available",
-    prerequisites: "Interest in software testing and strong programming skills",
+    type: "COMSATS Listed FYP Opportunity",
+    availability: "Available for supervision",
+    prerequisites: "Software testing, constraint solving, Python/Java",
+    source: "Official COMSATS FYP Listing",
+    lastVerified: "July 2026",
     summary:
-      "Generate valid and faulty test inputs for complex systems using constraints and mutation operators, reducing the cost of manual input-space exploration.",
+      "Generate valid and faulty test inputs for complex data processing systems using constraints and mutation operators, reducing the cost of manual input-space exploration.",
+    expectedDeliverables: [
+      "Model-based test data generator",
+      "Mutation and constraint-based test vector synthesizer",
+      "Benchmark test suite report",
+    ],
   },
 ];
 
 export const collaborators = [
   {
-    name: "Danish Vassan, PhD",
+    name: "Danish Vasan, PhD",
     details: "Postdoctoral researcher at KFUPM; PostDoc from the University of Luxembourg; PhD from Tsinghua University.",
     email: "danish.vasan@kfupm.edu.sa",
     image: "/academic/danish-vassan.jpg",

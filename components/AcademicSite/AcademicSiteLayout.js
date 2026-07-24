@@ -13,9 +13,9 @@ const navigation = [
   { label: "About", href: "/about" },
   { label: "Research", href: "/research" },
   { label: "Publications", href: "/publications" },
-  { label: "FYP Supervision", href: "/alumni" },
+  { label: "Supervision", href: "/supervision" },
   { label: "Resources", href: "/resources" },
-  { label: "Team", href: "/team" },
+  { label: "People & Partners", href: "/team" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },
 ];
