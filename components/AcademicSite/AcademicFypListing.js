@@ -58,7 +58,7 @@ export default function AcademicFypListing({ projects = [] }) {
     <section className={`${styles.section} ${styles.fypListingSection}`}>
       <div className={styles.sectionHeading}>
         <div>
-          <p className={styles.eyebrow}>Supervised FYP Directory</p>
+          <p className={styles.eyebrow}>FYP Supervision Directory</p>
           <h2>Final-Year Student Projects ({projects.length})</h2>
           <p className={styles.sectionLead}>
             Explore completed final-year projects supervised by Dr. Junaid Akram across software security, artificial intelligence, static analysis, and blockchain systems.
@@ -145,13 +145,25 @@ export default function AcademicFypListing({ projects = [] }) {
 
                 <p className={styles.fypCardSummary}>{project.summary}</p>
 
-                {/* Students list */}
+                {/* Students list with Alumni Profile links */}
                 <div className={styles.fypCardStudents}>
                   <Users size={14} className={styles.metaIcon} />
                   <span>
                     {(project.students || []).map((s, idx) => (
                       <strong key={s.name || idx}>
-                        {s.name}
+                        {s.profileUrl ? (
+                          <a
+                            href={s.profileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.studentProfileLink}
+                            title={`View ${s.name}'s profile`}
+                          >
+                            {s.name} <ExternalLink size={11} style={{ display: "inline", verticalAlign: "-1px" }} />
+                          </a>
+                        ) : (
+                          s.name
+                        )}
                         {s.registration ? <small> ({s.registration})</small> : ""}
                         {idx < project.students.length - 1 ? " · " : ""}
                       </strong>

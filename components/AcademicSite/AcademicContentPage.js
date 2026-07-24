@@ -298,14 +298,14 @@ export function PublicationsPage() {
 export function AlumniPage({ fypProjects = [] }) {
   return (
     <AcademicSiteLayout
-      title="Alumni & FYP"
+      title="FYP Supervision"
       path="/alumni"
-      description="Selected supervised projects, student work, internships, and alumni outcomes under Dr. Junaid Akram."
+      description="Supervised final-year capstone projects, student research, and FYP opportunities under Dr. Junaid Akram."
     >
       <PageIntro
-        eyebrow="Supervision & alumni"
-        title="From supervised projects to professional experience."
-        lead="Verified current COMSATS FYP opportunities alongside selected supervised projects, internships, and alumni outcomes from the professor’s existing record."
+        eyebrow="FYP Supervision"
+        title="Supervised final-year projects and student research."
+        lead="Verified current COMSATS FYP opportunities alongside completed final-year capstone projects supervised under Dr. Junaid Akram's SCSA Laboratory."
       />
       <AcademicFypListing projects={fypProjects} />
       <section className={`${styles.section} ${styles.softSection}`}>
@@ -576,11 +576,13 @@ export function ContactPage() {
           />
         </div>
         <div className={styles.contactVisual}>
-          <AcademicLottie
-            src="/academic/lottie/security-research.json"
-            ariaLabel="Animated software security shield"
-            className={styles.securityLottie}
-          />
+          <div className={styles.lottieCard}>
+            <AcademicLottie
+              src="/academic/lottie/security-research.json"
+              ariaLabel="Animated software security shield"
+              className={styles.securityLottie}
+            />
+          </div>
           <div>
             <p className={styles.eyebrow}>SCSA Research Lab</p>
             <h2>Software security, testing, and student research.</h2>

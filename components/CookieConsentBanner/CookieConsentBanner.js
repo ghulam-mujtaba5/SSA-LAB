@@ -39,29 +39,55 @@ const CookieConsentBanner = () => {
   if (!visible) return null;
 
   return (
-    <div className={`${commonStyles.banner} ${frameStyles.banner}`}>
-      <span className={`${commonStyles.text} ${frameStyles.text}`}>
-        This site uses cookies for a better experience.{" "}
-        <a
-          href="/privacy-policy"
-          className={`${commonStyles.link} ${frameStyles.link}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Privacy Policy
-        </a>
-        .
-      </span>
+    <div
+      className={`${commonStyles.banner} ${frameStyles.banner}`}
+      role="region"
+      aria-label="Cookie consent notice"
+    >
+      <div className={commonStyles.contentGroup}>
+        <div className={commonStyles.iconWrapper} aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+            <path d="M8.5 8.5v.01" />
+            <path d="M16 15.5v.01" />
+            <path d="M12 12v.01" />
+            <path d="M11 17v.01" />
+            <path d="M7 14v.01" />
+          </svg>
+        </div>
+        <span className={`${commonStyles.text} ${frameStyles.text}`}>
+          We use cookies to enhance your experience, analyze site usage, and support our marketing.{" "}
+          <a
+            href="/privacy-policy"
+            className={`${commonStyles.link} ${frameStyles.link}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Privacy Policy
+          </a>
+        </span>
+      </div>
       <div className={`${commonStyles.actions} ${frameStyles.actions}`}>
         <button
           className={`${commonStyles.button} ${frameStyles.button}`}
           onClick={acceptCookies}
+          type="button"
         >
-          Accept
+          Accept All
         </button>
         <button
           className={`${commonStyles.buttonSecondary} ${frameStyles.buttonSecondary}`}
           onClick={declineCookies}
+          type="button"
         >
           Decline
         </button>
@@ -71,3 +97,4 @@ const CookieConsentBanner = () => {
 };
 
 export default CookieConsentBanner;
+

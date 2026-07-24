@@ -12,8 +12,8 @@ export const defaultFypProjects = [
     session: "2022–2026",
     institution: "COMSATS University Islamabad, Lahore Campus",
     students: [
-      { name: "Ghulam Mujtaba", registration: "FA22-BSE-199" },
-      { name: "Muhammad Waqar Ul Mulk", registration: "FA22-BSE-153" },
+      { name: "Ghulam Mujtaba", registration: "FA22-BSE-199", profileUrl: "https://github.com/ghulam-mujtaba5" },
+      { name: "Muhammad Waqar Ul Mulk", registration: "FA22-BSE-153", profileUrl: "https://linkedin.com" },
     ],
     supervisor: "Dr. Junaid Akram",
     coSupervisor: "Ms. Khula Qadeer",

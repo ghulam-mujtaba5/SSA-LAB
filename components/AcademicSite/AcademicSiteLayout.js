@@ -13,7 +13,7 @@ const navigation = [
   { label: "About", href: "/about" },
   { label: "Research", href: "/research" },
   { label: "Publications", href: "/publications" },
-  { label: "Alumni & FYP", href: "/alumni" },
+  { label: "FYP Supervision", href: "/alumni" },
   { label: "Resources", href: "/resources" },
   { label: "Team", href: "/team" },
   { label: "Events", href: "/events" },

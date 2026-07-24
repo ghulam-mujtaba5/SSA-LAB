@@ -1100,11 +1100,36 @@
 
 .contactVisual {
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
   gap: clamp(24px, 5vw, 54px);
   align-items: center;
   max-width: 840px;
   margin: 0 auto 38px;
+}
+
+.lottieCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--academic-paper, #ffffff);
+  border: 1px solid var(--academic-line, #e2e8f0);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  transition: all 0.25s ease;
+}
+
+:global([data-theme="dark"]) .lottieCard {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.securityLottie {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1;
+  height: auto;
+  display: block;
 }
 
 .contactVisual h2,
@@ -1122,11 +1147,6 @@
   margin-top: 14px;
   color: var(--academic-muted);
   line-height: 1.7;
-}
-
-.securityLottie {
-  width: 190px;
-  height: 190px;
 }
 
 .officePhone {
@@ -1190,13 +1210,34 @@
 }
 
 .contactCard {
-  min-height: 260px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 32px;
+  padding: 30px;
   border: 1px solid var(--academic-line);
-  border-radius: 8px;
+  border-radius: 12px;
+  background: var(--academic-paper);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.contactCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--academic-blue);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.12);
+}
+
+.studentProfileLink {
+  color: var(--academic-blue, #4f46e5);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.studentProfileLink:hover {
+  color: var(--brand-primary-hover, #4338ca);
+  text-decoration: underline;
 }
 
 .contactCard > svg {

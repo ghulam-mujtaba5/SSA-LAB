@@ -7,7 +7,7 @@ export const MAIN_SECTIONS = [
   { label: "About", route: "/about" },
   { label: "Research", route: "/research" },
   { label: "Publications", route: "/publications" },
-  { label: "Alumni & FYP", route: "/alumni" },
+  { label: "FYP Supervision", route: "/alumni" },
   { label: "Resources", route: "/resources" },
   { label: "Team", route: "/team" },
   { label: "Events", route: "/events" },
