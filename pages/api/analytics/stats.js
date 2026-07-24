@@ -1,5 +1,5 @@
 import { getToken } from "next-auth/jwt";
-import dbConnect from "../../../lib/mongodb";
+import dbConnect from "../../../lib/mongoose";
 import Article from "../../../models/Article";
 import Project from "../../../models/Project";
 
