@@ -25,7 +25,6 @@ const navigation = [
     hasDropdown: true,
     children: supervisionSubItems,
   },
-  { label: "Resources", href: "/resources" },
   { label: "People & Partners", href: "/team" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },

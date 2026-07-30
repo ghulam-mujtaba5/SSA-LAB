@@ -8,7 +8,6 @@ export const MAIN_SECTIONS = [
   { label: "Research", route: "/research" },
   { label: "Publications", route: "/publications" },
   { label: "FYP Supervision", route: "/alumni" },
-  { label: "Resources", route: "/resources" },
   { label: "Team", route: "/team" },
   { label: "Events", route: "/events" },
   { label: "Contact", route: "/contact" },

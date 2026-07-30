@@ -21,6 +21,9 @@ import {
   CheckCircle2,
   Building,
   Users,
+  Calendar,
+  Award,
+  Maximize2,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import AcademicImageLightbox from "./AcademicImageLightbox";
@@ -35,7 +38,6 @@ import {
   eventGallery,
   eventHighlights,
   fypOpportunities,
-  learningResources,
   partnerLogos,
   publications,
   researchDomains,
@@ -416,19 +418,43 @@ export function AboutPage() {
             <h2>Research Activities & Conference Presentations</h2>
           </div>
         </div>
-        <div className={styles.eventGrid}>
-          {eventGallery.slice(0, 6).map((evt, idx) => (
-            <figure key={evt.src || idx}>
-              <AcademicImageLightbox
-                src={evt.src}
-                alt={evt.alt}
-                width={evt.width}
-                height={evt.height}
-                caption={evt.caption}
-              />
-              <figcaption>{evt.caption}</figcaption>
-            </figure>
-          ))}
+        <div className={styles.eventGalleryGrid}>
+          {eventGallery.map((image) => {
+            const isPortrait = image.orientation === "portrait";
+            return (
+              <article key={image.src} className={styles.eventGalleryCard}>
+                <div className={`${styles.eventMediaBox} ${isPortrait ? styles.eventMediaPortrait : styles.eventMediaLandscape}`}>
+                  <span className={styles.eventTopBadge}>
+                    <Sparkles size={12} /> {image.badge}
+                  </span>
+                  <AcademicImageLightbox
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    caption={image.caption}
+                    className={styles.eventImageButton}
+                    sizes="(max-width: 868px) 100vw, 50vw"
+                  />
+                  <div className={styles.eventExpandHint}>
+                    <Maximize2 size={13} /> Expand Photo
+                  </div>
+                </div>
+                <div className={styles.eventCardMetaBody}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "0.78rem", fontWeight: "600", color: "var(--academic-cyan)" }}>
+                      {image.category} · {image.date}
+                    </span>
+                    <span className={styles.eventLocation} style={{ fontSize: "0.78rem" }}>
+                      <MapPin size={12} /> {image.location}
+                    </span>
+                  </div>
+                  <h3>{image.title}</h3>
+                  <p>{image.caption}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
     </AcademicSiteLayout>
@@ -790,84 +816,349 @@ export function SupervisionPage({ fypProjects = [] }) {
 }
 
 export function TeamPage() {
+  const [activeTab, setActiveTab] = useState("all");
+
+  const showPi = activeTab === "all" || activeTab === "pi";
+  const showMs = activeTab === "all" || activeTab === "ms";
+  const showBs = activeTab === "all" || activeTab === "bs";
+  const showAlumni = activeTab === "all" || activeTab === "alumni";
+  const showPartners = activeTab === "all" || activeTab === "partners";
+
   return (
     <AcademicSiteLayout
       title="People & Partners"
       path="/team"
-      description="Dr. Junaid Akram, academic collaborators, and research partners connected with the SCSA Lab."
+      description="Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SCSA Lab."
     >
+      {/* PAGE INTRO HEADER */}
       <PageIntro
-        eyebrow="People & partners"
-        title="Research built through academic collaboration."
-        lead="The SCSA Lab connects faculty, collaborators, students, and institutional partners across software security and software engineering."
+        eyebrow="SCSA Research & Development Team"
+        title="People, Collaborators & Institutional Partners"
+        lead="Connecting principal investigators, international co-investigators, postgraduate MS & PhD thesis researchers, undergraduate BS engineering teams, and institutional partner organizations across software security and program repair."
       />
 
-      <section className={`${styles.section} ${styles.profileGrid}`}>
-        <div className={styles.profileImage}>
-          <AcademicImageLightbox
-            src="/academic/junaid-akram-professor.jpg"
-            alt="Dr. Junaid Akram"
-            width={755}
-            height={716}
-            caption="Dr. Junaid Akram — SCSA Research Lab lead"
-          />
-        </div>
-        <div className={styles.prose}>
-          <p className={styles.eyebrow}>Lab lead</p>
-          <h2>{academicProfile.name}</h2>
-          <p>{academicProfile.role}</p>
-          <p>{academicProfile.institution}</p>
-          <ul className={styles.plainList}>
-            {academicProfile.credentials.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <a className={styles.textLink} href={`mailto:${academicProfile.emails[0]}`}>
-            <Mail size={16} /> {academicProfile.emails[0]}
-          </a>
+      {/* INTERACTIVE CATEGORY FILTER BAR */}
+      <section className={styles.section} style={{ paddingTop: "24px", paddingBottom: "24px" }}>
+        <div className={styles.collabFilterBar}>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeTab === "all" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveTab("all")}
+          >
+            🌟 All Categories
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeTab === "pi" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveTab("pi")}
+          >
+            👨‍🏫 Faculty & Co-Investigators ({coInvestigators.length})
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeTab === "ms" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveTab("ms")}
+          >
+            🎓 Postgraduate Team — MS & PhD ({pgResearchers.length})
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeTab === "bs" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveTab("bs")}
+          >
+            💻 Undergraduate Team — BS Engineering ({defaultFypProjects.length + supervisedProjects.length})
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeTab === "alumni" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveTab("alumni")}
+          >
+            💼 Alumni & Placements ({alumniPlacements.length})
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeTab === "partners" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveTab("partners")}
+          >
+            🏛️ Institutional Partners ({partnerLogos.length})
+          </button>
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.softSection}`}>
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.eyebrow}>Academic collaborators</p>
-            <h2>Co-authors & Research Partners</h2>
+      {/* 1. PRINCIPAL INVESTIGATORS & MAIN COLLABORATORS */}
+      {showPi && (
+        <section className={styles.section}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>Core Leadership & Faculty</p>
+              <h2>Principal Investigators & Co-Investigators</h2>
+            </div>
+            <p style={{ maxWidth: "540px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
+              Leading research across COMSATS, SnT Luxembourg, Tsinghua University, and KFUPM.
+            </p>
           </div>
-        </div>
-        <div className={styles.peopleGrid}>
-          {collaborators.map((person) => (
-            <article key={person.name}>
-              <AcademicImageLightbox
-                src={person.image}
-                alt={person.name}
-                width={260}
-                height={260}
-                caption={person.name}
-                className={styles.personImage}
-              />
-              <div>
-                <h3>{person.name}</h3>
-                <p>{person.details}</p>
-                <a href={`mailto:${person.email}`}>{person.email}</a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
 
-      <section className={styles.partners}>
-        <p>Research affiliations and partner institutions</p>
-        <div>
-          {partnerLogos.map((partner) => (
-            <figure key={partner.name}>
-              <a href={partner.href} target="_blank" rel="noreferrer">
-                <Image src={partner.image} alt={partner.name} width={240} height={80} />
+          <div className={styles.collabGrid}>
+            {coInvestigators.map((pi) => (
+              <article key={pi.name} className={styles.collabCard}>
+                <div className={styles.collabTop}>
+                  <div className={styles.collabAvatar}>
+                    {pi.image ? (
+                      <AcademicImageLightbox
+                        src={pi.image}
+                        alt={pi.name}
+                        width={120}
+                        height={120}
+                        caption={`${pi.name} — ${pi.role}`}
+                      />
+                    ) : (
+                      <span>{pi.name.split(" ").map((n) => n[0]).join("")}</span>
+                    )}
+                  </div>
+                  <div className={styles.collabMeta}>
+                    <h3>{pi.name}</h3>
+                    <span className={styles.collabBadge}>{pi.badge}</span>
+                    <div className={styles.collabDegree}>{pi.role}</div>
+                    <div className={styles.collabFocus} style={{ marginTop: "4px" }}>
+                      {pi.affiliation}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.collabBody}>
+                  <p className={styles.collabTopic}>
+                    <strong>Specialization:</strong> {pi.specialization}
+                  </p>
+                  {pi.bio && <p className={styles.collabFocus}>{pi.bio}</p>}
+                </div>
+
+                <div className={styles.collabFooter}>
+                  {pi.email && (
+                    <a href={`mailto:${pi.email}`} className={styles.collabLinkBtn}>
+                      <Mail size={13} /> Email
+                    </a>
+                  )}
+                  {pi.googleScholar && (
+                    <a href={pi.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                      <ExternalLink size={13} /> Scholar
+                    </a>
+                  )}
+                  {pi.orcid && (
+                    <a href={pi.orcid} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                      <ExternalLink size={13} /> ORCID
+                    </a>
+                  )}
+                  {pi.officialProfile && (
+                    <a href={pi.officialProfile} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                      <ExternalLink size={13} /> Official Profile
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 2. POSTGRADUATE RESEARCHERS (MS & PHD STUDENTS) */}
+      {showMs && (
+        <section className={`${styles.section} ${styles.softSection}`}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>Postgraduate Research Team</p>
+              <h2>MS Computer Science Thesis Researchers</h2>
+            </div>
+            <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
+              Master of Science (MS CS) researchers working on vulnerability repair, AST/CFG code summarizers, Graph Neural Networks, and search-based testing under Dr. Junaid Akram's supervision.
+            </p>
+          </div>
+
+          <div className={styles.collabGrid}>
+            {pgResearchers.map((student) => (
+              <article key={student.id} className={styles.collabCard}>
+                <div className={styles.collabTop}>
+                  <div className={styles.collabAvatar} style={{ background: "rgba(6, 182, 212, 0.1)", border: "2px solid var(--academic-cyan)" }}>
+                    <GraduationCap size={24} style={{ color: "var(--academic-cyan)" }} />
+                  </div>
+                  <div className={styles.collabMeta}>
+                    <h3>{student.name}</h3>
+                    <span className={styles.collabRegId}>{student.id}</span>
+                    <div className={styles.collabDegree}>{student.degree}</div>
+                    <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
+                      {student.status}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.collabBody}>
+                  <p className={styles.collabTopic}>
+                    <strong>Thesis Topic:</strong> "{student.topic}"
+                  </p>
+                  <p className={styles.collabFocus}>
+                    <strong>Research Focus:</strong> {student.focus}
+                  </p>
+                </div>
+
+                <div className={styles.collabFooter}>
+                  <span className={styles.collabFocus} style={{ fontSize: "0.74rem" }}>
+                    <Building size={12} style={{ display: "inline", marginRight: "4px" }} />
+                    {student.institution}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 3. UNDERGRADUATE RESEARCHERS & FYP TEAMS (BS STUDENTS) */}
+      {showBs && (
+        <section className={styles.section}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>Undergraduate Research Team</p>
+              <h2>BS Software Engineering Teams & Supervised Researchers</h2>
+            </div>
+            <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
+              Final-year project engineering teams and supervised undergraduate researchers at COMSATS University Islamabad and Xiamen University Malaysia.
+            </p>
+          </div>
+
+          <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", marginBottom: "18px" }}>
+            Active COMSATS BS Final-Year Engineering Teams
+          </h3>
+
+          <div className={styles.collabGrid} style={{ marginBottom: "48px" }}>
+            {defaultFypProjects.map((fyp) => (
+              <article key={fyp.slug} className={styles.collabCard}>
+                <div className={styles.collabTop}>
+                  <div className={styles.collabAvatar} style={{ borderRadius: "8px", width: "48px", height: "48px" }}>
+                    <Users size={22} />
+                  </div>
+                  <div className={styles.collabMeta}>
+                    <h3>{fyp.title}</h3>
+                    <span className={styles.collabBadge}>{fyp.programme} · {fyp.session}</span>
+                    <div className={styles.collabDegree}>{fyp.projectType} ({fyp.nature})</div>
+                  </div>
+                </div>
+
+                <div className={styles.collabBody}>
+                  <p className={styles.collabFocus} style={{ marginBottom: "12px" }}>
+                    {fyp.summary}
+                  </p>
+                  <p className={styles.collabTopic} style={{ fontSize: "0.8rem", margin: 0 }}>
+                    <strong>Team Members:</strong>
+                  </p>
+                  <ul style={{ margin: "6px 0 12px 18px", padding: 0, fontSize: "0.78rem", color: "var(--academic-muted)" }}>
+                    {fyp.students.map((st) => (
+                      <li key={st.name}>
+                        <strong>{st.name}</strong> {st.registration && `(${st.registration})`}
+                      </li>
+                    ))}
+                  </ul>
+                  {fyp.supervisor && (
+                    <div className={styles.collabFocus} style={{ fontSize: "0.75rem" }}>
+                      Supervisor: <strong>{fyp.supervisor}</strong> {fyp.coSupervisor && `| Co-Supervisor: ${fyp.coSupervisor}`}
+                    </div>
+                  )}
+                </div>
+
+                <div className={styles.collabFooter}>
+                  <Link href="/fyp" className={styles.collabLinkBtn}>
+                    View FYP Details <ArrowRight size={13} />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", marginBottom: "18px" }}>
+            Supervised Undergraduate Student Projects & Alumni
+          </h3>
+
+          <div className={styles.collabGrid}>
+            {supervisedProjects.map((proj) => (
+              <article key={`${proj.student}-${proj.title}`} className={styles.collabCard}>
+                <div className={styles.collabTop}>
+                  <div className={styles.collabAvatar} style={{ width: "44px", height: "44px", fontSize: "0.9rem" }}>
+                    {proj.student.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div className={styles.collabMeta}>
+                    <h3>{proj.student}</h3>
+                    <span className={styles.collabBadge}>{proj.term}</span>
+                    <div className={styles.collabDegree}>{proj.institution}</div>
+                  </div>
+                </div>
+                <div className={styles.collabBody}>
+                  <p className={styles.collabTopic}>
+                    <strong>Supervised Project:</strong> "{proj.title}"
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 4. ALUMNI & CAREER PLACEMENTS */}
+      {showAlumni && (
+        <section className={`${styles.section} ${styles.softSection}`}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>Career Outcomes</p>
+              <h2>Supervised Alumni Placements & Industrial Careers</h2>
+            </div>
+            <p style={{ maxWidth: "540px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
+              Graduates mentored in the lab progressing to top global advisories, software tech leaders, and corporate research centers.
+            </p>
+          </div>
+
+          <div className={styles.placementList}>
+            {alumniPlacements.map((placement) => (
+              <article key={`${placement.name}-${placement.organization}`}>
+                <div>
+                  <h3>{placement.name}</h3>
+                  <p>{placement.organization}</p>
+                </div>
+                <span>{placement.term}</span>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 5. INSTITUTIONAL PARTNERS & ACADEMIC AFFILIATIONS */}
+      {showPartners && (
+        <section className={styles.section}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>Institutional Network</p>
+              <h2>Academic & Industry Partners</h2>
+            </div>
+            <p style={{ maxWidth: "540px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
+              Institutional affiliations and research partnerships driving joint security assessments and program repair.
+            </p>
+          </div>
+
+          <div className={styles.partnerCardGrid}>
+            {partnerLogos.map((partner) => (
+              <a
+                key={partner.name}
+                href={partner.href}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.partnerCardBox}
+              >
+                <div className={styles.partnerLogoWrap}>
+                  <Image src={partner.image} alt={partner.name} width={200} height={60} style={{ objectFit: "contain" }} />
+                </div>
+                <h4>{partner.name}</h4>
+                <span className={styles.partnerRole}>{partner.role}</span>
               </a>
-            </figure>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      )}
     </AcademicSiteLayout>
   );
 }
@@ -875,98 +1166,102 @@ export function TeamPage() {
 export function EventsPage() {
   return (
     <AcademicSiteLayout
-      title="Events"
+      title="Events & Presentations"
       path="/events"
-      description="Selected conference, workshop, and research partnership events attended by Dr. Junaid Akram."
+      description="Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SCSA Research Lab."
     >
       <PageIntro
-        eyebrow="Events"
-        title="Research presented and shared internationally."
-        lead="Selected international workshops, conferences, and academic partnership events led or attended by Dr Junaid Akram."
+        eyebrow="International Events & Keynotes"
+        title="Research presented and shared on global stages."
+        lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr Junaid Akram and SCSA Research Lab."
       />
 
+      {/* 1. KEYNOTE & CONFERENCE HIGHLIGHTS */}
       <section className={styles.section}>
-        <div className={styles.eventList}>
-          {eventHighlights.map((event, index) => (
-            <article key={event}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h2>{event}</h2>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Event gallery</p>
-            <h2>Workshops, conferences, and partnerships</h2>
+            <p className={styles.eyebrow}>Keynote & Conference Highlights</p>
+            <h2>International Presentations & Workshops</h2>
           </div>
         </div>
-        <div className={styles.eventGallery}>
-          {eventGallery.map((image, index) => (
-            <figure key={image.src} className={index < 2 ? styles.eventFeature : undefined}>
-              <AcademicImageLightbox
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                caption={image.caption}
-                className={styles.eventImageButton}
-                sizes="(max-width: 780px) 100vw, 33vw"
-              />
-              <figcaption>{image.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-    </AcademicSiteLayout>
-  );
-}
 
-export function ResourcesPage() {
-  return (
-    <AcademicSiteLayout
-      title="Learning Resources"
-      path="/resources"
-      description="Learning diagrams and visual references covering machine learning, generative AI infrastructure, networking, and modern AI concepts."
-    >
-      <PageIntro
-        eyebrow="Learning resources"
-        title="Visual references for advanced learning."
-        lead="Explore visual learning resources covering machine learning, generative AI infrastructure, networking, retrieval-augmented generation, and agentic systems."
-      />
-
-      <section className={styles.section}>
-        <div className={styles.resourceGrid}>
-          {learningResources.map((resource) => (
-            <article key={resource.title}>
-              <AcademicImageLightbox
-                src={resource.image}
-                alt={resource.title}
-                width={resource.width}
-                height={resource.height}
-                caption={resource.title}
-                className={styles.resourceImage}
-                sizes="(max-width: 780px) 100vw, 50vw"
-              />
-              <div>
-                <h2>{resource.title}</h2>
-                <p>{resource.description}</p>
-                <div style={{ marginTop: "12px" }}>
-                  <a
-                    href={resource.image}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.secondaryButton}
-                    style={{ padding: "4px 12px", fontSize: "0.8rem" }}
-                  >
-                    Open High-Res Diagram <ExternalLink size={13} />
-                  </a>
+        <div className={styles.eventList}>
+          {eventHighlights.map((event) => (
+            <article key={event.title} className={styles.eventCardItem}>
+              <div className={styles.eventYearBox}>
+                <Calendar size={18} style={{ color: "var(--academic-blue)", marginBottom: "4px" }} />
+                <span className={styles.eventYearNumber}>{event.year}</span>
+              </div>
+              <div className={styles.eventContentBody}>
+                <div className={styles.eventMetaRow}>
+                  <span className={styles.eventBadgeTag}>
+                    <Award size={13} /> {event.badge}
+                  </span>
+                  <span className={styles.eventLocation}>
+                    <MapPin size={13} /> {event.location}
+                  </span>
                 </div>
+                <h3>{event.title}</h3>
+                <p style={{ margin: "0 0 6px 0", fontSize: "0.85rem", fontWeight: "600", color: "var(--academic-text)" }}>
+                  {event.venue}
+                </p>
+                <p className={styles.eventSummaryText}>{event.summary}</p>
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* 2. EVENT PHOTOGRAPHY GALLERY */}
+      <section className={`${styles.section} ${styles.softSection}`}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Event Gallery</p>
+            <h2>Oral Presentations & Poster Exhibition</h2>
+          </div>
+          <p style={{ maxWidth: "600px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: 0 }}>
+            Click on any photo to view full resolution in the interactive lightbox viewer.
+          </p>
+        </div>
+
+        <div className={styles.eventGalleryGrid}>
+          {eventGallery.map((image) => {
+            const isPortrait = image.orientation === "portrait";
+            return (
+              <article key={image.src} className={styles.eventGalleryCard}>
+                <div className={`${styles.eventMediaBox} ${isPortrait ? styles.eventMediaPortrait : styles.eventMediaLandscape}`}>
+                  <span className={styles.eventTopBadge}>
+                    <Sparkles size={12} /> {image.badge}
+                  </span>
+                  <AcademicImageLightbox
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    caption={image.caption}
+                    className={styles.eventImageButton}
+                    sizes="(max-width: 868px) 100vw, 50vw"
+                  />
+                  <div className={styles.eventExpandHint}>
+                    <Maximize2 size={13} /> Expand Photo
+                  </div>
+                </div>
+
+                <div className={styles.eventCardMetaBody}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontSize: "0.78rem", fontWeight: "600", color: "var(--academic-cyan)" }}>
+                      {image.category} · {image.date}
+                    </span>
+                    <span className={styles.eventLocation} style={{ fontSize: "0.78rem" }}>
+                      <MapPin size={12} /> {image.location}
+                    </span>
+                  </div>
+                  <h3>{image.title}</h3>
+                  <p>{image.caption}</p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
     </AcademicSiteLayout>

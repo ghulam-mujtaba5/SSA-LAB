@@ -77,7 +77,7 @@ const nextConfig = {
       },
       {
         source: "/advance-learning",
-        destination: "/resources",
+        destination: "/research",
         permanent: true,
       },
       {
@@ -102,7 +102,7 @@ const nextConfig = {
       },
       {
         source: "/dsa-visualization",
-        destination: "/resources",
+        destination: "/research",
         permanent: true,
       },
       {

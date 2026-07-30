@@ -22,9 +22,8 @@ A high-performance, responsive academic web platform for **Dr. Junaid Akram** (A
 4. **Publications (`/publications`)**: Categorized peer-reviewed journal papers (Applied Soft Computing, IEEE, IJICS) and conference proceedings.
 5. **FYP Supervision (`/alumni`)**: Supervised final-year student projects, filterable category directory, and dedicated case study detail pages (`/alumni/case-study/[slug]`).
 6. **Team (`/team`)**: Supervised BS, MS, PhD students, student placements, and international research collaborators.
-7. **Resources (`/resources`)**: Curated machine learning, network architecture, and security reference materials.
-8. **Contact (`/contact`)**: Institutional office hours, lab location, email directory, and prospective student inquiry form.
-9. **Admin Portal (`/admin`)**: Enterprise management dashboard for publishing research articles, media, and FYP project records.
+7. **Contact (`/contact`)**: Institutional office hours, lab location, email directory, and prospective student inquiry form.
+8. **Admin Portal (`/admin`)**: Enterprise management dashboard for publishing research articles, media, and FYP project records.
 
 ---
 

@@ -628,41 +628,6 @@ export const eventGallery = [
   },
 ];
 
-export const learningResources = [
-  {
-    title: "Machine Learning Architecture and Concepts",
-    description:
-      "A reference map of supervised, deep, and unsupervised learning methods and representative applications.",
-    image: "/academic/resources/machine-learning-architecture.png",
-    width: 1280,
-    height: 1383,
-  },
-  {
-    title: "Generative AI Infrastructure",
-    description:
-      "An ecosystem view spanning compute, data, training frameworks, inference, deployment, and analytics.",
-    image: "/academic/resources/generative-ai-infrastructure.png",
-    width: 1280,
-    height: 1013,
-  },
-  {
-    title: "OSI Model Architecture",
-    description:
-      "A visual explanation of the seven OSI layers and the protocols and responsibilities associated with each layer.",
-    image: "/academic/resources/osi-model-architecture.png",
-    width: 710,
-    height: 717,
-  },
-  {
-    title: "AI, ML, GenAI, LLMs, RAG, and Agentic AI",
-    description:
-      "A compact hierarchy and comparison of modern artificial-intelligence concepts.",
-    image: "/academic/resources/ai-ml-genai-concepts.png",
-    width: 467,
-    height: 720,
-  },
-];
-
 export const partnerLogos = [
   {
     name: "COMSATS University Islamabad",

@@ -23,7 +23,6 @@ const RESEARCH_LINKS = [
   { href: "/research", label: "Research Projects & Tools" },
   { href: "/publications", label: "Selected Publications" },
   { href: "/research#domains", label: "Source Code Security Domains" },
-  { href: "/resources", label: "Datasets & Benchmarks" },
 ];
 
 const SUPERVISION_LINKS = [

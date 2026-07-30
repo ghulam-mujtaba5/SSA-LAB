@@ -33,7 +33,6 @@ The FYP Supervision page combines verified supervised projects and internship ou
 - Research: /research
 - Publications: /publications
 - FYP Supervision: /alumni
-- Learning resources: /resources
 - Team: /team
 - Events: /events
 - Contact: /contact
