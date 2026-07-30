@@ -3,12 +3,12 @@ import Head from "next/head";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   "https://sites.google.com/view/temporaryr";
-const SITE_NAME = "Junaid Akram — SCSA Research Lab";
+const SITE_NAME = "SCSA Research Lab";
 const PERSON_NAME = "Junaid Akram";
 const OG_IMAGE = `${SITE_URL}/academic/junaid-akram-professor.jpg`;
 
 export default function SEO({
-  title = `${PERSON_NAME} | Software Security Research`,
+  title = `SCSA Research Lab | Software Security Research`,
   description = "Academic profile of Dr. Junaid Akram and the Source Code Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
   url = SITE_URL,
   image = OG_IMAGE,

@@ -651,25 +651,260 @@ export const partnerLogos = [
     name: "COMSATS University Islamabad",
     image: "/academic/comsats-university-islamabad-logo.png",
     href: "https://lahore.comsats.edu.pk/",
+    role: "Host University & Research Base",
   },
   {
     name: "Tsinghua University",
-    image: "/academic/tsinghua-university-logo.png",
+    image: "/academic/tsinghua-university-logo.webp",
     href: "https://www.tsinghua.edu.cn/en/",
+    role: "PhD Alma Mater & Key Lab Partner",
   },
   {
     name: "SnT, University of Luxembourg",
     image: "/academic/snt-university-luxembourg-logo.png",
     href: "https://www.uni.lu/snt-en/",
+    role: "Postdoctoral Research Partner",
   },
   {
-    name: "SES",
+    name: "SES Satellites",
     image: "/academic/ses-logo.png",
     href: "https://www.ses.com/",
+    role: "Industrial Satellite Systems Partner",
   },
   {
     name: "King Fahd University of Petroleum & Minerals",
     image: "/academic/king-fahd-university-logo.png",
     href: "https://www.kfupm.edu.sa/",
+    role: "International Research Collaborator",
   },
 ];
+
+export const pgResearchers = [
+  {
+    name: "Mahzaib Mukhtar",
+    id: "FA23-RCS-005",
+    degree: "MS Computer Science",
+    topic: "Automated Search Based Test Data Generation for Complex Systems using UML Models",
+    focus: "Software Testing & Search-Based Algorithms",
+    status: "Active MS Thesis Research",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+  },
+  {
+    name: "Zain Ul Abdeen",
+    id: "FA23-RCS-011",
+    degree: "MS Computer Science",
+    topic: "LLM Based Software Vulnerability Patch Recommendation System",
+    focus: "LLM Fine-Tuning & Program Repair",
+    status: "Active MS Thesis Research",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+  },
+  {
+    name: "Muhammad Orangzaib",
+    id: "FA24-RCS-018",
+    degree: "MS Computer Science",
+    topic: "In-context Learning of Software Vulnerability Detection Using LLMs",
+    focus: "In-Context Prompt Engineering & Security",
+    status: "Active MS Thesis Research",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+  },
+  {
+    name: "Ahsan Nisar",
+    id: "FA24-RCS-017",
+    degree: "MS Computer Science",
+    topic: "Empowering a Graph Neural Network for Feature Envy Detection and Refactoring",
+    focus: "Graph Neural Networks & Code Smells",
+    status: "Active MS Thesis Research",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+  },
+  {
+    name: "Muhammad Haris",
+    id: "SP25-RCS-012",
+    degree: "MS Computer Science",
+    topic: "AICodeSummarizer: Optimizing Code Comment Generation through AST and CFG Structural Analysis",
+    focus: "Code Summarization & AST/CFG Analysis",
+    status: "Active MS Thesis Research",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+  },
+  {
+    name: "Farina Iqbal",
+    id: "SP25-RCS-004",
+    degree: "MS Computer Science",
+    topic: "Automated Test Smell Detection and Recommendation in BDD Specifications",
+    focus: "BDD Specifications & Test Quality",
+    status: "Active MS Thesis Research",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+  },
+  {
+    name: "Hafsa Butt",
+    id: "SP25-RCS-008",
+    degree: "MS Computer Science",
+    topic: "LLM-based Semantic-driven Approach to Detect Type-4 Code Clones",
+    focus: "Semantic Code Clones & Deep Learning",
+    status: "Active MS Thesis Research",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+  },
+];
+
+export const coInvestigators = [
+  {
+    name: "Dr. Junaid Akram",
+    role: "Lab Director & Principal Investigator",
+    affiliation: "COMSATS University Islamabad / SnT Luxembourg Postdoc / Tsinghua PhD",
+    specialization: "Source Code Security, Vulnerability Repair, Code Clone Detection, Software Testing",
+    image: "/academic/junaid-akram-professor.jpg",
+    email: "junaidakram@cuilahore.edu.pk",
+    googleScholar: "https://scholar.google.com/citations?user=JunaidAkram",
+    orcid: "https://orcid.org/0000-0003-1752-6124",
+    researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
+    officialProfile: "https://lahore.comsats.edu.pk/employees/1333",
+    bio: "Assistant Professor & HEC-Approved PhD Supervisor leading SCSA Lab. Former Postdoc at SnT Luxembourg & SES Satellites. PhD from Tsinghua University.",
+    badge: "Lab Director",
+  },
+  {
+    name: "Dr. Danish Vasan",
+    role: "Senior Co-Investigator & International Collaborator",
+    affiliation: "KFUPM Postdoc / SnT Luxembourg Postdoc / Tsinghua PhD",
+    specialization: "Obfuscated Malware Detection, Ensemble Learning, IoT & Android Security",
+    image: "/academic/danish-vassan.jpg",
+    email: "danish.vasan@kfupm.edu.sa",
+    bio: "Senior collaborator & co-author on advanced ensemble frameworks defending Windows, Android, and IoT malware systems (Applied Soft Computing 2025).",
+    badge: "International Collaborator",
+  },
+  {
+    name: "Dr. Majid Mumtaz",
+    role: "Co-Investigator & Academic Partner",
+    affiliation: "Assistant Professor, CUI Wah / Tsinghua PhD",
+    specialization: "Software Security & System Architecture",
+    image: "/academic/majid-mumtaz.png",
+    email: "mmumtaz@ciitwah.edu.pk",
+    bio: "Academic partner collaborating on source-code security assessment, empirical software engineering, and joint student development.",
+    badge: "Academic Partner",
+  },
+  {
+    name: "Prof. Ping Luo",
+    role: "Academic Mentor & Research Collaborator",
+    affiliation: "Key Laboratory of Information System Security, Tsinghua University",
+    specialization: "Information Security & Program Analysis",
+    image: "/academic/tsinghua-university-logo.webp",
+    bio: "Key collaborator on large-scale vulnerability detection platforms (SQVDT) and token-based clone analysis across multi-billion LOC repositories.",
+    badge: "Tsinghua Advisor",
+  },
+  {
+    name: "Dr. Mohammad Hammoudeh",
+    role: "Research Collaborator",
+    affiliation: "Cybersecurity Chair & Senior Researcher",
+    specialization: "Cybersecurity, IoT Security & Ensemble Learning",
+    bio: "Collaborating researcher co-authoring high-impact cybersecurity and malware defense studies in top-tier journals.",
+    badge: "Journal Co-Author",
+  },
+  {
+    name: "Dr. Adel F. Ahmed",
+    role: "Research Collaborator",
+    affiliation: "Information & Computer Science Dept, KFUPM",
+    specialization: "Machine Learning & Software Security",
+    bio: "Collaborator on ensemble frameworks for obfuscated malware identification and threat intelligence.",
+    badge: "Journal Co-Author",
+  },
+];
+
+export const labMilestones = [
+  {
+    year: "2015 – 2020",
+    era: "Phase 1",
+    title: "Foundations & Distributed Code Intelligence",
+    location: "Tsinghua University — Key Lab of Info System Security (Beijing, China)",
+    tag: "Tsinghua Era",
+    badge: "Big Data Security",
+    summary: "Engineered distributed static code analysis engines indexing over 324 billion lines of code on Hadoop MapReduce and scanning 152k+ open-source repositories.",
+    achievements: [
+      "Built IBFET — MapReduce inverted token index scaling clone detection across 324B+ LOC.",
+      "Developed SQVDT — Multi-terabyte C/C++ static vulnerability fingerprinting platform.",
+      "Pioneered DroidSD — Obfuscated Android clone detection across 30,500 application APKs.",
+      "Conferred PhD from Tsinghua University and published in IEEE ICST, IET InfoSec, and JISE."
+    ],
+    stats: { loc: "324B+", repos: "152K+", papers: "5+" }
+  },
+  {
+    year: "2021 – 2023",
+    era: "Phase 2",
+    title: "Satellite CPS Testing & Postdoctoral Research",
+    location: "SnT, University of Luxembourg & SES Satellites (Luxembourg)",
+    tag: "European Postdoc Era",
+    badge: "Industrial CPS Testing",
+    summary: "Conducted postdoctoral research at the Interdisciplinary Centre for Security, Reliability and Trust (SnT) in direct industrial collaboration with SES Satellites.",
+    achievements: [
+      "Engineered automated model-based test data generator for SES satellite Adaptive Resource Control (ARC).",
+      "Created static analyzer for identifying Behavior-Driven Development (BDD) test smells in satellite control test suites.",
+      "Developed log-based test-case slicing for isolated regression execution in large-scale CPS pipelines.",
+      "Presented key research at SnT Partnership Day and IPBG Annual Workshop in Luxembourg."
+    ],
+    stats: { system: "ARC CPS", partner: "SES Satellites", venue: "SnT Luxembourg" }
+  },
+  {
+    year: "2023 – Present",
+    era: "Phase 3",
+    title: "SCSA Research Lab Establishment & AI Transformation",
+    location: "COMSATS University Islamabad, Lahore Campus",
+    tag: "Current SCSA Era",
+    badge: "AI & Program Repair",
+    summary: "Established the Source Code Security Assessment (SCSA) Research Lab at COMSATS Lahore, uniting source code analysis, LLM patch synthesis, GNN refactoring, and student mentorship.",
+    achievements: [
+      "Supervising 7+ active MS/PhD theses spanning LLM patch synthesis, AST/CFG code summarizers, and GNN feature envy.",
+      "Supervising 12+ BS Software Engineering researchers across high-impact projects like MegiLance.",
+      "Approved as HEC PhD Supervisor and established state-of-the-art vulnerability detection benchmarks.",
+      "Formed joint research teams with international co-investigators from KFUPM and Tsinghua University."
+    ],
+    stats: { msStudents: "7 Active", fypTeams: "4 Teams", grants: "HEC Approved" }
+  },
+  {
+    year: "2025 – Beyond",
+    era: "Phase 4",
+    title: "Autonomous Security Agents & Multimodal Defense",
+    location: "Global SCSA Ecosystem (COMSATS, KFUPM, SnT, Tsinghua)",
+    tag: "Future Vision",
+    badge: "Next-Gen Security",
+    summary: "Expanding into autonomous LLM security agents, multi-architecture malware ensemble defense, and real-time continuous vulnerability patch synthesis.",
+    achievements: [
+      "Published groundbreaking ensemble malware defense framework in Applied Soft Computing (Elsevier 2025).",
+      "Building continuous automated security assessment pipelines for open-source ecosystem patch verification.",
+      "Scaling international student exchange, industry security audits, and open-source vulnerability benchmarks."
+    ],
+    stats: { journal: "Elsevier '25", paradigm: "AI Security Agents", scope: "Autonomous Repair" }
+  }
+];
+
+export const labPillars = [
+  {
+    id: "vulnerability",
+    title: "Source-Level Vulnerability Intelligence",
+    iconName: "ShieldCheck",
+    desc: "Indexing, matching, and tracing software vulnerabilities through AST fingerprints, patch diff signatures, and multi-terabyte code similarity lookup."
+  },
+  {
+    id: "ai-repair",
+    title: "AI & LLM-Driven Program Repair",
+    iconName: "Sparkles",
+    desc: "Leveraging Large Language Models, in-context learning, and Graph Neural Networks (GNN) for automated security patch synthesis and refactoring."
+  },
+  {
+    id: "testing",
+    title: "Automated Verification & Software Testing",
+    iconName: "Cpu",
+    desc: "Search-based test data generation, model-based satellite CPS testing, BDD test smell detection, and log-based regression test slicing."
+  },
+  {
+    id: "malware",
+    title: "Obfuscation & Malware Ensemble Defense",
+    iconName: "Zap",
+    desc: "Token-based obfuscated code clone identification and advanced ensemble machine learning frameworks defending Windows, Android, and IoT systems."
+  }
+];
+
+export const labImpactStats = [
+  { label: "Lines of Code Analyzed", value: "324B+", note: "Indexed on Hadoop MapReduce" },
+  { label: "Open-Source Repos Scanned", value: "152,823+", note: "SQVDT Vulnerability Engine" },
+  { label: "Researchers & Students Mentored", value: "50+", note: "PhD, MS & BS Engineering Graduates" },
+  { label: "Global Academic & Industry Partners", value: "5", note: "COMSATS, Tsinghua, SnT, SES, KFUPM" },
+  { label: "High-Impact Publications", value: "15+", note: "Applied Soft Computing, IEEE, IET" }
+];
+

@@ -82,8 +82,8 @@ const STAGES = [
   },
   {
     id: "alumni",
-    label: "5. FYP Supervision",
-    desc: "Supervised BS/MS/PhD student platforms & career placement",
+    label: "5. Innovation & Impact",
+    desc: "Practical contribution to researchers, developers, industry, and society — BS, MS & PhD Security Platforms",
   },
 ];
 
@@ -307,7 +307,7 @@ export default function AcademicPipelineHero() {
             <div className={styles.monoLine}>25+ Papers Published</div>
           </FloatCard>
 
-          {/* Outcome 3: Supervision & FYP */}
+          {/* Outcome 3: Innovation & Impact */}
           <FloatCard
             delay={1.0}
             floatDuration={5.0}
@@ -315,13 +315,14 @@ export default function AcademicPipelineHero() {
             className={styles.cardAlumni}
           >
             <div className={styles.cardHeader}>
-              <GraduationCap size={15} color="#1d6685" />
-              <strong className={styles.cardTitle}>Supervision & FYP</strong>
-              <span className={styles.cardMeta}>PROJECTS</span>
+              <Sparkles size={15} color="#1d6685" />
+              <strong className={styles.cardTitle}>Innovation & Impact</strong>
+              <span className={styles.cardMeta}>IMPACT</span>
             </div>
             <p className={styles.cardBody}>
-              BS, MS & PhD Student Security Platforms
+              Practical contribution to researchers, developers, industry, and society
             </p>
+            <div className={styles.monoLine}>Supervision & Security Platforms</div>
             <div className={styles.sparkContainer}>
               {barHeights.map((h, i) => (
                 <span key={i} className={styles.sparkBar} style={{ height: `${h}px` }} />

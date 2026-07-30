@@ -1,4 +1,4 @@
-# Junaid Akram, PhD — SCSA Research Lab
+# SCSA Research Lab — Source Code Security Assessment Laboratory
 
 This site presents the verified academic profile, research, publications, collaborators, supervised student projects, and contact details of Dr. Junaid Akram.
 

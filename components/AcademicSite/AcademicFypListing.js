@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   ArrowRight,
   ExternalLink,
@@ -19,30 +20,51 @@ const CATEGORIES = [
 ];
 
 export default function AcademicFypListing({ projects = [] }) {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
-  const [activeType, setActiveType] = useState("all"); // 'all', 'completed', 'opportunity'
+  const [activeType, setActiveType] = useState("all"); // 'all', 'running', 'completed', 'opportunity'
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { completedProjects, openOpportunities } = useMemo(() => {
+  useEffect(() => {
+    if (router.query.tab) {
+      const tabParam = String(router.query.tab).toLowerCase();
+      if (["all", "running", "completed", "complete", "future", "opportunity", "topics"].includes(tabParam)) {
+        if (tabParam === "complete") setActiveType("completed");
+        else if (tabParam === "opportunity" || tabParam === "topics") setActiveType("future");
+        else setActiveType(tabParam);
+      }
+    }
+  }, [router.query.tab]);
+
+  const { runningProjects, completedProjects, futureProjects } = useMemo(() => {
+    const running = [];
     const completed = [];
-    const opportunities = [];
+    const future = [];
     projects.forEach((p) => {
-      if (p.isOpportunity || p.projectType === "Open FYP Opportunity" || p.projectType === "COMSATS FYP Opportunity") {
-        opportunities.push(p);
+      const isRunning = p.categoryType === "running" || p.isRunning || (p.status && p.status.toLowerCase().includes("running"));
+      const isFuture = p.categoryType === "future" || p.isOpportunity || p.isMsPhD || (p.status && p.status.toLowerCase().includes("future")) || (p.projectType && (p.projectType.includes("Opportunity") || p.projectType.includes("MS/PhD") || p.projectType.includes("Future")));
+      
+      if (isRunning) {
+        running.push(p);
+      } else if (isFuture) {
+        future.push(p);
       } else {
         completed.push(p);
       }
     });
-    return { completedProjects: completed, openOpportunities: opportunities };
+    return { runningProjects: running, completedProjects: completed, futureProjects: future };
   }, [projects]);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
-      const isOpp = project.isOpportunity || project.projectType === "Open FYP Opportunity" || project.projectType === "COMSATS FYP Opportunity";
-      
+      const isRunning = project.categoryType === "running" || project.isRunning || (project.status && project.status.toLowerCase().includes("running"));
+      const isFuture = project.categoryType === "future" || project.isOpportunity || project.isMsPhD || (project.status && project.status.toLowerCase().includes("future")) || (project.projectType && (project.projectType.includes("Opportunity") || project.projectType.includes("MS/PhD") || project.projectType.includes("Future")));
+      const isCompleted = !isRunning && !isFuture;
+
       // Type tab filter
-      if (activeType === "completed" && isOpp) return false;
-      if (activeType === "opportunity" && !isOpp) return false;
+      if (activeType === "running" && !isRunning) return false;
+      if (activeType === "completed" && !isCompleted) return false;
+      if (activeType === "future" && !isFuture) return false;
 
       // Category filter
       const matchesCategory =
@@ -73,9 +95,9 @@ export default function AcademicFypListing({ projects = [] }) {
       <div className={styles.sectionHeading}>
         <div>
           <p className={styles.eyebrow}>Supervision Directory</p>
-          <h2>Supervised Final-Year Projects & Supervision Opportunities</h2>
+          <h2>Research Supervision & Capstone Projects</h2>
           <p className={styles.sectionLead}>
-            Explore completed student projects supervised by Dr. Junaid Akram alongside current open FYP topics for COMSATS students.
+            Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram at SCSA Lab.
           </p>
         </div>
       </div>
@@ -83,11 +105,15 @@ export default function AcademicFypListing({ projects = [] }) {
       {/* Summary Counts Ribbon */}
       <div className={styles.listingStatsRow} style={{ marginBottom: "20px" }}>
         <span>
-          <strong>{completedProjects.length}</strong> Completed Student Projects
+          <strong>{runningProjects.length}</strong> Running Projects
         </span>
         <span className={styles.listingStatsDivider}>·</span>
         <span>
-          <strong>{openOpportunities.length}</strong> Current FYP Opportunities
+          <strong>{completedProjects.length}</strong> Completed Projects
+        </span>
+        <span className={styles.listingStatsDivider}>·</span>
+        <span>
+          <strong>{futureProjects.length}</strong> Future Projects & Topics
         </span>
         <span className={styles.listingStatsDivider}>·</span>
         <span>
@@ -103,7 +129,14 @@ export default function AcademicFypListing({ projects = [] }) {
             className={`${styles.filterPill} ${activeType === "all" ? styles.filterPillActive : ""}`}
             onClick={() => setActiveType("all")}
           >
-            All Projects & Ideas ({projects.length})
+            All Projects ({projects.length})
+          </button>
+          <button
+            type="button"
+            className={`${styles.filterPill} ${activeType === "running" ? styles.filterPillActive : ""}`}
+            onClick={() => setActiveType("running")}
+          >
+            Running Projects ({runningProjects.length})
           </button>
           <button
             type="button"
@@ -114,10 +147,10 @@ export default function AcademicFypListing({ projects = [] }) {
           </button>
           <button
             type="button"
-            className={`${styles.filterPill} ${activeType === "opportunity" ? styles.filterPillActive : ""}`}
-            onClick={() => setActiveType("opportunity")}
+            className={`${styles.filterPill} ${activeType === "future" ? styles.filterPillActive : ""}`}
+            onClick={() => setActiveType("future")}
           >
-            Open FYP Opportunities ({openOpportunities.length})
+            Future Projects & Topics ({futureProjects.length})
           </button>
         </div>
 

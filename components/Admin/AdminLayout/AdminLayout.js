@@ -245,8 +245,8 @@ export default function AdminLayoutPremium({ children, title }) {
               <img
                 src="/academic/scsa-research-group-logo.png"
                 alt="SCSA Research Lab"
-                width={24}
-                height={24}
+                width={30}
+                height={20}
                 className={styles.logoImg}
               />
             </div>

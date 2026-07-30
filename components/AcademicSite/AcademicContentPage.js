@@ -15,6 +15,12 @@ import {
   GraduationCap,
   ShieldCheck,
   Send,
+  Sparkles,
+  Cpu,
+  Zap,
+  CheckCircle2,
+  Building,
+  Users,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import AcademicImageLightbox from "./AcademicImageLightbox";
@@ -35,7 +41,13 @@ import {
   researchDomains,
   researchProjects,
   supervisedProjects,
+  pgResearchers,
+  coInvestigators,
+  labMilestones,
+  labPillars,
+  labImpactStats,
 } from "../../data/academicSite";
+import { defaultFypProjects } from "../../data/fypProjects";
 import styles from "./AcademicSite.module.css";
 
 function PageIntro({ eyebrow, title, lead }) {
@@ -49,111 +61,372 @@ function PageIntro({ eyebrow, title, lead }) {
 }
 
 export function AboutPage() {
+  const [activeEraIndex, setActiveEraIndex] = useState(0);
+  const [activeCollabTab, setActiveCollabTab] = useState("all");
+
+  const currentMilestone = labMilestones[activeEraIndex] || labMilestones[0];
+
+  const renderPillarIcon = (name) => {
+    switch (name) {
+      case "ShieldCheck":
+        return <ShieldCheck size={24} />;
+      case "Sparkles":
+        return <Sparkles size={24} />;
+      case "Cpu":
+        return <Cpu size={24} />;
+      case "Zap":
+        return <Zap size={24} />;
+      default:
+        return <BookOpen size={24} />;
+    }
+  };
+
   return (
     <AcademicSiteLayout
-      title="About"
+      title="About SCSA Research Lab"
       path="/about"
-      description="Profile, background, and research focus of Dr. Junaid Akram and the Source Code Security Assessment Lab."
+      description="Source Code Security Assessment (SCSA) Research Lab — Profile, global research collaborations, MS & PhD researchers, lab journey timeline, and core security research pillars."
     >
+      {/* 1. HERO & LAB MISSION OVERVIEW */}
       <PageIntro
-        eyebrow="About"
-        title="Research leadership grounded in software security."
-        lead="Dr. Junaid Akram is an Assistant Professor and HEC-approved PhD supervisor whose work connects source-code analysis, vulnerability research, software testing, and student development."
+        eyebrow="About SCSA Lab & Collaborations"
+        title="Pioneering Source-Code Security Assessment & AI-Driven Software Reliability"
+        lead="The Source Code Security Assessment (SCSA) Research Lab unites academic rigor, global international partnerships, and industrial applications to discover software vulnerabilities, synthesize security patches, defend against malware, and automate software verification."
       />
 
-      <section className={`${styles.section} ${styles.profileGrid}`}>
-        <div className={styles.profileImage}>
-          <AcademicImageLightbox
-            src="/academic/junaid-akram-professor.jpg"
-            alt="Dr. Junaid Akram"
-            width={755}
-            height={716}
-            caption="Dr. Junaid Akram — Assistant Professor, COMSATS University Islamabad, Lahore Campus"
-          />
-        </div>
-        <div className={styles.prose}>
-          <h2>{academicProfile.name}</h2>
-          <p>
-            {academicProfile.role} at {academicProfile.institution}. He completed postdoctoral research at the Interdisciplinary Centre for Security, Reliability and Trust (SnT), University of Luxembourg, and earned his PhD from Tsinghua University.
-          </p>
-          <p>
-            His research focuses on practical ways to identify, assess, and mitigate weaknesses in software systems. This includes static and dynamic code analysis, software vulnerability detection, code clone analysis, malware detection, automated testing, and test-data generation.
-          </p>
-          <h3>{academicProfile.lab}</h3>
-          <p>
-            The SCSA Lab develops methods and tools for improving the security and robustness of software at source-code level. Its work brings together academic research, industry collaboration, and the supervision of BS, MS, and PhD students.
-          </p>
-
-          {/* Profiles links bar */}
-          <div className={styles.profileBadgeRow} style={{ display: "flex", gap: "10px", flexWrap: "wrap", margin: "16px 0" }}>
-            <a href={academicProfile.googleScholar} target="_blank" rel="noreferrer" className={styles.secondaryButton} style={{ padding: "6px 12px", fontSize: "0.82rem" }}>
-              Google Scholar <ExternalLink size={13} />
-            </a>
-            <a href={academicProfile.orcid} target="_blank" rel="noreferrer" className={styles.secondaryButton} style={{ padding: "6px 12px", fontSize: "0.82rem" }}>
-              ORCID <ExternalLink size={13} />
-            </a>
-            <a href={academicProfile.researchGate} target="_blank" rel="noreferrer" className={styles.secondaryButton} style={{ padding: "6px 12px", fontSize: "0.82rem" }}>
-              ResearchGate <ExternalLink size={13} />
-            </a>
-            <a href={academicProfile.officialProfile} target="_blank" rel="noreferrer" className={styles.secondaryButton} style={{ padding: "6px 12px", fontSize: "0.82rem" }}>
-              COMSATS Profile <ExternalLink size={13} />
-            </a>
-          </div>
-
-          <div className={styles.actions}>
-            <Link href="/research" className={styles.primaryButton}>
-              Explore research <ArrowRight size={17} />
-            </Link>
-            <Link href="/contact" className={styles.secondaryButton}>
-              Contact
-            </Link>
-          </div>
+      {/* 2. LAB IMPACT METRICS COUNTER GRID */}
+      <section className={styles.section} style={{ paddingTop: 0 }}>
+        <div className={styles.statsGrid}>
+          {labImpactStats.map((stat) => (
+            <div key={stat.label} className={styles.statCard}>
+              <div className={styles.statValue}>{stat.value}</div>
+              <div className={styles.statLabel}>{stat.label}</div>
+              <div className={styles.statNote}>{stat.note}</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.careerGrid}`}>
-        <div>
-          <p className={styles.eyebrow}>Experience</p>
-          <h2>Academic and industrial research</h2>
-          <div className={styles.timelineList}>
-            {academicProfile.experience.map((item) => (
-              <article key={`${item.role}-${item.organization}`}>
-                <span>{item.period}</span>
-                <h3>{item.role}</h3>
-                <p>{item.organization}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-        <div>
-          <p className={styles.eyebrow}>Education</p>
-          <h2>Research training</h2>
-          <div className={styles.timelineList}>
-            {academicProfile.education.map((item) => (
-              <article key={item.qualification}>
-                <span>{item.period}</span>
-                <h3>{item.qualification}</h3>
-                <p>{item.institution}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* 3. SCIENTIFIC METHODOLOGY & LAB PILLARS */}
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Affiliations</p>
-            <h2>Research connections</h2>
+            <p className={styles.eyebrow}>Core Principles</p>
+            <h2>Research Pillars & Technological Capabilities</h2>
           </div>
         </div>
-        <div className={styles.partnerGrid}>
+        <div className={styles.pillarsGrid}>
+          {labPillars.map((pillar) => (
+            <article key={pillar.id} className={styles.pillarCard}>
+              <div className={styles.pillarIconWrap}>
+                {renderPillarIcon(pillar.iconName)}
+              </div>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. LAB EVOLUTION & RESEARCH JOURNEY TIMELINE (INTERACTIVE STEPPER) */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Lab Evolution & Story</p>
+            <h2>Research Journey & Key Milestones</h2>
+          </div>
+          <p style={{ maxWidth: "600px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: 0 }}>
+            Explore how SCSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg and AI-driven program repair at COMSATS.
+          </p>
+        </div>
+
+        <div className={styles.timelineWrapper}>
+          {/* Timeline Nav / Stepper */}
+          <div className={styles.timelineNav}>
+            {labMilestones.map((ms, idx) => {
+              const isActive = activeEraIndex === idx;
+              return (
+                <button
+                  key={ms.era}
+                  type="button"
+                  className={`${styles.timelineTab} ${isActive ? styles.activeTimelineTab : ""}`}
+                  onClick={() => setActiveEraIndex(idx)}
+                >
+                  <span className={styles.timelineTabNum}>0{idx + 1}</span>
+                  <div className={styles.timelineTabMeta}>
+                    <h4>{ms.year}</h4>
+                    <span>{ms.badge}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Timeline Card Display */}
+          <div className={styles.timelineCard}>
+            <div className={styles.timelineCardHeader}>
+              <span className={styles.timelineEraBadge}>
+                <Sparkles size={13} /> {currentMilestone.tag}
+              </span>
+              <span className={styles.timelineLocation}>
+                <MapPin size={14} /> {currentMilestone.location}
+              </span>
+            </div>
+            <h3 className={styles.timelineCardTitle}>{currentMilestone.title}</h3>
+            <p className={styles.timelineSummary}>{currentMilestone.summary}</p>
+
+            <ul className={styles.achievementList}>
+              {currentMilestone.achievements.map((item, i) => (
+                <li key={i} className={styles.achievementItem}>
+                  <CheckCircle2 size={16} className={styles.achievementIcon} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className={styles.timelineStatsRow}>
+              {Object.entries(currentMilestone.stats).map(([k, v]) => (
+                <div key={k} className={styles.timelineStatBadge}>
+                  {k.toUpperCase()}: <strong>{v}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. PEOPLE & COLLABORATION ECOSYSTEM (INTERACTIVE FILTER TABS) */}
+      <section className={`${styles.section} ${styles.softSection}`}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Team & Networks</p>
+            <h2>Collaborators & Research Personnel</h2>
+          </div>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className={styles.collabFilterBar}>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeCollabTab === "all" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveCollabTab("all")}
+          >
+            All Members & Collaborators
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeCollabTab === "leadership" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveCollabTab("leadership")}
+          >
+            Lab Leadership & PIs
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeCollabTab === "international" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveCollabTab("international")}
+          >
+            International Collaborators
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeCollabTab === "pg" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveCollabTab("pg")}
+          >
+            MS & PhD Researchers
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeCollabTab === "fyp" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveCollabTab("fyp")}
+          >
+            BS / FYP Teams
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeCollabTab === "alumni" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveCollabTab("alumni")}
+          >
+            Alumni Placements
+          </button>
+        </div>
+
+        {/* Render Cards Grid according to active tab */}
+        <div className={styles.collabGrid}>
+          {/* Leadership & Co-Investigators */}
+          {(activeCollabTab === "all" || activeCollabTab === "leadership" || activeCollabTab === "international") &&
+            coInvestigators
+              .filter((person) => {
+                if (activeCollabTab === "leadership") return person.badge === "Lab Director";
+                if (activeCollabTab === "international") return person.badge !== "Lab Director";
+                return true;
+              })
+              .map((person) => (
+                <article key={person.name} className={styles.collabCard}>
+                  <div className={styles.collabTop}>
+                    <div className={styles.collabAvatar}>
+                      {person.image ? (
+                        <Image src={person.image} alt={person.name} width={56} height={56} />
+                      ) : (
+                        person.name.charAt(0)
+                      )}
+                    </div>
+                    <div className={styles.collabMeta}>
+                      <h3>{person.name}</h3>
+                      <span className={styles.collabBadge}>{person.badge}</span>
+                      <div className={styles.collabDegree}>{person.role}</div>
+                    </div>
+                  </div>
+                  <div className={styles.collabBody}>
+                    <p className={styles.collabTopic}>{person.bio}</p>
+                    <div className={styles.collabFocus}>
+                      <strong>Focus:</strong> {person.specialization}
+                    </div>
+                  </div>
+                  <div className={styles.collabFooter}>
+                    {person.email && (
+                      <a href={`mailto:${person.email}`} className={styles.collabLinkBtn}>
+                        <Mail size={12} /> Email
+                      </a>
+                    )}
+                    {person.googleScholar && (
+                      <a href={person.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        Scholar <ExternalLink size={12} />
+                      </a>
+                    )}
+                    {person.orcid && (
+                      <a href={person.orcid} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        ORCID <ExternalLink size={12} />
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ))}
+
+          {/* MS & PhD Postgraduate Researchers */}
+          {(activeCollabTab === "all" || activeCollabTab === "pg") &&
+            pgResearchers.map((student) => (
+              <article key={student.id} className={styles.collabCard}>
+                <div className={styles.collabTop}>
+                  <div className={styles.collabAvatar}>
+                    {student.name.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div className={styles.collabMeta}>
+                    <h3>{student.name}</h3>
+                    <span className={styles.collabRegId}>{student.id}</span>
+                    <div className={styles.collabDegree}>{student.degree}</div>
+                  </div>
+                </div>
+                <div className={styles.collabBody}>
+                  <p className={styles.collabTopic}>
+                    <strong>Thesis Topic:</strong> "{student.topic}"
+                  </p>
+                  <div className={styles.collabFocus}>
+                    <strong>Research Focus:</strong> {student.focus}
+                  </div>
+                </div>
+                <div className={styles.collabFooter}>
+                  <span className={styles.sessionBadge}>{student.status}</span>
+                </div>
+              </article>
+            ))}
+
+          {/* BS / FYP Engineering Researchers */}
+          {(activeCollabTab === "all" || activeCollabTab === "fyp") &&
+            defaultFypProjects.slice(0, 4).map((fyp) => (
+              <article key={fyp.slug} className={styles.collabCard}>
+                <div className={styles.collabTop}>
+                  <div className={styles.collabAvatar} style={{ background: "rgba(6, 182, 212, 0.1)", color: "var(--academic-cyan)" }}>
+                    <GraduationCap size={24} />
+                  </div>
+                  <div className={styles.collabMeta}>
+                    <h3>{fyp.title.split("—")[0]}</h3>
+                    <span className={styles.collabBadge}>{fyp.programme} · {fyp.session}</span>
+                  </div>
+                </div>
+                <div className={styles.collabBody}>
+                  <p className={styles.collabTopic}>{fyp.summary}</p>
+                  <div className={styles.collabFocus}>
+                    <strong>Student Team:</strong> {fyp.students.map((s) => s.name).join(", ")}
+                  </div>
+                </div>
+                <div className={styles.collabFooter}>
+                  <Link href={`/projects/${fyp.slug}`} className={styles.cardLink}>
+                    View Project <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </article>
+            ))}
+
+          {/* Alumni Industry Placements */}
+          {(activeCollabTab === "all" || activeCollabTab === "alumni") &&
+            alumniPlacements.map((alum) => (
+              <article key={`${alum.name}-${alum.organization}`} className={styles.collabCard}>
+                <div className={styles.collabTop}>
+                  <div className={styles.collabAvatar} style={{ background: "rgba(16, 185, 129, 0.1)", color: "#10b981" }}>
+                    <Building size={24} />
+                  </div>
+                  <div className={styles.collabMeta}>
+                    <h3>{alum.name}</h3>
+                    <span className={styles.collabBadge}>{alum.term} Alumni</span>
+                    <div className={styles.collabDegree}>{alum.organization}</div>
+                  </div>
+                </div>
+                <div className={styles.collabBody}>
+                  <p className={styles.collabTopic}>
+                    Successfully transitioned into top technology, cybersecurity, and consulting firms following SCSA Lab supervision.
+                  </p>
+                </div>
+              </article>
+            ))}
+        </div>
+      </section>
+
+      {/* 6. GLOBAL INSTITUTIONAL PARTNERS ECOSYSTEM */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Global Network</p>
+            <h2>Academic & Industrial Partners</h2>
+          </div>
+        </div>
+        <div className={styles.partnerCardGrid}>
           {partnerLogos.map((partner) => (
-            <figure key={partner.name}>
-              <a href={partner.href} target="_blank" rel="noreferrer">
-                <Image src={partner.image} alt={partner.name} width={300} height={100} />
-              </a>
-              <figcaption>{partner.name}</figcaption>
+            <a
+              key={partner.name}
+              href={partner.href}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.partnerCardBox}
+            >
+              <div className={styles.partnerLogoWrap}>
+                <Image src={partner.image} alt={partner.name} width={180} height={60} />
+              </div>
+              <h4>{partner.name}</h4>
+              <span className={styles.partnerRole}>{partner.role}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. EVENT & CONFERENCE GALLERY LIGHTBOX */}
+      <section className={`${styles.section} ${styles.softSection}`}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Gallery</p>
+            <h2>Research Activities & Conference Presentations</h2>
+          </div>
+        </div>
+        <div className={styles.eventGrid}>
+          {eventGallery.slice(0, 6).map((evt, idx) => (
+            <figure key={evt.src || idx}>
+              <AcademicImageLightbox
+                src={evt.src}
+                alt={evt.alt}
+                width={evt.width}
+                height={evt.height}
+                caption={evt.caption}
+              />
+              <figcaption>{evt.caption}</figcaption>
             </figure>
           ))}
         </div>

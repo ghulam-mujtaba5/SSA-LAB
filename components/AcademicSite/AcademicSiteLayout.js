@@ -3,17 +3,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Menu, X, Mail, MapPin, ExternalLink } from "lucide-react";
+import { Menu, X, Mail, MapPin, ExternalLink, ChevronDown } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
 import AcademicFooter from "./AcademicFooter";
 import styles from "./AcademicSite.module.css";
+
+const supervisionSubItems = [
+  { label: "Running Projects", href: "/supervision?tab=running" },
+  { label: "Completed Projects", href: "/supervision?tab=completed" },
+  { label: "Future Projects & Topics", href: "/supervision?tab=future" },
+];
 
 const navigation = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Research", href: "/research" },
   { label: "Publications", href: "/publications" },
-  { label: "Supervision", href: "/supervision" },
+  {
+    label: "Supervision",
+    href: "/supervision",
+    hasDropdown: true,
+    children: supervisionSubItems,
+  },
   { label: "Resources", href: "/resources" },
   { label: "People & Partners", href: "/team" },
   { label: "Events", href: "/events" },
@@ -32,9 +43,10 @@ export default function AcademicSiteLayout({
 }) {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pageTitle = title
-    ? `${title} | ${academicProfile.name}`
-    : `${academicProfile.name} | Software Security Research`;
+    ? `${title} | ${academicProfile.labShort}`
+    : `${academicProfile.labShort} | Software Security Research`;
   const canonical = `${siteUrl}${path}`;
 
   return (
@@ -58,50 +70,6 @@ export default function AcademicSiteLayout({
         />
         <meta property="og:site_name" content={academicProfile.labShort} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: academicProfile.name,
-              jobTitle: academicProfile.role,
-              worksFor: {
-                "@type": "CollegeOrUniversity",
-                name: academicProfile.institution,
-              },
-              affiliation: {
-                "@type": "ResearchOrganization",
-                name: academicProfile.lab,
-              },
-              alumniOf: [
-                {
-                  "@type": "CollegeOrUniversity",
-                  name: "Tsinghua University",
-                },
-                {
-                  "@type": "CollegeOrUniversity",
-                  name: "University of Luxembourg",
-                },
-              ],
-              email: `mailto:${academicProfile.emails[0]}`,
-              sameAs: [
-                academicProfile.linkedin,
-                academicProfile.researchGate,
-                academicProfile.orcid,
-                academicProfile.officialProfile,
-              ],
-              knowsAbout: [
-                "Cyber Security",
-                "Software Vulnerability Detection",
-                "Software Testing",
-                "Malware Detection",
-                "Code Clone Detection",
-                "Software Evolution and Maintenance",
-              ],
-            }),
-          }}
-        />
       </Head>
 
       <div className={styles.site}>
@@ -112,14 +80,14 @@ export default function AcademicSiteLayout({
                 <Image
                   src="/academic/scsa-research-group-logo.png"
                   alt="SCSA Research Group"
-                  width={44}
-                  height={52}
+                  width={54}
+                  height={36}
                   priority
                 />
               </span>
               <span className={styles.brandText}>
-                <strong>{academicProfile.shortName}</strong>
-                <small>{academicProfile.labShort}</small>
+                <strong>{academicProfile.labShort}</strong>
+                <small>{academicProfile.shortName}</small>
               </span>
             </Link>
 
@@ -128,7 +96,42 @@ export default function AcademicSiteLayout({
                 const active =
                   item.href === "/"
                     ? router.pathname === "/portfolio"
-                    : router.pathname === item.href;
+                    : router.pathname === item.href ||
+                      (item.hasDropdown && router.pathname.startsWith("/supervision"));
+
+                if (item.hasDropdown) {
+                  return (
+                    <div
+                      key={item.href}
+                      className={styles.navDropdown}
+                      onMouseEnter={() => setDropdownOpen(true)}
+                      onMouseLeave={() => setDropdownOpen(false)}
+                    >
+                      <Link
+                        href={item.href}
+                        className={`${styles.dropdownTrigger} ${active ? styles.activeNav : ""}`}
+                      >
+                        {item.label} <ChevronDown size={14} className={styles.dropdownChevron} />
+                      </Link>
+
+                      {dropdownOpen && (
+                        <div className={styles.dropdownMenu}>
+                          {item.children.map((sub) => (
+                            <Link
+                              key={sub.href}
+                              href={sub.href}
+                              className={styles.dropdownItem}
+                              onClick={() => setDropdownOpen(false)}
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
                 return (
                   <Link
                     key={item.href}
@@ -155,13 +158,26 @@ export default function AcademicSiteLayout({
           {menuOpen && (
             <nav className={styles.mobileNav} aria-label="Mobile navigation">
               {navigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
+                <React.Fragment key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    style={item.hasDropdown ? { fontWeight: 700 } : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.hasDropdown &&
+                    item.children.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        onClick={() => setMenuOpen(false)}
+                        style={{ paddingLeft: "24px", fontSize: "0.82rem", opacity: 0.85 }}
+                      >
+                        └ {sub.label}
+                      </Link>
+                    ))}
+                </React.Fragment>
               ))}
             </nav>
           )}

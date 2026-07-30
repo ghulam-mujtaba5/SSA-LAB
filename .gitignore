@@ -30,3 +30,11 @@ npm-debug.log*
 .next.js
 .vercel
 .env*.local
+
+# Temporary data & raw archives
+scratch/
+*.zip
+*.docx
+*.pptx
+Past Projects*
+Running Projects*

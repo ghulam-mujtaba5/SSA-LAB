@@ -1,4 +1,4 @@
-# Dr. Junaid Akram — Academic & SCSA Research Platform
+# SCSA Research Lab — Source Code Security Assessment Laboratory
 
 A high-performance, responsive academic web platform for **Dr. Junaid Akram** (Assistant Professor, HEC-approved PhD supervisor) and the **Source Code Security Assessment (SCSA) Research Laboratory** at COMSATS University Islamabad, Lahore Campus.
 

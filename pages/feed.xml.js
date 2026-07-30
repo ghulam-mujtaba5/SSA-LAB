@@ -26,7 +26,7 @@ export async function getServerSideProps({ res }) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Junaid Akram — SCSA Research Lab</title>
+    <title>SCSA Research Lab — Source Code Security Assessment</title>
     <link>${base}</link>
     <description>Research, publications, and supervision updates from the Source Code Security Assessment Lab.</description>
     <language>en-us</language>

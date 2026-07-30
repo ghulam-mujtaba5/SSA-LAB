@@ -96,14 +96,22 @@
   gap: 12px;
   text-decoration: none;
   color: inherit;
+  transition: opacity 0.2s ease;
 }
 
 .logoImage {
-  width: 44px;
-  height: 52px;
+  width: 54px;
+  height: 36px;
   object-fit: contain;
-  border-radius: 6px;
-  background: #141b22;
+  border-radius: 8px;
+  background: transparent;
+  filter: drop-shadow(0 2px 8px rgba(34, 211, 238, 0.25));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+}
+
+.logoWrap:hover .logoImage {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 16px rgba(56, 189, 248, 0.5));
 }
 
 .brandTitles strong {

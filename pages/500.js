@@ -11,7 +11,7 @@ export default function Custom500() {
   return (
     <div className={styles.wrapper} data-theme={theme}>
       <Head>
-        <title>Something Went Wrong — Junaid Akram</title>
+        <title>Server Error — SCSA Research Lab</title>
         <meta
           name="description"
           content="An unexpected error occurred. Please try again in a moment."
@@ -25,10 +25,10 @@ export default function Custom500() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <Image
-          src="/academic/scsa-research-group-logo.png"
-          alt="SCSA Research Lab"
-          width={68}
-          height={80}
+          src="/academic/scsa-research-group-full-logo.png"
+          alt="SCSA Research Lab — Software Security Assessment Lab"
+          width={220}
+          height={200}
           className={styles.logo}
           priority
         />
@@ -48,7 +48,8 @@ export default function Custom500() {
         transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
       >
         An unexpected error occurred on the server. It&rsquo;s not you —
-        please try again in a moment.
+        <br />
+        please refresh the page or try again in a few moments.
       </motion.p>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -57,7 +58,7 @@ export default function Custom500() {
       >
         <Link href="/" className={styles.homeLink} aria-label="Go back home">
           <span className={styles.homeBtnBg} />
-          <span className={styles.homeBtnText}>Go Back Home</span>
+          <span className={styles.homeBtnText}>Back to Safety</span>
         </Link>
       </motion.div>
       <motion.nav

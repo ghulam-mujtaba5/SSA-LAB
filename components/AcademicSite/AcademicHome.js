@@ -17,7 +17,6 @@ import {
   partnerLogos,
   publications,
   researchDomains,
-  researchProjects,
   supervisedProjects,
 } from "../../data/academicSite";
 import styles from "./AcademicSite.module.css";
@@ -160,38 +159,7 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* 4. Featured Research Project */}
-      <section className={`${styles.section} ${styles.softSection}`}>
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.eyebrow}>Featured work</p>
-            <h2>Research platforms and security tools</h2>
-          </div>
-        </div>
-        <div className={styles.featuredProject}>
-          <div className={styles.projectImage}>
-            <AcademicImageLightbox
-              src="/academic/vulnerability-detection-dashboard.png"
-              alt="Vulnerability detection platform interface"
-              width={838}
-              height={744}
-              caption="Source-code vulnerability detection platform from the SCSA research portfolio"
-              className={styles.projectLightbox}
-            />
-          </div>
-          <div className={styles.projectCopy}>
-            <span>{researchProjects[4].status}</span>
-            <h3>{researchProjects[4].title}</h3>
-            <p>{researchProjects[4].summary}</p>
-            <small>{researchProjects[4].collaboration}</small>
-            <Link href="/research" className={styles.textLink}>
-              Read about all projects & tools <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Selected Publications */}
+      {/* Selected Publications */}
       <section className={styles.section}>
         <div className={styles.sectionHeading}>
           <div>
@@ -215,12 +183,12 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* 6. Supervision & FYPs Preview */}
+      {/* Supervision & Projects Preview */}
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
             <p className={styles.eyebrow}>Supervision</p>
-            <h2>FYP supervision and student projects</h2>
+            <h2>Research project supervision</h2>
           </div>
           <Link href="/supervision" className={styles.textLink}>
             Explore supervision directory <ArrowRight size={16} />
@@ -238,7 +206,21 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* 7. Academic Partners */}
+      {/* Final Contact CTA */}
+      <section className={styles.ctaBand} style={{ textAlign: "center", padding: "48px 24px" }}>
+        <div>
+          <p className={styles.eyebrow}>Collaborate with SCSA Lab</p>
+          <h2>Interested in software security research or FYP supervision?</h2>
+          <p style={{ maxWidth: "640px", margin: "12px auto 24px" }}>
+            Dr Junaid Akram supervises BS, MS, and PhD students in software vulnerability detection, automated testing, malware analysis, and code clone research.
+          </p>
+          <Link href="/contact" className={styles.primaryButton}>
+            Contact the lab <ArrowRight size={17} />
+          </Link>
+        </div>
+      </section>
+
+      {/* Academic Partners (Above Footer) */}
       <section className={styles.partners}>
         <p>Academic and research affiliations</p>
         <div>
@@ -254,20 +236,6 @@ export default function AcademicHome() {
               </a>
             </figure>
           ))}
-        </div>
-      </section>
-
-      {/* 8. Final Contact CTA */}
-      <section className={styles.ctaBand} style={{ textAlign: "center", padding: "48px 24px" }}>
-        <div>
-          <p className={styles.eyebrow}>Collaborate with SCSA Lab</p>
-          <h2>Interested in software security research or FYP supervision?</h2>
-          <p style={{ maxWidth: "640px", margin: "12px auto 24px" }}>
-            Dr Junaid Akram supervises BS, MS, and PhD students in software vulnerability detection, automated testing, malware analysis, and code clone research.
-          </p>
-          <Link href="/contact" className={styles.primaryButton}>
-            Contact the lab <ArrowRight size={17} />
-          </Link>
         </div>
       </section>
     </AcademicSiteLayout>

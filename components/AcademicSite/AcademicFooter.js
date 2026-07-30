@@ -26,10 +26,11 @@ const RESEARCH_LINKS = [
   { href: "/resources", label: "Datasets & Benchmarks" },
 ];
 
-const ALUMNI_LINKS = [
-  { href: "/supervision", label: "FYP Supervision Projects" },
-  { href: "/supervision#projects", label: "Student Capstone Projects" },
-  { href: "/team", label: "People & Partners" },
+const SUPERVISION_LINKS = [
+  { href: "/supervision?tab=running", label: "Running Projects" },
+  { href: "/supervision?tab=completed", label: "Completed Projects" },
+  { href: "/supervision?tab=future", label: "Future Projects & Topics" },
+  { href: "/team", label: "People & Lab Members" },
   { href: academicProfile.officialFypIdeas, label: "COMSATS FYP Ideas", external: true },
 ];
 
@@ -70,13 +71,13 @@ export default function AcademicFooter() {
               <Image
                 src="/academic/scsa-research-group-logo.png"
                 alt="SCSA Research Group"
-                width={44}
-                height={52}
+                width={54}
+                height={36}
                 className={styles.logoImage}
               />
               <div className={styles.brandTitles}>
-                <strong>{academicProfile.name}</strong>
-                <span>{academicProfile.labShort}</span>
+                <strong>{academicProfile.labShort}</strong>
+                <span>{academicProfile.name}</span>
               </div>
             </Link>
             <p className={styles.tagline}>
@@ -99,8 +100,8 @@ export default function AcademicFooter() {
 
           {/* Nav Column 2: Supervision & Projects */}
           <nav className={styles.navCol} aria-label="Supervision links">
-            <strong className={styles.colTitle}>FYP Supervision</strong>
-            {ALUMNI_LINKS.map(({ href, label, external }) =>
+            <strong className={styles.colTitle}>Supervision Directory</strong>
+            {SUPERVISION_LINKS.map(({ href, label, external }) =>
               external ? (
                 <a
                   key={href}
