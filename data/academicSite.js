@@ -561,54 +561,71 @@ export const collaborators = [
 ];
 
 export const eventHighlights = [
-  "IPBG Annual Workshop at SnT, Luxembourg — paper presentation, 2022",
-  "SnT Partnership Day at the University of Luxembourg, 2021",
-  "ICST Conference, Xi’an, China, 2019",
-  "COMPSAC, Tokyo, Japan, 2018",
-];
-
-const eventGalleryDimensions = [
-  [1280, 951],
-  [1153, 1788],
-  [1280, 846],
-  [1280, 1771],
-  [960, 684],
-  [1271, 1905],
-  [1280, 704],
-  [1163, 1152],
-  [1245, 474],
-  [1280, 488],
-  [882, 212],
-  [1280, 488],
+  {
+    title: "IPBG Annual Workshop — SnT, Luxembourg",
+    year: "2022",
+    badge: "Keynote & Paper Presentation",
+    venue: "Interdisciplinary Centre for Security, Reliability and Trust (SnT)",
+    location: "University of Luxembourg, Luxembourg",
+    summary:
+      "Presented research paper on search-based automated test-data generation for complex cyber-physical systems and satellite domain software.",
+  },
+  {
+    title: "SnT Partnership Day — University of Luxembourg",
+    year: "2021",
+    badge: "Research Partnership Exhibition",
+    venue: "Kirchberg Campus / SnT Headquarters",
+    location: "Luxembourg City, Luxembourg",
+    summary:
+      "Exhibited SCSA Lab research activities in software security, vulnerability detection, and automated program repair to European academic and industrial partners.",
+  },
+  {
+    title: "IEEE International Conference on Software Testing (ICST 2019)",
+    year: "2019",
+    badge: "Peer-Reviewed Conference Presentation",
+    venue: "IEEE Computer Society",
+    location: "Xi’an, Shaanxi, China",
+    summary:
+      "Presented peer-reviewed research findings on automated test input generation and vulnerability assessment frameworks.",
+  },
+  {
+    title: "IEEE Computers, Software, and Applications Conference (COMPSAC 2018)",
+    year: "2018",
+    badge: "International Conference Presentation",
+    venue: "IEEE Computer Society",
+    location: "Tokyo, Japan",
+    summary:
+      "Delivered conference presentation on big-data source code analysis, software clone detection, and Android malware identification.",
+  },
 ];
 
 export const eventGallery = [
   {
     src: "/academic/events/event-01.jpg",
     alt: "Dr. Junaid Akram presenting at the IPBG Annual Workshop at SnT",
-    caption: "IPBG Annual Workshop presentation — SnT, Luxembourg, 2022",
-    width: eventGalleryDimensions[0][0],
-    height: eventGalleryDimensions[0][1],
+    title: "IPBG Annual Workshop Presentation",
+    caption: "Dr. Junaid Akram delivering research presentation on automated software testing at SnT, Luxembourg",
+    badge: "Oral Presentation",
+    category: "Workshop",
+    date: "2022",
+    location: "SnT, Luxembourg",
+    orientation: "landscape",
+    width: 1280,
+    height: 951,
   },
   {
     src: "/academic/events/event-02.jpg",
-    alt: "Dr. Junaid Akram with his automated test data generation research poster",
-    caption: "Automated test-data generation poster — IPBG Annual Workshop",
-    width: eventGalleryDimensions[1][0],
-    height: eventGalleryDimensions[1][1],
+    alt: "Dr. Junaid Akram presenting automated test data generation research poster",
+    title: "Search-Based Test Generation Poster Session",
+    caption: "Interactive poster session on automated test-data generation — IPBG Annual Workshop at SnT",
+    badge: "Poster Exhibition",
+    category: "Poster Session",
+    date: "2022",
+    location: "University of Luxembourg",
+    orientation: "portrait",
+    width: 1153,
+    height: 1788,
   },
-  ...Array.from({ length: 10 }, (_, index) => ({
-    src: `/academic/events/event-${String(index + 3).padStart(2, "0")}.jpg`,
-    alt: `Research event photograph ${index + 3} from the original SCSA Lab site`,
-    caption:
-      index < 2
-        ? "SnT Partnership Day — University of Luxembourg, 2021"
-        : index < 6
-          ? "Research collaboration and conference activity"
-          : "COMPSAC and international research events",
-    width: eventGalleryDimensions[index + 2][0],
-    height: eventGalleryDimensions[index + 2][1],
-  })),
 ];
 
 export const learningResources = [
