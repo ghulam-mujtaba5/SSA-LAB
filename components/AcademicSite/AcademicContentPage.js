@@ -30,6 +30,8 @@ import AcademicImageLightbox from "./AcademicImageLightbox";
 import AcademicLottie from "./AcademicLottie";
 import AcademicResearchPipeline from "./AcademicResearchPipeline";
 import AcademicFypListing from "./AcademicFypListing";
+import AcademicDomainModal from "./AcademicDomainModal";
+import { useRouter } from "next/router";
 import PlexusCanvas from "../Backgrounds/PlexusCanvas";
 import {
   academicProfile,
@@ -89,14 +91,87 @@ export function AboutPage() {
       path="/about"
       description="Source Code Security Assessment (SCSA) Research Lab — Profile, global research collaborations, MS & PhD researchers, lab journey timeline, and core security research pillars."
     >
-      {/* 1. HERO & LAB MISSION OVERVIEW */}
-      <PageIntro
-        eyebrow="About SCSA Lab & Collaborations"
-        title="Pioneering Source-Code Security Assessment & AI-Driven Software Reliability"
-        lead="The Source Code Security Assessment (SCSA) Research Lab unites academic rigor, global international partnerships, and industrial applications to discover software vulnerabilities, synthesize security patches, defend against malware, and automate software verification."
-      />
+      {/* 1. HERO & LAB MISSION OVERVIEW WITH DIRECTOR CARD */}
+      <div className={styles.aboutHeroRow}>
+        <PageIntro
+          eyebrow="About SCSA Lab & Collaborations"
+          title="Pioneering Source-Code Security Assessment & AI-Driven Software Reliability"
+          lead="The Source Code Security Assessment (SCSA) Research Lab unites academic rigor, global international partnerships, and industrial applications to discover software vulnerabilities, synthesize security patches, defend against malware, and automate software verification."
+        />
+        {coInvestigators[0] && (
+          <aside className={styles.aboutDirectorCard}>
+            <div className={styles.aboutDirectorAvatar}>
+              <Image
+                src={coInvestigators[0].image}
+                alt={coInvestigators[0].name}
+                width={72}
+                height={72}
+              />
+            </div>
+            <div className={styles.aboutDirectorInfo}>
+              <h3 className={styles.aboutDirectorName}>{coInvestigators[0].name}</h3>
+              <span className={styles.aboutDirectorTitle}>Assistant Professor & HEC PhD Supervisor</span>
+              <span className={styles.aboutDirectorMeta}>
+                Tsinghua University PhD · SnT Luxembourg Postdoc
+              </span>
+              <div className={styles.aboutDirectorLinks}>
+                <a
+                  href={`mailto:${coInvestigators[0].email}`}
+                  className={styles.aboutDirectorBtn}
+                  title="Send Email"
+                >
+                  <Mail size={12} /> Email
+                </a>
+                {coInvestigators[0].googleScholar && (
+                  <a
+                    href={coInvestigators[0].googleScholar}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.aboutDirectorBtn}
+                    title="Google Scholar"
+                  >
+                    Scholar <ExternalLink size={11} />
+                  </a>
+                )}
+              </div>
+            </div>
+          </aside>
+        )}
+      </div>
 
-      {/* 2. LAB IMPACT METRICS COUNTER GRID */}
+      {/* 2. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (SINGLE ROW SHOWCASE - ONE ROW ONLY) */}
+      <section className={styles.section} style={{ paddingTop: 0, paddingBottom: "24px" }}>
+        <div className={styles.sectionHeading} style={{ marginBottom: "16px" }}>
+          <div>
+            <p className={styles.eyebrow}>Institutional Network</p>
+            <h2>Academic & Industrial Partners</h2>
+          </div>
+          <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.85rem", margin: 0 }}>
+            Global research partnerships driving joint security assessments, satellite testing, and vulnerability remediation.
+          </p>
+        </div>
+        <div className={styles.partnerRowWrapper}>
+          <div className={styles.partnerCardGrid}>
+            {partnerLogos.map((partner) => (
+              <a
+                key={partner.name}
+                href={partner.href}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.partnerCardBox}
+              >
+                <div className={styles.partnerLogoWrap}>
+                  <Image src={partner.image} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
+                </div>
+                <h4>{partner.name}</h4>
+                <span className={styles.partnerRole}>{partner.role}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. LAB IMPACT METRICS COUNTER GRID */}
       <section className={styles.section} style={{ paddingTop: 0 }}>
         <div className={styles.statsGrid}>
           {labImpactStats.map((stat) => (
@@ -383,86 +458,27 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* 6. GLOBAL INSTITUTIONAL PARTNERS ECOSYSTEM */}
-      <section className={styles.section}>
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.eyebrow}>Global Network</p>
-            <h2>Academic & Industrial Partners</h2>
-          </div>
-        </div>
-        <div className={styles.partnerCardGrid}>
-          {partnerLogos.map((partner) => (
-            <a
-              key={partner.name}
-              href={partner.href}
-              target="_blank"
-              rel="noreferrer"
-              className={styles.partnerCardBox}
-            >
-              <div className={styles.partnerLogoWrap}>
-                <Image src={partner.image} alt={partner.name} width={180} height={60} />
-              </div>
-              <h4>{partner.name}</h4>
-              <span className={styles.partnerRole}>{partner.role}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* 7. EVENT & CONFERENCE GALLERY LIGHTBOX */}
-      <section className={`${styles.section} ${styles.softSection}`}>
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.eyebrow}>Gallery</p>
-            <h2>Research Activities & Conference Presentations</h2>
-          </div>
-        </div>
-        <div className={styles.eventGalleryGrid}>
-          {eventGallery.map((image) => {
-            const isPortrait = image.orientation === "portrait";
-            return (
-              <article key={image.src} className={styles.eventGalleryCard}>
-                <div className={`${styles.eventMediaBox} ${isPortrait ? styles.eventMediaPortrait : styles.eventMediaLandscape}`}>
-                  <span className={styles.eventTopBadge}>
-                    <Sparkles size={12} /> {image.badge}
-                  </span>
-                  <AcademicImageLightbox
-                    src={image.src}
-                    alt={image.alt}
-                    width={image.width}
-                    height={image.height}
-                    caption={image.caption}
-                    className={styles.eventImageButton}
-                    sizes="(max-width: 868px) 100vw, 50vw"
-                  />
-                  <div className={styles.eventExpandHint}>
-                    <Maximize2 size={13} /> Expand Photo
-                  </div>
-                </div>
-                <div className={styles.eventCardMetaBody}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: "0.78rem", fontWeight: "600", color: "var(--academic-cyan)" }}>
-                      {image.category} · {image.date}
-                    </span>
-                    <span className={styles.eventLocation} style={{ fontSize: "0.78rem" }}>
-                      <MapPin size={12} /> {image.location}
-                    </span>
-                  </div>
-                  <h3>{image.title}</h3>
-                  <p>{image.caption}</p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
     </AcademicSiteLayout>
   );
 }
 
 export function ResearchPage() {
+  const router = useRouter();
   const [expandedProject, setExpandedProject] = useState(null);
+  const [selectedDomain, setSelectedDomain] = useState(null);
+
+  React.useEffect(() => {
+    if (router.query.domain) {
+      const match = researchDomains.find(
+        (d) =>
+          d.id === router.query.domain ||
+          d.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === router.query.domain
+      );
+      if (match) {
+        setSelectedDomain(match);
+      }
+    }
+  }, [router.query.domain]);
 
   return (
     <AcademicSiteLayout
@@ -470,6 +486,13 @@ export function ResearchPage() {
       path="/research"
       description="Research areas, platforms, and software-security tools developed by Dr. Junaid Akram and the SCSA Lab."
     >
+      {selectedDomain && (
+        <AcademicDomainModal
+          domain={selectedDomain}
+          onClose={() => setSelectedDomain(null)}
+        />
+      )}
+
       <PageIntro
         eyebrow="Research"
         title="Software security research with practical reach."
@@ -479,8 +502,24 @@ export function ResearchPage() {
       <section className={styles.section}>
         <div className={styles.domainGrid}>
           {researchDomains.map((domain, index) => (
-            <article key={domain.title} className={styles.domainItem}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
+            <article
+              key={domain.title}
+              className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
+              onClick={() => setSelectedDomain(domain)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setSelectedDomain(domain);
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label={`Open detailed panel for ${domain.title}`}
+            >
+              <div className={styles.domainItemHeader}>
+                <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
+                <span className={styles.domainClickBadge}>Explore Roadmap →</span>
+              </div>
               <h2>{domain.title}</h2>
               <p>{domain.description}</p>
             </article>
@@ -1140,22 +1179,24 @@ export function TeamPage() {
             </p>
           </div>
 
-          <div className={styles.partnerCardGrid}>
-            {partnerLogos.map((partner) => (
-              <a
-                key={partner.name}
-                href={partner.href}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.partnerCardBox}
-              >
-                <div className={styles.partnerLogoWrap}>
-                  <Image src={partner.image} alt={partner.name} width={200} height={60} style={{ objectFit: "contain" }} />
-                </div>
-                <h4>{partner.name}</h4>
-                <span className={styles.partnerRole}>{partner.role}</span>
-              </a>
-            ))}
+          <div className={styles.partnerRowWrapper}>
+            <div className={styles.partnerCardGrid}>
+              {partnerLogos.map((partner) => (
+                <a
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.partnerCardBox}
+                >
+                  <div className={styles.partnerLogoWrap}>
+                    <Image src={partner.image} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
+                  </div>
+                  <h4>{partner.name}</h4>
+                  <span className={styles.partnerRole}>{partner.role}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </section>
       )}

@@ -4,15 +4,15 @@ This guide establishes a unified high-perception color system for the portfolio 
 
 ## Core Brand Colors
 
-### Primary Brand Color: Electric Indigo
-The primary brand color used throughout the app is a premium electric indigo-royal:
+### Primary Brand Color: Ocean Electric Blue (SCSA Logo Palette)
+The primary brand color used throughout the app matches the official SCSA Research Lab 3D shield & wordmark logo:
 
 | Token Name | Light Mode | Dark Mode | Usage |
 |------------|------------|-----------|-------|
-| `--brand-primary` | `#4f46e5` | `#6366f1` | Primary buttons, links, active accents |
-| `--brand-primary-hover` | `#4338ca` | `#818cf8` | Hover states |
-| `--brand-primary-active` | `#3730a3` | `#a5b4fc` | Active/pressed states |
-| `--brand-primary-muted` | `rgba(79, 70, 229, 0.08)` | `rgba(99, 102, 241, 0.16)` | Subtle badge & card backgrounds |
+| `--brand-primary` | `#0284c7` | `#38bdf8` | Primary buttons, links, active accents |
+| `--brand-primary-hover` | `#0369a1` | `#7dd3fc` | Hover states |
+| `--brand-primary-active` | `#075985` | `#0284c7` | Active/pressed states |
+| `--brand-primary-muted` | `rgba(2, 132, 199, 0.08)` | `rgba(56, 189, 248, 0.16)` | Subtle badge & card backgrounds |
 
 ### Secondary Accent: Sunset Coral
 | Token Name | Light Mode | Dark Mode | Usage |

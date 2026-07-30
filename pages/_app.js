@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps, session }) {
   });
 
   // Manual overlay for testing/preview
-  const [manualOverlay, setManualOverlay] = useState(false);
+  const [manualOverlay, setManualOverlay] = useState({ visible: false });
 
   // Loader visual settings
   const [loaderSettings, setLoaderSettings] = useState({
@@ -180,7 +180,18 @@ function MyApp({ Component, pageProps, session }) {
   // Custom event listeners for manual overlay and top progress bar
   useEffect(() => {
     const onManualOverlay = (e) => {
-      setManualOverlay(!!e?.detail?.visible);
+      const detail = e?.detail || {};
+      if (typeof detail === "boolean") {
+        setManualOverlay({ visible: detail });
+      } else {
+        setManualOverlay({
+          visible: !!detail.visible,
+          variant: detail.variant,
+          progress: detail.progress,
+          message: detail.message,
+          submessage: detail.submessage,
+        });
+      }
     };
 
     const onTopProgress = (e) => {
@@ -288,9 +299,13 @@ function MyApp({ Component, pageProps, session }) {
 
           {/* Full-page loading overlay */}
           <LoadingAnimation
-            visible={showLoader || manualOverlay}
+            visible={showLoader || manualOverlay.visible}
             backdropBlur={loaderSettings.backdropBlur}
             backdropOpacity={loaderSettings.backdropOpacity}
+            variant={manualOverlay.variant}
+            progress={manualOverlay.progress}
+            message={manualOverlay.message}
+            submessage={manualOverlay.submessage}
           />
 
           {/* Page content wrapped in ErrorBoundary */}

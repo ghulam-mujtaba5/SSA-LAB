@@ -38,8 +38,8 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md, 10px);
-  background: var(--brand-primary-muted, rgba(79, 70, 229, 0.12));
-  color: var(--brand-primary, #4f46e5);
+  background: var(--brand-primary-muted, rgba(2, 132, 199, 0.12));
+  color: var(--brand-primary, #0284c7);
 }
 
 .text {
@@ -57,7 +57,7 @@
 }
 
 .button {
-  background: var(--gradient-primary, linear-gradient(135deg, #4f46e5 0%, #6366f1 100%));
+  background: var(--brand-primary, #0284c7);
   color: #ffffff;
   border: none;
   border-radius: var(--radius-md, 8px);
@@ -65,20 +65,20 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: var(--btn-primary-shadow, 0 4px 14px rgba(79, 70, 229, 0.25));
+  box-shadow: var(--btn-primary-shadow, 0 4px 14px rgba(2, 132, 199, 0.25));
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
   white-space: nowrap;
 }
 
 .button:hover {
+  background: var(--brand-primary-hover, #0369a1);
   transform: translateY(-1px);
-  box-shadow: var(--btn-primary-shadow-hover, 0 6px 18px rgba(79, 70, 229, 0.35));
-  filter: brightness(1.05);
+  box-shadow: var(--btn-primary-shadow-hover, 0 6px 18px rgba(2, 132, 199, 0.35));
 }
 
 .button:focus-visible {
-  outline: var(--focus-ring, 0 0 0 2px rgba(79, 70, 229, 0.55));
+  outline: var(--focus-ring, 0 0 0 2px rgba(2, 132, 199, 0.55));
   outline-offset: 2px;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .buttonSecondary:focus-visible {
-  outline: var(--focus-ring, 0 0 0 2px rgba(79, 70, 229, 0.55));
+  outline: var(--focus-ring, 0 0 0 2px rgba(2, 132, 199, 0.55));
   outline-offset: 2px;
 }
 
@@ -133,4 +133,3 @@
     padding: 0.6rem 0.75rem;
   }
 }
-

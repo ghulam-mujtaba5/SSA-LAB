@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,6 +12,7 @@ import {
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import AcademicImageLightbox from "./AcademicImageLightbox";
 import AcademicPipelineHero from "./AcademicPipelineHero";
+import AcademicDomainModal from "./AcademicDomainModal";
 import {
   academicProfile,
   partnerLogos,
@@ -28,10 +29,18 @@ const impactStats = [
 ];
 
 export default function AcademicHome() {
+  const [selectedDomain, setSelectedDomain] = useState(null);
+
   return (
     <AcademicSiteLayout
       description="Advancing software security through source-code analysis, testing, and vulnerability research. Led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus."
     >
+      {selectedDomain && (
+        <AcademicDomainModal
+          domain={selectedDomain}
+          onClose={() => setSelectedDomain(null)}
+        />
+      )}
       {/* 1. Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
@@ -129,8 +138,24 @@ export default function AcademicHome() {
         </div>
         <div className={styles.domainGrid}>
           {researchDomains.map((domain, index) => (
-            <article key={domain.title} className={styles.domainItem}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
+            <article
+              key={domain.title}
+              className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
+              onClick={() => setSelectedDomain(domain)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setSelectedDomain(domain);
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label={`Open detailed panel for ${domain.title}`}
+            >
+              <div className={styles.domainItemHeader}>
+                <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
+                <span className={styles.domainClickBadge}>Explore Roadmap →</span>
+              </div>
               <h3>{domain.title}</h3>
               <p>{domain.description}</p>
             </article>
@@ -223,19 +248,24 @@ export default function AcademicHome() {
       {/* Academic Partners (Above Footer) */}
       <section className={styles.partners}>
         <p>Academic and research affiliations</p>
-        <div>
-          {partnerLogos.map((partner) => (
-            <figure key={partner.name}>
-              <a href={partner.href} target="_blank" rel="noreferrer">
-                <Image
-                  src={partner.image}
-                  alt={partner.name}
-                  width={240}
-                  height={80}
-                />
-              </a>
-            </figure>
-          ))}
+        <div className={styles.partnerRowWrapper}>
+          <div className={styles.partnerGrid}>
+            {partnerLogos.map((partner) => (
+              <figure key={partner.name}>
+                <a href={partner.href} target="_blank" rel="noreferrer" title={partner.name}>
+                  <div className={styles.partnerLogoWrap}>
+                    <Image
+                      src={partner.image}
+                      alt={partner.name}
+                      width={180}
+                      height={50}
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                </a>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
     </AcademicSiteLayout>
