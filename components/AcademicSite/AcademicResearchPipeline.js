@@ -42,7 +42,7 @@ const stages = [
   },
   {
     label: "Stage 05 — Transfer",
-    title: "Publications & FYP Projects",
+    title: "Publications & Supervised Projects",
     detail: "Q1 journal papers, open-source tools deployment & student supervision",
     icon: GraduationCap,
   },

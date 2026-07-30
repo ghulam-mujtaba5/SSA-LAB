@@ -58,7 +58,7 @@ const STAGES = [
   {
     id: "all",
     label: "Complete Pipeline",
-    desc: "Full automated flow from code collection to publication & FYP deployment",
+    desc: "Full automated flow from code collection to publication & project deployment",
   },
   {
     id: "input",

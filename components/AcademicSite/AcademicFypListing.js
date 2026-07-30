@@ -161,7 +161,7 @@ export default function AcademicFypListing({ projects = [] }) {
             placeholder="Search topic, student, technology..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search FYP Projects"
+            aria-label="Search Supervised Projects"
           />
           {searchQuery ? (
             <button
@@ -209,7 +209,7 @@ export default function AcademicFypListing({ projects = [] }) {
                 <div className={styles.fypCardTop}>
                   <div className={styles.fypCardBadges}>
                     <span className={styles.categoryBadge} style={isOpp ? { background: "rgba(59,130,246,0.12)", color: "#2563eb" } : undefined}>
-                      {isOpp ? "Open FYP Opportunity" : project.category || "Final Year Project"}
+                      {isOpp ? "Open Supervision Topic" : project.category || "Supervised Project"}
                     </span>
                     {isFeatured ? (
                       <span className={styles.featuredBadge}>

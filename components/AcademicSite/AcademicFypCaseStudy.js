@@ -48,7 +48,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
       <div className={styles.caseIntro}>
         <div className={styles.caseCopy}>
           <p className={styles.eyebrow}>
-            {isOpportunity ? "Open FYP Opportunity" : "Supervised Student Project"}
+            {isOpportunity ? "Open Supervision Topic" : "Supervised Student Project"}
           </p>
           <div className={styles.statusRow}>
             <span>{featured.status}</span>
@@ -193,7 +193,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
             <p className={styles.eyebrow}>Source & Verification</p>
             <h3>Official Listing Details</h3>
             <p>
-              <strong>Source:</strong> {featured.source || "Official COMSATS FYP Listing"}
+              <strong>Source:</strong> {featured.source || "Official COMSATS Supervision Listing"}
             </p>
             <p style={{ marginTop: "6px" }}>
               <strong>Last Verified:</strong> {featured.lastVerified || "July 2026"}

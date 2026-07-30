@@ -12,7 +12,7 @@ const entries = [
       "Selected journal and conference publications by Dr. Junaid Akram.",
   },
   {
-    title: "FYP Supervision",
+    title: "Supervision",
     path: "/alumni",
     description:
       "Selected supervised student projects and internship outcomes.",

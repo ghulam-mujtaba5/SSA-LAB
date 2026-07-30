@@ -30,7 +30,7 @@ const SUPERVISION_LINKS = [
   { href: "/supervision?tab=completed", label: "Completed Projects" },
   { href: "/supervision?tab=future", label: "Future Projects & Topics" },
   { href: "/team", label: "People & Lab Members" },
-  { href: academicProfile.officialFypIdeas, label: "COMSATS FYP Ideas", external: true },
+  { href: academicProfile.officialFypIdeas, label: "COMSATS Supervision Topics", external: true },
 ];
 
 const LAB_LINKS = [
@@ -121,9 +121,9 @@ export default function AcademicFooter() {
 
           {/* Collaboration Panel Column */}
           <div className={styles.startPanel}>
-            <strong className={styles.colTitle}>FYP & Research Collaboration</strong>
+            <strong className={styles.colTitle}>Research & Student Supervision</strong>
             <p className={styles.startCopy}>
-              Interested in BS/MS/PhD research, FYP supervision, or industrial code assessment?
+              Interested in BS/MS/PhD research, student supervision, or industrial code assessment?
             </p>
             <Link href="/contact" className={styles.cta}>
               Discuss an Opportunity <ArrowRight size={15} />

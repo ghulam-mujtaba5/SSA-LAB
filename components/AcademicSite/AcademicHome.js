@@ -210,7 +210,7 @@ export default function AcademicHome() {
       <section className={styles.ctaBand} style={{ textAlign: "center", padding: "48px 24px" }}>
         <div>
           <p className={styles.eyebrow}>Collaborate with SCSA Lab</p>
-          <h2>Interested in software security research or FYP supervision?</h2>
+          <h2>Interested in software security research or student supervision?</h2>
           <p style={{ maxWidth: "640px", margin: "12px auto 24px" }}>
             Dr Junaid Akram supervises BS, MS, and PhD students in software vulnerability detection, automated testing, malware analysis, and code clone research.
           </p>

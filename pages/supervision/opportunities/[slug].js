@@ -14,12 +14,12 @@ export default function FypOpportunityDetailPage({ project, relatedProjects = []
       <AcademicSiteLayout
         title="Opportunity Not Found"
         path="/supervision"
-        description="The requested FYP supervision opportunity could not be found."
+        description="The requested supervision opportunity could not be found."
       >
         <div style={{ padding: "80px 20px", textAlign: "center" }}>
           <h2>Supervision Opportunity Not Found</h2>
           <p style={{ margin: "16px 0 24px" }}>
-            The requested FYP supervision opportunity does not exist or may have been updated.
+            The requested supervision opportunity does not exist or may have been updated.
           </p>
           <Link href="/supervision" className={styles.primaryButton}>
             <ArrowLeft size={16} /> Return to Supervision Opportunities
@@ -31,9 +31,9 @@ export default function FypOpportunityDetailPage({ project, relatedProjects = []
 
   return (
     <AcademicSiteLayout
-      title={`${project.title} — Open FYP Supervision Opportunity`}
+      title={`${project.title} — Open Supervision Opportunity`}
       path={`/supervision/opportunities/${project.slug}`}
-      description={project.summary || `Open FYP Supervision Opportunity under Dr. Junaid Akram: ${project.title}`}
+      description={project.summary || `Open Supervision Opportunity under Dr. Junaid Akram: ${project.title}`}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>
@@ -42,7 +42,7 @@ export default function FypOpportunityDetailPage({ project, relatedProjects = []
             <ArrowLeft size={16} /> Back to Supervision Directory
           </Link>
           <div className={styles.breadcrumbMeta}>
-            <span>COMSATS FYP Listing</span>
+            <span>COMSATS Supervision Topic</span>
             <span>·</span>
             <span>Supervisor: Dr. Junaid Akram</span>
           </div>

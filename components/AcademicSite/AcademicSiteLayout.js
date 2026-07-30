@@ -56,7 +56,7 @@ export default function AcademicSiteLayout({
         <meta name="author" content={academicProfile.name} />
         <meta
           name="keywords"
-          content="Junaid Akram, SCSA Lab, software security, vulnerability detection, software testing, malware detection, code clone detection, COMSATS Lahore, FYP supervision"
+          content="Junaid Akram, SCSA Lab, software security, vulnerability detection, software testing, malware detection, code clone detection, COMSATS Lahore, student supervision"
         />
         <link rel="canonical" href={canonical} />
         <meta property="og:title" content={pageTitle} />

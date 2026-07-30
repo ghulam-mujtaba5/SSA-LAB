@@ -470,10 +470,10 @@ export const alumniPlacements = [
 export const fypOpportunities = [
   {
     title: "Building a Benchmark of Vulnerable Source Code",
-    type: "COMSATS Listed FYP Opportunity",
+    type: "COMSATS Listed Supervision Topic",
     availability: "Available for supervision",
     prerequisites: "Software security, C/C++/Java, Git API",
-    source: "Official COMSATS FYP Listing",
+    source: "Official COMSATS Supervision Listing",
     lastVerified: "July 2026",
     summary:
       "Extract vulnerable code from patch files at function, file, and component levels, analyse repair patterns, and build a reusable benchmark for vulnerability research.",
@@ -485,10 +485,10 @@ export const fypOpportunities = [
   },
   {
     title: "Intra-Project vs Inter-Project Software Dependency Analysis",
-    type: "COMSATS Listed FYP Opportunity",
+    type: "COMSATS Listed Supervision Topic",
     availability: "Available for supervision",
     prerequisites: "Software evolution, dependency graphs, Python/C++",
-    source: "Official COMSATS FYP Listing",
+    source: "Official COMSATS Supervision Listing",
     lastVerified: "July 2026",
     summary:
       "Measure cloned-code and dependency ratios across related software systems and multiple versions of the same system, using Linux kernel releases as an empirical case study.",
@@ -500,10 +500,10 @@ export const fypOpportunities = [
   },
   {
     title: "Automatic Patching of Similar Code Fragments",
-    type: "COMSATS Listed FYP Opportunity",
+    type: "COMSATS Listed Supervision Topic",
     availability: "Available for supervision",
     prerequisites: "AST diffing, Tree-sitter, Python, Code Clones",
-    source: "Official COMSATS FYP Listing",
+    source: "Official COMSATS Supervision Listing",
     lastVerified: "July 2026",
     summary:
       "Develop a tool that propagates an approved security patch to matching vulnerable fragments across repositories that reuse the affected source code.",
@@ -515,10 +515,10 @@ export const fypOpportunities = [
   },
   {
     title: "Software Vulnerability Prediction Model",
-    type: "COMSATS Listed FYP Opportunity",
+    type: "COMSATS Listed Supervision Topic",
     availability: "Available for supervision",
     prerequisites: "Machine learning, software security, Python/Scikit-learn",
-    source: "Official COMSATS FYP Listing",
+    source: "Official COMSATS Supervision Listing",
     lastVerified: "July 2026",
     summary:
       "Learn repair patterns from vulnerability patches and predict the existence or likely number of vulnerable fragments in open-source software.",
@@ -530,10 +530,10 @@ export const fypOpportunities = [
   },
   {
     title: "Automatic Test Data Generation for Data Processing Systems",
-    type: "COMSATS Listed FYP Opportunity",
+    type: "COMSATS Listed Supervision Topic",
     availability: "Available for supervision",
     prerequisites: "Software testing, constraint solving, Python/Java",
-    source: "Official COMSATS FYP Listing",
+    source: "Official COMSATS Supervision Listing",
     lastVerified: "July 2026",
     summary:
       "Generate valid and faulty test inputs for complex data processing systems using constraints and mutation operators, reducing the cost of manual input-space exploration.",
@@ -836,7 +836,7 @@ export const labMilestones = [
       "Approved as HEC PhD Supervisor and established state-of-the-art vulnerability detection benchmarks.",
       "Formed joint research teams with international co-investigators from KFUPM and Tsinghua University."
     ],
-    stats: { msStudents: "7 Active", fypTeams: "4 Teams", grants: "HEC Approved" }
+    stats: { msStudents: "7 Active", supervisedTeams: "4 Teams", grants: "HEC Approved" }
   },
   {
     year: "2025 – Beyond",

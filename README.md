@@ -10,7 +10,7 @@ A high-performance, responsive academic web platform for **Dr. Junaid Akram** (A
 - **Vulnerability Detection Platforms**: Scalable vulnerability detection engines (**SQVDT**, **VCIPR**) indexing 152,000+ open-source repositories and CVE patch datasets.
 - **Code Clone & Obfuscation Analysis**: Multi-language detection of Type-1 through Type-4 code clones and obfuscated Android malware.
 - **Software Testing & Automated Test Generation**: Model-based testing, constraint-based test data generation (**ARC System**), and test-smell detection.
-- **Supervised FYP Directory**: Interactive directory showcasing supervised final-year student development projects and research case studies.
+- **Supervised Student Projects Directory**: Interactive directory showcasing supervised student development projects and research case studies.
 
 ---
 
@@ -20,10 +20,10 @@ A high-performance, responsive academic web platform for **Dr. Junaid Akram** (A
 2. **About (`/about`)**: Background (PhD Tsinghua University, Postdoc SnT Luxembourg), experience, and lab overview.
 3. **Research (`/research`)**: Research domains, funded projects, vulnerability detection platforms, and interactive workflow.
 4. **Publications (`/publications`)**: Categorized peer-reviewed journal papers (Applied Soft Computing, IEEE, IJICS) and conference proceedings.
-5. **FYP Supervision (`/alumni`)**: Supervised final-year student projects, filterable category directory, and dedicated case study detail pages (`/alumni/case-study/[slug]`).
+5. **Supervision (`/alumni`)**: Supervised student projects, filterable category directory, and dedicated case study detail pages (`/alumni/case-study/[slug]`).
 6. **Team (`/team`)**: Supervised BS, MS, PhD students, student placements, and international research collaborators.
 7. **Contact (`/contact`)**: Institutional office hours, lab location, email directory, and prospective student inquiry form.
-8. **Admin Portal (`/admin`)**: Enterprise management dashboard for publishing research articles, media, and FYP project records.
+8. **Admin Portal (`/admin`)**: Enterprise management dashboard for publishing research articles, media, and student project records.
 
 ---
 

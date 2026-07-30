@@ -14,15 +14,15 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       <AcademicSiteLayout
         title="Project Not Found"
         path="/supervision"
-        description="The requested FYP case study could not be found."
+        description="The requested project case study could not be found."
       >
         <div style={{ padding: "80px 20px", textAlign: "center" }}>
           <h2>Project Case Study Not Found</h2>
           <p style={{ margin: "16px 0 24px" }}>
-            The requested final-year project case study does not exist or may have been updated.
+            The requested project case study does not exist or may have been updated.
           </p>
           <Link href="/supervision" className={styles.primaryButton}>
-            <ArrowLeft size={16} /> Return to FYP Supervision List
+            <ArrowLeft size={16} /> Return to Supervision List
           </Link>
         </div>
       </AcademicSiteLayout>
@@ -31,18 +31,18 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
 
   return (
     <AcademicSiteLayout
-      title={`${project.title} — Supervised FYP Case Study`}
+      title={`${project.title} — Supervised Project Case Study`}
       path={`/supervision/projects/${project.slug}`}
-      description={project.summary || `Supervised Final Year Project case study: ${project.title}`}
+      description={project.summary || `Supervised project case study: ${project.title}`}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>
         <div className={styles.breadcrumbInner}>
           <Link href="/supervision" className={styles.breadcrumbBack}>
-            <ArrowLeft size={16} /> Back to FYP Supervision Directory
+            <ArrowLeft size={16} /> Back to Supervision Directory
           </Link>
           <div className={styles.breadcrumbMeta}>
-            <span>{project.session || "COMSATS FYP"}</span>
+            <span>{project.session || "COMSATS Supervision"}</span>
             <span>·</span>
             <span>{project.supervisor || "Dr. Junaid Akram"}</span>
           </div>
@@ -57,7 +57,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
         <section className={`${styles.section} ${styles.softSection}`}>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Supervised FYP Portfolio</p>
+              <p className={styles.eyebrow}>Supervised Projects Portfolio</p>
               <h2>More Supervised Projects</h2>
             </div>
             <Link href="/supervision" className={styles.textLink}>
