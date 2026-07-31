@@ -1,11 +1,17 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Menu, X, Mail, MapPin, ExternalLink, ChevronDown } from "lucide-react";
+import { Menu, X, ExternalLink, ChevronDown } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
 import AcademicFooter from "./AcademicFooter";
+import SEO, {
+  webSiteSchema,
+  organizationSchema,
+  personSchema,
+  navigationSchema,
+  breadcrumbSchema,
+} from "../SEO";
 import styles from "./AcademicSite.module.css";
 
 const supervisionSubItems = [
@@ -30,15 +36,41 @@ const navigation = [
   { label: "Contact", href: "/contact" },
 ];
 
-const siteUrl =
+const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   "https://sites.google.com/view/temporaryr";
+
+/** Build the base JSON-LD schemas injected on every page */
+function buildBaseSchemas(path, extraSchemas = []) {
+  const schemas = [
+    webSiteSchema(),
+    organizationSchema(),
+    personSchema(),
+    navigationSchema(),
+  ];
+  // Breadcrumb for all inner pages
+  if (path && path !== "/" && path !== "") {
+    const pathLabel = path
+      .replace(/^\//, "")
+      .replace(/-/g, " ")
+      .replace(/\//g, " › ")
+      .replace(/\b\w/g, (l) => l.toUpperCase());
+    schemas.push(
+      breadcrumbSchema([{ name: pathLabel, url: `${SITE_URL}${path}` }])
+    );
+  }
+  return [...schemas, ...extraSchemas];
+}
 
 export default function AcademicSiteLayout({
   children,
   title,
   description,
   path = "",
+  keywords,
+  jsonLd,
+  image,
+  type,
 }) {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -46,30 +78,22 @@ export default function AcademicSiteLayout({
   const pageTitle = title
     ? `${title} | ${academicProfile.labShort}`
     : `${academicProfile.labShort} | Software Security Research`;
-  const canonical = `${siteUrl}${path}`;
+  const canonical = `${SITE_URL}${path}`;
+  const extraSchemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+  const allSchemas = buildBaseSchemas(path, extraSchemas);
 
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={description} />
-        <meta name="author" content={academicProfile.name} />
-        <meta
-          name="keywords"
-          content="Junaid Akram, SCSA Lab, software security, vulnerability detection, software testing, malware detection, code clone detection, COMSATS Lahore, student supervision"
-        />
-        <link rel="canonical" href={canonical} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonical} />
-        <meta
-          property="og:image"
-          content={`${siteUrl}/academic/junaid-akram-professor.jpg`}
-        />
-        <meta property="og:site_name" content={academicProfile.labShort} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
+      <SEO
+        title={pageTitle}
+        description={description}
+        url={canonical}
+        canonical={canonical}
+        keywords={keywords}
+        jsonLd={allSchemas}
+        {...(image ? { image } : {})}
+        {...(type ? { type } : {})}
+      />
 
       <div className={styles.site}>
         <header className={styles.header}>

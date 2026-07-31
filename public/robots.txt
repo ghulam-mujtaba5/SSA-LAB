@@ -1,9 +1,26 @@
 User-agent: *
 Allow: /
+Allow: /*.css
+Allow: /*.js
+Allow: /academic/
 Disallow: /admin/
 Disallow: /api/
 Disallow: /portfolio/
 Disallow: /search
 
-Sitemap: /sitemap.xml
+User-agent: Googlebot-Image
+Allow: /academic/
+Allow: /public/
 
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: CCBot
+Disallow: /
+
+Crawl-delay: 1
+
+Sitemap: /sitemap.xml
+Sitemap: /sitemap-dynamic.xml

@@ -13,6 +13,8 @@ import AcademicSiteLayout from "./AcademicSiteLayout";
 import AcademicImageLightbox from "./AcademicImageLightbox";
 import AcademicPipelineHero from "./AcademicPipelineHero";
 import AcademicDomainModal from "./AcademicDomainModal";
+import DomainTechnicalGraphic, { DataInfrastructureGraphic } from "./AcademicTechnicalVisuals";
+import InteractiveCodeScanner from "./InteractiveCodeScanner";
 import {
   academicProfile,
   partnerLogos,
@@ -125,8 +127,8 @@ export default function AcademicHome() {
       {/* 2. Verified Research Impact Statistics Bar */}
       <section className={styles.impactStrip} aria-label="Research Impact Statistics">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px', flexWrap: 'wrap', maxWidth: '1200px', margin: '0 auto' }}>
-          <div className={`${styles.impactBadgeWrapper} ${styles.floatAnim}`}>
-            <Image src="/ai-chatgpt/server-stack.png" alt="Data Infrastructure" width={100} height={100} className={styles.illustrationImage} />
+          <div className={styles.impactBadgeWrapper}>
+            <DataInfrastructureGraphic size={96} />
           </div>
           <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", flex: 1 }}>
             {impactStats.map((stat) => (
@@ -138,6 +140,17 @@ export default function AcademicHome() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* 2.5 Live Security Engineering Demo */}
+      <section className={styles.section} id="live-demo">
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Interactive Vulnerability Inspection</p>
+            <h2>Live AST Code Analysis & Remediation</h2>
+          </div>
+        </div>
+        <InteractiveCodeScanner />
       </section>
 
       {/* 3. Main Research Domains */}
@@ -173,18 +186,9 @@ export default function AcademicHome() {
                   Explore Roadmap <ArrowRight size={13} />
                 </span>
               </div>
-              {domain.image && (
-                <div className={styles.cornerCardIllustration}>
-                  <div className={styles.cornerBadgeDot} />
-                  <Image
-                    src={domain.image}
-                    alt={domain.title}
-                    width={135}
-                    height={135}
-                    className={styles.illustrationImage}
-                  />
-                </div>
-              )}
+              <div className={styles.cornerCardIllustration} style={{ padding: "12px", background: "rgba(15, 23, 42, 0.4)", borderRadius: "12px" }}>
+                <DomainTechnicalGraphic domainId={domain.graphicKey || domain.id} size={84} />
+              </div>
               <h3>{domain.title}</h3>
               <p>{domain.description}</p>
             </article>

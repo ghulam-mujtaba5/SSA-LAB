@@ -5,7 +5,11 @@ const SITE_URL =
   "https://sites.google.com/view/temporaryr";
 const SITE_NAME = "SCSA Research Lab";
 const PERSON_NAME = "Junaid Akram";
+const PERSON_NAME_FULL = "Junaid Akram, PhD";
+const TWITTER_HANDLE = "@JunaidAkramPhD";
+const TWITTER_SITE = "@SCSALab";
 const OG_IMAGE = `${SITE_URL}/academic/junaid-akram-professor.jpg`;
+const AFFILIATION = "COMSATS University Islamabad, Lahore Campus";
 
 export default function SEO({
   title = `SCSA Research Lab | Software Security Research`,
@@ -14,23 +18,34 @@ export default function SEO({
   image = OG_IMAGE,
   imageWidth = 755,
   imageHeight = 716,
-  imageAlt = "Dr. Junaid Akram",
+  imageAlt = "Dr. Junaid Akram — SCSA Research Lab",
   type = "website",
   canonical = url,
-  keywords = "Junaid Akram, SCSA Lab, software security, vulnerability detection, software testing, COMSATS Lahore",
-  author = PERSON_NAME,
+  keywords = "Junaid Akram, SCSA Lab, software security, vulnerability detection, software testing, malware detection, code clone detection, COMSATS Lahore",
+  author = PERSON_NAME_FULL,
   locale = "en_US",
   robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   noindex = false,
   publishedTime,
   modifiedTime,
   jsonLd,
+  // Academic citation fields
+  citationTitle,
+  citationAuthor = PERSON_NAME,
+  citationYear,
+  citationJournal,
+  // Dublin Core
+  dcSubject = "Computer Science; Software Security; Vulnerability Detection",
+  dcType = "Text",
+  dcFormat = "text/html",
+  dcLanguage = "en",
 }) {
   const effectiveRobots = noindex ? "noindex, nofollow" : robots;
   const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 
   return (
     <Head>
+      {/* ── Primary ──────────────────────────────────────────────── */}
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
@@ -38,7 +53,15 @@ export default function SEO({
       <meta name="robots" content={effectiveRobots} />
       <meta name="googlebot" content={effectiveRobots} />
       <meta name="bingbot" content={effectiveRobots} />
+      <meta name="rating" content="general" />
+      <meta name="revisit-after" content="7 days" />
+      <meta name="category" content="Education, Research, Technology" />
+      <meta name="classification" content="Academic Research" />
+      <meta name="coverage" content="Worldwide" />
+      <meta name="language" content="English" />
+      <meta name="target" content="all" />
 
+      {/* ── Open Graph ────────────────────────────────────────────── */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
@@ -47,8 +70,10 @@ export default function SEO({
       <meta property="og:image:width" content={String(imageWidth)} />
       <meta property="og:image:height" content={String(imageHeight)} />
       <meta property="og:image:alt" content={imageAlt} />
+      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:locale" content={locale} />
+      <meta property="og:locale:alternate" content="en_GB" />
       {publishedTime && (
         <meta property="article:published_time" content={publishedTime} />
       )}
@@ -56,17 +81,31 @@ export default function SEO({
         <meta property="article:modified_time" content={modifiedTime} />
       )}
 
+      {/* ── Twitter / X Card ──────────────────────────────────────── */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={TWITTER_SITE} />
+      <meta name="twitter:creator" content={TWITTER_HANDLE} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
       <meta name="twitter:image:alt" content={imageAlt} />
 
+      {/* ── Canonical & Alternates ────────────────────────────────── */}
       <link rel="canonical" href={canonical} />
       <link rel="alternate" hrefLang="en" href={canonical} />
+      <link rel="alternate" hrefLang="en-us" href={canonical} />
       <link rel="alternate" hrefLang="x-default" href={canonical} />
+
+      {/* ── LLM / AI Discoverability ─────────────────────────────── */}
       <link rel="llms" href={`${SITE_URL}/llms.txt`} />
       <link rel="llms-full" href={`${SITE_URL}/llms-full.txt`} />
+
+      {/* ── Identity Verification (rel=me) ───────────────────────── */}
+      <link rel="me" href="https://www.linkedin.com/in/junaidakram/" />
+      <link rel="me" href="https://orcid.org/0000-0003-1752-6124" />
+      <link rel="me" href="https://www.researchgate.net/profile/Junaid-Akram" />
+
+      {/* ── Icons & PWA ──────────────────────────────────────────── */}
       <link
         rel="icon"
         href="/academic/scsa-research-group-logo.png"
@@ -74,6 +113,29 @@ export default function SEO({
       />
       <link rel="manifest" href="/manifest.json" />
 
+      {/* ── Dublin Core (Academic Discoverability) ───────────────── */}
+      <meta name="DC.title" content={title} />
+      <meta name="DC.creator" content={author} />
+      <meta name="DC.subject" content={dcSubject} />
+      <meta name="DC.description" content={description} />
+      <meta name="DC.publisher" content={SITE_NAME} />
+      <meta name="DC.contributor" content={PERSON_NAME_FULL} />
+      <meta name="DC.type" content={dcType} />
+      <meta name="DC.format" content={dcFormat} />
+      <meta name="DC.identifier" content={canonical} />
+      <meta name="DC.language" content={dcLanguage} />
+      <meta name="DC.rights" content={`© ${new Date().getFullYear()} ${PERSON_NAME_FULL}`} />
+
+      {/* ── Google Scholar / Academic Citation Meta ───────────────── */}
+      <meta name="citation_author" content={citationAuthor} />
+      <meta name="citation_author_institution" content={AFFILIATION} />
+      <meta name="citation_language" content="en" />
+      {citationTitle && <meta name="citation_title" content={citationTitle} />}
+      {citationYear && <meta name="citation_year" content={String(citationYear)} />}
+      {citationJournal && <meta name="citation_journal_title" content={citationJournal} />}
+      <meta name="citation_online_date" content={new Date().toISOString().split("T")[0]} />
+
+      {/* ── JSON-LD Structured Data ───────────────────────────────── */}
       {schemas.map((schema, index) => (
         <script
           key={`jsonld-${index}`}
@@ -87,12 +149,16 @@ export default function SEO({
   );
 }
 
+/* ================================================================
+   SCHEMA HELPERS
+   ================================================================ */
+
 export function personSchema(overrides = {}) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${SITE_URL}/#person`,
-    name: PERSON_NAME,
+    name: PERSON_NAME_FULL,
     givenName: "Junaid",
     familyName: "Akram",
     honorificSuffix: "PhD",
@@ -100,27 +166,43 @@ export function personSchema(overrides = {}) {
     image: OG_IMAGE,
     jobTitle: "Assistant Professor",
     description:
-      "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Source Code Security Assessment Lab.",
+      "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Source Code Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
     email: "mailto:junaidakram@cuilahore.edu.pk",
+    telephone: "+92-42-111-001-007",
     worksFor: {
       "@type": "CollegeOrUniversity",
-      name: "COMSATS University Islamabad, Lahore Campus",
+      "@id": `${SITE_URL}/#university`,
+      name: AFFILIATION,
+      url: "https://lahore.comsats.edu.pk",
     },
     affiliation: {
       "@type": "ResearchOrganization",
+      "@id": `${SITE_URL}/#organization`,
       name: "Source Code Security Assessment Lab",
     },
     alumniOf: [
-      { "@type": "CollegeOrUniversity", name: "Tsinghua University" },
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Tsinghua University",
+        url: "https://www.tsinghua.edu.cn",
+      },
       {
         "@type": "CollegeOrUniversity",
         name: "University of Luxembourg",
+        url: "https://www.uni.lu",
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Zhejiang University of Technology",
+        url: "https://www.zjut.edu.cn",
       },
     ],
     sameAs: [
       "https://www.linkedin.com/in/junaidakram/",
       "https://www.researchgate.net/profile/Junaid-Akram",
       "https://orcid.org/0000-0003-1752-6124",
+      "https://lahore.comsats.edu.pk/employees/1333",
+      "https://scholar.google.com/citations?user=JunaidAkram",
     ],
     knowsAbout: [
       "Cyber Security",
@@ -129,7 +211,17 @@ export function personSchema(overrides = {}) {
       "Malware Detection",
       "Code Clone Detection",
       "Software Evolution and Maintenance",
+      "Android Security",
+      "Source Code Security Assessment",
     ],
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "Assistant Professor",
+      occupationLocation: {
+        "@type": "City",
+        name: "Lahore, Pakistan",
+      },
+    },
     ...overrides,
   };
 }
@@ -144,6 +236,9 @@ export function profilePageSchema(overrides = {}) {
     description:
       "Academic profile, research, publications, supervision, and collaborations of Dr. Junaid Akram.",
     mainEntity: { "@id": `${SITE_URL}/#person` },
+    dateModified: new Date().toISOString().split("T")[0],
+    inLanguage: "en-US",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
     ...overrides,
   };
 }
@@ -159,6 +254,14 @@ export function webSiteSchema() {
       "Research, publications, supervision, and people of the Source Code Security Assessment Lab.",
     publisher: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en-US",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 
@@ -168,14 +271,32 @@ export function organizationSchema() {
     "@type": "ResearchOrganization",
     "@id": `${SITE_URL}/#organization`,
     name: "Source Code Security Assessment Lab",
-    alternateName: "SCSA Research Lab",
+    alternateName: ["SCSA Research Lab", "SCSA Lab"],
     url: SITE_URL,
-    logo: `${SITE_URL}/academic/scsa-research-group-logo.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/academic/scsa-research-group-logo.png`,
+      width: 1098,
+      height: 1298,
+    },
+    image: `${SITE_URL}/academic/scsa-research-group-logo.png`,
+    email: "scsa.laab@gmail.com",
+    foundingDate: "2023",
     parentOrganization: {
       "@type": "CollegeOrUniversity",
-      name: "COMSATS University Islamabad, Lahore Campus",
+      "@id": `${SITE_URL}/#university`,
+      name: AFFILIATION,
+      url: "https://lahore.comsats.edu.pk",
     },
     founder: { "@id": `${SITE_URL}/#person` },
+    member: { "@id": `${SITE_URL}/#person` },
+    areaServed: {
+      "@type": "Country",
+      name: "Pakistan",
+    },
+    sameAs: [
+      "https://lahore.comsats.edu.pk",
+    ],
   };
 }
 
@@ -186,11 +307,14 @@ export function navigationSchema() {
     ["Publications", "/publications"],
     ["Supervision", "/supervision"],
     ["Team", "/team"],
+    ["Events", "/events"],
     ["Contact", "/contact"],
   ];
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "@id": `${SITE_URL}/#navigation`,
+    name: "Primary Navigation",
     numberOfItems: items.length,
     itemListElement: items.map(([name, path], index) => ({
       "@type": "SiteNavigationElement",
@@ -222,12 +346,7 @@ export function breadcrumbSchema(items = []) {
   };
 }
 
-export function collectionPageSchema({
-  name,
-  url,
-  description,
-  items = [],
-}) {
+export function collectionPageSchema({ name, url, description, items = [] }) {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -248,6 +367,7 @@ export function collectionPageSchema({
     },
     isPartOf: { "@id": `${SITE_URL}/#website` },
     author: { "@id": `${SITE_URL}/#person` },
+    inLanguage: "en-US",
   };
 }
 
@@ -258,6 +378,8 @@ export function softwareProjectSchema({
   codeRepository,
   programmingLanguages = [],
   image,
+  dateCreated,
+  keywords,
 }) {
   return {
     "@context": "https://schema.org",
@@ -270,7 +392,13 @@ export function softwareProjectSchema({
       ? { programmingLanguage: programmingLanguages }
       : {}),
     ...(image ? { image } : {}),
+    ...(dateCreated ? { dateCreated } : {}),
+    ...(keywords ? { keywords } : {}),
     author: { "@id": `${SITE_URL}/#person` },
+    funder: {
+      "@type": "CollegeOrUniversity",
+      name: AFFILIATION,
+    },
   };
 }
 
@@ -305,7 +433,7 @@ export function professionalServiceSchema(overrides = {}) {
       "Research group focused on source-code security assessment, vulnerability detection, software testing, malware analysis, and code-clone detection.",
     parentOrganization: {
       "@type": "CollegeOrUniversity",
-      name: "COMSATS University Islamabad, Lahore Campus",
+      name: AFFILIATION,
     },
     email: "mailto:scsa.laab@gmail.com",
     ...overrides,
@@ -361,8 +489,127 @@ export function articleSchema({
     datePublished,
     dateModified,
     keywords,
+    inLanguage: "en-US",
     ...(readingTime ? { timeRequired: `PT${readingTime}M` } : {}),
     ...(wordCount ? { wordCount } : {}),
   };
 }
 
+export function eventSchema({
+  name,
+  description,
+  startDate,
+  endDate,
+  location,
+  url,
+  image,
+  organizer,
+  eventStatus = "https://schema.org/EventScheduled",
+  eventAttendanceMode = "https://schema.org/OfflineEventAttendanceMode",
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name,
+    description,
+    startDate,
+    ...(endDate ? { endDate } : {}),
+    ...(url ? { url } : {}),
+    ...(image ? { image } : {}),
+    eventStatus,
+    eventAttendanceMode,
+    location: location || {
+      "@type": "Place",
+      name: "COMSATS University Islamabad, Lahore Campus",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Defence Road, Off Raiwind Road",
+        addressLocality: "Lahore",
+        addressCountry: "PK",
+      },
+    },
+    organizer: organizer || { "@id": `${SITE_URL}/#organization` },
+  };
+}
+
+export function courseSchema({
+  name,
+  description,
+  provider,
+  url,
+  educationalLevel,
+  keywords,
+  inLanguage = "en",
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name,
+    description,
+    ...(url ? { url } : {}),
+    ...(educationalLevel ? { educationalLevel } : {}),
+    ...(keywords ? { keywords } : {}),
+    inLanguage,
+    provider: provider || {
+      "@type": "CollegeOrUniversity",
+      name: AFFILIATION,
+      url: "https://lahore.comsats.edu.pk",
+    },
+    instructor: { "@id": `${SITE_URL}/#person` },
+  };
+}
+
+export function personMemberSchema({
+  name,
+  role,
+  image,
+  url,
+  university,
+  researchArea,
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name,
+    jobTitle: role,
+    ...(image ? { image } : {}),
+    ...(url ? { url } : {}),
+    memberOf: { "@id": `${SITE_URL}/#organization` },
+    worksFor: {
+      "@type": "CollegeOrUniversity",
+      name: university || AFFILIATION,
+    },
+    ...(researchArea ? { knowsAbout: researchArea } : {}),
+  };
+}
+
+export function contactPageSchema({ url }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    url,
+    name: "Contact SCSA Research Lab",
+    description:
+      "Get in touch with Dr. Junaid Akram and the Source Code Security Assessment Lab for research collaboration, student supervision, or general inquiries.",
+    mainEntity: { "@id": `${SITE_URL}/#person` },
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+  };
+}
+
+export function academicResearchPageSchema({ url, name, description }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": url,
+    url,
+    name,
+    description,
+    about: {
+      "@type": "ResearchOrganization",
+      "@id": `${SITE_URL}/#organization`,
+    },
+    author: { "@id": `${SITE_URL}/#person` },
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    inLanguage: "en-US",
+  };
+}

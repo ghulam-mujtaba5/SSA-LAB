@@ -1,27 +1,37 @@
-# Junaid Akram, PhD — Academic Profile
+# Junaid Akram, PhD — Academic Profile & SCSA Research Lab
 
 > Source Code Security Assessment (SCSA) Research Lab
 > COMSATS University Islamabad, Lahore Campus
+> H Block, Room 14 — Lahore, Pakistan
 
-## Profile
+## Identity
 
-Dr. Junaid Akram is an Assistant Professor, HEC-approved PhD supervisor, former postdoctoral researcher at SnT, University of Luxembourg, and PhD graduate of Tsinghua University.
+- Full Name: Junaid Akram, PhD
+- Role: Assistant Professor & HEC-approved PhD Supervisor
+- Lab: Source Code Security Assessment Lab (SCSA Lab)
+- Institution: COMSATS University Islamabad, Lahore Campus
+- Email: junaidakram@cuilahore.edu.pk
+- Lab Email: scsa.laab@gmail.com
 
-## Research
+## Academic Background
 
-- Cyber Security
-- Software Vulnerability Detection
-- Software Testing and Test Data Generation
-- Malware Detection
-- Code Clone Detection and Analysis
-- Software Evolution, Maintenance, and Reuse
+- PhD in Software Engineering — Tsinghua University (2015–2020)
+- MPhil — Zhejiang University of Technology (2012–2015)
+- Postdoctoral Research — SnT, University of Luxembourg (2021–2023)
+- Assistant Professor — Xiamen University Malaysia (2020–2021)
+- Assistant Professor — COMSATS University Islamabad, Lahore Campus (2023–present)
+
+## Research Areas
+
+Dr. Junaid Akram works on source-code security assessment, software vulnerability detection, code clone analysis, Android and cross-architecture malware detection, software testing, automated test-data generation, software evolution, maintenance, and reuse.
 
 ## Main Pages
 
+- [Home](/)
 - [About](/about)
 - [Research](/research)
 - [Publications](/publications)
-- [Supervision](/alumni)
+- [Supervision](/supervision)
 - [Team](/team)
 - [Events](/events)
 - [Contact](/contact)
@@ -32,9 +42,11 @@ Dr. Junaid Akram is an Assistant Professor, HEC-approved PhD supervisor, former 
 - ResearchGate: https://www.researchgate.net/profile/Junaid-Akram
 - ORCID: https://orcid.org/0000-0003-1752-6124
 - COMSATS profile: https://lahore.comsats.edu.pk/employees/1333
+- Google Scholar: https://scholar.google.com/citations?user=JunaidAkram
 
 ## Contact
 
 - Email: junaidakram@cuilahore.edu.pk
 - Lab email: scsa.laab@gmail.com
 - Office: H Block, Room 14, COMSATS University Islamabad, Lahore Campus
+- University Exchange: (042) 111-001-007

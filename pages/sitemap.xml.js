@@ -1,12 +1,89 @@
 const STATIC_PAGES = [
-  { path: "/", changefreq: "weekly", priority: 1.0 },
-  { path: "/about", changefreq: "monthly", priority: 0.9 },
-  { path: "/research", changefreq: "monthly", priority: 0.95 },
-  { path: "/publications", changefreq: "monthly", priority: 0.9 },
-  { path: "/alumni", changefreq: "monthly", priority: 0.9 },
-  { path: "/team", changefreq: "monthly", priority: 0.8 },
-  { path: "/events", changefreq: "monthly", priority: 0.7 },
-  { path: "/contact", changefreq: "yearly", priority: 0.7 },
+  {
+    path: "/",
+    changefreq: "weekly",
+    priority: 1.0,
+    lastmod: "2025-01-01",
+    image: {
+      loc: "/academic/junaid-akram-professor.jpg",
+      title: "Dr. Junaid Akram — SCSA Research Lab",
+      caption: "Dr. Junaid Akram, Assistant Professor and Head of SCSA Research Lab",
+    },
+  },
+  {
+    path: "/about",
+    changefreq: "monthly",
+    priority: 0.9,
+    lastmod: "2025-01-01",
+    image: {
+      loc: "/academic/scsa-research-group-logo.png",
+      title: "SCSA Research Lab Logo",
+    },
+  },
+  {
+    path: "/research",
+    changefreq: "monthly",
+    priority: 0.95,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/publications",
+    changefreq: "monthly",
+    priority: 0.9,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/supervision",
+    changefreq: "monthly",
+    priority: 0.85,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/supervision?tab=running",
+    changefreq: "weekly",
+    priority: 0.8,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/supervision?tab=completed",
+    changefreq: "monthly",
+    priority: 0.75,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/supervision?tab=future",
+    changefreq: "monthly",
+    priority: 0.75,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/alumni",
+    changefreq: "monthly",
+    priority: 0.8,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/team",
+    changefreq: "monthly",
+    priority: 0.8,
+    lastmod: "2025-01-01",
+    image: {
+      loc: "/academic/scsa-research-group-logo.png",
+      title: "SCSA Research Lab Team",
+    },
+  },
+  {
+    path: "/events",
+    changefreq: "monthly",
+    priority: 0.7,
+    lastmod: "2025-01-01",
+  },
+  {
+    path: "/contact",
+    changefreq: "yearly",
+    priority: 0.7,
+    lastmod: "2025-01-01",
+  },
 ];
 
 export async function getServerSideProps({ req, res }) {
@@ -18,36 +95,55 @@ export async function getServerSideProps({ req, res }) {
   const base =
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
     `${protocol}://${host}`;
-  const now = new Date().toISOString();
-  const urls = STATIC_PAGES.map((page) => ({
-    loc: `${base}${page.path}`,
-    lastmod: now,
-    changefreq: page.changefreq,
-    priority: page.priority,
-  }));
+
+  const buildUrl = (page) => {
+    const imageBlock = page.image
+      ? `<image:image>` +
+        `<image:loc>${base}${page.image.loc}</image:loc>` +
+        (page.image.title
+          ? `<image:title>${escapeXml(page.image.title)}</image:title>`
+          : "") +
+        (page.image.caption
+          ? `<image:caption>${escapeXml(page.image.caption)}</image:caption>`
+          : "") +
+        `</image:image>`
+      : "";
+
+    return (
+      `<url>` +
+      `<loc>${base}${page.path}</loc>` +
+      `<lastmod>${page.lastmod}</lastmod>` +
+      `<changefreq>${page.changefreq}</changefreq>` +
+      `<priority>${page.priority}</priority>` +
+      imageBlock +
+      `</url>`
+    );
+  };
 
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
-    urls
-      .map(
-        (url) =>
-          `<url>` +
-          `<loc>${url.loc}</loc>` +
-          `<lastmod>${url.lastmod}</lastmod>` +
-          `<changefreq>${url.changefreq}</changefreq>` +
-          `<priority>${url.priority}</priority>` +
-          `</url>`,
-      )
-      .join("") +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">` +
+    STATIC_PAGES.map(buildUrl).join("") +
     `</urlset>`;
 
   res.setHeader("Content-Type", "application/xml");
-  res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=3600, stale-while-revalidate=86400"
+  );
   res.write(xml);
   res.end();
 
   return { props: {} };
+}
+
+function escapeXml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 export default function Sitemap() {

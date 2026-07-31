@@ -26,6 +26,24 @@ import {
   Maximize2,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
+import {
+  profilePageSchema,
+  personSchema,
+  collectionPageSchema,
+  softwareProjectSchema,
+  articleSchema,
+  eventSchema,
+  courseSchema,
+  contactPageSchema,
+  faqSchema,
+  serviceSchema,
+  breadcrumbSchema,
+  personMemberSchema,
+} from "../SEO";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://sites.google.com/view/temporaryr";
 import AcademicImageLightbox from "./AcademicImageLightbox";
 import AcademicLottie from "./AcademicLottie";
 import AcademicResearchPipeline from "./AcademicResearchPipeline";
@@ -100,11 +118,24 @@ export function AboutPage() {
     }
   };
 
+  const aboutJsonLd = [
+    profilePageSchema({
+      url: `${SITE_URL}/about`,
+      "@id": `${SITE_URL}/about`,
+      name: "About SCSA Research Lab",
+      description:
+        "Source Code Security Assessment (SCSA) Research Lab — Profile, global research collaborations, MS & PhD researchers, lab journey timeline, and core security research pillars.",
+    }),
+    personSchema(),
+  ];
+
   return (
     <AcademicSiteLayout
       title="About SCSA Research Lab"
       path="/about"
       description="Source Code Security Assessment (SCSA) Research Lab — Profile, global research collaborations, MS & PhD researchers, lab journey timeline, and core security research pillars."
+      keywords="Junaid Akram PhD, SCSA Lab history, software security researcher, COMSATS Lahore professor, Tsinghua University PhD, University of Luxembourg postdoc"
+      jsonLd={aboutJsonLd}
     >
       {/* 1. HERO & LAB MISSION OVERVIEW WITH DIRECTOR CARD */}
       <div className={styles.aboutHeroRow}>
@@ -495,11 +526,35 @@ export function ResearchPage() {
     }
   }, [router.query.domain]);
 
+  const researchJsonLd = [
+    collectionPageSchema({
+      name: "SCSA Research Lab — Software Security Research",
+      url: `${SITE_URL}/research`,
+      description:
+        "Research areas, platforms, and software-security tools developed by Dr. Junaid Akram and the SCSA Lab.",
+      items: researchProjects.map((p) => ({
+        name: p.title || p.name,
+        url: `${SITE_URL}/research`,
+        description: p.description,
+      })),
+    }),
+    ...researchProjects.slice(0, 6).map((p) =>
+      softwareProjectSchema({
+        name: p.title || p.name,
+        description: p.description,
+        url: `${SITE_URL}/research`,
+        keywords: p.tags ? p.tags.join(", ") : undefined,
+      })
+    ),
+  ];
+
   return (
     <AcademicSiteLayout
       title="Research"
       path="/research"
       description="Research areas, platforms, and software-security tools developed by Dr. Junaid Akram and the SCSA Lab."
+      keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SCSA Lab research projects"
+      jsonLd={researchJsonLd}
     >
       {selectedDomain && (
         <AcademicDomainModal
@@ -664,11 +719,37 @@ export function PublicationsPage() {
     setTimeout(() => setCopiedIndex(null), 2500);
   };
 
+  const pubsJsonLd = [
+    collectionPageSchema({
+      name: "Publications — Dr. Junaid Akram",
+      url: `${SITE_URL}/publications`,
+      description:
+        "Peer-reviewed journal and conference publications by Dr. Junaid Akram in software security, testing, malware, and code analysis.",
+      items: publications.map((p) => ({
+        name: p.title,
+        url: p.doi ? `https://doi.org/${p.doi}` : `${SITE_URL}/publications`,
+        description: p.venue,
+      })),
+    }),
+    ...publications.slice(0, 8).map((p) =>
+      articleSchema({
+        headline: p.title,
+        description: p.abstract || p.venue,
+        url: p.doi ? `https://doi.org/${p.doi}` : `${SITE_URL}/publications`,
+        datePublished: p.year ? `${p.year}-01-01` : undefined,
+        dateModified: p.year ? `${p.year}-01-01` : undefined,
+        keywords: p.keywords || p.tags?.join(", "),
+      })
+    ),
+  ];
+
   return (
     <AcademicSiteLayout
       title="Publications"
       path="/publications"
       description="Peer-reviewed journal and conference publications by Dr. Junaid Akram in software security, testing, malware, and code analysis."
+      keywords="Junaid Akram publications, software security papers, vulnerability detection research, code clone analysis papers, malware detection journal, IEEE conference papers"
+      jsonLd={pubsJsonLd}
     >
       <PageIntro
         eyebrow="Publications"
@@ -823,11 +904,35 @@ export function PublicationsPage() {
 }
 
 export function SupervisionPage({ fypProjects = [] }) {
+  const supervisionJsonLd = [
+    collectionPageSchema({
+      name: "FYP Supervision — Dr. Junaid Akram",
+      url: `${SITE_URL}/supervision`,
+      description:
+        "Supervised final-year student projects, FYP opportunities, and student research under Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus.",
+      items: supervisedProjects.map((p) => ({
+        name: p.title,
+        url: `${SITE_URL}/supervision`,
+        description: `${p.student} — ${p.institution}`,
+      })),
+    }),
+    ...supervisedProjects.slice(0, 6).map((p) =>
+      courseSchema({
+        name: p.title,
+        description: `Final-year project by ${p.student} at ${p.institution}, supervised by Dr. Junaid Akram.`,
+        url: `${SITE_URL}/supervision`,
+        educationalLevel: p.level || "Undergraduate",
+      })
+    ),
+  ];
+
   return (
     <AcademicSiteLayout
       title="Supervision"
       path="/supervision"
       description="Supervised final-year student projects, FYP opportunities, and student research under Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus."
+      keywords="FYP supervision COMSATS, Junaid Akram student supervision, software security final year projects, BS MS PhD research supervision Pakistan"
+      jsonLd={supervisionJsonLd}
     >
       <PageIntro
         eyebrow="FYP Supervision"
@@ -895,11 +1000,46 @@ export function TeamPage() {
   const showAlumni = activeTab === "all" || activeTab === "alumni";
   const showPartners = activeTab === "all" || activeTab === "partners";
 
+  const teamJsonLd = [
+    collectionPageSchema({
+      name: "SCSA Lab — People & Partners",
+      url: `${SITE_URL}/team`,
+      description:
+        "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SCSA Lab.",
+      items: [
+        ...coInvestigators.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
+        ...pgResearchers.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
+      ],
+    }),
+    personSchema(),
+    ...coInvestigators.slice(0, 4).map((m) =>
+      personMemberSchema({
+        name: m.name,
+        role: m.role || "Co-Investigator",
+        image: m.image ? `${SITE_URL}${m.image}` : undefined,
+        url: m.profileUrl || `${SITE_URL}/team`,
+        university: m.institution,
+        researchArea: m.researchArea,
+      })
+    ),
+    ...pgResearchers.slice(0, 4).map((m) =>
+      personMemberSchema({
+        name: m.name,
+        role: m.program || "Researcher",
+        image: m.image ? `${SITE_URL}${m.image}` : undefined,
+        url: `${SITE_URL}/team`,
+        researchArea: m.researchArea,
+      })
+    ),
+  ];
+
   return (
     <AcademicSiteLayout
       title="People & Partners"
       path="/team"
       description="Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SCSA Lab."
+      keywords="SCSA Lab team, software security researchers, COMSATS research group members, PhD students software security, international collaborators Pakistan"
+      jsonLd={teamJsonLd}
     >
       {/* PAGE INTRO HEADER */}
       <PageIntro
@@ -1237,11 +1377,35 @@ export function TeamPage() {
 }
 
 export function EventsPage() {
+  const eventsJsonLd = [
+    collectionPageSchema({
+      name: "SCSA Lab — Events & Presentations",
+      url: `${SITE_URL}/events`,
+      description:
+        "Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SCSA Research Lab.",
+      items: eventHighlights.map((e) => ({
+        name: e.title,
+        url: `${SITE_URL}/events`,
+        description: e.description || e.venue,
+      })),
+    }),
+    ...eventHighlights.slice(0, 6).map((e) =>
+      eventSchema({
+        name: e.title,
+        description: e.description || `${e.type || "Event"} — ${e.venue || "International conference"}`,
+        startDate: e.year ? `${e.year}-01-01` : undefined,
+        url: `${SITE_URL}/events`,
+      })
+    ),
+  ];
+
   return (
     <AcademicSiteLayout
       title="Events & Presentations"
       path="/events"
       description="Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SCSA Research Lab."
+      keywords="Junaid Akram keynote, software security conference, SCSA Lab events, international research workshops, Pakistan cybersecurity conference"
+      jsonLd={eventsJsonLd}
     >
       <PageIntro
         eyebrow="International Events & Keynotes"
@@ -1357,11 +1521,47 @@ export function ContactPage() {
     setFormSubmitted(true);
   };
 
+  const contactJsonLd = [
+    contactPageSchema({ url: `${SITE_URL}/contact` }),
+    personSchema(),
+    serviceSchema({
+      name: "Research Collaboration & Student Supervision",
+      description:
+        "Dr. Junaid Akram accepts collaboration requests, research proposals, and student supervision enquiries in software security, vulnerability detection, and automated testing.",
+      serviceType: "Academic Research Supervision",
+      url: `${SITE_URL}/contact`,
+    }),
+    faqSchema([
+      {
+        question: "How can I apply for FYP supervision by Dr. Junaid Akram?",
+        answer:
+          "Email junaidakram@cuilahore.edu.pk with your group members' names, registration numbers, current CGPA, selected FYP topic, and technical background.",
+      },
+      {
+        question: "What research areas does the SCSA Lab focus on?",
+        answer:
+          "The SCSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
+      },
+      {
+        question: "Is Dr. Junaid Akram an HEC-approved PhD supervisor?",
+        answer:
+          "Yes. Dr. Junaid Akram is an HEC-approved PhD supervisor at COMSATS University Islamabad, Lahore Campus.",
+      },
+      {
+        question: "What is Dr. Junaid Akram's office location?",
+        answer:
+          "H Block, Room 14, COMSATS University Islamabad, Lahore Campus, Defence Road, Off Raiwind Road, Lahore, Pakistan.",
+      },
+    ]),
+  ];
+
   return (
     <AcademicSiteLayout
       title="Contact"
       path="/contact"
       description="Contact Dr. Junaid Akram and the Source Code Security Assessment Lab at COMSATS University Islamabad, Lahore Campus."
+      keywords="contact Junaid Akram, SCSA Lab contact, COMSATS Lahore faculty contact, PhD supervision enquiry Pakistan, software security collaboration"
+      jsonLd={contactJsonLd}
     >
       <PageIntro
         eyebrow="Contact"

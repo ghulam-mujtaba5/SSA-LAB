@@ -24,6 +24,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en" suppressHydrationWarning>
         <Head>
+        {/* ── Verification tokens ───────────────────────────── */}
           {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && (
             <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
           )}
@@ -31,20 +32,36 @@ class MyDocument extends Document {
             <meta name="msvalidate.01" content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION} />
           )}
 
-          {/* DNS prefetch & preconnects for faster resource loading */}
+          {/* ── App identity ──────────────────────────────────── */}
+          <meta name="application-name" content="SCSA Lab" />
+          <meta httpEquiv="x-ua-compatible" content="IE=edge" />
+
+          {/* ── DNS prefetch & preconnects ────────────────────── */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin=""
-          />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+          <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
           <link rel="dns-prefetch" href="https://res.cloudinary.com" />
           <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
           <link rel="dns-prefetch" href="https://www.google-analytics.com" />
           <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
+          <link rel="dns-prefetch" href="https://scholar.google.com" />
+          <link rel="dns-prefetch" href="https://orcid.org" />
 
-          {/* Google Fonts — preloaded then swapped to a stylesheet so it doesn't block first render */}
+          {/* ── LCP images preloaded to avoid render-blocking ─── */}
+          <link
+            rel="preload"
+            as="image"
+            href="/academic/junaid-akram-professor.jpg"
+            type="image/jpeg"
+          />
+          <link
+            rel="preload"
+            as="image"
+            href="/academic/scsa-research-group-logo.png"
+            type="image/png"
+          />
+
+          {/* ── Google Fonts — preloaded then swapped ─────────── */}
           <link
             rel="preload"
             as="style"
@@ -56,9 +73,6 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
             media="print"
           />
-          {/* This Document is never hydrated, so a JSX onLoad prop is silently stripped (React requires a
-              function, not a string). Flip the media synchronously via inline script instead — same effect
-              as the classic loadCSS pattern: the link fetches in parallel without blocking first paint. */}
           <script
             dangerouslySetInnerHTML={{
               __html: "document.getElementById('google-fonts-stylesheet').media='all';",
@@ -71,37 +85,42 @@ class MyDocument extends Document {
             />
           </noscript>
 
-          {/* Security headers hint */}
+          {/* ── Security headers ──────────────────────────────── */}
           <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
           <meta name="referrer" content="strict-origin-when-cross-origin" />
-          {/* You can add font stylesheet here if you use Google Fonts */}
 
-          {/* Theme colors for different contexts */}
-          <meta
-            name="theme-color"
-            content="#23272F"
-            media="(prefers-color-scheme: dark)"
-          />
-          <meta
-            name="theme-color"
-            content="#EAF6FF"
-            media="(prefers-color-scheme: light)"
-          />
+          {/* ── Theme colors ──────────────────────────────────── */}
+          <meta name="theme-color" content="#173b51" />
+          <meta name="theme-color" content="#23272F" media="(prefers-color-scheme: dark)" />
+          <meta name="theme-color" content="#EAF6FF" media="(prefers-color-scheme: light)" />
 
-          {/* Apple specific meta tags */}
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="black-translucent"
-          />
-          <meta name="apple-mobile-web-app-title" content="SCSA Lab" />
+          {/* ── RSS & OpenSearch autodiscovery ────────────────── */}
           <link
-            rel="apple-touch-icon"
-            href="/academic/scsa-research-group-logo.png"
+            rel="alternate"
+            type="application/rss+xml"
+            title="SCSA Research Lab — RSS Feed"
+            href="/feed.xml"
           />
+          <link
+            rel="search"
+            type="application/opensearchdescription+xml"
+            title="SCSA Research Lab"
+            href="/opensearch.xml"
+          />
+
+          {/* ── Apple / iOS meta ──────────────────────────────── */}
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+          <meta name="apple-mobile-web-app-title" content="SCSA Lab" />
+          <link rel="apple-touch-icon" href="/academic/scsa-research-group-logo.png" />
           <link rel="manifest" href="/manifest.json" />
 
-          {/* Mobile optimization */}
+          {/* ── Windows tiles ─────────────────────────────────── */}
+          <meta name="msapplication-TileColor" content="#173b51" />
+          <meta name="msapplication-TileImage" content="/academic/scsa-research-group-logo.png" />
+          <meta name="msapplication-config" content="/browserconfig.xml" />
+
+          {/* ── Mobile ────────────────────────────────────────── */}
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
         </Head>
