@@ -485,25 +485,45 @@
   cursor: pointer;
   position: relative;
   outline: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .interactiveDomainItem:hover,
 .interactiveDomainItem:focus-visible {
-  background: rgba(2, 132, 199, 0.03);
-  box-shadow: inset 0 0 0 1px var(--academic-blue, #0284c7);
+  background: rgba(79, 70, 229, 0.04);
+  box-shadow: inset 0 0 0 1px var(--academic-blue, #4f46e5);
+}
+
+:global([data-theme="dark"]) .interactiveDomainItem:hover,
+:global([data-theme="dark"]) .interactiveDomainItem:focus-visible {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.interactiveDomainItem:active {
+  transform: scale(0.995);
 }
 
 .interactiveDomainItem:hover .domainClickBadge,
 .interactiveDomainItem:focus-visible .domainClickBadge {
-  opacity: 1;
-  transform: translateX(0);
+  background: var(--academic-blue, #4f46e5);
+  color: #ffffff;
+  border-color: var(--academic-blue, #4f46e5);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+}
+
+.interactiveDomainItem:hover .domainClickBadge svg,
+.interactiveDomainItem:focus-visible .domainClickBadge svg {
+  transform: translateX(3px);
 }
 
 .domainItemHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .domainItemHeader > span:first-child,
@@ -512,22 +532,49 @@
   font-family: "Poppins", sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  background: rgba(79, 70, 229, 0.08);
+  border-radius: 6px;
+}
+
+:global([data-theme="dark"]) .domainItemHeader > span:first-child,
+:global([data-theme="dark"]) .domainItem > span {
+  background: rgba(99, 102, 241, 0.15);
 }
 
 .domainClickBadge {
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
   font-weight: 600;
-  color: var(--academic-blue, #0284c7);
-  opacity: 0.7;
-  transform: translateX(-4px);
+  color: var(--academic-blue, #4f46e5);
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.18);
+  padding: 4px 10px;
+  border-radius: 9999px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+:global([data-theme="dark"]) .domainClickBadge {
+  color: var(--academic-cyan, #38bdf8);
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.22);
+}
+
+.domainClickBadge svg {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .domainItem h2,
 .domainItem h3 {
-  margin: 28px 0 12px;
+  margin: 20px 0 10px;
   font-family: "Poppins", sans-serif;
   font-size: 1.13rem;
+  line-height: 1.35;
 }
 
 .domainItem p {
@@ -2974,7 +3021,6 @@
 }
 
 .partnerLogoWrap img {
-  max-height: 38px;
   max-width: 100%;
   width: auto;
   height: auto;

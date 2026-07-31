@@ -100,13 +100,14 @@ export default function AcademicFypListing({ projects = [] }) {
             Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram at SCSA Lab.
           </p>
         </div>
-        <div style={{ flexShrink: 0, margin: '0 auto' }}>
+        <div className={`${styles.projectIllustrationCard} ${styles.floatAnim}`} style={{ flexShrink: 0, margin: '0 auto', padding: '16px 24px' }}>
+          <div className={styles.illustrationGlow} />
           <img 
             src="/ai-chatgpt/ai-robot-mascot.png" 
             alt="AI Assistant Mascot" 
-            width={180} 
-            height={180} 
-            style={{ objectFit: 'contain', dropShadow: '0 10px 20px rgba(0,0,0,0.1)' }} 
+            width={160} 
+            height={160} 
+            className={styles.illustrationImage}
           />
         </div>
       </div>

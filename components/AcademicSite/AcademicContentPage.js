@@ -521,8 +521,15 @@ export function ResearchPage() {
                 <span className={styles.domainClickBadge}>Explore Roadmap →</span>
               </div>
               {domain.image && (
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
-                  <Image src={domain.image} alt={domain.title} width={140} height={140} style={{ objectFit: "contain" }} />
+                <div className={styles.illustrationCard}>
+                  <div className={styles.illustrationGlow} />
+                  <Image
+                    src={domain.image}
+                    alt={domain.title}
+                    width={130}
+                    height={130}
+                    className={styles.illustrationImage}
+                  />
                 </div>
               )}
               <h2>{domain.title}</h2>
@@ -601,14 +608,17 @@ export function ResearchPage() {
                   ) : null}
                 </div>
                 {project.image && (
-                  <AcademicImageLightbox
-                    src={project.image}
-                    alt={`${project.title} research visual`}
-                    width={640}
-                    height={420}
-                    caption={project.title}
-                    className={styles.projectDetailImage}
-                  />
+                  <div className={styles.projectIllustrationCard}>
+                    <div className={styles.illustrationGlow} />
+                    <AcademicImageLightbox
+                      src={project.image}
+                      alt={`${project.title} research visual`}
+                      width={320}
+                      height={320}
+                      caption={project.title}
+                      className={styles.illustrationImage}
+                    />
+                  </div>
                 )}
               </article>
             );

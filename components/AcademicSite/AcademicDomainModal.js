@@ -65,8 +65,9 @@ export default function AcademicDomainModal({ domain, onClose }) {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
               {domain.image && (
-                <div style={{ flexShrink: 0 }}>
-                  <img src={domain.image} alt={domain.title} width={100} height={100} style={{ objectFit: "contain" }} />
+                <div className={styles.illustrationCard} style={{ margin: 0, padding: "12px", width: "90px", height: "90px" }}>
+                  <div className={styles.illustrationGlow} />
+                  <img src={domain.image} alt={domain.title} width={70} height={70} className={styles.illustrationImage} />
                 </div>
               )}
               <h2 id="modal-domain-title" className={styles.modalTitle}>

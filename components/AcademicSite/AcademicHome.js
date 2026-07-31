@@ -114,9 +114,9 @@ export default function AcademicHome() {
 
       {/* 2. Verified Research Impact Statistics Bar */}
       <section className={styles.impactStrip} aria-label="Research Impact Statistics">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '40px', flexWrap: 'wrap', maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ flexShrink: 0, padding: '10px' }}>
-            <Image src="/ai-chatgpt/server-stack.png" alt="Data Infrastructure" width={110} height={110} style={{ objectFit: 'contain' }} />
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px', flexWrap: 'wrap', maxWidth: '1200px', margin: '0 auto' }}>
+          <div className={`${styles.impactBadgeWrapper} ${styles.floatAnim}`}>
+            <Image src="/ai-chatgpt/server-stack.png" alt="Data Infrastructure" width={100} height={100} className={styles.illustrationImage} />
           </div>
           <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", flex: 1 }}>
             {impactStats.map((stat) => (
@@ -159,11 +159,20 @@ export default function AcademicHome() {
             >
               <div className={styles.domainItemHeader}>
                 <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
-                <span className={styles.domainClickBadge}>Explore Roadmap →</span>
+                <span className={styles.domainClickBadge}>
+                  Explore Roadmap <ArrowRight size={13} />
+                </span>
               </div>
               {domain.image && (
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
-                  <Image src={domain.image} alt={domain.title} width={120} height={120} style={{ objectFit: "contain" }} />
+                <div className={styles.illustrationCard}>
+                  <div className={styles.illustrationGlow} />
+                  <Image
+                    src={domain.image}
+                    alt={domain.title}
+                    width={130}
+                    height={130}
+                    className={styles.illustrationImage}
+                  />
                 </div>
               )}
               <h3>{domain.title}</h3>
