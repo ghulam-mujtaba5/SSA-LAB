@@ -79,8 +79,8 @@ export default function AcademicSiteLayout({
                 <Image
                   src="/academic/scsa-research-group-logo.png"
                   alt="SCSA Research Group"
-                  width={54}
-                  height={36}
+                  width={90}
+                  height={60}
                   priority
                 />
               </span>
