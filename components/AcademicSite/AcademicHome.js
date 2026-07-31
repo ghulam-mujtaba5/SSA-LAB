@@ -114,14 +114,19 @@ export default function AcademicHome() {
 
       {/* 2. Verified Research Impact Statistics Bar */}
       <section className={styles.impactStrip} aria-label="Research Impact Statistics">
-        <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-          {impactStats.map((stat) => (
-            <div key={stat.label} className={styles.impactItem}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-              <small>{stat.detail}</small>
-            </div>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '40px', flexWrap: 'wrap', maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ flexShrink: 0, padding: '10px' }}>
+            <Image src="/ai-chatgpt/server-stack.png" alt="Data Infrastructure" width={110} height={110} style={{ objectFit: 'contain' }} />
+          </div>
+          <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", flex: 1 }}>
+            {impactStats.map((stat) => (
+              <div key={stat.label} className={styles.impactItem}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+                <small>{stat.detail}</small>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -156,6 +161,11 @@ export default function AcademicHome() {
                 <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
                 <span className={styles.domainClickBadge}>Explore Roadmap →</span>
               </div>
+              {domain.image && (
+                <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
+                  <Image src={domain.image} alt={domain.title} width={120} height={120} style={{ objectFit: "contain" }} />
+                </div>
+              )}
               <h3>{domain.title}</h3>
               <p>{domain.description}</p>
             </article>

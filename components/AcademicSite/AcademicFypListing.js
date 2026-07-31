@@ -92,13 +92,22 @@ export default function AcademicFypListing({ projects = [] }) {
 
   return (
     <section className={`${styles.section} ${styles.fypListingSection}`}>
-      <div className={styles.sectionHeading}>
-        <div>
+      <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+        <div style={{ flex: '1 1 min(100%, 600px)' }}>
           <p className={styles.eyebrow}>Supervision Directory</p>
           <h2>Research Supervision & Capstone Projects</h2>
           <p className={styles.sectionLead}>
             Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram at SCSA Lab.
           </p>
+        </div>
+        <div style={{ flexShrink: 0, margin: '0 auto' }}>
+          <img 
+            src="/ai-chatgpt/ai-robot-mascot.png" 
+            alt="AI Assistant Mascot" 
+            width={180} 
+            height={180} 
+            style={{ objectFit: 'contain', dropShadow: '0 10px 20px rgba(0,0,0,0.1)' }} 
+          />
         </div>
       </div>
 

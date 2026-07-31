@@ -63,9 +63,16 @@ export default function AcademicDomainModal({ domain, onClose }) {
               </span>
               <span className={styles.domainTag}>SCSA Lab Research Domain</span>
             </div>
-            <h2 id="modal-domain-title" className={styles.modalTitle}>
-              {domain.title}
-            </h2>
+            <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+              {domain.image && (
+                <div style={{ flexShrink: 0 }}>
+                  <img src={domain.image} alt={domain.title} width={100} height={100} style={{ objectFit: "contain" }} />
+                </div>
+              )}
+              <h2 id="modal-domain-title" className={styles.modalTitle}>
+                {domain.title}
+              </h2>
+            </div>
           </div>
           <button
             type="button"

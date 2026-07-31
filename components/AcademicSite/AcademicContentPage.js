@@ -520,6 +520,11 @@ export function ResearchPage() {
                 <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
                 <span className={styles.domainClickBadge}>Explore Roadmap →</span>
               </div>
+              {domain.image && (
+                <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
+                  <Image src={domain.image} alt={domain.title} width={140} height={140} style={{ objectFit: "contain" }} />
+                </div>
+              )}
               <h2>{domain.title}</h2>
               <p>{domain.description}</p>
             </article>
