@@ -54,12 +54,27 @@ import {
 import { defaultFypProjects } from "../../data/fypProjects";
 import styles from "./AcademicSite.module.css";
 
-function PageIntro({ eyebrow, title, lead }) {
+function PageIntro({ eyebrow, title, lead, showLogo = true }) {
   return (
-    <section className={styles.pageIntro}>
-      <p className={styles.eyebrow}>{eyebrow}</p>
-      <h1>{title}</h1>
-      <p>{lead}</p>
+    <section className={styles.pageIntro} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+      <div style={{ flex: '1 1 min(100%, 580px)' }}>
+        <p className={styles.eyebrow}>{eyebrow}</p>
+        <h1>{title}</h1>
+        <p>{lead}</p>
+      </div>
+      {showLogo && (
+        <div className={`${styles.projectIllustrationCard} ${styles.floatAnim}`} style={{ flexShrink: 0, margin: '0 auto', padding: '16px 24px' }}>
+          <div className={styles.illustrationGlow} />
+          <Image
+            src="/academic/scsa-research-group-logo.png"
+            alt="SCSA Research Group Official Branding Logo"
+            width={160}
+            height={106}
+            style={{ objectFit: 'contain' }}
+            priority
+          />
+        </div>
+      )}
     </section>
   );
 }
@@ -518,7 +533,9 @@ export function ResearchPage() {
             >
               <div className={styles.domainItemHeader}>
                 <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
-                <span className={styles.domainClickBadge}>Explore Roadmap →</span>
+                <span className={styles.domainClickBadge}>
+                  Explore Roadmap <ArrowRight size={13} />
+                </span>
               </div>
               {domain.image && (
                 <div className={styles.illustrationCard}>

@@ -93,6 +93,16 @@ export default function AcademicHome() {
           </div>
 
           <div className={styles.heroPortrait}>
+            <div className={styles.heroLogoBadge}>
+              <Image
+                src="/academic/scsa-research-group-logo.png"
+                alt="SCSA Research Group Official Emblem"
+                width={120}
+                height={80}
+                style={{ objectFit: "contain" }}
+                priority
+              />
+            </div>
             <AcademicImageLightbox
               src="/academic/junaid-akram-professor.jpg"
               alt="Dr. Junaid Akram"

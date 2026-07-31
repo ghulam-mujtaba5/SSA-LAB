@@ -56,18 +56,20 @@ export default function AcademicDomainModal({ domain, onClose }) {
       >
         {/* Header */}
         <div className={styles.modalHeader}>
-          <div>
+          <div className={styles.headerMain}>
             <div className={styles.headerMeta}>
               <span className={styles.numberBadge}>
                 {domain.number || domain.id}
               </span>
-              <span className={styles.domainTag}>SCSA Lab Research Domain</span>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <img src="/academic/scsa-research-group-logo.png" alt="SCSA Emblem" width={36} height={24} style={{ objectFit: 'contain' }} />
+                <span className={styles.domainTag}>SCSA Lab Research Domain</span>
+              </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <div className={styles.headerTitleGroup}>
               {domain.image && (
-                <div className={styles.illustrationCard} style={{ margin: 0, padding: "12px", width: "90px", height: "90px" }}>
-                  <div className={styles.illustrationGlow} />
-                  <img src={domain.image} alt={domain.title} width={70} height={70} className={styles.illustrationImage} />
+                <div className={styles.headerDomainImage}>
+                  <img src={domain.image} alt={domain.title} width={70} height={70} />
                 </div>
               )}
               <h2 id="modal-domain-title" className={styles.modalTitle}>
@@ -227,7 +229,7 @@ export default function AcademicDomainModal({ domain, onClose }) {
                       <div key={i} className={styles.labWorkItem}>
                         <CheckCircle2
                           size={16}
-                          style={{ color: "var(--academic-blue, #0284c7)" }}
+                          className={styles.checkIcon}
                         />
                         <span>{item}</span>
                       </div>
@@ -300,8 +302,7 @@ export default function AcademicDomainModal({ domain, onClose }) {
         <div className={styles.modalFooter}>
           <button
             type="button"
-            className={styles.closeButton}
-            style={{ width: "auto", padding: "8px 16px", borderRadius: "8px" }}
+            className={styles.footerCloseBtn}
             onClick={onClose}
           >
             Close Panel
