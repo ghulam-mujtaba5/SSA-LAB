@@ -66,7 +66,7 @@ export const researchDomains = [
   {
     id: "cyber-security",
     number: "01",
-    image: "/ai-chatgpt/cyber-security-shield.png",
+    graphicKey: "cyber-security",
     title: "Cyber Security",
     description:
       "Source-level assessment methods for identifying, understanding, and mitigating software vulnerabilities.",
@@ -150,7 +150,7 @@ export const researchDomains = [
   {
     id: "vulnerability-detection",
     number: "02",
-    image: "/ai-chatgpt/vulnerability-chip.png",
+    graphicKey: "vulnerability-detection",
     title: "Vulnerability Detection",
     description:
       "Scalable techniques and tools that trace vulnerable code through patches, fingerprints, and code similarity.",
@@ -241,7 +241,7 @@ export const researchDomains = [
   {
     id: "software-testing",
     number: "03",
-    image: "/ai-chatgpt/software-testing-checklist.png",
+    graphicKey: "software-testing",
     title: "Software Testing",
     description:
       "Search-based testing, automated test-data generation, regression testing, and test-smell detection.",
@@ -326,7 +326,7 @@ export const researchDomains = [
   {
     id: "malware-detection",
     number: "04",
-    image: "/ai-chatgpt/malware-ai-brain.png",
+    graphicKey: "malware-analysis",
     title: "Malware Detection",
     description:
       "Static and learning-based analysis of Android and cross-architecture malware at source-code level.",
@@ -648,7 +648,7 @@ export const researchProjects = [
       "A clone-detection approach for identifying identifier-renaming and string-encryption obfuscation in Android source code, evaluated across obfuscated and non-obfuscated datasets.",
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
-    image: "/ai-chatgpt/bug-magnifier-v1.png",
+    graphicKey: "malware-analysis",
     details: {
       problem: "Android malware authors use identifier renaming, control flow flattening, and string encryption to evade signature scanners.",
       approach: "Normalized AST token sequences and extracted invariant structural features immune to surface-level identifier mutations.",
@@ -662,7 +662,7 @@ export const researchProjects = [
       "A file-level platform built from a fingerprint index of 2,931 vulnerable files and evaluated across 7 TB of C/C++ source code from 152,823 open-source projects.",
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
-    image: "/ai-chatgpt/laptop-code.png",
+    graphicKey: "vulnerability-detection",
     details: {
       problem: "Existing static analysis tools struggle to scale to multi-terabyte code repositories when tracking recurring unpatched vulnerabilities.",
       approach: "Indexed source-code syntax trees into high-dimensional hash fingerprints stored in a distributed inverted index for fast similarity lookup.",
@@ -676,7 +676,7 @@ export const researchProjects = [
       "A scalable, token-based and language-independent tool for detecting vulnerable and unpatched code fragments at function-level granularity.",
     collaboration:
       "Key Laboratory of Information System Security, School of Software, Tsinghua University.",
-    image: "/ai-chatgpt/code-clone-sync.png",
+    graphicKey: "code-clone",
     details: {
       problem: "Function-level vulnerabilities (e.g. buffer overflows in C/C++) are easily copied across software projects without triggering file-level matches.",
       approach: "Extracted normalized function token streams and calculated patch diff signatures to identify vulnerable code variants.",

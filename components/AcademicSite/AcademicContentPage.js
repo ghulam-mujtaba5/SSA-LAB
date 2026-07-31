@@ -538,13 +538,13 @@ export function ResearchPage() {
                 </span>
               </div>
               {domain.image && (
-                <div className={styles.illustrationCard}>
-                  <div className={styles.illustrationGlow} />
+                <div className={styles.cornerCardIllustration}>
+                  <div className={styles.cornerBadgeDot} />
                   <Image
                     src={domain.image}
                     alt={domain.title}
-                    width={130}
-                    height={130}
+                    width={135}
+                    height={135}
                     className={styles.illustrationImage}
                   />
                 </div>
@@ -625,8 +625,8 @@ export function ResearchPage() {
                   ) : null}
                 </div>
                 {project.image && (
-                  <div className={styles.projectIllustrationCard}>
-                    <div className={styles.illustrationGlow} />
+                  <div className={styles.cornerCardIllustration} style={{ margin: 0, padding: "18px" }}>
+                    <div className={styles.cornerBadgeDot} />
                     <AcademicImageLightbox
                       src={project.image}
                       alt={`${project.title} research visual`}

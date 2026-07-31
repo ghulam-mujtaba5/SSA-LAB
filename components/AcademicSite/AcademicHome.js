@@ -174,13 +174,13 @@ export default function AcademicHome() {
                 </span>
               </div>
               {domain.image && (
-                <div className={styles.illustrationCard}>
-                  <div className={styles.illustrationGlow} />
+                <div className={styles.cornerCardIllustration}>
+                  <div className={styles.cornerBadgeDot} />
                   <Image
                     src={domain.image}
                     alt={domain.title}
-                    width={130}
-                    height={130}
+                    width={135}
+                    height={135}
                     className={styles.illustrationImage}
                   />
                 </div>
