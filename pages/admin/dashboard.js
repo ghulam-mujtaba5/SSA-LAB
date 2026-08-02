@@ -198,6 +198,7 @@ const AdminDashboard = () => {
   const [lastRefreshed, setLastRefreshed] = useState(null);
 
   const greeting = useMemo(() => getGreeting(), []);
+  const GreetingIcon = greeting.Icon;
   const userName = session?.user?.name || "Admin";
 
   const fetchDashboard = async () => {
@@ -422,7 +423,7 @@ const AdminDashboard = () => {
           <div className={styles.headerContent}>
             <div className={styles.headerText}>
               <div className={styles.greetingRow}>
-                <span className={styles.greetingIcon}><greeting.Icon /></span>
+                <span className={styles.greetingIcon}>{GreetingIcon ? <GreetingIcon /> : null}</span>
                 <h1 className={styles.headerTitle}>
                   {greeting.text}, {userName}
                 </h1>
