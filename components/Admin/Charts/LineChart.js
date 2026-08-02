@@ -1,5 +1,5 @@
-// components/Charts/LineChart.js
-import { Line } from "react-chartjs-2";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +11,10 @@ import {
   Legend,
 } from "chart.js";
 
+const Line = dynamic(() => import("react-chartjs-2").then((m) => m.Line), {
+  ssr: false,
+});
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -18,10 +22,16 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 const LineChart = ({ data, title }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // Support two input shapes:
   // 1) Array of { date, articleViews, projectViews }
   // 2) Prebuilt Chart.js data object { labels, datasets }
@@ -64,6 +74,8 @@ const LineChart = ({ data, title }) => {
       },
     },
   };
+
+  if (!isMounted) return null;
 
   return <Line options={options} data={chartData} />;
 };

@@ -143,6 +143,17 @@ const Icons = {
       <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
     </svg>
   ),
+  Plus: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
+  ),
+  Mail: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+      <polyline points="22,6 12,13 2,6"/>
+    </svg>
+  ),
 };
 
 // Time-of-day greeting helper
@@ -287,21 +298,20 @@ const AdminDashboard = () => {
     },
   ], [stats]);
 
-  // Quick actions configuration
   const quickActions = [
     {
-      label: "New Article",
-      description: "Write and publish content",
-      icon: Icons.Pen,
-      href: "/admin/articles/new",
-      variant: "primary",
-    },
-    {
       label: "New Project",
-      description: "Showcase your work",
-      icon: Icons.Projects,
+      description: "Create project portfolio item",
+      icon: Icons.Plus,
       href: "/admin/projects/new",
       variant: "success",
+    },
+    {
+      label: "Enquiries & Messages",
+      description: "View visitor submissions & contacts",
+      icon: Icons.Mail,
+      href: "/admin/enquiries",
+      variant: "primary",
     },
     {
       label: "Media Library",
@@ -480,56 +490,56 @@ const AdminDashboard = () => {
               {/* KPI Cards Grid */}
               <section className={styles.kpiSection}>
                 <div className={styles.kpiGrid}>
-                  {kpiCards.map((card) => (
-                    <motion.div
-                      key={card.id}
-                      variants={itemVariants}
-                      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                    >
-                      <Link
-                        href={card.href}
-                        className={`${styles.kpiCard} ${styles[`kpiCard${card.variant.charAt(0).toUpperCase() + card.variant.slice(1)}`]}`}
+                  {kpiCards.map((card) => {
+                    const CardIcon = card.icon;
+                    return (
+                      <motion.div
+                        key={card.id}
+                        variants={itemVariants}
+                        whileHover={{ y: -4, transition: { duration: 0.2 } }}
                       >
-                        <div className={styles.kpiHeader}>
-                          <div className={styles.kpiIconWrapper}>
-                            <card.icon />
-                          </div>
-                          <div className={styles.kpiProgress}>
-                            <ProgressRing 
-                              value={card.progress} 
-                              size={42} 
-                              strokeWidth={3}
-                              color={getVariantColor(card.variant)}
-                            />
-                          </div>
-                        </div>
-                        
-                        <div className={styles.kpiBody}>
-                          <span className={styles.kpiTitle}>{card.title}</span>
-                          <span className={styles.kpiValue}>
-                            {Number(card.value).toLocaleString()}
-                          </span>
-                          
-                          <div className={styles.kpiFooter}>
-                            <div className={`${styles.kpiTrend} ${card.trend.direction === 'up' ? styles.trendUp : styles.trendDown}`}>
-                              {card.trend.direction === 'up' ? <Icons.TrendUp /> : <Icons.TrendDown />}
-                              <span>{card.trend.value}%</span>
+                        <Link
+                          href={card.href}
+                          className={`${styles.kpiCard} ${styles[`kpiCard${card.variant.charAt(0).toUpperCase() + card.variant.slice(1)}`]}`}
+                        >
+                          <div className={styles.kpiHeader}>
+                            <div className={styles.kpiIconWrapper}>
+                              {CardIcon ? <CardIcon /> : null}
                             </div>
-                            <div className={styles.kpiSparkline}>
-                              <Sparkline 
-                                data={card.sparklineData} 
+                            <div className={styles.kpiProgress}>
+                              <ProgressRing 
+                                value={card.progress} 
+                                size={42} 
+                                strokeWidth={3}
                                 color={getVariantColor(card.variant)}
-                                height={28}
                               />
                             </div>
                           </div>
-                        </div>
-                        <span className={styles.kpiViewLink}>
-                          View details <Icons.ArrowRight />
-                        </span>
-                      </Link>
-                    </motion.div>
-                  ))}
+                          
+                          <div className={styles.kpiBody}>
+                            <span className={styles.kpiTitle}>{card.title}</span>
+                            <span className={styles.kpiValue}>
+                              {Number(card.value).toLocaleString()}
+                            </span>
+                            
+                            <div className={styles.kpiFooter}>
+                              <div className={`${styles.kpiTrend} ${card.trend.direction === 'up' ? styles.trendUp : styles.trendDown}`}>
+                                {card.trend.direction === 'up' ? <Icons.TrendUp /> : <Icons.TrendDown />}
+                                <span>{card.trend.value}%</span>
+                              </div>
+                              <div className={styles.kpiSparkline}>
+                                <Sparkline 
+                                  data={card.sparklineData} 
+                                  color={getVariantColor(card.variant)}
+                                  height={28}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </section>
 
@@ -543,18 +553,21 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className={styles.quickActionsGrid}>
-                  {quickActions.map((action) => (
-                    <Link key={action.label} className={`${styles.quickActionItem} ${styles[`qa${action.variant.charAt(0).toUpperCase() + action.variant.slice(1)}`] || ''}`} href={action.href}>
-                      <div className={styles.quickActionIcon}>
-                        <action.icon />
-                      </div>
-                      <div className={styles.quickActionText}>
-                        <span className={styles.quickActionLabel}>{action.label}</span>
-                        <span className={styles.quickActionDesc}>{action.description}</span>
-                      </div>
-                      <span className={styles.quickActionArrow}><Icons.ArrowRight /></span>
-                    </Link>
-                  ))}
+                  {quickActions.map((action) => {
+                    const ActionIcon = action.icon;
+                    return (
+                      <Link key={action.label} className={`${styles.quickActionItem} ${styles[`qa${action.variant.charAt(0).toUpperCase() + action.variant.slice(1)}`] || ''}`} href={action.href}>
+                        <div className={styles.quickActionIcon}>
+                          {ActionIcon ? <ActionIcon /> : null}
+                        </div>
+                        <div className={styles.quickActionText}>
+                          <span className={styles.quickActionLabel}>{action.label}</span>
+                          <span className={styles.quickActionDesc}>{action.description}</span>
+                        </div>
+                        <span className={styles.quickActionArrow}><Icons.ArrowRight /></span>
+                      </Link>
+                    );
+                  })}
                 </div>
               </motion.section>
 

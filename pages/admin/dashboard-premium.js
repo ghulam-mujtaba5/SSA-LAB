@@ -383,49 +383,52 @@ const AdminDashboard = () => {
               {/* KPI Cards Grid */}
               <section className={styles.kpiSection}>
                 <div className={styles.kpiGrid}>
-                  {kpiCards.map((card) => (
-                    <motion.div
-                      key={card.id}
-                      className={`${styles.kpiCard} ${styles[`kpiCard${card.variant.charAt(0).toUpperCase() + card.variant.slice(1)}`]}`}
-                      variants={itemVariants}
-                      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                    >
-                      <div className={styles.kpiHeader}>
-                        <div className={styles.kpiIconWrapper}>
-                          <card.icon />
-                        </div>
-                        <div className={styles.kpiProgress}>
-                          <ProgressRing 
-                            value={card.progress} 
-                            size={42} 
-                            strokeWidth={3}
-                            color={getVariantColor(card.variant)}
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className={styles.kpiBody}>
-                        <span className={styles.kpiTitle}>{card.title}</span>
-                        <span className={styles.kpiValue}>
-                          {Number(card.value).toLocaleString()}
-                        </span>
-                        
-                        <div className={styles.kpiFooter}>
-                          <div className={`${styles.kpiTrend} ${card.trend.direction === 'up' ? styles.trendUp : styles.trendDown}`}>
-                            {card.trend.direction === 'up' ? <Icons.TrendUp /> : <Icons.TrendDown />}
-                            <span>{card.trend.value}%</span>
+                  {kpiCards.map((card) => {
+                    const CardIcon = card.icon;
+                    return (
+                      <motion.div
+                        key={card.id}
+                        className={`${styles.kpiCard} ${styles[`kpiCard${card.variant.charAt(0).toUpperCase() + card.variant.slice(1)}`]}`}
+                        variants={itemVariants}
+                        whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                      >
+                        <div className={styles.kpiHeader}>
+                          <div className={styles.kpiIconWrapper}>
+                            {CardIcon ? <CardIcon /> : null}
                           </div>
-                          <div className={styles.kpiSparkline}>
-                            <Sparkline 
-                              data={card.sparklineData} 
+                          <div className={styles.kpiProgress}>
+                            <ProgressRing 
+                              value={card.progress} 
+                              size={42} 
+                              strokeWidth={3}
                               color={getVariantColor(card.variant)}
-                              height={28}
                             />
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                        
+                        <div className={styles.kpiBody}>
+                          <span className={styles.kpiTitle}>{card.title}</span>
+                          <span className={styles.kpiValue}>
+                            {Number(card.value).toLocaleString()}
+                          </span>
+                          
+                          <div className={styles.kpiFooter}>
+                            <div className={`${styles.kpiTrend} ${card.trend.direction === 'up' ? styles.trendUp : styles.trendDown}`}>
+                              {card.trend.direction === 'up' ? <Icons.TrendUp /> : <Icons.TrendDown />}
+                              <span>{card.trend.value}%</span>
+                            </div>
+                            <div className={styles.kpiSparkline}>
+                              <Sparkline 
+                                data={card.sparklineData} 
+                                color={getVariantColor(card.variant)}
+                                height={28}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </section>
 

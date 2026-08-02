@@ -1507,6 +1507,8 @@ export function EventsPage() {
 
 export function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -1516,9 +1518,30 @@ export function ContactPage() {
     message: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to submit enquiry. Please try again.");
+      }
+
+      setFormSubmitted(true);
+    } catch (err) {
+      setSubmitError(err.message || "Something went wrong. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactJsonLd = [
@@ -1644,23 +1667,35 @@ export function ContactPage() {
         {formSubmitted ? (
           <div
             style={{
-              padding: "24px",
+              padding: "28px",
               background: "rgba(16,185,129,0.1)",
               border: "1px solid rgba(16,185,129,0.3)",
-              borderRadius: "8px",
+              borderRadius: "12px",
               maxWidth: "680px",
             }}
           >
-            <h3 style={{ color: "#10b981", margin: "0 0 8px" }}>Enquiry Prepared</h3>
-            <p>
-              Thank you, <strong>{formData.name}</strong>. Your enquiry details have been formatted. Please also feel free to email directly to{" "}
-              <a href={`mailto:${academicProfile.emails[0]}`}>{academicProfile.emails[0]}</a> for immediate follow-up.
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+              <CheckCircle2 size={24} style={{ color: "#10b981" }} />
+              <h3 style={{ color: "#10b981", margin: 0, fontSize: "1.2rem" }}>Enquiry Submitted Successfully</h3>
+            </div>
+            <p style={{ marginTop: "12px", lineHeight: "1.6" }}>
+              Thank you, <strong>{formData.name}</strong>. Your enquiry has been received and saved into our research database. An email notification with your details has also been dispatched to the lab director at <strong>ssalab0101@gmail.com</strong>.
             </p>
             <button
               type="button"
               className={styles.secondaryButton}
               style={{ marginTop: "16px" }}
-              onClick={() => setFormSubmitted(false)}
+              onClick={() => {
+                setFormSubmitted(false);
+                setFormData({
+                  name: "",
+                  email: "",
+                  degree: "",
+                  enquiryType: "FYP Supervision",
+                  topic: "",
+                  message: "",
+                });
+              }}
             >
               Send another enquiry
             </button>
@@ -1678,6 +1713,21 @@ export function ContactPage() {
               border: "1px solid var(--academic-border, #e5e7eb)",
             }}
           >
+            {submitError && (
+              <div
+                style={{
+                  padding: "12px 16px",
+                  background: "rgba(239, 68, 68, 0.1)",
+                  border: "1px solid rgba(239, 68, 68, 0.3)",
+                  borderRadius: "8px",
+                  color: "#ef4444",
+                  fontSize: "0.9rem",
+                }}
+              >
+                {submitError}
+              </div>
+            )}
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               <div>
                 <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="name">
@@ -1687,6 +1737,7 @@ export function ContactPage() {
                   id="name"
                   type="text"
                   required
+                  disabled={isSubmitting}
                   style={{
                     width: "100%",
                     padding: "10px 14px",
@@ -1707,6 +1758,7 @@ export function ContactPage() {
                   id="email"
                   type="email"
                   required
+                  disabled={isSubmitting}
                   style={{
                     width: "100%",
                     padding: "10px 14px",
@@ -1729,6 +1781,7 @@ export function ContactPage() {
                 <input
                   id="degree"
                   type="text"
+                  disabled={isSubmitting}
                   placeholder="e.g. BS Software Engineering (FA22)"
                   style={{
                     width: "100%",
@@ -1748,6 +1801,7 @@ export function ContactPage() {
                 </label>
                 <select
                   id="enquiryType"
+                  disabled={isSubmitting}
                   style={{
                     width: "100%",
                     padding: "10px 14px",
@@ -1774,6 +1828,7 @@ export function ContactPage() {
               <input
                 id="topic"
                 type="text"
+                disabled={isSubmitting}
                 placeholder="e.g. Source code vulnerability detection / MegiLance"
                 style={{
                   width: "100%",
@@ -1795,6 +1850,7 @@ export function ContactPage() {
               <textarea
                 id="message"
                 required
+                disabled={isSubmitting}
                 rows={4}
                 placeholder="Describe your background, proposed research idea, or supervision query..."
                 style={{
@@ -1810,8 +1866,8 @@ export function ContactPage() {
               />
             </div>
 
-            <button type="submit" className={styles.primaryButton} style={{ justifySelf: "start" }}>
-              Submit Enquiry <Send size={15} />
+            <button type="submit" disabled={isSubmitting} className={styles.primaryButton} style={{ justifySelf: "start", opacity: isSubmitting ? 0.7 : 1 }}>
+              {isSubmitting ? "Sending Enquiry..." : "Submit Enquiry"} <Send size={15} />
             </button>
           </form>
         )}

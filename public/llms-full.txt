@@ -2,44 +2,54 @@
 
 This site presents the verified academic profile, research, publications, collaborators, supervised student projects, and contact details of Dr. Junaid Akram.
 
-## Academic Background
+## Academic Background & Career
 
-- Assistant Professor at COMSATS University Islamabad, Lahore Campus
-- HEC-approved PhD Supervisor
-- Postdoctoral research at SnT, University of Luxembourg
-- PhD from Tsinghua University
+- **Assistant Professor**: COMSATS University Islamabad, Lahore Campus (March 2023 — Present)
+- **HEC-approved PhD Supervisor**: Higher Education Commission of Pakistan
+- **Postdoctoral Research Associate**: SnT, University of Luxembourg (May 2021 — May 2023)
+- **Visiting Researcher**: SES, Luxembourg — Adaptive Resource Control project (2021 — 2023)
+- **Assistant Professor**: Xiamen University Malaysia (August 2020 — July 2021)
+- **Doctor of Philosophy (PhD) in Software Engineering**: Tsinghua University (2015 — 2020)
+- **Master of Philosophy (MPhil)**: Zhejiang University of Technology (2012 — 2015)
 
-## Research Areas
+## Primary Research Domains
 
-Dr. Junaid Akram works on source-code security assessment, software vulnerability detection, code clone analysis, Android and cross-architecture malware detection, software testing, automated test-data generation, software evolution, maintenance, and reuse.
+Dr. Junaid Akram leads the Source Code Security Assessment (SCSA) Lab. The lab works across six major research vectors:
+1. **Cyber Security**: Source-level assessment methods for identifying, understanding, and mitigating software vulnerabilities.
+2. **Software Vulnerability Detection**: Deep-learning and program-analysis approaches for vulnerability discovery in C/C++, Java, and Python.
+3. **Software Testing**: Automated test-data generation, test smell detection, log-based test slicing, and regression testing.
+4. **Malware Detection**: Static and dynamic detection of obfuscated Android and cross-architecture malware.
+5. **Code Clone Detection**: Large-scale clone search and refactoring analysis across massive code repositories.
+6. **Software Evolution & Maintenance**: Analyzing code reuse, patch synthesis, and long-term security debt.
 
-## Selected Research Tools and Projects
+## Selected Research Tools and Systems
 
-- Automated Test Data Generation for the ARC System
-- Test Smell Detection in the ARC System
-- Log-Based Test Case Slicing
-- Obfuscated Code Detection in Android Applications
-- SQVDT — Source Code Vulnerability Detection
-- VCIPR — Function-level Vulnerability Detection
-- DroidSD — Android Similarity Detection
-- IBFET — Large-scale Code Clone Detection
+- **SQVDT**: Source Code Vulnerability Detection Tool for large open-source repositories.
+- **VCIPR**: Function-level Vulnerability Detection using graph neural representations.
+- **DroidSD**: Android Application Similarity and Obfuscated Malware Detection.
+- **IBFET**: Large-scale Code Clone Analysis for massive software ecosystems (e.g., Apache Hadoop).
+- **ARC Test Suite**: Automated Test Data Generation and Test-Smell Detection for satellite control software at SES Luxembourg.
 
-## Supervision
+## Supervision Directory
 
-The Supervision page combines verified supervised projects and internship outcomes from the professor's previous website with current supervision topics published by the COMSATS Lahore Computer Science department.
+The SCSA Lab actively supervises BS, MS, and PhD researchers in software engineering and computer science at COMSATS University Islamabad, Lahore Campus. Supervised topics include:
+- Automated Security Patch Synthesis using Large Language Models
+- Static Analysis of Infrastructure-as-Code (IaC) Misconfigurations
+- Cross-Language Vulnerability Mapping
+- Deep Learning for Smart Contract Vulnerability Auditing
 
-## Links
+## Contact & Office Details
 
-- Research: /research
-- Publications: /publications
-- Supervision: /alumni
-- Team: /team
-- Events: /events
-- Contact: /contact
+- **Email**: junaidakram@cuilahore.edu.pk
+- **Lab Email**: scsa.laab@gmail.com
+- **Office**: H Block, Room 14, COMSATS University Islamabad, Lahore Campus
+- **University Exchange**: (042) 111-001-007
 
-## External Profiles
+## External Links & Verified Profiles
 
-- LinkedIn: https://www.linkedin.com/in/junaidakram/
-- ResearchGate: https://www.researchgate.net/profile/Junaid-Akram
-- ORCID: https://orcid.org/0000-0003-1752-6124
-- COMSATS profile: https://lahore.comsats.edu.pk/employees/1333
+- **Website**: https://sites.google.com/view/temporaryr
+- **LinkedIn**: https://www.linkedin.com/in/junaidakram/
+- **ResearchGate**: https://www.researchgate.net/profile/Junaid-Akram
+- **ORCID**: https://orcid.org/0000-0003-1752-6124
+- **Google Scholar**: https://scholar.google.com/citations?user=JunaidAkram
+- **Official COMSATS Profile**: https://lahore.comsats.edu.pk/employees/1333

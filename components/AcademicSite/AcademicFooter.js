@@ -62,6 +62,8 @@ export default function AcademicFooter() {
         initial={reduceMotion ? false : { opacity: 0, y: 24 }}
         animate={isInView ? { opacity: 1, y: 0 } : undefined}
         transition={{ duration: 0.6, ease: EASE }}
+        itemScope
+        itemType="https://schema.org/ResearchOrganization"
       >
         <div className={styles.content}>
           {/* Brand Identity Column */}
@@ -73,16 +75,17 @@ export default function AcademicFooter() {
                 width={90}
                 height={60}
                 className={styles.logoImage}
+                itemProp="logo"
               />
               <div className={styles.brandTitles}>
-                <strong>{academicProfile.labShort}</strong>
-                <span>{academicProfile.name}</span>
+                <strong itemProp="name">{academicProfile.labShort}</strong>
+                <span itemProp="founder">{academicProfile.name}</span>
               </div>
             </Link>
-            <p className={styles.tagline}>
+            <p className={styles.tagline} itemProp="description">
               Source code security assessment, vulnerability detection, automated software testing, and malware analysis at COMSATS University Islamabad, Lahore Campus.
             </p>
-            <div className={styles.institutionBadge}>
+            <div className={styles.institutionBadge} itemProp="parentOrganization">
               <GraduationCap size={15} /> {academicProfile.institution}
             </div>
           </div>
@@ -128,47 +131,51 @@ export default function AcademicFooter() {
             <Link href="/contact" className={styles.cta}>
               Discuss an Opportunity <ArrowRight size={15} />
             </Link>
-            <a href={`mailto:${academicProfile.emails[0]}`} className={styles.emailLink}>
+            <a href={`mailto:${academicProfile.emails[0]}`} className={styles.emailLink} itemProp="email">
               <Mail size={14} /> {academicProfile.emails[0]}
             </a>
             <div className={styles.socialRow} aria-label="Academic profile links">
               <a
                 href={academicProfile.linkedin}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="me noopener noreferrer"
                 className={styles.socialIcon}
                 aria-label="LinkedIn Profile"
                 title="LinkedIn Profile"
+                itemProp="sameAs"
               >
                 <Linkedin size={18} />
               </a>
               <a
                 href={academicProfile.researchGate}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="me noopener noreferrer"
                 className={styles.socialIcon}
                 aria-label="ResearchGate Profile"
                 title="ResearchGate Profile"
+                itemProp="sameAs"
               >
                 <BookOpen size={18} />
               </a>
               <a
                 href={academicProfile.orcid}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="me noopener noreferrer"
                 className={styles.socialIcon}
                 aria-label="ORCID Profile"
                 title="ORCID Profile"
+                itemProp="sameAs"
               >
                 <ExternalLink size={18} />
               </a>
               <a
                 href="https://github.com/scsa-lab"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="me noopener noreferrer"
                 className={styles.socialIcon}
                 aria-label="GitHub Repository"
                 title="GitHub Repository"
+                itemProp="sameAs"
               >
                 <Github size={18} />
               </a>

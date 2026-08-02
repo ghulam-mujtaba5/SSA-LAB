@@ -224,9 +224,41 @@ body {
 }
 
 /* Focus visible for keyboard navigation */
-.focus-visible:focus-visible {
-    outline: 2px solid var(--brand-primary, #4573df);
-    outline-offset: 2px;
+.focus-visible:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--brand-primary, #0284c7);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px var(--brand-primary-muted, rgba(2, 132, 199, 0.15));
+}
+
+/* Custom Theme-Aware Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-page, #090d16);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-slate-400, #94a3b8);
+    border-radius: 9999px;
+    border: 2px solid var(--bg-page, #090d16);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-primary, #0284c7);
+}
+
+/* Custom Text Selection */
+::selection {
+    background: var(--brand-primary, #0284c7);
+    color: #ffffff;
 }
 
 /* Smooth transitions for theme changes */
@@ -235,6 +267,17 @@ body {
         background-color 0.3s ease,
         color 0.3s ease,
         border-color 0.3s ease;
+}
+
+/* Hardware accelerated card hover utility */
+.hover-lift {
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1);
+    will-change: transform;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover, 0 10px 30px rgba(0, 0, 0, 0.15));
 }
 
 /* Quick override for the desktop navbar dark-theme seam seen on the
@@ -246,3 +289,4 @@ html[data-theme="dark"] .nav-bar-module__oZrldW__header {
     border-color: rgba(0,0,0,0.6) !important;
     box-shadow: 0 1px 0 rgba(0,0,0,0.28) inset, 0 6px 18px -8px rgba(0,0,0,0.6) !important;
 }
+

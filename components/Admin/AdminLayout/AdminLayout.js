@@ -33,7 +33,6 @@ const Icons = {
   moon: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
   grid: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>,
   pin: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 17v5"/><path d="M9 3l6 6"/><path d="M6 6l6 6"/><path d="M14 4l6 6"/><path d="M8 8l-4 4"/><path d="M16 16l4-4"/></svg>,
-  externalLink: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
   home: () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
   menu: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
   x: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
@@ -46,6 +45,7 @@ const BREADCRUMB_LABELS = {
   articles: 'Articles',
   projects: 'Projects',
   fyp: 'FYP Supervision',
+  enquiries: 'Enquiries & Messages',
   resume: 'Resume',
   media: 'Media Library',
   users: 'Users',
@@ -56,11 +56,6 @@ const BREADCRUMB_LABELS = {
   new: 'Create New',
   edit: 'Edit',
   preview: 'Preview',
-};
-
-const STORAGE_KEYS = {
-  sidebarCollapsed: 'admin:sidebarCollapsed:v1',
-  navSections: 'admin:navSectionsExpanded:v1',
 };
 
 export default function AdminLayoutPremium({ children, title }) {
@@ -138,14 +133,14 @@ export default function AdminLayoutPremium({ children, title }) {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
-      window.localStorage.setItem(STORAGE_KEYS.sidebarCollapsed, String(isCollapsed));
+      window.localStorage.setItem('sidebarCollapsed', String(isCollapsed));
     } catch {}
   }, [isCollapsed]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
-      window.localStorage.setItem(STORAGE_KEYS.navSections, JSON.stringify(expandedSections));
+      window.localStorage.setItem('navSections', JSON.stringify(expandedSections));
     } catch {}
   }, [expandedSections]);
 
@@ -163,6 +158,7 @@ export default function AdminLayoutPremium({ children, title }) {
             { href: '/admin/articles', label: 'Articles' },
             { href: '/admin/projects', label: 'Projects' },
             { href: '/admin/fyp', label: 'FYP Supervision' },
+            { href: '/admin/enquiries', label: 'Enquiries & Messages' },
             { href: '/admin/resume', label: 'Resume' },
           ],
         },
@@ -203,8 +199,6 @@ export default function AdminLayoutPremium({ children, title }) {
       ],
     };
   }, []);
-
-  // Auto-expand the section that contains the active route (without fighting user toggles too much)
   useEffect(() => {
     const activeSection = nav.sections.find((s) =>
       Array.isArray(s.children) && s.children.some((c) => isActive(c.href)),
