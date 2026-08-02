@@ -328,4 +328,8 @@ const AuditLogsPage = () => {
   );
 };
 
+export async function getServerSideProps() {
+  return { props: {} };
+}
+
 export default withAdminAuth(AuditLogsPage, { requiredRole: "admin" });

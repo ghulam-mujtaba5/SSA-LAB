@@ -363,3 +363,7 @@ export default function AdminSearchPage() {
     </AdminLayout>
   );
 }
+
+export async function getServerSideProps() {
+  return { props: {} };
+}

@@ -85,3 +85,9 @@ export default function NewArticlePage() {
     </AdminLayout>
   );
 }
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

@@ -462,4 +462,10 @@ const ArticlesPage = () => {
   );
 };
 
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
+
 export default ArticlesPage;

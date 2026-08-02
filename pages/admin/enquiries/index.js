@@ -603,4 +603,8 @@ function EnquiriesPage() {
   );
 }
 
+export async function getServerSideProps() {
+  return { props: {} };
+}
+
 export default withAdminAuth(EnquiriesPage);

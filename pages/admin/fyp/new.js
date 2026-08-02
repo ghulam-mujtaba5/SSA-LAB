@@ -40,3 +40,8 @@ export default function NewFypProjectPage() {
   );
 }
 
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

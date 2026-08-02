@@ -634,4 +634,8 @@ const UsersPage = () => {
   );
 };
 
+export async function getServerSideProps() {
+  return { props: {} };
+}
+
 export default withAdminAuth(UsersPage, { requiredRole: "admin" });

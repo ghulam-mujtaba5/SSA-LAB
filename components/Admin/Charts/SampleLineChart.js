@@ -1,9 +1,6 @@
 // components/Admin/Charts/SampleLineChart.js
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-const Line = dynamic(() => import("react-chartjs-2").then((m) => m.Line), {
-  ssr: false,
-});
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,6 +13,10 @@ import {
   Filler,
 } from "chart.js";
 import { useTheme } from "../../../context/ThemeContext";
+
+const Line = dynamic(() => import("react-chartjs-2").then((m) => m.Line), {
+  ssr: false,
+});
 
 ChartJS.register(
   CategoryScale,
@@ -31,6 +32,11 @@ ChartJS.register(
 const SampleLineChart = ({ labels, dataPoints, label = "Page Views" }) => {
   const { theme } = useTheme();
   const [chartData, setChartData] = useState(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const isDarkMode = theme === "dark";
@@ -132,7 +138,7 @@ const SampleLineChart = ({ labels, dataPoints, label = "Page Views" }) => {
     }});
   }, [theme, labels, dataPoints, label]);
 
-  if (!chartData) return null;
+  if (!isMounted || !chartData) return null;
 
   return <Line options={chartData.options} data={chartData.data} />;
 };

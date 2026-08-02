@@ -47,8 +47,8 @@ const CookieConsentBanner = () => {
       <div className={commonStyles.contentGroup}>
         <div className={commonStyles.iconWrapper} aria-hidden="true">
           <svg
-            width="22"
-            height="22"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -64,7 +64,7 @@ const CookieConsentBanner = () => {
             <path d="M7 14v.01" />
           </svg>
         </div>
-        <span className={`${commonStyles.text} ${frameStyles.text}`}>
+        <p className={`${commonStyles.text} ${frameStyles.text}`}>
           We use cookies to enhance your experience, analyze site usage, and support our marketing.{" "}
           <a
             href="/privacy-policy"
@@ -74,7 +74,7 @@ const CookieConsentBanner = () => {
           >
             Privacy Policy
           </a>
-        </span>
+        </p>
       </div>
       <div className={`${commonStyles.actions} ${frameStyles.actions}`}>
         <button
@@ -82,7 +82,7 @@ const CookieConsentBanner = () => {
           onClick={acceptCookies}
           type="button"
         >
-          Accept All
+          Accept
         </button>
         <button
           className={`${commonStyles.buttonSecondary} ${frameStyles.buttonSecondary}`}

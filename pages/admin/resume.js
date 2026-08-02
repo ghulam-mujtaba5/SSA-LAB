@@ -389,4 +389,8 @@ const ResumePage = () => {
   );
 };
 
+export async function getServerSideProps() {
+  return { props: {} };
+}
+
 export default ResumePage;

@@ -269,24 +269,28 @@ export default function AdminLayoutPremium({ children, title }) {
         {/* Navigation */}
         <nav className={styles.nav}>
           <ul>
-            {nav.primary.map((item) => (
-              <motion.li key={item.href} whileHover={{ x: 4 }}>
-                <Link
-                  href={item.href}
-                  className={`${styles.navItem} ${isActive(item.href) ? styles.active : ''}`}
-                  title={isCollapsed ? item.label : undefined}
-                >
-                  <span className={styles.navItemIcon}>
-                    <item.icon />
-                  </span>
-                  <span className={styles.navItemLabel}>{item.label}</span>
-                </Link>
-              </motion.li>
-            ))}
+            {nav.primary.map((item) => {
+              const ItemIcon = item.icon;
+              return (
+                <motion.li key={item.href} whileHover={{ x: 4 }}>
+                  <Link
+                    href={item.href}
+                    className={`${styles.navItem} ${isActive(item.href) ? styles.active : ''}`}
+                    title={isCollapsed ? item.label : undefined}
+                  >
+                    <span className={styles.navItemIcon}>
+                      {ItemIcon ? <ItemIcon /> : null}
+                    </span>
+                    <span className={styles.navItemLabel}>{item.label}</span>
+                  </Link>
+                </motion.li>
+              );
+            })}
 
             <li className={styles.navDivider} />
 
             {nav.sections.map((section) => {
+              const SectionIcon = section.icon;
               const hasActiveChild = section.children.some((c) => isActive(c.href));
               const isExpanded = !!expandedSections[section.id];
               return (
@@ -299,7 +303,7 @@ export default function AdminLayoutPremium({ children, title }) {
                     title={isCollapsed ? section.label : undefined}
                   >
                     <span className={styles.navSectionIcon}>
-                      <section.icon />
+                      {SectionIcon ? <SectionIcon /> : null}
                     </span>
                     <span className={styles.navSectionLabel}>{section.label}</span>
                     <span className={`${styles.navSectionChevron} ${isExpanded ? styles.expanded : ''}`}>

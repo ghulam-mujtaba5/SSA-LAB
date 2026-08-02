@@ -581,4 +581,8 @@ const ProjectsPage = () => {
   );
 };
 
+export async function getServerSideProps() {
+  return { props: {} };
+}
+
 export default ProjectsPage;

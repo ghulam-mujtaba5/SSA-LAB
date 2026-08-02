@@ -3,11 +3,13 @@ import styles from "./Tooltip.premium.module.css";
 
 const Tooltip = ({ 
   content, 
+  text,
   placement = "top", 
   children, 
   delay = 300,
   disabled = false 
 }) => {
+  const tooltipContent = content || text;
   const id = useId();
   const [isVisible, setIsVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -79,7 +81,7 @@ const Tooltip = ({
         role="tooltip"
         aria-hidden={!isVisible}
       >
-        {content}
+        {tooltipContent}
         <span className={styles.arrow} />
       </span>
     </span>

@@ -209,3 +209,8 @@ export default function FypAdminPage() {
   );
 }
 
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
