@@ -1,0 +1,12 @@
+.git
+.git/**
+.next
+.next/**
+node_modules
+node_modules/**
+.gemini
+.gemini/**
+scratch
+scratch/**
+tmp
+*.log

@@ -22,12 +22,9 @@ const ThemeToggleIcon = () => {
     return `${styles["theme-toggle-icon"]} ${isInView ? styles.animate : ""} ${theme === "light" ? styles.light : styles.dark}`;
   }, [theme, isInView, styles]);
 
-  // Use the GM logo - light theme shows dark icon, dark theme shows light icon
   const iconSrc = useMemo(() => {
-    return theme === "light"
-      ? "/personal-gm-monogram-on-light.png"
-      : "/personal-gm-monogram-on-dark.png";
-  }, [theme]);
+    return "/scsa-logo.png";
+  }, []);
 
   const checkInView = () => {
     if (iconRef.current) {

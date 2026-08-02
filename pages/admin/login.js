@@ -84,8 +84,8 @@ export default function LoginPage() {
         >
           <div className={styles.logoWrapper}>
             <img
-              src={theme === 'dark' ? '/personal-gm-monogram-on-dark.png' : '/personal-gm-monogram-on-light.png'}
-              alt="GM Logo"
+              src="/scsa-logo.png"
+              alt="SCSA Logo"
               width={36}
               height={36}
               className={styles.logoImg}
