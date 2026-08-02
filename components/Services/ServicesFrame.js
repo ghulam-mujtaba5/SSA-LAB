@@ -7,6 +7,15 @@ import darkStyles from "./ServicesFrameDark.module.css";
 
 const ServicesFrame = () => {
   const { theme } = useTheme();
+import React, { useRef, useState, useEffect } from "react";
+import { useTheme } from "../../context/ThemeContext";
+import { useScrollTrigger } from "../../hooks/useScrollAnimation";
+import commonStyles from "./ServicesFrameCommon.module.css";
+import lightStyles from "./ServicesFrame.module.css";
+import darkStyles from "./ServicesFrameDark.module.css";
+
+const ServicesFrame = () => {
+  const { theme } = useTheme();
   const frameStyles = theme === "dark" ? darkStyles : lightStyles;
   const [visible, setVisible] = useState([]);
   const { ref: sectionRef, hasEntered: sectionEntered } = useScrollTrigger({ threshold: 0.1 });
@@ -17,6 +26,7 @@ const ServicesFrame = () => {
     {
       title: "UI & UX Designing",
       titleicon: "/ui-ux-design-service-icon.svg",
+      illustration: "/ai-chatgpt/laptop-code-v1.png",
       skills: [
         {
           name: "Desktop Application",
@@ -35,6 +45,7 @@ const ServicesFrame = () => {
     {
       title: "Development",
       titleicon: "/software-development-service-icon.svg",
+      illustration: "/ai-chatgpt/server-stack.png",
       skills: [
         {
           name: "Desktop Application",
@@ -53,11 +64,23 @@ const ServicesFrame = () => {
     {
       title: "Data Science & AI",
       titleicon: "/data-science-ai-service-icon.svg",
+      illustration: "/ai-chatgpt/ai-brain-v1.png",
       skills: [
         { name: "Data Scraping", icon: "/data-scraping-service-icon.svg" },
         { name: "Data Visualization", icon: "/data-visualization-service-icon.svg" },
         { name: "Big Data Analytics", icon: "/big-data-analytics-service-icon.svg" },
         { name: "AI Solution Development", icon: "/ai-solution-development-service-icon.svg" },
+      ],
+      cardClass: frameStyles.dataScienceCard,
+    },
+    {
+      title: "Cyber Security & Audits",
+      titleicon: "/ai-chatgpt/cyber-security-shield.png",
+      illustration: "/ai-chatgpt/security-suite-3d.png",
+      skills: [
+        { name: "Vulnerability Audit", icon: "/ai-chatgpt/security-shield-v1.png" },
+        { name: "Code Clone Analysis", icon: "/ai-chatgpt/code-clone-sync.png" },
+        { name: "Automated Software Testing", icon: "/ai-chatgpt/software-testing-checklist.png" },
       ],
       cardClass: frameStyles.dataScienceCard,
     },
@@ -130,6 +153,18 @@ const ServicesFrame = () => {
               {category.title}
             </h3>
           </header>
+
+          {category.illustration && (
+            <div className={commonStyles.cornerCardIllustrationBottomLeft}>
+              <span className={commonStyles.cornerBadgeDotBottomLeft} />
+              <img
+                src={category.illustration}
+                alt={`${category.title} Illustration`}
+                loading="lazy"
+              />
+            </div>
+          )}
+
           {category.skills.map((skill, skillIndex) => (
             <div
               key={skillIndex}

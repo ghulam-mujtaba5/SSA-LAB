@@ -8,6 +8,7 @@ import {
   Microscope,
   ShieldCheck,
   ExternalLink,
+  Sparkles,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import AcademicImageLightbox from "./AcademicImageLightbox";
@@ -15,6 +16,7 @@ import AcademicPipelineHero from "./AcademicPipelineHero";
 import AcademicDomainModal from "./AcademicDomainModal";
 import DomainTechnicalGraphic, { DataInfrastructureGraphic } from "./AcademicTechnicalVisuals";
 import InteractiveCodeScanner from "./InteractiveCodeScanner";
+import AcademicLottie from "./AcademicLottie";
 import {
   academicProfile,
   partnerLogos,
@@ -29,6 +31,15 @@ const impactStats = [
   { value: "152,823+", label: "Repositories Analyzed", detail: "SQVDT open-source vulnerability platform" },
   { value: "30,500+", label: "Android Apps Analyzed", detail: "DroidSD similarity detection evaluation" },
 ];
+
+const domainIllustrationMap = {
+  "cyber-security": "/ai-chatgpt/cyber-security-shield.png",
+  "vulnerability": "/ai-chatgpt/vulnerability-chip.png",
+  "testing": "/ai-chatgpt/software-testing-checklist.png",
+  "code-clone": "/ai-chatgpt/code-clone-sync.png",
+  "malware": "/ai-chatgpt/malware-ai-brain.png",
+  "ai-repair": "/ai-chatgpt/ai-robot-mascot.png",
+};
 
 export default function AcademicHome() {
   const [selectedDomain, setSelectedDomain] = useState(null);
@@ -95,16 +106,34 @@ export default function AcademicHome() {
           </div>
 
           <div className={styles.heroPortrait}>
-            <div className={styles.heroLogoBadge}>
-              <Image
-                src="/academic/scsa-research-group-logo.png"
-                alt="SCSA Research Group Official Emblem"
-                width={120}
-                height={80}
-                style={{ objectFit: "contain" }}
-                priority
-              />
+            {/* Signature One-Time Large Branding Emblem Icon */}
+            <div
+              style={{
+                background: "linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.95))",
+                border: "1px solid rgba(56, 189, 248, 0.3)",
+                borderRadius: "16px",
+                padding: "16px",
+                marginBottom: "16px",
+                textAlign: "center",
+                boxShadow: "0 12px 32px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              <div style={{ display: "inline-block", position: "relative" }}>
+                <Image
+                  src="/scsa-logo.png"
+                  alt="SCSA Research Group Official Signature Branding Emblem"
+                  width={200}
+                  height={130}
+                  style={{ objectFit: "contain", filter: "drop-shadow(0 8px 20px rgba(56, 189, 248, 0.4))" }}
+                  priority
+                />
+              </div>
+              <div style={{ marginTop: "8px", fontSize: "0.78rem", fontWeight: 700, color: "#38bdf8", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                SCSA Research Laboratory Branding
+              </div>
             </div>
+
             <AcademicImageLightbox
               src="/academic/junaid-akram-professor.jpg"
               alt="Dr. Junaid Akram"
@@ -142,7 +171,7 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* 2.5 Live Security Engineering Demo */}
+      {/* 2.5 Live Security Engineering Demo with Lottie Integration */}
       <section className={styles.section} id="live-demo">
         <div className={styles.sectionHeading}>
           <div>
@@ -150,10 +179,15 @@ export default function AcademicHome() {
             <h2>Live AST Code Analysis & Remediation</h2>
           </div>
         </div>
-        <InteractiveCodeScanner />
+        <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "20px", alignItems: "center" }}>
+          <InteractiveCodeScanner />
+          <div style={{ maxWidth: "260px" }}>
+            <AcademicLottie src="/lottie/web-coding.json" ariaLabel="Live AST Inspection Animation" speed={0.8} />
+          </div>
+        </div>
       </section>
 
-      {/* 3. Main Research Domains */}
+      {/* 3. Main Research Domains with AI PNG Images & Bottom-Left Pop Corner Hover Effect */}
       <section className={styles.section} id="domains">
         <div className={styles.sectionHeading}>
           <div>
@@ -186,8 +220,14 @@ export default function AcademicHome() {
                   Explore Roadmap <ArrowRight size={13} />
                 </span>
               </div>
-              <div className={styles.cornerCardIllustration} style={{ padding: "12px", background: "rgba(15, 23, 42, 0.4)", borderRadius: "12px" }}>
-                <DomainTechnicalGraphic domainId={domain.graphicKey || domain.id} size={84} />
+              <div className={styles.cornerCardIllustrationBottomLeft}>
+                <span className={styles.cornerBadgeDotBottomLeft} />
+                <img
+                  src={domainIllustrationMap[domain.id] || "/ai-chatgpt/hero-composite.png"}
+                  alt={`${domain.title} 3D Illustration`}
+                  style={{ maxHeight: "110px", width: "auto", objectFit: "contain" }}
+                  loading="lazy"
+                />
               </div>
               <h3>{domain.title}</h3>
               <p>{domain.description}</p>

@@ -202,3 +202,7 @@ export default function AdminArticlePreviewPage() {
     </AdminLayout>
   );
 }
+
+export async function getServerSideProps(context) {
+  return { props: { slug: context.params?.slug || null } };
+}

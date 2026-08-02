@@ -81,3 +81,7 @@ export default function NewProjectPage() {
     </AdminLayout>
   );
 }
+
+export async function getServerSideProps() {
+  return { props: {} };
+}
