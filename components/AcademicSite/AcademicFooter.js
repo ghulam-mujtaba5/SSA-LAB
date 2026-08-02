@@ -13,6 +13,7 @@ import {
   Linkedin,
   BookOpen,
   GraduationCap,
+  ShieldCheck,
 } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
 import styles from "./AcademicFooter.module.css";
@@ -38,6 +39,7 @@ const LAB_LINKS = [
   { href: "/events", label: "Research Seminars & Events" },
   { href: academicProfile.officialProfile, label: "Official COMSATS Profile", external: true },
   { href: "/contact", label: "Office Hours & Location" },
+  { href: "/admin/login", label: "Admin Portal" },
 ];
 
 export default function AcademicFooter() {
@@ -192,6 +194,15 @@ export default function AcademicFooter() {
             <span style={{ color: "var(--academic-muted)", fontSize: "0.82rem" }}>
               {academicProfile.office}, COMSATS Lahore
             </span>
+            <Link
+              href="/admin/login"
+              className={styles.bottomLink}
+              title="SCSA Admin Portal Login"
+              style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}
+            >
+              <ShieldCheck size={14} style={{ color: "var(--academic-blue, #4f46e5)" }} />
+              <span>Admin Portal</span>
+            </Link>
             <button
               type="button"
               className={styles.toTop}

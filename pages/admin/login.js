@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./login.premium.module.css";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -40,7 +41,7 @@ export default function LoginPage() {
       setError(result.error);
     } else {
       const callbackUrl = router.query?.callbackUrl;
-      const destination = callbackUrl ? decodeURIComponent(callbackUrl) : "/admin";
+      const destination = callbackUrl ? decodeURIComponent(callbackUrl) : "/admin/dashboard";
       router.push(destination);
     }
   };
@@ -213,14 +214,21 @@ export default function LoginPage() {
           </motion.form>
         </motion.div>
 
-        <motion.p 
+        <motion.div 
           className={styles.loginFooter}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
+          style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center", marginTop: "24px" }}
         >
-          SCSA Research Lab &middot; Admin Portal
-        </motion.p>
+          <span>SCSA Research Lab &middot; Admin Portal</span>
+          <Link
+            href="/"
+            style={{ color: "var(--admin-primary, #6366f1)", fontSize: "0.85rem", textDecoration: "none", opacity: 0.9 }}
+          >
+            ← Return to Main Website
+          </Link>
+        </motion.div>
       </motion.div>
     </>
   );
@@ -232,7 +240,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: "/admin",
+        destination: "/admin/dashboard",
         permanent: false,
       },
     };
