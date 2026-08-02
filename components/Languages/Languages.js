@@ -29,7 +29,7 @@ const CATEGORIES = [
   {
     id: "systems",
     label: "Systems & OOP",
-    accent: "#a78bfa",
+    accent: "#0284c7",
     languages: [
       { name: "Java", src: "/java.png", level: "Proficient" },
       { name: "C++", src: "/cpp-language-icon.png", level: "Proficient" },

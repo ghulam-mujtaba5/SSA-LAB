@@ -141,14 +141,14 @@
 }
 
 .archived {
-  background: rgba(243, 232, 255, 0.85);
-  color: #5b21b6; /* violet-800 */
-  border-color: rgba(139, 92, 246, 0.2);
-  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.1);
+  background: rgba(224, 242, 254, 0.85);
+  color: #0369a1;
+  border-color: rgba(2, 132, 199, 0.2);
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.1);
 }
 
 .archived .dot {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: linear-gradient(135deg, #0284c7, #0369a1);
 }
 
 .error {

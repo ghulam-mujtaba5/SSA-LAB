@@ -1,7 +1,7 @@
 .site {
   --academic-ink: #0f172a;
-  --academic-navy: #1e1b4b;
-  --academic-blue: #4f46e5;
+  --academic-navy: #0f172a;
+  --academic-blue: #0284c7;
   --academic-cyan: #06b6d4;
   --academic-paper: #ffffff;
   --academic-soft: #f8fafc;
@@ -17,8 +17,8 @@
 
 :global([data-theme="dark"]) .site {
   --academic-ink: #f8fafc;
-  --academic-navy: #818cf8;
-  --academic-blue: #6366f1;
+  --academic-navy: #38bdf8;
+  --academic-blue: #0284c7;
   --academic-cyan: #38bdf8;
   --academic-paper: #090d16;
   --academic-soft: #111827;

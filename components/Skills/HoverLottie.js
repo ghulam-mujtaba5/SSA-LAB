@@ -20,7 +20,7 @@ const HoverLottie = ({ src, active, className }) => {
   }, []);
 
   useEffect(() => {
-    const card = wrapperRef.current?.parentElement;
+    const card = wrapperRef.current?.parentElement || wrapperRef.current;
     if (!card) return;
 
     const show = () => {
@@ -28,6 +28,18 @@ const HoverLottie = ({ src, active, className }) => {
       setIsLocallyActive(true);
     };
     const hide = () => setIsLocallyActive(false);
+
+    // Pre-load animation when element approaches viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "150px" }
+    );
+    observer.observe(card);
 
     card.addEventListener("mouseenter", show);
     card.addEventListener("pointerenter", show);
@@ -39,6 +51,7 @@ const HoverLottie = ({ src, active, className }) => {
     card.addEventListener("focusout", hide);
 
     return () => {
+      observer.disconnect();
       card.removeEventListener("mouseenter", show);
       card.removeEventListener("pointerenter", show);
       card.removeEventListener("focusin", show);

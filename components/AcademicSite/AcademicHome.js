@@ -153,7 +153,7 @@ export default function AcademicHome() {
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "20px", alignItems: "center" }}>
           <InteractiveCodeScanner />
-          <div style={{ maxWidth: "260px" }}>
+          <div className={styles.lottieCard} style={{ maxWidth: "260px", width: "100%", height: "240px" }}>
             <AcademicLottie src="/lottie/web-coding.json" ariaLabel="Live AST Inspection Animation" speed={0.8} />
           </div>
         </div>

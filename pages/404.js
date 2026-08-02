@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+import AcademicLottie from "../components/AcademicSite/AcademicLottie";
 import styles from "./404.module.css";
 
 export default function Custom404() {
@@ -24,6 +25,14 @@ export default function Custom404() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
+        <div style={{ width: "180px", height: "180px", margin: "0 auto 16px auto" }}>
+          <AcademicLottie
+            src="/lottie/cloud-devops.json"
+            ariaLabel="404 Page Not Found Animation"
+            speed={0.7}
+            showControls={false}
+          />
+        </div>
         <Image
           src="/academic/scsa-research-group-full-logo.png"
           alt="SCSA Research Lab — Software Security Assessment Lab"

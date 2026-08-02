@@ -6,19 +6,19 @@
 /* ========== ADMIN CSS CUSTOM PROPERTIES ========== */
 :root {
   /* Primary Brand Colors */
-  --admin-primary: #4f46e5;
-  --admin-primary-light: rgba(79, 70, 229, 0.12);
-  --admin-primary-dark: #4338ca;
-  --admin-primary-darker: #3730a3;
-  --admin-primary-rgb: 79, 70, 229;
-  --admin-primary-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-  --admin-primary-gradient-vivid: linear-gradient(135deg, #4f46e5 0%, #818cf8 50%, #a5b4fc 100%);
+  --admin-primary: #0284c7;
+  --admin-primary-light: rgba(2, 132, 199, 0.12);
+  --admin-primary-dark: #0369a1;
+  --admin-primary-darker: #075985;
+  --admin-primary-rgb: 2, 132, 199;
+  --admin-primary-gradient: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  --admin-primary-gradient-vivid: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #7dd3fc 100%);
   
   /* Secondary/Accent Colors */
-  --admin-secondary: #8b5cf6;
-  --admin-secondary-light: rgba(139, 92, 246, 0.12);
-  --admin-secondary-dark: #7c3aed;
-  --admin-secondary-gradient: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  --admin-secondary: #06b6d4;
+  --admin-secondary-light: rgba(6, 182, 212, 0.12);
+  --admin-secondary-dark: #0891b2;
+  --admin-secondary-gradient: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
   
   /* Semantic Colors */
   --admin-success: #10b981;

@@ -53,7 +53,7 @@ const SKILL_CATEGORIES = [
     id: "tools",
     label: "Tools & Cloud",
     enables: "Deployed, monitored, and maintained in production.",
-    accent: "#a78bfa",
+    accent: "#06b6d4",
     lottie: "/lottie/cloud-devops.json",
     skills: [
       { name: "Docker",   light: "/skills/docker.svg",   dark: "/skills/docker.svg"   },

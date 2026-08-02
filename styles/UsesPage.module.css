@@ -35,7 +35,7 @@
 }
 
 .usesTitleGradient {
-  background: linear-gradient(135deg, #4573df 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #4573df 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

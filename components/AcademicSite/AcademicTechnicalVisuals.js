@@ -180,10 +180,10 @@ export function CodeCloneGraphic({ size = 120, className = "" }) {
       <rect x="32" y="62" width="16" height="3" rx="1.5" fill="#94a3b8" />
 
       {/* Document 2 (Cloned) */}
-      <rect x="56" y="40" width="40" height="52" rx="6" fill="#0f172a" stroke="#818cf8" strokeWidth="1.5" />
+      <rect x="56" y="40" width="40" height="52" rx="6" fill="#0f172a" stroke="#0284c7" strokeWidth="1.5" />
       <rect x="64" y="50" width="24" height="3" rx="1.5" fill="#94a3b8" />
-      <rect x="64" y="58" width="20" height="3" rx="1.5" fill="#818cf8" />
-      <rect x="64" y="66" width="24" height="3" rx="1.5" fill="#818cf8" />
+      <rect x="64" y="58" width="20" height="3" rx="1.5" fill="#0284c7" />
+      <rect x="64" y="66" width="24" height="3" rx="1.5" fill="#0284c7" />
       <rect x="64" y="74" width="16" height="3" rx="1.5" fill="#94a3b8" />
 
       {/* Similarity Bridge Sync Icon */}
@@ -214,11 +214,11 @@ export function DataInfrastructureGraphic({ size = 120, className = "" }) {
       <circle cx="34" cy="35" r="3" fill="#10b981" />
       <rect x="44" y="33" width="30" height="4" rx="2" fill="#64748b" />
 
-      <rect x="24" y="51" width="72" height="18" rx="4" fill="#1e293b" stroke="#6366f1" strokeWidth="1.5" />
+      <rect x="24" y="51" width="72" height="18" rx="4" fill="#1e293b" stroke="#0284c7" strokeWidth="1.5" />
       <circle cx="34" cy="60" r="3" fill="#10b981" />
       <rect x="44" y="58" width="40" height="4" rx="2" fill="#64748b" />
 
-      <rect x="24" y="76" width="72" height="18" rx="4" fill="#1e293b" stroke="#8b5cf6" strokeWidth="1.5" />
+      <rect x="24" y="76" width="72" height="18" rx="4" fill="#1e293b" stroke="#06b6d4" strokeWidth="1.5" />
       <circle cx="34" cy="85" r="3" fill="#10b981" />
       <rect x="44" y="83" width="24" height="4" rx="2" fill="#64748b" />
 

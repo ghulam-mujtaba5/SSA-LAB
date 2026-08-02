@@ -66,13 +66,13 @@
 
 .archived { 
   background: rgba(255, 255, 255, 0.85);
-  color: #5b21b6; /* violet-800 */
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15);
+  color: #0369a1;
+  border-color: rgba(2, 132, 199, 0.3);
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
 }
 
 .archived .dot {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: linear-gradient(135deg, #0284c7, #0369a1);
 }
 
 .error { 

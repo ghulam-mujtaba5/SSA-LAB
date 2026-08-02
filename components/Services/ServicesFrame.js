@@ -1,15 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useScrollTrigger } from "../../hooks/useScrollAnimation";
-import commonStyles from "./ServicesFrameCommon.module.css";
-import lightStyles from "./ServicesFrame.module.css";
-import darkStyles from "./ServicesFrameDark.module.css";
-
-const ServicesFrame = () => {
-  const { theme } = useTheme();
-import React, { useRef, useState, useEffect } from "react";
-import { useTheme } from "../../context/ThemeContext";
-import { useScrollTrigger } from "../../hooks/useScrollAnimation";
+import HoverLottie from "../Skills/HoverLottie";
 import commonStyles from "./ServicesFrameCommon.module.css";
 import lightStyles from "./ServicesFrame.module.css";
 import darkStyles from "./ServicesFrameDark.module.css";
@@ -18,15 +10,18 @@ const ServicesFrame = () => {
   const { theme } = useTheme();
   const frameStyles = theme === "dark" ? darkStyles : lightStyles;
   const [visible, setVisible] = useState([]);
+  const [activeCard, setActiveCard] = useState(null);
   const { ref: sectionRef, hasEntered: sectionEntered } = useScrollTrigger({ threshold: 0.1 });
 
   const skillCardRefs = useRef([]);
 
   const skillsData = [
     {
+      id: "uiux",
       title: "UI & UX Designing",
       titleicon: "/ui-ux-design-service-icon.svg",
       illustration: "/ai-chatgpt/laptop-code-v1.png",
+      lottie: "/lottie/web-coding.json",
       skills: [
         {
           name: "Desktop Application",
@@ -43,9 +38,11 @@ const ServicesFrame = () => {
       cardClass: frameStyles.uiuxCard,
     },
     {
+      id: "development",
       title: "Development",
       titleicon: "/software-development-service-icon.svg",
       illustration: "/ai-chatgpt/server-stack.png",
+      lottie: "/lottie/mobile-app.json",
       skills: [
         {
           name: "Desktop Application",
@@ -62,9 +59,11 @@ const ServicesFrame = () => {
       cardClass: frameStyles.developmentCard,
     },
     {
+      id: "datascience",
       title: "Data Science & AI",
       titleicon: "/data-science-ai-service-icon.svg",
       illustration: "/ai-chatgpt/ai-brain-v1.png",
+      lottie: "/lottie/ai-brain.json",
       skills: [
         { name: "Data Scraping", icon: "/data-scraping-service-icon.svg" },
         { name: "Data Visualization", icon: "/data-visualization-service-icon.svg" },
@@ -74,9 +73,11 @@ const ServicesFrame = () => {
       cardClass: frameStyles.dataScienceCard,
     },
     {
+      id: "security",
       title: "Cyber Security & Audits",
       titleicon: "/ai-chatgpt/cyber-security-shield.png",
       illustration: "/ai-chatgpt/security-suite-3d.png",
+      lottie: "/academic/lottie/security-research.json",
       skills: [
         { name: "Vulnerability Audit", icon: "/ai-chatgpt/security-shield-v1.png" },
         { name: "Code Clone Analysis", icon: "/ai-chatgpt/code-clone-sync.png" },
@@ -99,7 +100,7 @@ const ServicesFrame = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Trigger scroll check on component mount
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -123,7 +124,7 @@ const ServicesFrame = () => {
       {skillsData.map((category, index) => (
         <article
           className={`${commonStyles.skillCard} ${frameStyles.skillCard} ${category.cardClass} ${visible[index] ? commonStyles.animateIn : ""}`}
-          key={index}
+          key={category.id || index}
           ref={(el) => (skillCardRefs.current[index] = el)}
           aria-labelledby={`${category.title.replace(/ /g, "-")}-title`}
           style={{
@@ -132,10 +133,12 @@ const ServicesFrame = () => {
             willChange: 'transform, opacity',
           }}
           onMouseEnter={(e) => {
+            setActiveCard(category.id);
             e.currentTarget.style.transform = 'translateY(-4px)';
             e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
           }}
           onMouseLeave={(e) => {
+            setActiveCard(null);
             e.currentTarget.style.transform = 'translateY(0)';
             e.currentTarget.style.boxShadow = 'none';
           }}
@@ -155,13 +158,23 @@ const ServicesFrame = () => {
           </header>
 
           {category.illustration && (
-            <div className={commonStyles.cornerCardIllustrationBottomLeft}>
+            <div className={commonStyles.cornerCardIllustrationBottomLeft} style={{ position: "relative", overflow: "hidden" }}>
               <span className={commonStyles.cornerBadgeDotBottomLeft} />
-              <img
-                src={category.illustration}
-                alt={`${category.title} Illustration`}
-                loading="lazy"
-              />
+              {category.lottie ? (
+                <div style={{ width: "90px", height: "90px", position: "relative" }}>
+                  <HoverLottie
+                    src={category.lottie}
+                    active={activeCard === category.id}
+                    className="serviceLottieAnim"
+                  />
+                </div>
+              ) : (
+                <img
+                  src={category.illustration}
+                  alt={`${category.title} Illustration`}
+                  loading="lazy"
+                />
+              )}
             </div>
           )}
 
