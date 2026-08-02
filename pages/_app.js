@@ -223,9 +223,9 @@ function MyApp({ Component, pageProps, session }) {
     };
   }, [clearAllTimers]);
 
-  // Google Analytics (production only)
+  // Google Analytics
   useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
+    if (!gtag.GA_TRACKING_ID) return;
 
     const handleRouteChange = (url) => {
       gtag.pageview(url);
@@ -247,8 +247,8 @@ function MyApp({ Component, pageProps, session }) {
         />
       </Head>
 
-      {/* Google Analytics - Production only with Consent Mode */}
-      {process.env.NODE_ENV === "production" && gtag.GA_TRACKING_ID && (
+      {/* Google Tag (gtag.js) - Google Analytics */}
+      {gtag.GA_TRACKING_ID && (
         <>
           <Script
             id="google-analytics"

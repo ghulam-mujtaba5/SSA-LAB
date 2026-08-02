@@ -24,6 +24,12 @@ import {
   Calendar,
   Award,
   Maximize2,
+  Search,
+  LayoutGrid,
+  List,
+  FileText,
+  X,
+  Quote,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import {
@@ -514,6 +520,8 @@ export function ResearchPage() {
   const router = useRouter();
   const [expandedProject, setExpandedProject] = useState(null);
   const [selectedDomain, setSelectedDomain] = useState(null);
+  const [projectSearch, setProjectSearch] = useState("");
+  const [activeDomainFilter, setActiveDomainFilter] = useState("All");
 
   React.useEffect(() => {
     if (router.query.domain) {
@@ -527,6 +535,30 @@ export function ResearchPage() {
       }
     }
   }, [router.query.domain]);
+
+  const filteredProjectsList = React.useMemo(() => {
+    return researchProjects.filter((project) => {
+      // Domain filter
+      if (activeDomainFilter !== "All") {
+        const titleLower = project.title.toLowerCase();
+        if (activeDomainFilter === "Vulnerability Detection" && !titleLower.includes("vulnerability") && !titleLower.includes("sqvdt") && !titleLower.includes("vcipr") && !titleLower.includes("patch")) return false;
+        if (activeDomainFilter === "Software Testing" && !titleLower.includes("test") && !titleLower.includes("arc")) return false;
+        if (activeDomainFilter === "Malware & Clones" && !titleLower.includes("malware") && !titleLower.includes("clone") && !titleLower.includes("obfuscated") && !titleLower.includes("droid")) return false;
+      }
+
+      // Search filter
+      const q = projectSearch.toLowerCase().trim();
+      if (!q) return true;
+
+      return (
+        project.title.toLowerCase().includes(q) ||
+        project.summary.toLowerCase().includes(q) ||
+        project.collaboration.toLowerCase().includes(q) ||
+        (project.details?.problem && project.details.problem.toLowerCase().includes(q)) ||
+        (project.details?.approach && project.details.approach.toLowerCase().includes(q))
+      );
+    });
+  }, [activeDomainFilter, projectSearch]);
 
   const researchJsonLd = [
     collectionPageSchema({
@@ -552,7 +584,7 @@ export function ResearchPage() {
 
   return (
     <AcademicSiteLayout
-      title="Research"
+      title="Research Showcase & Platforms"
       path="/research"
       description="Research areas, platforms, and software-security tools developed by Dr. Junaid Akram and the SCSA Lab."
       keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SCSA Lab research projects"
@@ -566,12 +598,20 @@ export function ResearchPage() {
       )}
 
       <PageIntro
-        eyebrow="Research"
-        title="Software security research with practical reach."
-        lead="The lab studies vulnerabilities, malware, code clones, software evolution, and testing at scales ranging from individual functions to billions of lines of code."
+        eyebrow="SCSA Research Platforms"
+        title="Software Security Research with Practical Reach"
+        lead="The lab studies source-code vulnerabilities, Android & IoT malware, code clones, software evolution, and testing at scales ranging from individual functions to 324+ billion lines of code."
       />
 
+      {/* Research Domains Visual Cards */}
       <section className={styles.section}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Core Pillars</p>
+            <h2>Research Domain Roadmaps</h2>
+          </div>
+        </div>
+
         <div className={styles.domainGrid}>
           {researchDomains.map((domain, index) => (
             <article
@@ -624,79 +664,158 @@ export function ResearchPage() {
         <AcademicResearchPipeline />
       </section>
 
-      {/* Projects & Tools with Expandable Technical Specifications */}
+      {/* Projects & Tools Showcase */}
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Projects & tools</p>
-            <h2>Current and completed research platforms</h2>
+            <p className={styles.eyebrow}>Projects & Tools Directory</p>
+            <h2>Empirical Research Systems & Platforms</h2>
           </div>
         </div>
+
+        {/* Project Search & Filter Toolbar */}
+        <div className={styles.toolbarContainer} style={{ marginBottom: "24px" }}>
+          <div className={styles.toolbarTopRow}>
+            <div className={styles.toolbarSearchBox}>
+              <Search size={16} className={styles.toolbarSearchIcon} />
+              <input
+                type="text"
+                className={styles.toolbarSearchInput}
+                placeholder="Search projects, methods, algorithms, partners..."
+                value={projectSearch}
+                onChange={(e) => setProjectSearch(e.target.value)}
+                aria-label="Search research projects"
+              />
+              {projectSearch ? (
+                <button
+                  type="button"
+                  className={styles.clearSearchBtn}
+                  onClick={() => setProjectSearch("")}
+                >
+                  ×
+                </button>
+              ) : null}
+            </div>
+
+            <div className={styles.categoryPillsRow}>
+              {["All", "Vulnerability Detection", "Software Testing", "Malware & Clones"].map((dom) => (
+                <button
+                  key={dom}
+                  type="button"
+                  className={`${styles.pubFilterTag} ${activeDomainFilter === dom ? styles.pubFilterTagActive : ""}`}
+                  onClick={() => setActiveDomainFilter(dom)}
+                >
+                  {dom}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Projects List Output */}
         <div className={styles.projectList}>
-          {researchProjects.map((project, idx) => {
-            const isExpanded = expandedProject === idx;
-            return (
-              <article key={project.title} style={{ marginBottom: "20px" }}>
-                <div>
-                  <span className={styles.sessionBadge}>{project.status}</span>
-                  <h3 style={{ marginTop: "8px" }}>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <small>{project.collaboration}</small>
+          {filteredProjectsList.length > 0 ? (
+            filteredProjectsList.map((project, idx) => {
+              const isExpanded = expandedProject === idx;
+              return (
+                <article
+                  key={project.title}
+                  style={{
+                    marginBottom: "24px",
+                    background: "var(--academic-paper)",
+                    border: "1px solid var(--academic-line)",
+                    borderRadius: "16px",
+                    padding: "24px",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.03)",
+                  }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <span className={styles.sessionBadge}>{project.status}</span>
+                    <h3 style={{ marginTop: "10px", fontSize: "1.2rem", fontWeight: 700, fontFamily: "Poppins, sans-serif" }}>
+                      {project.title}
+                    </h3>
+                    <p style={{ margin: "10px 0", color: "var(--academic-ink)", fontSize: "0.92rem", lineHeight: 1.5 }}>
+                      {project.summary}
+                    </p>
 
-                  {/* Expandable Technical Details Button */}
-                  {project.details ? (
-                    <div style={{ marginTop: "12px" }}>
-                      <button
-                        type="button"
-                        className={styles.secondaryButton}
-                        style={{ padding: "4px 12px", fontSize: "0.8rem" }}
-                        onClick={() => setExpandedProject(isExpanded ? null : idx)}
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.8rem", color: "var(--academic-muted)", margin: "8px 0 14px 0" }}>
+                      <Building size={14} style={{ color: "var(--academic-blue)" }} />
+                      <span><strong>Partners:</strong> {project.collaboration}</span>
+                    </div>
+
+                    {/* Expandable Technical Details Button */}
+                    {project.details ? (
+                      <div>
+                        <button
+                          type="button"
+                          className={styles.secondaryButton}
+                          style={{ padding: "6px 14px", fontSize: "0.8rem", borderRadius: "8px" }}
+                          onClick={() => setExpandedProject(isExpanded ? null : idx)}
+                        >
+                          {isExpanded ? "Hide Technical Specifications" : "View Technical Specifications"} {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                        </button>
+                      </div>
+                    ) : null}
+
+                    {/* Expanded Technical Details Box */}
+                    {isExpanded && project.details ? (
+                      <div
+                        style={{
+                          marginTop: "14px",
+                          padding: "16px 18px",
+                          background: "var(--academic-soft, rgba(255,255,255,0.04))",
+                          borderRadius: "12px",
+                          border: "1px solid var(--academic-line, #e5e7eb)",
+                          fontSize: "0.88rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "8px",
+                        }}
                       >
-                        {isExpanded ? "Hide Technical Details" : "Technical Specifications"} {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                      </button>
-                    </div>
-                  ) : null}
-
-                  {/* Expanded Technical Details Box */}
-                  {isExpanded && project.details ? (
-                    <div
-                      style={{
-                        marginTop: "12px",
-                        padding: "14px 16px",
-                        background: "var(--academic-card-bg, rgba(255,255,255,0.04))",
-                        borderRadius: "8px",
-                        border: "1px solid var(--academic-border, #e5e7eb)",
-                        fontSize: "0.88rem",
-                      }}
-                    >
-                      <p style={{ margin: "4px 0" }}>
-                        <strong>Problem:</strong> {project.details.problem}
-                      </p>
-                      <p style={{ margin: "4px 0" }}>
-                        <strong>Approach:</strong> {project.details.approach}
-                      </p>
-                      <p style={{ margin: "4px 0" }}>
-                        <strong>Outcome:</strong> {project.details.outcome}
-                      </p>
-                    </div>
-                  ) : null}
-                </div>
-                {project.image && (
-                  <div className={styles.cornerCardIllustration} style={{ margin: 0, padding: "18px" }}>
-                    <div className={styles.cornerBadgeDot} />
-                    <AcademicImageLightbox
-                      src={project.image}
-                      alt={`${project.title} research visual`}
-                      width={320}
-                      height={320}
-                      caption={project.title}
-                      className={styles.illustrationImage}
-                    />
+                        <p style={{ margin: 0 }}>
+                          <strong style={{ color: "#ef4444" }}>Research Challenge:</strong> {project.details.problem}
+                        </p>
+                        <p style={{ margin: 0 }}>
+                          <strong style={{ color: "var(--academic-blue)" }}>Technical Methodology:</strong> {project.details.approach}
+                        </p>
+                        <p style={{ margin: 0 }}>
+                          <strong style={{ color: "#10b981" }}>Validated Key Outcome:</strong> {project.details.outcome}
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
-                )}
-              </article>
-            );
-          })}
+
+                  {project.image && (
+                    <div className={styles.cornerCardIllustration} style={{ margin: 0, padding: "16px" }}>
+                      <div className={styles.cornerBadgeDot} />
+                      <AcademicImageLightbox
+                        src={project.image}
+                        alt={`${project.title} research visual`}
+                        width={300}
+                        height={300}
+                        caption={project.title}
+                        className={styles.illustrationImage}
+                      />
+                    </div>
+                  )}
+                </article>
+              );
+            })
+          ) : (
+            <div className={styles.noResultsBox} style={{ textAlign: "center", padding: "30px 0" }}>
+              <p>No research projects matched your filter criteria.</p>
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                onClick={() => {
+                  setProjectSearch("");
+                  setActiveDomainFilter("All");
+                }}
+              >
+                Reset Filter & Search
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </AcademicSiteLayout>
@@ -705,20 +824,64 @@ export function ResearchPage() {
 
 export function PublicationsPage() {
   const [filterType, setFilterType] = useState("All");
-  const [copiedIndex, setCopiedIndex] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'row'
+  const [sortOrder, setSortOrder] = useState("newest"); // 'newest' or 'oldest'
+  const [selectedCitationPub, setSelectedCitationPub] = useState(null);
+  const [citationFormat, setCitationFormat] = useState("bibtex"); // 'bibtex', 'ieee', 'apa'
+  const [copiedModal, setCopiedModal] = useState(false);
 
-  const filteredPubs = publications.filter((pub) => {
-    if (filterType === "All") return true;
-    if (filterType === "Journal") return pub.type === "Journal";
-    if (filterType === "Conference") return pub.type === "Conference";
-    return true;
-  });
+  // Helper to extract domain topic chips from paper titles
+  const getPubTags = (title = "") => {
+    const tags = [];
+    const t = title.toLowerCase();
+    if (t.includes("malware") || t.includes("droidmd") || t.includes("mthael")) tags.push("Malware Security");
+    if (t.includes("vulnerability") || t.includes("sqvdt") || t.includes("vcipr") || t.includes("benchmark")) tags.push("Vulnerability Detection");
+    if (t.includes("clone") || t.includes("obfuscated") || t.includes("droidcc") || t.includes("droidsd")) tags.push("Code Clone Analysis");
+    if (t.includes("testing") || t.includes("algorithm") || t.includes("courseware")) tags.push("Software Verification");
+    if (tags.length === 0) tags.push("Software Security");
+    return tags;
+  };
 
-  const handleCopyBibtex = (bibtex, index) => {
-    if (!bibtex) return;
-    navigator.clipboard.writeText(bibtex);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2500);
+  const filteredPubs = React.useMemo(() => {
+    return publications
+      .filter((pub) => {
+        // Category filter
+        if (filterType === "Journal" && pub.type !== "Journal") return false;
+        if (filterType === "Conference" && pub.type !== "Conference") return false;
+
+        // Search filter
+        const q = searchQuery.toLowerCase().trim();
+        if (!q) return true;
+        return (
+          pub.title?.toLowerCase().includes(q) ||
+          pub.authors?.toLowerCase().includes(q) ||
+          pub.venue?.toLowerCase().includes(q) ||
+          pub.year?.includes(q)
+        );
+      })
+      .sort((a, b) => {
+        const yearA = parseInt(a.year, 10) || 0;
+        const yearB = parseInt(b.year, 10) || 0;
+        return sortOrder === "newest" ? yearB - yearA : yearA - yearB;
+      });
+  }, [filterType, searchQuery, sortOrder]);
+
+  const handleCopyModalCitation = (text) => {
+    if (!text) return;
+    navigator.clipboard.writeText(text);
+    setCopiedModal(true);
+    setTimeout(() => setCopiedModal(false), 2200);
+  };
+
+  const generateIeeeCitation = (pub) => {
+    if (!pub) return "";
+    return `${pub.authors}, "${pub.title}," ${pub.venue}, ${pub.year}.`;
+  };
+
+  const generateApaCitation = (pub) => {
+    if (!pub) return "";
+    return `${pub.authors} (${pub.year}). ${pub.title}. ${pub.venue}.`;
   };
 
   const pubsJsonLd = [
@@ -729,45 +892,92 @@ export function PublicationsPage() {
         "Peer-reviewed journal and conference publications by Dr. Junaid Akram in software security, testing, malware, and code analysis.",
       items: publications.map((p) => ({
         name: p.title,
-        url: p.doi ? `https://doi.org/${p.doi}` : `${SITE_URL}/publications`,
+        url: p.href || `${SITE_URL}/publications`,
         description: p.venue,
       })),
     }),
     ...publications.slice(0, 8).map((p) =>
       articleSchema({
         headline: p.title,
-        description: p.abstract || p.venue,
-        url: p.doi ? `https://doi.org/${p.doi}` : `${SITE_URL}/publications`,
+        description: p.venue,
+        url: p.href || `${SITE_URL}/publications`,
         datePublished: p.year ? `${p.year}-01-01` : undefined,
         dateModified: p.year ? `${p.year}-01-01` : undefined,
-        keywords: p.keywords || p.tags?.join(", "),
       })
     ),
   ];
 
+  const totalJournals = publications.filter((p) => p.type === "Journal").length;
+  const totalConfs = publications.filter((p) => p.type === "Conference").length;
+  const totalDoi = publications.filter((p) => p.href).length;
+
   return (
     <AcademicSiteLayout
-      title="Publications"
+      title="Publications Showcase"
       path="/publications"
       description="Peer-reviewed journal and conference publications by Dr. Junaid Akram in software security, testing, malware, and code analysis."
       keywords="Junaid Akram publications, software security papers, vulnerability detection research, code clone analysis papers, malware detection journal, IEEE conference papers"
       jsonLd={pubsJsonLd}
     >
+      {/* Page intro header */}
       <PageIntro
-        eyebrow="Publications"
-        title="Peer-reviewed research output."
-        lead="Research spanning source-code vulnerability detection, Android malware and clone analysis, software testing, and scalable code assessment."
+        eyebrow="Peer-Reviewed Literature"
+        title="Publications & Research Output"
+        lead="Discover empirical research spanning source-code vulnerability assessment, Android malware analysis, code clones, and automated software verification."
       />
 
-      {/* 1. Academic Profiles Link Bar */}
-      <section className={styles.section} style={{ paddingBottom: "12px" }}>
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "center" }}>
+      {/* 1. Key Impact Stats Banner */}
+      <section className={styles.section} style={{ paddingTop: 0, paddingBottom: "16px" }}>
+        <div className={styles.listingStatsGrid}>
+          <div className={styles.statMetricCard}>
+            <div className={styles.statMetricIcon}>
+              <BookOpen size={22} />
+            </div>
+            <div className={styles.statMetricContent}>
+              <h4>{publications.length}</h4>
+              <p>Total Publications</p>
+            </div>
+          </div>
+
+          <div className={styles.statMetricCard}>
+            <div className={styles.statMetricIcon} style={{ background: "rgba(16, 185, 129, 0.12)", color: "#10b981" }}>
+              <Award size={22} />
+            </div>
+            <div className={styles.statMetricContent}>
+              <h4>{totalJournals}</h4>
+              <p>Journal Articles (SCIE Q1/Q2)</p>
+            </div>
+          </div>
+
+          <div className={styles.statMetricCard}>
+            <div className={styles.statMetricIcon} style={{ background: "rgba(56, 189, 248, 0.12)", color: "#38bdf8" }}>
+              <Users size={22} />
+            </div>
+            <div className={styles.statMetricContent}>
+              <h4>{totalConfs}</h4>
+              <p>IEEE Conference Papers</p>
+            </div>
+          </div>
+
+          <div className={styles.statMetricCard}>
+            <div className={styles.statMetricIcon} style={{ background: "rgba(245, 158, 11, 0.12)", color: "#f59e0b" }}>
+              <ExternalLink size={22} />
+            </div>
+            <div className={styles.statMetricContent}>
+              <h4>{totalDoi}</h4>
+              <p>Direct DOI / Open Access</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Academic Profiles Link Buttons */}
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
           <a
             href={academicProfile.googleScholar}
             target="_blank"
             rel="noreferrer"
             className={styles.primaryButton}
-            style={{ fontSize: "0.85rem", padding: "8px 16px" }}
+            style={{ fontSize: "0.83rem", padding: "8px 16px" }}
           >
             Google Scholar Profile <ExternalLink size={14} />
           </a>
@@ -776,7 +986,7 @@ export function PublicationsPage() {
             target="_blank"
             rel="noreferrer"
             className={styles.secondaryButton}
-            style={{ fontSize: "0.85rem", padding: "8px 16px" }}
+            style={{ fontSize: "0.83rem", padding: "8px 16px" }}
           >
             ORCID ({academicProfile.orcid.replace("https://orcid.org/", "")}) <ExternalLink size={14} />
           </a>
@@ -785,101 +995,244 @@ export function PublicationsPage() {
             target="_blank"
             rel="noreferrer"
             className={styles.secondaryButton}
-            style={{ fontSize: "0.85rem", padding: "8px 16px" }}
+            style={{ fontSize: "0.83rem", padding: "8px 16px" }}
           >
-            ResearchGate Profile <ExternalLink size={14} />
-          </a>
-          <a
-            href={academicProfile.officialProfile}
-            target="_blank"
-            rel="noreferrer"
-            className={styles.secondaryButton}
-            style={{ fontSize: "0.85rem", padding: "8px 16px" }}
-          >
-            COMSATS Profile <ExternalLink size={14} />
+            ResearchGate <ExternalLink size={14} />
           </a>
         </div>
       </section>
 
-      {/* 2. Publication Filter & Counter */}
+      {/* 2. Interactive Search & Multi-Filter Toolbar */}
       <section className={styles.section}>
-        <div className={styles.fypFilterBar} style={{ marginBottom: "20px" }}>
-          <div className={styles.categoryPills}>
+        <div className={styles.toolbarContainer}>
+          <div className={styles.toolbarTopRow}>
+            {/* Search Input */}
+            <div className={styles.toolbarSearchBox}>
+              <Search size={16} className={styles.toolbarSearchIcon} />
+              <input
+                type="text"
+                className={styles.toolbarSearchInput}
+                placeholder="Search by title, author, venue, or year..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search publications"
+              />
+              {searchQuery ? (
+                <button
+                  type="button"
+                  className={styles.clearSearchBtn}
+                  onClick={() => setSearchQuery("")}
+                  title="Clear search"
+                >
+                  ×
+                </button>
+              ) : null}
+            </div>
+
+            {/* View Mode Toggle & Sort Selector */}
+            <div className={styles.toolbarRightControls}>
+              <div className={styles.viewModeGroup} aria-label="Layout View Switcher">
+                <button
+                  type="button"
+                  className={`${styles.viewBtn} ${viewMode === "grid" ? styles.viewBtnActive : ""}`}
+                  onClick={() => setViewMode("grid")}
+                  title="Visual Cards View"
+                >
+                  <LayoutGrid size={15} /> Grid
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.viewBtn} ${viewMode === "row" ? styles.viewBtnActive : ""}`}
+                  onClick={() => setViewMode("row")}
+                  title="Compact Executive List View"
+                >
+                  <List size={15} /> Compact
+                </button>
+              </div>
+
+              <select
+                className={styles.sortSelect}
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                aria-label="Sort Order"
+              >
+                <option value="newest">Sort: Newest First</option>
+                <option value="oldest">Sort: Oldest First</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Category Pills Bar */}
+          <div className={styles.categoryPillsRow}>
             <button
               type="button"
-              className={`${styles.filterPill} ${filterType === "All" ? styles.filterPillActive : ""}`}
+              className={`${styles.pubFilterTag} ${filterType === "All" ? styles.pubFilterTagActive : ""}`}
               onClick={() => setFilterType("All")}
             >
               All Publications ({publications.length})
             </button>
             <button
               type="button"
-              className={`${styles.filterPill} ${filterType === "Journal" ? styles.filterPillActive : ""}`}
+              className={`${styles.pubFilterTag} ${filterType === "Journal" ? styles.pubFilterTagActive : ""}`}
               onClick={() => setFilterType("Journal")}
             >
-              Journal Papers ({publications.filter((p) => p.type === "Journal").length})
+              Journals ({totalJournals})
             </button>
             <button
               type="button"
-              className={`${styles.filterPill} ${filterType === "Conference" ? styles.filterPillActive : ""}`}
+              className={`${styles.pubFilterTag} ${filterType === "Conference" ? styles.pubFilterTagActive : ""}`}
               onClick={() => setFilterType("Conference")}
             >
-              Conference Papers ({publications.filter((p) => p.type === "Conference").length})
+              Conferences ({totalConfs})
             </button>
           </div>
         </div>
 
-        {/* Publications List */}
-        <div className={styles.publicationList}>
-          {filteredPubs.map((publication, index) => (
-            <article key={publication.title}>
-              <span>{publication.year}</span>
-              <div>
-                <span className={styles.categoryBadge} style={{ marginBottom: "6px", display: "inline-block" }}>
-                  {publication.type || "Peer-Reviewed"}
-                </span>
-                <h2>{publication.title}</h2>
-                <p>{publication.authors}</p>
-                <small>{publication.venue}</small>
-              </div>
+        {/* 3. Publications Output (Grid Cards vs Compact Rows) */}
+        {filteredPubs.length > 0 ? (
+          viewMode === "grid" ? (
+            <div className={styles.pubCardGrid}>
+              {filteredPubs.map((pub) => {
+                const isJournal = pub.type === "Journal";
+                const tags = getPubTags(pub.title);
+                const authorsFormatted = pub.authors
+                  ? pub.authors.replace("Junaid Akram", "<strong>Junaid Akram</strong>")
+                  : "";
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-end" }}>
-                {publication.href && (
-                  <a
-                    href={publication.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.textLink}
-                    aria-label={`Open ${publication.title}`}
-                  >
-                    DOI Link <ExternalLink size={14} />
-                  </a>
-                )}
-                {publication.bibtex ? (
-                  <button
-                    type="button"
-                    className={styles.secondaryButton}
-                    style={{ padding: "4px 10px", fontSize: "0.78rem" }}
-                    onClick={() => handleCopyBibtex(publication.bibtex, index)}
-                    title="Copy BibTeX Citation"
-                  >
-                    {copiedIndex === index ? (
-                      <>
-                        <Check size={12} style={{ color: "#10b981" }} /> Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy size={12} /> BibTeX
-                      </>
-                    )}
-                  </button>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
+                return (
+                  <article key={pub.title} className={styles.pubVisualCard}>
+                    <div>
+                      <div className={styles.pubCardTop}>
+                        <span
+                          className={`${styles.venuePill} ${
+                            isJournal ? styles.venuePillJournal : styles.venuePillConference
+                          }`}
+                        >
+                          {pub.type || "Peer-Reviewed"}
+                        </span>
+                        <span className={styles.pubYearBadge}>{pub.year}</span>
+                      </div>
 
-        <div style={{ marginTop: "32px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                      <h3 className={styles.pubCardTitle} style={{ marginTop: "12px" }}>
+                        {pub.title}
+                      </h3>
+
+                      <p
+                        className={styles.pubAuthorsList}
+                        style={{ marginTop: "10px" }}
+                        dangerouslySetInnerHTML={{ __html: authorsFormatted }}
+                      />
+
+                      <p className={styles.pubVenueText} style={{ marginTop: "8px" }}>
+                        {pub.venue}
+                      </p>
+
+                      {/* Topic Tags */}
+                      <div className={styles.pubTagsRow} style={{ marginTop: "14px" }}>
+                        {tags.map((t) => (
+                          <span key={t} className={styles.pubTopicTag}>
+                            #{t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className={styles.pubCardFooter}>
+                      {pub.href ? (
+                        <a
+                          href={pub.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`${styles.pubActionBtn} ${styles.pubPrimaryBtn}`}
+                        >
+                          DOI Article <ExternalLink size={13} />
+                        </a>
+                      ) : (
+                        <span style={{ fontSize: "0.78rem", color: "var(--academic-muted)" }}>Peer-Reviewed</span>
+                      )}
+
+                      <button
+                        type="button"
+                        className={`${styles.pubActionBtn} ${styles.pubSecondaryBtn}`}
+                        onClick={() => {
+                          setSelectedCitationPub(pub);
+                          setCitationFormat("bibtex");
+                        }}
+                      >
+                        <Quote size={13} /> Cite & Abstract
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            /* Compact Row View */
+            <div className={styles.pubRowList}>
+              {filteredPubs.map((pub) => {
+                const isJournal = pub.type === "Journal";
+                return (
+                  <article key={pub.title} className={styles.pubRowItem}>
+                    <div className={styles.pubRowYear}>{pub.year}</div>
+                    <div>
+                      <span
+                        className={`${styles.venuePill} ${
+                          isJournal ? styles.venuePillJournal : styles.venuePillConference
+                        }`}
+                      >
+                        {pub.type}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className={styles.pubRowTitle}>{pub.title}</h4>
+                      <p className={styles.pubRowAuthors}>{pub.authors} · <span style={{ color: "var(--academic-blue)" }}>{pub.venue}</span></p>
+                    </div>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      {pub.href && (
+                        <a
+                          href={pub.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`${styles.pubActionBtn} ${styles.pubPrimaryBtn}`}
+                          style={{ padding: "4px 10px", fontSize: "0.75rem" }}
+                        >
+                          DOI <ExternalLink size={12} />
+                        </a>
+                      )}
+                      <button
+                        type="button"
+                        className={`${styles.pubActionBtn} ${styles.pubSecondaryBtn}`}
+                        style={{ padding: "4px 10px", fontSize: "0.75rem" }}
+                        onClick={() => {
+                          setSelectedCitationPub(pub);
+                          setCitationFormat("bibtex");
+                        }}
+                      >
+                        <Quote size={12} /> Cite
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )
+        ) : (
+          <div className={styles.noResultsBox} style={{ margin: "40px 0", textAlign: "center" }}>
+            <p>No publications found matching "{searchQuery}".</p>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={() => {
+                setSearchQuery("");
+                setFilterType("All");
+              }}
+            >
+              Reset Search & Filters
+            </button>
+          </div>
+        )}
+
+        <div style={{ marginTop: "36px" }}>
           <a
             className={styles.sourceNote}
             href="https://docs.google.com/presentation/d/1arPiJH7qh6eBlYHkRl61SeIet7LnoqsEMP5tj547U0g/present"
@@ -891,7 +1244,120 @@ export function PublicationsPage() {
         </div>
       </section>
 
+      {/* 4. Interactive Citation & Abstract Modal Drawer */}
+      {selectedCitationPub ? (
+        <div className={styles.modalOverlay} onClick={() => setSelectedCitationPub(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <div>
+                <span className={styles.sessionBadge} style={{ marginBottom: "6px" }}>
+                  {selectedCitationPub.type} · {selectedCitationPub.year}
+                </span>
+                <h3 className={styles.modalTitle}>{selectedCitationPub.title}</h3>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--academic-muted)" }}>
+                  {selectedCitationPub.authors}
+                </p>
+                <p style={{ margin: "4px 0 0 0", fontSize: "0.85rem", color: "var(--academic-blue)" }}>
+                  {selectedCitationPub.venue}
+                </p>
+              </div>
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setSelectedCitationPub(null)}
+                title="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Format Selector Tabs */}
+            <div className={styles.citationFormatTabs}>
+              <button
+                type="button"
+                className={`${styles.citationTab} ${citationFormat === "bibtex" ? styles.citationTabActive : ""}`}
+                onClick={() => setCitationFormat("bibtex")}
+              >
+                BibTeX Format
+              </button>
+              <button
+                type="button"
+                className={`${styles.citationTab} ${citationFormat === "ieee" ? styles.citationTabActive : ""}`}
+                onClick={() => setCitationFormat("ieee")}
+              >
+                IEEE Style
+              </button>
+              <button
+                type="button"
+                className={`${styles.citationTab} ${citationFormat === "apa" ? styles.citationTabActive : ""}`}
+                onClick={() => setCitationFormat("apa")}
+              >
+                APA Style
+              </button>
+            </div>
+
+            {/* Citation Content Box */}
+            {citationFormat === "bibtex" && (
+              <div className={styles.bibtexCodeBox}>
+                <button
+                  type="button"
+                  className={styles.copyFloatingBtn}
+                  onClick={() => handleCopyModalCitation(selectedCitationPub.bibtex || generateIeeeCitation(selectedCitationPub))}
+                >
+                  {copiedModal ? <Check size={13} style={{ color: "#10b981" }} /> : <Copy size={13} />}
+                  {copiedModal ? "Copied!" : "Copy BibTeX"}
+                </button>
+                {selectedCitationPub.bibtex || generateIeeeCitation(selectedCitationPub)}
+              </div>
+            )}
+
+            {citationFormat === "ieee" && (
+              <div className={styles.bibtexCodeBox}>
+                <button
+                  type="button"
+                  className={styles.copyFloatingBtn}
+                  onClick={() => handleCopyModalCitation(generateIeeeCitation(selectedCitationPub))}
+                >
+                  {copiedModal ? <Check size={13} style={{ color: "#10b981" }} /> : <Copy size={13} />}
+                  {copiedModal ? "Copied!" : "Copy IEEE"}
+                </button>
+                {generateIeeeCitation(selectedCitationPub)}
+              </div>
+            )}
+
+            {citationFormat === "apa" && (
+              <div className={styles.bibtexCodeBox}>
+                <button
+                  type="button"
+                  className={styles.copyFloatingBtn}
+                  onClick={() => handleCopyModalCitation(generateApaCitation(selectedCitationPub))}
+                >
+                  {copiedModal ? <Check size={13} style={{ color: "#10b981" }} /> : <Copy size={13} />}
+                  {copiedModal ? "Copied!" : "Copy APA"}
+                </button>
+                {generateApaCitation(selectedCitationPub)}
+              </div>
+            )}
+
+            {selectedCitationPub.href ? (
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <a
+                  href={selectedCitationPub.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.primaryButton}
+                  style={{ fontSize: "0.85rem", padding: "8px 18px" }}
+                >
+                  Open Full Publisher Paper (DOI) <ExternalLink size={14} />
+                </a>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+
       {/* Collaboration Callout */}
+
       <section className={styles.ctaBand}>
         <div>
           <p className={styles.eyebrow}>Research Collaboration</p>

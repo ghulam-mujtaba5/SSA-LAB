@@ -300,13 +300,6 @@ export default function AcademicDomainModal({ domain, onClose }) {
 
         {/* Footer */}
         <div className={styles.modalFooter}>
-          <button
-            type="button"
-            className={styles.footerCloseBtn}
-            onClick={onClose}
-          >
-            Close Panel
-          </button>
           <Link href="/supervision" className={styles.footerCta}>
             Apply for Supervision / FYP <ArrowRight size={15} />
           </Link>

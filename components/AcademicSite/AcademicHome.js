@@ -145,17 +145,20 @@ export default function AcademicHome() {
 
       {/* 2.5 Live Security Engineering Demo with Lottie Integration */}
       <section className={styles.section} id="live-demo">
-        <div className={styles.sectionHeading}>
+        <div className={styles.sectionHeading} style={{ alignItems: "center" }}>
           <div>
             <p className={styles.eyebrow}>Interactive Vulnerability Inspection</p>
             <h2>Live AST Code Analysis & Remediation</h2>
+            <p style={{ color: "var(--academic-muted, #64748b)", fontSize: "0.92rem", marginTop: "6px", maxWidth: "680px" }}>
+              Test SCSA Lab's static analysis engine on real CVE benchmarks. Toggle between Split Diff, Unchecked Code, and Remediated Code views to inspect AST node traversal, vulnerability taint sinks, and security fixes.
+            </p>
           </div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "20px", alignItems: "center" }}>
-          <InteractiveCodeScanner />
-          <div className={styles.lottieCard} style={{ maxWidth: "260px", width: "100%", height: "240px" }}>
+          <div className={styles.lottieCard} style={{ maxWidth: "160px", width: "100%", height: "120px", flexShrink: 0, padding: 0 }}>
             <AcademicLottie src="/lottie/web-coding.json" ariaLabel="Live AST Inspection Animation" speed={0.8} />
           </div>
+        </div>
+        <div style={{ width: "100%" }}>
+          <InteractiveCodeScanner />
         </div>
       </section>
 
