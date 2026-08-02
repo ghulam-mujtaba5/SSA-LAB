@@ -88,7 +88,7 @@ export const authOptions = {
     signIn: "/admin/login",
     error: "/admin/login",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || "X2f+LFHZI5wwNOsGTF0Etql5AEgiR7I32/KQRqrql5EgXF3fM7FVtAFuhg4=",
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
