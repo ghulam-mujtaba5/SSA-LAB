@@ -292,23 +292,35 @@ export default function AcademicHome() {
 
       {/* Academic Partners (Above Footer) */}
       <section className={styles.partners}>
-        <p>Academic and research affiliations</p>
+        <p className={styles.eyebrow} style={{ textAlign: "center", marginBottom: "6px" }}>
+          Institutional Network
+        </p>
+        <h2 style={{ textAlign: "center", marginBottom: "24px", fontSize: "1.45rem", fontWeight: 700 }}>
+          Academic & Industrial Partners
+        </h2>
         <div className={styles.partnerRowWrapper}>
-          <div className={styles.partnerGrid}>
+          <div className={styles.partnerCardGrid}>
             {partnerLogos.map((partner) => (
-              <figure key={partner.name}>
-                <a href={partner.href} target="_blank" rel="noreferrer" title={partner.name}>
-                  <div className={styles.partnerLogoWrap}>
-                    <Image
-                      src={partner.image}
-                      alt={partner.name}
-                      width={180}
-                      height={50}
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
-                </a>
-              </figure>
+              <a
+                key={partner.name}
+                href={partner.href}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.partnerCardBox}
+                title={partner.name}
+              >
+                <div className={styles.partnerLogoWrap}>
+                  <Image
+                    src={partner.image}
+                    alt={partner.name}
+                    width={180}
+                    height={50}
+                    style={{ objectFit: "contain" }}
+                  />
+                </div>
+                <h4>{partner.name}</h4>
+                <span className={styles.partnerRole}>{partner.role}</span>
+              </a>
             ))}
           </div>
         </div>

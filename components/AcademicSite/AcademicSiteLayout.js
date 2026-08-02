@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Menu, X, ExternalLink, ChevronDown } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
 import AcademicFooter from "./AcademicFooter";
@@ -75,12 +75,39 @@ export default function AcademicSiteLayout({
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeoutRef = useRef(null);
+
   const pageTitle = title
     ? `${title} | ${academicProfile.labShort}`
     : `${academicProfile.labShort} | Software Security Research`;
   const canonical = `${SITE_URL}${path}`;
   const extraSchemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
   const allSchemas = buildBaseSchemas(path, extraSchemas);
+
+  const handleMouseEnter = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+      dropdownTimeoutRef.current = null;
+    }
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 150);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -126,25 +153,38 @@ export default function AcademicSiteLayout({
                   return (
                     <div
                       key={item.href}
-                      className={styles.navDropdown}
-                      onMouseEnter={() => setDropdownOpen(true)}
-                      onMouseLeave={() => setDropdownOpen(false)}
+                      className={`${styles.navDropdown} ${dropdownOpen ? styles.dropdownActive : ""}`}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
                     >
                       <Link
                         href={item.href}
                         className={`${styles.dropdownTrigger} ${active ? styles.activeNav : ""}`}
+                        aria-expanded={dropdownOpen}
+                        aria-haspopup="true"
                       >
                         {item.label} <ChevronDown size={14} className={styles.dropdownChevron} />
                       </Link>
 
                       {dropdownOpen && (
-                        <div className={styles.dropdownMenu}>
+                        <div
+                          className={styles.dropdownMenu}
+                          onMouseEnter={handleMouseEnter}
+                          onMouseLeave={handleMouseLeave}
+                          role="menu"
+                        >
                           {item.children.map((sub) => (
                             <Link
                               key={sub.href}
                               href={sub.href}
                               className={styles.dropdownItem}
-                              onClick={() => setDropdownOpen(false)}
+                              role="menuitem"
+                              onClick={() => {
+                                if (dropdownTimeoutRef.current) {
+                                  clearTimeout(dropdownTimeoutRef.current);
+                                }
+                                setDropdownOpen(false);
+                              }}
                             >
                               {sub.label}
                             </Link>

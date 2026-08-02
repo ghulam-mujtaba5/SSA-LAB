@@ -235,15 +235,19 @@ export default function LoginPage() {
 }
 
 export async function getServerSideProps(context) {
-  const session = await getServerSession(context.req, context.res, authOptions);
+  try {
+    const session = await getServerSession(context.req, context.res, authOptions);
 
-  if (session) {
-    return {
-      redirect: {
-        destination: "/admin/dashboard",
-        permanent: false,
-      },
-    };
+    if (session) {
+      return {
+        redirect: {
+          destination: "/admin/dashboard",
+          permanent: false,
+        },
+      };
+    }
+  } catch (error) {
+    console.error("Login page getServerSideProps warning:", error?.message || error);
   }
 
   return {
