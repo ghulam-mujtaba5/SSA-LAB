@@ -57,19 +57,24 @@ const ProjectDetail = ({ project }) => {
 
   const {
     title,
-    description,
-    image,
-    showImage,
-    showGallery,
-    gallery,
-    tags,
-    category,
     links,
-    problem,
-    solution,
-    outcome,
     status,
   } = project;
+
+  const description = project.description || project.summary;
+  const image = project.image || project.coverImage;
+  const gallery = project.gallery && project.gallery.length > 0
+    ? project.gallery
+    : project.coverImage
+      ? [{ url: project.coverImage, caption: `${project.title} — Official Poster`, order: 1 }]
+      : [];
+  const tags = project.tags || project.technologies || project.specializations || [];
+  const category = project.category || project.programme || project.projectType;
+  const problem = project.problem || project.summary;
+  const solution = project.solution || (project.technologies ? `Built using ${project.technologies.join(", ")}.` : undefined);
+  const outcome = project.outcome || (project.institution ? `Supervised at ${project.institution}` : undefined);
+  const showImage = project.showImage !== false;
+  const showGallery = project.showGallery !== false;
 
   // Case-study facts — render only what actually exists (plan §5.3)
   const caseFacts = [

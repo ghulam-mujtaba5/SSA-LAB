@@ -72,27 +72,22 @@ import {
 import { defaultFypProjects } from "../../data/fypProjects";
 import styles from "./AcademicSite.module.css";
 
-function PageIntro({ eyebrow, title, lead, showLogo = true }) {
+function PageIntro({ eyebrow, title, lead, illustration = null, action = null }) {
   return (
-    <section className={styles.pageIntro} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
-      <div style={{ flex: '1 1 min(100%, 580px)' }}>
-        <p className={styles.eyebrow}>{eyebrow}</p>
-        <h1>{title}</h1>
-        <p>{lead}</p>
-      </div>
-      {showLogo && (
-        <div className={`${styles.projectIllustrationCard} ${styles.floatAnim}`} style={{ flexShrink: 0, margin: '0 auto', padding: '16px 24px' }}>
-          <div className={styles.illustrationGlow} />
-          <Image
-            src="/academic/scsa-research-group-logo.png"
-            alt="SCSA Research Group Official Branding Logo"
-            width={160}
-            height={106}
-            style={{ objectFit: 'contain' }}
-            priority
-          />
+    <section className={styles.pageIntro}>
+      <div className={styles.pageIntroInner}>
+        <div className={styles.pageIntroText}>
+          {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
+          <h1>{title}</h1>
+          {lead && <p className={styles.leadText}>{lead}</p>}
+          {action && <div className={styles.pageIntroActions}>{action}</div>}
         </div>
-      )}
+        {illustration && (
+          <div className={styles.pageIntroIllustration}>
+            {illustration}
+          </div>
+        )}
+      </div>
     </section>
   );
 }
@@ -143,6 +138,13 @@ export function AboutPage() {
           eyebrow="About SCSA Lab & Collaborations"
           title="Pioneering Source-Code Security Assessment & AI-Driven Software Reliability"
           lead="The Source Code Security Assessment (SCSA) Research Lab unites academic rigor, global international partnerships, and industrial applications to discover software vulnerabilities, synthesize security patches, defend against malware, and automate software verification."
+          illustration={
+            <AcademicLottie
+              src="/lottie/ai-brain.json"
+              ariaLabel="AI Software Security Inspection Animation"
+              speed={0.8}
+            />
+          }
         />
         {coInvestigators[0] && (
           <aside className={styles.aboutDirectorCard}>

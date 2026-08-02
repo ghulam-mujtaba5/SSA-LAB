@@ -34,11 +34,11 @@ const impactStats = [
 
 const domainIllustrationMap = {
   "cyber-security": "/ai-chatgpt/cyber-security-shield.png",
-  "vulnerability": "/ai-chatgpt/vulnerability-chip.png",
-  "testing": "/ai-chatgpt/software-testing-checklist.png",
-  "code-clone": "/ai-chatgpt/code-clone-sync.png",
-  "malware": "/ai-chatgpt/malware-ai-brain.png",
-  "ai-repair": "/ai-chatgpt/ai-robot-mascot.png",
+  "vulnerability-detection": "/ai-chatgpt/vulnerability-chip.png",
+  "software-testing": "/ai-chatgpt/software-testing-checklist.png",
+  "malware-detection": "/ai-chatgpt/malware-ai-brain.png",
+  "code-clone-analysis": "/ai-chatgpt/code-clone-sync.png",
+  "software-evolution-reuse": "/ai-chatgpt/ai-robot-mascot.png",
 };
 
 export default function AcademicHome() {
@@ -106,34 +106,6 @@ export default function AcademicHome() {
           </div>
 
           <div className={styles.heroPortrait}>
-            {/* Signature One-Time Large Branding Emblem Icon */}
-            <div
-              style={{
-                background: "linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.95))",
-                border: "1px solid rgba(56, 189, 248, 0.3)",
-                borderRadius: "16px",
-                padding: "16px",
-                marginBottom: "16px",
-                textAlign: "center",
-                boxShadow: "0 12px 32px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                backdropFilter: "blur(12px)",
-              }}
-            >
-              <div style={{ display: "inline-block", position: "relative" }}>
-                <Image
-                  src="/scsa-logo.png"
-                  alt="SCSA Research Group Official Signature Branding Emblem"
-                  width={200}
-                  height={130}
-                  style={{ objectFit: "contain", filter: "drop-shadow(0 8px 20px rgba(56, 189, 248, 0.4))" }}
-                  priority
-                />
-              </div>
-              <div style={{ marginTop: "8px", fontSize: "0.78rem", fontWeight: 700, color: "#38bdf8", letterSpacing: "0.05em", textTransform: "uppercase" }}>
-                SCSA Research Laboratory Branding
-              </div>
-            </div>
-
             <AcademicImageLightbox
               src="/academic/junaid-akram-professor.jpg"
               alt="Dr. Junaid Akram"

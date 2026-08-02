@@ -22,6 +22,17 @@ export const defaultFypProjects = [
     technologies: ["Next.js 16", "React 19", "TypeScript", "FastAPI", "Python", "Turso / libSQL", "Solidity", "MetaMask"],
     coverImage: "/academic/fyp/megilance-final-year-project-poster.jpeg",
     coverAlt: "MegiLance final-year project poster",
+    gallery: [
+      { url: "/academic/fyp/megilance-final-year-project-poster.jpeg", caption: "MegiLance Official FYP Project Poster", order: 1 },
+      { url: "/academic/fyp/megilance-landing-page.png", caption: "MegiLance Landing Page & Platform Overview", order: 2 },
+      { url: "/academic/fyp/megilance-system-architecture.png", caption: "System Architecture & Blockchain Escrow Layer", order: 3 },
+      { url: "/academic/fyp/megilance-ai-fraud-analysis.png", caption: "AI Fraud Risk Analysis & Escrow Verification", order: 4 },
+      { url: "/academic/fyp/megilance-client-dashboard.png", caption: "Client Dashboard & Job Proposal Management", order: 5 },
+      { url: "/academic/fyp/megilance-freelancer-earnings-dashboard.png", caption: "Freelancer Earnings & Smart Contract Analytics", order: 6 },
+      { url: "/academic/fyp/megilance-admin-command-center.png", caption: "Admin Command Center & Dispute Resolution", order: 7 },
+      { url: "/academic/fyp/megilance-ai-matching.png", caption: "AI Talent Matching Engine", order: 8 },
+      { url: "/academic/fyp/megilance-ai-features.png", caption: "AI Proposal Assistant & Auto-Scoring", order: 9 }
+    ],
     published: true,
     featured: true,
     displayOrder: 1
@@ -47,6 +58,12 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Vulnerability Detection", "Large Language Models", "Source Code Security"],
     technologies: ["Python", "PyTorch", "Hugging Face Transformers", "Tree-sitter", "LLMs"],
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverAlt: "Software Vulnerability Detection LLM Research Poster",
+    gallery: [
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "Software Vulnerability Detection LLM Research Poster", order: 1 },
+      { url: "/academic/vulnerability-detection-workflow.jpg", caption: "AST Prompting & Model Fine-Tuning Pipeline", order: 2 }
+    ],
     published: true,
     featured: true,
     displayOrder: 2
@@ -72,6 +89,12 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Code Clone Detection", "Semantic Analysis", "Software Quality"],
     technologies: ["Python", "AST Parsing", "Tokenization", "Elasticsearch", "FastAPI"],
+    coverImage: "/academic/fyp/source-code-structure-poster.png",
+    coverAlt: "Token-Based Code Clone Detection Research Poster",
+    gallery: [
+      { url: "/academic/fyp/source-code-structure-poster.png", caption: "Token-Based Code Clone Detection Research Poster", order: 1 },
+      { url: "/academic/vulnerability-detection-dashboard.png", caption: "Type-3 & Type-4 Code Clone Analysis Dashboard", order: 2 }
+    ],
     published: true,
     featured: true,
     displayOrder: 3
@@ -97,6 +120,12 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Vulnerability Patching", "Program Repair", "LLM Optimization"],
     technologies: ["Python", "LLM Fine-tuning", "Git Diff Parser", "Docker"],
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverAlt: "LLM Vulnerability Patch Recommendation Poster",
+    gallery: [
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "LLM Vulnerability Patch Recommendation Poster", order: 1 },
+      { url: "/academic/vulnerability-detection-dashboard.png", caption: "RAG & LLM Security Patch Synthesis Engine", order: 2 }
+    ],
     published: true,
     featured: true,
     displayOrder: 4
@@ -121,6 +150,13 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Feature Envy Detection", "Graph Neural Networks", "Code Refactoring"],
     technologies: ["Python", "PyTorch Geometric", "AST Parsing", "React", "D3.js"],
+    coverImage: "/academic/fyp/code-smell-detection-poster.png",
+    coverAlt: "Feature Envy Code Smell Detection Research Poster",
+    gallery: [
+      { url: "/academic/fyp/code-smell-detection-poster.png", caption: "Feature Envy Code Smell Detection Research Poster", order: 1 },
+      { url: "/academic/vulnerability-detection-workflow.jpg", caption: "GNN Program Dependence Graph Workflow", order: 2 },
+      { url: "/academic/vulnerability-detection-dashboard.png", caption: "Interactive Refactoring Visualization Dashboard", order: 3 }
+    ],
     published: true,
     featured: true,
     displayOrder: 5
