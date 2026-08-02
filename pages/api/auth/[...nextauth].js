@@ -30,9 +30,10 @@ export const authOptions = {
 
           await dbConnect();
 
-          const user = await User.findOne({ email: credentials.email }).select(
-            "+password",
-          );
+          const normalizedEmail = credentials.email.trim().toLowerCase();
+          const user = await User.findOne({
+            email: { $regex: new RegExp(`^${normalizedEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') },
+          }).select("+password");
 
           if (!user) {
             await createAuditLog({
