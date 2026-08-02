@@ -211,7 +211,7 @@
   --signal-available: #10b981;
 
   /* Gradient definitions */
-  --gradient-primary: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #075985 100%);
+  --gradient-primary: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
   --gradient-accent: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   --gradient-subtle: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(3, 105, 161, 0.02) 100%);
   --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.45) 100%);
@@ -359,12 +359,12 @@
   --border-focus: #38bdf8;
   
   /* Brand colors */
-  --brand-primary: #38bdf8;
-  --brand-primary-hover: #7dd3fc;
-  --brand-primary-active: #0284c7;
-  --brand-primary-light: #7dd3fc;
-  --brand-primary-muted: rgba(56, 189, 248, 0.16);
-  --brand-primary-shadow: rgba(56, 189, 248, 0.35);
+  --brand-primary: #0284c7;
+  --brand-primary-hover: #2563eb;
+  --brand-primary-active: #0369a1;
+  --brand-primary-light: #38bdf8;
+  --brand-primary-muted: rgba(2, 132, 199, 0.16);
+  --brand-primary-shadow: rgba(2, 132, 199, 0.35);
   
   --bg: #090d16;
   --bg-elev-1: #111827;
@@ -374,9 +374,9 @@
   --text: #f8fafc;
   --text-muted: #94a3b8;
 
-  --primary: #38bdf8;
-  --primary-dark: #0284c7;
-  --primary-foreground: #0f172a;
+  --primary: #0284c7;
+  --primary-dark: #0369a1;
+  --primary-foreground: #ffffff;
   --success: #10b981;
   --success-dark: #059669;
   --warning: #f59e0b;

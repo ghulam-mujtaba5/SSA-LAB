@@ -17,9 +17,9 @@
 
 :global([data-theme="dark"]) .site {
   --academic-ink: #f8fafc;
-  --academic-navy: #38bdf8;
+  --academic-navy: #0284c7;
   --academic-blue: #0284c7;
-  --academic-cyan: #38bdf8;
+  --academic-cyan: #2563eb;
   --academic-paper: #090d16;
   --academic-soft: #111827;
   --academic-line: #1e293b;
@@ -815,7 +815,7 @@
   text-transform: uppercase;
 }
 
-.partners > div,
+.partners > div:not(.partnerRowWrapper),
 .partnerGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1825,7 +1825,7 @@
     grid-template-columns: 1fr;
   }
 
-  .partners > div,
+  .partners > div:not(.partnerRowWrapper),
   .partnerGrid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1929,7 +1929,7 @@
     grid-row: 1;
   }
 
-  .partners > div,
+  .partners > div:not(.partnerRowWrapper),
   .partnerGrid {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -2014,7 +2014,7 @@
     grid-template-columns: 1fr;
   }
 
-  .partners > div,
+  .partners > div:not(.partnerRowWrapper),
   .partnerGrid,
   .eventGallery {
     grid-template-columns: 1fr;
@@ -3059,7 +3059,7 @@
 /* Single-Row Institutional Partners Showcase (ONE ROW ONLY) */
 .partnerRowWrapper {
   width: 100%;
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
   overflow-x: auto;
