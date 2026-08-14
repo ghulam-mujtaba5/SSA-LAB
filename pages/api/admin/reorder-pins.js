@@ -31,18 +31,21 @@ async function handler(req, res) {
     const opsProjects = [];
 
     items.forEach((it, idx) => {
-      const ts = new Date(now - idx); // ensure unique millis
+      const ts = new Date(now - idx * 1000); // ensure distinct 1-second timestamps
+      const targetId = it.id || it._id;
+      if (!targetId) return;
+
       if (it?.type === "article") {
         opsArticles.push({
           updateOne: {
-            filter: { _id: it.id },
+            filter: { _id: targetId },
             update: { $set: { updatedAt: ts, pinned: true } },
           },
         });
       } else if (it?.type === "project") {
         opsProjects.push({
           updateOne: {
-            filter: { _id: it.id },
+            filter: { _id: targetId },
             update: { $set: { updatedAt: ts, pinned: true } },
           },
         });
@@ -56,10 +59,10 @@ async function handler(req, res) {
       await Project.bulkWrite(opsProjects, { ordered: false });
     }
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, message: "Order updated successfully" });
   } catch (error) {
     console.error("Error reordering pinned items:", error);
-    return res.status(500).json({ success: false, message: "Internal Server Error" });
+    return res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
   }
 }
 

@@ -17,22 +17,78 @@ async function handler(req, res) {
   await dbConnect();
 
   try {
+    const { includeUnpinned, q, type } = req.query;
+
     const pinnedArticles = await Article.find({ pinned: true })
+      .select("title slug excerpt coverImage published updatedAt pinned tags categories")
       .sort({ updatedAt: -1 })
-      .limit(5);
+      .lean();
+
     const pinnedProjects = await Project.find({ pinned: true })
+      .select("title slug description image published updatedAt pinned tags category")
       .sort({ updatedAt: -1 })
-      .limit(5);
+      .lean();
 
     const items = [
-      ...pinnedArticles.map((a) => ({ ...a.toObject(), type: "article" })),
-      ...pinnedProjects.map((p) => ({ ...p.toObject(), type: "project" })),
+      ...pinnedArticles.map((a) => ({ ...a, type: "article" })),
+      ...pinnedProjects.map((p) => ({ ...p, type: "project" })),
     ];
 
     // Sort combined items by when they were last updated (most recent first)
     items.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
-    res.status(200).json({ success: true, data: items.slice(0, 10) }); // Limit to 10 total
+    let candidates = [];
+    if (includeUnpinned === "true") {
+      const searchRegex = q ? new RegExp(String(q).trim(), "i") : null;
+      const articleFilter = { pinned: { $ne: true } };
+      const projectFilter = { pinned: { $ne: true } };
+
+      if (searchRegex) {
+        articleFilter.$or = [
+          { title: searchRegex },
+          { excerpt: searchRegex },
+          { tags: searchRegex },
+        ];
+        projectFilter.$or = [
+          { title: searchRegex },
+          { description: searchRegex },
+          { tags: searchRegex },
+        ];
+      }
+
+      if (!type || type === "all" || type === "article") {
+        const unpinnedArticles = await Article.find(articleFilter)
+          .select("title slug excerpt coverImage published updatedAt pinned tags")
+          .sort({ updatedAt: -1 })
+          .limit(20)
+          .lean();
+        candidates.push(
+          ...unpinnedArticles.map((a) => ({ ...a, type: "article" })),
+        );
+      }
+
+      if (!type || type === "all" || type === "project") {
+        const unpinnedProjects = await Project.find(projectFilter)
+          .select("title slug description image published updatedAt pinned tags")
+          .sort({ updatedAt: -1 })
+          .limit(20)
+          .lean();
+        candidates.push(
+          ...unpinnedProjects.map((p) => ({ ...p, type: "project" })),
+        );
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      data: items,
+      candidates,
+      stats: {
+        total: items.length,
+        articles: pinnedArticles.length,
+        projects: pinnedProjects.length,
+      },
+    });
   } catch (error) {
     console.error("Error fetching pinned items:", error);
     res.status(500).json({

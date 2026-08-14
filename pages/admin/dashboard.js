@@ -154,6 +154,17 @@ const Icons = {
       <polyline points="22,6 12,13 2,6"/>
     </svg>
   ),
+  Pin: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 17v5"/><path d="M9 3l6 6"/><path d="M6 6l6 6"/><path d="M14 4l6 6"/><path d="M8 8l-4 4"/><path d="M16 16l4-4"/>
+    </svg>
+  ),
+  GraduationCap: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+      <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+    </svg>
+  ),
 };
 
 // Time-of-day greeting helper
@@ -308,18 +319,32 @@ const AdminDashboard = () => {
       variant: "success",
     },
     {
+      label: "FYP Supervision",
+      description: "Manage research projects & students",
+      icon: Icons.GraduationCap,
+      href: "/admin/fyp",
+      variant: "primary",
+    },
+    {
+      label: "Pinned Showcase",
+      description: "Curate & reorder featured items",
+      icon: Icons.Pin,
+      href: "/admin/pins",
+      variant: "warning",
+    },
+    {
       label: "Enquiries & Messages",
       description: "View visitor submissions & contacts",
       icon: Icons.Mail,
       href: "/admin/enquiries",
-      variant: "primary",
+      variant: "info",
     },
     {
       label: "Media Library",
       description: "Manage images & files",
       icon: Icons.Image,
       href: "/admin/media",
-      variant: "warning",
+      variant: "secondary",
     },
     {
       label: "Analytics",

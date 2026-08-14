@@ -147,6 +147,24 @@ export default function CommandPalette() {
         action: () => router.push("/admin/projects"),
       },
       {
+        id: "go-fyp",
+        label: "Go to FYP Supervision",
+        description: "Manage student final year projects & research",
+        icon: PaletteIcons.project,
+        category: "navigation",
+        keywords: ["fyp", "supervision", "thesis", "students", "academic"],
+        action: () => router.push("/admin/fyp"),
+      },
+      {
+        id: "go-enquiries",
+        label: "Go to Enquiries & Messages",
+        description: "Manage contact inquiries and inbox messages",
+        icon: PaletteIcons.search,
+        category: "navigation",
+        keywords: ["messages", "inbox", "contact", "emails", "enquiries"],
+        action: () => router.push("/admin/enquiries"),
+      },
+      {
         id: "go-media",
         label: "Go to Media",
         description: "Media library and uploads",
@@ -175,9 +193,10 @@ export default function CommandPalette() {
       {
         id: "go-pins",
         label: "Go to Pins",
-        description: "Manage pinned items",
+        description: "Manage pinned showcase items",
         icon: PaletteIcons.pin,
         category: "navigation",
+        keywords: ["showcase", "featured", "order", "pin"],
         action: () => router.push("/admin/pins"),
       },
       {
@@ -224,6 +243,15 @@ export default function CommandPalette() {
         category: "create",
         keywords: ["create", "add", "portfolio"],
         action: () => router.push("/admin/projects/new"),
+      },
+      {
+        id: "new-fyp",
+        label: "New FYP Project",
+        description: "Add a supervised FYP project",
+        icon: PaletteIcons.plus,
+        category: "create",
+        keywords: ["create", "add", "fyp", "supervision", "student"],
+        action: () => router.push("/admin/fyp/new"),
       },
       // Theme commands
       {
