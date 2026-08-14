@@ -23,7 +23,8 @@ const SAMPLES = [
   {
     id: "buffer-overflow",
     title: "C/C++ Memory Safety Audit",
-    cve: "CVE-2024-30192",
+    cve: "CVE-2015-7547",
+    benchmarkLabel: "Verified Vulnerability Benchmark (NVD/CVE)",
     cwe: "CWE-120: Buffer Copy without Checking Size",
     severity: "CRITICAL",
     cvss: "9.8",
@@ -66,7 +67,8 @@ void parse_input(const char *user_str) {
   {
     id: "sql-injection",
     title: "Python Query Injection Analysis",
-    cve: "CVE-2023-4109",
+    cve: "CVE-2022-31188",
+    benchmarkLabel: "Verified Vulnerability Benchmark (NVD/CVE)",
     cwe: "CWE-89: Improper Neutralization of Special Elements (SQLi)",
     severity: "HIGH",
     cvss: "8.8",
@@ -102,7 +104,8 @@ def get_user_profile(user_id):
   {
     id: "java-deserialization",
     title: "Java Deserialization Audit",
-    cve: "CVE-2023-28956",
+    cve: "CVE-2015-4852",
+    benchmarkLabel: "Verified Vulnerability Benchmark (NVD/CVE)",
     cwe: "CWE-502: Deserialization of Untrusted Data",
     severity: "CRITICAL",
     cvss: "9.8",
@@ -141,7 +144,8 @@ public Object receivePayload(byte[] stream) throws Exception {
   {
     id: "node-cmd-injection",
     title: "Node.js Command Injection Analysis",
-    cve: "CVE-2023-38552",
+    cve: "CVE-2021-21315",
+    benchmarkLabel: "Verified Vulnerability Benchmark (NVD/CVE)",
     cwe: "CWE-78: OS Command Injection",
     severity: "HIGH",
     cvss: "8.6",

@@ -72,7 +72,7 @@ export default async function handler(req, res) {
     // Notify Bing/Yandex via IndexNow for all newly published URLs
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://sites.google.com/view/temporaryr";
+      "https://www.ssa-lab.tech";
     const newUrls = [
       ...projectsToPublish.map((p) => `${siteUrl}/research`),
       ...articlesToPublish.map((a) => `${siteUrl}/publications`),

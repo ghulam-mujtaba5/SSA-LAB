@@ -197,7 +197,7 @@ const ArticleDetail = ({ article, relatedArticles = [] }) => {
   const { title, content, coverImage, tags, categories, excerpt, readingTime, updatedAt, createdAt, publishAt, ctaLabel, ctaUrl } = article;
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://sites.google.com/view/temporaryr";
+    "https://www.ssa-lab.tech";
   const articleUrl = `${siteUrl}/publications`;
 
   // Combine styles based on theme

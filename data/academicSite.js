@@ -15,7 +15,7 @@ export const academicProfile = {
   orcid: "https://orcid.org/0000-0003-1752-6124",
   officialProfile: "https://lahore.comsats.edu.pk/employees/1333",
   officialFypIdeas: "https://lahore.comsats.edu.pk/cs/fyp/IdeasforStudents.aspx",
-  sourceSite: "https://sites.google.com/view/temporaryr/home",
+  sourceSite: "https://www.ssa-lab.tech",
   credentials: [
     "Postdoctoral research at SnT, University of Luxembourg",
     "PhD from Tsinghua University",

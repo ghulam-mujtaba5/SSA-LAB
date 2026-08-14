@@ -38,7 +38,7 @@ const navigation = [
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://sites.google.com/view/temporaryr";
+  "https://www.ssa-lab.tech";
 
 /** Build the base JSON-LD schemas injected on every page */
 function buildBaseSchemas(path, extraSchemas = []) {

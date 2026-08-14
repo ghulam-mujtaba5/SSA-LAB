@@ -17,10 +17,15 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
 User-agent: CCBot
 Disallow: /
 
 Crawl-delay: 1
 
-Sitemap: /sitemap.xml
-Sitemap: /sitemap-dynamic.xml
+Sitemap: https://www.ssa-lab.tech/sitemap.xml
+

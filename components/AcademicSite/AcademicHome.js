@@ -321,7 +321,7 @@ export default function AcademicHome() {
                     style={{ objectFit: "contain" }}
                   />
                 </div>
-                <h4>{partner.name}</h4>
+                <h3>{partner.name}</h3>
                 <span className={styles.partnerRole}>{partner.role}</span>
               </a>
             ))}

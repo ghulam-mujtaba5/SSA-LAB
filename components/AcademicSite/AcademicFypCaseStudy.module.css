@@ -27,6 +27,7 @@
   margin: 0 auto;
 }
 
+.caseCopy h1,
 .caseCopy h2 {
   max-width: 790px;
   margin: 18px 0;

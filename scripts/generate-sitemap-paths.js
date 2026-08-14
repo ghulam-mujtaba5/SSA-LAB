@@ -7,7 +7,7 @@ async function main() {
   const SITE =
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.SITE_URL ||
-    "https://sites.google.com/view/temporaryr";
+    "https://www.ssa-lab.tech";
 
   try {
     const [artRes, projRes] = await Promise.all([

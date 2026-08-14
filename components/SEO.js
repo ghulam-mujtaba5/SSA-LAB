@@ -2,7 +2,7 @@ import Head from "next/head";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://sites.google.com/view/temporaryr";
+  "https://www.ssa-lab.tech";
 const SITE_NAME = "SCSA Research Lab";
 const PERSON_NAME = "Junaid Akram";
 const PERSON_NAME_FULL = "Junaid Akram, PhD";
@@ -21,7 +21,7 @@ export default function SEO({
   imageAlt = "Dr. Junaid Akram — SCSA Research Lab",
   type = "website",
   canonical = url,
-  keywords = "Junaid Akram, SCSA Lab, software security, vulnerability detection, software testing, malware detection, code clone detection, COMSATS Lahore",
+  keywords,
   author = PERSON_NAME_FULL,
   locale = "en_US",
   robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
@@ -48,13 +48,11 @@ export default function SEO({
       {/* ── Primary ──────────────────────────────────────────────── */}
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
       <meta name="robots" content={effectiveRobots} />
       <meta name="googlebot" content={effectiveRobots} />
       <meta name="bingbot" content={effectiveRobots} />
       <meta name="rating" content="general" />
-      <meta name="revisit-after" content="7 days" />
       <meta name="category" content="Education, Research, Technology" />
       <meta name="classification" content="Academic Research" />
       <meta name="coverage" content="Worldwide" />

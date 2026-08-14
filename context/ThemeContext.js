@@ -75,7 +75,10 @@ export const ThemeProvider = ({ children }) => {
   }, [mode]);
 
   const toggleTheme = () => {
-    setMode((prev) => (prev === "light" ? "dark" : "light"));
+    setMode((prev) => {
+      const currentEffective = getEffectiveTheme(prev);
+      return currentEffective === "dark" ? "light" : "dark";
+    });
   };
 
   const setThemeMode = (nextMode) => {

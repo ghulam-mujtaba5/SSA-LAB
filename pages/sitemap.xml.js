@@ -1,9 +1,11 @@
+import { defaultFypProjects } from "../data/fypProjects";
+
 const STATIC_PAGES = [
   {
     path: "/",
     changefreq: "weekly",
     priority: 1.0,
-    lastmod: "2025-01-01",
+    lastmod: "2026-08-14",
     image: {
       loc: "/academic/junaid-akram-professor.jpg",
       title: "Dr. Junaid Akram — SCSA Research Lab",
@@ -14,7 +16,7 @@ const STATIC_PAGES = [
     path: "/about",
     changefreq: "monthly",
     priority: 0.9,
-    lastmod: "2025-01-01",
+    lastmod: "2026-08-01",
     image: {
       loc: "/academic/scsa-research-group-logo.png",
       title: "SCSA Research Lab Logo",
@@ -22,51 +24,27 @@ const STATIC_PAGES = [
   },
   {
     path: "/research",
-    changefreq: "monthly",
+    changefreq: "weekly",
     priority: 0.95,
-    lastmod: "2025-01-01",
+    lastmod: "2026-08-14",
   },
   {
     path: "/publications",
-    changefreq: "monthly",
-    priority: 0.9,
-    lastmod: "2025-01-01",
+    changefreq: "weekly",
+    priority: 0.95,
+    lastmod: "2026-08-14",
   },
   {
     path: "/supervision",
-    changefreq: "monthly",
-    priority: 0.85,
-    lastmod: "2025-01-01",
-  },
-  {
-    path: "/supervision?tab=running",
     changefreq: "weekly",
-    priority: 0.8,
-    lastmod: "2025-01-01",
-  },
-  {
-    path: "/supervision?tab=completed",
-    changefreq: "monthly",
-    priority: 0.75,
-    lastmod: "2025-01-01",
-  },
-  {
-    path: "/supervision?tab=future",
-    changefreq: "monthly",
-    priority: 0.75,
-    lastmod: "2025-01-01",
-  },
-  {
-    path: "/alumni",
-    changefreq: "monthly",
-    priority: 0.8,
-    lastmod: "2025-01-01",
+    priority: 0.9,
+    lastmod: "2026-08-14",
   },
   {
     path: "/team",
     changefreq: "monthly",
-    priority: 0.8,
-    lastmod: "2025-01-01",
+    priority: 0.85,
+    lastmod: "2026-08-01",
     image: {
       loc: "/academic/scsa-research-group-logo.png",
       title: "SCSA Research Lab Team",
@@ -75,14 +53,20 @@ const STATIC_PAGES = [
   {
     path: "/events",
     changefreq: "monthly",
-    priority: 0.7,
-    lastmod: "2025-01-01",
+    priority: 0.8,
+    lastmod: "2026-08-01",
   },
   {
     path: "/contact",
+    changefreq: "monthly",
+    priority: 0.8,
+    lastmod: "2026-08-01",
+  },
+  {
+    path: "/privacy-policy",
     changefreq: "yearly",
-    priority: 0.7,
-    lastmod: "2025-01-01",
+    priority: 0.5,
+    lastmod: "2026-08-01",
   },
 ];
 
@@ -94,7 +78,24 @@ export async function getServerSideProps({ req, res }) {
     forwardedProtocol || (host?.startsWith("localhost") ? "http" : "https");
   const base =
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    `${protocol}://${host}`;
+    "https://www.ssa-lab.tech";
+
+  // Build list of all 31 project case study pages
+  const projectPages = defaultFypProjects.map((p) => ({
+    path: `/supervision/projects/${p.slug}`,
+    changefreq: "monthly",
+    priority: 0.8,
+    lastmod: "2026-08-01",
+    image: p.coverImage
+      ? {
+          loc: p.coverImage,
+          title: p.title,
+          caption: p.coverAlt || `${p.title} case study poster`,
+        }
+      : undefined,
+  }));
+
+  const allPages = [...STATIC_PAGES, ...projectPages];
 
   const buildUrl = (page) => {
     const imageBlock = page.image
@@ -122,9 +123,9 @@ export async function getServerSideProps({ req, res }) {
 
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">` +
-    STATIC_PAGES.map(buildUrl).join("") +
-    `</urlset>`;
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
+    allPages.map(buildUrl).join("\n") +
+    `\n</urlset>`;
 
   res.setHeader("Content-Type", "application/xml");
   res.setHeader(

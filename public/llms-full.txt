@@ -47,7 +47,7 @@ The SCSA Lab actively supervises BS, MS, and PhD researchers in software enginee
 
 ## External Links & Verified Profiles
 
-- **Website**: https://sites.google.com/view/temporaryr
+- **Website**: https://www.ssa-lab.tech
 - **LinkedIn**: https://www.linkedin.com/in/junaidakram/
 - **ResearchGate**: https://www.researchgate.net/profile/Junaid-Akram
 - **ORCID**: https://orcid.org/0000-0003-1752-6124

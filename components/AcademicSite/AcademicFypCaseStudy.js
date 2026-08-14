@@ -55,7 +55,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
             <span>{featured.session}</span>
             <span>{featured.programme}</span>
           </div>
-          <h2>{featured.title}</h2>
+          <h1>{featured.title}</h1>
           <p className={styles.summary}>{featured.summary}</p>
           <div className={styles.specializations}>
             {(featured.specializations || []).map((item) => (

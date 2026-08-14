@@ -17,18 +17,58 @@ import styles from "./AcademicDomainModal.module.css";
 
 export default function AcademicDomainModal({ domain, onClose }) {
   const [activeTab, setActiveTab] = useState("overview");
+  const modalRef = React.useRef(null);
+  const triggerRef = React.useRef(null);
 
   useEffect(() => {
+    // Capture the trigger element that opened the modal
+    triggerRef.current = document.activeElement;
+
+    // Focus first focusable element inside modal
+    if (modalRef.current) {
+      const focusable = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length > 0) {
+        focusable[0].focus();
+      }
+    }
+
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         onClose();
+      } else if (e.key === "Tab" && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const firstElement = focusable[0];
+        const lastElement = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
+
     document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "auto";
+      // Restore focus to trigger element
+      if (triggerRef.current && typeof triggerRef.current.focus === "function") {
+        triggerRef.current.focus();
+      }
     };
   }, [onClose]);
 
@@ -51,6 +91,7 @@ export default function AcademicDomainModal({ domain, onClose }) {
       aria-labelledby="modal-domain-title"
     >
       <div
+        ref={modalRef}
         className={styles.modal}
         onClick={(e) => e.stopPropagation()}
       >

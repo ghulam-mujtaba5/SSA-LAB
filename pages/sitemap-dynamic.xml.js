@@ -5,7 +5,7 @@
 export async function getServerSideProps({ res }) {
   const base =
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://sites.google.com/view/temporaryr";
+    "https://www.ssa-lab.tech";
   res.setHeader("Location", `${base}/sitemap.xml`);
   res.statusCode = 301;
   res.end();

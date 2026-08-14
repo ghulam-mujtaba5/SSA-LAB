@@ -30,6 +30,7 @@ import {
   FileText,
   X,
   Quote,
+  HelpCircle,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import {
@@ -49,7 +50,7 @@ import {
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://sites.google.com/view/temporaryr";
+  "https://www.ssa-lab.tech";
 import AcademicImageLightbox from "./AcademicImageLightbox";
 import AcademicLottie from "./AcademicLottie";
 import AcademicResearchPipeline from "./AcademicResearchPipeline";
@@ -217,7 +218,7 @@ export function AboutPage() {
                 <div className={styles.partnerLogoWrap}>
                   <Image src={partner.image} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
                 </div>
-                <h4>{partner.name}</h4>
+                <h3>{partner.name}</h3>
                 <span className={styles.partnerRole}>{partner.role}</span>
               </a>
             ))}
@@ -934,8 +935,8 @@ export function PublicationsPage() {
               <BookOpen size={22} />
             </div>
             <div className={styles.statMetricContent}>
-              <h4>{publications.length}</h4>
-              <p>Total Publications</p>
+              <div className={styles.statMetricNumber}>{publications.length}</div>
+              <p>Selected Publications</p>
             </div>
           </div>
 
@@ -944,7 +945,7 @@ export function PublicationsPage() {
               <Award size={22} />
             </div>
             <div className={styles.statMetricContent}>
-              <h4>{totalJournals}</h4>
+              <div className={styles.statMetricNumber}>{totalJournals}</div>
               <p>Journal Articles (SCIE Q1/Q2)</p>
             </div>
           </div>
@@ -954,7 +955,7 @@ export function PublicationsPage() {
               <Users size={22} />
             </div>
             <div className={styles.statMetricContent}>
-              <h4>{totalConfs}</h4>
+              <div className={styles.statMetricNumber}>{totalConfs}</div>
               <p>IEEE Conference Papers</p>
             </div>
           </div>
@@ -964,7 +965,7 @@ export function PublicationsPage() {
               <ExternalLink size={22} />
             </div>
             <div className={styles.statMetricContent}>
-              <h4>{totalDoi}</h4>
+              <div className={styles.statMetricNumber}>{totalDoi}</div>
               <p>Direct DOI / Open Access</p>
             </div>
           </div>
@@ -1385,11 +1386,11 @@ export function SupervisionPage({ fypProjects = [] }) {
       })),
     }),
     ...supervisedProjects.slice(0, 6).map((p) =>
-      courseSchema({
+      softwareProjectSchema({
         name: p.title,
-        description: `Final-year project by ${p.student} at ${p.institution}, supervised by Dr. Junaid Akram.`,
+        description: `Final-year supervised research project by ${p.student} at ${p.institution}, supervised by Dr. Junaid Akram.`,
         url: `${SITE_URL}/supervision`,
-        educationalLevel: p.level || "Undergraduate",
+        keywords: p.technologies ? p.technologies.join(", ") : undefined,
       })
     ),
   ];
@@ -1832,7 +1833,7 @@ export function TeamPage() {
                   <div className={styles.partnerLogoWrap}>
                     <Image src={partner.image} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
                   </div>
-                  <h4>{partner.name}</h4>
+                  <h3>{partner.name}</h3>
                   <span className={styles.partnerRole}>{partner.role}</span>
                 </a>
               ))}
@@ -2012,6 +2013,29 @@ export function ContactPage() {
     }
   };
 
+  const CONTACT_FAQS = [
+    {
+      question: "How can I apply for FYP supervision by Dr. Junaid Akram?",
+      answer:
+        "Email junaidakram@cuilahore.edu.pk with your group members' names, registration numbers, current CGPA, selected FYP topic, and technical background.",
+    },
+    {
+      question: "What research areas does the SCSA Lab focus on?",
+      answer:
+        "The SCSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
+    },
+    {
+      question: "Is Dr. Junaid Akram an HEC-approved PhD supervisor?",
+      answer:
+        "Yes. Dr. Junaid Akram is an HEC-approved PhD supervisor at COMSATS University Islamabad, Lahore Campus.",
+    },
+    {
+      question: "What is Dr. Junaid Akram's office location?",
+      answer:
+        "H Block, Room 14, COMSATS University Islamabad, Lahore Campus, Defence Road, Off Raiwind Road, Lahore, Pakistan.",
+    },
+  ];
+
   const contactJsonLd = [
     contactPageSchema({ url: `${SITE_URL}/contact` }),
     personSchema(),
@@ -2022,28 +2046,7 @@ export function ContactPage() {
       serviceType: "Academic Research Supervision",
       url: `${SITE_URL}/contact`,
     }),
-    faqSchema([
-      {
-        question: "How can I apply for FYP supervision by Dr. Junaid Akram?",
-        answer:
-          "Email junaidakram@cuilahore.edu.pk with your group members' names, registration numbers, current CGPA, selected FYP topic, and technical background.",
-      },
-      {
-        question: "What research areas does the SCSA Lab focus on?",
-        answer:
-          "The SCSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
-      },
-      {
-        question: "Is Dr. Junaid Akram an HEC-approved PhD supervisor?",
-        answer:
-          "Yes. Dr. Junaid Akram is an HEC-approved PhD supervisor at COMSATS University Islamabad, Lahore Campus.",
-      },
-      {
-        question: "What is Dr. Junaid Akram's office location?",
-        answer:
-          "H Block, Room 14, COMSATS University Islamabad, Lahore Campus, Defence Road, Off Raiwind Road, Lahore, Pakistan.",
-      },
-    ]),
+    faqSchema(CONTACT_FAQS),
   ];
 
   return (
@@ -2339,6 +2342,27 @@ export function ContactPage() {
             </button>
           </form>
         )}
+      </section>
+
+      {/* ── FAQ Section (Visible matching FAQPage Schema) ── */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Frequently Asked Questions</p>
+            <h2>Supervision & Research FAQs</h2>
+          </div>
+        </div>
+        <div className={styles.faqGrid}>
+          {CONTACT_FAQS.map((faq, index) => (
+            <div key={index} className={styles.faqCard}>
+              <h3 className={styles.faqQuestion}>
+                <HelpCircle size={18} className={styles.faqIcon} />
+                {faq.question}
+              </h3>
+              <p className={styles.faqAnswer}>{faq.answer}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Map Section */}
