@@ -126,7 +126,7 @@ export function AboutPage() {
       "@id": `${SITE_URL}/about`,
       name: "About SCSA Research Lab",
       description:
-        "Source Code Security Assessment (SCSA) Research Lab — Profile, global research collaborations, MS & PhD researchers, lab journey timeline, and core security research pillars.",
+        "About Dr. Junaid Akram and SCSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team.",
     }),
     personSchema(),
   ];
@@ -135,7 +135,7 @@ export function AboutPage() {
     <AcademicSiteLayout
       title="About SCSA Research Lab"
       path="/about"
-      description="Source Code Security Assessment (SCSA) Research Lab — Profile, global research collaborations, MS & PhD researchers, lab journey timeline, and core security research pillars."
+      description="About Dr. Junaid Akram and SCSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team."
       keywords="Junaid Akram PhD, SCSA Lab history, software security researcher, COMSATS Lahore professor, Tsinghua University PhD, University of Luxembourg postdoc"
       jsonLd={aboutJsonLd}
     >
@@ -495,7 +495,7 @@ export function AboutPage() {
                   </div>
                 </div>
                 <div className={styles.collabFooter}>
-                  <Link href={`/projects/${fyp.slug}`} className={styles.cardLink}>
+                  <Link href={fyp.isOpportunity ? `/supervision/opportunities/${fyp.slug}` : `/supervision/projects/${fyp.slug}`} className={styles.cardLink}>
                     View Project <ArrowRight size={12} />
                   </Link>
                 </div>
@@ -600,7 +600,7 @@ export function ResearchPage() {
     <AcademicSiteLayout
       title="Research Showcase & Platforms"
       path="/research"
-      description="Research areas, platforms, and software-security tools developed by Dr. Junaid Akram and the SCSA Lab."
+      description="Explore software security research, vulnerability detection tools, and testing platforms developed by Dr. Junaid Akram and the SCSA Lab at COMSATS Lahore."
       keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SCSA Lab research projects"
       jsonLd={researchJsonLd}
     >
@@ -938,7 +938,7 @@ export function PublicationsPage() {
     <AcademicSiteLayout
       title="Publications Showcase"
       path="/publications"
-      description="Peer-reviewed journal and conference publications by Dr. Junaid Akram in software security, testing, malware, and code analysis."
+      description="Peer-reviewed journal and conference publications by Dr. Junaid Akram on software vulnerability detection, program repair, code clones, and malware analysis."
       keywords="Junaid Akram publications, software security papers, vulnerability detection research, code clone analysis papers, malware detection journal, IEEE conference papers"
       jsonLd={pubsJsonLd}
     >
@@ -1428,7 +1428,7 @@ export function SupervisionPage({ fypProjects = [] }) {
 
   return (
     <AcademicSiteLayout
-      title="Supervision"
+      title="Supervision Directory"
       path="/supervision"
       description="Supervised final-year student projects, FYP opportunities, and student research under Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus."
       keywords="FYP supervision COMSATS, Junaid Akram student supervision, software security final year projects, BS MS PhD research supervision Pakistan"
@@ -1775,7 +1775,7 @@ export function TeamPage() {
                 </div>
 
                 <div className={styles.collabFooter}>
-                  <Link href="/fyp" className={styles.collabLinkBtn}>
+                  <Link href={fyp.isOpportunity ? `/supervision/opportunities/${fyp.slug}` : `/supervision/projects/${fyp.slug}`} className={styles.collabLinkBtn}>
                     View FYP Details <ArrowRight size={13} />
                   </Link>
                 </div>
@@ -2082,9 +2082,9 @@ export function ContactPage() {
 
   return (
     <AcademicSiteLayout
-      title="Contact"
+      title="Contact SCSA Research Lab"
       path="/contact"
-      description="Contact Dr. Junaid Akram and the Source Code Security Assessment Lab at COMSATS University Islamabad, Lahore Campus."
+      description="Contact Dr. Junaid Akram and the SCSA Research Lab at COMSATS University Islamabad, Lahore Campus for research collaborations and student supervision inquiries."
       keywords="contact Junaid Akram, SCSA Lab contact, COMSATS Lahore faculty contact, PhD supervision enquiry Pakistan, software security collaboration"
       jsonLd={contactJsonLd}
     >
@@ -2471,7 +2471,7 @@ export function PrivacyPage() {
     <AcademicSiteLayout
       title="Privacy Policy"
       path="/privacy-policy"
-      description="Privacy information for the academic website of Dr. Junaid Akram and the SCSA Research Lab."
+      description="Privacy policy for the academic website of Dr. Junaid Akram and the Source Code Security Assessment (SCSA) Research Lab at COMSATS University Islamabad."
     >
       <PageIntro
         eyebrow="Privacy"

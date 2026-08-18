@@ -6,7 +6,10 @@ import AcademicFypCaseStudy from "../../../components/AcademicSite/AcademicFypCa
 import { defaultFypProjects } from "../../../data/fypProjects";
 import dbConnect from "../../../lib/mongoose";
 import FypProject from "../../../models/FypProject";
+import { breadcrumbSchema, softwareProjectSchema } from "../../../components/SEO";
 import styles from "../../../components/AcademicSite/AcademicSite.module.css";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ssa-lab.tech";
 
 export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }) {
   if (!project) {
@@ -29,11 +32,27 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
     );
   }
 
+  const projectJsonLd = [
+    breadcrumbSchema([
+      { name: "Supervision", url: `${SITE_URL}/supervision` },
+      { name: project.title, url: `${SITE_URL}/supervision/projects/${project.slug}` },
+    ]),
+    softwareProjectSchema({
+      name: project.title,
+      description: project.summary || `Supervised software security project: ${project.title}`,
+      url: `${SITE_URL}/supervision/projects/${project.slug}`,
+      image: project.coverImage ? `${SITE_URL}${project.coverImage}` : undefined,
+      programmingLanguages: project.technologies || project.techStack || [],
+      keywords: project.category || "Software Security",
+    }),
+  ];
+
   return (
     <AcademicSiteLayout
-      title={`${project.title} — Supervised Project Case Study`}
+      title={`${project.title} — Case Study`}
       path={`/supervision/projects/${project.slug}`}
-      description={project.summary || `Supervised project case study: ${project.title}`}
+      description={project.summary || `Supervised project case study: ${project.title} led by Dr. Junaid Akram.`}
+      jsonLd={projectJsonLd}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>

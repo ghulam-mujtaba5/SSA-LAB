@@ -61,7 +61,9 @@ export default function AcademicHome() {
 
   return (
     <AcademicSiteLayout
-      description="Advancing software security through source-code analysis, testing, and vulnerability research. Led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus."
+      path="/"
+      description="Software security research lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore. Specializing in vulnerability detection, testing, and malware."
+      keywords="SCSA Research Lab, Dr. Junaid Akram, software security research, vulnerability detection, COMSATS University Lahore, malware analysis, automated software testing"
     >
       {selectedDomain && (
         <AcademicDomainModal

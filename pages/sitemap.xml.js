@@ -80,20 +80,30 @@ export async function getServerSideProps({ req, res }) {
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
     "https://www.ssa-lab.tech";
 
-  // Build list of all 31 project case study pages
-  const projectPages = defaultFypProjects.map((p) => ({
-    path: `/supervision/projects/${p.slug}`,
-    changefreq: "monthly",
-    priority: 0.8,
-    lastmod: "2026-08-01",
-    image: p.coverImage
-      ? {
-          loc: p.coverImage,
-          title: p.title,
-          caption: p.coverAlt || `${p.title} case study poster`,
-        }
-      : undefined,
-  }));
+  // Build list of all project case studies and supervision opportunity pages
+  const projectPages = defaultFypProjects.map((p) => {
+    const isOpp =
+      p.isOpportunity ||
+      p.projectType === "Open FYP Opportunity" ||
+      p.projectType === "COMSATS FYP Opportunity";
+    const path = isOpp
+      ? `/supervision/opportunities/${p.slug}`
+      : `/supervision/projects/${p.slug}`;
+
+    return {
+      path,
+      changefreq: "monthly",
+      priority: 0.8,
+      lastmod: "2026-08-01",
+      image: p.coverImage
+        ? {
+            loc: p.coverImage,
+            title: p.title,
+            caption: p.coverAlt || `${p.title} case study poster`,
+          }
+        : undefined,
+    };
+  });
 
   const allPages = [...STATIC_PAGES, ...projectPages];
 

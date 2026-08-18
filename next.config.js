@@ -55,19 +55,6 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  async rewrites() {
-    // Internal rewrites — these do NOT cause HTTP redirects.
-    // They map public-facing URLs to actual page files under /portfolio/.
-    return [
-      // Homepage: / → /portfolio/index
-      { source: "/", destination: "/portfolio" },
-      // Resume: /resume → /portfolio/resume
-      { source: "/resume", destination: "/portfolio/resume" },
-    ];
-  },
-
-  // Removed custom www to non-www redirect. Vercel will handle this automatically.
-
   async redirects() {
     return [
       {
@@ -122,7 +109,7 @@ const nextConfig = {
       },
       {
         source: "/projects/:slug*",
-        destination: "/research",
+        destination: "/supervision/projects/:slug*",
         permanent: true,
       },
       {
@@ -151,7 +138,6 @@ const nextConfig = {
         permanent: true,
       },
       // Consolidate /portfolio to / — prevents duplicate content
-      // These are external 301 redirects that Google will follow.
       {
         source: "/portfolio",
         destination: "/",
@@ -159,22 +145,22 @@ const nextConfig = {
       },
       {
         source: "/portfolio/resume",
-        destination: "/resume",
+        destination: "/about",
         permanent: true,
       },
       {
         source: "/portfolio/search",
-        destination: "/search",
+        destination: "/research",
         permanent: true,
       },
       {
         source: "/blog",
-        destination: "/insights",
+        destination: "/publications",
         permanent: true,
       },
       {
         source: "/blog/:slug*",
-        destination: "/insights/:slug*",
+        destination: "/publications",
         permanent: true,
       },
       {
@@ -187,6 +173,11 @@ const nextConfig = {
         destination: "/publications",
         permanent: true,
       },
+      {
+        source: "/fyp",
+        destination: "/supervision",
+        permanent: true,
+      },
       // Redirect old static sitemap URL to the canonical sitemap
       {
         source: "/sitemap-0.xml",
@@ -197,9 +188,6 @@ const nextConfig = {
   },
 
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Example: Add any additional webpack plugins or loaders
-    // config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//));
-
     return config;
   },
   async headers() {

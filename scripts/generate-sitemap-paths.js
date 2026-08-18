@@ -1,6 +1,4 @@
 // Run before sitemap generation: node scripts/generate-sitemap-paths.js
-// Fetches dynamic article/project slugs from the deployed API so sitemap
-// includes all published content even during Vercel builds (where DB may not be available).
 const fs = require("fs");
 
 async function main() {
@@ -10,27 +8,17 @@ async function main() {
     "https://www.ssa-lab.tech";
 
   try {
-    const [artRes, projRes] = await Promise.all([
-      fetch(`${SITE}/api/articles?limit=1000&fields=slug,updatedAt`),
-      fetch(`${SITE}/api/projects?limit=1000&fields=slug,updatedAt`),
-    ]);
+    const projRes = await fetch(`${SITE}/api/projects?limit=1000&fields=slug,updatedAt`);
 
-    const articles = artRes.ok ? (await artRes.json()).articles || [] : [];
     const projects = projRes.ok
       ? (await projRes.json()).data || (await projRes.json()).projects || []
       : [];
 
     const paths = [
-      ...articles.map((a) => ({
-        loc: `/insights/${a.slug}`,
-        lastmod: a.updatedAt,
-        changefreq: "weekly",
-        priority: 0.8,
-      })),
       ...projects.map((p) => ({
-        loc: `/projects/${p.slug}`,
-        lastmod: p.updatedAt,
-        changefreq: "weekly",
+        loc: `/supervision/projects/${p.slug}`,
+        lastmod: p.updatedAt || new Date().toISOString().split("T")[0],
+        changefreq: "monthly",
         priority: 0.8,
       })),
     ];
@@ -38,7 +26,7 @@ async function main() {
     fs.writeFileSync("sitemap-paths.json", JSON.stringify(paths, null, 2));
     console.log(`✓ Wrote ${paths.length} sitemap paths`);
   } catch (e) {
-    console.warn("⚠ Sitemap path generation failed:", e.message);
+    console.warn("⚠ Sitemap path generation fallback:", e.message);
     fs.writeFileSync("sitemap-paths.json", "[]");
   }
 }

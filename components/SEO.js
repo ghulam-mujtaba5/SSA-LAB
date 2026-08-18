@@ -48,6 +48,7 @@ export default function SEO({
       {/* ── Primary ──────────────────────────────────────────────── */}
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       <meta name="author" content={author} />
       <meta name="robots" content={effectiveRobots} />
       <meta name="googlebot" content={effectiveRobots} />

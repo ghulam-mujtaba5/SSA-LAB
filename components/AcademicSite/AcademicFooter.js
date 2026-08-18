@@ -196,6 +196,7 @@ export default function AcademicFooter() {
             </span>
             <Link
               href="/admin/login"
+              rel="nofollow"
               className={styles.bottomLink}
               title="SCSA Admin Portal Login"
               style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}

@@ -145,7 +145,7 @@ export default function AcademicSiteLayout({
               {navigation.map((item) => {
                 const active =
                   item.href === "/"
-                    ? router.pathname === "/portfolio"
+                    ? router.pathname === "/" || router.pathname === "/portfolio"
                     : router.pathname === item.href ||
                       (item.hasDropdown && router.pathname.startsWith("/supervision"));
 

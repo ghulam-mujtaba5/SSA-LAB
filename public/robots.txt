@@ -1,18 +1,35 @@
+# Robots.txt for SCSA Research Lab (https://www.ssa-lab.tech)
+# RFC 9309 Compliant Search & AI Discoverability Policy
+
 User-agent: *
 Allow: /
-Allow: /*.css
-Allow: /*.js
+Allow: /*.css$
+Allow: /*.js$
 Allow: /academic/
+Allow: /public/
 Disallow: /admin/
 Disallow: /api/
 Disallow: /portfolio/
 Disallow: /search
 
+# Image Search Crawlers
 User-agent: Googlebot-Image
+Allow: /
 Allow: /academic/
 Allow: /public/
 
+# AI Search & Retrieval Crawlers
 User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: PerplexityBot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
@@ -22,10 +39,15 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-User-agent: CCBot
-Disallow: /
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
 
-Crawl-delay: 1
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
 
+# Canonical XML Sitemap
 Sitemap: https://www.ssa-lab.tech/sitemap.xml
-

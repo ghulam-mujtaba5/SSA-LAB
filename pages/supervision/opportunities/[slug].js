@@ -1,14 +1,17 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import AcademicSiteLayout from "../../../components/AcademicSite/AcademicSiteLayout";
 import AcademicFypCaseStudy from "../../../components/AcademicSite/AcademicFypCaseStudy";
 import { defaultFypProjects } from "../../../data/fypProjects";
 import dbConnect from "../../../lib/mongoose";
 import FypProject from "../../../models/FypProject";
+import { breadcrumbSchema, courseSchema } from "../../../components/SEO";
 import styles from "../../../components/AcademicSite/AcademicSite.module.css";
 
-export default function FypOpportunityDetailPage({ project, relatedProjects = [] }) {
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ssa-lab.tech";
+
+export default function FypOpportunityDetailPage({ project }) {
   if (!project) {
     return (
       <AcademicSiteLayout
@@ -29,11 +32,25 @@ export default function FypOpportunityDetailPage({ project, relatedProjects = []
     );
   }
 
+  const oppJsonLd = [
+    breadcrumbSchema([
+      { name: "Supervision", url: `${SITE_URL}/supervision` },
+      { name: project.title, url: `${SITE_URL}/supervision/opportunities/${project.slug}` },
+    ]),
+    courseSchema({
+      name: project.title,
+      description: project.summary || `Open Supervision Opportunity under Dr. Junaid Akram: ${project.title}`,
+      url: `${SITE_URL}/supervision/opportunities/${project.slug}`,
+      keywords: "Final Year Project, FYP Supervision, COMSATS University Lahore, Software Security",
+    }),
+  ];
+
   return (
     <AcademicSiteLayout
-      title={`${project.title} — Open Supervision Opportunity`}
+      title={`${project.title} — Open Opportunity`}
       path={`/supervision/opportunities/${project.slug}`}
       description={project.summary || `Open Supervision Opportunity under Dr. Junaid Akram: ${project.title}`}
+      jsonLd={oppJsonLd}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>
