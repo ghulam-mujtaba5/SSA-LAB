@@ -6,7 +6,18 @@ node_modules
 node_modules/**
 .gemini
 .gemini/**
+.agents
+.agents/**
 scratch
 scratch/**
+docs
+docs/**
 tmp
+tmp/**
 *.log
+*.zip
+*.docx
+public/ai chatgpt
+public/ai chatgpt/**
+public/ai-chatgpt
+public/ai-chatgpt/**
