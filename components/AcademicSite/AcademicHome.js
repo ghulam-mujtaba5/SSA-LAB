@@ -153,7 +153,7 @@ export default function AcademicHome() {
               Test SCSA Lab's static analysis engine on real CVE benchmarks. Toggle between Split Diff, Unchecked Code, and Remediated Code views to inspect AST node traversal, vulnerability taint sinks, and security fixes.
             </p>
           </div>
-          <div className={styles.lottieCard} style={{ maxWidth: "160px", width: "100%", height: "120px", flexShrink: 0, padding: 0 }}>
+          <div className={styles.lottieCard} style={{ maxWidth: "340px", width: "100%", height: "220px", minHeight: "180px", flexShrink: 0, padding: "8px", overflow: "hidden" }}>
             <AcademicLottie src="/lottie/web-coding.json" ariaLabel="Live AST Inspection Animation" speed={0.8} />
           </div>
         </div>

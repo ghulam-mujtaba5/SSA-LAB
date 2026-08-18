@@ -332,6 +332,69 @@ export default function AcademicPipelineHero() {
         </motion.div>
       </div>
 
+      {/* Mobile Pipeline Deck (Clean Stacked Presentation) */}
+      <div className={styles.mobilePipelineDeck} aria-label="Mobile Research Pipeline Cards">
+        <div className={`${styles.mobileCard} ${styles.coreCard}`}>
+          <div className={styles.cardHeader}>
+            <Cpu size={16} color="#42c4e8" />
+            <strong className={styles.cardTitle}>SCSA Core Engine</strong>
+            <span className={styles.dotLive} />
+          </div>
+          <p className={styles.cardBody}>
+            Static Analysis · Vulnerability Scanning · Clone Detection
+          </p>
+          <div className={styles.coreBadge}>
+            <ShieldCheck size={12} /> 324B+ Lines Indexed
+          </div>
+        </div>
+
+        <div className={styles.mobileCard}>
+          <div className={styles.cardHeader}>
+            <Database size={15} color="#1d6685" />
+            <strong className={styles.cardTitle}>1. Source Evidence</strong>
+            <span className={styles.cardMeta}>INPUT</span>
+          </div>
+          <span className={styles.typedLine}>git clone & cve_parse_patch()</span>
+          <p className={styles.cardBody}>152,823+ Open Source Repositories</p>
+        </div>
+
+        <div className={styles.mobileCard}>
+          <div className={styles.cardHeader}>
+            <FileCode2 size={15} color="#1d6685" />
+            <strong className={styles.cardTitle}>2. Security Tools</strong>
+            <span className={styles.cardMeta}>SQVDT</span>
+          </div>
+          <p className={styles.cardBody}>
+            Vulnerability detection & obfuscation analyzer tools
+          </p>
+          <div className={styles.monoLine}>99.4% Accuracy</div>
+        </div>
+
+        <div className={styles.mobileCard}>
+          <div className={styles.cardHeader}>
+            <BookOpenCheck size={15} color="#1d6685" />
+            <strong className={styles.cardTitle}>3. Publications</strong>
+            <span className={styles.cardMeta}>Q1 JOURNAL</span>
+          </div>
+          <p className={styles.cardBody}>
+            Applied Soft Computing & IEEE Security papers
+          </p>
+          <div className={styles.monoLine}>25+ Papers Published</div>
+        </div>
+
+        <div className={styles.mobileCard}>
+          <div className={styles.cardHeader}>
+            <Sparkles size={15} color="#1d6685" />
+            <strong className={styles.cardTitle}>4. Innovation & Impact</strong>
+            <span className={styles.cardMeta}>IMPACT</span>
+          </div>
+          <p className={styles.cardBody}>
+            Practical contribution to researchers, developers, industry, and society
+          </p>
+          <div className={styles.monoLine}>Supervision & Security Platforms</div>
+        </div>
+      </div>
+
       {/* Stage Detail Callout Banner */}
       {activeStageInfo && (
         <div className={styles.stageDescriptionBanner}>

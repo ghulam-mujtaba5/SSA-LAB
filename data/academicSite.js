@@ -1273,7 +1273,7 @@ export const coInvestigators = [
     role: "Academic Mentor & Research Collaborator",
     affiliation: "Key Laboratory of Information System Security, Tsinghua University",
     specialization: "Information Security & Program Analysis",
-    image: "/academic/tsinghua-university-logo.webp",
+    image: null,
     bio: "Key collaborator on large-scale vulnerability detection platforms (SQVDT) and token-based clone analysis across multi-billion LOC repositories.",
     badge: "Tsinghua Advisor",
   },

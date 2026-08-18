@@ -75,15 +75,15 @@
 }
 
 .cardPub {
-  left: 70%;
+  left: 69%;
   top: 36%;
-  width: min(194px, 28%);
+  width: min(196px, 29%);
 }
 
 .cardAlumni {
-  left: 65%;
-  top: 63%;
-  width: min(190px, 28%);
+  left: 69%;
+  top: 68%;
+  width: min(196px, 29%);
 }
 
 .cardHeader {
@@ -308,6 +308,26 @@
   font-weight: 500;
   text-align: center;
 }
+.mobilePipelineDeck {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.mobileCard {
+  border-radius: 12px;
+  border: 1px solid var(--academic-line, #dce5e9);
+  background: var(--academic-paper, #ffffff);
+  box-shadow: 0 4px 16px rgba(22, 38, 52, 0.05);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 @media (max-width: 900px) {
   .canvas {
     max-width: 100%;
@@ -321,12 +341,11 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   .canvas {
-    aspect-ratio: 1.1 / 1;
+    display: none;
   }
-  .card {
-    padding: 8px 10px;
-    gap: 4px;
+  .mobilePipelineDeck {
+    display: flex;
   }
 }

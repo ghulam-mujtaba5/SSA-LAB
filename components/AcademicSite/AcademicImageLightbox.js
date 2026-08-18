@@ -16,6 +16,7 @@ export default function AcademicImageLightbox({
   imageClassName = "",
   priority = false,
   sizes = "(max-width: 780px) 100vw, 50vw",
+  showZoomHint = true,
 }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -94,10 +95,12 @@ export default function AcademicImageLightbox({
           sizes={sizes}
           className={imageClassName}
         />
-        <span className={styles.zoomHint}>
-          <Maximize2 size={15} />
-          View
-        </span>
+        {showZoomHint && (
+          <span className={styles.zoomHint}>
+            <Maximize2 size={15} />
+            View
+          </span>
+        )}
       </button>
       {modal}
     </>

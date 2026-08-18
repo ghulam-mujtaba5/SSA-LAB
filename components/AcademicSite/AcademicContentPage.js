@@ -140,7 +140,7 @@ export function AboutPage() {
       jsonLd={aboutJsonLd}
     >
       {/* 1. HERO & LAB MISSION OVERVIEW WITH DIRECTOR CARD */}
-      <div className={styles.aboutHeroRow}>
+      <div className={styles.aboutHeroWrapper}>
         <PageIntro
           eyebrow="About SCSA Lab & Collaborations"
           title="Pioneering Source-Code Security Assessment & AI-Driven Software Reliability"
@@ -154,43 +154,45 @@ export function AboutPage() {
           }
         />
         {coInvestigators[0] && (
-          <aside className={styles.aboutDirectorCard}>
-            <div className={styles.aboutDirectorAvatar}>
-              <Image
-                src={coInvestigators[0].image}
-                alt={coInvestigators[0].name}
-                width={72}
-                height={72}
-              />
-            </div>
-            <div className={styles.aboutDirectorInfo}>
-              <h3 className={styles.aboutDirectorName}>{coInvestigators[0].name}</h3>
-              <span className={styles.aboutDirectorTitle}>Assistant Professor & HEC PhD Supervisor</span>
-              <span className={styles.aboutDirectorMeta}>
-                Tsinghua University PhD · SnT Luxembourg Postdoc
-              </span>
-              <div className={styles.aboutDirectorLinks}>
-                <a
-                  href={`mailto:${coInvestigators[0].email}`}
-                  className={styles.aboutDirectorBtn}
-                  title="Send Email"
-                >
-                  <Mail size={12} /> Email
-                </a>
-                {coInvestigators[0].googleScholar && (
-                  <a
-                    href={coInvestigators[0].googleScholar}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.aboutDirectorBtn}
-                    title="Google Scholar"
-                  >
-                    Scholar <ExternalLink size={11} />
-                  </a>
-                )}
+          <div className={styles.aboutDirectorCardBanner}>
+            <aside className={styles.aboutDirectorCard}>
+              <div className={styles.aboutDirectorAvatar}>
+                <Image
+                  src={coInvestigators[0].image}
+                  alt={coInvestigators[0].name}
+                  width={72}
+                  height={72}
+                />
               </div>
-            </div>
-          </aside>
+              <div className={styles.aboutDirectorInfo}>
+                <h3 className={styles.aboutDirectorName}>{coInvestigators[0].name}</h3>
+                <span className={styles.aboutDirectorTitle}>Assistant Professor & HEC PhD Supervisor</span>
+                <span className={styles.aboutDirectorMeta}>
+                  Tsinghua University PhD · SnT Luxembourg Postdoc
+                </span>
+                <div className={styles.aboutDirectorLinks}>
+                  <a
+                    href={`mailto:${coInvestigators[0].email}`}
+                    className={styles.aboutDirectorBtn}
+                    title="Send Email"
+                  >
+                    <Mail size={12} /> Email
+                  </a>
+                  {coInvestigators[0].googleScholar && (
+                    <a
+                      href={coInvestigators[0].googleScholar}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={styles.aboutDirectorBtn}
+                      title="Google Scholar"
+                    >
+                      Scholar <ExternalLink size={11} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </aside>
+          </div>
         )}
       </div>
 
@@ -2385,9 +2387,10 @@ export function ContactPage() {
         <div className={styles.campusMap}>
           <iframe
             title="Map of COMSATS University Islamabad, Lahore Campus"
-            src="https://www.google.com/maps?q=COMSATS+University+Islamabad+Lahore+Campus&output=embed"
+            src="https://maps.google.com/maps?q=COMSATS%20University%20Islamabad,%20Lahore%20Campus,%20Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
           />
         </div>
       </section>
