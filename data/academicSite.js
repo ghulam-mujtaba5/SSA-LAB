@@ -68,6 +68,7 @@ export const researchDomains = [
     number: "01",
     graphicKey: "cyber-security",
     title: "Cyber Security",
+    image: "/academic/illustrations/malware-vulnerability-defense.webp",
     description:
       "Source-level assessment methods for identifying, understanding, and mitigating software vulnerabilities.",
     overview:
@@ -152,6 +153,7 @@ export const researchDomains = [
     number: "02",
     graphicKey: "vulnerability-detection",
     title: "Vulnerability Detection",
+    image: "/academic/illustrations/vulnerability-detection.webp",
     description:
       "Scalable techniques and tools that trace vulnerable code through patches, fingerprints, and code similarity.",
     overview:
@@ -243,6 +245,7 @@ export const researchDomains = [
     number: "03",
     graphicKey: "software-testing",
     title: "Software Testing",
+    image: "/academic/illustrations/android-app-security.webp",
     description:
       "Search-based testing, automated test-data generation, regression testing, and test-smell detection.",
     overview:
@@ -328,6 +331,7 @@ export const researchDomains = [
     number: "04",
     graphicKey: "malware-analysis",
     title: "Malware Detection",
+    image: "/academic/illustrations/malware-detection.webp",
     description:
       "Static and learning-based analysis of Android and cross-architecture malware at source-code level.",
     overview:
@@ -344,7 +348,7 @@ export const researchDomains = [
       "Cross-architecture IoT malware detection",
       "Cross-platform behavior matching",
       "Malware evasion of dynamic-analysis sandboxes",
-      "Adversarial modification of malware features",
+      "Adversarially modification of malware features",
       "Separating malicious application code from legitimate libraries",
       "Explainability of machine-learning malware classifiers",
       "Safe storage and handling of malware datasets",
@@ -420,6 +424,7 @@ export const researchDomains = [
     id: "code-clone-analysis",
     number: "05",
     title: "Code Clone Analysis",
+    image: "/academic/illustrations/code-cloning.webp",
     description:
       "Large-scale detection of exact, near-miss, and obfuscated code clones across software systems.",
     overview:
@@ -448,42 +453,40 @@ export const researchDomains = [
       "Execution-based similarity detection",
       "Cross-language clone detection",
       "Source-to-binary clone matching",
-      "Large-scale approximate-nearest-neighbor indexing",
-      "Clone genealogy and provenance analysis",
-      "Vulnerable-clone detection",
-      "Security-patch propagation through clones",
-      "Obfuscation-resilient clone detection",
-      "Compiler-resilient binary similarity",
-      "AI-generated code provenance",
-      "Library-aware clone filtering",
-      "Explainable clone-matching evidence",
-      "Multilingual clone benchmarks",
+      "Large-scale repository and dataset clone auditing",
+      "Obfuscation-resilient similarity metrics",
+      "License and copyright compliance analysis",
+      "Vulnerable-clone propagation tracking",
+      "Security-patch consistency analysis across clones",
+      "Clone genealogy and evolution tracking",
+      "Code provenance and origin identification",
+      "Detecting verbatim code generation in LLMs",
+      "Benchmarking modern deep-learning clone detectors",
     ],
     relatedLabWork: {
       items: [
-        "IBFET: index-based feature extraction for very large code collections",
-        "DroidCC: scalable clone detection for Android applications",
-        "DroidSD: Android application similarity detection",
-        "Token-based detection of obfuscated source code",
-        "Vulnerable-code fingerprints and code similarity",
-        "Detection of Type-1, Type-2, and Type-3 Android clones",
+        "Clone-detection analysis over 324 billion lines of code",
+        "Hadoop and IBFET distributed clone analysis",
+        "Token-based clone detection across large software collections",
+        "Obfuscation-aware Android clone analysis in DroidCC",
+        "Identification of copied and modified vulnerable code",
       ],
       summary:
-        "The research page describes IBFET as being evaluated over more than 324 billion lines of code and DroidSD as being evaluated over 30,500 Android applications.",
+        "The published record includes large-scale clone detection over billions of lines of code, distributed clone processing using Hadoop, token-based similarity analysis, and Android application clone analysis.",
     },
     toolsAndDatasets: {
       items: [
         {
           name: "BigCloneBench",
-          url: "https://github.com/clonebench/BigCloneBench",
+          url: "https://github.com/jeffsvajlenko/BigCloneEval",
         },
         {
           name: "SourcererCC",
           url: "https://github.com/Mondego/SourcererCC",
         },
         {
-          name: "Open-NiCad",
-          url: "https://github.com/CordyJ/Open-NiCad",
+          name: "NiCad",
+          url: "https://www.txl.ca/nicaddownload.html",
         },
         {
           name: "CodeXGLUE",
@@ -514,6 +517,7 @@ export const researchDomains = [
     id: "software-evolution-reuse",
     number: "06",
     title: "Software Evolution & Reuse",
+    image: "/academic/illustrations/software-evolution-reuse.webp",
     description:
       "Understanding how code, vulnerabilities, and reusable components propagate between systems.",
     overview:

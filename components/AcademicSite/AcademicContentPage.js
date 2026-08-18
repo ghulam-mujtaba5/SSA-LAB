@@ -264,14 +264,25 @@ export function AboutPage() {
 
       {/* 4. LAB EVOLUTION & RESEARCH JOURNEY TIMELINE (INTERACTIVE STEPPER) */}
       <section className={styles.section}>
-        <div className={styles.sectionHeading}>
-          <div>
+        <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+          <div style={{ flex: '1 1 min(100%, 600px)' }}>
             <p className={styles.eyebrow}>Lab Evolution & Story</p>
             <h2>Research Journey & Key Milestones</h2>
+            <p style={{ maxWidth: "600px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: 0 }}>
+              Explore how SCSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg and AI-driven program repair at COMSATS.
+            </p>
           </div>
-          <p style={{ maxWidth: "600px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: 0 }}>
-            Explore how SCSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg and AI-driven program repair at COMSATS.
-          </p>
+          <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
+            <div className={styles.illustrationGlow} />
+            <img
+              src="/academic/illustrations/security-inspection-overview.webp"
+              alt="SCSA Lab Evolution & Research Journey 3D Illustration"
+              width={160}
+              height={140}
+              style={{ objectFit: 'contain', maxHeight: '130px' }}
+              className={styles.illustrationImage}
+            />
+          </div>
         </div>
 
         <div className={styles.timelineWrapper}>
@@ -604,6 +615,15 @@ export function ResearchPage() {
         eyebrow="SCSA Research Platforms"
         title="Software Security Research with Practical Reach"
         lead="The lab studies source-code vulnerabilities, Android & IoT malware, code clones, software evolution, and testing at scales ranging from individual functions to 324+ billion lines of code."
+        illustration={
+          <img
+            src="/academic/illustrations/homepage-hero.webp"
+            alt="SCSA Software Security Research Platforms 3D Illustration"
+            width={160}
+            height={150}
+            style={{ objectFit: 'contain', maxHeight: '150px' }}
+          />
+        }
       />
 
       {/* Research Domains Visual Cards */}
@@ -927,6 +947,15 @@ export function PublicationsPage() {
         eyebrow="Peer-Reviewed Literature"
         title="Publications & Research Output"
         lead="Discover empirical research spanning source-code vulnerability assessment, Android malware analysis, code clones, and automated software verification."
+        illustration={
+          <img
+            src="/academic/illustrations/billion-lines-code.webp"
+            alt="Publications & Research Output 3D Illustration"
+            width={160}
+            height={150}
+            style={{ objectFit: 'contain', maxHeight: '150px' }}
+          />
+        }
       />
 
       {/* 1. Key Impact Stats Banner */}
@@ -2130,10 +2159,24 @@ export function ContactPage() {
 
       {/* Interactive Enquiry Form Section */}
       <section className={styles.section}>
-        <div className={styles.sectionHeading}>
-          <div>
+        <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+          <div style={{ flex: '1 1 min(100%, 600px)' }}>
             <p className={styles.eyebrow}>Send an enquiry</p>
             <h2>Supervision & Research Enquiry Form</h2>
+            <p className={styles.sectionLead}>
+              Submit your research interests, FYP supervision requests, or collaboration inquiries directly to Dr. Junaid Akram.
+            </p>
+          </div>
+          <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
+            <div className={styles.illustrationGlow} />
+            <img
+              src="/academic/illustrations/submit-inquiry-form.webp"
+              alt="Supervision & Research Enquiry 3D Illustration"
+              width={160}
+              height={140}
+              style={{ objectFit: 'contain', maxHeight: '130px' }}
+              className={styles.illustrationImage}
+            />
           </div>
         </div>
 
@@ -2348,10 +2391,24 @@ export function ContactPage() {
 
       {/* ── FAQ Section (Visible matching FAQPage Schema) ── */}
       <section className={styles.section}>
-        <div className={styles.sectionHeading}>
-          <div>
+        <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+          <div style={{ flex: '1 1 min(100%, 600px)' }}>
             <p className={styles.eyebrow}>Frequently Asked Questions</p>
             <h2>Supervision & Research FAQs</h2>
+            <p className={styles.sectionLead}>
+              Common questions about SCSA Lab student requirements, research tools, thesis topics, and meeting schedules.
+            </p>
+          </div>
+          <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
+            <div className={styles.illustrationGlow} />
+            <img
+              src="/academic/illustrations/faq-helpdesk.webp"
+              alt="SCSA Lab FAQs 3D Illustration"
+              width={160}
+              height={140}
+              style={{ objectFit: 'contain', maxHeight: '130px' }}
+              className={styles.illustrationImage}
+            />
           </div>
         </div>
         <div className={styles.faqGrid}>
@@ -2370,8 +2427,19 @@ export function ContactPage() {
       {/* Map Section */}
       <section className={`${styles.section} ${styles.campusSection}`}>
         <div className={styles.campusCopy}>
-          <p className={styles.eyebrow}>Visit the campus</p>
-          <h2>COMSATS University Islamabad, Lahore Campus</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
+            <img
+              src="/academic/illustrations/ai-chatbot-assistant.webp"
+              alt="Lab Directions & Assistance 3D Avatar"
+              width={56}
+              height={56}
+              style={{ objectFit: 'contain' }}
+            />
+            <div>
+              <p className={styles.eyebrow} style={{ margin: 0 }}>Visit the campus</p>
+              <h2 style={{ margin: 0, fontSize: "1.4rem" }}>COMSATS University Islamabad, Lahore Campus</h2>
+            </div>
+          </div>
           <p>
             1.5 KM Defence Road, Off Raiwind Road, Lahore, Pakistan. Room 14 is located in H Block. Meetings should be arranged in advance via email.
           </p>

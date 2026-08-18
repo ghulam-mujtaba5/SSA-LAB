@@ -27,18 +27,33 @@ import {
 import styles from "./AcademicSite.module.css";
 
 const impactStats = [
-  { value: "324B+", label: "Lines of Code Indexed", detail: "Hadoop IBFET code-clone analysis study" },
-  { value: "152,823+", label: "Repositories Analyzed", detail: "SQVDT open-source vulnerability platform" },
-  { value: "30,500+", label: "Android Apps Analyzed", detail: "DroidSD similarity detection evaluation" },
+  {
+    value: "324B+",
+    label: "Lines of Code Indexed",
+    detail: "Hadoop IBFET code-clone analysis study",
+    image: "/academic/illustrations/billion-lines-code.webp",
+  },
+  {
+    value: "152,823+",
+    label: "Repositories Analyzed",
+    detail: "SQVDT open-source vulnerability platform",
+    image: "/academic/illustrations/repo-analyzed.webp",
+  },
+  {
+    value: "30,500+",
+    label: "Android Apps Analyzed",
+    detail: "DroidSD similarity detection evaluation",
+    image: "/academic/illustrations/android-app-security.webp",
+  },
 ];
 
 const domainIllustrationMap = {
-  "cyber-security": "/ai-chatgpt/cyber-security-shield.png",
-  "vulnerability-detection": "/ai-chatgpt/vulnerability-chip.png",
-  "software-testing": "/ai-chatgpt/software-testing-checklist.png",
-  "malware-detection": "/ai-chatgpt/malware-ai-brain.png",
-  "code-clone-analysis": "/ai-chatgpt/code-clone-sync.png",
-  "software-evolution-reuse": "/ai-chatgpt/ai-robot-mascot.png",
+  "cyber-security": "/academic/illustrations/malware-vulnerability-defense.webp",
+  "vulnerability-detection": "/academic/illustrations/vulnerability-detection.webp",
+  "software-testing": "/academic/illustrations/android-app-security.webp",
+  "malware-detection": "/academic/illustrations/malware-detection.webp",
+  "code-clone-analysis": "/academic/illustrations/code-cloning.webp",
+  "software-evolution-reuse": "/academic/illustrations/software-evolution-reuse.webp",
 };
 
 export default function AcademicHome() {
@@ -134,6 +149,15 @@ export default function AcademicHome() {
           <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", flex: 1 }}>
             {impactStats.map((stat) => (
               <div key={stat.label} className={styles.impactItem}>
+                {stat.image && (
+                  <img
+                    src={stat.image}
+                    alt={stat.label}
+                    width={42}
+                    height={42}
+                    style={{ objectFit: 'contain', marginBottom: '4px' }}
+                  />
+                )}
                 <strong>{stat.value}</strong>
                 <span>{stat.label}</span>
                 <small>{stat.detail}</small>
@@ -198,7 +222,7 @@ export default function AcademicHome() {
               <div className={styles.cornerCardIllustrationBottomLeft}>
                 <span className={styles.cornerBadgeDotBottomLeft} />
                 <img
-                  src={domainIllustrationMap[domain.id] || "/ai-chatgpt/hero-composite.png"}
+                  src={domainIllustrationMap[domain.id] || "/academic/illustrations/homepage-hero.webp"}
                   alt={`${domain.title} 3D Illustration`}
                   style={{ maxHeight: "110px", width: "auto", objectFit: "contain" }}
                   loading="lazy"

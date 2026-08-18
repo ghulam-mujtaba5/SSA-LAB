@@ -75,13 +75,13 @@ const ServicesFrame = () => {
     {
       id: "security",
       title: "Cyber Security & Audits",
-      titleicon: "/ai-chatgpt/cyber-security-shield.png",
-      illustration: "/ai-chatgpt/security-suite-3d.png",
+      titleicon: "/academic/illustrations/malware-vulnerability-defense.webp",
+      illustration: "/academic/illustrations/homepage-hero.webp",
       lottie: "/academic/lottie/security-research.json",
       skills: [
-        { name: "Vulnerability Audit", icon: "/ai-chatgpt/security-shield-v1.png" },
-        { name: "Code Clone Analysis", icon: "/ai-chatgpt/code-clone-sync.png" },
-        { name: "Automated Software Testing", icon: "/ai-chatgpt/software-testing-checklist.png" },
+        { name: "Vulnerability Audit", icon: "/academic/illustrations/vulnerability-detection.webp" },
+        { name: "Code Clone Analysis", icon: "/academic/illustrations/code-cloning.webp" },
+        { name: "Automated Software Testing", icon: "/academic/illustrations/android-app-security.webp" },
       ],
       cardClass: frameStyles.dataScienceCard,
     },
