@@ -6,7 +6,6 @@ import {
   ExternalLink,
   Mail,
   MapPin,
-  Phone,
   BookOpen,
   Copy,
   Check,
@@ -1384,11 +1383,23 @@ export function TeamPage() {
             {pgResearchers.map((student) => (
               <article key={student.id} className={styles.collabCard}>
                 <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar} style={{ background: "rgba(6, 182, 212, 0.1)", border: "2px solid var(--academic-cyan)" }}>
-                    <GraduationCap size={24} style={{ color: "var(--academic-cyan)" }} />
+                  <div className={styles.collabAvatar} style={{ border: "2.5px solid var(--academic-cyan)" }}>
+                    {student.image ? (
+                      <AcademicImageLightbox
+                        src={student.image}
+                        alt={student.name}
+                        width={120}
+                        height={120}
+                        caption={`${student.name} (${student.id}) — ${student.degree}`}
+                      />
+                    ) : (
+                      <span style={{ color: "var(--academic-cyan)", fontSize: "0.95rem" }}>
+                        {student.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                      </span>
+                    )}
                   </div>
                   <div className={styles.collabMeta}>
-                    <h3>{student.topic}</h3>
+                    <h3>{student.name}</h3>
                     <span className={styles.collabBadge}>{student.degree} · {student.id}</span>
                     <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
                       {student.status}
@@ -1397,9 +1408,9 @@ export function TeamPage() {
                 </div>
 
                 <div className={styles.collabBody}>
-                  <div className={styles.collabFocus} style={{ marginBottom: "6px" }}>
-                    <strong>Researcher:</strong> {student.name} ({student.id})
-                  </div>
+                  <p className={styles.collabTopic} style={{ marginBottom: "8px" }}>
+                    <strong>Thesis:</strong> {student.topic}
+                  </p>
                   <p className={styles.collabFocus}>
                     <strong>Research Focus:</strong> {student.focus}
                   </p>
@@ -1410,6 +1421,21 @@ export function TeamPage() {
                     <Building size={12} style={{ display: "inline", marginRight: "4px" }} />
                     {student.institution}
                   </span>
+                  {student.email && (
+                    <a href={`mailto:${student.email}`} className={styles.collabLinkBtn}>
+                      <Mail size={13} /> Email
+                    </a>
+                  )}
+                  {student.linkedin && (
+                    <a href={student.linkedin} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                      <ExternalLink size={13} /> LinkedIn
+                    </a>
+                  )}
+                  {student.googleScholar && (
+                    <a href={student.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                      <ExternalLink size={13} /> Scholar
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
@@ -1830,9 +1856,6 @@ export function ContactPage() {
             <span>Office Location</span>
             <strong>{academicProfile.office}</strong>
             <p>{academicProfile.institution}</p>
-            <p className={styles.officePhone}>
-              <Phone size={15} /> {academicProfile.officePhone}
-            </p>
           </div>
 
           <div className={styles.contactCard}>

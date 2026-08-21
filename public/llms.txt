@@ -49,4 +49,3 @@ Dr. Junaid Akram works on source-code security assessment, software vulnerabilit
 - Email: junaidakram@cuilahore.edu.pk
 - Lab email: ssa.laab@gmail.com
 - Office: H Block, Room 14, COMSATS University Islamabad, Lahore Campus
-- University Exchange: (042) 111-001-007

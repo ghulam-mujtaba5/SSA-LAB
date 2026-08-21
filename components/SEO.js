@@ -167,7 +167,6 @@ export function personSchema(overrides = {}) {
     description:
       "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
     email: "mailto:junaidakram@cuilahore.edu.pk",
-    telephone: "+92-42-111-001-007",
     worksFor: {
       "@type": "CollegeOrUniversity",
       "@id": `${SITE_URL}/#university`,

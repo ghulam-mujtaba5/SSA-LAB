@@ -7,7 +7,6 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import {
   Mail,
   MapPin,
-  Phone,
   ArrowRight,
   ExternalLink,
   Github,
@@ -121,10 +120,6 @@ export default function AcademicFooter() {
               <a href={`mailto:${academicProfile.emails[0]}`} itemProp="email">
                 {academicProfile.emails[0]}
               </a>
-            </p>
-            <p className={styles.contactItem}>
-              <Phone size={15} />
-              <span itemProp="telephone">{academicProfile.officePhone}</span>
             </p>
             <p className={styles.contactItem}>
               <MapPin size={15} />

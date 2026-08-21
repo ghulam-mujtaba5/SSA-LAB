@@ -91,28 +91,6 @@ export default function AcademicHome() {
               ))}
             </ul>
 
-            {/* Profile quick buttons */}
-            <div className={styles.profileBadgeRow} style={{ margin: "16px 0", display: "flex", gap: "10px", flexWrap: "wrap" }}>
-              <a
-                href={academicProfile.googleScholar}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.secondaryButton}
-                style={{ padding: "6px 14px", fontSize: "0.85rem" }}
-              >
-                Google Scholar <ExternalLink size={13} />
-              </a>
-              <a
-                href={academicProfile.officialProfile}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.secondaryButton}
-                style={{ padding: "6px 14px", fontSize: "0.85rem" }}
-              >
-                COMSATS Profile <ExternalLink size={13} />
-              </a>
-            </div>
-
             <div className={styles.actions}>
               <Link href="/research" className={styles.primaryButton}>
                 Explore Research <ArrowRight size={17} />
@@ -136,11 +114,45 @@ export default function AcademicHome() {
               imageClassName={styles.heroIllustrationImg}
               sizes="(max-width: 780px) 100vw, 45vw"
             />
-            <div className={styles.heroFloatingBadge}>
-              <Sparkles size={18} color="#38bdf8" />
-              <div>
-                <strong>SSA Security Assessment Engine</strong>
-                <span>Source-Code Analysis · Vulnerability Detection · Testing</span>
+            <div className={styles.heroProfileCard}>
+              <div className={styles.heroProfileCardHeader}>
+                <div className={styles.heroProfileStatusDot} />
+                <span className={styles.heroProfileCardTitle}>Faculty & Research Profiles</span>
+              </div>
+              <div className={styles.heroProfileButtons}>
+                <a
+                  href={academicProfile.googleScholar}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.heroProfileBtn}
+                  title="View Google Scholar Profile"
+                >
+                  <div className={styles.heroProfileBtnIcon}>
+                    <GraduationCap size={18} />
+                  </div>
+                  <div className={styles.heroProfileBtnContent}>
+                    <strong>Google Scholar</strong>
+                    <span>Citations & Publications</span>
+                  </div>
+                  <ExternalLink size={13} className={styles.heroProfileBtnExternal} />
+                </a>
+
+                <a
+                  href={academicProfile.officialProfile}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.heroProfileBtn}
+                  title="View COMSATS Faculty Profile"
+                >
+                  <div className={styles.heroProfileBtnIcon}>
+                    <BookOpen size={18} />
+                  </div>
+                  <div className={styles.heroProfileBtnContent}>
+                    <strong>COMSATS Profile</strong>
+                    <span>Official Faculty Page</span>
+                  </div>
+                  <ExternalLink size={13} className={styles.heroProfileBtnExternal} />
+                </a>
               </div>
             </div>
           </div>
