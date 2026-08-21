@@ -117,7 +117,7 @@ export default function AcademicHome() {
             <div className={styles.heroProfileCard}>
               <div className={styles.heroProfileCardHeader}>
                 <div className={styles.heroProfileStatusDot} />
-                <span className={styles.heroProfileCardTitle}>Faculty & Research Profiles</span>
+                <span className={styles.heroProfileCardTitle}>Profiles</span>
               </div>
               <div className={styles.heroProfileButtons}>
                 <a
@@ -125,16 +125,11 @@ export default function AcademicHome() {
                   target="_blank"
                   rel="noreferrer"
                   className={styles.heroProfileBtn}
-                  title="View Google Scholar Profile"
+                  title="View Google Scholar Profile & Citations"
                 >
-                  <div className={styles.heroProfileBtnIcon}>
-                    <GraduationCap size={18} />
-                  </div>
-                  <div className={styles.heroProfileBtnContent}>
-                    <strong>Google Scholar</strong>
-                    <span>Citations & Publications</span>
-                  </div>
-                  <ExternalLink size={13} className={styles.heroProfileBtnExternal} />
+                  <GraduationCap size={15} className={styles.heroProfileBtnIcon} />
+                  <span>Google Scholar</span>
+                  <ExternalLink size={12} className={styles.heroProfileBtnExternal} />
                 </a>
 
                 <a
@@ -142,16 +137,11 @@ export default function AcademicHome() {
                   target="_blank"
                   rel="noreferrer"
                   className={styles.heroProfileBtn}
-                  title="View COMSATS Faculty Profile"
+                  title="View COMSATS Official Faculty Profile"
                 >
-                  <div className={styles.heroProfileBtnIcon}>
-                    <BookOpen size={18} />
-                  </div>
-                  <div className={styles.heroProfileBtnContent}>
-                    <strong>COMSATS Profile</strong>
-                    <span>Official Faculty Page</span>
-                  </div>
-                  <ExternalLink size={13} className={styles.heroProfileBtnExternal} />
+                  <BookOpen size={15} className={styles.heroProfileBtnIcon} />
+                  <span>COMSATS</span>
+                  <ExternalLink size={12} className={styles.heroProfileBtnExternal} />
                 </a>
               </div>
             </div>
