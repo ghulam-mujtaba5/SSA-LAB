@@ -21,7 +21,7 @@ import styles from "./AcademicPipelineHero.module.css";
 
 const EASE = [0.22, 1, 0.36, 1];
 
-/* Wire paths in 720×480 canvas space — 1 input feeding SCSA core, 3 outputs fanning out */
+/* Wire paths in 720×480 canvas space — 1 input feeding SSA core, 3 outputs fanning out */
 const WIRE_IN = "M 188 228 C 240 228, 268 227, 306 226";
 const WIRE_TOOLS = "M 368 198 C 404 150, 442 108, 498 88";
 const WIRE_PUBLICATIONS = "M 380 226 C 424 223, 466 219, 506 216";
@@ -67,7 +67,7 @@ const STAGES = [
   },
   {
     id: "core",
-    label: "2. SCSA Core Engine",
+    label: "2. SSA Core Engine",
     desc: "Static analysis, clone detection, identifier renaming & obfuscation parsing",
   },
   {
@@ -160,7 +160,7 @@ export default function AcademicPipelineHero() {
         ))}
       </div>
 
-      <div className={styles.canvas} aria-label="SCSA Security Research Pipeline Diagram">
+      <div className={styles.canvas} aria-label="SSA Security Research Pipeline Diagram">
         {/* SVG Wires Layer */}
         <motion.div className={styles.layer} style={{ x: wiresX, y: wiresY }}>
           <svg className={styles.wires} viewBox="0 0 720 480" preserveAspectRatio="none">
@@ -231,7 +231,7 @@ export default function AcademicPipelineHero() {
           </svg>
         </motion.div>
 
-        {/* SCSA Core Box Layer */}
+        {/* SSA Core Box Layer */}
         <motion.div className={styles.layer} style={{ x: coreX, y: coreY }}>
           <FloatCard
             delay={0.6}
@@ -241,7 +241,7 @@ export default function AcademicPipelineHero() {
           >
             <div className={styles.cardHeader}>
               <Cpu size={16} color="#42c4e8" />
-              <strong className={styles.cardTitle}>SCSA Core Engine</strong>
+              <strong className={styles.cardTitle}>SSA Core Engine</strong>
               <span className={styles.dotLive} />
             </div>
             <p className={styles.cardBody}>
@@ -337,7 +337,7 @@ export default function AcademicPipelineHero() {
         <div className={`${styles.mobileCard} ${styles.coreCard}`}>
           <div className={styles.cardHeader}>
             <Cpu size={16} color="#42c4e8" />
-            <strong className={styles.cardTitle}>SCSA Core Engine</strong>
+            <strong className={styles.cardTitle}>SSA Core Engine</strong>
             <span className={styles.dotLive} />
           </div>
           <p className={styles.cardBody}>

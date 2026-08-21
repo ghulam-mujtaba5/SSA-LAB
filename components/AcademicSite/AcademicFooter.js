@@ -70,10 +70,10 @@ export default function AcademicFooter() {
         <div className={styles.content}>
           {/* Brand Identity Column */}
           <div className={styles.brand}>
-            <Link href="/" className={styles.logoWrap} aria-label="SCSA Research Lab Home">
+            <Link href="/" className={styles.logoWrap} aria-label="SSA Research Lab Home">
               <Image
-                src="/academic/scsa-research-group-logo.png"
-                alt="SCSA Research Group"
+                src="/academic/ssa-research-group-logo.png"
+                alt="SSA Research Group"
                 width={90}
                 height={60}
                 className={styles.logoImage}
@@ -102,41 +102,45 @@ export default function AcademicFooter() {
             ))}
           </nav>
 
-          {/* Nav Column 2: Supervision & Projects */}
+          {/* Nav Column 2: Supervision & Students */}
           <nav className={styles.navCol} aria-label="Supervision links">
-            <strong className={styles.colTitle}>Supervision Directory</strong>
-            {SUPERVISION_LINKS.map(({ href, label, external }) =>
-              external ? (
-                <a
-                  key={href}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.navLink}
-                >
-                  {label} <ExternalLink size={12} style={{ display: "inline" }} />
-                </a>
-              ) : (
-                <Link key={href} href={href} className={styles.navLink}>
-                  {label}
-                </Link>
-              )
-            )}
+            <strong className={styles.colTitle}>Supervision & Students</strong>
+            {SUPERVISION_LINKS.map(({ href, label }) => (
+              <Link key={href} href={href} className={styles.navLink}>
+                {label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Collaboration Panel Column */}
-          <div className={styles.startPanel}>
-            <strong className={styles.colTitle}>Research & Student Supervision</strong>
-            <p className={styles.startCopy}>
-              Interested in BS/MS/PhD research, student supervision, or industrial code assessment?
+          {/* Nav Column 3: Direct Institutional Details */}
+          <div className={styles.contactCol}>
+            <strong className={styles.colTitle}>Direct Contact</strong>
+            <p className={styles.contactItem}>
+              <Mail size={15} />
+              <a href={`mailto:${academicProfile.emails[0]}`} itemProp="email">
+                {academicProfile.emails[0]}
+              </a>
             </p>
-            <Link href="/contact" className={styles.cta}>
-              Discuss an Opportunity <ArrowRight size={15} />
-            </Link>
-            <a href={`mailto:${academicProfile.emails[0]}`} className={styles.emailLink} itemProp="email">
-              <Mail size={14} /> {academicProfile.emails[0]}
-            </a>
-            <div className={styles.socialRow} aria-label="Academic profile links">
+            <p className={styles.contactItem}>
+              <Phone size={15} />
+              <span itemProp="telephone">{academicProfile.officePhone}</span>
+            </p>
+            <p className={styles.contactItem}>
+              <MapPin size={15} />
+              <span itemProp="address">{academicProfile.office}</span>
+            </p>
+            <div className={styles.socialRow}>
+              <a
+                href={academicProfile.googleScholar}
+                target="_blank"
+                rel="me noopener noreferrer"
+                className={styles.socialIcon}
+                aria-label="Google Scholar Profile"
+                title="Google Scholar Profile"
+                itemProp="sameAs"
+              >
+                <BookOpen size={18} />
+              </a>
               <a
                 href={academicProfile.linkedin}
                 target="_blank"
@@ -149,29 +153,18 @@ export default function AcademicFooter() {
                 <Linkedin size={18} />
               </a>
               <a
-                href={academicProfile.researchGate}
+                href={academicProfile.officialProfile}
                 target="_blank"
-                rel="me noopener noreferrer"
+                rel="noopener noreferrer"
                 className={styles.socialIcon}
-                aria-label="ResearchGate Profile"
-                title="ResearchGate Profile"
-                itemProp="sameAs"
-              >
-                <BookOpen size={18} />
-              </a>
-              <a
-                href={academicProfile.orcid}
-                target="_blank"
-                rel="me noopener noreferrer"
-                className={styles.socialIcon}
-                aria-label="ORCID Profile"
-                title="ORCID Profile"
+                aria-label="COMSATS Official Profile"
+                title="COMSATS Official Profile"
                 itemProp="sameAs"
               >
                 <ExternalLink size={18} />
               </a>
               <a
-                href="https://github.com/scsa-lab"
+                href="https://github.com/ssa-lab"
                 target="_blank"
                 rel="me noopener noreferrer"
                 className={styles.socialIcon}
@@ -198,7 +191,7 @@ export default function AcademicFooter() {
               href="/admin/login"
               rel="nofollow"
               className={styles.bottomLink}
-              title="SCSA Admin Portal Login"
+              title="SSA Admin Portal Login"
               style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}
             >
               <ShieldCheck size={14} style={{ color: "var(--academic-blue, #4f46e5)" }} />
@@ -219,7 +212,7 @@ export default function AcademicFooter() {
 
       {/* Oversized subtle background watermark */}
       <div className={styles.watermark} aria-hidden="true">
-        SCSA LAB
+        SSA LAB
       </div>
     </footer>
   );

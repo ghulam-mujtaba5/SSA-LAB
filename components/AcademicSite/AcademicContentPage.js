@@ -2139,7 +2139,7 @@ export function ContactPage() {
         <div className={styles.campusMap}>
           <iframe
             title="Map of COMSATS University Islamabad, Lahore Campus"
-            src="https://maps.google.com/maps?q=COMSATS%20University%20Islamabad,%20Lahore%20Campus,%20Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.9950334812693!2d74.2660163750567!3d31.417409952044813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190209632870bb%3A0x6e788c7f7ec49e48!2sCOMSATS%20University%20Islamabad%2C%20Lahore%20Campus!5e0!3m2!1sen!2s!4v1724261700000!5m2!1sen!2s"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen

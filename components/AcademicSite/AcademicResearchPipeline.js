@@ -78,7 +78,7 @@ export default function AcademicResearchPipeline() {
       </div>
       <div className={styles.codeMark} aria-hidden="true">
         <Braces size={20} />
-        SCSA Laboratory — End-to-End Vulnerability Research Pipeline
+        SSA Laboratory — End-to-End Vulnerability Research Pipeline
       </div>
     </div>
   );

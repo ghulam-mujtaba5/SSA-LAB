@@ -97,7 +97,7 @@ export default function AcademicFypListing({ projects = [] }) {
           <p className={styles.eyebrow}>Supervision Directory</p>
           <h2>Research Supervision & Capstone Projects</h2>
           <p className={styles.sectionLead}>
-            Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram at SCSA Lab.
+            Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram at SSA Lab.
           </p>
         </div>
         <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
@@ -128,7 +128,7 @@ export default function AcademicFypListing({ projects = [] }) {
         </span>
         <span className={styles.listingStatsDivider}>·</span>
         <span>
-          <ShieldCheck size={14} style={{ display: "inline", verticalAlign: "-2px", color: "var(--brand-primary)" }} /> SCSA Lab Verified Directory
+          <ShieldCheck size={14} style={{ display: "inline", verticalAlign: "-2px", color: "var(--brand-primary)" }} /> SSA Lab Verified Directory
         </span>
       </div>
 
