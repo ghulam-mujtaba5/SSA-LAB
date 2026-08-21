@@ -492,6 +492,11 @@ export function ResearchPage() {
                   setSelectedDomain(domain);
                 }
               }}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+              }}
               tabIndex={0}
               role="button"
               aria-label={`Open detailed panel for ${domain.title}`}
