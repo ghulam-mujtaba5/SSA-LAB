@@ -4,8 +4,8 @@ This guide establishes a unified high-perception color system for the portfolio 
 
 ## Core Brand Colors
 
-### Primary Brand Color: Ocean Electric Blue (SCSA Logo Palette)
-The primary brand color used throughout the app matches the official SCSA Research Lab 3D shield & wordmark logo:
+### Primary Brand Color: Ocean Electric Blue (SSA Logo Palette)
+The primary brand color used throughout the app matches the official SSA Research Lab 3D shield & wordmark logo:
 
 | Token Name | Light Mode | Dark Mode | Usage |
 |------------|------------|-----------|-------|

@@ -124,27 +124,27 @@ export function AboutPage() {
     profilePageSchema({
       url: `${SITE_URL}/about`,
       "@id": `${SITE_URL}/about`,
-      name: "About SCSA Research Lab",
+      name: "About SSA Research Lab",
       description:
-        "About Dr. Junaid Akram and SCSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team.",
+        "About Dr. Junaid Akram and SSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team.",
     }),
     personSchema(),
   ];
 
   return (
     <AcademicSiteLayout
-      title="About SCSA Research Lab"
+      title="About SSA Research Lab"
       path="/about"
-      description="About Dr. Junaid Akram and SCSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team."
-      keywords="Junaid Akram PhD, SCSA Lab history, software security researcher, COMSATS Lahore professor, Tsinghua University PhD, University of Luxembourg postdoc"
+      description="About Dr. Junaid Akram and SSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team."
+      keywords="Junaid Akram PhD, SSA Lab history, software security researcher, COMSATS Lahore professor, Tsinghua University PhD, University of Luxembourg postdoc"
       jsonLd={aboutJsonLd}
     >
       {/* 1. HERO & LAB MISSION OVERVIEW WITH DIRECTOR CARD */}
       <div className={styles.aboutHeroWrapper}>
         <PageIntro
-          eyebrow="About SCSA Lab & Collaborations"
+          eyebrow="About SSA Lab & Collaborations"
           title="Pioneering Source-Code Security Assessment & AI-Driven Software Reliability"
-          lead="The Source Code Security Assessment (SCSA) Research Lab unites academic rigor, global international partnerships, and industrial applications to discover software vulnerabilities, synthesize security patches, defend against malware, and automate software verification."
+          lead="The Software Security Assessment (SSA) Research Lab unites academic rigor, global international partnerships, and industrial applications to discover software vulnerabilities, synthesize security patches, defend against malware, and automate software verification."
           illustration={
             <AcademicLottie
               src="/lottie/ai-brain.json"
@@ -269,14 +269,14 @@ export function AboutPage() {
             <p className={styles.eyebrow}>Lab Evolution & Story</p>
             <h2>Research Journey & Key Milestones</h2>
             <p style={{ maxWidth: "600px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: 0 }}>
-              Explore how SCSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg and AI-driven program repair at COMSATS.
+              Explore how SSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg and AI-driven program repair at COMSATS.
             </p>
           </div>
           <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
             <div className={styles.illustrationGlow} />
             <img
               src="/academic/illustrations/security-inspection-overview.webp"
-              alt="SCSA Lab Evolution & Research Journey 3D Illustration"
+              alt="SSA Lab Evolution & Research Journey 3D Illustration"
               width={160}
               height={140}
               style={{ objectFit: 'contain', maxHeight: '130px' }}
@@ -429,10 +429,10 @@ export function ResearchPage() {
 
   const researchJsonLd = [
     collectionPageSchema({
-      name: "SCSA Research Lab — Software Security Research",
+      name: "SSA Research Lab — Software Security Research",
       url: `${SITE_URL}/research`,
       description:
-        "Research areas, domain roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SCSA Lab.",
+        "Research areas, domain roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SSA Lab.",
       items: researchDomains.map((d) => ({
         name: d.title,
         url: `${SITE_URL}/research?domain=${d.id}`,
@@ -445,8 +445,8 @@ export function ResearchPage() {
     <AcademicSiteLayout
       title="Research Domains & Frameworks"
       path="/research"
-      description="Explore software security research domains, vulnerability detection roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SCSA Lab at COMSATS Lahore."
-      keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SCSA Lab research domains"
+      description="Explore software security research domains, vulnerability detection roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SSA Lab at COMSATS Lahore."
+      keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SSA Lab research domains"
       jsonLd={researchJsonLd}
     >
       {selectedDomain && (
@@ -457,13 +457,13 @@ export function ResearchPage() {
       )}
 
       <PageIntro
-        eyebrow="SCSA Research Roadmaps"
+        eyebrow="SSA Research Roadmaps"
         title="Software Security Research with Practical Reach"
         lead="The lab studies source-code vulnerabilities, Android & IoT malware, code clones, software evolution, and testing at scales ranging from individual functions to 324+ billion lines of code."
         illustration={
           <img
             src="/academic/illustrations/security-inspection-overview.webp"
-            alt="SCSA Software Security Research Platforms 3D Illustration"
+            alt="SSA Software Security Research Platforms 3D Illustration"
             width={160}
             height={150}
             style={{ objectFit: 'contain', maxHeight: '150px' }}
@@ -836,7 +836,15 @@ export function PublicationsPage() {
                   : "";
 
                 return (
-                  <article key={pub.title} className={styles.pubVisualCard}>
+                  <article
+                    key={pub.title}
+                    className={styles.pubVisualCard}
+                    onMouseMove={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                      e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                    }}
+                  >
                     <div>
                       <div className={styles.pubCardTop}>
                         <span
@@ -1141,7 +1149,7 @@ export function SupervisionPage({ fypProjects = [] }) {
       <PageIntro
         eyebrow="FYP Supervision"
         title="Supervised final-year projects and research opportunities."
-        lead="Explore open COMSATS final-year project topics alongside completed student projects supervised under Dr Junaid Akram's SCSA Laboratory."
+        lead="Explore open COMSATS final-year project topics alongside completed student projects supervised under Dr Junaid Akram's SSA Laboratory."
       />
 
       {/* Interactive Directory Component */}
@@ -1185,10 +1193,10 @@ export function TeamPage() {
 
   const teamJsonLd = [
     collectionPageSchema({
-      name: "SCSA Lab — People & Partners",
+      name: "SSA Lab — People & Partners",
       url: `${SITE_URL}/team`,
       description:
-        "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SCSA Lab.",
+        "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab.",
       items: [
         ...coInvestigators.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
         ...pgResearchers.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
@@ -1220,13 +1228,13 @@ export function TeamPage() {
     <AcademicSiteLayout
       title="People & Partners"
       path="/team"
-      description="Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SCSA Lab."
-      keywords="SCSA Lab team, software security researchers, COMSATS research group members, PhD students software security, international collaborators Pakistan"
+      description="Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab."
+      keywords="SSA Lab team, software security researchers, COMSATS research group members, PhD students software security, international collaborators Pakistan"
       jsonLd={teamJsonLd}
     >
       {/* PAGE INTRO HEADER */}
       <PageIntro
-        eyebrow="SCSA Research & Development Team"
+        eyebrow="SSA Research & Development Team"
         title="People, Collaborators & Institutional Partners"
         lead="Connecting principal investigators, international co-investigators, postgraduate MS & PhD thesis researchers, undergraduate BS engineering teams, and institutional partner organizations across software security and program repair."
       />
@@ -1563,10 +1571,10 @@ export function TeamPage() {
 export function EventsPage() {
   const eventsJsonLd = [
     collectionPageSchema({
-      name: "SCSA Lab — Events & Presentations",
+      name: "SSA Lab — Events & Presentations",
       url: `${SITE_URL}/events`,
       description:
-        "Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SCSA Research Lab.",
+        "Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SSA Research Lab.",
       items: eventHighlights.map((e) => ({
         name: e.title,
         url: `${SITE_URL}/events`,
@@ -1587,14 +1595,14 @@ export function EventsPage() {
     <AcademicSiteLayout
       title="Events & Presentations"
       path="/events"
-      description="Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SCSA Research Lab."
-      keywords="Junaid Akram keynote, software security conference, SCSA Lab events, international research workshops, Pakistan cybersecurity conference"
+      description="Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SSA Research Lab."
+      keywords="Junaid Akram keynote, software security conference, SSA Lab events, international research workshops, Pakistan cybersecurity conference"
       jsonLd={eventsJsonLd}
     >
       <PageIntro
         eyebrow="International Events & Keynotes"
         title="Research presented and shared on global stages."
-        lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr Junaid Akram and SCSA Research Lab."
+        lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr Junaid Akram and SSA Research Lab."
       />
 
       {/* 1. KEYNOTE & CONFERENCE HIGHLIGHTS */}
@@ -1735,9 +1743,9 @@ export function ContactPage() {
         "Email junaidakram@cuilahore.edu.pk with your group members' names, registration numbers, current CGPA, selected FYP topic, and technical background.",
     },
     {
-      question: "What research areas does the SCSA Lab focus on?",
+      question: "What research areas does the SSA Lab focus on?",
       answer:
-        "The SCSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
+        "The SSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
     },
     {
       question: "Is Dr. Junaid Akram an HEC-approved PhD supervisor?",
@@ -1766,16 +1774,16 @@ export function ContactPage() {
 
   return (
     <AcademicSiteLayout
-      title="Contact SCSA Research Lab"
+      title="Contact SSA Research Lab"
       path="/contact"
-      description="Contact Dr. Junaid Akram and the SCSA Research Lab at COMSATS University Islamabad, Lahore Campus for research collaborations and student supervision inquiries."
-      keywords="contact Junaid Akram, SCSA Lab contact, COMSATS Lahore faculty contact, PhD supervision enquiry Pakistan, software security collaboration"
+      description="Contact Dr. Junaid Akram and the SSA Research Lab at COMSATS University Islamabad, Lahore Campus for research collaborations and student supervision inquiries."
+      keywords="contact Junaid Akram, SSA Lab contact, COMSATS Lahore faculty contact, PhD supervision enquiry Pakistan, software security collaboration"
       jsonLd={contactJsonLd}
     >
       <PageIntro
         eyebrow="Contact"
         title="Discuss research, supervision, or collaboration."
-        lead="For research collaboration, student supervision, and SCSA Lab enquiries, use the verified institutional contact details below or submit an enquiry form."
+        lead="For research collaboration, student supervision, and SSA Lab enquiries, use the verified institutional contact details below or submit an enquiry form."
       />
 
       <section className={`${styles.section} ${styles.contactStage}`}>
@@ -1792,7 +1800,7 @@ export function ContactPage() {
             />
           </div>
           <div>
-            <p className={styles.eyebrow}>SCSA Research Lab</p>
+            <p className={styles.eyebrow}>SSA Research Lab</p>
             <h2>Software security, testing, and student research.</h2>
             <p>
               Include your research topic, degree programme, or collaboration objective so the enquiry can be assessed efficiently.
@@ -2080,14 +2088,14 @@ export function ContactPage() {
             <p className={styles.eyebrow}>Frequently Asked Questions</p>
             <h2>Supervision & Research FAQs</h2>
             <p className={styles.sectionLead}>
-              Common questions about SCSA Lab student requirements, research tools, thesis topics, and meeting schedules.
+              Common questions about SSA Lab student requirements, research tools, thesis topics, and meeting schedules.
             </p>
           </div>
           <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
             <div className={styles.illustrationGlow} />
             <img
               src="/academic/illustrations/faq-helpdesk.webp"
-              alt="SCSA Lab FAQs 3D Illustration"
+              alt="SSA Lab FAQs 3D Illustration"
               width={160}
               height={140}
               style={{ objectFit: 'contain', maxHeight: '130px' }}
@@ -2155,7 +2163,7 @@ export function PrivacyPage() {
     <AcademicSiteLayout
       title="Privacy Policy"
       path="/privacy-policy"
-      description="Privacy policy for the academic website of Dr. Junaid Akram and the Source Code Security Assessment (SCSA) Research Lab at COMSATS University Islamabad."
+      description="Privacy policy for the academic website of Dr. Junaid Akram and the Software Security Assessment (SSA) Research Lab at COMSATS University Islamabad."
     >
       <PageIntro
         eyebrow="Privacy"
@@ -2165,7 +2173,7 @@ export function PrivacyPage() {
       <section className={`${styles.section} ${styles.prose}`}>
         <h2>Information you provide</h2>
         <p>
-          If you contact Dr. Junaid Akram or the SCSA Lab by email or form, the information you send is used only to respond to your enquiry, research proposal, collaboration request, or supervision question.
+          If you contact Dr. Junaid Akram or the SSA Lab by email or form, the information you send is used only to respond to your enquiry, research proposal, collaboration request, or supervision question.
         </p>
         <h3>Analytics and essential operation</h3>
         <p>

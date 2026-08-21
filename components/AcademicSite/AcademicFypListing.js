@@ -216,6 +216,11 @@ export default function AcademicFypListing({ projects = [] }) {
                 key={project.slug || project._id}
                 className={`${styles.fypCard} ${isFeatured ? styles.fypCardFeatured : ""}`}
                 style={isOpp ? { borderTop: "3px solid var(--brand-accent, #3b82f6)" } : undefined}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                  e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                }}
               >
                 <div className={styles.fypCardTop}>
                   <div className={styles.fypCardBadges}>

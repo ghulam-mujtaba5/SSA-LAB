@@ -12,7 +12,7 @@ export default function Custom500() {
   return (
     <div className={styles.wrapper} data-theme={theme}>
       <Head>
-        <title>Server Error — SCSA Research Lab</title>
+        <title>Server Error — SSA Research Lab</title>
         <meta
           name="description"
           content="An unexpected error occurred. Please try again in a moment."
@@ -34,8 +34,8 @@ export default function Custom500() {
           />
         </div>
         <Image
-          src="/academic/scsa-research-group-full-logo.png"
-          alt="SCSA Research Lab — Software Security Assessment Lab"
+          src="/academic/ssa-research-group-full-logo.png"
+          alt="SSA Research Lab — Software Security Assessment Lab"
           width={220}
           height={200}
           className={styles.logo}

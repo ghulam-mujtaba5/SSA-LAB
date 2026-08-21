@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-  <ShortName>SCSA Lab</ShortName>
-  <Description>Search SCSA Research Lab — Software Security, Publications, and Research Projects</Description>
+  <ShortName>SSA Lab</ShortName>
+  <Description>Search SSA Research Lab — Software Security, Publications, and Research Projects</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Language>en-us</Language>
-  <Image width="16" height="16" type="image/png">/academic/scsa-research-group-logo.png</Image>
+  <Image width="16" height="16" type="image/png">/academic/ssa-research-group-logo.png</Image>
   <Url type="text/html" template="/search?q={searchTerms}" />
   <Url type="application/opensearchdescription+xml" rel="self" template="/opensearch.xml" />
-  <Contact>scsa.laab@gmail.com</Contact>
-  <Developer>SCSA Research Lab</Developer>
-  <Attribution>Content © SCSA Research Lab, COMSATS University Islamabad</Attribution>
+  <Contact>ssa.laab@gmail.com</Contact>
+  <Developer>SSA Research Lab</Developer>
+  <Attribution>Content © SSA Research Lab, COMSATS University Islamabad</Attribution>
   <SyndicationRight>open</SyndicationRight>
   <AdultContent>false</AdultContent>
 </OpenSearchDescription>

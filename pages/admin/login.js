@@ -49,7 +49,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Admin Login | SCSA Research Lab</title>
+        <title>Admin Login | SSA Research Lab</title>
       </Head>
       <motion.div 
         className={`${styles.loginContainer}`}
@@ -84,8 +84,8 @@ export default function LoginPage() {
         >
           <div className={styles.logoWrapper}>
             <img
-              src="/scsa-logo.png"
-              alt="SCSA Logo"
+              src="/ssa-logo.png"
+              alt="SSA Logo"
               width={36}
               height={36}
               className={styles.logoImg}
@@ -221,7 +221,7 @@ export default function LoginPage() {
           transition={{ duration: 0.5, delay: 0.6 }}
           style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center", marginTop: "24px" }}
         >
-          <span>SCSA Research Lab &middot; Admin Portal</span>
+          <span>SSA Research Lab &middot; Admin Portal</span>
           <Link
             href="/"
             style={{ color: "var(--admin-primary, #6366f1)", fontSize: "0.85rem", textDecoration: "none", opacity: 0.9 }}

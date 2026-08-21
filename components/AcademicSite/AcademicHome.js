@@ -50,9 +50,9 @@ const impactStats = [
 
 const domainIllustrationMap = {
   "cyber-security": "/academic/illustrations/malware-vulnerability-defense.webp",
-  "vulnerability-detection": "/academic/illustrations/repo-analyzed.webp",
+  "vulnerability-detection": "/academic/illustrations/vulnerability-detection.webp",
   "software-testing": "/academic/illustrations/android-app-security.webp",
-  "malware-detection": "/academic/illustrations/repo-analyzed.webp",
+  "malware-detection": "/academic/illustrations/malware-detection.webp",
   "code-clone-analysis": "/academic/illustrations/code-cloning.webp",
   "software-evolution-reuse": "/academic/illustrations/software-evolution-reuse.webp",
 };
@@ -126,7 +126,7 @@ export default function AcademicHome() {
           <div className={styles.heroIllustrationContainer}>
             <div className={styles.heroIllustrationGlow} />
             <AcademicImageLightbox
-              src="/academic/illustrations/security-inspection-overview.webp"
+              src="/academic/illustrations/homepage-hero.webp"
               alt="SSA Research Lab — Software Security Assessment Platform"
               width={800}
               height={800}
@@ -215,6 +215,11 @@ export default function AcademicHome() {
                   e.preventDefault();
                   setSelectedDomain(domain);
                 }
+              }}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
               }}
               tabIndex={0}
               role="button"

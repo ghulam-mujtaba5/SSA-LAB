@@ -25,7 +25,7 @@ const displayUrl = (project) => {
       /* fall through */
     }
   }
-  return project?.slug ? "SCSA research archive" : "";
+  return project?.slug ? "SSA research archive" : "";
 };
 
 const resolveImage = (project) => {

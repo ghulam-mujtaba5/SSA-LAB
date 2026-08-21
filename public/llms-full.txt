@@ -1,4 +1,4 @@
-# SCSA Research Lab — Source Code Security Assessment Laboratory
+# SSA Research Lab — Software Security Assessment Laboratory
 
 This site presents the verified academic profile, research, publications, collaborators, supervised student projects, and contact details of Dr. Junaid Akram.
 
@@ -14,7 +14,7 @@ This site presents the verified academic profile, research, publications, collab
 
 ## Primary Research Domains
 
-Dr. Junaid Akram leads the Source Code Security Assessment (SCSA) Lab. The lab works across six major research vectors:
+Dr. Junaid Akram leads the Software Security Assessment (SSA) Lab. The lab works across six major research vectors:
 1. **Cyber Security**: Source-level assessment methods for identifying, understanding, and mitigating software vulnerabilities.
 2. **Software Vulnerability Detection**: Deep-learning and program-analysis approaches for vulnerability discovery in C/C++, Java, and Python.
 3. **Software Testing**: Automated test-data generation, test smell detection, log-based test slicing, and regression testing.
@@ -32,7 +32,7 @@ Dr. Junaid Akram leads the Source Code Security Assessment (SCSA) Lab. The lab w
 
 ## Supervision Directory
 
-The SCSA Lab actively supervises BS, MS, and PhD researchers in software engineering and computer science at COMSATS University Islamabad, Lahore Campus. Supervised topics include:
+The SSA Lab actively supervises BS, MS, and PhD researchers in software engineering and computer science at COMSATS University Islamabad, Lahore Campus. Supervised topics include:
 - Automated Security Patch Synthesis using Large Language Models
 - Static Analysis of Infrastructure-as-Code (IaC) Misconfigurations
 - Cross-Language Vulnerability Mapping
@@ -41,7 +41,7 @@ The SCSA Lab actively supervises BS, MS, and PhD researchers in software enginee
 ## Contact & Office Details
 
 - **Email**: junaidakram@cuilahore.edu.pk
-- **Lab Email**: scsa.laab@gmail.com
+- **Lab Email**: ssa.laab@gmail.com
 - **Office**: H Block, Room 14, COMSATS University Islamabad, Lahore Campus
 - **University Exchange**: (042) 111-001-007
 

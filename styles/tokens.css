@@ -3,7 +3,7 @@
 
 :root {
   /* ==============================================
-     BRAND COLOR SHADES (Official SCSA Sky/Brand Blue Palette)
+     BRAND COLOR SHADES (Official SSA Sky/Brand Blue Palette)
      ============================================== */
   --color-primary-50: #f0f9ff;
   --color-primary-100: #e0f2fe;
@@ -32,7 +32,7 @@
   --color-slate-900: #0f172a;
   --color-slate-950: #090d16;
 
-  /* Primary Brand - Electric Ocean Blue Main Accent (Matching SCSA Logo) */
+  /* Primary Brand - Electric Ocean Blue Main Accent (Matching SSA Logo) */
   --brand-primary: #0284c7;
   --brand-primary-hover: #0369a1;
   --brand-primary-active: #075985;

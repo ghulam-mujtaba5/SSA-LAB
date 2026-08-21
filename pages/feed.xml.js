@@ -7,7 +7,7 @@ const entries = [
     title: "Research Projects and Tools",
     path: "/research",
     description:
-      "Current and completed SCSA Lab research in software security, vulnerability detection, testing, malware, and code analysis.",
+      "Current and completed SSA Lab research in software security, vulnerability detection, testing, malware, and code analysis.",
     category: "Research",
   },
   {
@@ -28,21 +28,21 @@ const entries = [
     title: "People & Partners",
     path: "/team",
     description:
-      "Principal investigator, MS/PhD researchers, BS engineering teams, and institutional partners of SCSA Lab.",
+      "Principal investigator, MS/PhD researchers, BS engineering teams, and institutional partners of SSA Lab.",
     category: "Team",
   },
   {
     title: "Events & Presentations",
     path: "/events",
     description:
-      "International conference keynotes, workshops, and research presentations by SCSA Lab.",
+      "International conference keynotes, workshops, and research presentations by SSA Lab.",
     category: "Events",
   },
   {
-    title: "About SCSA Lab",
+    title: "About SSA Lab",
     path: "/about",
     description:
-      "Profile, background, global research collaborations, and lab milestones of SCSA Research Lab.",
+      "Profile, background, global research collaborations, and lab milestones of SSA Research Lab.",
     category: "About",
   },
 ];
@@ -52,20 +52,20 @@ export async function getServerSideProps({ res }) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>SCSA Research Lab — Source Code Security Assessment</title>
+    <title>SSA Research Lab — Software Security Assessment</title>
     <link>${SITE_URL}</link>
-    <description>Research, publications, and supervision updates from the Source Code Security Assessment Lab at COMSATS University Islamabad, Lahore Campus. Led by Dr. Junaid Akram.</description>
+    <description>Research, publications, and supervision updates from the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus. Led by Dr. Junaid Akram.</description>
     <language>en-us</language>
     <managingEditor>junaidakram@cuilahore.edu.pk (Junaid Akram)</managingEditor>
-    <webMaster>scsa.laab@gmail.com (SCSA Lab)</webMaster>
+    <webMaster>ssa.laab@gmail.com (SSA Lab)</webMaster>
     <lastBuildDate>${buildDate}</lastBuildDate>
     <ttl>60</ttl>
     <category>Computer Science</category>
     <category>Software Security</category>
     <category>Academic Research</category>
     <image>
-      <url>${SITE_URL}/academic/scsa-research-group-logo.png</url>
-      <title>SCSA Research Lab</title>
+      <url>${SITE_URL}/academic/ssa-research-group-logo.png</url>
+      <title>SSA Research Lab</title>
       <link>${SITE_URL}</link>
       <width>144</width>
       <height>144</height>

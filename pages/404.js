@@ -12,7 +12,7 @@ export default function Custom404() {
   return (
     <div className={styles.wrapper} data-theme={theme}>
       <Head>
-        <title>Page Not Found — SCSA Research Lab</title>
+        <title>Page Not Found — SSA Research Lab</title>
         <meta
           name="description"
           content="This page does not exist. Explore Dr. Junaid Akram's research, publications, supervision, or contact information."
@@ -34,8 +34,8 @@ export default function Custom404() {
           />
         </div>
         <Image
-          src="/academic/scsa-research-group-full-logo.png"
-          alt="SCSA Research Lab — Software Security Assessment Lab"
+          src="/academic/ssa-research-group-full-logo.png"
+          alt="SSA Research Lab — Software Security Assessment Lab"
           width={220}
           height={200}
           className={styles.logo}

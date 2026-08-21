@@ -125,11 +125,11 @@ export default function AcademicSiteLayout({
       <div className={styles.site}>
         <header className={styles.header}>
           <div className={styles.headerInner}>
-            <Link href="/" className={styles.brand} aria-label="SCSA home">
+            <Link href="/" className={styles.brand} aria-label="SSA home">
               <span className={styles.logoWrap}>
                 <Image
-                  src="/academic/scsa-research-group-logo.png"
-                  alt="SCSA Research Group"
+                  src="/academic/ssa-research-group-logo.png"
+                  alt="SSA Research Group"
                   width={90}
                   height={60}
                   priority

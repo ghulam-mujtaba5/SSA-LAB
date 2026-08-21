@@ -1,12 +1,12 @@
-# SCSA Research Lab — Source Code Security Assessment Laboratory
+# SSA Research Lab — Software Security Assessment Laboratory
 
-A high-performance, responsive academic web platform for **Dr. Junaid Akram** (Assistant Professor, HEC-approved PhD supervisor) and the **Source Code Security Assessment (SCSA) Research Laboratory** at COMSATS University Islamabad, Lahore Campus.
+A high-performance, responsive academic web platform for **Dr. Junaid Akram** (Assistant Professor, HEC-approved PhD supervisor) and the **Software Security Assessment (SSA) Research Laboratory** at COMSATS University Islamabad, Lahore Campus.
 
 ---
 
 ## 🔬 Core Academic & Research Specializations
 
-- **Source Code Security Assessment (SCSA)**: Static analysis methods for identifying, understanding, and mitigating software vulnerabilities.
+- **Software Security Assessment (SSA)**: Static analysis methods for identifying, understanding, and mitigating software vulnerabilities.
 - **Vulnerability Detection Platforms**: Scalable vulnerability detection engines (**SQVDT**, **VCIPR**) indexing 152,000+ open-source repositories and CVE patch datasets.
 - **Code Clone & Obfuscation Analysis**: Multi-language detection of Type-1 through Type-4 code clones and obfuscated Android malware.
 - **Software Testing & Automated Test Generation**: Model-based testing, constraint-based test data generation (**ARC System**), and test-smell detection.
@@ -16,7 +16,7 @@ A high-performance, responsive academic web platform for **Dr. Junaid Akram** (A
 
 ## 🚀 Main Platform Sections
 
-1. **Home (`/`)**: Executive academic summary, research metrics, interactive SCSA pipeline visualizer, and recent highlights.
+1. **Home (`/`)**: Executive academic summary, research metrics, interactive SSA pipeline visualizer, and recent highlights.
 2. **About (`/about`)**: Background (PhD Tsinghua University, Postdoc SnT Luxembourg), experience, and lab overview.
 3. **Research (`/research`)**: Research domains, funded projects, vulnerability detection platforms, and interactive workflow.
 4. **Publications (`/publications`)**: Categorized peer-reviewed journal papers (Applied Soft Computing, IEEE, IJICS) and conference proceedings.

@@ -1,6 +1,6 @@
-# Junaid Akram, PhD — Academic Profile & SCSA Research Lab
+# Junaid Akram, PhD — Academic Profile & SSA Research Lab
 
-> Source Code Security Assessment (SCSA) Research Lab
+> Software Security Assessment (SSA) Research Lab
 > COMSATS University Islamabad, Lahore Campus
 > H Block, Room 14 — Lahore, Pakistan
 
@@ -8,10 +8,10 @@
 
 - Full Name: Junaid Akram, PhD
 - Role: Assistant Professor & HEC-approved PhD Supervisor
-- Lab: Source Code Security Assessment Lab (SCSA Lab)
+- Lab: Software Security Assessment Lab (SSA Lab)
 - Institution: COMSATS University Islamabad, Lahore Campus
 - Email: junaidakram@cuilahore.edu.pk
-- Lab Email: scsa.laab@gmail.com
+- Lab Email: ssa.laab@gmail.com
 
 ## Academic Background
 
@@ -47,6 +47,6 @@ Dr. Junaid Akram works on source-code security assessment, software vulnerabilit
 ## Contact
 
 - Email: junaidakram@cuilahore.edu.pk
-- Lab email: scsa.laab@gmail.com
+- Lab email: ssa.laab@gmail.com
 - Office: H Block, Room 14, COMSATS University Islamabad, Lahore Campus
 - University Exchange: (042) 111-001-007

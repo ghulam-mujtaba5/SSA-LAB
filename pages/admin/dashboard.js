@@ -433,7 +433,7 @@ const AdminDashboard = () => {
   return (
     <AdminLayout>
       <Head>
-        <title>Admin Dashboard | Overview — SCSA Research Lab</title>
+        <title>Admin Dashboard | Overview — SSA Research Lab</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </Head>
       

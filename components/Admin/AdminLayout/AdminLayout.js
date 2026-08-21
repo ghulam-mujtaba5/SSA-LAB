@@ -238,14 +238,14 @@ export default function AdminLayoutPremium({ children, title }) {
           <Link href="/admin/dashboard" className={styles.logo}>
             <div className={styles.logoIcon}>
               <img
-                src="/academic/scsa-research-group-logo.png"
-                alt="SCSA Research Lab"
+                src="/academic/ssa-research-group-logo.png"
+                alt="SSA Research Lab"
                 width={30}
                 height={20}
                 className={styles.logoImg}
               />
             </div>
-            <span>SCSA Admin</span>
+            <span>SSA Admin</span>
           </Link>
           <div className={styles.sidebarHeaderActions}>
             <motion.button

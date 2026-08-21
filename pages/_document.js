@@ -33,7 +33,7 @@ class MyDocument extends Document {
           )}
 
           {/* ── App identity ──────────────────────────────────── */}
-          <meta name="application-name" content="SCSA Lab" />
+          <meta name="application-name" content="SSA Lab" />
           <meta httpEquiv="x-ua-compatible" content="IE=edge" />
 
           {/* ── DNS prefetch & preconnects ────────────────────── */}
@@ -51,13 +51,13 @@ class MyDocument extends Document {
           <link
             rel="preload"
             as="image"
-            href="/academic/junaid-akram-professor.jpg"
-            type="image/jpeg"
+            href="/academic/illustrations/homepage-hero.webp"
+            type="image/webp"
           />
           <link
             rel="preload"
             as="image"
-            href="/academic/scsa-research-group-logo.png"
+            href="/academic/ssa-research-group-logo.png"
             type="image/png"
           />
 
@@ -98,26 +98,26 @@ class MyDocument extends Document {
           <link
             rel="alternate"
             type="application/rss+xml"
-            title="SCSA Research Lab — RSS Feed"
+            title="SSA Research Lab — RSS Feed"
             href="/feed.xml"
           />
           <link
             rel="search"
             type="application/opensearchdescription+xml"
-            title="SCSA Research Lab"
+            title="SSA Research Lab"
             href="/opensearch.xml"
           />
 
           {/* ── Apple / iOS meta ──────────────────────────────── */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-          <meta name="apple-mobile-web-app-title" content="SCSA Lab" />
-          <link rel="apple-touch-icon" href="/academic/scsa-research-group-logo.png" />
+          <meta name="apple-mobile-web-app-title" content="SSA Lab" />
+          <link rel="apple-touch-icon" href="/academic/ssa-research-group-logo.png" />
           <link rel="manifest" href="/manifest.json" />
 
           {/* ── Windows tiles ─────────────────────────────────── */}
           <meta name="msapplication-TileColor" content="#173b51" />
-          <meta name="msapplication-TileImage" content="/academic/scsa-research-group-logo.png" />
+          <meta name="msapplication-TileImage" content="/academic/ssa-research-group-logo.png" />
           <meta name="msapplication-config" content="/browserconfig.xml" />
 
           {/* ── Mobile ────────────────────────────────────────── */}

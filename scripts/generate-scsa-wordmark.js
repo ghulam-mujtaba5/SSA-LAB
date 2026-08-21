@@ -13,7 +13,7 @@ async function generateWordmark() {
     return;
   }
 
-  console.log('⚡ Generating SCSA-Lab Wordmark Logo using existing 3D shield icon...');
+  console.log('⚡ Generating SSA-Lab Wordmark Logo using existing 3D shield icon...');
 
   // Load metadata of shield logo
   const shieldMeta = await sharp(shieldLogoPath).metadata();
@@ -25,7 +25,7 @@ async function generateWordmark() {
   const canvasHeight = 1400;
 
   // SVG overlay for text matching the screenshot styling:
-  // "SSA-Lab" or "SCSA-Lab" + "Software Security Assessment Lab"
+  // "SSA-Lab" or "SSA-Lab" + "Software Security Assessment Lab"
   const svgTextOverlay = `<svg width="${canvasWidth}" height="${canvasHeight}" viewBox="0 0 ${canvasWidth} ${canvasHeight}" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <!-- Gradient for SSA-Lab primary text -->
@@ -119,8 +119,8 @@ async function generateWordmark() {
   fs.copyFileSync(fullLogoPngPath, path.join(publicDir, 'scsa-wordmark-logo.png'));
   fs.copyFileSync(fullLogoWebpPath, path.join(publicDir, 'scsa-wordmark-logo.webp'));
 
-  console.log(`✅ Generated SCSA Wordmark PNG: ${fullLogoPngPath} (${fs.statSync(fullLogoPngPath).size} bytes)`);
-  console.log(`✅ Generated SCSA Wordmark WebP: ${fullLogoWebpPath} (${fs.statSync(fullLogoWebpPath).size} bytes)`);
+  console.log(`✅ Generated SSA Wordmark PNG: ${fullLogoPngPath} (${fs.statSync(fullLogoPngPath).size} bytes)`);
+  console.log(`✅ Generated SSA Wordmark WebP: ${fullLogoWebpPath} (${fs.statSync(fullLogoWebpPath).size} bytes)`);
 }
 
 generateWordmark().catch(console.error);

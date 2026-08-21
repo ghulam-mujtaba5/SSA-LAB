@@ -533,7 +533,7 @@ function EnquiriesPage() {
               {/* Footer Actions */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "16px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
                 <a
-                  href={`mailto:${selectedEnquiry.email}?subject=Re: ${encodeURIComponent(selectedEnquiry.topic || selectedEnquiry.enquiryType || 'SCSA Lab Enquiry')}`}
+                  href={`mailto:${selectedEnquiry.email}?subject=Re: ${encodeURIComponent(selectedEnquiry.topic || selectedEnquiry.enquiryType || 'SSA Lab Enquiry')}`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => handleUpdateStatus(selectedEnquiry._id, "replied")}

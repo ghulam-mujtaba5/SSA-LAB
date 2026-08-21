@@ -7,6 +7,7 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import {
   Mail,
   MapPin,
+  Phone,
   ArrowRight,
   ExternalLink,
   Github,

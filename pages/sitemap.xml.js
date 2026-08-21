@@ -8,8 +8,8 @@ const STATIC_PAGES = [
     lastmod: "2026-08-14",
     image: {
       loc: "/academic/junaid-akram-professor.jpg",
-      title: "Dr. Junaid Akram — SCSA Research Lab",
-      caption: "Dr. Junaid Akram, Assistant Professor and Head of SCSA Research Lab",
+      title: "Dr. Junaid Akram — SSA Research Lab",
+      caption: "Dr. Junaid Akram, Assistant Professor and Head of SSA Research Lab",
     },
   },
   {
@@ -18,8 +18,8 @@ const STATIC_PAGES = [
     priority: 0.9,
     lastmod: "2026-08-01",
     image: {
-      loc: "/academic/scsa-research-group-logo.png",
-      title: "SCSA Research Lab Logo",
+      loc: "/academic/ssa-research-group-logo.png",
+      title: "SSA Research Lab Logo",
     },
   },
   {
@@ -46,8 +46,8 @@ const STATIC_PAGES = [
     priority: 0.85,
     lastmod: "2026-08-01",
     image: {
-      loc: "/academic/scsa-research-group-logo.png",
-      title: "SCSA Research Lab Team",
+      loc: "/academic/ssa-research-group-logo.png",
+      title: "SSA Research Lab Team",
     },
   },
   {

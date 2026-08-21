@@ -21,7 +21,7 @@ const displayUrl = (project) => {
       /* fall through */
     }
   }
-  return project?.slug ? "SCSA research archive" : "";
+  return project?.slug ? "SSA research archive" : "";
 };
 
 const ProjectDetail = ({ project }) => {
@@ -313,7 +313,7 @@ const ProjectDetail = ({ project }) => {
         </h2>
         <p className={styles.ctaDesc}>
           Discuss research collaboration, funded projects, or student
-          supervision opportunities with the SCSA Lab.
+          supervision opportunities with the SSA Lab.
         </p>
         <div className={styles.ctaActions}>
           <Link href="/contact" className={`${styles.btn} ${styles.btnCta}`}>

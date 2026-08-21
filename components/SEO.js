@@ -3,22 +3,22 @@ import Head from "next/head";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   "https://www.ssa-lab.tech";
-const SITE_NAME = "SCSA Research Lab";
+const SITE_NAME = "SSA Research Lab";
 const PERSON_NAME = "Junaid Akram";
 const PERSON_NAME_FULL = "Junaid Akram, PhD";
 const TWITTER_HANDLE = "@JunaidAkramPhD";
-const TWITTER_SITE = "@SCSALab";
+const TWITTER_SITE = "@SSALab";
 const OG_IMAGE = `${SITE_URL}/academic/junaid-akram-professor.jpg`;
 const AFFILIATION = "COMSATS University Islamabad, Lahore Campus";
 
 export default function SEO({
-  title = `SCSA Research Lab | Software Security Research`,
-  description = "Academic profile of Dr. Junaid Akram and the Source Code Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
+  title = `SSA Research Lab | Software Security Research`,
+  description = "Academic profile of Dr. Junaid Akram and the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
   url = SITE_URL,
   image = OG_IMAGE,
   imageWidth = 755,
   imageHeight = 716,
-  imageAlt = "Dr. Junaid Akram — SCSA Research Lab",
+  imageAlt = "Dr. Junaid Akram — SSA Research Lab",
   type = "website",
   canonical = url,
   keywords,
@@ -107,7 +107,7 @@ export default function SEO({
       {/* ── Icons & PWA ──────────────────────────────────────────── */}
       <link
         rel="icon"
-        href="/academic/scsa-research-group-logo.png"
+        href="/academic/ssa-research-group-logo.png"
         type="image/png"
       />
       <link rel="manifest" href="/manifest.json" />
@@ -165,7 +165,7 @@ export function personSchema(overrides = {}) {
     image: OG_IMAGE,
     jobTitle: "Assistant Professor",
     description:
-      "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Source Code Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
+      "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
     email: "mailto:junaidakram@cuilahore.edu.pk",
     telephone: "+92-42-111-001-007",
     worksFor: {
@@ -177,7 +177,7 @@ export function personSchema(overrides = {}) {
     affiliation: {
       "@type": "ResearchOrganization",
       "@id": `${SITE_URL}/#organization`,
-      name: "Source Code Security Assessment Lab",
+      name: "Software Security Assessment Lab",
     },
     alumniOf: [
       {
@@ -211,7 +211,7 @@ export function personSchema(overrides = {}) {
       "Code Clone Detection",
       "Software Evolution and Maintenance",
       "Android Security",
-      "Source Code Security Assessment",
+      "Software Security Assessment",
     ],
     hasOccupation: {
       "@type": "Occupation",
@@ -250,7 +250,7 @@ export function webSiteSchema() {
     url: SITE_URL,
     name: SITE_NAME,
     description:
-      "Research, publications, supervision, and people of the Source Code Security Assessment Lab.",
+      "Research, publications, supervision, and people of the Software Security Assessment Lab.",
     publisher: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en-US",
     potentialAction: {
@@ -269,17 +269,17 @@ export function organizationSchema() {
     "@context": "https://schema.org",
     "@type": "ResearchOrganization",
     "@id": `${SITE_URL}/#organization`,
-    name: "Source Code Security Assessment Lab",
-    alternateName: ["SCSA Research Lab", "SCSA Lab"],
+    name: "Software Security Assessment Lab",
+    alternateName: ["SSA Research Lab", "SSA Lab"],
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/academic/scsa-research-group-logo.png`,
+      url: `${SITE_URL}/academic/ssa-research-group-logo.png`,
       width: 1098,
       height: 1298,
     },
-    image: `${SITE_URL}/academic/scsa-research-group-logo.png`,
-    email: "scsa.laab@gmail.com",
+    image: `${SITE_URL}/academic/ssa-research-group-logo.png`,
+    email: "ssa.laab@gmail.com",
     foundingDate: "2023",
     parentOrganization: {
       "@type": "CollegeOrUniversity",
@@ -425,16 +425,16 @@ export function professionalServiceSchema(overrides = {}) {
     "@context": "https://schema.org",
     "@type": "ResearchOrganization",
     "@id": `${SITE_URL}/#research-lab`,
-    name: "Source Code Security Assessment Lab",
+    name: "Software Security Assessment Lab",
     url: SITE_URL,
-    image: `${SITE_URL}/academic/scsa-research-group-logo.png`,
+    image: `${SITE_URL}/academic/ssa-research-group-logo.png`,
     description:
       "Research group focused on source-code security assessment, vulnerability detection, software testing, malware analysis, and code-clone detection.",
     parentOrganization: {
       "@type": "CollegeOrUniversity",
       name: AFFILIATION,
     },
-    email: "mailto:scsa.laab@gmail.com",
+    email: "mailto:ssa.laab@gmail.com",
     ...overrides,
   };
 }
@@ -587,9 +587,9 @@ export function contactPageSchema({ url }) {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     url,
-    name: "Contact SCSA Research Lab",
+    name: "Contact SSA Research Lab",
     description:
-      "Get in touch with Dr. Junaid Akram and the Source Code Security Assessment Lab for research collaboration, student supervision, or general inquiries.",
+      "Get in touch with Dr. Junaid Akram and the Software Security Assessment Lab for research collaboration, student supervision, or general inquiries.",
     mainEntity: { "@id": `${SITE_URL}/#person` },
     isPartOf: { "@id": `${SITE_URL}/#website` },
   };

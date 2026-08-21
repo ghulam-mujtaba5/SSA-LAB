@@ -13,7 +13,7 @@ async function optimizeLogo() {
     return;
   }
 
-  console.log('⚡ Processing and compressing SCSA logo without quality compromise...');
+  console.log('⚡ Processing and compressing SSA logo without quality compromise...');
   
   const metadata = await sharp(inputFile).metadata();
   console.log(`Original dimensions: ${metadata.width}x${metadata.height}, format: ${metadata.format}`);
