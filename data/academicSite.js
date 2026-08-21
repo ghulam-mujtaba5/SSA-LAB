@@ -3,12 +3,12 @@ export const academicProfile = {
   shortName: "Junaid Akram",
   role: "Assistant Professor",
   institution: "COMSATS University Islamabad, Lahore Campus",
-  lab: "Source Code Security Assessment Lab",
-  labShort: "SCSA Research Lab",
+  lab: "Software Security Assessment Lab",
+  labShort: "SSA Research Lab",
   office: "H Block — Room 14",
   officePhone: "(042) 111-001-007 (University Exchange)",
   emails: ["junaidakram@cuilahore.edu.pk", "junaid.tsinghua@yahoo.com"],
-  labEmail: "scsa.laab@gmail.com",
+  labEmail: "ssa.laab@gmail.com",
   googleScholar: "https://scholar.google.com/citations?user=JunaidAkram",
   linkedin: "https://www.linkedin.com/in/junaidakram/",
   researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
@@ -153,7 +153,7 @@ export const researchDomains = [
     number: "02",
     graphicKey: "vulnerability-detection",
     title: "Vulnerability Detection",
-    image: "/academic/illustrations/vulnerability-detection.webp",
+    image: "/academic/illustrations/repo-analyzed.webp",
     description:
       "Scalable techniques and tools that trace vulnerable code through patches, fingerprints, and code similarity.",
     overview:
@@ -331,7 +331,7 @@ export const researchDomains = [
     number: "04",
     graphicKey: "malware-analysis",
     title: "Malware Detection",
-    image: "/academic/illustrations/malware-detection.webp",
+    image: "/academic/illustrations/repo-analyzed.webp",
     description:
       "Static and learning-based analysis of Android and cross-architecture malware at source-code level.",
     overview:
@@ -1087,7 +1087,7 @@ export const eventHighlights = [
     venue: "Kirchberg Campus / SnT Headquarters",
     location: "Luxembourg City, Luxembourg",
     summary:
-      "Exhibited SCSA Lab research activities in software security, vulnerability detection, and automated program repair to European academic and industrial partners.",
+      "Exhibited SSA Lab research activities in software security, vulnerability detection, and automated program repair to European academic and industrial partners.",
   },
   {
     title: "IEEE International Conference on Software Testing (ICST 2019)",
@@ -1249,7 +1249,7 @@ export const coInvestigators = [
     orcid: "https://orcid.org/0000-0003-1752-6124",
     researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
     officialProfile: "https://lahore.comsats.edu.pk/employees/1333",
-    bio: "Assistant Professor & HEC-Approved PhD Supervisor leading SCSA Lab. Former Postdoc at SnT Luxembourg & SES Satellites. PhD from Tsinghua University.",
+    bio: "Assistant Professor & HEC-Approved PhD Supervisor leading SSA Lab. Former Postdoc at SnT Luxembourg & SES Satellites. PhD from Tsinghua University.",
     badge: "Lab Director",
   },
   {
@@ -1335,11 +1335,11 @@ export const labMilestones = [
   {
     year: "2023 – Present",
     era: "Phase 3",
-    title: "SCSA Research Lab Establishment & AI Transformation",
+    title: "SSA Research Lab Establishment & AI Transformation",
     location: "COMSATS University Islamabad, Lahore Campus",
-    tag: "Current SCSA Era",
+    tag: "Current SSA Era",
     badge: "AI & Program Repair",
-    summary: "Established the Source Code Security Assessment (SCSA) Research Lab at COMSATS Lahore, uniting source code analysis, LLM patch synthesis, GNN refactoring, and student mentorship.",
+    summary: "Established the Software Security Assessment (SSA) Research Lab at COMSATS Lahore, uniting source code analysis, LLM patch synthesis, GNN refactoring, and student mentorship.",
     achievements: [
       "Supervising 7+ active MS/PhD theses spanning LLM patch synthesis, AST/CFG code summarizers, and GNN feature envy.",
       "Supervising 12+ BS Software Engineering researchers across high-impact projects like MegiLance.",
@@ -1352,7 +1352,7 @@ export const labMilestones = [
     year: "2025 – Beyond",
     era: "Phase 4",
     title: "Autonomous Security Agents & Multimodal Defense",
-    location: "Global SCSA Ecosystem (COMSATS, KFUPM, SnT, Tsinghua)",
+    location: "Global SSA Ecosystem (COMSATS, KFUPM, SnT, Tsinghua)",
     tag: "Future Vision",
     badge: "Next-Gen Security",
     summary: "Expanding into autonomous LLM security agents, multi-architecture malware ensemble defense, and real-time continuous vulnerability patch synthesis.",

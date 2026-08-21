@@ -43,7 +43,7 @@ export default async function handler(req, res) {
     });
 
     // 2. Dispatch Email via Resend to recipient
-    const recipientEmail = process.env.CONTACT_NOTIFICATION_EMAIL || "ssalab0101@gmail.com";
+    const recipientEmail = process.env.CONTACT_NOTIFICATION_EMAIL || "jnd.akram@hotmail.com";
     const emailSubject = `[SCSA Lab] ${newEnquiry.enquiryType}: ${newEnquiry.name} ${newEnquiry.topic ? `- ${newEnquiry.topic}` : ""}`;
     const emailHtml = buildEnquiryEmailHtml({
       name: newEnquiry.name,

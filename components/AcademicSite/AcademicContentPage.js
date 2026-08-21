@@ -340,189 +340,69 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* 5. PEOPLE & COLLABORATION ECOSYSTEM (INTERACTIVE FILTER TABS) */}
+      {/* 5. PEOPLE & RESEARCH COMMUNITY CALLOUT (STREAMLINED SUMMARY LINKING TO /team) */}
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
             <p className={styles.eyebrow}>Team & Networks</p>
-            <h2>Collaborators & Research Personnel</h2>
+            <h2>Research Personnel & Global Collaborators</h2>
+          </div>
+          <Link href="/team" className={styles.textLink}>
+            Explore full directory <ArrowRight size={16} />
+          </Link>
+        </div>
+
+        <div className={styles.aboutTeamSpotlightGrid}>
+          <div className={styles.aboutTeamSpotlightCard}>
+            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "rgba(59, 130, 246, 0.12)", color: "#3b82f6" }}>
+              <Users size={24} />
+            </div>
+            <div className={styles.aboutTeamSpotlightContent}>
+              <h3>Faculty & Co-Investigators ({coInvestigators.length})</h3>
+              <p>
+                International academic partnerships spanning COMSATS Lahore, Tsinghua University, SnT Luxembourg, and KFUPM.
+              </p>
+              <Link href="/team?tab=pi" className={styles.aboutTeamLink}>
+                View Faculty & Co-Investigators <ArrowRight size={13} />
+              </Link>
+            </div>
+          </div>
+
+          <div className={styles.aboutTeamSpotlightCard}>
+            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "rgba(6, 182, 212, 0.12)", color: "var(--academic-cyan)" }}>
+              <GraduationCap size={24} />
+            </div>
+            <div className={styles.aboutTeamSpotlightContent}>
+              <h3>Postgraduate MS & PhD Theses ({pgResearchers.length})</h3>
+              <p>
+                Active Master of Science (MS CS) researchers working on LLM vulnerability detection, program repair, and GNNs.
+              </p>
+              <Link href="/team?tab=ms" className={styles.aboutTeamLink}>
+                View MS & PhD Researchers <ArrowRight size={13} />
+              </Link>
+            </div>
+          </div>
+
+          <div className={styles.aboutTeamSpotlightCard}>
+            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "rgba(16, 185, 129, 0.12)", color: "#10b981" }}>
+              <Building size={24} />
+            </div>
+            <div className={styles.aboutTeamSpotlightContent}>
+              <h3>Alumni Placements ({alumniPlacements.length})</h3>
+              <p>
+                Graduates transitioning into top global technology advisories, cybersecurity firms, and enterprise software teams.
+              </p>
+              <Link href="/team?tab=alumni" className={styles.aboutTeamLink}>
+                View Supervised Alumni <ArrowRight size={13} />
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Filter Tabs */}
-        <div className={styles.collabFilterBar}>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeCollabTab === "all" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveCollabTab("all")}
-          >
-            All Members & Collaborators
-          </button>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeCollabTab === "leadership" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveCollabTab("leadership")}
-          >
-            Lab Leadership & PIs
-          </button>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeCollabTab === "international" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveCollabTab("international")}
-          >
-            International Collaborators
-          </button>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeCollabTab === "pg" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveCollabTab("pg")}
-          >
-            MS & PhD Researchers
-          </button>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeCollabTab === "fyp" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveCollabTab("fyp")}
-          >
-            BS / FYP Teams
-          </button>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeCollabTab === "alumni" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveCollabTab("alumni")}
-          >
-            Alumni Placements
-          </button>
-        </div>
-
-        {/* Render Cards Grid according to active tab */}
-        <div className={styles.collabGrid}>
-          {/* Leadership & Co-Investigators */}
-          {(activeCollabTab === "all" || activeCollabTab === "leadership" || activeCollabTab === "international") &&
-            coInvestigators
-              .filter((person) => {
-                if (activeCollabTab === "leadership") return person.badge === "Lab Director";
-                if (activeCollabTab === "international") return person.badge !== "Lab Director";
-                return true;
-              })
-              .map((person) => (
-                <article key={person.name} className={styles.collabCard}>
-                  <div className={styles.collabTop}>
-                    <div className={styles.collabAvatar}>
-                      {person.image ? (
-                        <Image src={person.image} alt={person.name} width={56} height={56} />
-                      ) : (
-                        person.name.charAt(0)
-                      )}
-                    </div>
-                    <div className={styles.collabMeta}>
-                      <h3>{person.name}</h3>
-                      <span className={styles.collabBadge}>{person.badge}</span>
-                      <div className={styles.collabDegree}>{person.role}</div>
-                    </div>
-                  </div>
-                  <div className={styles.collabBody}>
-                    <p className={styles.collabTopic}>{person.bio}</p>
-                    <div className={styles.collabFocus}>
-                      <strong>Focus:</strong> {person.specialization}
-                    </div>
-                  </div>
-                  <div className={styles.collabFooter}>
-                    {person.email && (
-                      <a href={`mailto:${person.email}`} className={styles.collabLinkBtn}>
-                        <Mail size={12} /> Email
-                      </a>
-                    )}
-                    {person.googleScholar && (
-                      <a href={person.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
-                        Scholar <ExternalLink size={12} />
-                      </a>
-                    )}
-                    {person.orcid && (
-                      <a href={person.orcid} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
-                        ORCID <ExternalLink size={12} />
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
-
-          {/* MS & PhD Postgraduate Researchers */}
-          {(activeCollabTab === "all" || activeCollabTab === "pg") &&
-            pgResearchers.map((student) => (
-              <article key={student.id} className={styles.collabCard}>
-                <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar}>
-                    {student.name.split(" ").map((n) => n[0]).join("")}
-                  </div>
-                  <div className={styles.collabMeta}>
-                    <h3>{student.name}</h3>
-                    <span className={styles.collabRegId}>{student.id}</span>
-                    <div className={styles.collabDegree}>{student.degree}</div>
-                  </div>
-                </div>
-                <div className={styles.collabBody}>
-                  <p className={styles.collabTopic}>
-                    <strong>Thesis Topic:</strong> "{student.topic}"
-                  </p>
-                  <div className={styles.collabFocus}>
-                    <strong>Research Focus:</strong> {student.focus}
-                  </div>
-                </div>
-                <div className={styles.collabFooter}>
-                  <span className={styles.sessionBadge}>{student.status}</span>
-                </div>
-              </article>
-            ))}
-
-          {/* BS / FYP Engineering Researchers */}
-          {(activeCollabTab === "all" || activeCollabTab === "fyp") &&
-            defaultFypProjects.slice(0, 4).map((fyp) => (
-              <article key={fyp.slug} className={styles.collabCard}>
-                <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar} style={{ background: "rgba(6, 182, 212, 0.1)", color: "var(--academic-cyan)" }}>
-                    <GraduationCap size={24} />
-                  </div>
-                  <div className={styles.collabMeta}>
-                    <h3>{fyp.title.split("—")[0]}</h3>
-                    <span className={styles.collabBadge}>{fyp.programme} · {fyp.session}</span>
-                  </div>
-                </div>
-                <div className={styles.collabBody}>
-                  <p className={styles.collabTopic}>{fyp.summary}</p>
-                  <div className={styles.collabFocus}>
-                    <strong>Student Team:</strong> {fyp.students.map((s) => s.name).join(", ")}
-                  </div>
-                </div>
-                <div className={styles.collabFooter}>
-                  <Link href={fyp.isOpportunity ? `/supervision/opportunities/${fyp.slug}` : `/supervision/projects/${fyp.slug}`} className={styles.cardLink}>
-                    View Project <ArrowRight size={12} />
-                  </Link>
-                </div>
-              </article>
-            ))}
-
-          {/* Alumni Industry Placements */}
-          {(activeCollabTab === "all" || activeCollabTab === "alumni") &&
-            alumniPlacements.map((alum) => (
-              <article key={`${alum.name}-${alum.organization}`} className={styles.collabCard}>
-                <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar} style={{ background: "rgba(16, 185, 129, 0.1)", color: "#10b981" }}>
-                    <Building size={24} />
-                  </div>
-                  <div className={styles.collabMeta}>
-                    <h3>{alum.name}</h3>
-                    <span className={styles.collabBadge}>{alum.term} Alumni</span>
-                    <div className={styles.collabDegree}>{alum.organization}</div>
-                  </div>
-                </div>
-                <div className={styles.collabBody}>
-                  <p className={styles.collabTopic}>
-                    Successfully transitioned into top technology, cybersecurity, and consulting firms following SCSA Lab supervision.
-                  </p>
-                </div>
-              </article>
-            ))}
+        <div style={{ textAlign: "center", marginTop: "28px" }}>
+          <Link href="/team" className={styles.primaryButton}>
+            View Complete People & Partners Directory <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
 
@@ -532,10 +412,7 @@ export function AboutPage() {
 
 export function ResearchPage() {
   const router = useRouter();
-  const [expandedProject, setExpandedProject] = useState(null);
   const [selectedDomain, setSelectedDomain] = useState(null);
-  const [projectSearch, setProjectSearch] = useState("");
-  const [activeDomainFilter, setActiveDomainFilter] = useState("All");
 
   React.useEffect(() => {
     if (router.query.domain) {
@@ -550,58 +427,26 @@ export function ResearchPage() {
     }
   }, [router.query.domain]);
 
-  const filteredProjectsList = React.useMemo(() => {
-    return researchProjects.filter((project) => {
-      // Domain filter
-      if (activeDomainFilter !== "All") {
-        const titleLower = project.title.toLowerCase();
-        if (activeDomainFilter === "Vulnerability Detection" && !titleLower.includes("vulnerability") && !titleLower.includes("sqvdt") && !titleLower.includes("vcipr") && !titleLower.includes("patch")) return false;
-        if (activeDomainFilter === "Software Testing" && !titleLower.includes("test") && !titleLower.includes("arc")) return false;
-        if (activeDomainFilter === "Malware & Clones" && !titleLower.includes("malware") && !titleLower.includes("clone") && !titleLower.includes("obfuscated") && !titleLower.includes("droid")) return false;
-      }
-
-      // Search filter
-      const q = projectSearch.toLowerCase().trim();
-      if (!q) return true;
-
-      return (
-        project.title.toLowerCase().includes(q) ||
-        project.summary.toLowerCase().includes(q) ||
-        project.collaboration.toLowerCase().includes(q) ||
-        (project.details?.problem && project.details.problem.toLowerCase().includes(q)) ||
-        (project.details?.approach && project.details.approach.toLowerCase().includes(q))
-      );
-    });
-  }, [activeDomainFilter, projectSearch]);
-
   const researchJsonLd = [
     collectionPageSchema({
       name: "SCSA Research Lab — Software Security Research",
       url: `${SITE_URL}/research`,
       description:
-        "Research areas, platforms, and software-security tools developed by Dr. Junaid Akram and the SCSA Lab.",
-      items: researchProjects.map((p) => ({
-        name: p.title || p.name,
-        url: `${SITE_URL}/research`,
-        description: p.description,
+        "Research areas, domain roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SCSA Lab.",
+      items: researchDomains.map((d) => ({
+        name: d.title,
+        url: `${SITE_URL}/research?domain=${d.id}`,
+        description: d.description,
       })),
     }),
-    ...researchProjects.slice(0, 6).map((p) =>
-      softwareProjectSchema({
-        name: p.title || p.name,
-        description: p.description,
-        url: `${SITE_URL}/research`,
-        keywords: p.tags ? p.tags.join(", ") : undefined,
-      })
-    ),
   ];
 
   return (
     <AcademicSiteLayout
-      title="Research Showcase & Platforms"
+      title="Research Domains & Frameworks"
       path="/research"
-      description="Explore software security research, vulnerability detection tools, and testing platforms developed by Dr. Junaid Akram and the SCSA Lab at COMSATS Lahore."
-      keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SCSA Lab research projects"
+      description="Explore software security research domains, vulnerability detection roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SCSA Lab at COMSATS Lahore."
+      keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SCSA Lab research domains"
       jsonLd={researchJsonLd}
     >
       {selectedDomain && (
@@ -612,12 +457,12 @@ export function ResearchPage() {
       )}
 
       <PageIntro
-        eyebrow="SCSA Research Platforms"
+        eyebrow="SCSA Research Roadmaps"
         title="Software Security Research with Practical Reach"
         lead="The lab studies source-code vulnerabilities, Android & IoT malware, code clones, software evolution, and testing at scales ranging from individual functions to 324+ billion lines of code."
         illustration={
           <img
-            src="/academic/illustrations/homepage-hero.webp"
+            src="/academic/illustrations/security-inspection-overview.webp"
             alt="SCSA Software Security Research Platforms 3D Illustration"
             width={160}
             height={150}
@@ -687,159 +532,18 @@ export function ResearchPage() {
         <AcademicResearchPipeline />
       </section>
 
-      {/* Projects & Tools Showcase */}
-      <section className={`${styles.section} ${styles.softSection}`}>
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.eyebrow}>Projects & Tools Directory</p>
-            <h2>Empirical Research Systems & Platforms</h2>
-          </div>
+      {/* Direct link to Publications to prevent duplication */}
+      <section className={styles.ctaBand}>
+        <div>
+          <p className={styles.eyebrow}>Peer-Reviewed Literature & Tools</p>
+          <h2>Explore Published Papers, Benchmarks & Tools</h2>
+          <p style={{ margin: "8px 0 0 0", color: "var(--academic-muted)", fontSize: "0.92rem", maxWidth: "600px" }}>
+            All empirical research findings, platforms (SQVDT, VCIPR, DroidSD, DroidMD), and datasets are published with full DOI links and citations in our Publications directory.
+          </p>
         </div>
-
-        {/* Project Search & Filter Toolbar */}
-        <div className={styles.toolbarContainer} style={{ marginBottom: "24px" }}>
-          <div className={styles.toolbarTopRow}>
-            <div className={styles.toolbarSearchBox}>
-              <Search size={16} className={styles.toolbarSearchIcon} />
-              <input
-                type="text"
-                className={styles.toolbarSearchInput}
-                placeholder="Search projects, methods, algorithms, partners..."
-                value={projectSearch}
-                onChange={(e) => setProjectSearch(e.target.value)}
-                aria-label="Search research projects"
-              />
-              {projectSearch ? (
-                <button
-                  type="button"
-                  className={styles.clearSearchBtn}
-                  onClick={() => setProjectSearch("")}
-                >
-                  ×
-                </button>
-              ) : null}
-            </div>
-
-            <div className={styles.categoryPillsRow}>
-              {["All", "Vulnerability Detection", "Software Testing", "Malware & Clones"].map((dom) => (
-                <button
-                  key={dom}
-                  type="button"
-                  className={`${styles.pubFilterTag} ${activeDomainFilter === dom ? styles.pubFilterTagActive : ""}`}
-                  onClick={() => setActiveDomainFilter(dom)}
-                >
-                  {dom}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Projects List Output */}
-        <div className={styles.projectList}>
-          {filteredProjectsList.length > 0 ? (
-            filteredProjectsList.map((project, idx) => {
-              const isExpanded = expandedProject === idx;
-              return (
-                <article
-                  key={project.title}
-                  style={{
-                    marginBottom: "24px",
-                    background: "var(--academic-paper)",
-                    border: "1px solid var(--academic-line)",
-                    borderRadius: "16px",
-                    padding: "24px",
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.03)",
-                  }}
-                >
-                  <div style={{ flex: 1 }}>
-                    <span className={styles.sessionBadge}>{project.status}</span>
-                    <h3 style={{ marginTop: "10px", fontSize: "1.2rem", fontWeight: 700, fontFamily: "Poppins, sans-serif" }}>
-                      {project.title}
-                    </h3>
-                    <p style={{ margin: "10px 0", color: "var(--academic-ink)", fontSize: "0.92rem", lineHeight: 1.5 }}>
-                      {project.summary}
-                    </p>
-
-                    <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.8rem", color: "var(--academic-muted)", margin: "8px 0 14px 0" }}>
-                      <Building size={14} style={{ color: "var(--academic-blue)" }} />
-                      <span><strong>Partners:</strong> {project.collaboration}</span>
-                    </div>
-
-                    {/* Expandable Technical Details Button */}
-                    {project.details ? (
-                      <div>
-                        <button
-                          type="button"
-                          className={styles.secondaryButton}
-                          style={{ padding: "6px 14px", fontSize: "0.8rem", borderRadius: "8px" }}
-                          onClick={() => setExpandedProject(isExpanded ? null : idx)}
-                        >
-                          {isExpanded ? "Hide Technical Specifications" : "View Technical Specifications"} {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                        </button>
-                      </div>
-                    ) : null}
-
-                    {/* Expanded Technical Details Box */}
-                    {isExpanded && project.details ? (
-                      <div
-                        style={{
-                          marginTop: "14px",
-                          padding: "16px 18px",
-                          background: "var(--academic-soft, rgba(255,255,255,0.04))",
-                          borderRadius: "12px",
-                          border: "1px solid var(--academic-line, #e5e7eb)",
-                          fontSize: "0.88rem",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "8px",
-                        }}
-                      >
-                        <p style={{ margin: 0 }}>
-                          <strong style={{ color: "#ef4444" }}>Research Challenge:</strong> {project.details.problem}
-                        </p>
-                        <p style={{ margin: 0 }}>
-                          <strong style={{ color: "var(--academic-blue)" }}>Technical Methodology:</strong> {project.details.approach}
-                        </p>
-                        <p style={{ margin: 0 }}>
-                          <strong style={{ color: "#10b981" }}>Validated Key Outcome:</strong> {project.details.outcome}
-                        </p>
-                      </div>
-                    ) : null}
-                  </div>
-
-                  {project.image && (
-                    <div className={styles.cornerCardIllustration} style={{ margin: 0, padding: "16px" }}>
-                      <div className={styles.cornerBadgeDot} />
-                      <AcademicImageLightbox
-                        src={project.image}
-                        alt={`${project.title} research visual`}
-                        width={300}
-                        height={300}
-                        caption={project.title}
-                        className={styles.illustrationImage}
-                      />
-                    </div>
-                  )}
-                </article>
-              );
-            })
-          ) : (
-            <div className={styles.noResultsBox} style={{ textAlign: "center", padding: "30px 0" }}>
-              <p>No research projects matched your filter criteria.</p>
-              <button
-                type="button"
-                className={styles.secondaryButton}
-                onClick={() => {
-                  setProjectSearch("");
-                  setActiveDomainFilter("All");
-                }}
-              >
-                Reset Filter & Search
-              </button>
-            </div>
-          )}
-        </div>
+        <Link href="/publications" className={styles.primaryButton}>
+          View Publications & Papers <ArrowRight size={17} />
+        </Link>
       </section>
     </AcademicSiteLayout>
   );
@@ -1443,27 +1147,6 @@ export function SupervisionPage({ fypProjects = [] }) {
       {/* Interactive Directory Component */}
       <AcademicFypListing projects={fypProjects} />
 
-      {/* Student Placements & Internships */}
-      <section className={`${styles.section} ${styles.softSection}`}>
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.eyebrow}>Placement outcomes</p>
-            <h2>Supervised student placements & careers</h2>
-          </div>
-        </div>
-        <div className={styles.placementList}>
-          {alumniPlacements.map((placement) => (
-            <article key={`${placement.name}-${placement.organization}`}>
-              <div>
-                <h3>{placement.name}</h3>
-                <p>{placement.organization}</p>
-              </div>
-              <span>{placement.term}</span>
-            </article>
-          ))}
-        </div>
-      </section>
-
       {/* Supervision Application Guidance */}
       <section className={styles.section}>
         <div className={styles.sectionHeading}>
@@ -1577,7 +1260,7 @@ export function TeamPage() {
             className={`${styles.collabTab} ${activeTab === "bs" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("bs")}
           >
-            💻 Undergraduate Team — BS Engineering ({defaultFypProjects.length + supervisedProjects.length})
+            💻 Undergraduate Team — BS Engineering ({defaultFypProjects.filter((p) => !p.isOpportunity && (p.institution || "").includes("COMSATS")).length + supervisedProjects.length})
           </button>
           <button
             type="button"
@@ -1692,9 +1375,8 @@ export function TeamPage() {
                     <GraduationCap size={24} style={{ color: "var(--academic-cyan)" }} />
                   </div>
                   <div className={styles.collabMeta}>
-                    <h3>{student.name}</h3>
-                    <span className={styles.collabRegId}>{student.id}</span>
-                    <div className={styles.collabDegree}>{student.degree}</div>
+                    <h3>{student.topic}</h3>
+                    <span className={styles.collabBadge}>{student.degree} · {student.id}</span>
                     <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
                       {student.status}
                     </div>
@@ -1702,9 +1384,9 @@ export function TeamPage() {
                 </div>
 
                 <div className={styles.collabBody}>
-                  <p className={styles.collabTopic}>
-                    <strong>Thesis Topic:</strong> "{student.topic}"
-                  </p>
+                  <div className={styles.collabFocus} style={{ marginBottom: "6px" }}>
+                    <strong>Researcher:</strong> {student.name} ({student.id})
+                  </div>
                   <p className={styles.collabFocus}>
                     <strong>Research Focus:</strong> {student.focus}
                   </p>
@@ -1736,73 +1418,75 @@ export function TeamPage() {
           </div>
 
           <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", marginBottom: "18px" }}>
-            Active COMSATS BS Final-Year Engineering Teams
+            COMSATS BS Final-Year Engineering Teams
           </h3>
 
           <div className={styles.collabGrid} style={{ marginBottom: "48px" }}>
-            {defaultFypProjects.map((fyp) => (
-              <article key={fyp.slug} className={styles.collabCard}>
-                <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar} style={{ borderRadius: "8px", width: "48px", height: "48px" }}>
-                    <Users size={22} />
-                  </div>
-                  <div className={styles.collabMeta}>
-                    <h3>{fyp.title}</h3>
-                    <span className={styles.collabBadge}>{fyp.programme} · {fyp.session}</span>
-                    <div className={styles.collabDegree}>{fyp.projectType} ({fyp.nature})</div>
-                  </div>
-                </div>
-
-                <div className={styles.collabBody}>
-                  <p className={styles.collabFocus} style={{ marginBottom: "12px" }}>
-                    {fyp.summary}
-                  </p>
-                  <p className={styles.collabTopic} style={{ fontSize: "0.8rem", margin: 0 }}>
-                    <strong>Team Members:</strong>
-                  </p>
-                  <ul style={{ margin: "6px 0 12px 18px", padding: 0, fontSize: "0.78rem", color: "var(--academic-muted)" }}>
-                    {fyp.students.map((st) => (
-                      <li key={st.name}>
-                        <strong>{st.name}</strong> {st.registration && `(${st.registration})`}
-                      </li>
-                    ))}
-                  </ul>
-                  {fyp.supervisor && (
-                    <div className={styles.collabFocus} style={{ fontSize: "0.75rem" }}>
-                      Supervisor: <strong>{fyp.supervisor}</strong> {fyp.coSupervisor && `| Co-Supervisor: ${fyp.coSupervisor}`}
+            {defaultFypProjects
+              .filter((fyp) => !fyp.isOpportunity && (fyp.institution || "").includes("COMSATS"))
+              .map((fyp) => (
+                <article key={fyp.slug} className={styles.collabCard}>
+                  <div className={styles.collabTop}>
+                    <div className={styles.collabAvatar} style={{ borderRadius: "8px", width: "48px", height: "48px" }}>
+                      <Users size={22} />
                     </div>
-                  )}
-                </div>
+                    <div className={styles.collabMeta}>
+                      <h3>{fyp.title}</h3>
+                      <span className={styles.collabBadge}>{fyp.programme} · {fyp.session}</span>
+                      <div className={styles.collabDegree}>{fyp.projectType} ({fyp.nature})</div>
+                    </div>
+                  </div>
 
-                <div className={styles.collabFooter}>
-                  <Link href={fyp.isOpportunity ? `/supervision/opportunities/${fyp.slug}` : `/supervision/projects/${fyp.slug}`} className={styles.collabLinkBtn}>
-                    View FYP Details <ArrowRight size={13} />
-                  </Link>
-                </div>
-              </article>
-            ))}
+                  <div className={styles.collabBody}>
+                    <p className={styles.collabFocus} style={{ marginBottom: "12px" }}>
+                      {fyp.summary}
+                    </p>
+                    <p className={styles.collabTopic} style={{ fontSize: "0.8rem", margin: 0 }}>
+                      <strong>Team Members:</strong>
+                    </p>
+                    <ul style={{ margin: "6px 0 12px 18px", padding: 0, fontSize: "0.78rem", color: "var(--academic-muted)" }}>
+                      {fyp.students.map((st) => (
+                        <li key={st.name}>
+                          <strong>{st.name}</strong> {st.registration && `(${st.registration})`}
+                        </li>
+                      ))}
+                    </ul>
+                    {fyp.supervisor && (
+                      <div className={styles.collabFocus} style={{ fontSize: "0.75rem" }}>
+                        Supervisor: <strong>{fyp.supervisor}</strong> {fyp.coSupervisor && `| Co-Supervisor: ${fyp.coSupervisor}`}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className={styles.collabFooter}>
+                    <Link href={`/supervision/projects/${fyp.slug}`} className={styles.collabLinkBtn}>
+                      View FYP Details <ArrowRight size={13} />
+                    </Link>
+                  </div>
+                </article>
+              ))}
           </div>
 
           <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", marginBottom: "18px" }}>
-            Supervised Undergraduate Student Projects & Alumni
+            International Supervised Student Projects (Xiamen University)
           </h3>
 
           <div className={styles.collabGrid}>
             {supervisedProjects.map((proj) => (
               <article key={`${proj.student}-${proj.title}`} className={styles.collabCard}>
                 <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar} style={{ width: "44px", height: "44px", fontSize: "0.9rem" }}>
-                    {proj.student.split(" ").map((n) => n[0]).join("")}
+                  <div className={styles.collabAvatar} style={{ width: "44px", height: "44px", fontSize: "0.9rem", background: "rgba(6, 182, 212, 0.1)", color: "var(--academic-cyan)" }}>
+                    <GraduationCap size={22} />
                   </div>
                   <div className={styles.collabMeta}>
-                    <h3>{proj.student}</h3>
+                    <h3>{proj.title}</h3>
                     <span className={styles.collabBadge}>{proj.term}</span>
                     <div className={styles.collabDegree}>{proj.institution}</div>
                   </div>
                 </div>
                 <div className={styles.collabBody}>
-                  <p className={styles.collabTopic}>
-                    <strong>Supervised Project:</strong> "{proj.title}"
+                  <p className={styles.collabFocus}>
+                    <strong>Student Researcher:</strong> {proj.student}
                   </p>
                 </div>
               </article>
@@ -2195,7 +1879,7 @@ export function ContactPage() {
               <h3 style={{ color: "#10b981", margin: 0, fontSize: "1.2rem" }}>Enquiry Submitted Successfully</h3>
             </div>
             <p style={{ marginTop: "12px", lineHeight: "1.6" }}>
-              Thank you, <strong>{formData.name}</strong>. Your enquiry has been received and saved into our research database. An email notification with your details has also been dispatched to the lab director at <strong>ssalab0101@gmail.com</strong>.
+              Thank you, <strong>{formData.name}</strong>. Your enquiry has been received and saved into our research database. An email notification with your details has also been dispatched to the lab director at <strong>jnd.akram@hotmail.com</strong>.
             </p>
             <button
               type="button"

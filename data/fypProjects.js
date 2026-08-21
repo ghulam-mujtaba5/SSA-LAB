@@ -1,4 +1,5 @@
 export const defaultFypProjects = [
+  // ── 1. RUNNING BS FINAL-YEAR PROJECTS (CURRENT COMSATS RESEARCH) ──
   {
     title: "MegiLance — AI and Blockchain-Powered Freelancing Platform",
     slug: "megilance-ai-blockchain-freelancing-platform",
@@ -184,164 +185,8 @@ export const defaultFypProjects = [
     featured: true,
     displayOrder: 6
   },
-  {
-    title: "Automated Search Based Test Data Generation for Complex Systems using UML Models",
-    slug: "automated-search-based-test-data-generation-uml",
-    summary: "Future / MS research thesis evaluating search-based evolutionary algorithms to synthesize test vectors and test paths automatically from complex UML state machine and sequence models.",
-    status: "Future",
-    categoryType: "future",
-    projectType: "Future Topic (MS/PhD)",
-    isOpportunity: true,
-    isMsPhD: true,
-    nature: "Software Testing Research",
-    category: "Full-Stack & Systems",
-    programme: "MS Computer Science",
-    session: "FA23-RCS-005",
-    institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "MAHZAIB MUKHTAR", registration: "FA23-RCS-005" }],
-    supervisor: "Dr. Junaid Akram",
-    specializations: ["Test Data Generation", "UML Model-Based Testing", "Genetic Algorithms"],
-    technologies: ["Python", "Java", "UML Parsers", "EvoSuite / Search-Based Testing"],
-    coverImage: "/academic/fyp/test-data-generation-poster.png",
-    coverAlt: "Test data generation research poster",
-    published: true,
-    featured: true,
-    displayOrder: 7
-  },
-  {
-    title: "LLM Based Software Vulnerability Patch Recommendation System",
-    slug: "llm-vulnerability-patch-recommendation-system",
-    summary: "Future / MS research thesis investigating multi-step LLM prompting and retrieval-augmented patch generation to recommend verified security fixes for complex source code vulnerabilities.",
-    status: "Future",
-    categoryType: "future",
-    projectType: "Future Topic (MS/PhD)",
-    isOpportunity: true,
-    isMsPhD: true,
-    nature: "Vulnerability Patching",
-    category: "Vulnerability & Security",
-    programme: "MS Computer Science",
-    session: "FA23-RCS-011",
-    institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "ZAIN UL ABDEEN", registration: "FA23-RCS-011" }],
-    supervisor: "Dr. Junaid Akram",
-    specializations: ["Vulnerability Patching", "RAG & LLMs", "Program Repair"],
-    technologies: ["Python", "LangChain", "PyTorch", "Git Diff Benchmark"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
-    coverAlt: "Vulnerability patch recommendation poster",
-    published: true,
-    featured: true,
-    displayOrder: 8
-  },
-  {
-    title: "In-context Learning of Software Vulnerability Detection Using LLMs",
-    slug: "in-context-learning-vulnerability-detection-llms",
-    summary: "Future / MS research topic exploring in-context learning, few-shot prompting strategies, and domain adapter tuning for software vulnerability detection across multi-language code bases.",
-    status: "Future",
-    categoryType: "future",
-    projectType: "Future Topic (MS/PhD)",
-    isOpportunity: true,
-    isMsPhD: true,
-    nature: "Vulnerability Detection",
-    category: "Vulnerability & Security",
-    programme: "MS Computer Science",
-    session: "FA24-RCS-018",
-    institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "MUHAMMAD ORANGZAIB", registration: "FA24-RCS-018" }],
-    supervisor: "Dr. Junaid Akram",
-    specializations: ["In-context Learning", "Vulnerability Detection", "LLM Benchmarking"],
-    technologies: ["Python", "Hugging Face", "CodeBERT / StarCoder", "CVE Corpus"],
-    published: true,
-    featured: true,
-    displayOrder: 9
-  },
-  {
-    title: "Empowering a Graph Neural Network for Feature Envy Detection and Refactorization",
-    slug: "gnn-feature-envy-detection-refactorization",
-    summary: "Future / MS research thesis modeling code program dependence graphs (PDG) and abstract syntax trees (AST) into Graph Neural Networks to automate Feature Envy detection and method relocation refactoring.",
-    status: "Future",
-    categoryType: "future",
-    projectType: "Future Topic (MS/PhD)",
-    isOpportunity: true,
-    isMsPhD: true,
-    nature: "Code Smell & Graph Learning",
-    category: "AI & Machine Learning",
-    programme: "MS Computer Science",
-    session: "FA24-RCS-017",
-    institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "AHSAN NISAR", registration: "FA24-RCS-017" }],
-    supervisor: "Dr. Junaid Akram",
-    specializations: ["Graph Neural Networks", "Program Dependence Graphs", "Automated Refactoring"],
-    technologies: ["Python", "PyTorch Geometric", "Joern / Code Graph API", "Spoon"],
-    published: true,
-    featured: true,
-    displayOrder: 10
-  },
-  {
-    title: "AICodeSummarizer: Optimizing Code Comment Generation through AST and CFG Structural Analysis",
-    slug: "aicode-summarizer-code-comment-generation",
-    summary: "Future / MS research thesis building structural AST and Control Flow Graph (CFG) representations to enhance LLM code summarization and documentation generation accuracy.",
-    status: "Future",
-    categoryType: "future",
-    projectType: "Future Topic (MS/PhD)",
-    isOpportunity: true,
-    isMsPhD: true,
-    nature: "AI Code Documentation",
-    category: "AI & Machine Learning",
-    programme: "MS Computer Science",
-    session: "SP25-RCS-012",
-    institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "MUHAMMAD HARIS", registration: "SP25-RCS-012" }],
-    supervisor: "Dr. Junaid Akram",
-    specializations: ["Code Summarization", "AST & CFG Analysis", "Documentation Automation"],
-    technologies: ["Python", "Tree-sitter", "CodeT5", "BLEU / ROUGE Metrics"],
-    published: true,
-    featured: true,
-    displayOrder: 11
-  },
-  {
-    title: "Automated Test Smell Detection and Recommendation in BDD Specifications",
-    slug: "automated-test-smell-detection-bdd",
-    summary: "Future / MS research thesis developing static analysis algorithms to identify test smells in Behavior-Driven Development (BDD) Cucumber/Gherkin feature files and recommend refactoring steps.",
-    status: "Future",
-    categoryType: "future",
-    projectType: "Future Topic (MS/PhD)",
-    isOpportunity: true,
-    isMsPhD: true,
-    nature: "Software Quality & Testing",
-    category: "Full-Stack & Systems",
-    programme: "MS Computer Science",
-    session: "SP25-RCS-004",
-    institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "FARINA IQBAL", registration: "SP25-RCS-004" }],
-    supervisor: "Dr. Junaid Akram",
-    specializations: ["Test Smell Detection", "BDD Specifications", "Gherkin Analysis"],
-    technologies: ["Java", "Cucumber Gherkin Parser", "Python", "NLP Static Auditing"],
-    published: true,
-    featured: true,
-    displayOrder: 12
-  },
-  {
-    title: "LLM-based Semantic-driven Approach to Detect Type-4 Code Clones",
-    slug: "llm-semantic-type4-code-clone-detection",
-    summary: "Future / MS research thesis formulating semantic embeddings and LLM representations to detect deep Type-4 (syntactically different but semantically identical) code clones.",
-    status: "Future",
-    categoryType: "future",
-    projectType: "Future Topic (MS/PhD)",
-    isOpportunity: true,
-    isMsPhD: true,
-    nature: "Code Clone Analysis",
-    category: "Vulnerability & Security",
-    programme: "MS Computer Science",
-    session: "SP25-RCS-008",
-    institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "HAFSA BUTT", registration: "SP25-RCS-008" }],
-    supervisor: "Dr. Junaid Akram",
-    specializations: ["Type-4 Code Clones", "Semantic Code Embeddings", "LLM Analysis"],
-    technologies: ["Python", "FAISS Vector Index", "CodeBERT / UniXcoder", "Tree-sitter"],
-    published: true,
-    featured: true,
-    displayOrder: 13
-  },
+
+  // ── 2. COMPLETED BS PROJECTS (COMSATS & INTERNATIONAL ALUMNI) ──
   {
     title: "Robust Android Malware Detector",
     slug: "robust-android-malware-detector",
@@ -360,7 +205,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "Apktool", "Androguard", "Scikit-learn"],
     published: true,
     featured: false,
-    displayOrder: 14
+    displayOrder: 7
   },
   {
     title: "HemaAI — Diagnostic Intelligence System",
@@ -380,7 +225,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "TensorFlow", "OpenCV", "Flask / React"],
     published: true,
     featured: false,
-    displayOrder: 15
+    displayOrder: 8
   },
   {
     title: "XSS Vulnerability Detection & Defense System",
@@ -400,7 +245,7 @@ export const defaultFypProjects = [
     technologies: ["JavaScript", "Python", "DOM Analysis", "Node.js"],
     published: true,
     featured: false,
-    displayOrder: 16
+    displayOrder: 9
   },
   {
     title: "Cric-Craft — AI Cricket Performance Analysis System",
@@ -420,7 +265,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "OpenCV", "YOLOv8", "Streamlit"],
     published: true,
     featured: false,
-    displayOrder: 17
+    displayOrder: 10
   },
   {
     title: "ApneaGuard AI — Sleep Apnea Detection System",
@@ -440,7 +285,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "Librosa", "Signal Processing", "React Native"],
     published: true,
     featured: false,
-    displayOrder: 18
+    displayOrder: 11
   },
   {
     title: "Vulnerability Management & Benchmarking System (VBS)",
@@ -460,7 +305,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "Django", "PostgreSQL", "NVD API"],
     published: true,
     featured: false,
-    displayOrder: 19
+    displayOrder: 12
   },
   {
     title: "Code Smell Detection and Refactoring System",
@@ -482,7 +327,7 @@ export const defaultFypProjects = [
     coverAlt: "Code smell detection poster",
     published: true,
     featured: false,
-    displayOrder: 20
+    displayOrder: 13
   },
   {
     title: "Source Code Structure Capturing & Recommendation",
@@ -504,7 +349,7 @@ export const defaultFypProjects = [
     coverAlt: "Source code structure poster",
     published: true,
     featured: false,
-    displayOrder: 21
+    displayOrder: 14
   },
   {
     title: "AI Dermatologist Diagnostic Platform",
@@ -526,7 +371,7 @@ export const defaultFypProjects = [
     coverAlt: "AI Dermatologist project poster",
     published: true,
     featured: false,
-    displayOrder: 22
+    displayOrder: 15
   },
   {
     title: "Analysis and Detection of Fraudulent Transactions Using PaySim Simulator",
@@ -546,7 +391,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "PaySim Simulator", "Scikit-Learn", "Pandas"],
     published: true,
     featured: false,
-    displayOrder: 23
+    displayOrder: 16
   },
   {
     title: "Detection and Defense of Vulnerability in OpenSSL",
@@ -566,7 +411,7 @@ export const defaultFypProjects = [
     technologies: ["C", "C++", "GDB", "Valgrind", "OpenSSL"],
     published: true,
     featured: false,
-    displayOrder: 24
+    displayOrder: 17
   },
   {
     title: "Malware Feature Extraction of Instruction Frequency",
@@ -586,7 +431,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "IDA Pro", "Capstone Engine", "Scikit-Learn"],
     published: true,
     featured: false,
-    displayOrder: 25
+    displayOrder: 18
   },
   {
     title: "Malware Feature Extraction via Machine Learning Algorithm",
@@ -606,7 +451,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "PEfile", "Scikit-Learn", "XGBoost"],
     published: true,
     featured: false,
-    displayOrder: 26
+    displayOrder: 19
   },
   {
     title: "Correlation Attack on Geffe Generator",
@@ -626,7 +471,7 @@ export const defaultFypProjects = [
     technologies: ["Python", "SageMath", "C++"],
     published: true,
     featured: false,
-    displayOrder: 27
+    displayOrder: 20
   },
   {
     title: "ElderlyCare — Android-Based Health Assistance Application",
@@ -646,69 +491,143 @@ export const defaultFypProjects = [
     technologies: ["Java", "Android SDK", "SQLite", "Firebase"],
     published: true,
     featured: false,
-    displayOrder: 28
+    displayOrder: 21
   },
+
+  // ── 3. OPEN FYP SUPERVISION OPPORTUNITIES (FUTURE TOPICS) ──
   {
     title: "Building a Benchmark of Vulnerable Source Code",
     slug: "building-benchmark-vulnerable-source-code",
-    summary: "Future research topic extracting vulnerable code fragments from patch files to build a reusable benchmark for vulnerability research.",
-    status: "Future",
+    summary: "Extract vulnerable code from patch files at function, file, and component levels, analyse repair patterns, and build a reusable benchmark for vulnerability research.",
+    status: "Available for Supervision",
     categoryType: "future",
-    projectType: "Future Topic (Open Supervision)",
+    projectType: "Open Supervision Topic",
     isOpportunity: true,
     nature: "Source Security Research",
     category: "Vulnerability & Security",
     programme: "BS Software Engineering / BS Computer Science",
-    session: "Current COMSATS Listing",
+    session: "Current Academic Session",
     institution: "COMSATS University Islamabad, Lahore Campus",
     students: [],
     supervisor: "Dr. Junaid Akram",
     specializations: ["Vulnerability Benchmark", "Patch Extraction", "CVE Corpus"],
+    prerequisites: "Software security, C/C++/Java, Git API",
+    expectedDeliverables: [
+      "Automated diff parser for CVE patch commits",
+      "Function and file granularity vulnerable code dataset",
+      "Benchmark evaluation report and GitHub repository"
+    ],
     technologies: ["Python", "Git API", "C/C++", "Java", "Docker"],
     published: true,
     featured: false,
-    displayOrder: 29
+    displayOrder: 22
   },
   {
     title: "Intra-Project vs Inter-Project Software Dependency Analysis",
     slug: "intra-inter-project-software-dependency-analysis",
-    summary: "Future research topic analyzing code clone and dependency propagation ratios across related software systems.",
-    status: "Future",
+    summary: "Measure cloned-code and dependency ratios across related software systems and multiple versions of the same system, using Linux kernel releases as an empirical case study.",
+    status: "Available for Supervision",
     categoryType: "future",
-    projectType: "Future Topic (Open Supervision)",
+    projectType: "Open Supervision Topic",
     isOpportunity: true,
     nature: "Software Evolution Analysis",
     category: "Full-Stack & Systems",
-    programme: "BS Computer Science",
-    session: "Current COMSATS Listing",
+    programme: "BS Computer Science / BS Software Engineering",
+    session: "Current Academic Session",
     institution: "COMSATS University Islamabad, Lahore Campus",
     students: [],
     supervisor: "Dr. Junaid Akram",
     specializations: ["Software Evolution", "Dependency Analysis", "Code Reuse"],
+    prerequisites: "Software evolution, dependency graphs, Python/C++",
+    expectedDeliverables: [
+      "Cross-repository dependency mapping tool",
+      "Cloned code propagation metrics across versions",
+      "Empirical study report on Linux kernel versions"
+    ],
     technologies: ["Python", "Clang", "Graphviz", "Linux Kernel Source"],
     published: true,
     featured: false,
-    displayOrder: 30
+    displayOrder: 23
   },
   {
     title: "Automatic Patching of Similar Code Fragments",
     slug: "automatic-patching-similar-code-fragments",
-    summary: "Future research topic developing a tool that propagates approved vulnerability patches to matching code clones across repositories.",
-    status: "Future",
+    summary: "Develop a tool that propagates an approved security patch to matching vulnerable fragments across repositories that reuse the affected source code.",
+    status: "Available for Supervision",
     categoryType: "future",
-    projectType: "Future Topic (Open Supervision)",
+    projectType: "Open Supervision Topic",
     isOpportunity: true,
     nature: "Program Repair Research",
     category: "Vulnerability & Security",
     programme: "BS Software Engineering",
-    session: "Current COMSATS Listing",
+    session: "Current Academic Session",
     institution: "COMSATS University Islamabad, Lahore Campus",
     students: [],
     supervisor: "Dr. Junaid Akram",
     specializations: ["Program Repair", "Patch Propagation", "Clone Matching"],
+    prerequisites: "AST diffing, Tree-sitter, Python, Code Clones",
+    expectedDeliverables: [
+      "AST-level clone matcher and patch synthesizer",
+      "Automated patch propagation engine",
+      "Validation against open-source CVE patches"
+    ],
     technologies: ["Python", "Tree-sitter", "Git API", "AST Diffing"],
     published: true,
     featured: false,
-    displayOrder: 31
+    displayOrder: 24
+  },
+  {
+    title: "Software Vulnerability Prediction Model",
+    slug: "software-vulnerability-prediction-model",
+    summary: "Learn repair patterns from vulnerability patches and predict the existence or likely number of vulnerable fragments in open-source software.",
+    status: "Available for Supervision",
+    categoryType: "future",
+    projectType: "Open Supervision Topic",
+    isOpportunity: true,
+    nature: "Machine Learning Security",
+    category: "AI & Machine Learning",
+    programme: "BS Software Engineering / BS Computer Science",
+    session: "Current Academic Session",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+    students: [],
+    supervisor: "Dr. Junaid Akram",
+    specializations: ["Machine Learning", "Vulnerability Prediction", "AST Features"],
+    prerequisites: "Machine learning, software security, Python/Scikit-learn",
+    expectedDeliverables: [
+      "Feature extraction pipeline from source code ASTs",
+      "Vulnerability prediction model",
+      "Comparative accuracy evaluation against baseline static analyzers"
+    ],
+    technologies: ["Python", "Scikit-Learn", "Tree-sitter", "PyTorch"],
+    published: true,
+    featured: false,
+    displayOrder: 25
+  },
+  {
+    title: "Automatic Test Data Generation for Data Processing Systems",
+    slug: "automatic-test-data-generation-data-processing",
+    summary: "Generate valid and faulty test inputs for complex data processing systems using constraints and mutation operators, reducing the cost of manual input-space exploration.",
+    status: "Available for Supervision",
+    categoryType: "future",
+    projectType: "Open Supervision Topic",
+    isOpportunity: true,
+    nature: "Software Quality & Testing",
+    category: "Full-Stack & Systems",
+    programme: "BS Software Engineering / BS Computer Science",
+    session: "Current Academic Session",
+    institution: "COMSATS University Islamabad, Lahore Campus",
+    students: [],
+    supervisor: "Dr. Junaid Akram",
+    specializations: ["Automated Testing", "Constraint Solving", "Mutation Testing"],
+    prerequisites: "Software testing, constraint solving, Python/Java",
+    expectedDeliverables: [
+      "Model-based test data generator",
+      "Mutation and constraint-based test vector synthesizer",
+      "Benchmark test suite report"
+    ],
+    technologies: ["Python", "Java", "Z3 SMT Solver", "Mutation Engines"],
+    published: true,
+    featured: false,
+    displayOrder: 26
   }
 ];

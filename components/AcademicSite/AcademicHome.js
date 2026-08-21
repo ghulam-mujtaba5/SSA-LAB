@@ -24,6 +24,7 @@ import {
   researchDomains,
   supervisedProjects,
 } from "../../data/academicSite";
+import { defaultFypProjects } from "../../data/fypProjects";
 import styles from "./AcademicSite.module.css";
 
 const impactStats = [
@@ -49,9 +50,9 @@ const impactStats = [
 
 const domainIllustrationMap = {
   "cyber-security": "/academic/illustrations/malware-vulnerability-defense.webp",
-  "vulnerability-detection": "/academic/illustrations/vulnerability-detection.webp",
+  "vulnerability-detection": "/academic/illustrations/repo-analyzed.webp",
   "software-testing": "/academic/illustrations/android-app-security.webp",
-  "malware-detection": "/academic/illustrations/malware-detection.webp",
+  "malware-detection": "/academic/illustrations/repo-analyzed.webp",
   "code-clone-analysis": "/academic/illustrations/code-cloning.webp",
   "software-evolution-reuse": "/academic/illustrations/software-evolution-reuse.webp",
 };
@@ -63,7 +64,7 @@ export default function AcademicHome() {
     <AcademicSiteLayout
       path="/"
       description="Software security research lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore. Specializing in vulnerability detection, testing, and malware."
-      keywords="SCSA Research Lab, Dr. Junaid Akram, software security research, vulnerability detection, COMSATS University Lahore, malware analysis, automated software testing"
+      keywords="SSA Research Lab, Dr. Junaid Akram, software security research, vulnerability detection, COMSATS University Lahore, malware analysis, automated software testing"
     >
       {selectedDomain && (
         <AcademicDomainModal
@@ -80,7 +81,7 @@ export default function AcademicHome() {
               Advancing software security through source-code analysis, testing, and vulnerability research.
             </h1>
             <p className={styles.heroLead}>
-              Led by Dr Junaid Akram at COMSATS University Islamabad, Lahore Campus, the SCSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
+              Led by Dr Junaid Akram at COMSATS University Islamabad, Lahore Campus, the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
             </p>
             <ul className={styles.credentialList}>
               {academicProfile.credentials.map((credential) => (
@@ -122,21 +123,25 @@ export default function AcademicHome() {
             </div>
           </div>
 
-          <div className={styles.heroPortrait}>
+          <div className={styles.heroIllustrationContainer}>
+            <div className={styles.heroIllustrationGlow} />
             <AcademicImageLightbox
-              src="/academic/junaid-akram-professor.jpg"
-              alt="Dr. Junaid Akram"
-              width={755}
-              height={716}
+              src="/academic/illustrations/security-inspection-overview.webp"
+              alt="SSA Research Lab — Software Security Assessment Platform"
+              width={800}
+              height={800}
               priority
-              caption="Dr. Junaid Akram — Lead of SCSA Lab at COMSATS University Islamabad, Lahore Campus"
-              className={styles.heroPortraitImage}
-              sizes="(max-width: 780px) 100vw, 42vw"
+              caption="SSA Research Lab — Advancing Software Security through Source-Code Analysis, Testing, and Vulnerability Research"
+              className={styles.heroIllustrationLightbox}
+              imageClassName={styles.heroIllustrationImg}
+              sizes="(max-width: 780px) 100vw, 45vw"
             />
-            <div className={styles.portraitCaption}>
-              <strong>{academicProfile.name}</strong>
-              <span>{academicProfile.role}</span>
-              <span>{academicProfile.institution}</span>
+            <div className={styles.heroFloatingBadge}>
+              <Sparkles size={18} color="#38bdf8" />
+              <div>
+                <strong>SSA Security Assessment Engine</strong>
+                <span>Source-Code Analysis · Vulnerability Detection · Testing</span>
+              </div>
             </div>
           </div>
         </div>
@@ -174,13 +179,13 @@ export default function AcademicHome() {
         <div className={styles.sectionHeading} style={{ alignItems: "center" }}>
           <div>
             <p className={styles.eyebrow}>Interactive Vulnerability Inspection</p>
-            <h2>Live AST Code Analysis & Remediation</h2>
+            <h2>Code Vulnerability & Remediation Analysis</h2>
             <p style={{ color: "var(--academic-muted, #64748b)", fontSize: "0.92rem", marginTop: "6px", maxWidth: "680px" }}>
-              Test SCSA Lab's static analysis engine on real CVE benchmarks. Toggle between Split Diff, Unchecked Code, and Remediated Code views to inspect AST node traversal, vulnerability taint sinks, and security fixes.
+              Explore real-world CVE vulnerability patterns and their verified secure remediations across multiple programming languages.
             </p>
           </div>
-          <div className={styles.lottieCard} style={{ maxWidth: "340px", width: "100%", height: "220px", minHeight: "180px", flexShrink: 0, padding: "8px", overflow: "hidden" }}>
-            <AcademicLottie src="/lottie/web-coding.json" ariaLabel="Live AST Inspection Animation" speed={0.8} />
+          <div className={styles.lottieCard} style={{ maxWidth: "280px", width: "100%", height: "180px", minHeight: "150px", flexShrink: 0, padding: "8px", overflow: "hidden" }}>
+            <AcademicLottie src="/lottie/web-coding.json" ariaLabel="Live Vulnerability Inspection Animation" speed={0.85} />
           </div>
         </div>
         <div style={{ width: "100%" }}>
@@ -238,7 +243,7 @@ export default function AcademicHome() {
       </section>
 
       {/* Interactive Workflow Preview */}
-      <section className={styles.pipelineSection} aria-label="SCSA Research Pipeline Preview">
+      <section className={styles.pipelineSection} aria-label="SSA Research Pipeline Preview">
         <div className={styles.pipelineContainer}>
           <div className={styles.pipelineHeader}>
             <span className={styles.eyebrow}>Research Methodology</span>
@@ -287,19 +292,21 @@ export default function AcademicHome() {
         <div className={styles.sectionHeading}>
           <div>
             <p className={styles.eyebrow}>Supervision</p>
-            <h2>Research project supervision</h2>
+            <h2>Research Project Supervision</h2>
           </div>
           <Link href="/supervision" className={styles.textLink}>
             Explore supervision directory <ArrowRight size={16} />
           </Link>
         </div>
         <div className={styles.studentGrid}>
-          {supervisedProjects.slice(0, 4).map((project) => (
-            <article key={`${project.student}-${project.title}`}>
-              <span>{project.term}</span>
-              <h3>{project.title}</h3>
-              <p>{project.student}</p>
-              <small>{project.institution}</small>
+          {defaultFypProjects.slice(0, 4).map((project) => (
+            <article key={project.slug}>
+              <span className={styles.sessionBadge}>{project.projectType || project.status}</span>
+              <h3>
+                <Link href={`/supervision/projects/${project.slug}`}>{project.title}</Link>
+              </h3>
+              <p>{project.students.map((s) => s.name).join(", ")}</p>
+              <small>{project.programme} · {project.session}</small>
             </article>
           ))}
         </div>
@@ -308,7 +315,7 @@ export default function AcademicHome() {
       {/* Final Contact CTA */}
       <section className={styles.ctaBand} style={{ textAlign: "center", padding: "48px 24px" }}>
         <div>
-          <p className={styles.eyebrow}>Collaborate with SCSA Lab</p>
+          <p className={styles.eyebrow}>Collaborate with SSA Lab</p>
           <h2>Interested in software security research or student supervision?</h2>
           <p style={{ maxWidth: "640px", margin: "12px auto 24px" }}>
             Dr Junaid Akram supervises BS, MS, and PhD students in software vulnerability detection, automated testing, malware analysis, and code clone research.

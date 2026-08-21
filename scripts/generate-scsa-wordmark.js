@@ -49,20 +49,20 @@ async function generateWordmark() {
       </linearGradient>
     </defs>
 
-    <!-- Main Title: SCSA-Lab / SSA-Lab -->
+    <!-- Main Title: SSA-Lab -->
     <text 
       x="768" 
       y="1120" 
       text-anchor="middle" 
       font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" 
       font-weight="900" 
-      font-size="142" 
+      font-size="148" 
       letter-spacing="-1.5"
       fill="url(#textGrad)"
       filter="url(#3dShadow)"
       stroke="#0a192f"
       stroke-width="3"
-    >SCSA-Lab</text>
+    >SSA-Lab</text>
 
     <!-- Horizontal Divider Line with End Dots -->
     <g transform="translate(0, 1165)">

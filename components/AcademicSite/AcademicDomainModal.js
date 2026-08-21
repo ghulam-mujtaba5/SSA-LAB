@@ -103,8 +103,8 @@ export default function AcademicDomainModal({ domain, onClose }) {
                 {domain.number || domain.id}
               </span>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <img src="/academic/scsa-research-group-logo.png" alt="SCSA Emblem" width={36} height={24} style={{ objectFit: 'contain' }} />
-                <span className={styles.domainTag}>SCSA Lab Research Domain</span>
+                <img src="/academic/ssa-research-group-logo.png" alt="SSA Emblem" width={36} height={24} style={{ objectFit: 'contain' }} />
+                <span className={styles.domainTag}>SSA Lab Research Domain</span>
               </div>
             </div>
             <div className={styles.headerTitleGroup}>
@@ -256,7 +256,7 @@ export default function AcademicDomainModal({ domain, onClose }) {
                 <span className={styles.sectionIcon}>
                   <Building size={20} />
                 </span>
-                <h3 className={styles.sectionTitle}>Related SCSA Lab Work</h3>
+                <h3 className={styles.sectionTitle}>Related SSA Lab Work</h3>
               </div>
               <div className={styles.labWorkBox}>
                 {domain.relatedLabWork.summary && (

@@ -76,10 +76,10 @@ const ServicesFrame = () => {
       id: "security",
       title: "Cyber Security & Audits",
       titleicon: "/academic/illustrations/malware-vulnerability-defense.webp",
-      illustration: "/academic/illustrations/homepage-hero.webp",
+      illustration: "/academic/illustrations/security-inspection-overview.webp",
       lottie: "/academic/lottie/security-research.json",
       skills: [
-        { name: "Vulnerability Audit", icon: "/academic/illustrations/vulnerability-detection.webp" },
+        { name: "Vulnerability Audit", icon: "/academic/illustrations/repo-analyzed.webp" },
         { name: "Code Clone Analysis", icon: "/academic/illustrations/code-cloning.webp" },
         { name: "Automated Software Testing", icon: "/academic/illustrations/android-app-security.webp" },
       ],

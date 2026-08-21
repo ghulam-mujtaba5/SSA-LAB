@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import { useReducedMotion } from "framer-motion";
-import { Play, Pause, Shield, Sparkles } from "lucide-react";
+import { Shield, Sparkles } from "lucide-react";
 
 export default function AcademicLottie({
   src,
@@ -11,13 +11,9 @@ export default function AcademicLottie({
   className,
   ariaLabel,
   speed = 0.85,
-  interactive = true,
-  showControls = true,
 }) {
   const [animationData, setAnimationData] = useState(directData || null);
   const [isLoading, setIsLoading] = useState(!directData && !!src);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const containerRef = useRef(null);
   const lottieRef = useRef(null);
@@ -60,42 +56,15 @@ export default function AcademicLottie({
     };
   }, [src, directData]);
 
-  // Set Speed
+  // Set Speed and ensure active continuous playback
   useEffect(() => {
     if (lottieRef.current) {
-      lottieRef.current.setSpeed(speed);
+      try {
+        lottieRef.current.setSpeed(speed);
+        lottieRef.current.play();
+      } catch (_) {}
     }
   }, [safeAnimationData, speed]);
-
-  // Intersection Observer for viewport auto play/pause (saves performance)
-  useEffect(() => {
-    if (!containerRef.current || !lottieRef.current || reduceMotion) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isPaused) {
-          lottieRef.current?.play();
-        } else {
-          lottieRef.current?.pause();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [safeAnimationData, reduceMotion, isPaused]);
-
-  const togglePlayPause = () => {
-    if (!lottieRef.current) return;
-    if (isPaused) {
-      lottieRef.current.play();
-      setIsPaused(false);
-    } else {
-      lottieRef.current.pause();
-      setIsPaused(true);
-    }
-  };
 
   return (
     <div
@@ -111,11 +80,7 @@ export default function AcademicLottie({
         alignItems: "center",
         justifyContent: "center",
         userSelect: "none",
-        cursor: interactive ? "pointer" : "default",
       }}
-      onClick={interactive ? togglePlayPause : undefined}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Loading Skeleton */}
       {isLoading && (
@@ -131,23 +96,22 @@ export default function AcademicLottie({
             borderRadius: "12px",
             color: "var(--academic-blue, #0284c7)",
             gap: "8px",
-            animation: "pulse 1.5s ease-in-out infinite",
           }}
         >
-          <Sparkles size={24} style={{ opacity: 0.6 }} />
+          <Sparkles size={22} style={{ opacity: 0.6 }} />
           <span style={{ fontSize: "0.75rem", fontWeight: 600, opacity: 0.8 }}>
             Loading Animation...
           </span>
         </div>
       )}
 
-      {/* Main Lottie Player */}
+      {/* Main Lottie Player — Always continuously loops without pause or stop */}
       {safeAnimationData ? (
         <Lottie
           lottieRef={lottieRef}
           animationData={safeAnimationData}
-          autoplay={!reduceMotion && !isPaused}
-          loop={!reduceMotion}
+          autoplay={true}
+          loop={true}
           style={{ width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%" }}
         />
       ) : !isLoading ? (
@@ -170,34 +134,6 @@ export default function AcademicLottie({
           </span>
         </div>
       ) : null}
-
-      {/* Interactive Controls Overlay Badge (Shown on Hover) */}
-      {showControls && safeAnimationData && isHovered && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "12px",
-            right: "12px",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "6px",
-            padding: "4px 10px",
-            borderRadius: "20px",
-            background: "rgba(15, 23, 42, 0.85)",
-            color: "#ffffff",
-            fontSize: "0.72rem",
-            fontWeight: 600,
-            backdropFilter: "blur(6px)",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-            zIndex: 10,
-            pointerEvents: "none",
-            transition: "all 0.2s ease",
-          }}
-        >
-          {isPaused ? <Play size={12} fill="currentColor" /> : <Pause size={12} fill="currentColor" />}
-          <span>{isPaused ? "Play" : "Pause"}</span>
-        </div>
-      )}
     </div>
   );
 }
