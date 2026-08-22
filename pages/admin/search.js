@@ -101,9 +101,13 @@ export default function AdminSearchPage() {
     if (!r) return "/admin";
     if (r.type === "Project") return `/admin/projects/edit/${r._id}`;
     if (r.type === "FypProject") return `/admin/fyp/edit/${r._id}`;
+    if (r.type === "Publication") return `/admin/publications/edit/${r._id}`;
+    if (r.type === "Member" || r.type === "TeamMember") return `/admin/team/edit/${r._id}`;
+    if (r.type === "ResearchDomain") return `/admin/research-areas/edit/${r._id}`;
+    if (r.type === "EventHighlight" || r.type === "LabEvent") return `/admin/news-events/edit/${r._id}`;
     if (r.type === "Enquiry") return `/admin/enquiries`;
     if (r.type === "User") return `/admin/users`;
-    return `/admin/projects`;
+    return `/admin/dashboard`;
   };
 
   const onKeyDown = (e) => {
@@ -190,7 +194,7 @@ export default function AdminSearchPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.05 }}
           >
-            Search across Research Projects, FYP Supervisions, Enquiries, and Users.
+            Search across Publications, Research Areas, Team Directory, FYP Supervisions, Lab Projects, News & Events, Enquiries, and Users.
           </motion.p>
         </div>
         <motion.form 

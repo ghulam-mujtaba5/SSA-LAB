@@ -19,6 +19,8 @@ const PaletteIcons = {
   clock: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
   pin: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 17v5"/><path d="M9 3l6 6"/><path d="M6 6l6 6"/></svg>,
   logs: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>,
+  book: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>,
+  tools: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-3 3-3-3 3-3z"/></svg>,
   play: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>,
   command: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>,
   arrow: () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>,
@@ -368,6 +370,20 @@ export default function CommandPalette() {
         case "FypProject":
           path += `/fyp/edit/${item._id}`;
           break;
+        case "Publication":
+          path += `/publications/edit/${item._id}`;
+          break;
+        case "Member":
+        case "TeamMember":
+          path += `/team/edit/${item._id}`;
+          break;
+        case "ResearchDomain":
+          path += `/research-areas/edit/${item._id}`;
+          break;
+        case "EventHighlight":
+        case "LabEvent":
+          path += `/news-events/edit/${item._id}`;
+          break;
         case "Enquiry":
           path += `/enquiries`;
           break;
@@ -375,7 +391,8 @@ export default function CommandPalette() {
           path += `/users`;
           break;
         default:
-          return;
+          path += `/dashboard`;
+          break;
       }
       router.push(path);
       setIsOpen(false);
@@ -407,6 +424,12 @@ export default function CommandPalette() {
     switch (item.type) {
       case 'Project': return PaletteIcons.project;
       case 'FypProject': return PaletteIcons.project;
+      case 'Publication': return PaletteIcons.book;
+      case 'Member':
+      case 'TeamMember': return PaletteIcons.user;
+      case 'ResearchDomain': return PaletteIcons.tools;
+      case 'EventHighlight':
+      case 'LabEvent': return PaletteIcons.clock;
       case 'Enquiry': return PaletteIcons.search;
       case 'User': return PaletteIcons.user;
       default: return PaletteIcons.search;

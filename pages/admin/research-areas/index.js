@@ -164,6 +164,16 @@ export default function ResearchAreasAdminPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#64748b", fontSize: "1.1rem", padding: "0 4px" }}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
           </div>
         </div>
 
@@ -173,7 +183,25 @@ export default function ResearchAreasAdminPage() {
           <div className={styles.emptyState}>
             <Cpu size={48} style={{ opacity: 0.4, marginBottom: 12 }} />
             <h3>No research domains found</h3>
-            <p>Add a research focus area to showcase your lab's active scientific domains.</p>
+            <p>
+              {searchTerm
+                ? "No research domains match your search query."
+                : "Add a research focus area to showcase your lab's active scientific domains."}
+            </p>
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "16px" }}>
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={() => setSearchTerm("")}
+                  className={styles.secondaryButton}
+                >
+                  Clear Search
+                </button>
+              )}
+              <Link href="/admin/research-areas/new" className={styles.actionButton}>
+                <Plus size={16} /> Add Research Area
+              </Link>
+            </div>
           </div>
         ) : (
           <div className={styles.list}>

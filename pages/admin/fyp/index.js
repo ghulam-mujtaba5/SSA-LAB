@@ -249,6 +249,24 @@ export default function FypAdminPage() {
                 ? "No projects match your filter criteria."
                 : "Add the first supervised project to begin the academic archive."}
             </p>
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "16px" }}>
+              {(searchTerm || statusFilter !== "All") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setStatusFilter("All");
+                  }}
+                  className={styles.chipBtn}
+                  style={{ background: "var(--bg-elev-2)", padding: "8px 16px", borderRadius: "8px", border: "1px solid var(--border)", cursor: "pointer" }}
+                >
+                  Reset Filters
+                </button>
+              )}
+              <Link href="/admin/fyp/new" className={styles.createButton}>
+                <Plus size={16} /> Add FYP project
+              </Link>
+            </div>
           </div>
         ) : (
           <div className={styles.list}>

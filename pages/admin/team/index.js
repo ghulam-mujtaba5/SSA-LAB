@@ -209,6 +209,16 @@ export default function TeamAdminPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#64748b", fontSize: "1.1rem", padding: "0 4px" }}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
           </div>
         </div>
 
@@ -237,7 +247,28 @@ export default function TeamAdminPage() {
           <div className={styles.emptyState}>
             <Users size={48} style={{ opacity: 0.4, marginBottom: 12 }} />
             <h3>No team members found</h3>
-            <p>Try adjusting your search or category filter.</p>
+            <p>
+              {searchTerm || selectedCategory !== 'all'
+                ? "No team members match your current filter criteria."
+                : "Add postgraduate students, faculty collaborators, or alumni to the roster."}
+            </p>
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "16px" }}>
+              {(searchTerm || selectedCategory !== 'all') && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedCategory("all");
+                  }}
+                  className={styles.secondaryButton}
+                >
+                  Reset Filters
+                </button>
+              )}
+              <Link href="/admin/team/new" className={styles.actionButton}>
+                <Plus size={16} /> Add Member
+              </Link>
+            </div>
           </div>
         ) : (
           <div className={styles.list}>

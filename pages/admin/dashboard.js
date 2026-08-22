@@ -242,6 +242,27 @@ const AdminDashboard = () => {
   const [statsError, setStatsError] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [lastRefreshed, setLastRefreshed] = useState(null);
+  const [showGuide, setShowGuide] = useState(true);
+
+  // Restore guide preference
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('admin:showQuickGuide');
+        if (stored !== null) setShowGuide(stored === 'true');
+      } catch {}
+    }
+  }, []);
+
+  const toggleGuide = () => {
+    setShowGuide((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('admin:showQuickGuide', String(next));
+      } catch {}
+      return next;
+    });
+  };
 
   const greeting = useMemo(() => getGreeting(), []);
   const GreetingIcon = greeting.Icon;
@@ -626,6 +647,83 @@ const AdminDashboard = () => {
               animate="visible"
               key="content"
             >
+              {/* Beginner-Friendly Quick Start Guide */}
+              <motion.div className={styles.guideCard} variants={itemVariants}>
+                <div className={styles.guideHeader}>
+                  <div className={styles.guideTitleGroup}>
+                    <span className={styles.guideBadge}>
+                      <Icons.Zap /> Lab Guide
+                    </span>
+                    <h2>Admin Portal Quick Start</h2>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={toggleGuide}
+                    className={styles.guideToggleBtn}
+                    aria-expanded={showGuide}
+                  >
+                    {showGuide ? "Hide Guide" : "Show Guide"}
+                  </button>
+                </div>
+
+                {showGuide && (
+                  <>
+                    <div className={styles.guideGrid}>
+                      <div className={styles.guideStep}>
+                        <div className={styles.guideStepHead}>
+                          <span className={styles.guideStepNumber}>1</span>
+                          <h3>Lab Profile & Pillars</h3>
+                        </div>
+                        <p>Configure PI credentials, lab office details, research pillars, and partner logos.</p>
+                        <Link href="/admin/site-settings" className={styles.guideStepAction}>
+                          Open Settings &rarr;
+                        </Link>
+                      </div>
+
+                      <div className={styles.guideStep}>
+                        <div className={styles.guideStepHead}>
+                          <span className={styles.guideStepNumber}>2</span>
+                          <h3>Research & Publications</h3>
+                        </div>
+                        <p>Publish research papers, import BibTeX citations, and manage core scientific focus domains.</p>
+                        <Link href="/admin/publications" className={styles.guideStepAction}>
+                          Manage Publications &rarr;
+                        </Link>
+                      </div>
+
+                      <div className={styles.guideStep}>
+                        <div className={styles.guideStepHead}>
+                          <span className={styles.guideStepNumber}>3</span>
+                          <h3>Supervision & Students</h3>
+                        </div>
+                        <p>Manage BS FYP case studies, student team rosters, and available thesis opportunities.</p>
+                        <Link href="/admin/fyp" className={styles.guideStepAction}>
+                          Supervised Projects &rarr;
+                        </Link>
+                      </div>
+
+                      <div className={styles.guideStep}>
+                        <div className={styles.guideStepHead}>
+                          <span className={styles.guideStepNumber}>4</span>
+                          <h3>Team & Alumni</h3>
+                        </div>
+                        <p>Maintain postgraduate researchers, faculty co-investigators, and alumni placements.</p>
+                        <Link href="/admin/team" className={styles.guideStepAction}>
+                          Team Directory &rarr;
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className={styles.guideTipsRow}>
+                      <span className={styles.guideTipBadge}>Pro Tips:</span>
+                      <span>• Toggle the <strong>Eye icon</strong> on any listing to publish or draft an item instantly.</span>
+                      <span>• Drag cards or rows to re-order items displayed on the public website.</span>
+                      <span>• Press <kbd style={{ padding: "2px 6px", background: "var(--bg-elev-2)", borderRadius: "4px", border: "1px solid var(--border)", fontFamily: "monospace" }}>Ctrl + K</kbd> anywhere to search all records or run quick commands.</span>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+
               {/* KPI Cards Grid */}
               <section className={styles.kpiSection}>
                 <div className={styles.kpiGrid}>

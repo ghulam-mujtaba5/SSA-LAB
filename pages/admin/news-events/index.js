@@ -200,6 +200,16 @@ export default function NewsEventsAdminPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#64748b", fontSize: "1.1rem", padding: "0 4px" }}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
           </div>
         </div>
 
@@ -226,7 +236,28 @@ export default function NewsEventsAdminPage() {
           <div className={styles.emptyState}>
             <Calendar size={48} style={{ opacity: 0.4, marginBottom: 12 }} />
             <h3>No events or gallery items found</h3>
-            <p>Add announcements, talk highlights, or photos to showcase lab activity.</p>
+            <p>
+              {searchTerm || selectedTab !== 'all'
+                ? "No events or gallery items match your current filter criteria."
+                : "Add announcements, talk highlights, or photos to showcase lab activity."}
+            </p>
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "16px" }}>
+              {(searchTerm || selectedTab !== 'all') && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedTab("all");
+                  }}
+                  className={styles.secondaryButton}
+                >
+                  Reset Filters
+                </button>
+              )}
+              <Link href="/admin/news-events/new" className={styles.actionButton}>
+                <Plus size={16} /> Add News or Event
+              </Link>
+            </div>
           </div>
         ) : (
           <div className={styles.list}>

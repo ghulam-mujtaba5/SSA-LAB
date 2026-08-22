@@ -243,6 +243,16 @@ export default function PublicationsAdminPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#64748b", fontSize: "1.1rem", padding: "0 4px" }}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
           </div>
 
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
@@ -280,7 +290,29 @@ export default function PublicationsAdminPage() {
           <div className={styles.emptyState}>
             <BookOpen size={48} style={{ opacity: 0.4, marginBottom: 12 }} />
             <h3>No publications found</h3>
-            <p>Try adjusting your search filters or create a new publication record.</p>
+            <p>
+              {searchTerm || selectedType !== 'all' || selectedYear !== 'all'
+                ? "No publications matched your current filter criteria."
+                : "Add your first research paper or import from BibTeX to populate the archive."}
+            </p>
+            <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "16px" }}>
+              {(searchTerm || selectedType !== 'all' || selectedYear !== 'all') && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedType("all");
+                    setSelectedYear("all");
+                  }}
+                  className={styles.secondaryButton}
+                >
+                  Reset Filters
+                </button>
+              )}
+              <Link href="/admin/publications/new" className={styles.actionButton}>
+                <Plus size={16} /> Add Publication
+              </Link>
+            </div>
           </div>
         ) : (
           <div className={styles.list}>

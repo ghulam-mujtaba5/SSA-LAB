@@ -1415,3 +1415,179 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ========== BEGINNER ONBOARDING & GUIDE CARD ========== */
+.guideCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--admin-radius-xl);
+  padding: var(--admin-space-xl);
+  margin-bottom: var(--admin-space-2xl);
+  box-shadow: var(--admin-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.guideCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--admin-primary-gradient);
+}
+
+.guideHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--admin-space-md);
+  margin-bottom: var(--admin-space-lg);
+  flex-wrap: wrap;
+}
+
+.guideTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-md);
+}
+
+.guideBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--admin-radius-full);
+  background: var(--admin-primary-light);
+  color: var(--admin-primary);
+  font-size: var(--admin-text-xs);
+  font-weight: var(--admin-font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.guideTitleGroup h2 {
+  margin: 0;
+  font-size: var(--admin-text-xl);
+  font-weight: var(--admin-font-bold);
+  color: var(--text);
+}
+
+.guideToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--admin-radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-elev-1);
+  color: var(--text-muted);
+  font-size: var(--admin-text-xs);
+  font-weight: var(--admin-font-semibold);
+  cursor: pointer;
+  transition: all var(--admin-transition);
+}
+
+.guideToggleBtn:hover {
+  background: var(--bg-elev-2);
+  color: var(--text);
+}
+
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--admin-space-lg);
+  margin-top: var(--admin-space-md);
+}
+
+.guideStep {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--admin-space-md);
+  border-radius: var(--admin-radius-lg);
+  background: var(--bg-elev-1);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.guideStep:hover {
+  border-color: var(--admin-primary);
+  transform: translateY(-2px);
+}
+
+.guideStepHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.guideStepNumber {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--admin-primary-gradient);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--admin-text-xs);
+  font-weight: var(--admin-font-bold);
+  flex-shrink: 0;
+}
+
+.guideStepHead h3 {
+  margin: 0;
+  font-size: var(--admin-text-sm);
+  font-weight: var(--admin-font-bold);
+  color: var(--text);
+}
+
+.guideStep p {
+  margin: 0;
+  font-size: var(--admin-text-xs);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.guideStepAction {
+  margin-top: auto;
+  padding-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--admin-text-xs);
+  font-weight: var(--admin-font-semibold);
+  color: var(--admin-primary);
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+
+.guideStepAction:hover {
+  gap: 8px;
+}
+
+.guideTipsRow {
+  margin-top: var(--admin-space-lg);
+  padding: var(--admin-space-md) var(--admin-space-lg);
+  border-radius: var(--admin-radius-lg);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(99, 102, 241, 0.08));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: var(--admin-text-xs);
+  color: var(--text);
+}
+
+.guideTipBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: var(--admin-font-bold);
+  color: var(--admin-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

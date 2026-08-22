@@ -76,6 +76,26 @@ export default function AdminLayoutPremium({ children, title }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [expandedSections, setExpandedSections] = useState({});
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [unreadEnquiriesCount, setUnreadEnquiriesCount] = useState(0);
+
+  // Fetch unread enquiries count for notification badge
+  useEffect(() => {
+    let isMounted = true;
+    const fetchUnreadCount = async () => {
+      try {
+        const res = await fetch('/api/admin/enquiries?status=new&limit=1');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (isMounted && data.stats && typeof data.stats.new === 'number') {
+          setUnreadEnquiriesCount(data.stats.new);
+        }
+      } catch (err) {
+        // Silently ignore background badge errors
+      }
+    };
+    fetchUnreadCount();
+    return () => { isMounted = false; };
+  }, [router.pathname]);
 
   const isActive = (path) => router.pathname === path || router.pathname.startsWith(path + '/');
 
@@ -454,12 +474,16 @@ export default function AdminLayoutPremium({ children, title }) {
             <button
               type="button"
               className={styles.topBarBtn}
-              aria-label="View enquiries & messages"
-              title="View Enquiries & Messages"
+              aria-label={`View enquiries & messages${unreadEnquiriesCount > 0 ? ` (${unreadEnquiriesCount} new)` : ''}`}
+              title={unreadEnquiriesCount > 0 ? `${unreadEnquiriesCount} new enquiry message(s)` : 'View Enquiries & Messages'}
               onClick={() => router.push("/admin/enquiries")}
             >
               <Icons.bell />
-              <span className={styles.topBarBtnBadge} aria-hidden="true">3</span>
+              {unreadEnquiriesCount > 0 && (
+                <span className={styles.topBarBtnBadge} aria-hidden="true">
+                  {unreadEnquiriesCount > 99 ? '99+' : unreadEnquiriesCount}
+                </span>
+              )}
             </button>
 
             <div className={styles.topBarDivider} />
