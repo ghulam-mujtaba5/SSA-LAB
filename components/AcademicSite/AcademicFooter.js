@@ -92,9 +92,6 @@ export default function AcademicFooter() {
               testing, and malware analysis at COMSATS University Islamabad.
             </p>
             <div className={styles.metaRow}>
-              <GraduationCap size={15} /> {profile.institution}
-            </div>
-            <div className={styles.metaRow}>
               <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
             </div>
           </div>

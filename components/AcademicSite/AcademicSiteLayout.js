@@ -102,11 +102,18 @@ export default function AcademicSiteLayout({
     }
     dropdownTimeoutRef.current = setTimeout(() => {
       setDropdownOpen(false);
-    }, 150);
+    }, 300);
   };
 
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setDropdownOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
+      window.removeEventListener("keydown", handleKeyDown);
       if (dropdownTimeoutRef.current) {
         clearTimeout(dropdownTimeoutRef.current);
       }
@@ -166,35 +173,37 @@ export default function AcademicSiteLayout({
                         className={`${styles.dropdownTrigger} ${active ? styles.activeNav : ""}`}
                         aria-expanded={dropdownOpen}
                         aria-haspopup="true"
+                        onClick={() => {
+                          setDropdownOpen(false);
+                        }}
                       >
                         {item.label} <ChevronDown size={14} className={styles.dropdownChevron} />
                       </Link>
 
-                      {dropdownOpen && (
-                        <div
-                          className={styles.dropdownMenu}
-                          onMouseEnter={handleMouseEnter}
-                          onMouseLeave={handleMouseLeave}
-                          role="menu"
-                        >
-                          {item.children.map((sub) => (
-                            <Link
-                              key={sub.href}
-                              href={sub.href}
-                              className={styles.dropdownItem}
-                              role="menuitem"
-                              onClick={() => {
-                                if (dropdownTimeoutRef.current) {
-                                  clearTimeout(dropdownTimeoutRef.current);
-                                }
-                                setDropdownOpen(false);
-                              }}
-                            >
-                              {sub.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
+                      <div
+                        className={styles.dropdownMenu}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        role="menu"
+                        aria-label={`${item.label} sub-navigation`}
+                      >
+                        {item.children.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className={styles.dropdownItem}
+                            role="menuitem"
+                            onClick={() => {
+                              if (dropdownTimeoutRef.current) {
+                                clearTimeout(dropdownTimeoutRef.current);
+                              }
+                              setDropdownOpen(false);
+                            }}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   );
                 }

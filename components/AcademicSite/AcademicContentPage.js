@@ -124,7 +124,18 @@ export function AboutPage() {
     stats: {},
   };
 
-  const renderPillarIcon = (name) => {
+  const renderPillarIcon = (name, image) => {
+    if (image) {
+      return (
+        <img
+          src={image}
+          alt={name}
+          width={54}
+          height={54}
+          style={{ objectFit: "contain", maxHeight: "54px" }}
+        />
+      );
+    }
     switch (name) {
       case "ShieldCheck":
         return <ShieldCheck size={24} />;
@@ -165,11 +176,13 @@ export function AboutPage() {
           title="Pioneering Source-Code Security Assessment & AI-Driven Software Reliability"
           lead="The Software Security Assessment (SSA) Research Lab unites academic rigor, global international partnerships, and industrial applications to discover software vulnerabilities, synthesize security patches, defend against malware, and automate software verification."
           illustration={
-            <AcademicLottie
-              src="/lottie/ai-brain.json"
-              ariaLabel="AI Software Security Inspection Animation"
-              speed={0.8}
-            />
+            <div className={styles.aboutHeroLottieWrap}>
+              <AcademicLottie
+                src="/lottie/ai-brain.json"
+                ariaLabel="AI Software Security Inspection Animation"
+                speed={0.8}
+              />
+            </div>
           }
         />
         {coInvestigatorsData[0] && (
@@ -228,21 +241,24 @@ export function AboutPage() {
         </div>
         <div className={styles.partnerRowWrapper}>
           <div className={styles.partnerCardGrid}>
-            {partnerLogosData.map((partner) => (
-              <a
-                key={partner.name}
-                href={partner.href}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.partnerCardBox}
-              >
-                <div className={styles.partnerLogoWrap}>
-                  <Image src={partner.image} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
-                </div>
-                <h3>{partner.name}</h3>
-                <span className={styles.partnerRole}>{partner.role}</span>
-              </a>
-            ))}
+            {partnerLogosData.map((partner) => {
+              const partnerImg = partner.image || staticPartnerMap[partner.name];
+              return (
+                <a
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.partnerCardBox}
+                >
+                  <div className={styles.partnerLogoWrap}>
+                    <Image src={partnerImg} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
+                  </div>
+                  <h3>{partner.name}</h3>
+                  <span className={styles.partnerRole}>{partner.role}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -272,7 +288,7 @@ export function AboutPage() {
           {labPillarsData.map((pillar) => (
             <article key={pillar.id || pillar.title} className={styles.pillarCard}>
               <div className={styles.pillarIconWrap}>
-                {renderPillarIcon(pillar.iconName)}
+                {renderPillarIcon(pillar.iconName, pillar.image)}
               </div>
               <h3>{pillar.title}</h3>
               <p>{pillar.desc || pillar.description}</p>
@@ -283,24 +299,13 @@ export function AboutPage() {
 
       {/* 4. LAB EVOLUTION & RESEARCH JOURNEY TIMELINE (INTERACTIVE STEPPER) */}
       <section className={styles.section}>
-        <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
-          <div style={{ flex: '1 1 min(100%, 600px)' }}>
+        <div className={styles.sectionHeading}>
+          <div>
             <p className={styles.eyebrow}>Lab Evolution & Story</p>
             <h2>Research Journey & Key Milestones</h2>
             <p style={{ maxWidth: "600px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: 0 }}>
               Explore how SSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg and AI-driven program repair at COMSATS.
             </p>
-          </div>
-          <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
-            <div className={styles.illustrationGlow} />
-            <img
-              src="/academic/illustrations/security-inspection-overview.webp"
-              alt="SSA Lab Evolution & Research Journey 3D Illustration"
-              width={160}
-              height={140}
-              style={{ objectFit: 'contain', maxHeight: '130px' }}
-              className={styles.illustrationImage}
-            />
           </div>
         </div>
 
@@ -475,7 +480,7 @@ export function ResearchPage() {
       keywords="software security research, software vulnerability detection, malware analysis, code clone detection, software testing, source code security, COMSATS Lahore"
       jsonLd={researchJsonLd}
     >
-      {selectedDomain && (
+          {selectedDomain && (
         <AcademicDomainModal
           domain={selectedDomain}
           onClose={() => setSelectedDomain(null)}
@@ -486,16 +491,6 @@ export function ResearchPage() {
         eyebrow="SSA Research Roadmaps"
         title="Software Security Research with Practical Reach"
         lead="The lab studies source-code vulnerabilities, Android & IoT malware, code clones, software evolution, and testing at scales ranging from individual functions to 324+ billion lines of code."
-        illustration={
-          <img
-            src="/academic/illustrations/security-inspection-overview.webp"
-            alt="SSA Software Security Research Platforms 3D Illustration"
-            width={160}
-            height={150}
-            style={{ objectFit: 'contain', maxHeight: '150px' }}
-            className={styles.illustrationImage}
-          />
-        }
       />
 
       {/* Research Domains Visual Cards */}
@@ -687,15 +682,6 @@ export function PublicationsPage() {
         eyebrow="Peer-Reviewed Literature"
         title="Publications & Research Output"
         lead="Discover empirical research spanning source-code vulnerability assessment, Android malware analysis, code clones, and automated software verification."
-        illustration={
-          <img
-            src="/academic/illustrations/billion-lines-code.webp"
-            alt="Publications & Research Output 3D Illustration"
-            width={160}
-            height={150}
-            style={{ objectFit: 'contain', maxHeight: '150px' }}
-          />
-        }
       />
 
       {/* 1. Key Impact Stats Banner */}
@@ -1218,6 +1204,40 @@ export function SupervisionPage({ fypProjects = [] }) {
   );
 }
 
+const staticCoInvestigatorMap = {
+  "Prof. Ping Luo": "/academic/ping-luo.jpg",
+  "Dr. Mohammad Hammoudeh": "/academic/mohammad-hammoudeh.png",
+  "Dr. Junaid Akram": "/academic/junaid-akram-professor.jpg",
+  "Dr. Danish Vasan": "/academic/danish-vassan.jpg",
+  "Dr. Majid Mumtaz": "/academic/majid-mumtaz.png",
+  "Dr. Adel F. Ahmed": "/academic/adel-ahmed.png",
+};
+
+const staticPgMap = {
+  "Muhammad Haris": "/academic/muhammad-haris.png",
+  "Muhammad Orangzaib": "/academic/muhammad-orangzaib.png",
+  "Mahzaib Mukhtar": "/academic/mahzaib-mukhtar.png",
+  "Zain Ul Abdeen": "/academic/zain-ul-abdeen.png",
+  "Ahsan Nisar": "/academic/ahsan-nisar.png",
+  "Farina Iqbal": "/academic/farina-iqbal.png",
+  "Hafsa Butt": "/academic/hafsa-butt.png",
+};
+
+const staticPartnerMap = {
+  "COMSATS University Islamabad": "/academic/comsats-university-islamabad-logo.png",
+  "Tsinghua University": "/academic/tsinghua-university-logo.webp",
+  "University of Luxembourg (SnT)": "/academic/snt-university-luxembourg-logo.png",
+  "SES Satellites": "/academic/ses-logo.png",
+  "King Fahd University (KFUPM)": "/academic/king-fahd-university-logo.png",
+};
+
+const staticStudentMap = {
+  "Ghulam Mujtaba": "/academic/students/ghulam-mujtaba.png",
+  "Muhammad Waqar Ul Mulk": "/academic/students/muhammad-waqar-ul-mulk.png",
+  "Muhammad Muneeb Azhar": "/academic/students/muhammad-muneeb-azhar.png",
+  "Hafiz Muhammad Shams ul Huda": "/academic/students/hafiz-shams-ul-huda.png",
+};
+
 export function TeamPage() {
   const { siteData } = useAcademicData();
   const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
@@ -1242,6 +1262,11 @@ export function TeamPage() {
   const showAlumni = activeTab === "all" || activeTab === "alumni";
   const showPartners = activeTab === "all" || activeTab === "partners";
 
+  const allPersonnel = [
+    ...coInvestigatorsData.map((c) => ({ ...c, type: "Faculty & Investigator" })),
+    ...pgResearchersData.map((p) => ({ ...p, type: "Postgraduate MS/PhD Researcher" })),
+  ];
+
   const teamJsonLd = [
     collectionPageSchema({
       name: "SSA Lab — People & Partners",
@@ -1249,8 +1274,7 @@ export function TeamPage() {
       description:
         "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab.",
       items: [
-        ...coInvestigatorsData.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
-        ...pgResearchersData.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
+        ...allPersonnel.map((p) => ({ name: p.name, url: `${SITE_URL}/team` })),
       ],
     }),
     personSchema(),
@@ -1288,6 +1312,16 @@ export function TeamPage() {
         eyebrow="SSA Research & Development Team"
         title="People, Collaborators & Institutional Partners"
         lead="Connecting principal investigators, international co-investigators, postgraduate MS & PhD thesis researchers, undergraduate BS engineering teams, and institutional partner organizations across software security and program repair."
+        illustration={
+          <img
+            src="/academic/illustrations/team-hero.webp"
+            alt="People, Collaborators & Institutional Partners 3D Illustration"
+            width={160}
+            height={150}
+            style={{ objectFit: 'contain', maxHeight: '150px' }}
+            className={styles.illustrationImage}
+          />
+        }
       />
 
       {/* INTERACTIVE CATEGORY FILTER BAR */}
@@ -1352,63 +1386,67 @@ export function TeamPage() {
           </div>
 
           <div className={styles.collabGrid}>
-            {coInvestigatorsData.map((pi) => (
-              <article key={pi.name} className={styles.collabCard}>
-                <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar}>
-                    {pi.image ? (
-                      <AcademicImageLightbox
-                        src={pi.image}
-                        alt={pi.name}
-                        width={120}
-                        height={120}
-                        caption={`${pi.name} — ${pi.role}`}
-                      />
-                    ) : (
-                      <span>{pi.name.split(" ").map((n) => n[0]).join("")}</span>
-                    )}
-                  </div>
-                  <div className={styles.collabMeta}>
-                    <h3>{pi.name}</h3>
-                    <span className={styles.collabBadge}>{pi.badge}</span>
-                    <div className={styles.collabDegree}>{pi.role}</div>
-                    <div className={styles.collabFocus} style={{ marginTop: "4px" }}>
-                      {pi.affiliation}
+            {coInvestigatorsData.map((pi) => {
+              const piImage = pi.image || staticCoInvestigatorMap[pi.name];
+              return (
+                <article key={pi.name} className={styles.collabCard}>
+                  <div className={styles.collabTop}>
+                    <div className={styles.collabAvatar}>
+                      {piImage ? (
+                        <AcademicImageLightbox
+                          src={piImage}
+                          alt={pi.name}
+                          width={120}
+                          height={120}
+                          caption={`${pi.name} — ${pi.role}`}
+                          showZoomHint={false}
+                        />
+                      ) : (
+                        <span>{pi.name.split(" ").map((n) => n[0]).join("")}</span>
+                      )}
+                    </div>
+                    <div className={styles.collabMeta}>
+                      <h3>{pi.name}</h3>
+                      <span className={styles.collabBadge}>{pi.badge}</span>
+                      <div className={styles.collabDegree}>{pi.role}</div>
+                      <div className={styles.collabFocus} style={{ marginTop: "4px" }}>
+                        {pi.affiliation}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className={styles.collabBody}>
-                  <p className={styles.collabTopic}>
-                    <strong>Specialization:</strong> {pi.specialization}
-                  </p>
-                  {pi.bio && <p className={styles.collabFocus}>{pi.bio}</p>}
-                </div>
+                  <div className={styles.collabBody}>
+                    <p className={styles.collabTopic}>
+                      <strong>Specialization:</strong> {pi.specialization}
+                    </p>
+                    {pi.bio && <p className={styles.collabFocus}>{pi.bio}</p>}
+                  </div>
 
-                <div className={styles.collabFooter}>
-                  {pi.email && (
-                    <a href={`mailto:${pi.email}`} className={styles.collabLinkBtn}>
-                      <Mail size={13} /> Email
-                    </a>
-                  )}
-                  {pi.googleScholar && (
-                    <a href={pi.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
-                      <ExternalLink size={13} /> Scholar
-                    </a>
-                  )}
-                  {pi.orcid && (
-                    <a href={pi.orcid} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
-                      <ExternalLink size={13} /> ORCID
-                    </a>
-                  )}
-                  {pi.officialProfile && (
-                    <a href={pi.officialProfile} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
-                      <ExternalLink size={13} /> Official Profile
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
+                  <div className={styles.collabFooter}>
+                    {pi.email && (
+                      <a href={`mailto:${pi.email}`} className={styles.collabLinkBtn}>
+                        <Mail size={13} /> Email
+                      </a>
+                    )}
+                    {pi.googleScholar && (
+                      <a href={pi.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> Scholar
+                      </a>
+                    )}
+                    {pi.orcid && (
+                      <a href={pi.orcid} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> ORCID
+                      </a>
+                    )}
+                    {pi.officialProfile && (
+                      <a href={pi.officialProfile} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> Official Profile
+                      </a>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       )}
@@ -1427,65 +1465,69 @@ export function TeamPage() {
           </div>
 
           <div className={styles.collabGrid}>
-            {pgResearchersData.map((student) => (
-              <article key={student.id || student.name} className={styles.collabCard}>
-                <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar} style={{ border: "2.5px solid var(--academic-cyan)" }}>
-                    {student.image ? (
-                      <AcademicImageLightbox
-                        src={student.image}
-                        alt={student.name}
-                        width={120}
-                        height={120}
-                        caption={`${student.name} (${student.id || student.memberId}) — ${student.degree}`}
-                      />
-                    ) : (
-                      <span style={{ color: "var(--academic-cyan)", fontSize: "0.95rem" }}>
-                        {student.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
-                      </span>
-                    )}
-                  </div>
-                  <div className={styles.collabMeta}>
-                    <h3>{student.name}</h3>
-                    <span className={styles.collabBadge}>{student.degree} {student.id ? `· ${student.id}` : student.memberId ? `· ${student.memberId}` : ""}</span>
-                    <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
-                      {student.status}
+            {pgResearchersData.map((student) => {
+              const studentImage = student.image || staticPgMap[student.name];
+              return (
+                <article key={student.id || student.name} className={styles.collabCard}>
+                  <div className={styles.collabTop}>
+                    <div className={styles.collabAvatar} style={{ border: "2.5px solid var(--academic-cyan)" }}>
+                      {studentImage ? (
+                        <AcademicImageLightbox
+                          src={studentImage}
+                          alt={student.name}
+                          width={120}
+                          height={120}
+                          caption={`${student.name} (${student.id || student.memberId}) — ${student.degree}`}
+                          showZoomHint={false}
+                        />
+                      ) : (
+                        <span style={{ color: "var(--academic-cyan)", fontSize: "0.95rem" }}>
+                          {student.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                        </span>
+                      )}
+                    </div>
+                    <div className={styles.collabMeta}>
+                      <h3>{student.name}</h3>
+                      <span className={styles.collabBadge}>{student.degree} {student.id ? `· ${student.id}` : student.memberId ? `· ${student.memberId}` : ""}</span>
+                      <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
+                        {student.status}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className={styles.collabBody}>
-                  <p className={styles.collabTopic} style={{ marginBottom: "8px" }}>
-                    <strong>Thesis:</strong> {student.topic || student.specialization}
-                  </p>
-                  <p className={styles.collabFocus}>
-                    <strong>Research Focus:</strong> {student.focus || student.bio}
-                  </p>
-                </div>
+                  <div className={styles.collabBody}>
+                    <p className={styles.collabTopic} style={{ marginBottom: "8px" }}>
+                      <strong>Thesis:</strong> {student.topic || student.specialization}
+                    </p>
+                    <p className={styles.collabFocus}>
+                      <strong>Research Focus:</strong> {student.focus || student.bio}
+                    </p>
+                  </div>
 
-                <div className={styles.collabFooter}>
-                  <span className={styles.collabFocus} style={{ fontSize: "0.74rem" }}>
-                    <Building size={12} style={{ display: "inline", marginRight: "4px" }} />
-                    {student.institution || "COMSATS University Islamabad"}
-                  </span>
-                  {student.email && (
-                    <a href={`mailto:${student.email}`} className={styles.collabLinkBtn}>
-                      <Mail size={13} /> Email
-                    </a>
-                  )}
-                  {student.linkedin && (
-                    <a href={student.linkedin} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
-                      <ExternalLink size={13} /> LinkedIn
-                    </a>
-                  )}
-                  {student.googleScholar && (
-                    <a href={student.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
-                      <ExternalLink size={13} /> Scholar
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
+                  <div className={styles.collabFooter}>
+                    <span className={styles.collabFocus} style={{ fontSize: "0.74rem" }}>
+                      <Building size={12} style={{ display: "inline", marginRight: "4px" }} />
+                      {student.institution || "COMSATS University Islamabad"}
+                    </span>
+                    {student.email && (
+                      <a href={`mailto:${student.email}`} className={styles.collabLinkBtn}>
+                        <Mail size={13} /> Email
+                      </a>
+                    )}
+                    {student.linkedin && (
+                      <a href={student.linkedin} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> LinkedIn
+                      </a>
+                    )}
+                    {student.googleScholar && (
+                      <a href={student.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> Scholar
+                      </a>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       )}
@@ -1528,18 +1570,48 @@ export function TeamPage() {
                       {fyp.summary}
                     </p>
                     {fyp.students && fyp.students.length > 0 && (
-                      <>
-                        <p className={styles.collabTopic} style={{ fontSize: "0.8rem", margin: 0 }}>
+                      <div style={{ marginTop: "12px", marginBottom: "14px" }}>
+                        <p className={styles.collabTopic} style={{ fontSize: "0.8rem", marginBottom: "8px" }}>
                           <strong>Team Members:</strong>
                         </p>
-                        <ul style={{ margin: "6px 0 12px 18px", padding: 0, fontSize: "0.78rem", color: "var(--academic-muted)" }}>
-                          {fyp.students.map((st) => (
-                            <li key={st.name}>
-                              <strong>{st.name}</strong> {st.registration && `(${st.registration})`}
-                            </li>
-                          ))}
-                        </ul>
-                      </>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                          {fyp.students.map((st) => {
+                            const studentAvatar = st.image || staticStudentMap[st.name];
+                            return (
+                              <div
+                                key={st.name}
+                                style={{
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  gap: studentAvatar ? "8px" : "4px",
+                                  background: "rgba(255,255,255,0.04)",
+                                  border: "1px solid var(--academic-border)",
+                                  padding: studentAvatar ? "3px 10px 3px 4px" : "4px 10px",
+                                  borderRadius: "18px",
+                                }}
+                              >
+                                {studentAvatar && (
+                                  <img
+                                    src={studentAvatar}
+                                    alt={st.name}
+                                    width={24}
+                                    height={24}
+                                    style={{ borderRadius: "50%", objectFit: "cover" }}
+                                  />
+                                )}
+                                <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "var(--academic-text)" }}>
+                                  {st.name}
+                                  {st.registration && (
+                                    <span style={{ color: "var(--academic-muted)", fontSize: "0.72rem", marginLeft: "4px" }}>
+                                      ({st.registration})
+                                    </span>
+                                  )}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
                     )}
                     {fyp.supervisor && (
                       <div className={styles.collabFocus} style={{ fontSize: "0.75rem" }}>
@@ -1569,15 +1641,18 @@ export function TeamPage() {
                     <GraduationCap size={22} />
                   </div>
                   <div className={styles.collabMeta}>
-                    <h3>{proj.title}</h3>
+                    <h3 style={{ fontSize: "1.05rem", fontWeight: 600 }}>{proj.student}</h3>
                     <span className={styles.collabBadge}>{proj.term}</span>
                     <div className={styles.collabDegree}>{proj.institution}</div>
                   </div>
                 </div>
                 <div className={styles.collabBody}>
-                  <p className={styles.collabFocus}>
-                    <strong>Student Researcher:</strong> {proj.student}
+                  <p className={styles.collabFocus} style={{ marginBottom: "8px" }}>
+                    <strong>Research Project:</strong> {proj.title}
                   </p>
+                  <div className={styles.collabFocus} style={{ fontSize: "0.78rem", color: "var(--academic-muted)" }}>
+                    Supervisor: <strong style={{ color: "var(--academic-text)" }}>Dr. Junaid Akram</strong>
+                  </div>
                 </div>
               </article>
             ))}
@@ -1627,21 +1702,24 @@ export function TeamPage() {
 
           <div className={styles.partnerRowWrapper}>
             <div className={styles.partnerCardGrid}>
-              {partnerLogosData.map((partner) => (
-                <a
-                  key={partner.name}
-                  href={partner.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.partnerCardBox}
-                >
-                  <div className={styles.partnerLogoWrap}>
-                    <Image src={partner.image} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
-                  </div>
-                  <h3>{partner.name}</h3>
-                  <span className={styles.partnerRole}>{partner.role}</span>
-                </a>
-              ))}
+              {partnerLogosData.map((partner) => {
+                const partnerImg = partner.image || staticPartnerMap[partner.name];
+                return (
+                  <a
+                    key={partner.name}
+                    href={partner.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.partnerCardBox}
+                  >
+                    <div className={styles.partnerLogoWrap}>
+                      <Image src={partnerImg} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
+                    </div>
+                    <h3>{partner.name}</h3>
+                    <span className={styles.partnerRole}>{partner.role}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -1689,6 +1767,16 @@ export function EventsPage() {
         eyebrow="International Events & Keynotes"
         title="Research presented and shared on global stages."
         lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr Junaid Akram and SSA Research Lab."
+        illustration={
+          <img
+            src="/academic/illustrations/event-hero.webp"
+            alt="International Events & Keynotes 3D Illustration"
+            width={160}
+            height={150}
+            style={{ objectFit: 'contain', maxHeight: '150px' }}
+            className={styles.illustrationImage}
+          />
+        }
       />
 
       {/* 1. KEYNOTE & CONFERENCE HIGHLIGHTS */}
@@ -1887,7 +1975,7 @@ export function ContactPage() {
               className={styles.securityLottie}
             />
           </div>
-          <div>
+          <div className={styles.contactVisualCopy}>
             <p className={styles.eyebrow}>SSA Research Lab</p>
             <h2>Software security, testing, and student research.</h2>
             <p>
@@ -1936,24 +2024,13 @@ export function ContactPage() {
 
       {/* Interactive Enquiry Form Section */}
       <section className={styles.section}>
-        <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
-          <div style={{ flex: '1 1 min(100%, 600px)' }}>
+        <div className={styles.sectionHeading}>
+          <div>
             <p className={styles.eyebrow}>Send an enquiry</p>
             <h2>Supervision & Research Enquiry Form</h2>
             <p className={styles.sectionLead}>
               Submit your research interests, FYP supervision requests, or collaboration inquiries directly to Dr. Junaid Akram.
             </p>
-          </div>
-          <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
-            <div className={styles.illustrationGlow} />
-            <img
-              src="/academic/illustrations/submit-inquiry-form.webp"
-              alt="Supervision & Research Enquiry 3D Illustration"
-              width={160}
-              height={140}
-              style={{ objectFit: 'contain', maxHeight: '130px' }}
-              className={styles.illustrationImage}
-            />
           </div>
         </div>
 
@@ -1994,175 +2071,149 @@ export function ContactPage() {
             </button>
           </div>
         ) : (
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "grid",
-              gap: "16px",
-              maxWidth: "680px",
-              padding: "24px",
-              background: "var(--academic-card-bg, rgba(255,255,255,0.03))",
-              borderRadius: "12px",
-              border: "1px solid var(--academic-border, #e5e7eb)",
-            }}
-          >
-            {submitError && (
-              <div
-                style={{
-                  padding: "12px 16px",
-                  background: "rgba(239, 68, 68, 0.1)",
-                  border: "1px solid rgba(239, 68, 68, 0.3)",
-                  borderRadius: "8px",
-                  color: "#ef4444",
-                  fontSize: "0.9rem",
-                }}
-              >
-                {submitError}
-              </div>
-            )}
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-              <div>
-                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="name">
-                  Full Name *
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  required
-                  disabled={isSubmitting}
+          <div className={styles.enquirySectionGrid}>
+            <form
+              onSubmit={handleSubmit}
+              className={styles.enquiryFormCard}
+            >
+              {submitError && (
+                <div
                   style={{
-                    width: "100%",
-                    padding: "10px 14px",
-                    borderRadius: "6px",
-                    border: "1px solid var(--academic-border, #ccc)",
-                    background: "transparent",
-                    color: "inherit",
+                    padding: "12px 16px",
+                    background: "rgba(239, 68, 68, 0.1)",
+                    border: "1px solid rgba(239, 68, 68, 0.3)",
+                    borderRadius: "8px",
+                    color: "#ef4444",
+                    fontSize: "0.9rem",
                   }}
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                />
-              </div>
-              <div>
-                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="email">
-                  Institutional Email *
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  disabled={isSubmitting}
-                  style={{
-                    width: "100%",
-                    padding: "10px 14px",
-                    borderRadius: "6px",
-                    border: "1px solid var(--academic-border, #ccc)",
-                    background: "transparent",
-                    color: "inherit",
-                  }}
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-              <div>
-                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="degree">
-                  Degree Programme / Organisation
-                </label>
-                <input
-                  id="degree"
-                  type="text"
-                  disabled={isSubmitting}
-                  placeholder="e.g. BS Software Engineering (FA22)"
-                  style={{
-                    width: "100%",
-                    padding: "10px 14px",
-                    borderRadius: "6px",
-                    border: "1px solid var(--academic-border, #ccc)",
-                    background: "transparent",
-                    color: "inherit",
-                  }}
-                  value={formData.degree}
-                  onChange={(e) => setFormData({ ...formData, degree: e.target.value })}
-                />
-              </div>
-              <div>
-                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="enquiryType">
-                  Enquiry Type
-                </label>
-                <select
-                  id="enquiryType"
-                  disabled={isSubmitting}
-                  style={{
-                    width: "100%",
-                    padding: "10px 14px",
-                    borderRadius: "6px",
-                    border: "1px solid var(--academic-border, #ccc)",
-                    background: "var(--academic-bg, #fff)",
-                    color: "inherit",
-                  }}
-                  value={formData.enquiryType}
-                  onChange={(e) => setFormData({ ...formData, enquiryType: e.target.value })}
                 >
-                  <option value="FYP Supervision">BS FYP Supervision Request</option>
-                  <option value="Research Collaboration">Research Collaboration</option>
-                  <option value="MS/PhD Inquiry">MS / PhD Supervision Inquiry</option>
-                  <option value="General">General Enquiry</option>
-                </select>
+                  {submitError}
+                </div>
+              )}
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="name">
+                    Full Name *
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    required
+                    disabled={isSubmitting}
+                    className={styles.formInput}
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="email">
+                    Institutional Email *
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    disabled={isSubmitting}
+                    className={styles.formInput}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="topic">
-                Research Topic or Project Title
-              </label>
-              <input
-                id="topic"
-                type="text"
-                disabled={isSubmitting}
-                placeholder="e.g. Source code vulnerability detection / MegiLance"
-                style={{
-                  width: "100%",
-                  padding: "10px 14px",
-                  borderRadius: "6px",
-                  border: "1px solid var(--academic-border, #ccc)",
-                  background: "transparent",
-                  color: "inherit",
-                }}
-                value={formData.topic}
-                onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-              />
-            </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="degree">
+                    Degree Programme / Organisation
+                  </label>
+                  <input
+                    id="degree"
+                    type="text"
+                    disabled={isSubmitting}
+                    placeholder="e.g. BS Software Engineering (FA22)"
+                    className={styles.formInput}
+                    value={formData.degree}
+                    onChange={(e) => setFormData({ ...formData, degree: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="enquiryType">
+                    Enquiry Type
+                  </label>
+                  <select
+                    id="enquiryType"
+                    disabled={isSubmitting}
+                    className={styles.enquirySelect}
+                    value={formData.enquiryType}
+                    onChange={(e) => setFormData({ ...formData, enquiryType: e.target.value })}
+                  >
+                    <option value="FYP Supervision">BS FYP Supervision Request</option>
+                    <option value="Research Collaboration">Research Collaboration</option>
+                    <option value="MS/PhD Inquiry">MS / PhD Supervision Inquiry</option>
+                    <option value="General">General Enquiry</option>
+                  </select>
+                </div>
+              </div>
 
-            <div>
-              <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="message">
-                Message Details *
-              </label>
-              <textarea
-                id="message"
-                required
-                disabled={isSubmitting}
-                rows={4}
-                placeholder="Describe your background, proposed research idea, or supervision query..."
-                style={{
-                  width: "100%",
-                  padding: "10px 14px",
-                  borderRadius: "6px",
-                  border: "1px solid var(--academic-border, #ccc)",
-                  background: "transparent",
-                  color: "inherit",
-                }}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              />
-            </div>
+              <div>
+                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="topic">
+                  Research Topic or Project Title
+                </label>
+                <input
+                  id="topic"
+                  type="text"
+                  disabled={isSubmitting}
+                  placeholder="e.g. Source code vulnerability detection / MegiLance"
+                  className={styles.formInput}
+                  value={formData.topic}
+                  onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
+                />
+              </div>
 
-            <button type="submit" disabled={isSubmitting} className={styles.primaryButton} style={{ justifySelf: "start", opacity: isSubmitting ? 0.7 : 1 }}>
-              {isSubmitting ? "Sending Enquiry..." : "Submit Enquiry"} <Send size={15} />
-            </button>
-          </form>
+              <div>
+                <label style={{ display: "block", fontSize: "0.85rem", marginBottom: "6px" }} htmlFor="message">
+                  Message Details *
+                </label>
+                <textarea
+                  id="message"
+                  required
+                  disabled={isSubmitting}
+                  rows={4}
+                  placeholder="Describe your background, proposed research idea, or supervision query..."
+                  className={styles.formInput}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                />
+              </div>
+
+              <button type="submit" disabled={isSubmitting} className={styles.primaryButton} style={{ justifySelf: "start", opacity: isSubmitting ? 0.7 : 1 }}>
+                {isSubmitting ? "Sending Enquiry..." : "Submit Enquiry"} <Send size={15} />
+              </button>
+            </form>
+
+            <aside className={styles.enquirySidebarCard}>
+              <div className={styles.enquiryIllustrationBox}>
+                <img
+                  src="/academic/illustrations/contact-hero.webp"
+                  alt="Supervision & Research Enquiry 3D Illustration"
+                  width={220}
+                  height={200}
+                  style={{ objectFit: 'contain', maxHeight: '190px' }}
+                  className={styles.illustrationImage}
+                />
+              </div>
+              <div className={styles.enquirySidebarDetails}>
+                <h3>Direct Consultation</h3>
+                <p>
+                  Submit your research background, degree program, or collaboration inquiry directly to Dr. Junaid Akram for research and FYP assessment.
+                </p>
+                <div className={styles.enquirySidebarBadge}>
+                  <ShieldCheck size={16} /> 24–48h Response Window
+                </div>
+              </div>
+            </aside>
+          </div>
         )}
       </section>
 

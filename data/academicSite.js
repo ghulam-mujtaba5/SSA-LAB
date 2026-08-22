@@ -67,7 +67,7 @@ export const researchDomains = [
     number: "01",
     graphicKey: "cyber-security",
     title: "Cyber Security",
-    image: "/academic/illustrations/malware-vulnerability-defense.webp",
+    image: "/academic/illustrations/cyber-security.webp",
     description:
       "Source-level assessment methods for identifying, understanding, and mitigating software vulnerabilities.",
     overview:
@@ -244,7 +244,7 @@ export const researchDomains = [
     number: "03",
     graphicKey: "software-testing",
     title: "Software Testing",
-    image: "/academic/illustrations/android-app-security.webp",
+    image: "/academic/illustrations/software-testing.webp",
     description:
       "Search-based testing, automated test-data generation, regression testing, and test-smell detection.",
     overview:
@@ -1283,7 +1283,7 @@ export const coInvestigators = [
     role: "Academic Mentor & Research Collaborator",
     affiliation: "Key Laboratory of Information System Security, School of Software, Tsinghua University",
     specialization: "Information Security & Program Analysis",
-    image: "/academic/ping-luo.png",
+    image: "/academic/ping-luo.jpg",
     email: "luop@mail.tsinghua.edu.cn",
     officialProfile: "https://www.thss.tsinghua.edu.cn/",
     researchGate: "https://www.researchgate.net/scientific-contributions/Ping-Luo-2035311037",
@@ -1390,24 +1390,28 @@ export const labPillars = [
     id: "vulnerability",
     title: "Source-Level Vulnerability Intelligence",
     iconName: "ShieldCheck",
+    image: "/academic/illustrations/source-level-vulnerability-intelligence.webp",
     desc: "Indexing, matching, and tracing software vulnerabilities through AST fingerprints, patch diff signatures, and multi-terabyte code similarity lookup."
   },
   {
     id: "ai-repair",
     title: "AI & LLM-Driven Program Repair",
     iconName: "Sparkles",
+    image: "/academic/illustrations/ai-llm-program-repair.webp",
     desc: "Leveraging Large Language Models, in-context learning, and Graph Neural Networks (GNN) for automated security patch synthesis and refactoring."
   },
   {
     id: "testing",
     title: "Automated Verification & Software Testing",
     iconName: "Cpu",
+    image: "/academic/illustrations/automated-verification-testing.webp",
     desc: "Search-based test data generation, model-based satellite CPS testing, BDD test smell detection, and log-based regression test slicing."
   },
   {
     id: "malware",
     title: "Obfuscation & Malware Ensemble Defense",
     iconName: "Zap",
+    image: "/academic/illustrations/obfuscation-malware-defense.webp",
     desc: "Token-based obfuscated code clone identification and advanced ensemble machine learning frameworks defending Windows, Android, and IoT systems."
   }
 ];

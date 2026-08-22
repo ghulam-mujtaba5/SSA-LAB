@@ -13,8 +13,8 @@ export const defaultFypProjects = [
     session: "2022–2026",
     institution: "COMSATS University Islamabad, Lahore Campus",
     students: [
-      { name: "Ghulam Mujtaba", registration: "FA22-BSE-199", profileUrl: "https://github.com/ghulam-mujtaba5" },
-      { name: "Muhammad Waqar Ul Mulk", registration: "FA22-BSE-153", profileUrl: "https://linkedin.com" }
+      { name: "Ghulam Mujtaba", registration: "FA22-BSE-199", profileUrl: "https://github.com/ghulam-mujtaba5", image: "/academic/students/ghulam-mujtaba.png" },
+      { name: "Muhammad Waqar Ul Mulk", registration: "FA22-BSE-153", profileUrl: "https://linkedin.com", image: "/academic/students/muhammad-waqar-ul-mulk.png" }
     ],
     supervisor: "Dr. Junaid Akram",
     coSupervisor: "Ms. Khula Qadeer",
@@ -54,7 +54,7 @@ export const defaultFypProjects = [
     students: [
       { name: "Syed Muhammad Irtaza Shahid", registration: "SP23-BSE-156" },
       { name: "Muhammad Waleed", registration: "SP23-BSE-134" },
-      { name: "Muhammad Muneeb Azhar", registration: "SP23-BSE-125" }
+      { name: "Muhammad Muneeb Azhar", registration: "SP23-BSE-125", image: "/academic/students/muhammad-muneeb-azhar.png" }
     ],
     supervisor: "Dr. Junaid Akram",
     specializations: ["Vulnerability Detection", "Large Language Models", "Source Code Security", "AST Parsing"],
@@ -110,7 +110,7 @@ export const defaultFypProjects = [
     students: [
       { name: "Ali Muhammad", registration: "SP23-BSE-032" },
       { name: "Ali Murtaza", registration: "SP23-BSE-033" },
-      { name: "Hafiz Muhammad Shams ul Huda", registration: "SP23-BSE-067" }
+      { name: "Hafiz Muhammad Shams ul Huda", registration: "SP23-BSE-067", image: "/academic/students/hafiz-shams-ul-huda.png" }
     ],
     supervisor: "Dr. Junaid Akram",
     specializations: ["Code Clone Detection", "Semantic Analysis", "Software Quality", "Information Retrieval"],

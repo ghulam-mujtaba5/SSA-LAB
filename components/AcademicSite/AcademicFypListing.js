@@ -92,24 +92,13 @@ export default function AcademicFypListing({ projects = [] }) {
 
   return (
     <section className={`${styles.section} ${styles.fypListingSection}`}>
-      <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
-        <div style={{ flex: '1 1 min(100%, 600px)' }}>
+      <div className={styles.sectionHeading}>
+        <div>
           <p className={styles.eyebrow}>Supervision Directory</p>
           <h2>Research Supervision & Capstone Projects</h2>
           <p className={styles.sectionLead}>
             Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram at SSA Lab.
           </p>
-        </div>
-        <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
-          <div className={styles.illustrationGlow} />
-          <img 
-            src="/academic/illustrations/software-evolution-reuse.webp" 
-            alt="Research Supervision & Capstone Projects 3D Illustration" 
-            width={160} 
-            height={140} 
-            style={{ objectFit: 'contain', maxHeight: '130px' }}
-            className={styles.illustrationImage}
-          />
         </div>
       </div>
 
@@ -244,11 +233,18 @@ export default function AcademicFypListing({ projects = [] }) {
 
                 {/* Students list or Opportunity badge */}
                 {!isOpp && project.students && project.students.length > 0 ? (
-                  <div className={styles.fypCardStudents}>
-                    <Users size={14} className={styles.metaIcon} />
-                    <span>
-                      {project.students.map((s, idx) => (
-                        <strong key={s.name || idx}>
+                  <div className={styles.fypCardStudents} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "6px", marginTop: "10px" }}>
+                    {project.students.map((s, idx) => {
+                      const staticStudentMap = {
+                        "Ghulam Mujtaba": "/academic/students/ghulam-mujtaba.png",
+                        "Muhammad Waqar Ul Mulk": "/academic/students/muhammad-waqar-ul-mulk.png",
+                        "Muhammad Muneeb Azhar": "/academic/students/muhammad-muneeb-azhar.png",
+                        "Hafiz Muhammad Shams ul Huda": "/academic/students/hafiz-shams-ul-huda.png",
+                      };
+                      const avatar = s.image || staticStudentMap[s.name];
+                      return (
+                        <span key={s.name || idx} style={{ display: "inline-flex", alignItems: "center", gap: avatar ? "6px" : "3px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--academic-border)", padding: avatar ? "2px 8px 2px 4px" : "3px 8px", borderRadius: "16px", fontSize: "0.75rem" }}>
+                          {avatar && <img src={avatar} alt={s.name} width={18} height={18} style={{ borderRadius: "50%", objectFit: "cover" }} />}
                           {s.profileUrl ? (
                             <a
                               href={s.profileUrl}
@@ -256,16 +252,15 @@ export default function AcademicFypListing({ projects = [] }) {
                               rel="noopener noreferrer"
                               className={styles.studentProfileLink}
                             >
-                              {s.name} <ExternalLink size={11} style={{ display: "inline", verticalAlign: "-1px" }} />
+                              {s.name} <ExternalLink size={10} style={{ display: "inline", verticalAlign: "-1px" }} />
                             </a>
                           ) : (
-                            s.name
+                            <span style={{ fontWeight: 500 }}>{s.name}</span>
                           )}
-                          {s.registration ? <small> ({s.registration})</small> : ""}
-                          {idx < project.students.length - 1 ? " · " : ""}
-                        </strong>
-                      ))}
-                    </span>
+                          {s.registration ? <small style={{ opacity: 0.75, marginLeft: "2px" }}>({s.registration})</small> : ""}
+                        </span>
+                      );
+                    })}
                   </div>
                 ) : isOpp ? (
                   <div className={styles.fypCardStudents} style={{ color: "var(--brand-primary)" }}>

@@ -203,6 +203,10 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
+.linkList li a:visited {
+  color: var(--academic-muted, #64748b);
+}
+
 .linkList li a:hover {
   color: var(--academic-blue, #4f46e5);
   transform: translateX(3px);
@@ -239,6 +243,10 @@
   text-decoration: none;
   transition: color 0.2s ease;
   word-break: break-word;
+}
+
+.contactItem a:visited {
+  color: var(--academic-muted, #64748b);
 }
 
 .contactItem a:hover {

@@ -50,9 +50,9 @@ const impactStats = [
 ];
 
 const domainIllustrationMap = {
-  "cyber-security": "/academic/illustrations/malware-vulnerability-defense.webp",
+  "cyber-security": "/academic/illustrations/cyber-security.webp",
   "vulnerability-detection": "/academic/illustrations/vulnerability-detection.webp",
-  "software-testing": "/academic/illustrations/android-app-security.webp",
+  "software-testing": "/academic/illustrations/software-testing.webp",
   "malware-detection": "/academic/illustrations/malware-detection.webp",
   "code-clone-analysis": "/academic/illustrations/code-cloning.webp",
   "software-evolution-reuse": "/academic/illustrations/software-evolution-reuse.webp",
@@ -166,20 +166,17 @@ export default function AcademicHome() {
 
       {/* 2. Verified Research Impact Statistics Bar */}
       <section className={styles.impactStrip} aria-label="Research Impact Statistics">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px', flexWrap: 'wrap', maxWidth: '1200px', margin: '0 auto' }}>
-          <div className={styles.impactBadgeWrapper}>
-            <DataInfrastructureGraphic size={96} />
-          </div>
-          <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", flex: 1 }}>
+        <div className={styles.impactContainer}>
+          <div className={styles.impactGrid}>
             {labImpactStatsData.map((stat) => (
               <div key={stat.label} className={styles.impactItem}>
                 {stat.image && (
                   <img
                     src={stat.image}
                     alt={stat.label}
-                    width={42}
-                    height={42}
-                    style={{ objectFit: 'contain', marginBottom: '4px' }}
+                    width={48}
+                    height={48}
+                    style={{ objectFit: 'contain', marginBottom: '8px' }}
                   />
                 )}
                 <strong>{stat.value}</strong>
@@ -358,28 +355,38 @@ export default function AcademicHome() {
         </h2>
         <div className={styles.partnerRowWrapper}>
           <div className={styles.partnerCardGrid}>
-            {partnerLogosData.map((partner) => (
-              <a
-                key={partner.name}
-                href={partner.href}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.partnerCardBox}
-                title={partner.name}
-              >
-                <div className={styles.partnerLogoWrap}>
-                  <Image
-                    src={partner.image}
-                    alt={partner.name}
-                    width={180}
-                    height={50}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-                <h3>{partner.name}</h3>
-                <span className={styles.partnerRole}>{partner.role}</span>
-              </a>
-            ))}
+            {partnerLogosData.map((partner) => {
+              const staticPartnerMap = {
+                "COMSATS University Islamabad": "/academic/comsats-university-islamabad-logo.png",
+                "Tsinghua University": "/academic/tsinghua-university-logo.webp",
+                "University of Luxembourg (SnT)": "/academic/snt-university-luxembourg-logo.png",
+                "SES Satellites": "/academic/ses-logo.png",
+                "King Fahd University (KFUPM)": "/academic/king-fahd-university-logo.png",
+              };
+              const partnerImg = partner.image || staticPartnerMap[partner.name];
+              return (
+                <a
+                  key={partner.name}
+                  href={partner.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.partnerCardBox}
+                  title={partner.name}
+                >
+                  <div className={styles.partnerLogoWrap}>
+                    <Image
+                      src={partnerImg}
+                      alt={partner.name}
+                      width={180}
+                      height={50}
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                  <h3>{partner.name}</h3>
+                  <span className={styles.partnerRole}>{partner.role}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>

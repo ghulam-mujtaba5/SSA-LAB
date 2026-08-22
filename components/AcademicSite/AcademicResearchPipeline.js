@@ -1,18 +1,6 @@
-"use client";
-
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import {
-  BadgeCheck,
-  Braces,
-  Cpu,
-  Database,
-  FileCheck2,
-  GitBranch,
-  GraduationCap,
-  ScanSearch,
-  ShieldAlert,
-  ShieldCheck,
-} from "lucide-react";
+import { Braces } from "lucide-react";
 import styles from "./AcademicResearchPipeline.module.css";
 
 const stages = [
@@ -20,31 +8,31 @@ const stages = [
     label: "Stage 01 — Evidence",
     title: "Source Artifact Ingestion",
     detail: "Repositories, CVE benchmarks, smart contracts, APKs & patch histories",
-    icon: Database,
+    image: "/academic/illustrations/stage-1.webp",
   },
   {
     label: "Stage 02 — Analysis",
     title: "AST & Semantic Parsing",
     detail: "Control/data flow graphs, clone detection & obfuscation normalization",
-    icon: ScanSearch,
+    image: "/academic/illustrations/stage-2.webp",
   },
   {
     label: "Stage 03 — Detection",
     title: "Vulnerability Engine",
     detail: "Isolating security flaws, malware behaviors & test smells (SQVDT, VCIPR)",
-    icon: ShieldAlert,
+    image: "/academic/illustrations/stage-3.webp",
   },
   {
     label: "Stage 04 — Validation",
     title: "Empirical Benchmarking",
     detail: "Precision/recall evaluation, CWE ground truths & patch verification",
-    icon: FileCheck2,
+    image: "/academic/illustrations/stage-4.webp",
   },
   {
     label: "Stage 05 — Transfer",
     title: "Publications & Supervised Projects",
     detail: "Q1 journal papers, open-source tools deployment & student supervision",
-    icon: GraduationCap,
+    image: "/academic/illustrations/stage-5.webp",
   },
 ];
 
@@ -58,7 +46,6 @@ export default function AcademicResearchPipeline() {
       </div>
       <div className={styles.stageGrid}>
         {stages.map((stage) => {
-          const Icon = stage.icon;
           return (
             <motion.article
               key={stage.title}
@@ -67,7 +54,13 @@ export default function AcademicResearchPipeline() {
               transition={{ duration: 0.2 }}
             >
               <div className={styles.iconBox}>
-                <Icon size={22} />
+                <Image
+                  src={stage.image}
+                  alt={stage.title}
+                  width={44}
+                  height={44}
+                  style={{ objectFit: "contain" }}
+                />
               </div>
               <span>{stage.label}</span>
               <h3>{stage.title}</h3>

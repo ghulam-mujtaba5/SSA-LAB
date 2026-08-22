@@ -113,8 +113,7 @@
   }
 
   .zoomHint {
-    opacity: 1;
-    transform: none;
+    display: none;
   }
 
   .closeButton {
