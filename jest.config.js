@@ -15,7 +15,10 @@ const customJestConfig = {
     "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$":
       "<rootDir>/test/__mocks__/fileMock.js",
   },
-  testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+  testMatch: [
+    "**/__tests__/**/*.[jt]s?(x)",
+    "<rootDir>/test/**/*.test.[jt]s?(x)",
+  ],
 };
 
 module.exports = createJestConfig(customJestConfig);

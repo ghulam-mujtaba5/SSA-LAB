@@ -1,5 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import AdminLayout from "../../../components/Admin/AdminLayout/AdminLayout";
+import Modal from "../../../components/Admin/Modal/Modal";
+import InlineSpinner from "../../../components/LoadingAnimation/InlineSpinner";
 import withAdminAuth from "../../../lib/withAdminAuth";
 import toast from "react-hot-toast";
 import { formatDistanceToNow } from "date-fns";
@@ -138,15 +140,15 @@ function EnquiriesPage() {
   const getStatusBadgeStyle = (status) => {
     switch (status) {
       case "new":
-        return { background: "rgba(59, 130, 246, 0.15)", color: "#3b82f6", border: "1px solid rgba(59, 130, 246, 0.3)" };
+        return { background: "rgba(2, 132, 199, 0.12)", color: "var(--primary)", border: "1px solid rgba(2, 132, 199, 0.3)" };
       case "read":
-        return { background: "rgba(234, 179, 8, 0.15)", color: "#eab308", border: "1px solid rgba(234, 179, 8, 0.3)" };
+        return { background: "rgba(245, 158, 11, 0.12)", color: "var(--warning, #b45309)", border: "1px solid rgba(245, 158, 11, 0.3)" };
       case "replied":
-        return { background: "rgba(16, 185, 129, 0.15)", color: "#10b981", border: "1px solid rgba(16, 185, 129, 0.3)" };
+        return { background: "rgba(16, 185, 129, 0.12)", color: "var(--success)", border: "1px solid rgba(16, 185, 129, 0.3)" };
       case "archived":
-        return { background: "rgba(148, 163, 184, 0.15)", color: "#94a3b8", border: "1px solid rgba(148, 163, 184, 0.3)" };
+        return { background: "rgba(100, 116, 139, 0.12)", color: "var(--text-muted)", border: "1px solid var(--border)" };
       default:
-        return { background: "rgba(255, 255, 255, 0.1)", color: "inherit" };
+        return { background: "var(--bg-elev-2)", color: "var(--text)" };
     }
   };
 
@@ -156,8 +158,8 @@ function EnquiriesPage() {
         {/* Page Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px", flexWrap: "wrap", gap: "16px" }}>
           <div>
-            <h1 style={{ fontSize: "1.75rem", fontWeight: "700", margin: "0 0 4px" }}>Contact Form Enquiries</h1>
-            <p style={{ margin: 0, color: "var(--text-muted, #94a3b8)", fontSize: "0.9rem" }}>
+            <h1 style={{ fontSize: "1.75rem", fontWeight: "700", margin: "0 0 4px", color: "var(--text)" }}>Contact Form Enquiries</h1>
+            <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.9rem" }}>
               Manage student supervision requests, research collaborations, and visitor messages.
             </p>
           </div>
@@ -166,9 +168,9 @@ function EnquiriesPage() {
             style={{
               padding: "8px 16px",
               borderRadius: "8px",
-              border: "1px solid var(--border-color, rgba(255,255,255,0.15))",
-              background: "transparent",
-              color: "inherit",
+              border: "1px solid var(--border)",
+              background: "var(--bg-elev-1)",
+              color: "var(--text)",
               cursor: "pointer",
               fontSize: "0.85rem",
               fontWeight: "500",
@@ -180,21 +182,21 @@ function EnquiriesPage() {
 
         {/* Stats Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "16px", marginBottom: "24px" }}>
-          <div style={{ padding: "16px", borderRadius: "12px", background: "var(--card-bg, rgba(255,255,255,0.04))", border: "1px solid var(--border-color, rgba(255,255,255,0.1))" }}>
-            <span style={{ fontSize: "0.8rem", color: "#94a3b8", textTransform: "uppercase", fontWeight: "600" }}>Total Enquiries</span>
-            <div style={{ fontSize: "1.8rem", fontWeight: "700", marginTop: "4px" }}>{stats.total}</div>
+          <div style={{ padding: "16px", borderRadius: "12px", background: "var(--surface, var(--bg-elev-1))", border: "1px solid var(--border)" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", textTransform: "uppercase", fontWeight: "600" }}>Total Enquiries</span>
+            <div style={{ fontSize: "1.8rem", fontWeight: "700", marginTop: "4px", color: "var(--text)" }}>{stats.total}</div>
           </div>
-          <div style={{ padding: "16px", borderRadius: "12px", background: "rgba(59, 130, 246, 0.08)", border: "1px solid rgba(59, 130, 246, 0.2)" }}>
-            <span style={{ fontSize: "0.8rem", color: "#3b82f6", textTransform: "uppercase", fontWeight: "600" }}>New Messages</span>
-            <div style={{ fontSize: "1.8rem", fontWeight: "700", color: "#3b82f6", marginTop: "4px" }}>{stats.new}</div>
+          <div style={{ padding: "16px", borderRadius: "12px", background: "rgba(2, 132, 199, 0.08)", border: "1px solid rgba(2, 132, 199, 0.25)" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--primary)", textTransform: "uppercase", fontWeight: "600" }}>New Messages</span>
+            <div style={{ fontSize: "1.8rem", fontWeight: "700", color: "var(--primary)", marginTop: "4px" }}>{stats.new}</div>
           </div>
-          <div style={{ padding: "16px", borderRadius: "12px", background: "rgba(234, 179, 8, 0.08)", border: "1px solid rgba(234, 179, 8, 0.2)" }}>
-            <span style={{ fontSize: "0.8rem", color: "#eab308", textTransform: "uppercase", fontWeight: "600" }}>Read / Pending</span>
-            <div style={{ fontSize: "1.8rem", fontWeight: "700", color: "#eab308", marginTop: "4px" }}>{stats.read}</div>
+          <div style={{ padding: "16px", borderRadius: "12px", background: "rgba(245, 158, 11, 0.08)", border: "1px solid rgba(245, 158, 11, 0.25)" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--warning, #b45309)", textTransform: "uppercase", fontWeight: "600" }}>Read / Pending</span>
+            <div style={{ fontSize: "1.8rem", fontWeight: "700", color: "var(--warning, #b45309)", marginTop: "4px" }}>{stats.read}</div>
           </div>
-          <div style={{ padding: "16px", borderRadius: "12px", background: "rgba(16, 185, 129, 0.08)", border: "1px solid rgba(16, 185, 129, 0.2)" }}>
-            <span style={{ fontSize: "0.8rem", color: "#10b981", textTransform: "uppercase", fontWeight: "600" }}>Replied</span>
-            <div style={{ fontSize: "1.8rem", fontWeight: "700", color: "#10b981", marginTop: "4px" }}>{stats.replied}</div>
+          <div style={{ padding: "16px", borderRadius: "12px", background: "rgba(16, 185, 129, 0.08)", border: "1px solid rgba(16, 185, 129, 0.25)" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--success)", textTransform: "uppercase", fontWeight: "600" }}>Replied</span>
+            <div style={{ fontSize: "1.8rem", fontWeight: "700", color: "var(--success)", marginTop: "4px" }}>{stats.replied}</div>
           </div>
         </div>
 
@@ -209,10 +211,11 @@ function EnquiriesPage() {
               flex: "1 1 280px",
               padding: "10px 14px",
               borderRadius: "8px",
-              border: "1px solid var(--border-color, rgba(255,255,255,0.15))",
-              background: "transparent",
-              color: "inherit",
+              border: "1px solid var(--border)",
+              background: "var(--surface, var(--bg-elev-1))",
+              color: "var(--text)",
               fontSize: "0.9rem",
+              outline: "none",
             }}
           />
 
@@ -222,10 +225,11 @@ function EnquiriesPage() {
             style={{
               padding: "10px 14px",
               borderRadius: "8px",
-              border: "1px solid var(--border-color, rgba(255,255,255,0.15))",
-              background: "var(--card-bg, #1e293b)",
-              color: "inherit",
+              border: "1px solid var(--border)",
+              background: "var(--surface, var(--bg-elev-1))",
+              color: "var(--text)",
               fontSize: "0.9rem",
+              outline: "none",
             }}
           >
             <option value="all">All Statuses</option>
@@ -241,10 +245,11 @@ function EnquiriesPage() {
             style={{
               padding: "10px 14px",
               borderRadius: "8px",
-              border: "1px solid var(--border-color, rgba(255,255,255,0.15))",
-              background: "var(--card-bg, #1e293b)",
-              color: "inherit",
+              border: "1px solid var(--border)",
+              background: "var(--surface, var(--bg-elev-1))",
+              color: "var(--text)",
               fontSize: "0.9rem",
+              outline: "none",
             }}
           >
             <option value="all">All Types</option>
@@ -256,18 +261,21 @@ function EnquiriesPage() {
         </div>
 
         {/* Table List */}
-        <div style={{ borderRadius: "12px", border: "1px solid var(--border-color, rgba(255,255,255,0.1))", overflow: "hidden", background: "var(--card-bg, rgba(255,255,255,0.02))" }}>
+        <div style={{ borderRadius: "12px", border: "1px solid var(--border)", overflow: "hidden", background: "var(--surface, var(--bg-elev-1))" }}>
           {loading ? (
-            <div style={{ padding: "40px", textAlign: "center", color: "#94a3b8" }}>Loading enquiries...</div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", padding: "60px 20px", color: "var(--text-muted)" }}>
+              <InlineSpinner sizePx={24} />
+              <span>Loading enquiries...</span>
+            </div>
           ) : enquiries.length === 0 ? (
-            <div style={{ padding: "40px", textAlign: "center", color: "#94a3b8" }}>
+            <div style={{ padding: "60px 20px", textAlign: "center", color: "var(--text-muted)" }}>
               No contact form enquiries found matching criteria.
             </div>
           ) : (
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: "0.9rem" }}>
                 <thead>
-                  <tr style={{ borderBottom: "1px solid var(--border-color, rgba(255,255,255,0.1))", background: "rgba(255,255,255,0.03)", color: "#94a3b8" }}>
+                  <tr style={{ borderBottom: "1px solid var(--border)", background: "var(--bg-elev-2)", color: "var(--text-muted)" }}>
                     <th style={{ padding: "12px 16px" }}>Sender Details</th>
                     <th style={{ padding: "12px 16px" }}>Enquiry Type</th>
                     <th style={{ padding: "12px 16px" }}>Topic / Program</th>
@@ -281,26 +289,26 @@ function EnquiriesPage() {
                     <tr
                       key={item._id}
                       style={{
-                        borderBottom: "1px solid var(--border-color, rgba(255,255,255,0.05))",
+                        borderBottom: "1px solid var(--border)",
                         cursor: "pointer",
-                        background: item.status === "new" ? "rgba(59, 130, 246, 0.04)" : "transparent",
+                        background: item.status === "new" ? "rgba(2, 132, 199, 0.04)" : "transparent",
                       }}
                       onClick={() => openDetailModal(item)}
                     >
                       <td style={{ padding: "14px 16px" }}>
-                        <strong style={{ display: "block", color: "inherit" }}>{item.name}</strong>
-                        <span style={{ fontSize: "0.8rem", color: "#94a3b8" }}>{item.email}</span>
+                        <strong style={{ display: "block", color: "var(--text)" }}>{item.name}</strong>
+                        <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{item.email}</span>
                       </td>
                       <td style={{ padding: "14px 16px" }}>
-                        <span style={{ padding: "4px 8px", borderRadius: "6px", background: "rgba(255,255,255,0.08)", fontSize: "0.8rem" }}>
+                        <span style={{ padding: "4px 8px", borderRadius: "6px", background: "var(--bg-elev-2)", color: "var(--text)", fontSize: "0.8rem" }}>
                           {item.enquiryType}
                         </span>
                       </td>
                       <td style={{ padding: "14px 16px" }}>
-                        <div style={{ fontWeight: "500" }}>{item.topic || "—"}</div>
-                        <div style={{ fontSize: "0.8rem", color: "#94a3b8" }}>{item.degree || ""}</div>
+                        <div style={{ fontWeight: "500", color: "var(--text)" }}>{item.topic || "—"}</div>
+                        <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{item.degree || ""}</div>
                       </td>
-                      <td style={{ padding: "14px 16px", color: "#94a3b8", fontSize: "0.85rem" }}>
+                      <td style={{ padding: "14px 16px", color: "var(--text-muted)", fontSize: "0.85rem" }}>
                         {formatDistanceToNow(new Date(item.createdAt), { addSuffix: true })}
                       </td>
                       <td style={{ padding: "14px 16px" }}>
@@ -323,9 +331,9 @@ function EnquiriesPage() {
                           style={{
                             padding: "6px 12px",
                             borderRadius: "6px",
-                            border: "1px solid var(--border-color, rgba(255,255,255,0.2))",
-                            background: "transparent",
-                            color: "inherit",
+                            border: "1px solid var(--border)",
+                            background: "var(--bg-elev-2)",
+                            color: "var(--text)",
                             cursor: "pointer",
                             fontSize: "0.8rem",
                             marginRight: "8px",
@@ -340,7 +348,7 @@ function EnquiriesPage() {
                             borderRadius: "6px",
                             border: "1px solid rgba(239,68,68,0.3)",
                             background: "rgba(239,68,68,0.1)",
-                            color: "#ef4444",
+                            color: "var(--danger, #ef4444)",
                             cursor: "pointer",
                             fontSize: "0.8rem",
                           }}
@@ -362,17 +370,17 @@ function EnquiriesPage() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((p) => Math.max(p - 1, 1))}
-              style={{ padding: "6px 14px", borderRadius: "6px", cursor: page <= 1 ? "not-allowed" : "pointer" }}
+              style={{ padding: "6px 14px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--surface)", color: "var(--text)", cursor: page <= 1 ? "not-allowed" : "pointer" }}
             >
               Previous
             </button>
-            <span style={{ alignSelf: "center", fontSize: "0.85rem", color: "#94a3b8" }}>
+            <span style={{ alignSelf: "center", fontSize: "0.85rem", color: "var(--text-muted)" }}>
               Page {page} of {totalPages}
             </span>
             <button
               disabled={page >= totalPages}
               onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-              style={{ padding: "6px 14px", borderRadius: "6px", cursor: page >= totalPages ? "not-allowed" : "pointer" }}
+              style={{ padding: "6px 14px", borderRadius: "6px", border: "1px solid var(--border)", background: "var(--surface)", color: "var(--text)", cursor: page >= totalPages ? "not-allowed" : "pointer" }}
             >
               Next
             </button>
@@ -381,35 +389,13 @@ function EnquiriesPage() {
 
         {/* Enquiry Detail Modal */}
         {selectedEnquiry && (
-          <div
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 1000,
-              background: "rgba(0, 0, 0, 0.7)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "20px",
-            }}
-            onClick={() => setSelectedEnquiry(null)}
+          <Modal
+            isOpen={Boolean(selectedEnquiry)}
+            onClose={() => setSelectedEnquiry(null)}
+            title={`Enquiry: ${selectedEnquiry.name}`}
           >
-            <div
-              style={{
-                background: "var(--card-bg, #0f172a)",
-                color: "#f8fafc",
-                border: "1px solid var(--border-color, rgba(255,255,255,0.15))",
-                borderRadius: "16px",
-                width: "100%",
-                maxWidth: "640px",
-                maxHeight: "90vh",
-                overflowY: "auto",
-                padding: "28px",
-                boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "20px" }}>
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
                 <div>
                   <span
                     style={{
@@ -423,42 +409,37 @@ function EnquiriesPage() {
                   >
                     {selectedEnquiry.status}
                   </span>
-                  <h2 style={{ margin: "8px 0 2px", fontSize: "1.4rem" }}>{selectedEnquiry.name}</h2>
-                  <a href={`mailto:${selectedEnquiry.email}`} style={{ color: "#38bdf8", textDecoration: "none", fontSize: "0.9rem" }}>
+                  <h3 style={{ margin: "8px 0 2px", fontSize: "1.25rem", color: "var(--text)" }}>{selectedEnquiry.name}</h3>
+                  <a href={`mailto:${selectedEnquiry.email}`} style={{ color: "var(--primary)", textDecoration: "none", fontSize: "0.9rem" }}>
                     {selectedEnquiry.email}
                   </a>
                 </div>
-                <button
-                  onClick={() => setSelectedEnquiry(null)}
-                  style={{ background: "none", border: "none", color: "#94a3b8", fontSize: "1.5rem", cursor: "pointer" }}
-                >
-                  &times;
-                </button>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px", background: "rgba(255,255,255,0.03)", padding: "12px", borderRadius: "8px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px", background: "var(--bg-elev-2)", padding: "12px", borderRadius: "8px", border: "1px solid var(--border)" }}>
                 <div>
-                  <span style={{ fontSize: "0.75rem", color: "#94a3b8", display: "block" }}>ENQUIRY TYPE</span>
-                  <strong>{selectedEnquiry.enquiryType}</strong>
+                  <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block" }}>ENQUIRY TYPE</span>
+                  <strong style={{ color: "var(--text)" }}>{selectedEnquiry.enquiryType}</strong>
                 </div>
                 <div>
-                  <span style={{ fontSize: "0.75rem", color: "#94a3b8", display: "block" }}>PROGRAMME / DEGREE</span>
-                  <span>{selectedEnquiry.degree || "Not specified"}</span>
+                  <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block" }}>PROGRAMME / DEGREE</span>
+                  <span style={{ color: "var(--text)" }}>{selectedEnquiry.degree || "Not specified"}</span>
                 </div>
                 <div style={{ gridColumn: "1 / -1" }}>
-                  <span style={{ fontSize: "0.75rem", color: "#94a3b8", display: "block" }}>RESEARCH TOPIC</span>
-                  <span>{selectedEnquiry.topic || "Not specified"}</span>
+                  <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block" }}>RESEARCH TOPIC</span>
+                  <span style={{ color: "var(--text)" }}>{selectedEnquiry.topic || "Not specified"}</span>
                 </div>
               </div>
 
               <div style={{ marginBottom: "20px" }}>
-                <span style={{ fontSize: "0.75rem", color: "#94a3b8", display: "block", marginBottom: "6px" }}>MESSAGE BODY</span>
+                <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block", marginBottom: "6px" }}>MESSAGE BODY</span>
                 <div
                   style={{
                     padding: "16px",
                     borderRadius: "8px",
-                    background: "rgba(0,0,0,0.3)",
-                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "var(--bg-elev-2)",
+                    border: "1px solid var(--border)",
+                    color: "var(--text)",
                     fontSize: "0.95rem",
                     lineHeight: "1.6",
                     whiteSpace: "pre-wrap",
@@ -470,7 +451,7 @@ function EnquiriesPage() {
 
               {/* Status Change Buttons */}
               <div style={{ marginBottom: "20px" }}>
-                <span style={{ fontSize: "0.75rem", color: "#94a3b8", display: "block", marginBottom: "8px" }}>UPDATE STATUS</span>
+                <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block", marginBottom: "8px" }}>UPDATE STATUS</span>
                 <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                   {["new", "read", "replied", "archived"].map((st) => (
                     <button
@@ -480,12 +461,13 @@ function EnquiriesPage() {
                       style={{
                         padding: "6px 12px",
                         borderRadius: "6px",
-                        border: selectedEnquiry.status === st ? "2px solid #38bdf8" : "1px solid rgba(255,255,255,0.15)",
-                        background: selectedEnquiry.status === st ? "rgba(56,189,248,0.15)" : "transparent",
-                        color: "inherit",
+                        border: selectedEnquiry.status === st ? "2px solid var(--primary)" : "1px solid var(--border)",
+                        background: selectedEnquiry.status === st ? "rgba(2, 132, 199, 0.15)" : "var(--bg-elev-2)",
+                        color: selectedEnquiry.status === st ? "var(--primary)" : "var(--text)",
                         cursor: selectedEnquiry.status === st ? "default" : "pointer",
                         fontSize: "0.8rem",
                         textTransform: "capitalize",
+                        fontWeight: selectedEnquiry.status === st ? "700" : "500",
                       }}
                     >
                       Mark as {st}
@@ -496,7 +478,7 @@ function EnquiriesPage() {
 
               {/* Admin Notes Box */}
               <div style={{ marginBottom: "20px" }}>
-                <span style={{ fontSize: "0.75rem", color: "#94a3b8", display: "block", marginBottom: "6px" }}>ADMIN NOTES (INTERNAL ONLY)</span>
+                <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block", marginBottom: "6px" }}>ADMIN NOTES (INTERNAL ONLY)</span>
                 <textarea
                   rows={3}
                   value={adminNotesInput}
@@ -506,10 +488,11 @@ function EnquiriesPage() {
                     width: "100%",
                     padding: "10px",
                     borderRadius: "6px",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    background: "transparent",
-                    color: "inherit",
+                    border: "1px solid var(--border)",
+                    background: "var(--bg-elev-2)",
+                    color: "var(--text)",
                     fontSize: "0.85rem",
+                    outline: "none",
                   }}
                 />
                 <button
@@ -519,11 +502,12 @@ function EnquiriesPage() {
                     marginTop: "8px",
                     padding: "6px 14px",
                     borderRadius: "6px",
-                    background: "rgba(255,255,255,0.1)",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    color: "inherit",
+                    background: "var(--primary)",
+                    border: "none",
+                    color: "#ffffff",
                     cursor: "pointer",
                     fontSize: "0.8rem",
+                    fontWeight: "600",
                   }}
                 >
                   Save Internal Notes
@@ -531,20 +515,20 @@ function EnquiriesPage() {
               </div>
 
               {/* Footer Actions */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "16px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "16px", borderTop: "1px solid var(--border)" }}>
                 <a
                   href={`mailto:${selectedEnquiry.email}?subject=Re: ${encodeURIComponent(selectedEnquiry.topic || selectedEnquiry.enquiryType || 'SSA Lab Enquiry')}`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => handleUpdateStatus(selectedEnquiry._id, "replied")}
                   style={{
-                    padding: "10px 20px",
+                    padding: "8px 18px",
                     borderRadius: "8px",
-                    background: "#0284c7",
+                    background: "var(--primary)",
                     color: "#ffffff",
                     textDecoration: "none",
                     fontWeight: "600",
-                    fontSize: "0.9rem",
+                    fontSize: "0.875rem",
                     display: "inline-block",
                   }}
                 >
@@ -555,48 +539,36 @@ function EnquiriesPage() {
                   style={{
                     padding: "8px 16px",
                     borderRadius: "8px",
-                    background: "transparent",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    color: "inherit",
+                    background: "var(--bg-elev-2)",
+                    border: "1px solid var(--border)",
+                    color: "var(--text)",
                     cursor: "pointer",
+                    fontSize: "0.875rem",
                   }}
                 >
                   Close
                 </button>
               </div>
             </div>
-          </div>
+          </Modal>
         )}
 
         {/* Delete Confirmation Modal */}
         {deleteTarget && (
-          <div
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 1100,
-              background: "rgba(0, 0, 0, 0.75)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "20px",
-            }}
+          <Modal
+            isOpen={Boolean(deleteTarget)}
+            onClose={() => setDeleteTarget(null)}
+            title="Delete Enquiry"
+            onConfirm={() => handleDeleteEnquiry(deleteTarget._id)}
+            confirmText="Delete Permanently"
+            confirmVariant="danger"
+            variant="danger"
+            cancelText="Cancel"
           >
-            <div style={{ background: "#0f172a", border: "1px solid rgba(239,68,68,0.4)", borderRadius: "12px", padding: "24px", maxWidth: "420px", width: "100%" }}>
-              <h3 style={{ margin: "0 0 8px", color: "#ef4444" }}>Delete Enquiry?</h3>
-              <p style={{ margin: "0 0 20px", fontSize: "0.9rem", color: "#94a3b8" }}>
-                Are you sure you want to permanently delete the enquiry from <strong>{deleteTarget.name}</strong>? This action cannot be undone.
-              </p>
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-                <button onClick={() => setDeleteTarget(null)} style={{ padding: "8px 16px", borderRadius: "6px", background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "inherit", cursor: "pointer" }}>
-                  Cancel
-                </button>
-                <button onClick={() => handleDeleteEnquiry(deleteTarget._id)} style={{ padding: "8px 16px", borderRadius: "6px", background: "#ef4444", border: "none", color: "#ffffff", fontWeight: "600", cursor: "pointer" }}>
-                  Delete Permanently
-                </button>
-              </div>
-            </div>
-          </div>
+            <p style={{ margin: 0, fontSize: "0.95rem", color: "var(--text)", lineHeight: "1.5" }}>
+              Are you sure you want to permanently delete the enquiry from <strong>{deleteTarget.name}</strong> ({deleteTarget.email})? This action cannot be undone.
+            </p>
+          </Modal>
         )}
       </div>
     </AdminLayout>

@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]";
 import dbConnect from "../../../../lib/mongoose";
-import Article from "../../../../models/Article";
 import Project from "../../../../models/Project";
+import FypProject from "../../../../models/FypProject";
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -25,8 +25,8 @@ export default async function handler(req, res) {
           ? new Date(now.getTime() - rangeDays * 24 * 60 * 60 * 1000)
           : null;
 
-      const articleStats = await Article.aggregate([
-        { $group: { _id: "$published", count: { $sum: 1 } } },
+      const fypStats = await FypProject.aggregate([
+        { $group: { _id: "$status", count: { $sum: 1 } } },
       ]);
 
       const projectStats = await Project.aggregate([
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       const dateMatch = fromDate
         ? { $match: { createdAt: { $gte: fromDate } } }
         : null;
-      const articlesByDate = await Article.aggregate([
+      const fypByDate = await FypProject.aggregate([
         ...(dateMatch ? [dateMatch] : []),
         {
           $group: {
@@ -58,19 +58,19 @@ export default async function handler(req, res) {
       ]);
 
       // KPIs
-      const [totalArticles, totalProjects] = await Promise.all([
-        Article.countDocuments(
+      const [totalFyp, totalProjects] = await Promise.all([
+        FypProject.countDocuments(
           fromDate ? { createdAt: { $gte: fromDate } } : {},
         ),
         Project.countDocuments(
           fromDate ? { createdAt: { $gte: fromDate } } : {},
         ),
       ]);
-      const [publishedArticles, publishedProjects] = await Promise.all([
-        Article.countDocuments(
+      const [completedFyp, publishedProjects] = await Promise.all([
+        FypProject.countDocuments(
           fromDate
-            ? { published: true, createdAt: { $gte: fromDate } }
-            : { published: true },
+            ? { status: "Completed", createdAt: { $gte: fromDate } }
+            : { status: "Completed" },
         ),
         Project.countDocuments(
           fromDate
@@ -80,12 +80,6 @@ export default async function handler(req, res) {
       ]);
 
       // Tag breakdowns
-      const articleTags = await Article.aggregate([
-        { $unwind: { path: "$tags", preserveNullAndEmptyArrays: false } },
-        { $group: { _id: "$tags", count: { $sum: 1 } } },
-        { $sort: { count: -1 } },
-        { $limit: 12 },
-      ]);
       const projectTags = await Project.aggregate([
         { $unwind: { path: "$tags", preserveNullAndEmptyArrays: false } },
         { $group: { _id: "$tags", count: { $sum: 1 } } },
@@ -99,26 +93,16 @@ export default async function handler(req, res) {
         { $sort: { count: -1 } },
       ]);
 
-      // Top viewed
+      // Top viewed projects
       const topViewedFilter = fromDate ? { createdAt: { $gte: fromDate } } : {};
-      const topViewedArticles = await Article.find(topViewedFilter)
-        .sort({ views: -1 })
-        .limit(5)
-        .select("title slug views createdAt")
-        .lean();
       const topViewedProjects = await Project.find(topViewedFilter)
         .sort({ views: -1 })
         .limit(5)
         .select("title slug views createdAt")
         .lean();
 
-      // Recent
+      // Recent projects
       const recentFilter = fromDate ? { createdAt: { $gte: fromDate } } : {};
-      const recentArticles = await Article.find(recentFilter)
-        .sort({ createdAt: -1 })
-        .limit(5)
-        .select("title slug createdAt published")
-        .lean();
       const recentProjects = await Project.find(recentFilter)
         .sort({ createdAt: -1 })
         .limit(5)
@@ -128,22 +112,22 @@ export default async function handler(req, res) {
       res.status(200).json({
         success: true,
         data: {
-          articleStats,
+          articleStats: fypStats,
           projectStats,
-          articlesByDate,
+          articlesByDate: fypByDate,
           projectsByDate,
           kpis: {
-            totalArticles,
+            totalArticles: totalFyp,
             totalProjects,
-            publishedArticles,
+            publishedArticles: completedFyp,
             publishedProjects,
           },
-          articleTags,
+          articleTags: projectTags,
           projectTags,
           projectCategories,
-          topViewedArticles,
+          topViewedArticles: topViewedProjects,
           topViewedProjects,
-          recentArticles,
+          recentArticles: recentProjects,
           recentProjects,
         },
       });

@@ -80,12 +80,12 @@ const AnalyticsPage = () => {
     if (!stats) return {};
 
     const articleStatusData = {
-      labels: stats.articleStats.map((s) => (s._id ? "Published" : "Draft")),
+      labels: stats.articleStats.map((s) => (s._id || "In Progress")),
       datasets: [
         {
-          label: "Articles by Status",
+          label: "FYP Projects by Status",
           data: stats.articleStats.map((s) => s.count),
-          backgroundColor: ["#3b82f6", "#94a3b8"],
+          backgroundColor: ["#3b82f6", "#94a3b8", "#10b981"],
         },
       ],
     };
@@ -105,7 +105,7 @@ const AnalyticsPage = () => {
       labels: stats.articlesByDate.map((d) => d._id),
       datasets: [
         {
-          label: "Articles Created Over Time",
+          label: "FYP Supervisions Over Time",
           data: stats.articlesByDate.map((d) => d.count),
           borderColor: "#3b82f6",
           backgroundColor: "rgba(59, 130, 246, 0.1)",
@@ -145,7 +145,7 @@ const AnalyticsPage = () => {
       labels: combinedLabels,
       datasets: [
         {
-          label: "Articles",
+          label: "FYP Projects",
           data: combinedLabels.map((d) => articleCountByDate.get(d) || 0),
           borderColor: "#3b82f6",
           backgroundColor: "rgba(59, 130, 246, 0.1)",
@@ -431,7 +431,7 @@ const AnalyticsPage = () => {
           >
             <div className={styles.kpiTitle}>
               <Icon name="file-text" size={16} />
-              Total Articles
+              Supervised FYPs
             </div>
             <div className={styles.kpiRow}>
               <h3 className={styles.kpiValue}>
@@ -470,7 +470,7 @@ const AnalyticsPage = () => {
           >
             <div className={styles.kpiTitle}>
               <Icon name="check-circle" size={16} />
-              Published Articles
+              Completed FYPs
             </div>
             <div className={styles.kpiRow}>
               <h3 className={styles.kpiValue}>
@@ -613,13 +613,13 @@ const AnalyticsPage = () => {
           >
             <h3 className={styles.chartHeader}>
               <Icon name="pie-chart" size={20} />
-              Articles by Status
+              FYP Projects by Status
             </h3>
             <div className={styles.chartContainer}>
               {articleStatusData ? <DoughnutChart data={articleStatusData} /> : (
                 <div className={styles.emptyState}>
                   <Icon name="file-text" size={48} />
-                  <p>No article data available</p>
+                  <p>No FYP data available</p>
                 </div>
               )}
             </div>
@@ -649,7 +649,7 @@ const AnalyticsPage = () => {
           >
             <h3 className={styles.chartHeader}>
               <Icon name="bar-chart" size={20} />
-              Articles vs Projects (Combined Trend)
+              FYP vs Research Projects (Combined Trend)
             </h3>
             <div className={styles.chartContainer}>
               {combinedTrendData ? <LineChart data={combinedTrendData} /> : (
@@ -667,13 +667,13 @@ const AnalyticsPage = () => {
           >
             <h3 className={styles.chartHeader}>
               <Icon name="bar-chart" size={20} />
-              Article Creation Trend
+              FYP Supervisions Trend
             </h3>
             <div className={styles.chartContainer}>
               {articlesTrendData ? <LineChart data={articlesTrendData} /> : (
                 <div className={styles.emptyState}>
                   <Icon name="file-text" size={48} />
-                  <p>No article trend data available</p>
+                  <p>No FYP trend data available</p>
                 </div>
               )}
             </div>
@@ -740,21 +740,21 @@ const AnalyticsPage = () => {
               <div className={styles.twoCol}>
                 <div className={styles.column}>
                   <h4 className={styles.subTitle}>
-                    <Icon name="file-text" size={16} />
-                    Articles
+                    <Icon name="briefcase" size={16} />
+                    Top Viewed Projects
                   </h4>
                   <div className={styles.listContainer}>
                     {stats?.topViewedArticles?.length > 0 ? (
                       <ul className={styles.list}>
                         {stats?.topViewedArticles?.map((a) => (
                           <motion.li
-                            key={a.slug}
+                            key={a.slug || a._id}
                             className={styles.listItem}
-                            onClick={() => router.push(`/admin/articles/edit/${a._id || a.id}`)}
+                            onClick={() => router.push(`/admin/projects/edit/${a._id || a.id}`)}
                             whileHover={{ x: 10 }}
                             whileTap={{ scale: 0.98 }}
                           >
-                            <Icon name="file-text" size={14} />
+                            <Icon name="briefcase" size={14} />
                             <div>
                               <div>{a.title}</div>
                               <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
@@ -766,8 +766,8 @@ const AnalyticsPage = () => {
                       </ul>
                     ) : (
                       <div className={styles.emptyState}>
-                        <Icon name="file-text" size={48} />
-                        <p>No articles found</p>
+                        <Icon name="briefcase" size={48} />
+                        <p>No projects found</p>
                       </div>
                     )}
                   </div>
@@ -775,14 +775,14 @@ const AnalyticsPage = () => {
                 <div className={styles.column}>
                   <h4 className={styles.subTitle}>
                     <Icon name="briefcase" size={16} />
-                    Projects
+                    Active Showcase
                   </h4>
                   <div className={styles.listContainer}>
                     {stats?.topViewedProjects?.length > 0 ? (
                       <ul className={styles.list}>
                         {stats?.topViewedProjects?.map((p) => (
                           <motion.li
-                            key={p.slug}
+                            key={p.slug || p._id}
                             className={styles.listItem}
                             onClick={() => router.push(`/admin/projects/edit/${p._id || p.id}`)}
                             whileHover={{ x: 10 }}
@@ -824,21 +824,21 @@ const AnalyticsPage = () => {
               <div className={styles.twoCol}>
                 <div className={styles.column}>
                   <h4 className={styles.subTitle}>
-                    <Icon name="file-text" size={16} />
-                    Articles
+                    <Icon name="briefcase" size={16} />
+                    Recent Projects
                   </h4>
                   <div className={styles.listContainer}>
                     {stats?.recentArticles?.length > 0 ? (
                       <ul className={styles.list}>
                         {stats?.recentArticles?.map((a) => (
                           <motion.li
-                            key={a.slug}
+                            key={a.slug || a._id}
                             className={styles.listItem}
-                            onClick={() => router.push(`/admin/articles/edit/${a._id || a.id}`)}
+                            onClick={() => router.push(`/admin/projects/edit/${a._id || a.id}`)}
                             whileHover={{ x: 10 }}
                             whileTap={{ scale: 0.98 }}
                           >
-                            <Icon name="file-text" size={14} />
+                            <Icon name="briefcase" size={14} />
                             <div>
                               <div>{a.title}</div>
                               <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
@@ -856,8 +856,8 @@ const AnalyticsPage = () => {
                       </ul>
                     ) : (
                       <div className={styles.emptyState}>
-                        <Icon name="file-text" size={48} />
-                        <p>No recent articles</p>
+                        <Icon name="briefcase" size={48} />
+                        <p>No recent projects</p>
                       </div>
                     )}
                   </div>
@@ -922,9 +922,9 @@ const AnalyticsPage = () => {
                   <motion.span
                     key={t._id}
                     onClick={() =>
-                      router.push(`/insights?tag=${encodeURIComponent(t._id)}`)
+                      router.push(`/projects?tag=${encodeURIComponent(t._id)}`)
                     }
-                    title="View articles with this tag"
+                    title="View projects with this tag"
                     className={`${styles.chip} ${styles.chipActive}`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -935,7 +935,7 @@ const AnalyticsPage = () => {
                 ))
               ) : (
                 <div className={styles.emptyState}>
-                  <p>No article tags found</p>
+                  <p>No project tags found</p>
                 </div>
               )}
             </div>

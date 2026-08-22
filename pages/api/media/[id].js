@@ -3,6 +3,7 @@ import { authOptions } from "../auth/[...nextauth]";
 import dbConnect from "../../../lib/mongoose";
 import MediaAsset from "../../../models/MediaAsset";
 import mongoose from "mongoose";
+import { createAuditLog } from "../../../lib/auditLog";
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -32,6 +33,15 @@ export default async function handler(req, res) {
         if (!updatedAsset) {
           return res.status(404).json({ message: "Asset not found" });
         }
+
+        await createAuditLog({
+          session,
+          action: "update",
+          entity: "MediaAsset",
+          entityId: id,
+          details: `Updated metadata for media: ${updatedAsset.filename}`,
+        });
+
         res
           .status(200)
           .json({ message: "Asset updated successfully", asset: updatedAsset });
@@ -72,6 +82,14 @@ export default async function handler(req, res) {
         }
 
         await MediaAsset.findByIdAndDelete(id);
+
+        await createAuditLog({
+          session,
+          action: "delete",
+          entity: "MediaAsset",
+          entityId: id,
+          details: `Deleted media asset: ${asset.filename}`,
+        });
 
         res.status(200).json({ message: "Asset deleted successfully" });
       } catch (error) {

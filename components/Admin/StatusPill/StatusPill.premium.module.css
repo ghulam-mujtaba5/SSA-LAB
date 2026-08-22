@@ -91,7 +91,7 @@
 .scheduled {
   background: rgba(2, 132, 199, 0.1);
   border-color: rgba(2, 132, 199, 0.3);
-  color: #0284c7;
+  color: #0369a1;
 }
 
 [data-theme="dark"] .scheduled {

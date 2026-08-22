@@ -5,13 +5,9 @@ import User from "../../../models/User";
 
 const handler = async (req, res) => {
   const { method } = req;
-  try {
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-    if (!token || !["admin", "editor"].includes(token.role)) {
-      return res.status(403).json({ success: false, message: "Forbidden" });
-    }
-  } catch (e) {
-    return res.status(401).json({ success: false, message: "Unauthorized" });
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  if (!token || !["admin", "editor"].includes(token.role)) {
+    return res.status(403).json({ success: false, message: "Forbidden" });
   }
 
   try {
@@ -25,20 +21,12 @@ const handler = async (req, res) => {
     });
   }
 
-  // Default to configured ADMIN_EMAIL user; fallback to token.id if available
-  let userId;
-  try {
-    const adminUser = await User.findOne({ email: process.env.ADMIN_EMAIL });
-    userId = adminUser?._id;
-  } catch {}
-  if (!userId) {
+  // Bind directly to authenticated user's ID
+  let userId = token.id || token.sub;
+  if (!userId && token.email) {
     try {
-      const token = await getToken({
-        req,
-        secret: process.env.NEXTAUTH_SECRET,
-      });
-      // next-auth jwt typically has sub as user id
-      userId = token?.id || token?.sub || null;
+      const dbUser = await User.findOne({ email: token.email });
+      userId = dbUser?._id;
     } catch {}
   }
   if (!userId) {

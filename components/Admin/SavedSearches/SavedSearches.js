@@ -204,7 +204,6 @@ const SavedSearches = ({ scope }) => {
         isOpen={confirmOpen}
         onClose={() => setConfirmOpen(false)}
         title="Delete saved search?"
-        initialFocusRef={confirmDeleteBtnRef}
         onConfirm={() => {
           if (confirmTargetId) {
             handleDeleteSearch(confirmTargetId);
@@ -213,6 +212,8 @@ const SavedSearches = ({ scope }) => {
           setConfirmTargetId(null);
         }}
         confirmText="Delete"
+        confirmVariant="danger"
+        variant="danger"
         cancelText="Cancel"
       >
         <p>This action cannot be undone.</p>

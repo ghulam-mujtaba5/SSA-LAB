@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 import styles from "./GalleryManager.premium.module.css";
 
 const GalleryManager = ({ gallery = [], onChange, maxImages = 20, contextTitle = "" }) => {
@@ -18,7 +19,7 @@ const GalleryManager = ({ gallery = [], onChange, maxImages = 20, contextTitle =
     const filesToUpload = files.slice(0, remainingSlots);
 
     if (filesToUpload.length === 0) {
-      alert(`Maximum ${maxImages} images allowed.`);
+      toast.warning(`Maximum ${maxImages} images allowed.`);
       return;
     }
 
@@ -66,7 +67,7 @@ const GalleryManager = ({ gallery = [], onChange, maxImages = 20, contextTitle =
       onChange(updatedGallery);
     } catch (error) {
       console.error("Upload error:", error);
-      alert(
+      toast.error(
         `Failed to upload one or more images: ${error.message || "Please try again."}`,
       );
     } finally {
@@ -84,7 +85,7 @@ const GalleryManager = ({ gallery = [], onChange, maxImages = 20, contextTitle =
     if (!urlInput.trim()) return;
 
     if (gallery.length >= maxImages) {
-      alert(`Maximum ${maxImages} images allowed.`);
+      toast.warning(`Maximum ${maxImages} images allowed.`);
       return;
     }
 

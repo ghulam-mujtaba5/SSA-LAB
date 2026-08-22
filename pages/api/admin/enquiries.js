@@ -1,6 +1,7 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../../lib/mongoose";
 import Enquiry from "../../../models/Enquiry";
+import { createAuditLog } from "../../../lib/auditLog";
 
 export default async function handler(req, res) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
@@ -23,11 +24,12 @@ export default async function handler(req, res) {
 
       const query = {};
       if (search) {
+        const sanitizedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         query.$or = [
-          { name: { $regex: search, $options: "i" } },
-          { email: { $regex: search, $options: "i" } },
-          { topic: { $regex: search, $options: "i" } },
-          { message: { $regex: search, $options: "i" } },
+          { name: { $regex: sanitizedSearch, $options: "i" } },
+          { email: { $regex: sanitizedSearch, $options: "i" } },
+          { topic: { $regex: sanitizedSearch, $options: "i" } },
+          { message: { $regex: sanitizedSearch, $options: "i" } },
         ];
       }
 
@@ -107,6 +109,14 @@ export default async function handler(req, res) {
         return res.status(404).json({ success: false, message: "Enquiry not found." });
       }
 
+      await createAuditLog({
+        session: token,
+        action: "update",
+        entity: "Enquiry",
+        entityId: id,
+        details: `Updated enquiry ${id}: status=${status || updatedEnquiry.status}${typeof adminNotes === "string" ? " (notes updated)" : ""}`,
+      });
+
       return res.status(200).json({
         success: true,
         message: "Enquiry updated successfully.",
@@ -131,6 +141,14 @@ export default async function handler(req, res) {
       if (!deleted) {
         return res.status(404).json({ success: false, message: "Enquiry not found." });
       }
+
+      await createAuditLog({
+        session: token,
+        action: "delete",
+        entity: "Enquiry",
+        entityId: id,
+        details: `Deleted enquiry from ${deleted.email || deleted.name || id}`,
+      });
 
       return res.status(200).json({
         success: true,

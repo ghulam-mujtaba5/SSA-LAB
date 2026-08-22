@@ -559,8 +559,9 @@ const ProjectsPage = () => {
           onClose={() => setConfirmState({ open: false, type: null, payload: null })}
           title={confirmState.type === "bulk-action" ? "Confirm Bulk Action" : "Delete Project"}
           onConfirm={onConfirm}
-          initialFocusRef={confirmBtnRef}
           confirmText={confirmState.type === "bulk-action" ? "Confirm" : "Delete"}
+          confirmVariant={confirmState.type === "bulk-action" && confirmState.payload?.action !== "delete" ? "primary" : "danger"}
+          variant={confirmState.type === "bulk-action" && confirmState.payload?.action !== "delete" ? "primary" : "danger"}
           cancelText="Cancel"
         >
           {confirmState.type === "bulk-action" ? (

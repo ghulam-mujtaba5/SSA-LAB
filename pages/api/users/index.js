@@ -25,27 +25,40 @@ const handler = async (req, res) => {
 
     case "POST":
       try {
-        const { name, email, password, role } = req.body;
+        const { name, username, email, password, role, isActive } = req.body;
         if (!name || !email || !password) {
           return res
             .status(400)
             .json({ error: "Name, email, and password are required" });
         }
 
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
+        const normalizedEmail = email.trim().toLowerCase();
+        const existingEmail = await User.findOne({ email: normalizedEmail });
+        if (existingEmail) {
           return res
             .status(409)
             .json({ error: "User with this email already exists" });
         }
 
+        const cleanUsername = (username || name.toLowerCase().replace(/\s+/g, "_")).trim().toLowerCase();
+        if (cleanUsername) {
+          const existingUsername = await User.findOne({ username: cleanUsername });
+          if (existingUsername) {
+            return res
+              .status(409)
+              .json({ error: "Username is already in use. Please choose another." });
+          }
+        }
+
         const hashedPassword = await bcrypt.hash(password, 12);
 
         const newUser = new User({
-          name,
-          email,
+          name: name.trim(),
+          username: cleanUsername,
+          email: normalizedEmail,
           password: hashedPassword,
           role: role || "editor",
+          isActive: typeof isActive !== "undefined" ? Boolean(isActive) : true,
         });
 
         await newUser.save();
@@ -56,14 +69,14 @@ const handler = async (req, res) => {
           action: "create",
           entity: "User",
           entityId: newUser._id.toString(),
-          details: `User created: ${newUser.email}`,
+          details: `User created: ${newUser.email} (@${newUser.username})`,
         });
 
         res
           .status(201)
           .json({ message: "User created successfully", user: newUser });
       } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: error?.message || "Internal Server Error" });
       }
       break;
 

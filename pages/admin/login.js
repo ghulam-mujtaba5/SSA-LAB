@@ -10,7 +10,7 @@ import { getServerSession } from "next-auth/next";
 import { useTheme } from "../../context/ThemeContext";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -31,7 +31,8 @@ export default function LoginPage() {
 
     const result = await signIn("credentials", {
       redirect: false,
-      email,
+      username: identifier,
+      email: identifier,
       password,
     });
 
@@ -115,22 +116,22 @@ export default function LoginPage() {
             transition={{ duration: 0.3, delay: 0.4 }}
           >
             <div className={styles.inputGroup}>
-              <label htmlFor="email" className={`${styles.label}`}>
-                Email Address
+              <label htmlFor="identifier" className={`${styles.label}`}>
+                Username or Email
               </label>
               <div className={styles.inputWrapper}>
                 <svg className={styles.inputIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
                 </svg>
                 <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  id="identifier"
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
                   required
                   autoComplete="username"
-                  placeholder="you@example.com"
+                  placeholder="admin or admin@example.com"
                   className={`${styles.input} ${styles.inputWithIcon}`}
                 />
               </div>

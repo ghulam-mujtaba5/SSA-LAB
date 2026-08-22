@@ -51,11 +51,13 @@ const DeleteConfirmModal = ({ user, onCancel, onConfirm, isDeleting }) => {
 
 // Edit User Modal Component
 const EditUserModal = ({ user, onClose, onUserUpdate }) => {
-  
   const nameRef = useRef(null);
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [role, setRole] = useState(user.role);
+  const [name, setName] = useState(user.name || "");
+  const [username, setUsername] = useState(user.username || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [role, setRole] = useState(user.role || "editor");
+  const [isActive, setIsActive] = useState(user.isActive !== false);
+  const [password, setPassword] = useState("");
 
   const [saving, setSaving] = useState(false);
   const handleUpdate = async (e) => {
@@ -63,10 +65,14 @@ const EditUserModal = ({ user, onClose, onUserUpdate }) => {
     const toastId = toast.loading("Updating user...");
     try {
       setSaving(true);
+      const payload = { name, username, email, role, isActive };
+      if (password.trim()) {
+        payload.password = password.trim();
+      }
       const res = await fetch(`/api/users/${user._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, role }),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to update user");
@@ -96,7 +102,7 @@ const EditUserModal = ({ user, onClose, onUserUpdate }) => {
         >
           <div className={commonStyles.formGrid}>
             <div className={commonStyles.formGroup}>
-              <label htmlFor="edit_name" className={commonStyles.formLabel}>Name</label>
+              <label htmlFor="edit_name" className={commonStyles.formLabel}>Full Name</label>
               <input
                 type="text"
                 value={name}
@@ -105,6 +111,17 @@ const EditUserModal = ({ user, onClose, onUserUpdate }) => {
                 ref={nameRef}
                 className={commonStyles.formControl}
                 required
+              />
+            </div>
+            <div className={commonStyles.formGroup}>
+              <label htmlFor="edit_username" className={commonStyles.formLabel}>Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                id="edit_username"
+                placeholder="e.g. admin"
+                className={commonStyles.formControl}
               />
             </div>
             <div className={commonStyles.formGroup}>
@@ -129,6 +146,32 @@ const EditUserModal = ({ user, onClose, onUserUpdate }) => {
                 <option value="editor">Editor</option>
                 <option value="admin">Admin</option>
               </select>
+            </div>
+            <div className={commonStyles.formGroup}>
+              <label htmlFor="edit_status" className={commonStyles.formLabel}>Account Status</label>
+              <select
+                value={isActive ? "active" : "inactive"}
+                onChange={(e) => setIsActive(e.target.value === "active")}
+                id="edit_status"
+                className={commonStyles.formControl}
+              >
+                <option value="active">Active</option>
+                <option value="inactive">Deactivated</option>
+              </select>
+            </div>
+            <div className={commonStyles.formGroup} style={{ gridColumn: "1 / -1" }}>
+              <label htmlFor="edit_password" className={commonStyles.formLabel}>
+                Reset Password <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontWeight: "normal" }}>(Leave blank to keep unchanged)</span>
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                id="edit_password"
+                placeholder="Enter new password (optional)"
+                className={commonStyles.formControl}
+                autoComplete="new-password"
+              />
             </div>
           </div>
           <div className={commonStyles.actionsRow}>
@@ -164,6 +207,7 @@ const UsersPage = () => {
 
   // Create form state
   const [newName, setNewName] = useState("");
+  const [newUsername, setNewUsername] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newRole, setNewRole] = useState("editor");
@@ -197,8 +241,9 @@ const UsersPage = () => {
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       result = result.filter(user => 
-        user.name.toLowerCase().includes(term) || 
-        user.email.toLowerCase().includes(term)
+        (user.name && user.name.toLowerCase().includes(term)) || 
+        (user.username && user.username.toLowerCase().includes(term)) || 
+        (user.email && user.email.toLowerCase().includes(term))
       );
     }
     
@@ -220,6 +265,7 @@ const UsersPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: newName,
+          username: newUsername,
           email: newEmail,
           password: newPassword,
           role: newRole,
@@ -229,6 +275,7 @@ const UsersPage = () => {
       if (!res.ok) throw new Error(data.error || "Failed to create user");
       toast.success("User created successfully!", { id: toastId });
       setNewName("");
+      setNewUsername("");
       setNewEmail("");
       setNewPassword("");
       setNewRole("editor");
@@ -429,15 +476,26 @@ const UsersPage = () => {
             >
               <div className={commonStyles.formGrid}>
                 <div className={commonStyles.formGroup}>
-                  <label htmlFor="create_name" className={commonStyles.formLabel}>Name</label>
+                  <label htmlFor="create_name" className={commonStyles.formLabel}>Full Name</label>
                   <input
                     type="text"
-                    placeholder="Full Name"
+                    placeholder="e.g. John Doe"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                     id="create_name"
                     className={commonStyles.formControl}
                     required
+                  />
+                </div>
+                <div className={commonStyles.formGroup}>
+                  <label htmlFor="create_username" className={commonStyles.formLabel}>Username</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. jdoe (optional)"
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)}
+                    id="create_username"
+                    className={commonStyles.formControl}
                   />
                 </div>
                 <div className={commonStyles.formGroup}>
@@ -541,13 +599,15 @@ const UsersPage = () => {
                       <th>User</th>
                       <th>Email</th>
                       <th>Role</th>
+                      <th>Status</th>
+                      <th>Last Login</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredUsers.length === 0 ? (
                       <tr>
-                        <td colSpan="4" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
+                        <td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
                           <Icon name="users" size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
                           <p>No users found</p>
                           {(searchTerm || roleFilter) && (
@@ -580,7 +640,12 @@ const UsersPage = () => {
                               >
                                 {user.name.charAt(0).toUpperCase()}
                               </motion.div>
-                              <span>{user.name}</span>
+                              <div>
+                                <span style={{ display: 'block', fontWeight: '600' }}>{user.name}</span>
+                                {user.username && (
+                                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>@{user.username}</span>
+                                )}
+                              </div>
                             </div>
                           </td>
                           <td>{user.email}</td>
@@ -588,6 +653,24 @@ const UsersPage = () => {
                             <span className={`${commonStyles.roleBadge} ${commonStyles[user.role]}`}>
                               {user.role}
                             </span>
+                          </td>
+                          <td>
+                            <span
+                              style={{
+                                display: "inline-flex",
+                                padding: "2px 8px",
+                                borderRadius: "9999px",
+                                fontSize: "0.75rem",
+                                fontWeight: "500",
+                                backgroundColor: user.isActive !== false ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.15)",
+                                color: user.isActive !== false ? "#10b981" : "#ef4444",
+                              }}
+                            >
+                              {user.isActive !== false ? "Active" : "Deactivated"}
+                            </span>
+                          </td>
+                          <td style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                            {user.lastLogin ? new Date(user.lastLogin).toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" }) : "Never"}
                           </td>
                           <td className={commonStyles.actions}>
                             {isDeleting && userToDelete && userToDelete._id === user._id ? (

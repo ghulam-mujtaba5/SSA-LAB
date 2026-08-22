@@ -1,7 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../lib/mongoose";
 import Project from "../../models/Project";
-import Article from "../../models/Article";
 
 export default async function handler(req, res) {
   const { secret, type, id } = req.query;
@@ -23,12 +22,9 @@ export default async function handler(req, res) {
   let content;
   let path;
 
-  if (type === "project") {
+  if (type === "project" || !type) {
     content = await Project.findById(id).lean();
-    path = `/projects/${content.slug}`;
-  } else if (type === "article") {
-    content = await Article.findById(id).lean();
-    path = `/insights/${content.slug}`;
+    path = `/projects/${content?.slug}`;
   } else {
     return res.status(400).json({ message: "Invalid content type" });
   }

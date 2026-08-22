@@ -4,7 +4,7 @@ import styles from "./Dashboard.premium.module.css";
 
 const Dashboard = ({ stats, recentActivity }) => {
   // Default values to prevent errors if props are undefined
-  const safeStats = stats || { articles: 0, projects: 0 };
+  const safeStats = stats || { projects: 0, fypProjects: 0 };
   const safeRecentActivity = recentActivity || [];
 
   return (
@@ -13,12 +13,12 @@ const Dashboard = ({ stats, recentActivity }) => {
 
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <h3>Total Articles</h3>
-          <p>{safeStats.articles}</p>
+          <h3>Research Projects</h3>
+          <p>{safeStats.projects}</p>
         </div>
         <div className={styles.statCard}>
-          <h3>Total Projects</h3>
-          <p>{safeStats.projects}</p>
+          <h3>FYP Supervisions</h3>
+          <p>{safeStats.fypProjects || 0}</p>
         </div>
       </div>
 
@@ -37,14 +37,14 @@ const Dashboard = ({ stats, recentActivity }) => {
 
         <div className={styles.quickActions}>
           <h2>Quick Actions</h2>
-          <Link href="/admin/articles/new" passHref>
-            <button className={styles.quickButton}>
-              New Article
-            </button>
-          </Link>
           <Link href="/admin/projects/new" passHref>
             <button className={styles.quickButton}>
               New Project
+            </button>
+          </Link>
+          <Link href="/admin/fyp/new" passHref>
+            <button className={styles.quickButton}>
+              New FYP Record
             </button>
           </Link>
         </div>

@@ -13,40 +13,59 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        username: { label: "Username or Email", type: "text" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         try {
-          if (!credentials?.email || !credentials?.password) {
+          const identifier = (credentials?.username || credentials?.email || "").trim();
+          const password = credentials?.password;
+
+          if (!identifier || !password) {
             await createAuditLog({
               action: "login_fail",
               entity: "Auth",
-              details: "Missing email or password",
-              actorName: credentials?.email,
+              details: "Missing username/email or password",
+              actorName: identifier || "Anonymous",
             });
-            throw new Error("Please enter an email and password");
+            throw new Error("Please enter your username/email and password");
           }
 
           await dbConnect();
 
-          const normalizedEmail = credentials.email.trim().toLowerCase();
+          const escaped = identifier.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
           const user = await User.findOne({
-            email: { $regex: new RegExp(`^${normalizedEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') },
+            $or: [
+              { email: { $regex: new RegExp(`^${escaped}$`, "i") } },
+              { username: { $regex: new RegExp(`^${escaped}$`, "i") } },
+              { name: { $regex: new RegExp(`^${escaped}$`, "i") } },
+            ],
           }).select("+password");
 
           if (!user) {
             await createAuditLog({
               action: "login_fail",
               entity: "Auth",
-              details: "No user found",
-              actorName: credentials.email,
+              details: "No user found for identifier: " + identifier,
+              actorName: identifier,
             });
-            throw new Error("No user found with this email");
+            throw new Error("No user found with this username or email");
+          }
+
+          if (user.isActive === false) {
+            await createAuditLog({
+              action: "login_fail",
+              entity: "Auth",
+              details: "Deactivated user login attempt: " + identifier,
+              actorId: user._id.toString(),
+              actorName: user.name,
+            });
+            throw new Error("Account has been deactivated. Please contact an administrator.");
           }
 
           const isPasswordMatch = await bcrypt.compare(
-            credentials.password,
+            password,
             user.password,
           );
 
@@ -54,24 +73,31 @@ export const authOptions = {
             await createAuditLog({
               action: "login_fail",
               entity: "Auth",
-              details: "Incorrect password",
+              details: "Incorrect password attempt",
               actorId: user._id.toString(),
               actorName: user.name,
             });
-            throw new Error("Incorrect password");
+            throw new Error("Incorrect password. Please try again.");
           }
+
+          // Record lastLogin timestamp
+          user.lastLogin = new Date();
+          await user.save();
 
           const result = {
             id: user._id.toString(),
             name: user.name,
+            username: user.username || user.name,
             email: user.email,
             role: user.role,
+            isActive: user.isActive !== false,
+            lastLogin: user.lastLogin,
           };
 
           await createAuditLog({
             action: "login_success",
             entity: "Auth",
-            details: "User logged in",
+            details: "User logged in successfully",
             actorId: user._id.toString(),
             actorName: user.name,
           });
@@ -93,14 +119,20 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.role = user.role; // Add role to the token
+        token.role = user.role;
+        token.username = user.username;
+        token.isActive = user.isActive;
+        token.lastLogin = user.lastLogin;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id;
-        session.user.role = token.role; // Add role to the session
+        session.user.role = token.role;
+        session.user.username = token.username;
+        session.user.isActive = token.isActive;
+        session.user.lastLogin = token.lastLogin;
       }
       return session;
     },

@@ -9,7 +9,6 @@ import styles from "./CommandPalette.premium.module.css";
 const PaletteIcons = {
   search: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
   dashboard: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>,
-  article: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
   project: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>,
   media: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>,
   user: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
@@ -20,7 +19,6 @@ const PaletteIcons = {
   clock: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
   pin: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 17v5"/><path d="M9 3l6 6"/><path d="M6 6l6 6"/></svg>,
   logs: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>,
-  resume: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
   play: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>,
   command: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>,
   arrow: () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>,
@@ -129,15 +127,6 @@ export default function CommandPalette() {
         action: () => router.push("/admin/dashboard"),
       },
       {
-        id: "go-articles",
-        label: "Go to Articles",
-        description: "Manage blog articles",
-        icon: PaletteIcons.article,
-        category: "navigation",
-        keywords: ["blog", "posts", "content"],
-        action: () => router.push("/admin/articles"),
-      },
-      {
         id: "go-projects",
         label: "Go to Projects",
         description: "Manage portfolio projects",
@@ -165,6 +154,51 @@ export default function CommandPalette() {
         action: () => router.push("/admin/enquiries"),
       },
       {
+        id: "go-publications",
+        label: "Go to Publications",
+        description: "Manage research papers & publications",
+        icon: PaletteIcons.project,
+        category: "navigation",
+        keywords: ["papers", "bibtex", "journals", "conferences"],
+        action: () => router.push("/admin/publications"),
+      },
+      {
+        id: "go-team",
+        label: "Go to Team & Alumni",
+        description: "Manage researchers, faculty & alumni",
+        icon: PaletteIcons.user,
+        category: "navigation",
+        keywords: ["members", "students", "researchers", "people"],
+        action: () => router.push("/admin/team"),
+      },
+      {
+        id: "go-research",
+        label: "Go to Research Areas",
+        description: "Manage research focus domains & directions",
+        icon: PaletteIcons.project,
+        category: "navigation",
+        keywords: ["domains", "topics", "focus"],
+        action: () => router.push("/admin/research-areas"),
+      },
+      {
+        id: "go-news-events",
+        label: "Go to News & Events",
+        description: "Manage announcements, talks & photo gallery",
+        icon: PaletteIcons.search,
+        category: "navigation",
+        keywords: ["news", "events", "gallery", "photos", "talks"],
+        action: () => router.push("/admin/news-events"),
+      },
+      {
+        id: "go-site-settings",
+        label: "Go to Site Settings",
+        description: "Configure PI profile, credentials, pillars & milestones",
+        icon: PaletteIcons.settings,
+        category: "navigation",
+        keywords: ["profile", "bio", "settings", "pillars", "milestones"],
+        action: () => router.push("/admin/site-settings"),
+      },
+      {
         id: "go-media",
         label: "Go to Media",
         description: "Media library and uploads",
@@ -172,15 +206,6 @@ export default function CommandPalette() {
         category: "navigation",
         keywords: ["images", "files", "upload"],
         action: () => router.push("/admin/media"),
-      },
-      {
-        id: "go-resume",
-        label: "Go to Resume",
-        description: "Edit resume/CV",
-        icon: PaletteIcons.resume,
-        category: "navigation",
-        keywords: ["cv", "experience"],
-        action: () => router.push("/admin/resume"),
       },
       {
         id: "go-search",
@@ -227,21 +252,48 @@ export default function CommandPalette() {
       },
       // Create commands
       {
-        id: "new-article",
-        label: "New Article",
-        description: "Create a new blog article",
+        id: "new-publication",
+        label: "New Publication",
+        description: "Add a research paper or conference article",
         icon: PaletteIcons.plus,
         category: "create",
-        keywords: ["create", "add", "blog", "post"],
-        action: () => router.push("/admin/articles/new"),
+        keywords: ["create", "add", "publication", "paper", "bibtex"],
+        action: () => router.push("/admin/publications/new"),
+      },
+      {
+        id: "new-team-member",
+        label: "New Team Member",
+        description: "Add a postgraduate researcher or collaborator",
+        icon: PaletteIcons.plus,
+        category: "create",
+        keywords: ["create", "add", "member", "researcher", "student"],
+        action: () => router.push("/admin/team/new"),
+      },
+      {
+        id: "new-research-area",
+        label: "New Research Area",
+        description: "Add a research domain or focus topic",
+        icon: PaletteIcons.plus,
+        category: "create",
+        keywords: ["create", "add", "domain", "research", "area"],
+        action: () => router.push("/admin/research-areas/new"),
+      },
+      {
+        id: "new-news-event",
+        label: "New News / Event",
+        description: "Post a news announcement or gallery item",
+        icon: PaletteIcons.plus,
+        category: "create",
+        keywords: ["create", "add", "event", "news", "announcement"],
+        action: () => router.push("/admin/news-events/new"),
       },
       {
         id: "new-project",
         label: "New Project",
-        description: "Create a new portfolio project",
+        description: "Create a new research project",
         icon: PaletteIcons.plus,
         category: "create",
-        keywords: ["create", "add", "portfolio"],
+        keywords: ["create", "add", "project", "research"],
         action: () => router.push("/admin/projects/new"),
       },
       {
@@ -310,14 +362,17 @@ export default function CommandPalette() {
       
       let path = "/admin";
       switch (item.type) {
-        case "Article":
-          path += `/articles/edit/${item._id}`;
-          break;
         case "Project":
           path += `/projects/edit/${item._id}`;
           break;
+        case "FypProject":
+          path += `/fyp/edit/${item._id}`;
+          break;
+        case "Enquiry":
+          path += `/enquiries`;
+          break;
         case "User":
-          path += `/users/edit/${item._id}`;
+          path += `/users`;
           break;
         default:
           return;
@@ -350,8 +405,9 @@ export default function CommandPalette() {
       return item.icon || PaletteIcons.command;
     }
     switch (item.type) {
-      case 'Article': return PaletteIcons.article;
       case 'Project': return PaletteIcons.project;
+      case 'FypProject': return PaletteIcons.project;
+      case 'Enquiry': return PaletteIcons.search;
       case 'User': return PaletteIcons.user;
       default: return PaletteIcons.search;
     }
@@ -366,39 +422,42 @@ export default function CommandPalette() {
       }
 
       if (isOpen) {
-        if (e.key === "ArrowDown") {
-          e.preventDefault();
-          setActiveIndex((prev) => {
-            const newIndex = (prev + 1) % results.length;
-            // Scroll active item into view
-            setTimeout(() => {
-              const activeEl = resultsRef.current?.querySelector(`[data-index="${newIndex}"]`);
-              activeEl?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            }, 0);
-            return newIndex;
-          });
-        } else if (e.key === "ArrowUp") {
-          e.preventDefault();
-          setActiveIndex((prev) => {
-            const newIndex = (prev - 1 + results.length) % results.length;
-            setTimeout(() => {
-              const activeEl = resultsRef.current?.querySelector(`[data-index="${newIndex}"]`);
-              activeEl?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            }, 0);
-            return newIndex;
-          });
-        } else if (e.key === "Enter" && activeIndex >= 0) {
+        if (results.length > 0) {
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setActiveIndex((prev) => {
+              const newIndex = (prev + 1) % results.length;
+              // Scroll active item into view
+              setTimeout(() => {
+                const activeEl = resultsRef.current?.querySelector(`[data-index="${newIndex}"]`);
+                activeEl?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+              }, 0);
+              return newIndex;
+            });
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setActiveIndex((prev) => {
+              const newIndex = (prev - 1 + results.length) % results.length;
+              setTimeout(() => {
+                const activeEl = resultsRef.current?.querySelector(`[data-index="${newIndex}"]`);
+                activeEl?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+              }, 0);
+              return newIndex;
+            });
+          }
+        }
+        if (e.key === "Enter" && activeIndex >= 0 && results[activeIndex]) {
           e.preventDefault();
           const item = results[activeIndex];
-          if (item.__kind === "command") {
+          if (item.__kind === "command" || typeof item.action === "function") {
             handleCommand(item);
           } else {
             handleNavigation(item);
           }
         } else if (e.key === "Escape") {
           setIsOpen(false);
-        } else if (e.key === "Tab") {
-          // Allow cycling through category filters
+        } else if (e.key === "Tab" && isCommandMode) {
+          // Allow cycling through category filters only in command mode
           e.preventDefault();
           const categories = Object.keys(commandCategories);
           if (selectedCategory === null) {
@@ -414,7 +473,7 @@ export default function CommandPalette() {
         }
       }
     },
-    [isOpen, results, activeIndex, handleNavigation, commandCategories, selectedCategory],
+    [isOpen, results, activeIndex, handleNavigation, commandCategories, selectedCategory, isCommandMode],
   );
 
   useEffect(() => {
@@ -479,6 +538,8 @@ export default function CommandPalette() {
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) return;
+
     // Command mode: filter local commands
     if (isCommandMode) {
       const q = query.slice(1).toLowerCase();
@@ -519,6 +580,21 @@ export default function CommandPalette() {
         }));
         setResults(recentResults);
         setActiveIndex(recentResults.length ? 0 : -1);
+      } else if (query.length === 0 && recentSearches.length === 0 && !isCommandMode) {
+        const quickActionResults = commands
+          .filter((c) => c.category === "create")
+          .map((c) => ({
+            __kind: "command",
+            _id: c.id,
+            title: c.label,
+            description: c.description,
+            type: "Command",
+            category: c.category,
+            icon: c.icon,
+            action: c.action,
+          }));
+        setResults(quickActionResults);
+        setActiveIndex(quickActionResults.length ? 0 : -1);
       } else {
         setResults([]);
         setActiveIndex(-1);
@@ -538,7 +614,7 @@ export default function CommandPalette() {
           const items = data.data || data;
           const mappedResults = Array.isArray(items) ? items.map(item => ({
             ...item,
-            type: item.type || 'Article',
+            type: item.type || 'Project',
             title: item.title || item.name,
           })) : [];
           setResults(mappedResults);
@@ -555,8 +631,6 @@ export default function CommandPalette() {
     return () => clearTimeout(debounce);
   }, [query, isCommandMode, commands, recentSearches, selectedCategory]);
 
-  if (!isOpen) return null;
-
   // Group results by category for commands
   const groupedResults = useMemo(() => {
     if (!isCommandMode) return null;
@@ -571,14 +645,15 @@ export default function CommandPalette() {
 
   return (
     <AnimatePresence>
-      <motion.div
-        className={styles.overlay}
-        onClick={() => setIsOpen(false)}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.15 }}
-      >
+      {isOpen && (
+        <motion.div
+          className={styles.overlay}
+          onClick={() => setIsOpen(false)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+        >
         <motion.div
           className={styles.modal}
           onClick={(e) => e.stopPropagation()}
@@ -612,7 +687,7 @@ export default function CommandPalette() {
               placeholder={
                 isCommandMode
                   ? "Type a command..."
-                  : "Search articles, projects, or type > for commands..."
+                  : "Search projects, FYPs, enquiries, or type > for commands..."
               }
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -679,7 +754,13 @@ export default function CommandPalette() {
                         key={item._id}
                         data-index={index}
                         className={`${styles.resultItem} ${index === activeIndex ? styles.activeItem : ''}`}
-                        onClick={() => handleNavigation(item)}
+                        onClick={() => {
+                          if (item.__kind === "command" || typeof item.action === "function") {
+                            handleCommand(item);
+                          } else {
+                            handleNavigation(item);
+                          }
+                        }}
                         onMouseEnter={() => setActiveIndex(index)}
                       >
                         <span className={styles.resultIcon}>
@@ -804,26 +885,31 @@ export default function CommandPalette() {
                   </span>
                 </div>
                 <ul className={styles.resultsList}>
-                  {commands.filter(c => c.category === 'create').map((cmd, index) => (
-                    <li
-                      key={cmd.id}
-                      data-index={index}
-                      className={`${styles.resultItem} ${index === activeIndex ? styles.activeItem : ''}`}
-                      onClick={() => { cmd.action(); setIsOpen(false); }}
-                      onMouseEnter={() => setActiveIndex(index)}
-                    >
-                      <span className={styles.resultIcon}>
-                        <cmd.icon />
-                      </span>
-                      <div className={styles.resultContent}>
-                        <span className={styles.resultTitle}>{cmd.label}</span>
-                        <span className={styles.resultDescription}>{cmd.description}</span>
-                      </div>
-                      <span className={styles.resultAction}>
-                        <PaletteIcons.arrow />
-                      </span>
-                    </li>
-                  ))}
+                  {results.map((cmd, index) => {
+                    const Icon = cmd.icon || PaletteIcons.command;
+                    return (
+                      <li
+                        key={cmd._id}
+                        data-index={index}
+                        className={`${styles.resultItem} ${index === activeIndex ? styles.activeItem : ''}`}
+                        onClick={() => handleCommand(cmd)}
+                        onMouseEnter={() => setActiveIndex(index)}
+                      >
+                        <span className={styles.resultIcon}>
+                          <Icon />
+                        </span>
+                        <div className={styles.resultContent}>
+                          <span className={styles.resultTitle}>{cmd.title}</span>
+                          {cmd.description && (
+                            <span className={styles.resultDescription}>{cmd.description}</span>
+                          )}
+                        </div>
+                        <span className={styles.resultAction}>
+                          <PaletteIcons.arrow />
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
@@ -848,6 +934,7 @@ export default function CommandPalette() {
           </div>
         </motion.div>
       </motion.div>
+      )}
     </AnimatePresence>
   );
 }

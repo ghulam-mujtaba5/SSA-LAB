@@ -20,14 +20,42 @@ const AuditLogSchema = new mongoose.Schema(
         "update",
         "delete",
         "bulk_delete",
+        "bulk-delete",
+        "bulk-publish",
+        "bulk-draft",
+        "reorder",
         "login_success",
         "login_fail",
+        "pin",
+        "unpin",
+        "upload",
+        "status_change",
       ],
     },
     entity: {
       type: String,
       required: true,
-      enum: ["Article", "Project", "User", "Auth"],
+      enum: [
+        "Article",
+        "Project",
+        "FypProject",
+        "Publication",
+        "Member",
+        "TeamMember",
+        "ResearchDomain",
+        "EventHighlight",
+        "LabEvent",
+        "NewsEvent",
+        "LabProfile",
+        "SiteSettings",
+        "Enquiry",
+        "MediaAsset",
+        "User",
+        "Auth",
+        "Setting",
+        "SavedSearch",
+        "PinnedItem",
+      ],
     },
     entityId: {
       type: String, // Can be ObjectId or other identifiers
@@ -36,8 +64,15 @@ const AuditLogSchema = new mongoose.Schema(
       type: String, // e.g., "Deleted 5 articles"
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-export default mongoose.models.AuditLog ||
-  mongoose.model("AuditLog", AuditLogSchema);
+try {
+  AuditLogSchema.index({ entity: 1, createdAt: -1 });
+  AuditLogSchema.index({ user: 1, createdAt: -1 });
+  AuditLogSchema.index({ action: 1, createdAt: -1 });
+} catch (e) {
+  // noop
+}
+
+export default mongoose.models.AuditLog || mongoose.model("AuditLog", AuditLogSchema);

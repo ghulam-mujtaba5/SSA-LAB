@@ -496,58 +496,59 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 8px 6px 12px;
-  border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.88);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35), 0 0 18px rgba(56, 189, 248, 0.14);
+  padding: 5px 8px 5px 10px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(56, 189, 248, 0.1);
   max-width: 100%;
   box-sizing: border-box;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 :global([data-theme="light"]) .heroProfileCard {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(2, 132, 199, 0.28);
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08), 0 0 16px rgba(2, 132, 199, 0.1);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08), 0 0 12px rgba(2, 132, 199, 0.08);
 }
 
 .heroProfileCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42), 0 0 22px rgba(56, 189, 248, 0.18);
 }
 
 :global([data-theme="light"]) .heroProfileCard:hover {
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12), 0 0 20px rgba(2, 132, 199, 0.18);
+  border-color: rgba(2, 132, 199, 0.5);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
 }
 
 .heroProfileCardHeader {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding-right: 6px;
-  border-right: 1px solid rgba(148, 163, 184, 0.25);
+  padding-right: 8px;
+  border-right: 1px solid rgba(148, 163, 184, 0.22);
 }
 
 :global([data-theme="light"]) .heroProfileCardHeader {
-  border-right-color: rgba(203, 213, 225, 0.8);
+  border-right-color: rgba(203, 213, 225, 0.85);
 }
 
 .heroProfileStatusDot {
   width: 6px;
   height: 6px;
-  border-radius: 50%;
+  border-radius: 1px;
   background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
   animation: heroPulseDot 2s infinite ease-in-out;
   flex-shrink: 0;
 }
 
 :global([data-theme="light"]) .heroProfileStatusDot {
   background: #0284c7;
-  box-shadow: 0 0 8px #0284c7;
+  box-shadow: 0 0 6px #0284c7;
 }
 
 @keyframes heroPulseDot {
@@ -562,15 +563,16 @@
 }
 
 .heroProfileCardTitle {
-  font-size: 0.68rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.66rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #94a3b8;
 }
 
 :global([data-theme="light"]) .heroProfileCardTitle {
-  color: #475569;
+  color: #64748b;
 }
 
 .heroProfileButtons {
@@ -583,52 +585,46 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  border-radius: 9999px;
-  background: rgba(30, 41, 59, 0.75);
-  border: 1px solid rgba(148, 163, 184, 0.22);
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   color: #f1f5f9;
-  font-size: 0.78rem;
+  font-size: 0.77rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.18s ease;
   cursor: pointer;
 }
 
 :global([data-theme="light"]) .heroProfileBtn {
-  background: rgba(241, 245, 249, 0.9);
-  border: 1px solid rgba(203, 213, 225, 0.85);
+  background: rgba(241, 245, 249, 0.95);
+  border: 1px solid rgba(203, 213, 225, 0.9);
   color: #0f172a;
 }
 
 .heroProfileBtn:hover {
-  background: rgba(56, 189, 248, 0.18);
+  background: rgba(56, 189, 248, 0.16);
   border-color: rgba(56, 189, 248, 0.55);
   color: #38bdf8;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 10px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 8px rgba(56, 189, 248, 0.2);
 }
 
 :global([data-theme="light"]) .heroProfileBtn:hover {
-  background: rgba(2, 132, 199, 0.1);
+  background: rgba(2, 132, 199, 0.08);
   border-color: rgba(2, 132, 199, 0.5);
   color: #0369a1;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
 }
 
 .heroProfileBtnIcon {
   color: #38bdf8;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
 }
 
 :global([data-theme="light"]) .heroProfileBtnIcon {
   color: #0284c7;
-}
-
-.heroProfileBtn:hover .heroProfileBtnIcon {
-  transform: scale(1.15);
 }
 
 .heroProfileBtnExternal {
@@ -652,7 +648,7 @@
     padding: 6px 10px;
     flex-wrap: wrap;
     justify-content: center;
-    border-radius: 14px;
+    border-radius: 6px;
     width: auto;
     max-width: 100%;
   }
@@ -672,8 +668,8 @@
   }
 
   .heroProfileBtn {
-    padding: 6px 10px;
-    font-size: 0.76rem;
+    padding: 5px 9px;
+    font-size: 0.75rem;
   }
 }
 

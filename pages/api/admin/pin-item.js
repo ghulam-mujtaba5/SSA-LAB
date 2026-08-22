@@ -1,6 +1,5 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../../lib/mongoose";
-import Article from "../../../models/Article";
 import Project from "../../../models/Project";
 
 async function handler(req, res) {
@@ -16,25 +15,16 @@ async function handler(req, res) {
 
   await dbConnect();
 
-  const { id, type } = req.body;
+  const { id } = req.body;
 
-  if (!id || !type) {
+  if (!id) {
     return res
       .status(400)
-      .json({ success: false, message: "Item ID and type are required." });
+      .json({ success: false, message: "Item ID is required." });
   }
 
   try {
-    let item;
-    const Model = type === "article" ? Article : Project;
-
-    if (!Model) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid item type specified." });
-    }
-
-    item = await Model.findById(id);
+    const item = await Project.findById(id);
 
     if (!item) {
       return res

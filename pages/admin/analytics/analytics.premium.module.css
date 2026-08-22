@@ -9,7 +9,7 @@
   font-size: 2.5rem;
   font-weight: 800;
   margin: 0 0 0.5rem 0;
-  background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+  background: linear-gradient(90deg, var(--primary), var(--info));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -18,7 +18,7 @@
 
 .pageTitle svg {
   -webkit-text-fill-color: initial;
-  color: var(--admin-primary);
+  color: var(--primary);
 }
 
 .pageSubtitle {
@@ -34,9 +34,9 @@
   justify-content: space-between;
   margin: 2.5rem 0 1rem 0;
   padding: 0.75rem 1rem;
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
   border-radius: 16px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
 }
 
 .sectionTitle {
@@ -46,7 +46,7 @@
   display: flex;
   align-items: center;
   gap: 0.875rem;
-  color: var(--text-primary);
+  color: var(--text);
 }
 
 .toggleButton {
@@ -59,12 +59,12 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .toggleButton:hover {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: var(--bg-elev-2);
+  color: var(--text);
 }
 
 /* Filter Bar */
@@ -74,8 +74,8 @@
   align-items: center;
   margin: 1.5rem 0 2rem;
   padding: 1.5rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-color);
+  background: var(--surface, var(--bg-elev-1));
+  border: 1px solid var(--border);
   border-radius: 16px;
   flex-wrap: wrap;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -90,7 +90,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+  background: linear-gradient(90deg, var(--primary), var(--info));
   border-radius: 16px 16px 0 0;
   opacity: 0.7;
 }
@@ -105,7 +105,7 @@
 .filterLabel {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -120,33 +120,33 @@
 .rangeButton {
   padding: 0.625rem 1.25rem;
   border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  background: var(--bg-elev-2);
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text-primary);
+  color: var(--text);
 }
 
 .rangeButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
 }
 
 .rangeButtonActive {
-  background: var(--primary-color);
+  background: var(--primary);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--primary);
   font-weight: 600;
 }
 
 .exportButton {
   padding: 0.625rem 1.25rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -154,14 +154,14 @@
   align-items: center;
   gap: 0.5rem;
   font-weight: 500;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: var(--bg-elev-2);
+  color: var(--text);
 }
 
 .exportButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
 }
 
 /* KPI Grid with modern card design */
@@ -179,9 +179,9 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -198,7 +198,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+  background: linear-gradient(90deg, var(--primary), var(--info));
   border-radius: 16px 16px 0 0;
   opacity: 0.7;
 }
@@ -206,7 +206,7 @@
 .kpiTitle {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin: 0 0 0.75rem 0;
   display: flex;
   align-items: center;
@@ -225,7 +225,7 @@
   font-weight: 800;
   line-height: 1;
   margin: 0;
-  background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+  background: linear-gradient(90deg, var(--primary), var(--info));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -240,11 +240,11 @@
 }
 
 .deltaPositive {
-  color: var(--success-color);
+  color: var(--success);
 }
 
 .deltaNegative {
-  color: var(--error-color);
+  color: var(--danger);
 }
 
 /* Sparklines helpers */
@@ -258,7 +258,7 @@
 }
 
 .sparklineRefMean {
-  stroke: var(--text-secondary);
+  stroke: var(--text-muted);
   stroke-opacity: 0.6;
   stroke-dasharray: 2, 2;
 }
@@ -272,12 +272,12 @@
 }
 
 .chartCard {
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
   padding: 1.75rem;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   position: relative;
@@ -291,7 +291,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+  background: linear-gradient(90deg, var(--primary), var(--info));
   border-radius: 16px 16px 0 0;
   opacity: 0.7;
 }
@@ -308,14 +308,14 @@
   display: flex;
   align-items: center;
   gap: 0.875rem;
-  color: var(--text-primary);
+  color: var(--text);
 }
 
 .chartHeader::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, var(--primary-color), transparent);
+  background: linear-gradient(90deg, var(--primary), transparent);
   opacity: 0.3;
 }
 
@@ -339,12 +339,12 @@
 }
 
 .breakdownCard {
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
   padding: 1.75rem;
   border-radius: 16px;
   min-width: 0;
   transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -362,7 +362,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+  background: linear-gradient(90deg, var(--primary), var(--info));
   border-radius: 16px 16px 0 0;
   opacity: 0.7;
 }
@@ -379,9 +379,9 @@
   display: flex;
   align-items: center;
   gap: 0.875rem;
-  color: var(--text-primary);
+  color: var(--text);
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
 }
 
 .twoColWrapper {
@@ -401,14 +401,14 @@
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--bg-secondary);
+  background: var(--bg-elev-2);
   border-radius: 8px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
 }
 
 .listContainer {
@@ -431,7 +431,7 @@
 
 .chip {
   padding: 0.5rem 1rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   border-radius: 999px;
   font-size: 0.875rem;
   cursor: pointer;
@@ -440,20 +440,20 @@
   align-items: center;
   gap: 0.375rem;
   font-weight: 500;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: var(--bg-elev-2);
+  color: var(--text);
 }
 
 .chip:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
 }
 
 .chipActive {
-  background: rgba(59, 130, 246, 0.15);
-  color: var(--primary-color);
-  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(2, 132, 199, 0.15);
+  color: var(--primary);
+  border-color: rgba(2, 132, 199, 0.3);
 }
 
 .twoCol {
@@ -480,8 +480,8 @@
   display: flex;
   align-items: center;
   gap: 0.875rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
   position: relative;
   overflow: hidden;
@@ -494,7 +494,7 @@
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(to bottom, var(--primary-color), var(--info-color));
+  background: linear-gradient(to bottom, var(--primary), var(--info));
   opacity: 0.7;
   border-radius: 8px 0 0 8px;
   transform: scaleY(0);
@@ -506,29 +506,29 @@
 }
 
 .listItem:hover {
-  background: var(--bg-elevated);
+  background: var(--surface, var(--bg-elev-1));
   transform: translateX(8px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: rgba(2, 132, 199, 0.3);
 }
 
 .listItem svg {
   flex-shrink: 0;
-  color: var(--primary-color);
+  color: var(--primary);
 }
 
 .emptyState {
   text-align: center;
   padding: 3.5rem 1rem;
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background: var(--bg-secondary);
+  background: var(--bg-elev-2);
   border-radius: 16px;
-  border: 1px dashed var(--border-color);
+  border: 1px dashed var(--border);
 }
 
 .emptyState svg {
@@ -544,7 +544,7 @@
   justify-content: center;
   gap: 0.875rem;
   padding: 2.5rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .errorState {
@@ -554,8 +554,8 @@
   justify-content: center;
   padding: 2.5rem;
   border-radius: 16px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  background: var(--surface, var(--bg-elev-1));
   text-align: center;
   max-width: 500px;
   margin: 2.5rem auto;

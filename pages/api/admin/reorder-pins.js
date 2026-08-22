@@ -1,6 +1,5 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../../lib/mongoose";
-import Article from "../../../models/Article";
 import Project from "../../../models/Project";
 
 async function handler(req, res) {
@@ -27,7 +26,6 @@ async function handler(req, res) {
     // We persist order by setting updatedAt in descending order for the provided sequence.
     // First item gets most recent timestamp, next gets slightly older, etc.
     const now = Date.now();
-    const opsArticles = [];
     const opsProjects = [];
 
     items.forEach((it, idx) => {
@@ -35,26 +33,14 @@ async function handler(req, res) {
       const targetId = it.id || it._id;
       if (!targetId) return;
 
-      if (it?.type === "article") {
-        opsArticles.push({
-          updateOne: {
-            filter: { _id: targetId },
-            update: { $set: { updatedAt: ts, pinned: true } },
-          },
-        });
-      } else if (it?.type === "project") {
-        opsProjects.push({
-          updateOne: {
-            filter: { _id: targetId },
-            update: { $set: { updatedAt: ts, pinned: true } },
-          },
-        });
-      }
+      opsProjects.push({
+        updateOne: {
+          filter: { _id: targetId },
+          update: { $set: { updatedAt: ts, pinned: true } },
+        },
+      });
     });
 
-    if (opsArticles.length) {
-      await Article.bulkWrite(opsArticles, { ordered: false });
-    }
     if (opsProjects.length) {
       await Project.bulkWrite(opsProjects, { ordered: false });
     }

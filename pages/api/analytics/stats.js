@@ -1,6 +1,5 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../../lib/mongoose";
-import Article from "../../../models/Article";
 import Project from "../../../models/Project";
 
 const handler = async (req, res) => {
@@ -13,33 +12,24 @@ const handler = async (req, res) => {
     try {
       await dbConnect();
 
-      const articles = await Article.find({}, "title views slug").sort({
-        views: -1,
-      });
       const projects = await Project.find({}, "title views slug").sort({
         views: -1,
       });
 
-      const totalArticleViews = articles.reduce(
-        (acc, article) => acc + article.views,
-        0,
-      );
       const totalProjectViews = projects.reduce(
-        (acc, project) => acc + project.views,
+        (acc, project) => acc + (project.views || 0),
         0,
       );
-      const totalViews = totalArticleViews + totalProjectViews;
-
-      const mostViewedArticle = articles.length > 0 ? articles[0] : null;
+      const totalViews = totalProjectViews;
       const mostViewedProject = projects.length > 0 ? projects[0] : null;
 
       res.status(200).json({
         totalViews,
-        totalArticleViews,
+        totalArticleViews: 0,
         totalProjectViews,
-        mostViewedArticle,
+        mostViewedArticle: null,
         mostViewedProject,
-        articles,
+        articles: [],
         projects,
       });
     } catch (error) {

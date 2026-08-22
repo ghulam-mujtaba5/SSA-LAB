@@ -112,9 +112,10 @@ export default function EditProjectPage({ project, previewSecret }) {
         isOpen={showDelete}
         onClose={() => setShowDelete(false)}
         title="Delete Project"
-        initialFocusRef={confirmRef}
         onConfirm={doDelete}
         confirmText="Delete"
+        confirmVariant="danger"
+        variant="danger"
         cancelText="Cancel"
       >
         <p id="delete-project-desc">

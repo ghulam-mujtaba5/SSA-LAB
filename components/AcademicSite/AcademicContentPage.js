@@ -76,6 +76,7 @@ import {
   labImpactStats,
 } from "../../data/academicSite";
 import { defaultFypProjects } from "../../data/fypProjects";
+import { useAcademicData } from "../../context/AcademicDataContext";
 import styles from "./AcademicSite.module.css";
 
 function PageIntro({ eyebrow, title, lead, illustration = null, action = null }) {

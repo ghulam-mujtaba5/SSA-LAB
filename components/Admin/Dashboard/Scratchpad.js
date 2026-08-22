@@ -158,8 +158,9 @@ const Scratchpad = () => {
       title="Delete Note"
       onConfirm={handleDelete}
       confirmText="Delete"
+      confirmVariant="danger"
+      variant="danger"
       cancelText="Cancel"
-      initialFocusRef={confirmBtnRef}
     >
       <p>This action will permanently delete this note. Continue?</p>
     </Modal>

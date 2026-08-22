@@ -77,9 +77,9 @@ export default function QuickActions() {
       </h2>
       <div className={styles.actionsGrid}>
         <ActionButton
-          href="/admin/articles/new"
+          href="/admin/fyp/new"
           icon={<FaPlus />}
-          label="New Article"
+          label="New FYP Record"
         />
         <ActionButton
           href="/admin/projects/new"

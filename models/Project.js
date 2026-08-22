@@ -21,17 +21,39 @@ const ProjectSchema = new mongoose.Schema(
       type: String,
       required: [true, "Description is required."],
     },
+    summary: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+    collaboration: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+    graphicKey: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+    details: {
+      problem: { type: String, default: "" },
+      approach: { type: String, default: "" },
+      outcome: { type: String, default: "" },
+    },
     image: {
-      type: String, // URL to the main/cover image from upload or direct link
+      type: String,
       default: "",
     },
     gallery: {
-      type: [{
-        url: { type: String, required: true },
-        caption: { type: String, default: "" },
-        alt: { type: String, default: "" },
-        order: { type: Number, default: 0 }
-      }],
+      type: [
+        {
+          url: { type: String, required: true },
+          caption: { type: String, default: "" },
+          alt: { type: String, default: "" },
+          order: { type: Number, default: 0 },
+        },
+      ],
       default: [],
     },
     imageFit: {
@@ -49,13 +71,36 @@ const ProjectSchema = new mongoose.Schema(
     },
     tags: {
       type: [String],
-      required: true,
+      default: [],
     },
-    // Case-study proof fields (optional — cards render them when present)
     role: {
       type: String,
       trim: true,
       default: "",
+    },
+    period: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    organization: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    funding: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    focus: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    students: {
+      type: [String],
+      default: [],
     },
     problem: {
       type: String,
@@ -72,19 +117,16 @@ const ProjectSchema = new mongoose.Schema(
       trim: true,
       default: "",
     },
-    // Who the product is built for (case-study "Users" section)
     users: {
       type: String,
       trim: true,
       default: "",
     },
-    // Key features — newline or comma-separated list
     features: {
       type: String,
       trim: true,
       default: "",
     },
-    // Reflection — what was learned building this
     learned: {
       type: String,
       trim: true,
@@ -92,26 +134,22 @@ const ProjectSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["In Progress", "Completed", "Archived"],
-      default: "In Progress",
+      default: "Completed",
+      trim: true,
     },
     links: {
-      live: String,
-      github: String,
+      live: { type: String, default: "" },
+      github: { type: String, default: "" },
     },
     category: {
       type: String,
-      enum: [
-        "All",
-        "Software Development",
-        "Web Development",
-        "AI",
-        "Data Science",
-        "UI/UX",
-        "Client Projects",
-        "Others",
-      ],
-      default: "Others",
+      default: "Research Project",
+      trim: true,
+    },
+    projectType: {
+      type: String,
+      enum: ["Research", "Supervised", "Industry", "Open Source", "General"],
+      default: "Research",
     },
     published: {
       type: Boolean,
@@ -130,7 +168,7 @@ const ProjectSchema = new mongoose.Schema(
       trim: true,
     },
     ogImage: {
-      type: String, // URL to the Open Graph image
+      type: String,
       trim: true,
     },
     scheduledAt: {
@@ -145,25 +183,27 @@ const ProjectSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    adminModified: {
+      type: Boolean,
+      default: false,
+    },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-// Indexes for faster listings and filters
 try {
   ProjectSchema.index({ published: 1, createdAt: -1 }, { name: "ProjectPublishedCreated_idx" });
   ProjectSchema.index({ status: 1, createdAt: -1 }, { name: "ProjectStatusCreated_idx" });
+  ProjectSchema.index({ projectType: 1, createdAt: -1 }, { name: "ProjectTypeCreated_idx" });
   ProjectSchema.index({ pinned: 1, createdAt: -1 }, { name: "ProjectPinnedCreated_idx" });
   ProjectSchema.index({ displayOrder: 1, createdAt: -1 }, { name: "ProjectDisplayOrder_idx" });
   ProjectSchema.index({ tags: 1 }, { name: "ProjectTags_idx" });
-  // Full-text index to support public search
   ProjectSchema.index(
     { title: "text", description: "text", tags: "text" },
     { weights: { title: 5, description: 3, tags: 1 }, name: "ProjectTextIndex" }
   );
 } catch (e) {
-  // noop for dev hot-reload
+  // noop
 }
 
-export default mongoose.models.Project ||
-  mongoose.model("Project", ProjectSchema);
+export default mongoose.models.Project || mongoose.model("Project", ProjectSchema);

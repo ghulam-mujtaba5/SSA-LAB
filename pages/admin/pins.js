@@ -26,10 +26,10 @@ import styles from "./pins.premium.module.css";
 export default function AdminPinsPage() {
   const [items, setItems] = useState([]);
   const [candidates, setCandidates] = useState([]);
-  const [stats, setStats] = useState({ total: 0, articles: 0, projects: 0 });
+  const [stats, setStats] = useState({ total: 0, projects: 0 });
   const [loading, setLoading] = useState(true);
   const [savingOrder, setSavingOrder] = useState(false);
-  const [activeTab, setActiveTab] = useState("all"); // 'all' | 'articles' | 'projects' | 'discover'
+  const [activeTab, setActiveTab] = useState("all"); // 'all' | 'projects' | 'discover'
   const [searchQuery, setSearchQuery] = useState("");
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(null);
@@ -152,9 +152,7 @@ export default function AdminPinsPage() {
   // Filtered pinned items
   const filteredItems = useMemo(() => {
     let list = items;
-    if (activeTab === "articles") {
-      list = list.filter((i) => i.type === "article");
-    } else if (activeTab === "projects") {
+    if (activeTab === "projects") {
       list = list.filter((i) => i.type === "project");
     }
 
@@ -193,7 +191,7 @@ export default function AdminPinsPage() {
               Pinned Showcase Manager
             </h1>
             <p className={styles.muted}>
-              Curate and order featured articles and top projects prominently highlighted on the public website.
+              Curate and order featured research projects prominently highlighted on the public website.
             </p>
           </div>
           <div className={styles.headerActions}>
@@ -231,15 +229,6 @@ export default function AdminPinsPage() {
             </div>
           </div>
           <div className={styles.statCard}>
-            <div className={`${styles.statIconWrapper} ${styles.article}`}>
-              <BookOpen size={22} />
-            </div>
-            <div className={styles.statInfo}>
-              <span className={styles.statLabel}>Pinned Articles</span>
-              <span className={styles.statValue}>{stats.articles}</span>
-            </div>
-          </div>
-          <div className={styles.statCard}>
             <div className={`${styles.statIconWrapper} ${styles.project}`}>
               <FolderGit2 size={22} />
             </div>
@@ -258,12 +247,6 @@ export default function AdminPinsPage() {
               onClick={() => setActiveTab("all")}
             >
               All Pinned ({items.length})
-            </button>
-            <button
-              className={`${styles.tabBtn} ${activeTab === "articles" ? styles.active : ""}`}
-              onClick={() => setActiveTab("articles")}
-            >
-              Articles ({stats.articles})
             </button>
             <button
               className={`${styles.tabBtn} ${activeTab === "projects" ? styles.active : ""}`}
@@ -287,7 +270,7 @@ export default function AdminPinsPage() {
               className={styles.searchInput}
               placeholder={
                 activeTab === "discover"
-                  ? "Search unpinned articles & projects…"
+                  ? "Search unpinned projects…"
                   : "Search pinned showcase items…"
               }
               value={searchQuery}
@@ -341,13 +324,7 @@ export default function AdminPinsPage() {
             ) : (
               <div className={styles.itemsList}>
                 {filteredCandidates.map((item) => {
-                  const isArticle = item.type === "article";
-                  const editUrl = isArticle
-                    ? `/admin/articles/edit/${item._id}`
-                    : `/admin/projects/edit/${item._id}`;
-                  const viewUrl = isArticle
-                    ? `/insights/${item.slug || item._id}`
-                    : `/projects/${item.slug || item._id}`;
+                  const editUrl = `/admin/projects/edit/${item._id}`;
                   const thumbnail = item.coverImage || item.image;
 
                   return (
@@ -357,7 +334,7 @@ export default function AdminPinsPage() {
                           <img src={thumbnail} alt={item.title} />
                         ) : (
                           <div className={styles.thumbPlaceholder}>
-                            {isArticle ? <BookOpen size={20} /> : <FolderGit2 size={20} />}
+                            <FolderGit2 size={20} />
                           </div>
                         )}
                       </div>
@@ -365,9 +342,7 @@ export default function AdminPinsPage() {
                       <div className={styles.itemDetails}>
                         <div className={styles.itemMeta}>
                           <span
-                            className={`${styles.typeBadge} ${
-                              isArticle ? styles.article : styles.project
-                            }`}
+                            className={`${styles.typeBadge} ${styles.project}`}
                           >
                             {item.type}
                           </span>
@@ -413,7 +388,7 @@ export default function AdminPinsPage() {
             <p className={styles.emptyText}>
               {searchQuery
                 ? "No pinned items matched your search query."
-                : "You haven’t pinned any articles or projects to the showcase yet."}
+                : "You haven’t pinned any projects to the showcase yet."}
             </p>
             <button
               className={styles.saveOrderBtn}
@@ -428,13 +403,7 @@ export default function AdminPinsPage() {
           /* PINNED ITEMS LIST (DRAG & DROP) */
           <div className={styles.itemsList}>
             {filteredItems.map((item, index) => {
-              const isArticle = item.type === "article";
-              const editUrl = isArticle
-                ? `/admin/articles/edit/${item._id}`
-                : `/admin/projects/edit/${item._id}`;
-              const viewUrl = isArticle
-                ? `/insights/${item.slug || item._id}`
-                : `/projects/${item.slug || item._id}`;
+              const editUrl = `/admin/projects/edit/${item._id}`;
               const thumbnail = item.coverImage || item.image;
 
               return (
@@ -468,7 +437,7 @@ export default function AdminPinsPage() {
                       <img src={thumbnail} alt={item.title} />
                     ) : (
                       <div className={styles.thumbPlaceholder}>
-                        {isArticle ? <BookOpen size={20} /> : <FolderGit2 size={20} />}
+                        <FolderGit2 size={20} />
                       </div>
                     )}
                   </div>
@@ -477,9 +446,7 @@ export default function AdminPinsPage() {
                   <div className={styles.itemDetails}>
                     <div className={styles.itemMeta}>
                       <span
-                        className={`${styles.typeBadge} ${
-                          isArticle ? styles.article : styles.project
-                        }`}
+                        className={`${styles.typeBadge} ${styles.project}`}
                       >
                         {item.type}
                       </span>

@@ -62,9 +62,11 @@ const Filters = ({ filters, setFilters, onApply }) => {
               setFilters((f) => ({ ...f, entity: e.target.value }))
             }
           >
-            <option value="">All</option>
-            <option value="Article">Article</option>
-            <option value="Project">Project</option>
+            <option value="">All Entities</option>
+            <option value="Project">Research Project</option>
+            <option value="FypProject">FYP Project</option>
+            <option value="Enquiry">Enquiry</option>
+            <option value="MediaAsset">Media Asset</option>
             <option value="User">User</option>
             <option value="Auth">Auth</option>
           </select>
@@ -263,7 +265,7 @@ const AuditLogsPage = () => {
             transition={{ duration: 0.4, delay: 0.3 }}
             className={styles.pageSubtitle}
           >
-            Track admin actions across Articles, Projects, and Users.
+            Track admin actions across Projects, FYP Supervisions, Enquiries, Media, and Users.
           </motion.p>
         </motion.header>
 

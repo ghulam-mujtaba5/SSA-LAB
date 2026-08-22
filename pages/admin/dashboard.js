@@ -199,7 +199,8 @@ const AdminDashboard = () => {
   const [showAllActivity, setShowAllActivity] = useState(false);
   const [stats, setStats] = useState({
     projects: 0,
-    articles: 0,
+    fypProjects: 0,
+    enquiries: 0,
     users: 0,
     views: 0,
   });
@@ -222,7 +223,7 @@ const AdminDashboard = () => {
       const json = await res.json();
       const payload = json.data || {};
       setStats(
-        payload.stats || { projects: 0, articles: 0, users: 0, views: 0 },
+        payload.stats || { projects: 0, fypProjects: 0, enquiries: 0, users: 0, views: 0 },
       );
       setRecentActivity(payload.recentActivity || []);
       setStatsError(null);
@@ -231,7 +232,7 @@ const AdminDashboard = () => {
       console.error("Failed to fetch dashboard data:", error);
       setStatsError(error.message);
       toast.error(error?.message || "Failed to load dashboard data.");
-      setStats({ projects: 0, articles: 0, users: 0, views: 0 });
+      setStats({ projects: 0, fypProjects: 0, enquiries: 0, users: 0, views: 0 });
       setRecentActivity([]);
     }
   };
@@ -262,51 +263,51 @@ const AdminDashboard = () => {
     return data;
   };
 
-  // KPI card configurations
+  // KPI card configurations for active lab entities
   const kpiCards = useMemo(() => [
     {
-      id: "users",
-      title: "Total Users",
-      value: stats.users,
-      icon: Icons.Users,
-      variant: "primary",
-      trend: { value: 12, direction: "up" },
-      sparklineData: generateTrendData(stats.users),
-      progress: Math.min((stats.users / 100) * 100, 100),
-      href: "/admin/users",
-    },
-    {
-      id: "articles",
-      title: "Total Articles",
-      value: stats.articles,
-      icon: Icons.Articles,
-      variant: "success",
-      trend: { value: 8, direction: "up" },
-      sparklineData: generateTrendData(stats.articles),
-      progress: Math.min((stats.articles / 50) * 100, 100),
-      href: "/admin/articles",
-    },
-    {
       id: "projects",
-      title: "Total Projects",
+      title: "Research Projects",
       value: stats.projects,
       icon: Icons.Projects,
-      variant: "warning",
-      trend: { value: 5, direction: "up" },
+      variant: "primary",
+      trend: { value: 8, direction: "up" },
       sparklineData: generateTrendData(stats.projects),
       progress: Math.min((stats.projects / 30) * 100, 100),
       href: "/admin/projects",
     },
     {
-      id: "views",
-      title: "Total Views",
-      value: stats.views,
-      icon: Icons.Views,
+      id: "fypProjects",
+      title: "FYP Supervision",
+      value: stats.fypProjects,
+      icon: Icons.GraduationCap,
+      variant: "success",
+      trend: { value: 12, direction: "up" },
+      sparklineData: generateTrendData(stats.fypProjects),
+      progress: Math.min((stats.fypProjects / 20) * 100, 100),
+      href: "/admin/fyp",
+    },
+    {
+      id: "enquiries",
+      title: "Student Enquiries",
+      value: stats.enquiries,
+      icon: Icons.Mail,
+      variant: "warning",
+      trend: { value: 15, direction: "up" },
+      sparklineData: generateTrendData(stats.enquiries),
+      progress: Math.min((stats.enquiries / 50) * 100, 100),
+      href: "/admin/enquiries",
+    },
+    {
+      id: "users",
+      title: "Lab Users",
+      value: stats.users,
+      icon: Icons.Users,
       variant: "error",
-      trend: { value: 24, direction: "up" },
-      sparklineData: generateTrendData(stats.views),
-      progress: Math.min((stats.views / 10000) * 100, 100),
-      href: "/admin/analytics",
+      trend: { value: 5, direction: "up" },
+      sparklineData: generateTrendData(stats.users),
+      progress: Math.min((stats.users / 20) * 100, 100),
+      href: "/admin/users",
     },
   ], [stats]);
 

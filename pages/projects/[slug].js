@@ -3,7 +3,7 @@ import ProjectDetail from "../../components/Projects/ProjectDetail";
 import AcademicSiteLayout from "../../components/AcademicSite/AcademicSiteLayout";
 import { defaultFypProjects } from "../../data/fypProjects";
 import dbConnect from "../../lib/mongoose";
-import FypProject from "../../models/FypProject";
+import Project from "../../models/Project";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import styles from "../../components/AcademicSite/AcademicSite.module.css";
@@ -45,7 +45,7 @@ export async function getServerSideProps({ params }) {
 
   try {
     await dbConnect();
-    const dbProject = await FypProject.findOne({ slug, published: true }).lean();
+    const dbProject = await Project.findOne({ slug, published: true }).lean();
 
     if (dbProject) {
       return {

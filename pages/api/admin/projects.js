@@ -21,16 +21,27 @@ export default async function handler(req, res) {
         sortOrder = "asc",
         search = "",
         status = "",
+        category = "",
         published: publishedFilter = "",
         featured = "",
       } = req.query;
 
       const query = {};
       if (search) {
-        query.title = { $regex: search, $options: "i" };
+        const sanitizedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        query.title = { $regex: sanitizedSearch, $options: "i" };
       }
-      if (status) {
-        query.published = status === "published";
+      if (status && status !== "all") {
+        if (status === "published") {
+          query.published = true;
+        } else if (status === "draft") {
+          query.published = false;
+        } else {
+          query.status = status;
+        }
+      }
+      if (category && category !== "all" && category !== "All") {
+        query.category = category;
       }
       // Support "published" and "featured" query filters from the admin UI
       if (publishedFilter === "true") query.published = true;
@@ -48,6 +59,8 @@ export default async function handler(req, res) {
         .select({
           title: 1,
           slug: 1,
+          status: 1,
+          category: 1,
           published: 1,
           scheduledAt: 1,
           featuredOnHome: 1,
@@ -57,6 +70,8 @@ export default async function handler(req, res) {
           tags: 1,
           links: 1,
           displayOrder: 1,
+          createdAt: 1,
+          updatedAt: 1,
         })
         .sort(sort)
         .skip(skip)

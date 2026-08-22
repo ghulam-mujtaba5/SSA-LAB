@@ -97,6 +97,15 @@ export default function AdminSearchPage() {
     router.push(`/admin/search?q=${encodeURIComponent(q)}`);
   };
 
+  const getItemLink = (r) => {
+    if (!r) return "/admin";
+    if (r.type === "Project") return `/admin/projects/edit/${r._id}`;
+    if (r.type === "FypProject") return `/admin/fyp/edit/${r._id}`;
+    if (r.type === "Enquiry") return `/admin/enquiries`;
+    if (r.type === "User") return `/admin/users`;
+    return `/admin/projects`;
+  };
+
   const onKeyDown = (e) => {
     if (!["ArrowDown", "ArrowUp", "Enter", "Escape", "Home", "End", "PageDown", "PageUp"].includes(e.key)) return;
     if (e.key === "ArrowDown") {
@@ -126,9 +135,7 @@ export default function AdminSearchPage() {
     } else if (e.key === "Enter") {
       if (activeIndex >= 0 && results[activeIndex]) {
         e.preventDefault();
-        router.push(
-          `/admin/articles/preview/${encodeURIComponent(results[activeIndex].slug)}`,
-        );
+        router.push(getItemLink(results[activeIndex]));
       }
     } else if (e.key === "Escape") {
       // Clear active selection and announce
@@ -183,7 +190,7 @@ export default function AdminSearchPage() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.05 }}
           >
-            Search articles by title, tag, or category.
+            Search across Research Projects, FYP Supervisions, Enquiries, and Users.
           </motion.p>
         </div>
         <motion.form 
@@ -199,7 +206,7 @@ export default function AdminSearchPage() {
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={onKeyDown}
             ref={inputRef}
-            placeholder="Search articles by title, tag, category..."
+            placeholder="Search projects, FYPs, enquiries, users..."
             className={styles.searchInput}
             aria-label="Search query"
             aria-controls={resultsListId}
@@ -284,16 +291,14 @@ export default function AdminSearchPage() {
                 aria-busy={loading}
               >
                 {results.map((r, idx) => {
-                  const isScheduled =
-                    r.published &&
-                    r.publishAt &&
-                    new Date(r.publishAt) > new Date();
-                  const status = r.published
-                    ? isScheduled
-                      ? "Scheduled"
-                      : "Published"
-                    : "Draft";
+                  const status =
+                    typeof r.published !== "undefined"
+                      ? r.published
+                        ? "Published"
+                        : "Draft"
+                      : r.status || r.role || "Active";
                   const active = idx === activeIndex;
+                  const itemLink = getItemLink(r);
                   return (
                     <motion.li
                       key={r._id}
@@ -303,11 +308,7 @@ export default function AdminSearchPage() {
                       ref={(el) => (resultRefs.current[idx] = el)}
                       className={`${styles.resultRow} ${active ? styles.resultActive : ""}`}
                       onMouseEnter={() => setActiveIndex(idx)}
-                      onClick={() =>
-                        router.push(
-                          `/admin/articles/preview/${encodeURIComponent(r.slug)}`,
-                        )
-                      }
+                      onClick={() => router.push(itemLink)}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, delay: idx * 0.05 }}
@@ -318,7 +319,19 @@ export default function AdminSearchPage() {
                       </div>
                       <div className={styles.resultMeta}>
                         <span
-                          className={`${styles.resultChip} ${status === "Draft" ? styles.chipGray : status === "Scheduled" ? styles.chipAmber : styles.chipGreen}`}
+                          className={`${styles.resultChip} ${styles.chipAmber}`}
+                          style={{ fontWeight: "700" }}
+                        >
+                          {r.type || "Item"}
+                        </span>
+                        <span
+                          className={`${styles.resultChip} ${
+                            status === "Draft"
+                              ? styles.chipGray
+                              : status === "Published" || status === "In Progress" || status === "new"
+                              ? styles.chipGreen
+                              : styles.chipAmber
+                          }`}
                         >
                           {status}
                         </span>
@@ -329,26 +342,16 @@ export default function AdminSearchPage() {
                         </span>
                       </div>
                       <div className={styles.resultActions}>
-                        <Tooltip content="Preview">
+                        <Tooltip content="Open item">
                           <Link
-                            href={`/admin/articles/preview/${encodeURIComponent(r.slug)}`}
+                            href={itemLink}
                             className={`${utilities.btn} ${utilities.btnIcon}`}
-                            title="Preview"
-                            aria-label="Preview"
-                          >
-                            <Icon name="eye" aria-hidden="true" />
-                            <span className={styles.visuallyHidden}>Preview</span>
-                          </Link>
-                        </Tooltip>
-                        <Tooltip content="Open in list">
-                          <Link
-                            href={`/admin/articles?search=${encodeURIComponent(r.title)}`}
-                            className={`${utilities.btn} ${utilities.btnIcon}`}
-                            title="Open in list"
-                            aria-label="Open in list"
+                            title="Open item"
+                            aria-label="Open item"
+                            onClick={(e) => e.stopPropagation()}
                           >
                             <Icon name="open" aria-hidden="true" />
-                            <span className={styles.visuallyHidden}>Open in list</span>
+                            <span className={styles.visuallyHidden}>Open item</span>
                           </Link>
                         </Tooltip>
                       </div>

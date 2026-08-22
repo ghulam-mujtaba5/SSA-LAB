@@ -25,6 +25,7 @@ import {
   supervisedProjects,
 } from "../../data/academicSite";
 import { defaultFypProjects } from "../../data/fypProjects";
+import { useAcademicData } from "../../context/AcademicDataContext";
 import styles from "./AcademicSite.module.css";
 
 const impactStats = [
@@ -58,6 +59,13 @@ const domainIllustrationMap = {
 };
 
 export default function AcademicHome() {
+  const { siteData } = useAcademicData();
+  const academicProfileData = siteData.academicProfile || academicProfile;
+  const researchDomainsData = siteData.researchDomains || researchDomains;
+  const publicationsData = siteData.publications || publications;
+  const partnerLogosData = siteData.partnerLogos || partnerLogos;
+  const supervisedProjectsData = siteData.supervisedProjects || supervisedProjects;
+  const fypProjectsData = siteData.fypProjects || defaultFypProjects;
   const [selectedDomain, setSelectedDomain] = useState(null);
 
   return (
@@ -84,7 +92,7 @@ export default function AcademicHome() {
               Led by Dr Junaid Akram at COMSATS University Islamabad, Lahore Campus, the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
             </p>
             <ul className={styles.credentialList}>
-              {academicProfile.credentials.map((credential) => (
+              {(academicProfileData.credentials || []).map((credential) => (
                 <li key={credential}>
                   <ShieldCheck size={18} /> {credential}
                 </li>
@@ -117,31 +125,31 @@ export default function AcademicHome() {
             <div className={styles.heroProfileCard}>
               <div className={styles.heroProfileCardHeader}>
                 <div className={styles.heroProfileStatusDot} />
-                <span className={styles.heroProfileCardTitle}>Profiles</span>
+                <span className={styles.heroProfileCardTitle}>PROFILES</span>
               </div>
               <div className={styles.heroProfileButtons}>
                 <a
-                  href={academicProfile.googleScholar}
+                  href={academicProfileData.googleScholar}
                   target="_blank"
                   rel="noreferrer"
                   className={styles.heroProfileBtn}
                   title="View Google Scholar Profile & Citations"
                 >
-                  <GraduationCap size={15} className={styles.heroProfileBtnIcon} />
+                  <GraduationCap size={14} className={styles.heroProfileBtnIcon} />
                   <span>Google Scholar</span>
-                  <ExternalLink size={12} className={styles.heroProfileBtnExternal} />
+                  <ExternalLink size={11} className={styles.heroProfileBtnExternal} />
                 </a>
 
                 <a
-                  href={academicProfile.officialProfile}
+                  href={academicProfileData.officialProfile}
                   target="_blank"
                   rel="noreferrer"
                   className={styles.heroProfileBtn}
                   title="View COMSATS Official Faculty Profile"
                 >
-                  <BookOpen size={15} className={styles.heroProfileBtnIcon} />
+                  <BookOpen size={14} className={styles.heroProfileBtnIcon} />
                   <span>COMSATS</span>
-                  <ExternalLink size={12} className={styles.heroProfileBtnExternal} />
+                  <ExternalLink size={11} className={styles.heroProfileBtnExternal} />
                 </a>
               </div>
             </div>
@@ -207,7 +215,7 @@ export default function AcademicHome() {
           </Link>
         </div>
         <div className={styles.domainGrid}>
-          {researchDomains.map((domain, index) => (
+          {researchDomainsData.map((domain, index) => (
             <article
               key={domain.title}
               className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
@@ -282,7 +290,7 @@ export default function AcademicHome() {
           </Link>
         </div>
         <div className={styles.compactList}>
-          {publications.slice(0, 4).map((publication) => (
+          {publicationsData.slice(0, 4).map((publication) => (
             <article key={publication.title}>
               <span>{publication.year}</span>
               <div>
@@ -306,13 +314,13 @@ export default function AcademicHome() {
           </Link>
         </div>
         <div className={styles.studentGrid}>
-          {defaultFypProjects.slice(0, 4).map((project) => (
+          {fypProjectsData.slice(0, 4).map((project) => (
             <article key={project.slug}>
               <span className={styles.sessionBadge}>{project.projectType || project.status}</span>
               <h3>
                 <Link href={`/supervision/projects/${project.slug}`}>{project.title}</Link>
               </h3>
-              <p>{project.students.map((s) => s.name).join(", ")}</p>
+              <p>{(project.students || []).map((s) => s.name || s).join(", ")}</p>
               <small>{project.programme} · {project.session}</small>
             </article>
           ))}
@@ -343,7 +351,7 @@ export default function AcademicHome() {
         </h2>
         <div className={styles.partnerRowWrapper}>
           <div className={styles.partnerCardGrid}>
-            {partnerLogos.map((partner) => (
+            {partnerLogosData.map((partner) => (
               <a
                 key={partner.name}
                 href={partner.href}

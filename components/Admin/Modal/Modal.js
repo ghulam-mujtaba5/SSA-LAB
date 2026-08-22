@@ -11,11 +11,16 @@ const Modal = ({
   onConfirm,
   confirmText = "Confirm",
   cancelText = "Cancel",
+  variant = "primary",
+  confirmVariant,
 }) => {
   const modalRef = useRef(null);
   const prevFocusRef = useRef(null);
   const confirmBtnRef = useRef(null);
+  const cancelBtnRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const isDanger = variant === "danger" || confirmVariant === "danger";
 
   useEffect(() => {
     if (isOpen) {
@@ -46,7 +51,12 @@ const Modal = ({
             return initialFocusRef.current.focus();
           }
           
-          // If we have a confirm button, prefer it as initial focus
+          // Default initial focus to cancel button for safe destructive actions or when cancel is present
+          if (cancelBtnRef.current && typeof cancelBtnRef.current.focus === "function") {
+            return cancelBtnRef.current.focus();
+          }
+
+          // If we have a confirm button, fallback focus to it
           if (onConfirm && confirmBtnRef.current && typeof confirmBtnRef.current.focus === "function") {
             return confirmBtnRef.current.focus();
           }
@@ -153,12 +163,16 @@ const Modal = ({
         <div className={styles.content}>{children}</div>
         {onConfirm && (
           <div className={styles.footer}>
-            <button className={`${styles.btn} ${styles.btnSecondary}`} onClick={onClose}>
+            <button 
+              ref={cancelBtnRef}
+              className={`${styles.btn} ${styles.btnSecondary}`} 
+              onClick={onClose}
+            >
               {cancelText}
             </button>
             <button 
               ref={confirmBtnRef} 
-              className={`${styles.btn} ${styles.btnPrimary}`} 
+              className={`${styles.btn} ${isDanger ? styles.btnDanger : styles.btnPrimary}`} 
               onClick={onConfirm}
             >
               {confirmText}

@@ -14,7 +14,7 @@ const themeScript = `
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.style.colorScheme = theme;
     // Set initial background immediately to prevent white flash
-    document.documentElement.style.backgroundColor = theme === 'dark' ? '#1d2127' : '#ffffff';
+    document.documentElement.style.backgroundColor = theme === 'dark' ? '#090d16' : '#ffffff';
   } catch (e) {}
 })();
 `;

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState, useRef, useEffect } from "react";
 import { Menu, X, ExternalLink, ChevronDown } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
+import { useAcademicData } from "../../context/AcademicDataContext";
 import AcademicFooter from "./AcademicFooter";
 import SEO, {
   webSiteSchema,

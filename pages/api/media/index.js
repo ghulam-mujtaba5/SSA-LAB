@@ -6,6 +6,7 @@ import formidable from "formidable";
 import fs from "fs";
 import mongoose from "mongoose";
 import { generateSEOFilename } from "../../../lib/generateSEOFilename";
+import { createAuditLog } from "../../../lib/auditLog";
 
 // Disable Next.js body parser for this route to use formidable
 export const config = {
@@ -147,6 +148,14 @@ export default async function handler(req, res) {
 
             await newAsset.save();
 
+            await createAuditLog({
+              session,
+              action: "create",
+              entity: "MediaAsset",
+              entityId: newAsset._id.toString(),
+              details: `Media uploaded: ${newAsset.filename} (${newAsset.fileType})`,
+            });
+
             res
               .status(201)
               .json({ message: "File uploaded successfully", asset: newAsset });
@@ -204,6 +213,14 @@ export default async function handler(req, res) {
         }
 
         await MediaAsset.deleteMany({ _id: { $in: ids } });
+
+        await createAuditLog({
+          session,
+          action: "bulk-delete",
+          entity: "MediaAsset",
+          entityId: "multiple",
+          details: `Deleted ${assets.length} media assets`,
+        });
 
         res.status(200).json({ message: "Assets deleted successfully" });
       } catch (error) {

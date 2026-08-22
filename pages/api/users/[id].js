@@ -1,6 +1,7 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../../lib/mongoose";
 import User from "../../../models/User";
+import bcrypt from "bcryptjs";
 import { createAuditLog } from "../../../lib/auditLog";
 
 const handler = async (req, res) => {
@@ -27,12 +28,40 @@ const handler = async (req, res) => {
       }
       break;
 
+    case "PATCH":
     case "PUT":
       try {
-        const { name, email, role } = req.body;
+        const { name, username, email, role, password, isActive } = req.body;
+        const updateData = {};
+        if (name) updateData.name = name.trim();
+        if (email) {
+          const normalizedEmail = email.trim().toLowerCase();
+          const existingEmail = await User.findOne({ email: normalizedEmail, _id: { $ne: id } });
+          if (existingEmail) {
+            return res.status(409).json({ error: "User with this email already exists" });
+          }
+          updateData.email = normalizedEmail;
+        }
+        if (username) {
+          const cleanUsername = username.trim().toLowerCase();
+          const existingUsername = await User.findOne({ username: cleanUsername, _id: { $ne: id } });
+          if (existingUsername) {
+            return res.status(409).json({ error: "Username is already in use by another user" });
+          }
+          updateData.username = cleanUsername;
+        }
+        if (role) updateData.role = role;
+        if (typeof isActive !== "undefined") {
+          updateData.isActive = Boolean(isActive);
+        }
+
+        if (password && password.trim()) {
+          updateData.password = await bcrypt.hash(password.trim(), 12);
+        }
+
         const user = await User.findByIdAndUpdate(
           id,
-          { name, email, role },
+          updateData,
           { new: true, runValidators: true },
         );
         if (!user) {
@@ -43,11 +72,11 @@ const handler = async (req, res) => {
           action: "update",
           entity: "User",
           entityId: user._id.toString(),
-          details: `User updated: ${user.email}`,
+          details: `User updated: ${user.email}${password ? ' (password reset)' : ''}`,
         });
         res.status(200).json({ message: "User updated successfully", user });
       } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: error?.message || "Internal Server Error" });
       }
       break;
 

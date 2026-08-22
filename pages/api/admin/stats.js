@@ -2,10 +2,16 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../../lib/mongoose";
 import Project from "../../../models/Project";
-import Article from "../../../models/Article";
+import FypProject from "../../../models/FypProject";
+import Enquiry from "../../../models/Enquiry";
 import User from "../../../models/User";
 import AuditLog from "../../../models/AuditLog";
 import DailyStat from "../../../models/DailyStat";
+
+import Publication from "../../../models/Publication";
+import TeamMember from "../../../models/TeamMember";
+import ResearchDomain from "../../../models/ResearchDomain";
+import LabEvent from "../../../models/LabEvent";
 
 export default async function handler(req, res) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
@@ -36,11 +42,10 @@ export default async function handler(req, res) {
       }
       if (endDate) {
         const endOfDay = new Date(endDate);
-        endOfDay.setUTCHours(23, 59, 59, 999); // Set to end of the day
+        endOfDay.setUTCHours(23, 59, 59, 999);
         dateFilter.$lte = endOfDay;
       }
 
-      // Determine which queries need the date filter
       const auditLogQuery = AuditLog.find(
         Object.keys(dateFilter).length > 0 ? { createdAt: dateFilter } : {}
       )
@@ -54,7 +59,6 @@ export default async function handler(req, res) {
           .sort({ date: "asc" })
           .lean();
       } else {
-        // Default to last 30 days if no range is provided
         const thirtyDaysAgo = new Date();
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         dailyStatQuery = DailyStat.find({ date: { $gte: thirtyDaysAgo } })
@@ -62,7 +66,6 @@ export default async function handler(req, res) {
           .lean();
       }
 
-      // Add error handling for the aggregation
       let totalViews = 0;
       try {
         const totalViewsAggregation = await DailyStat.aggregate([
@@ -76,43 +79,45 @@ export default async function handler(req, res) {
           totalViewsAggregation.length > 0 ? totalViewsAggregation[0].total : 0;
       } catch (aggregationError) {
         console.error("Error in views aggregation:", aggregationError);
-        // Continue with default value of 0
       }
 
-      // These counts are global and not affected by date range
       let projectCount = 0;
-      let articleCount = 0;
+      let fypCount = 0;
+      let enquiryCount = 0;
       let userCount = 0;
+      let publicationCount = 0;
+      let teamCount = 0;
+      let domainCount = 0;
+      let eventCount = 0;
       let recentActivity = [];
       let viewStats = [];
 
       try {
-        [projectCount, articleCount, userCount, recentActivity, viewStats] =
-          await Promise.all([
-            Project.countDocuments().catch(err => {
-              console.error("Error counting projects:", err);
-              return 0;
-            }),
-            Article.countDocuments().catch(err => {
-              console.error("Error counting articles:", err);
-              return 0;
-            }),
-            User.countDocuments().catch(err => {
-              console.error("Error counting users:", err);
-              return 0;
-            }),
-            auditLogQuery.catch(err => {
-              console.error("Error fetching recent activity:", err);
-              return [];
-            }),
-            dailyStatQuery.catch(err => {
-              console.error("Error fetching view stats:", err);
-              return [];
-            }),
-          ]);
+        [
+          projectCount,
+          fypCount,
+          enquiryCount,
+          userCount,
+          publicationCount,
+          teamCount,
+          domainCount,
+          eventCount,
+          recentActivity,
+          viewStats,
+        ] = await Promise.all([
+          Project.countDocuments().catch(() => 0),
+          FypProject.countDocuments().catch(() => 0),
+          Enquiry.countDocuments().catch(() => 0),
+          User.countDocuments().catch(() => 0),
+          Publication.countDocuments().catch(() => 0),
+          TeamMember.countDocuments().catch(() => 0),
+          ResearchDomain.countDocuments().catch(() => 0),
+          LabEvent.countDocuments().catch(() => 0),
+          auditLogQuery.catch(() => []),
+          dailyStatQuery.catch(() => []),
+        ]);
       } catch (promiseError) {
         console.error("Error in Promise.all:", promiseError);
-        // Return default values
       }
 
       res.status(200).json({
@@ -120,8 +125,14 @@ export default async function handler(req, res) {
         data: {
           stats: {
             projects: projectCount,
-            articles: articleCount,
+            fypProjects: fypCount,
+            enquiries: enquiryCount,
             users: userCount,
+            publications: publicationCount,
+            teamMembers: teamCount,
+            researchDomains: domainCount,
+            events: eventCount,
+            newsEvents: eventCount,
             views: totalViews,
           },
           recentActivity,

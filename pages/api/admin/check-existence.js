@@ -1,6 +1,7 @@
 import dbConnect from "../../../lib/mongoose";
-import Article from "../../../models/Article";
 import Project from "../../../models/Project";
+import FypProject from "../../../models/FypProject";
+import User from "../../../models/User";
 import mongoose from "mongoose";
 
 export default async function handler(req, res) {
@@ -8,17 +9,19 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { id, type } = req.body;
+  const { id, type = 'project' } = req.body;
 
-  if (!id || !type) {
-    return res.status(400).json({ message: 'ID and type are required' });
+  if (!id) {
+    return res.status(400).json({ message: 'ID is required' });
   }
 
   await dbConnect();
 
-  const Model = type === 'article' ? Article : Project;
-  if (!Model) {
-    return res.status(400).json({ message: 'Invalid type' });
+  let Model = Project;
+  if (type === 'fyp' || type === 'fypproject') {
+    Model = FypProject;
+  } else if (type === 'user') {
+    Model = User;
   }
 
   let exists = false;

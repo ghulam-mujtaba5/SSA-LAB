@@ -1,7 +1,6 @@
 import { getSession } from "next-auth/react";
 import dbConnect from "../../../../lib/mongoose";
 import Project from "../../../../models/Project";
-import Article from "../../../../models/Article";
 import { submitToIndexNow } from "../../../../lib/indexnow";
 
 export default async function handler(req, res) {
@@ -28,45 +27,25 @@ export default async function handler(req, res) {
     await dbConnect();
     const now = new Date();
     const filter = { scheduledAt: { $ne: null, $lte: now }, published: false };
-    const articleFilter = {
-      publishAt: { $ne: null, $lte: now },
-      published: false,
-    };
 
-    const [projectsToPublish, articlesToPublish] = await Promise.all([
-      Project.find(filter).select("_id title slug").lean(),
-      Article.find(articleFilter).select("_id title slug").lean(),
-    ]);
+    const projectsToPublish = await Project.find(filter).select("_id title slug").lean();
 
-    if (!projectsToPublish.length && !articlesToPublish.length) {
+    if (!projectsToPublish.length) {
       return res
         .status(200)
         .json({ success: true, publishedCount: 0, items: [] });
     }
 
     const projectIds = projectsToPublish.map((p) => p._id);
-    const articleIds = articlesToPublish.map((a) => a._id);
 
-    const [projectResult, articleResult] = await Promise.all([
-      projectIds.length > 0
-        ? Project.updateMany(
-            { _id: { $in: projectIds } },
-            { $set: { published: true } },
-          )
-        : Promise.resolve({ modifiedCount: 0 }),
-      articleIds.length > 0
-        ? Article.updateMany(
-            { _id: { $in: articleIds } },
-            { $set: { published: true } },
-          )
-        : Promise.resolve({ modifiedCount: 0 }),
-    ]);
+    const projectResult = await Project.updateMany(
+        { _id: { $in: projectIds } },
+        { $set: { published: true } },
+    );
 
-    const publishedCount =
-      (projectResult.modifiedCount || 0) + (articleResult.modifiedCount || 0);
+    const publishedCount = projectResult.modifiedCount || 0;
     const publishedItems = [
       ...projectsToPublish.map((p) => ({ ...p, type: "Project" })),
-      ...articlesToPublish.map((a) => ({ ...a, type: "Article" })),
     ];
 
     // Notify Bing/Yandex via IndexNow for all newly published URLs
@@ -75,7 +54,6 @@ export default async function handler(req, res) {
       "https://www.ssa-lab.tech";
     const newUrls = [
       ...projectsToPublish.map((p) => `${siteUrl}/research`),
-      ...articlesToPublish.map((a) => `${siteUrl}/publications`),
     ];
     if (newUrls.length) submitToIndexNow(newUrls).catch(() => {});
 

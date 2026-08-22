@@ -5,6 +5,7 @@ import { Edit3, GripVertical, Plus, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 import AdminLayout from "../../../components/Admin/AdminLayout/AdminLayout";
 import Modal from "../../../components/Admin/Modal/Modal";
+import InlineSpinner from "../../../components/LoadingAnimation/InlineSpinner";
 import styles from "./fyp-admin.module.css";
 
 export default function FypAdminPage() {
@@ -13,6 +14,8 @@ export default function FypAdminPage() {
   const [deleteProject, setDeleteProject] = useState(null);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
   const confirmRef = useRef(null);
 
   const loadProjects = useCallback(async () => {
@@ -93,6 +96,42 @@ export default function FypAdminPage() {
     }
   };
 
+  const filteredProjects = projects.filter((project) => {
+    if (statusFilter === "Published") {
+      if (!project.published) return false;
+    } else if (statusFilter === "Draft") {
+      if (project.published) return false;
+    } else if (statusFilter !== "All") {
+      if (project.status !== statusFilter) return false;
+    }
+
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      const matchTitle = project.title?.toLowerCase().includes(term);
+      const matchSummary = project.summary?.toLowerCase().includes(term);
+      const matchStudents = (project.students || []).some(
+        (s) =>
+          s.name?.toLowerCase().includes(term) ||
+          s.registration?.toLowerCase().includes(term)
+      );
+      const matchTech = (project.technologies || []).some((t) =>
+        t.toLowerCase().includes(term)
+      );
+      if (!matchTitle && !matchSummary && !matchStudents && !matchTech)
+        return false;
+    }
+    return true;
+  });
+
+  const filterOptions = [
+    "All",
+    "In Progress",
+    "Completed",
+    "Archived",
+    "Published",
+    "Draft",
+  ];
+
   return (
     <AdminLayout title="FYP Supervision">
       <div className={styles.page}>
@@ -110,16 +149,60 @@ export default function FypAdminPage() {
           </Link>
         </header>
 
+        {/* Search & Filter Bar */}
+        <div className={styles.filterBar}>
+          <div className={styles.searchWrapper}>
+            <input
+              type="text"
+              placeholder="Search FYP projects by title, summary, student, technology..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={styles.searchInput}
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className={styles.clearButton}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
+          </div>
+          <div className={styles.filterChips}>
+            {filterOptions.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                className={`${styles.chipBtn} ${
+                  statusFilter === opt ? styles.activeChip : ""
+                }`}
+                onClick={() => setStatusFilter(opt)}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {loading ? (
-          <div className={styles.empty}>Loading supervised projects…</div>
-        ) : projects.length === 0 ? (
+          <div className={styles.empty} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", padding: "60px 20px" }}>
+            <InlineSpinner sizePx={24} />
+            <span>Loading supervised projects…</span>
+          </div>
+        ) : filteredProjects.length === 0 ? (
           <div className={styles.empty}>
-            <h2>No FYP records yet</h2>
-            <p>Add the first supervised project to begin the academic archive.</p>
+            <h2>No FYP records found</h2>
+            <p>
+              {searchTerm || statusFilter !== "All"
+                ? "No projects match your filter criteria."
+                : "Add the first supervised project to begin the academic archive."}
+            </p>
           </div>
         ) : (
           <div className={styles.list}>
-            {projects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <article
                 key={project._id}
                 className={`${styles.card} ${
@@ -197,6 +280,8 @@ export default function FypAdminPage() {
         title="Delete FYP project"
         onConfirm={confirmDelete}
         confirmText="Delete project"
+        confirmVariant="danger"
+        variant="danger"
         cancelText="Cancel"
         initialFocusRef={confirmRef}
       >

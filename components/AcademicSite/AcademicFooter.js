@@ -16,6 +16,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
+import { useAcademicData } from "../../context/AcademicDataContext";
 import styles from "./AcademicFooter.module.css";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -43,6 +44,8 @@ const LAB_LINKS = [
 ];
 
 export default function AcademicFooter() {
+  const { siteData } = useAcademicData();
+  const profile = siteData.academicProfile || academicProfile;
   const footerRef = useRef(null);
   const isInView = useInView(footerRef, { once: true, amount: 0.15 });
   const reduceMotion = useReducedMotion();
@@ -79,93 +82,101 @@ export default function AcademicFooter() {
                 className={styles.logoImage}
                 itemProp="logo"
               />
-              <div className={styles.brandTitles}>
-                <strong itemProp="name">{academicProfile.labShort}</strong>
-                <span itemProp="founder">{academicProfile.name}</span>
+              <div className={styles.brandTitle}>
+                <strong itemProp="name">{profile.labShort || profile.lab}</strong>
+                <span itemProp="founder">{profile.name}</span>
               </div>
             </Link>
-            <p className={styles.tagline} itemProp="description">
-              Source code security assessment, vulnerability detection, automated software testing, and malware analysis at COMSATS University Islamabad, Lahore Campus.
+            <p className={styles.brandDesc} itemProp="description">
+              Advancing source-code vulnerability detection, automated software
+              testing, and malware analysis at COMSATS University Islamabad.
             </p>
-            <div className={styles.institutionBadge} itemProp="parentOrganization">
-              <GraduationCap size={15} /> {academicProfile.institution}
+            <div className={styles.metaRow}>
+              <GraduationCap size={15} /> {profile.institution}
+            </div>
+            <div className={styles.metaRow}>
+              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
             </div>
           </div>
 
-          {/* Nav Column 1: Research */}
-          <nav className={styles.navCol} aria-label="Research links">
-            <strong className={styles.colTitle}>Research & Tools</strong>
-            {RESEARCH_LINKS.map(({ href, label }) => (
-              <Link key={href} href={href} className={styles.navLink}>
-                {label}
-              </Link>
-            ))}
+          {/* Column 2: Research Quick Links */}
+          <nav className={styles.col} aria-label="Research Links">
+            <h4 className={styles.colHeading}>Research</h4>
+            <ul className={styles.linkList}>
+              {RESEARCH_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <ArrowRight size={13} className={styles.linkArrow} />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          {/* Nav Column 2: Supervision & Students */}
-          <nav className={styles.navCol} aria-label="Supervision links">
-            <strong className={styles.colTitle}>Supervision & Students</strong>
-            {SUPERVISION_LINKS.map(({ href, label }) => (
-              <Link key={href} href={href} className={styles.navLink}>
-                {label}
-              </Link>
-            ))}
+          {/* Column 3: Supervision */}
+          <nav className={styles.col} aria-label="Supervision Links">
+            <h4 className={styles.colHeading}>Supervision</h4>
+            <ul className={styles.linkList}>
+              {SUPERVISION_LINKS.map((link) => (
+                <li key={link.label}>
+                  {link.external ? (
+                    <a href={link.href} target="_blank" rel="noreferrer">
+                      <ExternalLink size={13} className={styles.linkArrow} />
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href}>
+                      <ArrowRight size={13} className={styles.linkArrow} />
+                      {link.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          {/* Nav Column 3: Direct Institutional Details */}
-          <div className={styles.contactCol}>
-            <strong className={styles.colTitle}>Direct Contact</strong>
-            <p className={styles.contactItem}>
+          {/* Column 4: Contact & Office */}
+          <div className={styles.col}>
+            <h4 className={styles.colHeading}>Contact & Office</h4>
+            <div className={styles.contactItem}>
               <Mail size={15} />
-              <a href={`mailto:${academicProfile.emails[0]}`} itemProp="email">
-                {academicProfile.emails[0]}
+              <a href={`mailto:${profile.emails?.[0] || profile.labEmail || 'junaidakram@cuilahore.edu.pk'}`} itemProp="email">
+                {profile.emails?.[0] || profile.labEmail}
               </a>
-            </p>
-            <p className={styles.contactItem}>
+            </div>
+            <div className={styles.contactItem}>
               <MapPin size={15} />
-              <span itemProp="address">{academicProfile.office}</span>
-            </p>
+              <span itemProp="address">{profile.office}</span>
+            </div>
+
             <div className={styles.socialRow}>
               <a
-                href={academicProfile.googleScholar}
+                href={profile.googleScholar}
                 target="_blank"
-                rel="me noopener noreferrer"
-                className={styles.socialIcon}
-                aria-label="Google Scholar Profile"
+                rel="noreferrer"
+                className={styles.socialBtn}
                 title="Google Scholar Profile"
-                itemProp="sameAs"
+                aria-label="Google Scholar"
               >
-                <BookOpen size={18} />
+                <GraduationCap size={16} />
               </a>
               <a
-                href={academicProfile.linkedin}
+                href={profile.linkedin}
                 target="_blank"
-                rel="me noopener noreferrer"
-                className={styles.socialIcon}
-                aria-label="LinkedIn Profile"
+                rel="noreferrer"
+                className={styles.socialBtn}
                 title="LinkedIn Profile"
-                itemProp="sameAs"
+                aria-label="LinkedIn"
               >
-                <Linkedin size={18} />
+                <Linkedin size={16} />
               </a>
               <a
-                href={academicProfile.officialProfile}
+                href={profile.officialProfile}
                 target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialIcon}
-                aria-label="COMSATS Official Profile"
+                rel="noreferrer"
+                className={styles.socialBtn}
                 title="COMSATS Official Profile"
-                itemProp="sameAs"
-              >
-                <ExternalLink size={18} />
-              </a>
-              <a
-                href="https://github.com/ssa-lab"
-                target="_blank"
-                rel="me noopener noreferrer"
-                className={styles.socialIcon}
-                aria-label="GitHub Repository"
-                title="GitHub Repository"
                 itemProp="sameAs"
               >
                 <Github size={18} />

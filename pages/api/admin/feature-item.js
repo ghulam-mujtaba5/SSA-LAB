@@ -1,6 +1,5 @@
 import { getToken } from "next-auth/jwt";
 import dbConnect from "../../../lib/mongoose";
-import Article from "../../../models/Article";
 import Project from "../../../models/Project";
 
 const MAX_FEATURED_ITEMS = 3;
@@ -17,16 +16,14 @@ export default async function handler(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  const { id, type, featured } = req.body;
+  const { id, featured } = req.body;
 
-  if (!id || !type || typeof featured !== 'boolean') {
-    return res.status(400).json({ success: false, message: "Missing required parameters: id, type, and featured status." });
+  if (!id || typeof featured !== 'boolean') {
+    return res.status(400).json({ success: false, message: "Missing required parameters: id and featured status." });
   }
 
-  const Model = type === 'article' ? Article : Project;
-  if (!Model) {
-    return res.status(400).json({ success: false, message: "Invalid item type specified." });
-  }
+  const Model = Project;
+  const itemType = "project";
 
   try {
     await dbConnect();
@@ -36,7 +33,7 @@ export default async function handler(req, res) {
       if (featuredCount >= MAX_FEATURED_ITEMS) {
         return res.status(400).json({
           success: false,
-          message: `You can only feature a maximum of ${MAX_FEATURED_ITEMS} ${type}s at a time.`
+          message: `You can only feature a maximum of ${MAX_FEATURED_ITEMS} ${itemType}s at a time.`
         });
       }
     }
@@ -54,7 +51,7 @@ export default async function handler(req, res) {
     res.status(200).json({ success: true, data: updatedItem });
 
   } catch (error) {
-    console.error(`Failed to update ${type} feature status:`, error);
+    console.error(`Failed to update ${itemType} feature status:`, error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 }

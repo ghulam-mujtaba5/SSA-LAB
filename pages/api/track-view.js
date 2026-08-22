@@ -1,7 +1,7 @@
 // pages/api/track-view.js
 import dbConnect from "../../lib/mongoose";
-import Article from "../../models/Article";
 import Project from "../../models/Project";
+import FypProject from "../../models/FypProject";
 import DailyStat from "../../models/DailyStat";
 
 export default async function handler(req, res) {
@@ -11,9 +11,9 @@ export default async function handler(req, res) {
       .json({ success: false, message: "Method Not Allowed" });
   }
 
-  const { id, type } = req.body;
+  const { id, type = "project" } = req.body;
 
-  if (!id || !type || !["article", "project"].includes(type)) {
+  if (!id) {
     return res
       .status(400)
       .json({ success: false, message: "Invalid request body" });
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   try {
     await dbConnect();
 
-    const Model = type === "article" ? Article : Project;
+    const Model = type === "fyp" ? FypProject : Project;
     const updatedContent = await Model.findByIdAndUpdate(id, {
       $inc: { views: 1 },
     });
@@ -36,11 +36,9 @@ export default async function handler(req, res) {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to the start of the day
 
-    const updateField = type === "article" ? "articleViews" : "projectViews";
-
     await DailyStat.findOneAndUpdate(
       { date: today },
-      { $inc: { [updateField]: 1 } },
+      { $inc: { projectViews: 1, views: 1 } },
       { upsert: true, new: true }, // Create a new doc if one doesn't exist for today
     );
 

@@ -38,3 +38,5 @@ scratch/
 *.pptx
 Past Projects*
 Running Projects*
+.agents/
+agents/

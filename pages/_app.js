@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, useRef, useCallback } from "react";
 import { hasAcceptedCookies } from "../utils/cookieConsent";
 import Head from "next/head";
 import { ThemeProvider } from "../context/ThemeContext";
+import { AcademicDataProvider } from "../context/AcademicDataContext";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import CookieConsentBanner from "../components/CookieConsentBanner/CookieConsentBanner";
@@ -294,28 +295,30 @@ function MyApp({ Component, pageProps, session }) {
           }}
         />
         <ThemeProvider>
-          {/* Top progress bar for navigation */}
-          <TopProgress active={topProgress.active} done={topProgress.done} />
+          <AcademicDataProvider>
+            {/* Top progress bar for navigation */}
+            <TopProgress active={topProgress.active} done={topProgress.done} />
 
-          {/* Full-page loading overlay */}
-          <LoadingAnimation
-            visible={showLoader || manualOverlay.visible}
-            backdropBlur={loaderSettings.backdropBlur}
-            backdropOpacity={loaderSettings.backdropOpacity}
-            variant={manualOverlay.variant}
-            progress={manualOverlay.progress}
-            message={manualOverlay.message}
-            submessage={manualOverlay.submessage}
-          />
+            {/* Full-page loading overlay */}
+            <LoadingAnimation
+              visible={showLoader || manualOverlay.visible}
+              backdropBlur={loaderSettings.backdropBlur}
+              backdropOpacity={loaderSettings.backdropOpacity}
+              variant={manualOverlay.variant}
+              progress={manualOverlay.progress}
+              message={manualOverlay.message}
+              submessage={manualOverlay.submessage}
+            />
 
-          {/* Page content wrapped in ErrorBoundary */}
-          <ErrorBoundary key={router.asPath}>
-            <Component {...pageProps} key={router.asPath} />
-          </ErrorBoundary>
+            {/* Page content wrapped in ErrorBoundary */}
+            <ErrorBoundary key={router.asPath}>
+              <Component {...pageProps} key={router.asPath} />
+            </ErrorBoundary>
 
-          {/* Global UI elements */}
-          <ThemeToggle />
-          <CookieConsentBanner />
+            {/* Global UI elements */}
+            {!router.pathname?.startsWith("/admin") && <ThemeToggle />}
+            <CookieConsentBanner />
+          </AcademicDataProvider>
         </ThemeProvider>
       </SessionProvider>
     </Fragment>

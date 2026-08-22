@@ -14,7 +14,7 @@ const SavedSearchSchema = new mongoose.Schema(
     scope: {
       type: String,
       required: true,
-      enum: ["articles", "projects", "media"],
+      enum: ["articles", "projects", "fyp", "media", "enquiries", "users", "all"],
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

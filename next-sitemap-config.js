@@ -15,7 +15,6 @@ module.exports = {
     "/sitemap-dynamic.xml",
     "/feed.xml",
     "/privacy-policy",
-    "/resume",
     "/portfolio",
     "/portfolio/*",
     "/projects",

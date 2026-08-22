@@ -6,6 +6,8 @@ import { projectSchema } from "../../../lib/validation/schemas";
 import RichTextEditor from "../RichTextEditor/RichTextEditor";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import GalleryManager from "../GalleryManager/GalleryManager";
+import ChipInput from "../Form/ChipInput";
+import InlineSpinner from "../../LoadingAnimation/InlineSpinner";
 
 import styles from "./ProjectForm.premium.module.css";
 import utilities from "../../../styles/utilities.module.css";
@@ -38,7 +40,7 @@ function ProjectForm({
     defaultValues: {
       title: project.title || "",
       description: project.description || "",
-      tags: (project.tags || []).join(", "),
+      tags: Array.isArray(project.tags) ? project.tags.join(", ") : (project.tags || ""),
       status: project.status || "In Progress",
       category: project.category || "Others",
       // Normalize legacy placeholders like '#' to empty string to avoid URL validation errors
@@ -296,12 +298,21 @@ function ProjectForm({
           htmlFor="tags"
           className={`${styles.label} ${styles.label}`}
         >
-          Tags (comma-separated)
+          Tags
         </label>
-        <input
-          id="tags"
-          {...register("tags")}
-          className={`${styles.input} ${styles.input}`}
+        <Controller
+          name="tags"
+          control={control}
+          render={({ field }) => (
+            <ChipInput
+              value={field.value}
+              onChange={field.onChange}
+              placeholder="Add tag and press Enter"
+              ariaLabel="Add tag"
+              addButtonLabel="Add Tag"
+              reorderable={true}
+            />
+          )}
         />
         {errors.tags && (
           <p className={styles.error}>{errors.tags.message}</p>
@@ -648,8 +659,16 @@ function ProjectForm({
           type="submit"
           className={`${utilities.btn} ${utilities.btnPrimary}`}
           disabled={isSubmitting}
+          style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}
         >
-          {project?._id ? "Update" : "Create"} Project
+          {isSubmitting && <InlineSpinner sizePx={16} />}
+          {isSubmitting
+            ? project?._id
+              ? "Updating…"
+              : "Creating…"
+            : project?._id
+              ? "Update Project"
+              : "Create Project"}
         </button>
       </div>
     </form>

@@ -1,36 +1,50 @@
 # Original User Request
 
-## Initial Request — 2026-08-01T16:19:16Z
+## 2026-08-22T03:07:46Z
 
-Audit, diagnose, and comprehensively overhaul the frontend UI/UX of the portfolio application (`e:\MyPortfolio - Copy`) to fix existing flaws, elevate visual aesthetics and typography, optimize responsive layouts, polish interactive micro-animations, and maximize overall user experience without breaking existing features or introducing side-effects.
+Enable comprehensive management of all existing and new website content directly from the Admin Portal, including database migration/seeding for existing static data, full CRUD UI for all site sections, dynamic synchronization with public pages, and thorough end-to-end browser verification.
 
-Working directory: e:\MyPortfolio - Copy
+Working directory: e:\ssa lab
 Integrity mode: development
 
 ## Requirements
 
-### R1. Complete UI/UX Audit & Flaw Resolution
-- Conduct a systematic audit of all pages and components across the portfolio to detect layout bugs, styling inconsistencies, broken link handlers, contrast/accessibility flaws, overflow issues, and unhandled loading/error UI states.
-- Fix identified weaknesses, visual glitches, and interactive bugs cleanly without altering core application behavior or breaking backend API integrations.
+### R1. Database Migration & Existing Data Seeding
+- Migrate and seed all existing static data (from `data/academicSite.js`, `data/fypProjects.js`, and related sources) into MongoDB models so that all pre-existing records (Lab details, Publications, Team Members, Research Areas, News/Announcements, FYP Projects, and General Projects) exist in the database and appear immediately in the admin portal.
+- Ensure the seeding mechanism safely upserts or populates missing records without overwriting future admin modifications.
 
-### R2. Visual Design & Modern Frontend Elevation
-- Maximize UI aesthetics using modern design principles: refined HSL/CSS color palette with smooth dark/light mode transitions, modern typography, glassmorphism, responsive cards, crisp gradients, and cohesive icon usage (e.g. Framer Motion, Lucide icons).
-- Upgrade interactive micro-animations, button hover responses, active navigation feedback, scroll triggers, and mobile drawer/menu interactions for a seamless, state-of-the-art user experience.
+### R2. Complete Admin Portal CMS & Management Interfaces
+- Build/extend admin dashboard interfaces and API endpoints to provide full CRUD (Create, Read, Update, Delete) management for:
+  - Lab Profile & Site Settings (Name, tagline, mission, contact info, hero content)
+  - Team Members & Alumni (Profiles, designations, bio, images, social links)
+  - Publications (Title, authors, year, conference/journal, DOI/links, categories)
+  - Research Areas & Focus Topics (Titles, descriptions, icons, associated papers/projects)
+  - News, Events & Announcements (Headlines, dates, summaries, details)
+  - FYP Projects & Regular Projects (Titles, supervisors, students, status, tags, deliverables)
+- Include proper form validation, image/asset upload handling, sorting, search, filtering, and audit logging for modifications.
 
-### R3. Responsive & Mobile UX Optimization
-- Ensure flawless responsiveness across all viewport sizes (mobile, tablet, desktop, ultra-wide) with appropriate touch targets, dynamic layout math, mobile-friendly navigation, and clear visual hierarchy.
+### R3. Public Site Dynamic Integration
+- Update public-facing pages and components to consume live data directly from MongoDB via Next.js server-side/API routes, with fallback handling to ensure the site remains fully functional even before initialization.
+- Ensure any edits or additions made in the admin portal reflect immediately on the corresponding public site pages.
 
-### R4. Build, Lint & Regression Verification
-- Perform programmatic verification using `npm run build`, `npm run lint`, and `npm test` to ensure zero compilation, linting, or regression errors after the frontend overhaul.
+### R4. End-to-End Browser & Verification Testing
+- Perform comprehensive browser testing (navigating the admin portal, logging in, creating, modifying, and deleting records across all sections).
+- Verify that updated content displays accurately on public-facing site pages without layout or runtime errors.
 
 ## Acceptance Criteria
 
-### UI/UX & Visual Aesthetics
-- [ ] Visual design across all pages (Home, Projects, Research/Lab, Publications, Contact, etc.) features modern styling, high-contrast typography, refined spacing, and cohesive theme toggle support.
-- [ ] Interactive elements (buttons, links, nav items, project cards) feature smooth micro-interactions, Framer Motion animations, hover states, and clear focus indicators without layout shifts.
-- [ ] No visual overlap, text truncation errors, or broken responsive layouts across mobile, tablet, and desktop breakpoints.
+### Data & Seeding
+- [ ] All pre-existing static records from `data/academicSite.js` and `data/fypProjects.js` are populated in the database.
+- [ ] Database contains valid collections and schemas for all site sections (Site Info, Members, Publications, Research Areas, News, Projects).
 
-### Stability & Verification
-- [ ] `npm run build` completes successfully with zero build or syntax errors.
-- [ ] `npm run lint` passes without critical errors or unhandled warnings.
-- [ ] Existing Jest unit/integration tests (`npm test`) execute and pass without breaking existing functionality.
+### Admin Portal Management
+- [ ] Admin portal displays lists and management tables for all site entities with search, edit, delete, and add new capabilities.
+- [ ] Admin forms allow editing all fields (text, arrays, dates, tags, URLs, images) and successfully save updates to MongoDB.
+- [ ] New items can be added and existing items can be edited or removed without database or UI errors.
+
+### Public Website Synchronization
+- [ ] Public pages (Home, About, Team, Research, Publications, Projects, News/Events) dynamically render database content.
+- [ ] Changes saved in the admin portal immediately update the live public view.
+
+### Browser Verification
+- [ ] Browser verification confirms successful admin authentication, entity creation/editing/deletion, and public site verification.

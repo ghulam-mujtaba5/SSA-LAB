@@ -34,17 +34,21 @@ const createAdmin = async () => {
     if (existingUser) {
       existingUser.password = hashedPassword;
       existingUser.role = "admin"; // Ensure role is admin
+      if (!existingUser.username) existingUser.username = "admin";
+      if (existingUser.isActive === false) existingUser.isActive = true;
       await existingUser.save();
-      console.log(`Admin user with email ${email} was updated successfully.`);
+      console.log(`Admin user with email ${email} was updated successfully (username: ${existingUser.username}).`);
     } else {
       const newUser = new User({
         name: "Admin",
+        username: "admin",
         email: email,
         password: hashedPassword,
         role: "admin",
+        isActive: true,
       });
       await newUser.save();
-      console.log(`Admin user created successfully with email: ${email}`);
+      console.log(`Admin user created successfully with email: ${email} (username: admin)`);
     }
   } catch (err) {
     console.error("Admin creation failed:", err.message);

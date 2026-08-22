@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Save } from "lucide-react";
 import GalleryManager from "../GalleryManager/GalleryManager";
 import ImageUploader from "../ImageUploader/ImageUploader";
+import InlineSpinner from "../../LoadingAnimation/InlineSpinner";
 import styles from "./FypProjectForm.module.css";
 
 const emptyProject = {
@@ -381,7 +382,7 @@ export default function FypProjectForm({
 
       <div className={styles.actions}>
         <button type="submit" disabled={submitting}>
-          <Save size={18} />
+          {submitting ? <InlineSpinner sizePx={16} /> : <Save size={18} />}
           {submitting ? "Saving…" : "Save FYP project"}
         </button>
       </div>

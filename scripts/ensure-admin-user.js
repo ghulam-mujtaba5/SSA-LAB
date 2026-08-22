@@ -26,15 +26,17 @@ async function main() {
     const hashed = await bcrypt.hash(password, 10);
 
     if (!user) {
-      user = new User({ name, email, password: hashed, role: 'admin' });
+      user = new User({ name, username: 'admin', email, password: hashed, role: 'admin', isActive: true });
       await user.save();
-      console.log(`Created new admin user: ${email}`);
+      console.log(`Created new admin user: ${email} (username: admin)`);
     } else {
       user.password = hashed;
       user.role = 'admin';
       if (!user.name) user.name = name;
+      if (!user.username) user.username = 'admin';
+      if (user.isActive === false) user.isActive = true;
       await user.save();
-      console.log(`Updated existing user to admin and reset password: ${email}`);
+      console.log(`Updated existing user to admin and reset password: ${email} (username: ${user.username})`);
     }
 
     process.exit(0);

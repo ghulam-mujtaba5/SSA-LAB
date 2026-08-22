@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "loc": "/supervision/projects/t2-1787369261905-51707-invalid-category-project",
+    "lastmod": "2026-08-22T04:23:40.874Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/automated-test-data-generation-for-the-arc-system",
+    "lastmod": "2026-08-22T04:33:51.400Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/m2-c2-1787367468381-quantum-ml",
+    "lastmod": "2026-08-22T02:57:53.930Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/m2-c2-1787367385503-quantum-ml",
+    "lastmod": "2026-08-22T02:56:32.148Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/m2_c2_test_1787367329856-quantum-ml",
+    "lastmod": "2026-08-22T02:55:35.639Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sup-analysis-and-detection-of-fraudulent-transactions-using-the-paysim-financial-simulator",
+    "lastmod": "2026-08-22T03:23:13.984Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/test-smell-detection-in-the-arc-system",
+    "lastmod": "2026-08-22T04:33:51.557Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sup-malware-feature-extraction-of-instruction-frequency",
+    "lastmod": "2026-08-22T03:23:14.057Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/log-based-test-case-slicing",
+    "lastmod": "2026-08-22T04:33:51.706Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sup-malware-feature-extraction-via-machine-learning-algorithm",
+    "lastmod": "2026-08-22T03:23:14.130Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/obfuscated-code-detection-in-android-applications",
+    "lastmod": "2026-08-22T04:33:51.853Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sup-elderlycare-an-android-based-elderly-health-assistance-application",
+    "lastmod": "2026-08-22T03:23:14.214Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sqvdt-source-code-vulnerability-detection",
+    "lastmod": "2026-08-22T04:33:52.000Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sup-detection-and-defense-of-vulnerability-in-openssl",
+    "lastmod": "2026-08-22T03:23:14.564Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/vcipr-vulnerability-detection-at-function-level",
+    "lastmod": "2026-08-22T04:33:52.147Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sup-correlation-attack-on-geffe-generator",
+    "lastmod": "2026-08-22T03:23:14.637Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/patch-analysis-and-vulnerability-research",
+    "lastmod": "2026-08-22T04:33:52.295Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/sup-chess-game-development",
+    "lastmod": "2026-08-22T03:23:14.710Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/droidsd-android-similarity-detection",
+    "lastmod": "2026-08-22T04:33:52.468Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  },
+  {
+    "loc": "/supervision/projects/ibfet-large-scale-code-clone-detection",
+    "lastmod": "2026-08-22T04:33:52.616Z",
+    "changefreq": "monthly",
+    "priority": 0.8
+  }
+]

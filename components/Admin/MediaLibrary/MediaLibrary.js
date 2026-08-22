@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import ChipInput from "../ArticleForm/ChipInput"; // Re-using ChipInput for tags
+import ChipInput from "../Form/ChipInput"; // Re-using ChipInput for tags
 import Modal from "../Modal/Modal";
 import Icon from "../Icon/Icon";
 import InlineSpinner from "../../LoadingAnimation/InlineSpinner";
@@ -269,7 +269,7 @@ const MediaLibrary = ({ onSelect, isModal = false, contextTitle = "", imageType 
               <div className={styles.assetOverlay}>
                 <p className={styles.assetName}>{asset.filename}</p>
                 <div className={styles.assetMeta}>
-                  <span>{new Date(asset.uploadedAt).toLocaleDateString()}</span>
+                  <span>{new Date(asset.createdAt || asset.uploadedAt).toLocaleDateString()}</span>
                   <span>{(asset.tags || []).length} tags</span>
                 </div>
                 <div className={styles.tagContainer}>
@@ -397,7 +397,7 @@ const PreviewModal = ({ asset, onClose, onInsert }) => {
             <strong>Tags:</strong> {(asset.tags || []).join(", ") || "N/A"}
           </div>
           <div className={styles.formGroup}>
-            <strong>Uploaded:</strong> {new Date(asset.uploadedAt).toLocaleString()}
+            <strong>Uploaded:</strong> {new Date(asset.createdAt || asset.uploadedAt).toLocaleString()}
           </div>
           <div className={styles.modalActions}>
             <motion.button 

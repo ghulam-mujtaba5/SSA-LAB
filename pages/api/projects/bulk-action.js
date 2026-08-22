@@ -17,32 +17,33 @@ async function handler(req, res) {
 
   if (req.method === "POST") {
     await dbConnect();
-    const { projectIds, action } = req.body;
+    const { projectIds, ids, action } = req.body;
+    const targetIds = projectIds || ids || [];
 
     try {
       let result;
       let auditAction;
 
       // Fetch slugs of affected projects before mutating for revalidation
-      const affectedProjects = await Project.find({ _id: { $in: projectIds } }).select("slug").lean();
+      const affectedProjects = await Project.find({ _id: { $in: targetIds } }).select("slug").lean();
 
       switch (action) {
         case "publish":
           result = await Project.updateMany(
-            { _id: { $in: projectIds } },
+            { _id: { $in: targetIds } },
             { $set: { published: true } },
           );
           auditAction = "bulk-publish";
           break;
         case "draft":
           result = await Project.updateMany(
-            { _id: { $in: projectIds } },
+            { _id: { $in: targetIds } },
             { $set: { published: false } },
           );
           auditAction = "bulk-draft";
           break;
         case "delete":
-          result = await Project.deleteMany({ _id: { $in: projectIds } });
+          result = await Project.deleteMany({ _id: { $in: targetIds } });
           auditAction = "bulk-delete";
           break;
         default:
