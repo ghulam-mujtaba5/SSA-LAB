@@ -91,9 +91,9 @@
 }
 
 .logoWrap {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
   color: inherit;
   transition: opacity 0.2s ease;
@@ -110,40 +110,47 @@
 }
 
 .logoWrap:hover .logoImage {
-  transform: scale(1.08);
+  transform: scale(1.06);
   filter: drop-shadow(0 4px 16px rgba(56, 189, 248, 0.5));
 }
 
-.brandTitles strong {
+.brandTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brandTitle strong {
   display: block;
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
+  font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--academic-ink, #0f172a);
+  line-height: 1.3;
 }
 
-.brandTitles span {
+.brandTitle span {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--academic-blue, #4f46e5);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
 }
 
-.tagline {
+.brandDesc {
   margin: 0;
   font-size: 0.88rem;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--academic-muted, #64748b);
   max-width: 320px;
 }
 
-.institutionBadge {
+.metaRow {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--academic-navy, #1e1b4b);
@@ -154,88 +161,88 @@
   width: fit-content;
 }
 
-/* Nav Columns */
-.navCol {
+:global([data-theme="dark"]) .metaRow {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--academic-ink, #f8fafc);
+  border-color: var(--academic-line, #1e293b);
+}
+
+/* Nav & Contact Columns */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.colHeading {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--academic-ink, #0f172a);
+  margin: 0 0 2px 0;
+  letter-spacing: -0.01em;
+}
+
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.colTitle {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--academic-ink, #0f172a);
-  margin-bottom: 4px;
-}
-
-.navLink {
+.linkList li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--academic-muted, #64748b);
   font-size: 0.88rem;
   line-height: 1.45;
   text-decoration: none;
-  width: fit-content;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.navLink:hover {
+.linkList li a:hover {
   color: var(--academic-blue, #4f46e5);
   transform: translateX(3px);
 }
 
-/* Start / Collaboration Panel */
-.startPanel {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: var(--academic-soft, #f8fafc);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid var(--academic-line, #e2e8f0);
+.linkArrow {
+  flex-shrink: 0;
+  color: var(--academic-blue, #4f46e5);
+  opacity: 0.8;
+  transition: transform 0.2s ease;
 }
 
-.startCopy {
-  margin: 0;
-  font-size: 0.84rem;
-  line-height: 1.55;
+.linkList li a:hover .linkArrow {
+  transform: translateX(2px);
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.88rem;
+  line-height: 1.5;
   color: var(--academic-muted, #64748b);
 }
 
-.cta {
-  width: fit-content;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 0 20px;
-  border-radius: 8px;
-  background: var(--academic-blue, #4f46e5);
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.88rem;
-  text-decoration: none;
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cta:hover {
-  background: var(--brand-primary-hover, #4338ca);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
-}
-
-.emailLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.contactItem svg {
+  flex-shrink: 0;
+  margin-top: 3px;
   color: var(--academic-blue, #4f46e5);
-  font-family: ui-monospace, monospace;
-  font-size: 0.8rem;
+}
+
+.contactItem a {
+  color: var(--academic-muted, #64748b);
   text-decoration: none;
   transition: color 0.2s ease;
+  word-break: break-word;
 }
 
-.emailLink:hover {
-  color: var(--brand-primary-hover, #4338ca);
+.contactItem a:hover {
+  color: var(--academic-blue, #4f46e5);
   text-decoration: underline;
 }
 
@@ -243,10 +250,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
-.socialIcon {
+.socialBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -260,7 +267,7 @@
   text-decoration: none;
 }
 
-.socialIcon:hover {
+.socialBtn:hover {
   border-color: var(--academic-blue, #4f46e5);
   color: var(--academic-blue, #4f46e5);
   transform: translateY(-2px);
@@ -294,6 +301,7 @@
   color: var(--academic-muted, #64748b);
   font-size: 0.82rem;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .bottomLink:hover {
@@ -338,7 +346,7 @@
 }
 
 :global([data-theme="dark"]) .wireNode,
-:global([data-theme="dark"]) .socialIcon,
+:global([data-theme="dark"]) .socialBtn,
 :global([data-theme="dark"]) .toTop {
   background: var(--academic-soft, #111827);
   border-color: var(--academic-line, #1e293b);

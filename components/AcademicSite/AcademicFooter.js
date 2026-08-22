@@ -188,11 +188,11 @@ export default function AcademicFooter() {
         {/* Bottom copyright bar */}
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            © {new Date().getFullYear()} {academicProfile.name} · {academicProfile.lab}. All rights reserved.
+            © {new Date().getFullYear()} {profile.name || academicProfile.name} · {profile.lab || academicProfile.lab}. All rights reserved.
           </p>
           <div className={styles.bottomLinks}>
             <span style={{ color: "var(--academic-muted)", fontSize: "0.82rem" }}>
-              {academicProfile.office}, COMSATS Lahore
+              {profile.office || academicProfile.office}, COMSATS Lahore
             </span>
             <Link
               href="/admin/login"
