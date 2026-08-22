@@ -181,6 +181,11 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["AI Healthcare", "Computer Vision", "Psychological Screening"],
     technologies: ["Python", "OpenCV", "TensorFlow", "Next.js", "TailwindCSS"],
+    coverImage: "/academic/fyp/ai-dermatologist-poster.png",
+    coverAlt: "MultiSense AI Screening Project Visual",
+    gallery: [
+      { url: "/academic/fyp/ai-dermatologist-poster.png", caption: "MultiSense AI Multi-Modal Screening Poster", order: 1 }
+    ],
     published: true,
     featured: true,
     displayOrder: 6
@@ -203,6 +208,11 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Android Malware", "Apktool Disassembly", "Random Forest Classifier"],
     technologies: ["Python", "Apktool", "Androguard", "Scikit-learn"],
+    coverImage: "/academic/fyp/test-data-generation-poster.png",
+    coverAlt: "Robust Android Malware Detector Poster",
+    gallery: [
+      { url: "/academic/fyp/test-data-generation-poster.png", caption: "Robust Android Malware Detector Research Poster", order: 1 }
+    ],
     published: true,
     featured: false,
     displayOrder: 7
@@ -223,6 +233,11 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Medical Image AI", "Convolutional Neural Networks", "Cell Classification"],
     technologies: ["Python", "TensorFlow", "OpenCV", "Flask / React"],
+    coverImage: "/academic/fyp/ai-dermatologist-poster.png",
+    coverAlt: "HemaAI Diagnostic Intelligence Poster",
+    gallery: [
+      { url: "/academic/fyp/ai-dermatologist-poster.png", caption: "HemaAI Diagnostic Intelligence Poster", order: 1 }
+    ],
     published: true,
     featured: false,
     displayOrder: 8
@@ -243,6 +258,11 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["XSS Defense", "Web Security Auditing", "Browser Extension Security"],
     technologies: ["JavaScript", "Python", "DOM Analysis", "Node.js"],
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverAlt: "XSS Vulnerability Detection & Defense Poster",
+    gallery: [
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "XSS Vulnerability Detection & Defense Poster", order: 1 }
+    ],
     published: true,
     featured: false,
     displayOrder: 9
@@ -263,6 +283,11 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Computer Vision", "YOLO Object Tracking", "Sports Analytics"],
     technologies: ["Python", "OpenCV", "YOLOv8", "Streamlit"],
+    coverImage: "/academic/fyp/test-data-generation-poster.png",
+    coverAlt: "Cric-Craft AI Analysis Poster",
+    gallery: [
+      { url: "/academic/fyp/test-data-generation-poster.png", caption: "Cric-Craft AI Performance Analytics Poster", order: 1 }
+    ],
     published: true,
     featured: false,
     displayOrder: 10
@@ -283,6 +308,11 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Biomedical Signal Processing", "Acoustic Classification", "Real-Time Monitoring"],
     technologies: ["Python", "Librosa", "Signal Processing", "React Native"],
+    coverImage: "/academic/fyp/apneaguard-poster.png",
+    coverAlt: "ApneaGuard AI Project Poster",
+    gallery: [
+      { url: "/academic/fyp/apneaguard-poster.png", caption: "ApneaGuard AI Nocturnal Sleep Monitoring System Poster", order: 1 }
+    ],
     published: true,
     featured: false,
     displayOrder: 11
@@ -303,6 +333,11 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["CVE Management", "Vulnerability Benchmarking", "Security Dashboard"],
     technologies: ["Python", "Django", "PostgreSQL", "NVD API"],
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverAlt: "Vulnerability Management & Benchmarking System Poster",
+    gallery: [
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "Vulnerability Management & Benchmarking System Poster", order: 1 }
+    ],
     published: true,
     featured: false,
     displayOrder: 12
