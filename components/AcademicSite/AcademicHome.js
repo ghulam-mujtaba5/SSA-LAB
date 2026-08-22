@@ -36,21 +36,27 @@ import styles from "./AcademicSite.module.css";
 const impactStats = [
   {
     value: "324B+",
-    label: "Lines of Code Indexed",
-    detail: "Hadoop IBFET code-clone analysis study",
+    label: "Lines of Code Analyzed",
+    detail: "Indexed on Hadoop MapReduce",
     image: "/academic/illustrations/billion-lines-code.webp",
   },
   {
     value: "152,823+",
-    label: "Repositories Analyzed",
-    detail: "SQVDT open-source vulnerability platform",
+    label: "Open-Source Repos Scanned",
+    detail: "SQVDT Vulnerability Engine",
     image: "/academic/illustrations/repo-analyzed.webp",
   },
   {
-    value: "30,500+",
-    label: "Android Apps Analyzed",
-    detail: "DroidSD similarity detection evaluation",
-    image: "/academic/illustrations/android-app-security.webp",
+    value: "15+",
+    label: "High-Impact Publications",
+    detail: "Applied Soft Computing, IEEE, IET",
+    image: "/academic/illustrations/publications-hero.webp",
+  },
+  {
+    value: "50+",
+    label: "Researchers & Students Mentored",
+    detail: "PhD, MS & BS Engineering Graduates",
+    image: "/academic/illustrations/team-hero.webp",
   },
 ];
 
@@ -71,7 +77,7 @@ export default function AcademicHome() {
   const partnerLogosData = siteData.partnerLogos || partnerLogos;
   const supervisedProjectsData = siteData.supervisedProjects || supervisedProjects;
   const fypProjectsData = siteData.fypProjects || defaultFypProjects;
-  const labImpactStatsData = siteData.labImpactStats?.length ? siteData.labImpactStats : impactStats;
+  const labImpactStatsData = (siteData.labImpactStats?.length ? siteData.labImpactStats : impactStats).slice(0, 4);
   const [selectedDomain, setSelectedDomain] = useState(null);
 
   // Filter top Tier A research projects for the homepage showcase

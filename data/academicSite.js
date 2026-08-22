@@ -1419,8 +1419,7 @@ export const labPillars = [
 export const labImpactStats = [
   { label: "Lines of Code Analyzed", value: "324B+", note: "Indexed on Hadoop MapReduce" },
   { label: "Open-Source Repos Scanned", value: "152,823+", note: "SQVDT Vulnerability Engine" },
-  { label: "Researchers & Students Mentored", value: "50+", note: "PhD, MS & BS Engineering Graduates" },
-  { label: "Global Academic & Industry Partners", value: "5", note: "COMSATS, Tsinghua, SnT, SES, KFUPM" },
-  { label: "High-Impact Publications", value: "15+", note: "Applied Soft Computing, IEEE, IET" }
+  { label: "High-Impact Publications", value: "15+", note: "Applied Soft Computing, IEEE, IET" },
+  { label: "Researchers & Students Mentored", value: "50+", note: "PhD, MS & BS Engineering Graduates" }
 ];
 

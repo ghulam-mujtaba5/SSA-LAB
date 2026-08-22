@@ -269,7 +269,7 @@
 }
 
 :global([data-theme="dark"]) .hero::after {
-  opacity: 0.25;
+  opacity: 0;
 }
 
 .heroInner {
@@ -2643,8 +2643,8 @@
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: clamp(16px, 2.5vw, 24px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 24px);
   position: relative;
   z-index: 1;
 }
@@ -2711,7 +2711,7 @@
   line-height: 1.45;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .impactGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -3368,9 +3368,21 @@
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(14px, 2vw, 20px);
   margin: 32px 0 0;
+}
+
+@media (max-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .statCard {
@@ -5679,6 +5691,138 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Publications & Subpage Helpers ── */
+.pubProfileButtonsRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.toolbarSection {
+  padding-top: 0 !important;
+  padding-bottom: clamp(20px, 3.5vw, 36px) !important;
+}
+
+.pageHeroIllustrationWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.pageHeroIllustrationWrap img {
+  max-height: 280px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ── Dark Mode Noisy Texture Removal & Sleek Card Surface Uniformity ── */
+:global([data-theme="dark"]) .impactStrip::before {
+  display: none !important;
+}
+
+:global([data-theme="dark"]) .statMetricCard,
+:global([data-theme="dark"]) .statCard,
+:global([data-theme="dark"]) .impactItem,
+:global([data-theme="dark"]) .domainItem,
+:global([data-theme="dark"]) .pillarCard,
+:global([data-theme="dark"]) .fypCard,
+:global([data-theme="dark"]) .contactCard,
+:global([data-theme="dark"]) .toolbarContainer,
+:global([data-theme="dark"]) .enquiryFormCard,
+:global([data-theme="dark"]) .enquirySidebarCard,
+:global([data-theme="dark"]) .partnerCardBox,
+:global([data-theme="dark"]) .eventCardItem,
+:global([data-theme="dark"]) .lottieCard,
+:global([data-theme="dark"]) .aboutDirectorCard {
+  background: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+:global([data-theme="dark"]) .statMetricCard:hover,
+:global([data-theme="dark"]) .statCard:hover,
+:global([data-theme="dark"]) .impactItem:hover,
+:global([data-theme="dark"]) .domainItem:hover,
+:global([data-theme="dark"]) .pillarCard:hover,
+:global([data-theme="dark"]) .fypCard:hover,
+:global([data-theme="dark"]) .contactCard:hover,
+:global([data-theme="dark"]) .partnerCardBox:hover,
+:global([data-theme="dark"]) .eventCardItem:hover,
+:global([data-theme="dark"]) .lottieCard:hover,
+:global([data-theme="dark"]) .aboutDirectorCard:hover {
+  background: #151f32 !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15) !important;
+}
+
+/* ── Mobile View UI & Overflow Fixes ── */
+@media (max-width: 900px) {
+  .pageIntroIllustration,
+  .aboutHeroLottieWrap,
+  .pageHeroIllustrationWrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 16px auto 0 !important;
+    text-align: center !important;
+  }
+
+  .aboutHeroLottieWrap > div,
+  .pageHeroIllustrationWrap > div {
+    margin: 0 auto !important;
+  }
+
+  .contactVisual {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 24px 18px !important;
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .contactVisual .lottieCard {
+    width: 160px !important;
+    height: 160px !important;
+    max-width: 160px !important;
+    max-height: 160px !important;
+    margin: 0 auto 12px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .securityLottie {
+    width: 130px !important;
+    height: 130px !important;
+  }
+
+  .contactVisualCopy {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    text-align: center !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
+  .contactVisualCopy h2 {
+    font-size: 1.25rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .contactVisualCopy p {
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
 
 
 

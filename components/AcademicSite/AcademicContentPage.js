@@ -106,7 +106,7 @@ export function AboutPage() {
   const labMilestonesData = siteData.labMilestones || labMilestones;
   const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
   const partnerLogosData = siteData.partnerLogos || partnerLogos;
-  const labImpactStatsData = siteData.labImpactStats || labImpactStats;
+  const labImpactStatsData = (siteData.labImpactStats || labImpactStats).slice(0, 4);
   const labPillarsData = siteData.labPillars || labPillars;
   const alumniPlacementsData = siteData.alumniPlacements || alumniPlacements;
   const pgResearchersData = siteData.pgResearchers || pgResearchers;
@@ -793,6 +793,18 @@ export function PublicationsPage() {
         eyebrow="Peer-Reviewed Literature"
         title="Publications & Research Output"
         lead="Discover empirical research spanning source-code vulnerability assessment, Android malware analysis, code clones, and automated software verification."
+        illustration={
+          <div className={styles.pageHeroIllustrationWrap}>
+            <Image
+              src="/academic/illustrations/publications-hero.webp"
+              alt="Publications & Research Output Illustration"
+              width={280}
+              height={280}
+              priority
+              className={styles.illustrationImage}
+            />
+          </div>
+        }
       />
 
       {/* 1. Key Impact Stats Banner */}
@@ -840,7 +852,7 @@ export function PublicationsPage() {
         </div>
 
         {/* Academic Profiles Link Buttons */}
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
+        <div className={styles.pubProfileButtonsRow}>
           <a
             href={profile.googleScholar || academicProfile.googleScholar}
             target="_blank"
@@ -872,7 +884,7 @@ export function PublicationsPage() {
       </section>
 
       {/* 2. Interactive Search & Multi-Filter Toolbar */}
-      <section className={styles.section}>
+      <section className={`${styles.section} ${styles.toolbarSection}`}>
         <div className={styles.toolbarContainer}>
           <div className={styles.toolbarTopRow}>
             {/* Search Input */}
@@ -1321,6 +1333,18 @@ export function SupervisionPage({ fypProjects = [] }) {
         eyebrow="FYP Supervision"
         title="Supervised final-year projects and research opportunities."
         lead="Explore open COMSATS final-year project topics alongside completed student projects supervised under Dr Junaid Akram's SSA Laboratory."
+        illustration={
+          <div className={styles.pageHeroIllustrationWrap}>
+            <Image
+              src="/academic/illustrations/supervision-hero.webp"
+              alt="Supervised final-year projects and research opportunities"
+              width={280}
+              height={280}
+              priority
+              className={styles.illustrationImage}
+            />
+          </div>
+        }
       />
 
       {/* Interactive Directory Component */}
@@ -1462,14 +1486,16 @@ export function TeamPage() {
         title="People, Collaborators & Institutional Partners"
         lead="Connecting principal investigators, international co-investigators, postgraduate MS & PhD thesis researchers, undergraduate BS engineering teams, and institutional partner organizations across software security and program repair."
         illustration={
-          <img
-            src="/academic/illustrations/team-hero.webp"
-            alt="People, Collaborators & Institutional Partners 3D Illustration"
-            width={160}
-            height={150}
-            style={{ objectFit: 'contain', maxHeight: '150px' }}
-            className={styles.illustrationImage}
-          />
+          <div className={styles.pageHeroIllustrationWrap}>
+            <Image
+              src="/academic/illustrations/team-hero.webp"
+              alt="People, Collaborators & Institutional Partners 3D Illustration"
+              width={280}
+              height={280}
+              priority
+              className={styles.illustrationImage}
+            />
+          </div>
         }
       />
 
@@ -1917,14 +1943,16 @@ export function EventsPage() {
         title="Research presented and shared on global stages."
         lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr Junaid Akram and SSA Research Lab."
         illustration={
-          <img
-            src="/academic/illustrations/event-hero.webp"
-            alt="International Events & Keynotes 3D Illustration"
-            width={160}
-            height={150}
-            style={{ objectFit: 'contain', maxHeight: '150px' }}
-            className={styles.illustrationImage}
-          />
+          <div className={styles.pageHeroIllustrationWrap}>
+            <Image
+              src="/academic/illustrations/event-hero.webp"
+              alt="International Events & Keynotes 3D Illustration"
+              width={280}
+              height={280}
+              priority
+              className={styles.illustrationImage}
+            />
+          </div>
         }
       />
 
