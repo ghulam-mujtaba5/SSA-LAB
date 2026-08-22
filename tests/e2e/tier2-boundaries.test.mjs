@@ -98,19 +98,27 @@ describe('Tier 2 - Feature 1: Empty Collections & Missing Fields', () => {
   });
 
   it('1.3 LabProfile update with empty arrays for milestones, pillars, impactStats defaults safely', async () => {
-    const { req, res } = await createMockReqRes({
-      method: 'PUT',
-      body: {
-        milestones: [],
-        pillars: [],
-        impactStats: [],
-      },
-      token: adminToken,
-    });
-    await siteSettingsHandler(req, res);
-    assert.strictEqual(res.getStatusCode(), 200);
-    const updated = res.getData()?.data;
-    assert.deepStrictEqual(updated.milestones, []);
+    const originalProfile = await LabProfile.findOne({ key: 'default' }).lean();
+    try {
+      const { req, res } = await createMockReqRes({
+        method: 'PUT',
+        body: {
+          milestones: [],
+          pillars: [],
+          impactStats: [],
+        },
+        token: adminToken,
+      });
+      await siteSettingsHandler(req, res);
+      assert.strictEqual(res.getStatusCode(), 200);
+      const updated = res.getData()?.data;
+      assert.deepStrictEqual(updated.milestones, []);
+    } finally {
+      if (originalProfile) {
+        const { _id, createdAt, updatedAt, __v, ...rest } = originalProfile;
+        await LabProfile.findOneAndUpdate({ key: 'default' }, rest, { upsert: true });
+      }
+    }
   });
 
   it('1.4 Project created with minimal required fields populates default status and category', async () => {
@@ -648,25 +656,33 @@ describe('Tier 2 - Feature 6: Date & Year Boundaries', () => {
   });
 
   it('6.5 Milestone schema accepts arbitrary era and year range strings', async () => {
+    const originalProfile = await LabProfile.findOne({ key: 'default' }).lean();
     const testEra = '2024 — Present (AI & Security Era)';
-    const { req, res } = await createMockReqRes({
-      method: 'PUT',
-      body: {
-        milestones: [
-          {
-            year: '2026+',
-            era: testEra,
-            title: 'Expanding Cyber Security Research',
-            summary: 'Leading national software assurance lab initiatives.',
-          },
-        ],
-      },
-      token: adminToken,
-    });
-    await siteSettingsHandler(req, res);
-    assert.strictEqual(res.getStatusCode(), 200);
-    const profile = res.getData()?.data;
-    assert.strictEqual(profile.milestones[0].era, testEra);
+    try {
+      const { req, res } = await createMockReqRes({
+        method: 'PUT',
+        body: {
+          milestones: [
+            {
+              year: '2026+',
+              era: testEra,
+              title: 'Expanding Cyber Security Research',
+              summary: 'Leading national software assurance lab initiatives.',
+            },
+          ],
+        },
+        token: adminToken,
+      });
+      await siteSettingsHandler(req, res);
+      assert.strictEqual(res.getStatusCode(), 200);
+      const profile = res.getData()?.data;
+      assert.strictEqual(profile.milestones[0].era, testEra);
+    } finally {
+      if (originalProfile) {
+        const { _id, createdAt, updatedAt, __v, ...rest } = originalProfile;
+        await LabProfile.findOneAndUpdate({ key: 'default' }, rest, { upsert: true });
+      }
+    }
   });
 
   it('6.6 Date filtering in publications GET API filters by exact year string', async () => {

@@ -30,13 +30,17 @@ Dr. Junaid Akram leads the Software Security Assessment (SSA) Lab. The lab works
 - **IBFET**: Large-scale Code Clone Analysis for massive software ecosystems (e.g., Apache Hadoop).
 - **ARC Test Suite**: Automated Test Data Generation and Test-Smell Detection for satellite control software at SES Luxembourg.
 
-## Supervision Directory
+## Supervision Directory & Supervised Research Projects
 
-The SSA Lab actively supervises BS, MS, and PhD researchers in software engineering and computer science at COMSATS University Islamabad, Lahore Campus. Supervised topics include:
-- Automated Security Patch Synthesis using Large Language Models
-- Static Analysis of Infrastructure-as-Code (IaC) Misconfigurations
-- Cross-Language Vulnerability Mapping
-- Deep Learning for Smart Contract Vulnerability Auditing
+The SSA Lab actively supervises BS, MS, and PhD researchers in software engineering and computer science at COMSATS University Islamabad, Lahore Campus. Key research projects include:
+- **Software Vulnerability Detection using LLM Model** (`/supervision/projects/software-vulnerability-detection-llm-model`): AST serialization with fine-tuned CodeBERT and LLaMA transformers for high-precision vulnerability discovery on Big-Vul and Devign.
+- **Token-Based Semantic Code Clone Detection** (`/supervision/projects/token-based-semantic-code-clone-detection`): Sub-linear inverted index search using Elasticsearch for Type-3 and Type-4 semantic clone detection across large-scale repositories.
+- **LLM-based Software Vulnerability Patch Optimizer** (`/supervision/projects/llm-based-vulnerability-patch-optimizer`): Automated program repair coupling RAG historical patch retrieval with Dockerized regression test verification.
+- **Feature Envy Detection and Refactoring System** (`/supervision/projects/feature-envy-detection-refactoring-system`): Graph Neural Networks over Program Dependence Graphs with automated Move Method refactoring recommendations.
+- **Robust Android Malware Detector** (`/supervision/projects/robust-android-malware-detector`): Static disassembly via Apktool and opcode n-gram frequency matrices classified with ensemble Random Forest and XGBoost models.
+- **XSS Vulnerability Detection & Defense System** (`/supervision/projects/xss-vulnerability-detection-defense`): Static AST taint flow analysis combined with a real-time browser DOM defense extension.
+- **Vulnerability Management & Benchmarking System (VBS)** (`/supervision/projects/vulnerability-management-benchmarking-system`): Multi-source CVE aggregation, CVSS v3.1 and EPSS scoring correlation, and static analysis tool benchmarking.
+- **Source Code Structure Capturing & Recommendation** (`/supervision/projects/source-code-structure-capturing-recommendation`): AST and Control Flow Graph extraction for architectural modularity recommendation.
 
 ## Contact & Office Details
 

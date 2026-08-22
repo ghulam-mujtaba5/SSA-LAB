@@ -43,6 +43,18 @@ function ProjectForm({
       tags: Array.isArray(project.tags) ? project.tags.join(", ") : (project.tags || ""),
       status: project.status || "In Progress",
       category: project.category || "Others",
+      projectType: project.projectType || "Research",
+      summary: project.summary || "",
+      collaboration: project.collaboration || "",
+      role: project.role || "",
+      period: project.period || "",
+      organization: project.organization || "",
+      funding: project.funding || "",
+      focus: project.focus || "",
+      graphicKey: project.graphicKey || "",
+      "details.problem": project.details?.problem || "",
+      "details.approach": project.details?.approach || "",
+      "details.outcome": project.details?.outcome || "",
       // Normalize legacy placeholders like '#' to empty string to avoid URL validation errors
       "links.live": project.links?.live === "#" ? "" : (project.links?.live || ""),
       "links.github": project.links?.github === "#" ? "" : (project.links?.github || ""),
@@ -353,6 +365,7 @@ function ProjectForm({
           className={`${styles.input} ${styles.input}`}
         >
           <option value="All">All</option>
+          <option value="Research Project">Research Project</option>
           <option value="Software Development">Software Development</option>
           <option value="Web Development">Web Development</option>
           <option value="AI">AI</option>
@@ -364,6 +377,102 @@ function ProjectForm({
         {errors.category && (
           <p className={styles.error}>{errors.category.message}</p>
         )}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label
+          htmlFor="projectType"
+          className={`${styles.label} ${styles.label}`}
+        >
+          Project Type / Scope
+        </label>
+        <select
+          id="projectType"
+          {...register("projectType")}
+          className={`${styles.input} ${styles.input}`}
+        >
+          <option value="Research">Research</option>
+          <option value="Supervised">Supervised Student Project</option>
+          <option value="Industry">Industry Collaboration</option>
+          <option value="Open Source">Open Source Platform</option>
+          <option value="General">General Project</option>
+        </select>
+      </div>
+
+      <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+        <label
+          htmlFor="summary"
+          className={`${styles.label} ${styles.label}`}
+        >
+          Short Summary (for academic card previews)
+        </label>
+        <textarea
+          id="summary"
+          rows={3}
+          placeholder="Concise overview of this academic research project, objective, and impact..."
+          {...register("summary")}
+          className={`${styles.textarea} ${styles.textarea}`}
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label
+          htmlFor="collaboration"
+          className={`${styles.label} ${styles.label}`}
+        >
+          Collaboration / Partner Institutions
+        </label>
+        <input
+          id="collaboration"
+          placeholder="e.g. SnT Luxembourg, Tsinghua University"
+          {...register("collaboration")}
+          className={`${styles.input} ${styles.input}`}
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label
+          htmlFor="role"
+          className={`${styles.label} ${styles.label}`}
+        >
+          Project Role
+        </label>
+        <input
+          id="role"
+          placeholder="e.g. Principal Investigator, Research Lead"
+          {...register("role")}
+          className={`${styles.input} ${styles.input}`}
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label
+          htmlFor="period"
+          className={`${styles.label} ${styles.label}`}
+        >
+          Active Duration / Term
+        </label>
+        <input
+          id="period"
+          placeholder="e.g. 2021 – 2024"
+          {...register("period")}
+          className={`${styles.input} ${styles.input}`}
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label
+          htmlFor="funding"
+          className={`${styles.label} ${styles.label}`}
+        >
+          Funding Agency / Grant
+        </label>
+        <input
+          id="funding"
+          placeholder="e.g. HEC NRPU / Internal Research Grant"
+          {...register("funding")}
+          className={`${styles.input} ${styles.input}`}
+        />
       </div>
 
       <div className={styles.formGroup}>

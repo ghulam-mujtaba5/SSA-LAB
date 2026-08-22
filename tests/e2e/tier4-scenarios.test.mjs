@@ -184,6 +184,7 @@ describe('Tier 4: Real-World Workload Scenarios & Application Lifecycles', () =>
   });
 
   it('Scenario 3: Lab Profile & Department Rebranding (Admin updates PI bio, credentials, pillars, milestones, and impact stats -> Verifies live public payload)', async () => {
+    const originalProfile = await LabProfile.findOne({ key: 'default' }).lean();
     const updatedName = 'Junaid Akram, PhD (IEEE Senior Member)';
     const updatedPillars = [
       {
@@ -205,25 +206,32 @@ describe('Tier 4: Real-World Workload Scenarios & Application Lifecycles', () =>
       { label: 'Funded Research', value: '$1.2M+' },
     ];
 
-    const { req: putReq, res: putRes } = await createMockReqRes({
-      method: 'PUT',
-      body: {
-        name: updatedName,
-        pillars: updatedPillars,
-        impactStats: updatedStats,
-      },
-      token: adminToken,
-    });
-    await siteSettingsHandler(putReq, putRes);
-    assert.strictEqual(putRes.getStatusCode(), 200);
+    try {
+      const { req: putReq, res: putRes } = await createMockReqRes({
+        method: 'PUT',
+        body: {
+          name: updatedName,
+          pillars: updatedPillars,
+          impactStats: updatedStats,
+        },
+        token: adminToken,
+      });
+      await siteSettingsHandler(putReq, putRes);
+      assert.strictEqual(putRes.getStatusCode(), 200);
 
-    const { req: pubReq, res: pubRes } = await createMockReqRes({ method: 'GET' });
-    await siteDataHandler(pubReq, pubRes);
-    const data = pubRes.getData()?.data;
-    assert.strictEqual(data.academicProfile.name, updatedName);
-    assert.strictEqual(data.labPillars.length, 2);
-    assert.strictEqual(data.labPillars[0].title, 'Quantum-Safe AI Systems');
-    assert.strictEqual(data.labImpactStats.length, 3);
+      const { req: pubReq, res: pubRes } = await createMockReqRes({ method: 'GET' });
+      await siteDataHandler(pubReq, pubRes);
+      const data = pubRes.getData()?.data;
+      assert.strictEqual(data.academicProfile.name, updatedName);
+      assert.strictEqual(data.labPillars.length, 2);
+      assert.strictEqual(data.labPillars[0].title, 'Quantum-Safe AI Systems');
+      assert.strictEqual(data.labImpactStats.length, 3);
+    } finally {
+      if (originalProfile) {
+        const { _id, createdAt, updatedAt, __v, ...rest } = originalProfile;
+        await LabProfile.findOneAndUpdate({ key: 'default' }, rest, { upsert: true });
+      }
+    }
   });
 
   it('Scenario 4: Academic Team & Alumni Career Progression (Add MS Researcher -> Researcher completes thesis -> Transition to alumni -> Placement data verified)', async () => {

@@ -13,6 +13,7 @@ import {
   EyeOff,
   Layers,
   Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
@@ -244,6 +245,17 @@ export default function ResearchAreasAdminPage() {
                       <EyeOff size={16} color="#dc2626" />
                     )}
                   </button>
+
+                  {/* View on Live Site */}
+                  <a
+                    href={`/research#${dom.slug || dom.domainId || ''}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.iconButton}
+                    title="View Domain on Public Website"
+                  >
+                    <ExternalLink size={16} />
+                  </a>
 
                   {/* Edit */}
                   <Link

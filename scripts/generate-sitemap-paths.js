@@ -10,9 +10,14 @@ async function main() {
   try {
     const projRes = await fetch(`${SITE}/api/projects?limit=1000&fields=slug,updatedAt`);
 
-    const projects = projRes.ok
+    const rawProjects = projRes.ok
       ? (await projRes.json()).data || (await projRes.json()).projects || []
       : [];
+
+    // Filter out any suspicious or test slugs
+    const projects = rawProjects.filter(
+      (p) => p && p.slug && !/^(m2-c2|m2_c2|t1_|t2_|t3_|t4_|t5_|t2-|test_)/i.test(p.slug)
+    );
 
     const paths = [
       ...projects.map((p) => ({

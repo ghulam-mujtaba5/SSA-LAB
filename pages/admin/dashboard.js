@@ -165,6 +165,36 @@ const Icons = {
       <path d="M6 12v5c3 3 9 3 12 0v-5"/>
     </svg>
   ),
+  BookOpen: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+    </svg>
+  ),
+  Microscope: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 18h8"/>
+      <path d="M3 22h18"/>
+      <path d="M14 22a7 7 0 1 0 0-14h-1"/>
+      <path d="M9 14h2"/>
+      <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/>
+      <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>
+    </svg>
+  ),
+  Calendar: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+      <line x1="16" y1="2" x2="16" y2="6"/>
+      <line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+  ),
+  Award: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="8" r="7"/>
+      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+    </svg>
+  ),
 };
 
 // Time-of-day greeting helper
@@ -200,6 +230,10 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState({
     projects: 0,
     fypProjects: 0,
+    publications: 0,
+    teamMembers: 0,
+    researchDomains: 0,
+    events: 0,
     enquiries: 0,
     users: 0,
     views: 0,
@@ -223,7 +257,17 @@ const AdminDashboard = () => {
       const json = await res.json();
       const payload = json.data || {};
       setStats(
-        payload.stats || { projects: 0, fypProjects: 0, enquiries: 0, users: 0, views: 0 },
+        payload.stats || {
+          projects: 0,
+          fypProjects: 0,
+          publications: 0,
+          teamMembers: 0,
+          researchDomains: 0,
+          events: 0,
+          enquiries: 0,
+          users: 0,
+          views: 0,
+        },
       );
       setRecentActivity(payload.recentActivity || []);
       setStatsError(null);
@@ -232,7 +276,17 @@ const AdminDashboard = () => {
       console.error("Failed to fetch dashboard data:", error);
       setStatsError(error.message);
       toast.error(error?.message || "Failed to load dashboard data.");
-      setStats({ projects: 0, fypProjects: 0, enquiries: 0, users: 0, views: 0 });
+      setStats({
+        projects: 0,
+        fypProjects: 0,
+        publications: 0,
+        teamMembers: 0,
+        researchDomains: 0,
+        events: 0,
+        enquiries: 0,
+        users: 0,
+        views: 0,
+      });
       setRecentActivity([]);
     }
   };
@@ -277,6 +331,17 @@ const AdminDashboard = () => {
       href: "/admin/projects",
     },
     {
+      id: "publications",
+      title: "Publications",
+      value: stats.publications,
+      icon: Icons.BookOpen,
+      variant: "info",
+      trend: { value: 14, direction: "up" },
+      sparklineData: generateTrendData(stats.publications),
+      progress: Math.min((stats.publications / 40) * 100, 100),
+      href: "/admin/publications",
+    },
+    {
       id: "fypProjects",
       title: "FYP Supervision",
       value: stats.fypProjects,
@@ -286,6 +351,39 @@ const AdminDashboard = () => {
       sparklineData: generateTrendData(stats.fypProjects),
       progress: Math.min((stats.fypProjects / 20) * 100, 100),
       href: "/admin/fyp",
+    },
+    {
+      id: "researchDomains",
+      title: "Research Areas",
+      value: stats.researchDomains,
+      icon: Icons.Microscope,
+      variant: "warning",
+      trend: { value: 6, direction: "up" },
+      sparklineData: generateTrendData(stats.researchDomains),
+      progress: Math.min((stats.researchDomains / 10) * 100, 100),
+      href: "/admin/research-areas",
+    },
+    {
+      id: "teamMembers",
+      title: "Team & Faculty",
+      value: stats.teamMembers,
+      icon: Icons.Users,
+      variant: "primary",
+      trend: { value: 10, direction: "up" },
+      sparklineData: generateTrendData(stats.teamMembers),
+      progress: Math.min((stats.teamMembers / 25) * 100, 100),
+      href: "/admin/team",
+    },
+    {
+      id: "events",
+      title: "Events & News",
+      value: stats.events,
+      icon: Icons.Calendar,
+      variant: "secondary",
+      trend: { value: 9, direction: "up" },
+      sparklineData: generateTrendData(stats.events),
+      progress: Math.min((stats.events / 20) * 100, 100),
+      href: "/admin/news-events",
     },
     {
       id: "enquiries",
@@ -302,7 +400,7 @@ const AdminDashboard = () => {
       id: "users",
       title: "Lab Users",
       value: stats.users,
-      icon: Icons.Users,
+      icon: Icons.Shield,
       variant: "error",
       trend: { value: 5, direction: "up" },
       sparklineData: generateTrendData(stats.users),
@@ -320,11 +418,39 @@ const AdminDashboard = () => {
       variant: "success",
     },
     {
+      label: "Publications",
+      description: "Manage papers, DOIs & citations",
+      icon: Icons.BookOpen,
+      href: "/admin/publications",
+      variant: "info",
+    },
+    {
       label: "FYP Supervision",
       description: "Manage research projects & students",
       icon: Icons.GraduationCap,
       href: "/admin/fyp",
       variant: "primary",
+    },
+    {
+      label: "Research Areas",
+      description: "Manage research domains & roadmaps",
+      icon: Icons.Microscope,
+      href: "/admin/research-areas",
+      variant: "warning",
+    },
+    {
+      label: "Team Directory",
+      description: "Manage researchers & collaborators",
+      icon: Icons.Users,
+      href: "/admin/team",
+      variant: "primary",
+    },
+    {
+      label: "Events & News",
+      description: "Manage keynotes & gallery photos",
+      icon: Icons.Calendar,
+      href: "/admin/news-events",
+      variant: "secondary",
     },
     {
       label: "Pinned Showcase",
@@ -345,20 +471,6 @@ const AdminDashboard = () => {
       description: "Manage images & files",
       icon: Icons.Image,
       href: "/admin/media",
-      variant: "secondary",
-    },
-    {
-      label: "Analytics",
-      description: "View performance data",
-      icon: Icons.Chart,
-      href: "/admin/analytics",
-      variant: "info",
-    },
-    {
-      label: "Search",
-      description: "Find anything fast",
-      icon: Icons.Search,
-      href: "/admin/search",
       variant: "secondary",
     },
     {

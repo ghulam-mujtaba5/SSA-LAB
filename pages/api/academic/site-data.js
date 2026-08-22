@@ -88,28 +88,35 @@ export default async function handler(req, res) {
     // Format research domains
     const researchDomains = domainDocs?.length
       ? domainDocs.map((d) => ({
-          id: d.domainId,
+          id: d.domainId || d.slug,
+          slug: d.slug,
           number: d.number,
-          graphicKey: d.graphicKey || d.domainId,
+          graphicKey: d.graphicKey || d.domainId || d.slug,
           title: d.title,
           image: d.image,
           description: d.description,
-          overview: d.overview,
-          keyProblems: d.keyProblems,
-          currentDirections: d.currentDirections,
-          caseStudies: d.caseStudies,
-          coreTopics: d.coreTopics,
-          toolsTechnologies: d.toolsTechnologies,
+          overview: d.overview || d.description,
+          keyProblems: d.keyProblems || [],
+          currentDirections: d.currentDirections || [],
+          relatedLabWork: d.relatedLabWork || { items: [], summary: "" },
+          toolsAndDatasets: d.toolsAndDatasets || { items: [], summary: "" },
+          projectIdeas: d.projectIdeas || [],
+          caseStudies: d.caseStudies || [],
+          coreTopics: d.coreTopics || [],
+          toolsTechnologies: d.toolsTechnologies || [],
         }))
       : staticAcademicData.researchDomains;
 
     // Format events
-    const eventHighlights = eventDocs?.filter((e) => e.type === 'highlight').length
-      ? eventDocs.filter((e) => e.type === 'highlight')
+    const highlightDocs = eventDocs?.filter((e) => !e.isGalleryItem && e.type !== 'gallery') || [];
+    const galleryDocs = eventDocs?.filter((e) => e.isGalleryItem || e.type === 'gallery') || [];
+
+    const eventHighlights = highlightDocs.length
+      ? highlightDocs
       : staticAcademicData.eventHighlights;
 
-    const eventGallery = eventDocs?.filter((e) => e.type === 'gallery').length
-      ? eventDocs.filter((e) => e.type === 'gallery')
+    const eventGallery = galleryDocs.length
+      ? galleryDocs
       : staticAcademicData.eventGallery;
 
     // Format projects
@@ -121,8 +128,28 @@ export default async function handler(req, res) {
       ? projectDocs.filter((p) => p.projectType === 'Supervised')
       : staticAcademicData.supervisedProjects;
 
-    // Format FYP projects
+    // Format FYP projects & opportunities
     const fypProjects = fypDocs?.length ? fypDocs : staticFypProjects;
+
+    const dynamicOpportunities = fypDocs?.filter(
+      (p) => p.isOpportunity || p.categoryType === 'future' || p.status === 'Available for Supervision'
+    ).map((p) => ({
+      title: p.title,
+      type: p.opportunityType || p.type || "COMSATS Listed Supervision Topic",
+      availability: p.availability || (p.published ? "Available for supervision" : "Pending"),
+      prerequisites: p.prerequisites || (p.technologies || []).join(', ') || "Software security, Python/C++",
+      source: p.source || "SSA Research Lab",
+      lastVerified: p.academicYear || "Current Academic Year",
+      summary: p.summary || p.description || "",
+      expectedDeliverables: Array.isArray(p.expectedDeliverables) && p.expectedDeliverables.length > 0
+        ? p.expectedDeliverables
+        : (p.objectives || []),
+      slug: p.slug,
+    }));
+
+    const fypOpportunities = dynamicOpportunities?.length
+      ? dynamicOpportunities
+      : staticAcademicData.fypOpportunities;
 
     res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=120');
     return res.status(200).json({
@@ -134,7 +161,7 @@ export default async function handler(req, res) {
         publications,
         supervisedProjects,
         alumniPlacements,
-        fypOpportunities: staticAcademicData.fypOpportunities,
+        fypOpportunities,
         collaborators,
         eventHighlights,
         eventGallery,

@@ -11,6 +11,83 @@ import styles from "../../../components/AcademicSite/AcademicSite.module.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ssa-lab.tech";
 
+// Explicit semantic cross-linking maps for Tier A research topics
+const SEMANTIC_RELATIONS = {
+  "software-vulnerability-detection-llm-model": [
+    "llm-based-vulnerability-patch-optimizer",
+    "vulnerability-management-benchmarking-system",
+    "xss-vulnerability-detection-defense",
+    "token-based-semantic-code-clone-detection"
+  ],
+  "token-based-semantic-code-clone-detection": [
+    "source-code-structure-capturing-recommendation",
+    "feature-envy-detection-refactoring-system",
+    "code-smell-detection-refactoring-system",
+    "software-vulnerability-detection-llm-model"
+  ],
+  "llm-based-vulnerability-patch-optimizer": [
+    "software-vulnerability-detection-llm-model",
+    "vulnerability-management-benchmarking-system",
+    "automatic-patching-similar-code-fragments",
+    "token-based-semantic-code-clone-detection"
+  ],
+  "feature-envy-detection-refactoring-system": [
+    "code-smell-detection-refactoring-system",
+    "source-code-structure-capturing-recommendation",
+    "token-based-semantic-code-clone-detection",
+    "software-vulnerability-detection-llm-model"
+  ],
+  "robust-android-malware-detector": [
+    "malware-feature-extraction-instruction-frequency",
+    "malware-feature-extraction-machine-learning",
+    "detection-and-defense-vulnerability-openssl",
+    "software-vulnerability-detection-llm-model"
+  ],
+  "xss-vulnerability-detection-defense": [
+    "software-vulnerability-detection-llm-model",
+    "vulnerability-management-benchmarking-system",
+    "detection-and-defense-vulnerability-openssl",
+    "llm-based-vulnerability-patch-optimizer"
+  ],
+  "vulnerability-management-benchmarking-system": [
+    "software-vulnerability-detection-llm-model",
+    "building-benchmark-vulnerable-source-code",
+    "llm-based-vulnerability-patch-optimizer",
+    "xss-vulnerability-detection-defense"
+  ],
+  "source-code-structure-capturing-recommendation": [
+    "feature-envy-detection-refactoring-system",
+    "token-based-semantic-code-clone-detection",
+    "intra-inter-project-software-dependency-analysis",
+    "code-smell-detection-refactoring-system"
+  ]
+};
+
+function getSmartRelatedProjects(currentSlug, allProjects) {
+  const current = allProjects.find((p) => p.slug === currentSlug);
+  const preferredSlugs = SEMANTIC_RELATIONS[currentSlug] || [];
+  
+  const preferred = preferredSlugs
+    .map((slug) => allProjects.find((p) => p.slug === slug))
+    .filter(Boolean);
+
+  const categoryMatches = allProjects.filter(
+    (p) =>
+      p.slug !== currentSlug &&
+      !preferredSlugs.includes(p.slug) &&
+      (p.category === current?.category || p.nature === current?.nature)
+  );
+
+  const remaining = allProjects.filter(
+    (p) =>
+      p.slug !== currentSlug &&
+      !preferredSlugs.includes(p.slug) &&
+      !categoryMatches.includes(p)
+  );
+
+  return [...preferred, ...categoryMatches, ...remaining].slice(0, 3);
+}
+
 export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }) {
   if (!project) {
     return (
@@ -32,6 +109,15 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
     );
   }
 
+  const projectKeywords = [
+    project.title,
+    ...(project.specializations || []),
+    ...(project.technologies || []),
+    project.nature || "Software Security Research",
+    "COMSATS FYP Supervision",
+    "Dr. Junaid Akram"
+  ].join(", ");
+
   const projectJsonLd = [
     breadcrumbSchema([
       { name: "Supervision", url: `${SITE_URL}/supervision` },
@@ -43,15 +129,23 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       url: `${SITE_URL}/supervision/projects/${project.slug}`,
       image: project.coverImage ? `${SITE_URL}${project.coverImage}` : undefined,
       programmingLanguages: project.technologies || project.techStack || [],
-      keywords: project.category || "Software Security",
+      keywords: projectKeywords,
     }),
   ];
 
+  const metaTitle = `${project.title} | Case Study`;
+  const metaDescription = project.summary
+    ? project.summary.length > 155
+      ? `${project.summary.substring(0, 152)}...`
+      : project.summary
+    : `Research case study for ${project.title} supervised by Dr. Junaid Akram at SSA Research Lab.`;
+
   return (
     <AcademicSiteLayout
-      title={`${project.title} — Case Study`}
+      title={metaTitle}
       path={`/supervision/projects/${project.slug}`}
-      description={project.summary || `Supervised project case study: ${project.title} led by Dr. Junaid Akram.`}
+      description={metaDescription}
+      keywords={projectKeywords}
       jsonLd={projectJsonLd}
     >
       {/* Top Navigation & Breadcrumb */}
@@ -77,7 +171,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
           <div className={styles.sectionHeading}>
             <div>
               <p className={styles.eyebrow}>Supervised Projects Portfolio</p>
-              <h2>More Supervised Projects</h2>
+              <h2>Related Research & Supervised Projects</h2>
             </div>
             <Link href="/supervision" className={styles.textLink}>
               View all projects <ExternalLink size={15} />
@@ -114,13 +208,14 @@ export async function getServerSideProps({ params }) {
     const dbProject = await FypProject.findOne({ slug, published: true }).lean();
 
     if (dbProject) {
-      const allDb = await FypProject.find({ published: true, slug: { $ne: slug } })
-        .limit(4)
-        .lean();
+      const allDb = await FypProject.find({ published: true }).lean();
+      const cleanAll = JSON.parse(JSON.stringify(allDb));
+      const related = getSmartRelatedProjects(slug, cleanAll);
+
       return {
         props: {
           project: JSON.parse(JSON.stringify(dbProject)),
-          relatedProjects: JSON.parse(JSON.stringify(allDb)),
+          relatedProjects: related,
         },
       };
     }
@@ -130,7 +225,7 @@ export async function getServerSideProps({ params }) {
 
   // Fallback to static defaultFypProjects
   const project = defaultFypProjects.find((p) => p.slug === slug || String(p._id) === slug);
-  const relatedProjects = defaultFypProjects.filter((p) => p.slug !== slug);
+  const relatedProjects = getSmartRelatedProjects(slug, defaultFypProjects);
 
   return {
     props: {

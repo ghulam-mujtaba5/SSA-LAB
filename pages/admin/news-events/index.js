@@ -311,6 +311,17 @@ export default function NewsEventsAdminPage() {
                     )}
                   </button>
 
+                  {/* View on Public Website */}
+                  <a
+                    href="/events"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.iconButton}
+                    title="View News & Events on Live Website"
+                  >
+                    <ExternalLink size={16} />
+                  </a>
+
                   {/* Edit */}
                   <Link
                     href={`/admin/news-events/edit/${ev._id}`}

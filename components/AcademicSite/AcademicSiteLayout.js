@@ -74,13 +74,16 @@ export default function AcademicSiteLayout({
   type,
 }) {
   const router = useRouter();
+  const { siteData } = useAcademicData();
+  const profile = siteData.academicProfile || academicProfile;
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeoutRef = useRef(null);
 
+  const labName = profile.labShort || profile.lab || "SSA Research Lab";
   const pageTitle = title
-    ? `${title} | ${academicProfile.labShort}`
-    : `${academicProfile.labShort} | Software Security Research`;
+    ? `${title} | ${labName}`
+    : `${labName} | Software Security Research`;
   const canonical = `${SITE_URL}${path}`;
   const extraSchemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
   const allSchemas = buildBaseSchemas(path, extraSchemas);

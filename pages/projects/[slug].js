@@ -4,6 +4,7 @@ import AcademicSiteLayout from "../../components/AcademicSite/AcademicSiteLayout
 import { defaultFypProjects } from "../../data/fypProjects";
 import dbConnect from "../../lib/mongoose";
 import Project from "../../models/Project";
+import FypProject from "../../models/FypProject";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import styles from "../../components/AcademicSite/AcademicSite.module.css";
@@ -51,6 +52,15 @@ export async function getServerSideProps({ params }) {
       return {
         props: {
           project: JSON.parse(JSON.stringify(dbProject)),
+        },
+      };
+    }
+
+    const dbFyp = await FypProject.findOne({ slug, published: true }).lean();
+    if (dbFyp) {
+      return {
+        props: {
+          project: JSON.parse(JSON.stringify(dbFyp)),
         },
       };
     }

@@ -27,28 +27,28 @@ const RESEARCH_LINKS = [
   { href: "/research#domains", label: "Source Code Security Domains" },
 ];
 
-const SUPERVISION_LINKS = [
-  { href: "/supervision?tab=running", label: "Running Projects" },
-  { href: "/supervision?tab=completed", label: "Completed Projects" },
-  { href: "/supervision?tab=future", label: "Future Projects & Topics" },
-  { href: "/team", label: "People & Lab Members" },
-  { href: academicProfile.officialFypIdeas, label: "COMSATS Supervision Topics", external: true },
-];
-
-const LAB_LINKS = [
-  { href: "/about", label: "About Dr. Junaid Akram" },
-  { href: "/events", label: "Research Seminars & Events" },
-  { href: academicProfile.officialProfile, label: "Official COMSATS Profile", external: true },
-  { href: "/contact", label: "Office Hours & Location" },
-  { href: "/admin/login", label: "Admin Portal" },
-];
-
 export default function AcademicFooter() {
   const { siteData } = useAcademicData();
   const profile = siteData.academicProfile || academicProfile;
   const footerRef = useRef(null);
   const isInView = useInView(footerRef, { once: true, amount: 0.15 });
   const reduceMotion = useReducedMotion();
+
+  const supervisionLinks = [
+    { href: "/supervision?tab=running", label: "Running Projects" },
+    { href: "/supervision?tab=completed", label: "Completed Projects" },
+    { href: "/supervision?tab=future", label: "Future Projects & Topics" },
+    { href: "/team", label: "People & Lab Members" },
+    { href: profile.officialFypIdeas || academicProfile.officialFypIdeas, label: "COMSATS Supervision Topics", external: true },
+  ];
+
+  const labLinks = [
+    { href: "/about", label: "About Dr. Junaid Akram" },
+    { href: "/events", label: "Research Seminars & Events" },
+    { href: profile.officialProfile || academicProfile.officialProfile, label: "Official COMSATS Profile", external: true },
+    { href: "/contact", label: "Office Hours & Location" },
+    { href: "/admin/login", label: "Admin Portal" },
+  ];
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
@@ -118,7 +118,7 @@ export default function AcademicFooter() {
           <nav className={styles.col} aria-label="Supervision Links">
             <h4 className={styles.colHeading}>Supervision</h4>
             <ul className={styles.linkList}>
-              {SUPERVISION_LINKS.map((link) => (
+              {supervisionLinks.map((link) => (
                 <li key={link.label}>
                   {link.external ? (
                     <a href={link.href} target="_blank" rel="noreferrer">

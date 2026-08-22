@@ -9,8 +9,13 @@ import styles from './ResearchDomainForm.module.css';
 
 const GRAPHIC_KEYS = [
   'cyber-security',
-  'software-engineering',
+  'vulnerability-detection',
+  'software-testing',
+  'malware-detection',
+  'code-clone-analysis',
+  'software-evolution-reuse',
   'ai-security',
+  'software-engineering',
   'vulnerability-analysis',
   'cloud-systems',
   'empirical-se',
@@ -28,6 +33,9 @@ export default function ResearchDomainForm({
   const [currentDirectionsText, setCurrentDirectionsText] = useState('');
   const [projectIdeasText, setProjectIdeasText] = useState('');
   const [coreTopicsText, setCoreTopicsText] = useState('');
+  const [toolsTechnologiesText, setToolsTechnologiesText] = useState('');
+  const [relatedLabWorkSummary, setRelatedLabWorkSummary] = useState('');
+  const [relatedLabWorkText, setRelatedLabWorkText] = useState('');
   const [toolsList, setToolsList] = useState([]);
 
   const {
@@ -51,11 +59,13 @@ export default function ResearchDomainForm({
       overview: initialData.overview || '',
       published: initialData.published !== false,
       displayOrder: Number(initialData.displayOrder) || 0,
+      relatedLabWork: initialData.relatedLabWork || { items: [], summary: '' },
       toolsAndDatasets: initialData.toolsAndDatasets || { items: [], summary: '' },
       keyProblems: Array.isArray(initialData.keyProblems) ? initialData.keyProblems : [],
       currentDirections: Array.isArray(initialData.currentDirections) ? initialData.currentDirections : [],
       projectIdeas: Array.isArray(initialData.projectIdeas) ? initialData.projectIdeas : [],
       coreTopics: Array.isArray(initialData.coreTopics) ? initialData.coreTopics : [],
+      toolsTechnologies: Array.isArray(initialData.toolsTechnologies) ? initialData.toolsTechnologies : [],
     },
   });
 
@@ -72,11 +82,13 @@ export default function ResearchDomainForm({
         overview: initialData.overview || '',
         published: initialData.published !== false,
         displayOrder: Number(initialData.displayOrder) || 0,
+        relatedLabWork: initialData.relatedLabWork || { items: [], summary: '' },
         toolsAndDatasets: initialData.toolsAndDatasets || { items: [], summary: '' },
         keyProblems: Array.isArray(initialData.keyProblems) ? initialData.keyProblems : [],
         currentDirections: Array.isArray(initialData.currentDirections) ? initialData.currentDirections : [],
         projectIdeas: Array.isArray(initialData.projectIdeas) ? initialData.projectIdeas : [],
         coreTopics: Array.isArray(initialData.coreTopics) ? initialData.coreTopics : [],
+        toolsTechnologies: Array.isArray(initialData.toolsTechnologies) ? initialData.toolsTechnologies : [],
       });
 
       setKeyProblemsText(
@@ -90,6 +102,13 @@ export default function ResearchDomainForm({
       );
       setCoreTopicsText(
         Array.isArray(initialData.coreTopics) ? initialData.coreTopics.join(', ') : ''
+      );
+      setToolsTechnologiesText(
+        Array.isArray(initialData.toolsTechnologies) ? initialData.toolsTechnologies.join(', ') : ''
+      );
+      setRelatedLabWorkSummary(initialData.relatedLabWork?.summary || '');
+      setRelatedLabWorkText(
+        Array.isArray(initialData.relatedLabWork?.items) ? initialData.relatedLabWork.items.join('\n') : ''
       );
       setToolsList(
         initialData.toolsAndDatasets && Array.isArray(initialData.toolsAndDatasets.items)
@@ -135,6 +154,17 @@ export default function ResearchDomainForm({
         .split(',')
         .map((x) => x.trim())
         .filter(Boolean),
+      toolsTechnologies: toolsTechnologiesText
+        .split(',')
+        .map((x) => x.trim())
+        .filter(Boolean),
+      relatedLabWork: {
+        summary: relatedLabWorkSummary || '',
+        items: relatedLabWorkText
+          .split('\n')
+          .map((x) => x.trim())
+          .filter(Boolean),
+      },
       toolsAndDatasets: {
         summary: data.toolsAndDatasets?.summary || '',
         items: toolsList.filter((t) => t.name.trim() !== ''),
@@ -243,6 +273,17 @@ export default function ResearchDomainForm({
             onChange={(e) => setCoreTopicsText(e.target.value)}
           />
         </div>
+
+        <div className={styles.field}>
+          <label htmlFor="toolsTechnologies">Tools & Technologies (comma-separated)</label>
+          <input
+            id="toolsTechnologies"
+            type="text"
+            placeholder="e.g. CodeQL, LLVM, Python, PyTorch, Joern, Ghidra"
+            value={toolsTechnologiesText}
+            onChange={(e) => setToolsTechnologiesText(e.target.value)}
+          />
+        </div>
       </section>
 
       {/* Section 2: Problems & Current Directions */}
@@ -279,6 +320,35 @@ export default function ResearchDomainForm({
             placeholder="LLM-Guided Fuzzing for Open-Source Cryptographic Libraries&#10;Zero-Day Exploit Detection with Graph Neural Networks"
             value={projectIdeasText}
             onChange={(e) => setProjectIdeasText(e.target.value)}
+          />
+        </div>
+      </section>
+
+      {/* Section 2.5: Related Lab Work & Publications */}
+      <section className={styles.section}>
+        <div className={styles.sectionHeading}>
+          <p>Publications & Tools</p>
+          <h2>Related Lab Publications & Platforms</h2>
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor="relatedLabWorkSummary">Related Lab Work Summary</label>
+          <input
+            id="relatedLabWorkSummary"
+            type="text"
+            placeholder="e.g. Selected peer-reviewed papers and tools produced by SSA Lab in this area"
+            value={relatedLabWorkSummary}
+            onChange={(e) => setRelatedLabWorkSummary(e.target.value)}
+          />
+        </div>
+
+        <div className={styles.field}>
+          <label>Related Lab Work Items / Papers (one per line)</label>
+          <textarea
+            rows={4}
+            placeholder="SQVDT: Software Quality & Vulnerability Diagnostic Toolset&#10;Empirical Study on Vulnerability Lifecycles in C/C++ Repositories&#10;VCIPR: Automated Vulnerability-Fix Commit Identification"
+            value={relatedLabWorkText}
+            onChange={(e) => setRelatedLabWorkText(e.target.value)}
           />
         </div>
       </section>

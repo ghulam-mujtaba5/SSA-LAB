@@ -420,17 +420,25 @@ describe('Tier 1 - Feature 4: Admin CRUD REST APIs (§R2)', () => {
   });
 
   it('4.4 Site Settings API supports GET and PUT updates', async () => {
-    const { req: putReq, res: putRes } = await createMockReqRes({
-      method: 'PUT',
-      body: {
-        office: 'Block H — Lab Room 14B',
-        labShort: 'SSA Lab Tech',
-      },
-      token: adminToken,
-    });
-    await siteSettingsHandler(putReq, putRes);
-    assert.strictEqual(putRes.getStatusCode(), 200);
-    assert.strictEqual(putRes.getData()?.data?.office, 'Block H — Lab Room 14B');
+    const originalProfile = await LabProfile.findOne({ key: 'default' }).lean();
+    try {
+      const { req: putReq, res: putRes } = await createMockReqRes({
+        method: 'PUT',
+        body: {
+          office: 'Block H — Lab Room 14B',
+          labShort: 'SSA Lab Tech',
+        },
+        token: adminToken,
+      });
+      await siteSettingsHandler(putReq, putRes);
+      assert.strictEqual(putRes.getStatusCode(), 200);
+      assert.strictEqual(putRes.getData()?.data?.office, 'Block H — Lab Room 14B');
+    } finally {
+      if (originalProfile) {
+        const { _id, createdAt, updatedAt, __v, ...rest } = originalProfile;
+        await LabProfile.findOneAndUpdate({ key: 'default' }, rest, { upsert: true });
+      }
+    }
   });
 
   it('4.5 Admin Stats API returns aggregated KPI counts for all entities', async () => {
@@ -669,18 +677,26 @@ describe('Tier 1 - Feature 7: Real-time Admin-to-Public Synchronization (§R3)',
   });
 
   it('7.2 Updated PI tagline in Admin immediately reflects in public academicProfile', async () => {
+    const originalProfile = await LabProfile.findOne({ key: 'default' }).lean();
     const customRole = 'Tenured Associate Professor & Lab Director';
-    const { req: putReq, res: putRes } = await createMockReqRes({
-      method: 'PUT',
-      body: { role: customRole },
-      token: adminToken,
-    });
-    await siteSettingsHandler(putReq, putRes);
+    try {
+      const { req: putReq, res: putRes } = await createMockReqRes({
+        method: 'PUT',
+        body: { role: customRole },
+        token: adminToken,
+      });
+      await siteSettingsHandler(putReq, putRes);
 
-    const { req: pubReq, res: pubRes } = await createMockReqRes({ method: 'GET' });
-    await siteDataHandler(pubReq, pubRes);
-    const profile = pubRes.getData()?.data?.academicProfile;
-    assert.strictEqual(profile?.role, customRole);
+      const { req: pubReq, res: pubRes } = await createMockReqRes({ method: 'GET' });
+      await siteDataHandler(pubReq, pubRes);
+      const profile = pubRes.getData()?.data?.academicProfile;
+      assert.strictEqual(profile?.role, customRole);
+    } finally {
+      if (originalProfile) {
+        const { _id, createdAt, updatedAt, __v, ...rest } = originalProfile;
+        await LabProfile.findOneAndUpdate({ key: 'default' }, rest, { upsert: true });
+      }
+    }
   });
 
   it('7.3 New FYP project created in Admin appears in public fypProjects', async () => {

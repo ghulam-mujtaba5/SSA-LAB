@@ -66,13 +66,20 @@ export default function AcademicHome() {
   const partnerLogosData = siteData.partnerLogos || partnerLogos;
   const supervisedProjectsData = siteData.supervisedProjects || supervisedProjects;
   const fypProjectsData = siteData.fypProjects || defaultFypProjects;
+  const labImpactStatsData = siteData.labImpactStats?.length ? siteData.labImpactStats : impactStats;
   const [selectedDomain, setSelectedDomain] = useState(null);
+
+  // Filter top Tier A research projects for the homepage showcase
+  const topProjects = fypProjectsData
+    .filter((p) => !p.isOpportunity && p.slug !== "megilance-ai-blockchain-freelancing-platform")
+    .slice(0, 4);
 
   return (
     <AcademicSiteLayout
+      title="Software Security & Source Code Analysis Research"
       path="/"
-      description="Software security research lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore. Specializing in vulnerability detection, testing, and malware."
-      keywords="SSA Research Lab, Dr. Junaid Akram, software security research, vulnerability detection, COMSATS University Lahore, malware analysis, automated software testing"
+      description="Software Security Assessment Lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore. Specializing in LLM vulnerability detection, code clone analysis, and malware detection."
+      keywords="Software Security Assessment Lab, Dr. Junaid Akram, software vulnerability detection, LLM vulnerability detection, semantic code clone detection, COMSATS University Lahore, malware analysis, automated software testing"
     >
       {selectedDomain && (
         <AcademicDomainModal
@@ -164,7 +171,7 @@ export default function AcademicHome() {
             <DataInfrastructureGraphic size={96} />
           </div>
           <div className={styles.impactGrid} style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", flex: 1 }}>
-            {impactStats.map((stat) => (
+            {labImpactStatsData.map((stat) => (
               <div key={stat.label} className={styles.impactItem}>
                 {stat.image && (
                   <img
@@ -177,7 +184,7 @@ export default function AcademicHome() {
                 )}
                 <strong>{stat.value}</strong>
                 <span>{stat.label}</span>
-                <small>{stat.detail}</small>
+                <small>{stat.detail || stat.note}</small>
               </div>
             ))}
           </div>
@@ -314,7 +321,7 @@ export default function AcademicHome() {
           </Link>
         </div>
         <div className={styles.studentGrid}>
-          {fypProjectsData.slice(0, 4).map((project) => (
+          {topProjects.map((project) => (
             <article key={project.slug}>
               <span className={styles.sessionBadge}>{project.projectType || project.status}</span>
               <h3>

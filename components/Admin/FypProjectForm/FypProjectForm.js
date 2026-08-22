@@ -8,7 +8,8 @@ import styles from "./FypProjectForm.module.css";
 const emptyProject = {
   title: "",
   summary: "",
-  status: "In Progress",
+  status: "Running",
+  categoryType: "running",
   projectType: "Final Year Project",
   nature: "Research & Development",
   programme: "",
@@ -29,12 +30,14 @@ const emptyProject = {
   outcome: "",
   limitations: [],
   futureWork: [],
+  isRunning: true,
+  isOpportunity: false,
   coverImage: "",
   coverAlt: "",
   gallery: [],
   liveUrl: "",
   repositoryUrl: "",
-  published: false,
+  published: true,
   featured: false,
   displayOrder: 0,
 };
@@ -128,21 +131,46 @@ export default function FypProjectForm({
           <h2>Project essentials</h2>
         </div>
         <div className={styles.twoColumns}>
-          <Field label="Project title">
+          <Field label="Project title *">
             <input
               required
               value={form.title}
               onChange={(event) => update("title", event.target.value)}
             />
           </Field>
+          <Field label="Category / Directory Tab">
+            <select
+              value={form.categoryType || (form.isOpportunity ? "future" : form.status === "Completed" ? "completed" : "running")}
+              onChange={(event) => {
+                const cat = event.target.value;
+                update("categoryType", cat);
+                if (cat === "future") {
+                  update("isOpportunity", true);
+                  update("status", "Available for Supervision");
+                } else if (cat === "completed") {
+                  update("isOpportunity", false);
+                  update("status", "Completed");
+                } else {
+                  update("isOpportunity", false);
+                  update("status", "Running");
+                }
+              }}
+            >
+              <option value="running">Running Projects</option>
+              <option value="completed">Completed Projects</option>
+              <option value="future">Future Projects & Opportunities</option>
+            </select>
+          </Field>
           <Field label="Status">
             <select
               value={form.status}
               onChange={(event) => update("status", event.target.value)}
             >
-              <option>In Progress</option>
-              <option>Completed</option>
-              <option>Archived</option>
+              <option value="Running">Running</option>
+              <option value="Completed">Completed</option>
+              <option value="Available for Supervision">Available for Supervision</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Archived">Archived</option>
             </select>
           </Field>
           <Field label="Project type">
@@ -170,7 +198,7 @@ export default function FypProjectForm({
             />
           </Field>
         </div>
-        <Field label="Summary" hint="Two or three concise sentences for the public project introduction.">
+        <Field label="Summary *" hint="Two or three concise sentences for the public project introduction.">
           <textarea
             required
             rows={4}
@@ -375,6 +403,30 @@ export default function FypProjectForm({
                 onChange={(event) => update("featured", event.target.checked)}
               />
               Featured case study
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={form.isOpportunity}
+                onChange={(event) => {
+                  const val = event.target.checked;
+                  update("isOpportunity", val);
+                  if (val) update("categoryType", "future");
+                }}
+              />
+              Supervision Opportunity (Future Topic)
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={form.isRunning}
+                onChange={(event) => {
+                  const val = event.target.checked;
+                  update("isRunning", val);
+                  if (val) update("categoryType", "running");
+                }}
+              />
+              Currently Running Project
             </label>
           </div>
         </div>

@@ -106,25 +106,33 @@ describe('Tier 3: Cross-Feature Pairwise Combinations & End-to-End Pipelines', (
   });
 
   it('Pairwise 2: Admin Update Lab Profile -> DB Write -> Public Site Data reflects updated Lab Profile & Contacts', async () => {
+    const originalProfile = await LabProfile.findOne({ key: 'default' }).lean();
     const newLabName = 'Software Security & Assurance Research Group';
-    const newOffice = 'Engineering Complex — Floor 2 Room 204';
-    const { req: putReq, res: putRes } = await createMockReqRes({
-      method: 'PUT',
-      body: {
-        lab: newLabName,
-        office: newOffice,
-      },
-      token: adminToken,
-    });
-    await siteSettingsHandler(putReq, putRes);
-    assert.strictEqual(putRes.getStatusCode(), 200);
+    const newOffice = 'H Block — Room 14 (Temporary Test Update)';
+    try {
+      const { req: putReq, res: putRes } = await createMockReqRes({
+        method: 'PUT',
+        body: {
+          lab: newLabName,
+          office: newOffice,
+        },
+        token: adminToken,
+      });
+      await siteSettingsHandler(putReq, putRes);
+      assert.strictEqual(putRes.getStatusCode(), 200);
 
-    // Verify in Public Site Data
-    const { req: pubReq, res: pubRes } = await createMockReqRes({ method: 'GET' });
-    await siteDataHandler(pubReq, pubRes);
-    const profile = pubRes.getData()?.data?.academicProfile;
-    assert.strictEqual(profile.lab, newLabName);
-    assert.strictEqual(profile.office, newOffice);
+      // Verify in Public Site Data
+      const { req: pubReq, res: pubRes } = await createMockReqRes({ method: 'GET' });
+      await siteDataHandler(pubReq, pubRes);
+      const profile = pubRes.getData()?.data?.academicProfile;
+      assert.strictEqual(profile.lab, newLabName);
+      assert.strictEqual(profile.office, newOffice);
+    } finally {
+      if (originalProfile) {
+        const { _id, createdAt, updatedAt, __v, ...rest } = originalProfile;
+        await LabProfile.findOneAndUpdate({ key: 'default' }, rest, { upsert: true });
+      }
+    }
   });
 
   it('Pairwise 3: Admin Create FYP Project -> DB Write -> Public FYP API includes project -> Text search in FYP API finds it', async () => {

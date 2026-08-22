@@ -1,31 +1,7 @@
 [
   {
-    "loc": "/supervision/projects/t2-1787369261905-51707-invalid-category-project",
-    "lastmod": "2026-08-22T04:23:40.874Z",
-    "changefreq": "monthly",
-    "priority": 0.8
-  },
-  {
     "loc": "/supervision/projects/automated-test-data-generation-for-the-arc-system",
-    "lastmod": "2026-08-22T04:33:51.400Z",
-    "changefreq": "monthly",
-    "priority": 0.8
-  },
-  {
-    "loc": "/supervision/projects/m2-c2-1787367468381-quantum-ml",
-    "lastmod": "2026-08-22T02:57:53.930Z",
-    "changefreq": "monthly",
-    "priority": 0.8
-  },
-  {
-    "loc": "/supervision/projects/m2-c2-1787367385503-quantum-ml",
-    "lastmod": "2026-08-22T02:56:32.148Z",
-    "changefreq": "monthly",
-    "priority": 0.8
-  },
-  {
-    "loc": "/supervision/projects/m2_c2_test_1787367329856-quantum-ml",
-    "lastmod": "2026-08-22T02:55:35.639Z",
+    "lastmod": "2026-08-22T06:15:16.846Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -37,7 +13,7 @@
   },
   {
     "loc": "/supervision/projects/test-smell-detection-in-the-arc-system",
-    "lastmod": "2026-08-22T04:33:51.557Z",
+    "lastmod": "2026-08-22T06:15:17.002Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -49,7 +25,7 @@
   },
   {
     "loc": "/supervision/projects/log-based-test-case-slicing",
-    "lastmod": "2026-08-22T04:33:51.706Z",
+    "lastmod": "2026-08-22T06:15:17.163Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -61,7 +37,7 @@
   },
   {
     "loc": "/supervision/projects/obfuscated-code-detection-in-android-applications",
-    "lastmod": "2026-08-22T04:33:51.853Z",
+    "lastmod": "2026-08-22T06:15:17.316Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -73,7 +49,7 @@
   },
   {
     "loc": "/supervision/projects/sqvdt-source-code-vulnerability-detection",
-    "lastmod": "2026-08-22T04:33:52.000Z",
+    "lastmod": "2026-08-22T06:15:17.466Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -85,7 +61,7 @@
   },
   {
     "loc": "/supervision/projects/vcipr-vulnerability-detection-at-function-level",
-    "lastmod": "2026-08-22T04:33:52.147Z",
+    "lastmod": "2026-08-22T06:15:17.620Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -97,7 +73,7 @@
   },
   {
     "loc": "/supervision/projects/patch-analysis-and-vulnerability-research",
-    "lastmod": "2026-08-22T04:33:52.295Z",
+    "lastmod": "2026-08-22T06:15:17.776Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -109,13 +85,13 @@
   },
   {
     "loc": "/supervision/projects/droidsd-android-similarity-detection",
-    "lastmod": "2026-08-22T04:33:52.468Z",
+    "lastmod": "2026-08-22T06:15:17.923Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
   {
     "loc": "/supervision/projects/ibfet-large-scale-code-clone-detection",
-    "lastmod": "2026-08-22T04:33:52.616Z",
+    "lastmod": "2026-08-22T06:15:18.069Z",
     "changefreq": "monthly",
     "priority": 0.8
   }

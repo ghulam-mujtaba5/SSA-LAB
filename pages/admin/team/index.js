@@ -17,6 +17,7 @@ import {
   Briefcase,
   GraduationCap,
   Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import AdminLayout from '../../../components/Admin/AdminLayout/AdminLayout';
@@ -353,6 +354,17 @@ export default function TeamAdminPage() {
                       <Linkedin size={16} />
                     </a>
                   )}
+
+                  {/* View on Public Website */}
+                  <a
+                    href="/team"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.iconButton}
+                    title="View Team on Live Website"
+                  >
+                    <ExternalLink size={16} />
+                  </a>
 
                   {/* Edit */}
                   <Link

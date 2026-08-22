@@ -100,10 +100,29 @@ function PageIntro({ eyebrow, title, lead, illustration = null, action = null })
 }
 
 export function AboutPage() {
+  const { siteData } = useAcademicData();
+  const labMilestonesData = siteData.labMilestones || labMilestones;
+  const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
+  const partnerLogosData = siteData.partnerLogos || partnerLogos;
+  const labImpactStatsData = siteData.labImpactStats || labImpactStats;
+  const labPillarsData = siteData.labPillars || labPillars;
+  const alumniPlacementsData = siteData.alumniPlacements || alumniPlacements;
+  const pgResearchersData = siteData.pgResearchers || pgResearchers;
+
   const [activeEraIndex, setActiveEraIndex] = useState(0);
   const [activeCollabTab, setActiveCollabTab] = useState("all");
 
-  const currentMilestone = labMilestones[activeEraIndex] || labMilestones[0];
+  const currentMilestone = labMilestonesData[activeEraIndex] || labMilestonesData[0] || {
+    era: "default",
+    year: "2023",
+    badge: "Current",
+    tag: "Software Security",
+    location: "COMSATS Lahore",
+    title: "SSA Research Lab",
+    summary: "Advancing software security through empirical assessment and verification.",
+    achievements: [],
+    stats: {},
+  };
 
   const renderPillarIcon = (name) => {
     switch (name) {
@@ -124,19 +143,19 @@ export function AboutPage() {
     profilePageSchema({
       url: `${SITE_URL}/about`,
       "@id": `${SITE_URL}/about`,
-      name: "About SSA Research Lab",
+      name: "Dr. Junaid Akram — Academic Profile & SSA Research Lab",
       description:
-        "About Dr. Junaid Akram and SSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team.",
+        "Academic profile of Dr. Junaid Akram, Assistant Professor & HEC-approved PhD supervisor leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
     }),
     personSchema(),
   ];
 
   return (
     <AcademicSiteLayout
-      title="About SSA Research Lab"
+      title="Dr. Junaid Akram — Academic Profile & SSA Lab"
       path="/about"
-      description="About Dr. Junaid Akram and SSA Research Lab at COMSATS University Lahore. Explore our research journey, international collaborations, and academic team."
-      keywords="Junaid Akram PhD, SSA Lab history, software security researcher, COMSATS Lahore professor, Tsinghua University PhD, University of Luxembourg postdoc"
+      description="Academic profile of Dr. Junaid Akram, Assistant Professor & HEC PhD supervisor leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore."
+      keywords="Dr Junaid Akram, Junaid Akram PhD, SSA Research Lab, COMSATS Lahore, Tsinghua University PhD, University of Luxembourg postdoc, HEC PhD supervisor, software security researcher"
       jsonLd={aboutJsonLd}
     >
       {/* 1. HERO & LAB MISSION OVERVIEW WITH DIRECTOR CARD */}
@@ -153,34 +172,34 @@ export function AboutPage() {
             />
           }
         />
-        {coInvestigators[0] && (
+        {coInvestigatorsData[0] && (
           <div className={styles.aboutDirectorCardBanner}>
             <aside className={styles.aboutDirectorCard}>
               <div className={styles.aboutDirectorAvatar}>
                 <Image
-                  src={coInvestigators[0].image}
-                  alt={coInvestigators[0].name}
+                  src={coInvestigatorsData[0].image || "/academic/co-investigators/dr-junaid-akram.webp"}
+                  alt={coInvestigatorsData[0].name}
                   width={72}
                   height={72}
                 />
               </div>
               <div className={styles.aboutDirectorInfo}>
-                <h3 className={styles.aboutDirectorName}>{coInvestigators[0].name}</h3>
+                <h3 className={styles.aboutDirectorName}>{coInvestigatorsData[0].name}</h3>
                 <span className={styles.aboutDirectorTitle}>Assistant Professor & HEC PhD Supervisor</span>
                 <span className={styles.aboutDirectorMeta}>
                   Tsinghua University PhD · SnT Luxembourg Postdoc
                 </span>
                 <div className={styles.aboutDirectorLinks}>
                   <a
-                    href={`mailto:${coInvestigators[0].email}`}
+                    href={`mailto:${coInvestigatorsData[0].email}`}
                     className={styles.aboutDirectorBtn}
                     title="Send Email"
                   >
                     <Mail size={12} /> Email
                   </a>
-                  {coInvestigators[0].googleScholar && (
+                  {coInvestigatorsData[0].googleScholar && (
                     <a
-                      href={coInvestigators[0].googleScholar}
+                      href={coInvestigatorsData[0].googleScholar}
                       target="_blank"
                       rel="noreferrer"
                       className={styles.aboutDirectorBtn}
@@ -209,7 +228,7 @@ export function AboutPage() {
         </div>
         <div className={styles.partnerRowWrapper}>
           <div className={styles.partnerCardGrid}>
-            {partnerLogos.map((partner) => (
+            {partnerLogosData.map((partner) => (
               <a
                 key={partner.name}
                 href={partner.href}
@@ -231,11 +250,11 @@ export function AboutPage() {
       {/* 3. LAB IMPACT METRICS COUNTER GRID */}
       <section className={styles.section} style={{ paddingTop: 0 }}>
         <div className={styles.statsGrid}>
-          {labImpactStats.map((stat) => (
+          {labImpactStatsData.map((stat) => (
             <div key={stat.label} className={styles.statCard}>
               <div className={styles.statValue}>{stat.value}</div>
               <div className={styles.statLabel}>{stat.label}</div>
-              <div className={styles.statNote}>{stat.note}</div>
+              <div className={styles.statNote}>{stat.note || stat.detail}</div>
             </div>
           ))}
         </div>
@@ -250,13 +269,13 @@ export function AboutPage() {
           </div>
         </div>
         <div className={styles.pillarsGrid}>
-          {labPillars.map((pillar) => (
-            <article key={pillar.id} className={styles.pillarCard}>
+          {labPillarsData.map((pillar) => (
+            <article key={pillar.id || pillar.title} className={styles.pillarCard}>
               <div className={styles.pillarIconWrap}>
                 {renderPillarIcon(pillar.iconName)}
               </div>
               <h3>{pillar.title}</h3>
-              <p>{pillar.desc}</p>
+              <p>{pillar.desc || pillar.description}</p>
             </article>
           ))}
         </div>
@@ -288,11 +307,11 @@ export function AboutPage() {
         <div className={styles.timelineWrapper}>
           {/* Timeline Nav / Stepper */}
           <div className={styles.timelineNav}>
-            {labMilestones.map((ms, idx) => {
+            {labMilestonesData.map((ms, idx) => {
               const isActive = activeEraIndex === idx;
               return (
                 <button
-                  key={ms.era}
+                  key={ms.era || ms.year || idx}
                   type="button"
                   className={`${styles.timelineTab} ${isActive ? styles.activeTimelineTab : ""}`}
                   onClick={() => setActiveEraIndex(idx)}
@@ -311,7 +330,7 @@ export function AboutPage() {
           <div className={styles.timelineCard}>
             <div className={styles.timelineCardHeader}>
               <span className={styles.timelineEraBadge}>
-                <Sparkles size={13} /> {currentMilestone.tag}
+                <Sparkles size={13} /> {currentMilestone.tag || currentMilestone.badge}
               </span>
               <span className={styles.timelineLocation}>
                 <MapPin size={14} /> {currentMilestone.location}
@@ -320,22 +339,26 @@ export function AboutPage() {
             <h3 className={styles.timelineCardTitle}>{currentMilestone.title}</h3>
             <p className={styles.timelineSummary}>{currentMilestone.summary}</p>
 
-            <ul className={styles.achievementList}>
-              {currentMilestone.achievements.map((item, i) => (
-                <li key={i} className={styles.achievementItem}>
-                  <CheckCircle2 size={16} className={styles.achievementIcon} />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+            {currentMilestone.achievements && currentMilestone.achievements.length > 0 && (
+              <ul className={styles.achievementList}>
+                {currentMilestone.achievements.map((item, i) => (
+                  <li key={i} className={styles.achievementItem}>
+                    <CheckCircle2 size={16} className={styles.achievementIcon} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
 
-            <div className={styles.timelineStatsRow}>
-              {Object.entries(currentMilestone.stats).map(([k, v]) => (
-                <div key={k} className={styles.timelineStatBadge}>
-                  {k.toUpperCase()}: <strong>{v}</strong>
-                </div>
-              ))}
-            </div>
+            {currentMilestone.stats && (
+              <div className={styles.timelineStatsRow}>
+                {Object.entries(currentMilestone.stats).map(([k, v]) => (
+                  <div key={k} className={styles.timelineStatBadge}>
+                    {k.toUpperCase()}: <strong>{v}</strong>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -358,7 +381,7 @@ export function AboutPage() {
               <Users size={24} />
             </div>
             <div className={styles.aboutTeamSpotlightContent}>
-              <h3>Faculty & Co-Investigators ({coInvestigators.length})</h3>
+              <h3>Faculty & Co-Investigators ({coInvestigatorsData.length})</h3>
               <p>
                 International academic partnerships spanning COMSATS Lahore, Tsinghua University, SnT Luxembourg, and KFUPM.
               </p>
@@ -373,7 +396,7 @@ export function AboutPage() {
               <GraduationCap size={24} />
             </div>
             <div className={styles.aboutTeamSpotlightContent}>
-              <h3>Postgraduate MS & PhD Theses ({pgResearchers.length})</h3>
+              <h3>Postgraduate MS & PhD Theses ({pgResearchersData.length})</h3>
               <p>
                 Active Master of Science (MS CS) researchers working on LLM vulnerability detection, program repair, and GNNs.
               </p>
@@ -388,7 +411,7 @@ export function AboutPage() {
               <Building size={24} />
             </div>
             <div className={styles.aboutTeamSpotlightContent}>
-              <h3>Alumni Placements ({alumniPlacements.length})</h3>
+              <h3>Alumni Placements ({alumniPlacementsData.length})</h3>
               <p>
                 Graduates transitioning into top global technology advisories, cybersecurity firms, and enterprise software teams.
               </p>
@@ -412,20 +435,23 @@ export function AboutPage() {
 
 export function ResearchPage() {
   const router = useRouter();
+  const { siteData } = useAcademicData();
+  const researchDomainsData = siteData.researchDomains || researchDomains;
   const [selectedDomain, setSelectedDomain] = useState(null);
 
   React.useEffect(() => {
     if (router.query.domain) {
-      const match = researchDomains.find(
+      const match = researchDomainsData.find(
         (d) =>
           d.id === router.query.domain ||
+          d.slug === router.query.domain ||
           d.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === router.query.domain
       );
       if (match) {
         setSelectedDomain(match);
       }
     }
-  }, [router.query.domain]);
+  }, [router.query.domain, researchDomainsData]);
 
   const researchJsonLd = [
     collectionPageSchema({
@@ -433,9 +459,9 @@ export function ResearchPage() {
       url: `${SITE_URL}/research`,
       description:
         "Research areas, domain roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SSA Lab.",
-      items: researchDomains.map((d) => ({
+      items: researchDomainsData.map((d) => ({
         name: d.title,
-        url: `${SITE_URL}/research?domain=${d.id}`,
+        url: `${SITE_URL}/research?domain=${d.id || d.slug}`,
         description: d.description,
       })),
     }),
@@ -443,10 +469,10 @@ export function ResearchPage() {
 
   return (
     <AcademicSiteLayout
-      title="Research Domains & Frameworks"
+      title="Software Security Research Domains & Frameworks"
       path="/research"
-      description="Explore software security research domains, vulnerability detection roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SSA Lab at COMSATS Lahore."
-      keywords="software vulnerability detection, malware analysis, code clone detection, software testing, source code security, SSA Lab research domains"
+      description="Explore software security research domains, vulnerability detection roadmaps, code clone detection, and analysis workflows developed by Dr. Junaid Akram at SSA Lab."
+      keywords="software security research, software vulnerability detection, malware analysis, code clone detection, software testing, source code security, COMSATS Lahore"
       jsonLd={researchJsonLd}
     >
       {selectedDomain && (
@@ -467,6 +493,7 @@ export function ResearchPage() {
             width={160}
             height={150}
             style={{ objectFit: 'contain', maxHeight: '150px' }}
+            className={styles.illustrationImage}
           />
         }
       />
@@ -481,9 +508,9 @@ export function ResearchPage() {
         </div>
 
         <div className={styles.domainGrid}>
-          {researchDomains.map((domain, index) => (
+          {researchDomainsData.map((domain, index) => (
             <article
-              key={domain.title}
+              key={domain.id || domain.slug || domain.title}
               className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
               onClick={() => setSelectedDomain(domain)}
               onKeyDown={(e) => {
@@ -555,6 +582,10 @@ export function ResearchPage() {
 }
 
 export function PublicationsPage() {
+  const { siteData } = useAcademicData();
+  const publicationsData = siteData.publications || publications;
+  const profile = siteData.academicProfile || academicProfile;
+
   const [filterType, setFilterType] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'row'
@@ -576,7 +607,7 @@ export function PublicationsPage() {
   };
 
   const filteredPubs = React.useMemo(() => {
-    return publications
+    return publicationsData
       .filter((pub) => {
         // Category filter
         if (filterType === "Journal" && pub.type !== "Journal") return false;
@@ -597,7 +628,7 @@ export function PublicationsPage() {
         const yearB = parseInt(b.year, 10) || 0;
         return sortOrder === "newest" ? yearB - yearA : yearA - yearB;
       });
-  }, [filterType, searchQuery, sortOrder]);
+  }, [publicationsData, filterType, searchQuery, sortOrder]);
 
   const handleCopyModalCitation = (text) => {
     if (!text) return;
@@ -622,13 +653,13 @@ export function PublicationsPage() {
       url: `${SITE_URL}/publications`,
       description:
         "Peer-reviewed journal and conference publications by Dr. Junaid Akram in software security, testing, malware, and code analysis.",
-      items: publications.map((p) => ({
+      items: publicationsData.map((p) => ({
         name: p.title,
         url: p.href || `${SITE_URL}/publications`,
         description: p.venue,
       })),
     }),
-    ...publications.slice(0, 8).map((p) =>
+    ...publicationsData.slice(0, 8).map((p) =>
       articleSchema({
         headline: p.title,
         description: p.venue,
@@ -639,16 +670,16 @@ export function PublicationsPage() {
     ),
   ];
 
-  const totalJournals = publications.filter((p) => p.type === "Journal").length;
-  const totalConfs = publications.filter((p) => p.type === "Conference").length;
-  const totalDoi = publications.filter((p) => p.href).length;
+  const totalJournals = publicationsData.filter((p) => p.type === "Journal").length;
+  const totalConfs = publicationsData.filter((p) => p.type === "Conference").length;
+  const totalDoi = publicationsData.filter((p) => p.href).length;
 
   return (
     <AcademicSiteLayout
-      title="Publications Showcase"
+      title="Software Security Publications & Research Papers"
       path="/publications"
       description="Peer-reviewed journal and conference publications by Dr. Junaid Akram on software vulnerability detection, program repair, code clones, and malware analysis."
-      keywords="Junaid Akram publications, software security papers, vulnerability detection research, code clone analysis papers, malware detection journal, IEEE conference papers"
+      keywords="Junaid Akram publications, software security research papers, software vulnerability detection papers, code clone analysis papers, malware detection journal, IEEE conference papers, COMSATS research"
       jsonLd={pubsJsonLd}
     >
       {/* Page intro header */}
@@ -675,7 +706,7 @@ export function PublicationsPage() {
               <BookOpen size={22} />
             </div>
             <div className={styles.statMetricContent}>
-              <div className={styles.statMetricNumber}>{publications.length}</div>
+              <div className={styles.statMetricNumber}>{publicationsData.length}</div>
               <p>Selected Publications</p>
             </div>
           </div>
@@ -714,7 +745,7 @@ export function PublicationsPage() {
         {/* Academic Profiles Link Buttons */}
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
           <a
-            href={academicProfile.googleScholar}
+            href={profile.googleScholar || academicProfile.googleScholar}
             target="_blank"
             rel="noreferrer"
             className={styles.primaryButton}
@@ -1145,10 +1176,10 @@ export function SupervisionPage({ fypProjects = [] }) {
 
   return (
     <AcademicSiteLayout
-      title="Supervision Directory"
+      title="Software Engineering FYP Supervision & Research Projects"
       path="/supervision"
-      description="Supervised final-year student projects, FYP opportunities, and student research under Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus."
-      keywords="FYP supervision COMSATS, Junaid Akram student supervision, software security final year projects, BS MS PhD research supervision Pakistan"
+      description="Explore BS & MS Software Engineering FYP supervision, running projects, and research opportunities led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore."
+      keywords="Software Engineering FYP Supervision, COMSATS FYP projects, software security research, cybersecurity FYP ideas, BS software engineering projects, Dr Junaid Akram supervision"
       jsonLd={supervisionJsonLd}
     >
       <PageIntro
@@ -1188,7 +1219,22 @@ export function SupervisionPage({ fypProjects = [] }) {
 }
 
 export function TeamPage() {
+  const { siteData } = useAcademicData();
+  const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
+  const pgResearchersData = siteData.pgResearchers || pgResearchers;
+  const alumniPlacementsData = siteData.alumniPlacements || alumniPlacements;
+  const partnerLogosData = siteData.partnerLogos || partnerLogos;
+  const supervisedProjectsData = siteData.supervisedProjects || supervisedProjects;
+  const fypProjectsData = siteData.fypProjects || defaultFypProjects;
+
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("all");
+
+  React.useEffect(() => {
+    if (router.query.tab) {
+      setActiveTab(router.query.tab);
+    }
+  }, [router.query.tab]);
 
   const showPi = activeTab === "all" || activeTab === "pi";
   const showMs = activeTab === "all" || activeTab === "ms";
@@ -1203,12 +1249,12 @@ export function TeamPage() {
       description:
         "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab.",
       items: [
-        ...coInvestigators.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
-        ...pgResearchers.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
+        ...coInvestigatorsData.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
+        ...pgResearchersData.map((m) => ({ name: m.name, url: `${SITE_URL}/team` })),
       ],
     }),
     personSchema(),
-    ...coInvestigators.slice(0, 4).map((m) =>
+    ...coInvestigatorsData.slice(0, 4).map((m) =>
       personMemberSchema({
         name: m.name,
         role: m.role || "Co-Investigator",
@@ -1218,7 +1264,7 @@ export function TeamPage() {
         researchArea: m.researchArea,
       })
     ),
-    ...pgResearchers.slice(0, 4).map((m) =>
+    ...pgResearchersData.slice(0, 4).map((m) =>
       personMemberSchema({
         name: m.name,
         role: m.program || "Researcher",
@@ -1259,35 +1305,35 @@ export function TeamPage() {
             className={`${styles.collabTab} ${activeTab === "pi" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("pi")}
           >
-            👨‍🏫 Faculty & Co-Investigators ({coInvestigators.length})
+            👨‍🏫 Faculty & Co-Investigators ({coInvestigatorsData.length})
           </button>
           <button
             type="button"
             className={`${styles.collabTab} ${activeTab === "ms" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("ms")}
           >
-            🎓 Postgraduate Team — MS & PhD ({pgResearchers.length})
+            🎓 Postgraduate Team — MS & PhD ({pgResearchersData.length})
           </button>
           <button
             type="button"
             className={`${styles.collabTab} ${activeTab === "bs" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("bs")}
           >
-            💻 Undergraduate Team — BS Engineering ({defaultFypProjects.filter((p) => !p.isOpportunity && (p.institution || "").includes("COMSATS")).length + supervisedProjects.length})
+            💻 Undergraduate Team — BS Engineering ({fypProjectsData.filter((p) => !p.isOpportunity && (p.institution || "").includes("COMSATS")).length + supervisedProjectsData.length})
           </button>
           <button
             type="button"
             className={`${styles.collabTab} ${activeTab === "alumni" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("alumni")}
           >
-            💼 Alumni & Placements ({alumniPlacements.length})
+            💼 Alumni & Placements ({alumniPlacementsData.length})
           </button>
           <button
             type="button"
             className={`${styles.collabTab} ${activeTab === "partners" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("partners")}
           >
-            🏛️ Institutional Partners ({partnerLogos.length})
+            🏛️ Institutional Partners ({partnerLogosData.length})
           </button>
         </div>
       </section>
@@ -1306,7 +1352,7 @@ export function TeamPage() {
           </div>
 
           <div className={styles.collabGrid}>
-            {coInvestigators.map((pi) => (
+            {coInvestigatorsData.map((pi) => (
               <article key={pi.name} className={styles.collabCard}>
                 <div className={styles.collabTop}>
                   <div className={styles.collabAvatar}>
@@ -1381,8 +1427,8 @@ export function TeamPage() {
           </div>
 
           <div className={styles.collabGrid}>
-            {pgResearchers.map((student) => (
-              <article key={student.id} className={styles.collabCard}>
+            {pgResearchersData.map((student) => (
+              <article key={student.id || student.name} className={styles.collabCard}>
                 <div className={styles.collabTop}>
                   <div className={styles.collabAvatar} style={{ border: "2.5px solid var(--academic-cyan)" }}>
                     {student.image ? (
@@ -1391,7 +1437,7 @@ export function TeamPage() {
                         alt={student.name}
                         width={120}
                         height={120}
-                        caption={`${student.name} (${student.id}) — ${student.degree}`}
+                        caption={`${student.name} (${student.id || student.memberId}) — ${student.degree}`}
                       />
                     ) : (
                       <span style={{ color: "var(--academic-cyan)", fontSize: "0.95rem" }}>
@@ -1401,7 +1447,7 @@ export function TeamPage() {
                   </div>
                   <div className={styles.collabMeta}>
                     <h3>{student.name}</h3>
-                    <span className={styles.collabBadge}>{student.degree} · {student.id}</span>
+                    <span className={styles.collabBadge}>{student.degree} {student.id ? `· ${student.id}` : student.memberId ? `· ${student.memberId}` : ""}</span>
                     <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
                       {student.status}
                     </div>
@@ -1410,17 +1456,17 @@ export function TeamPage() {
 
                 <div className={styles.collabBody}>
                   <p className={styles.collabTopic} style={{ marginBottom: "8px" }}>
-                    <strong>Thesis:</strong> {student.topic}
+                    <strong>Thesis:</strong> {student.topic || student.specialization}
                   </p>
                   <p className={styles.collabFocus}>
-                    <strong>Research Focus:</strong> {student.focus}
+                    <strong>Research Focus:</strong> {student.focus || student.bio}
                   </p>
                 </div>
 
                 <div className={styles.collabFooter}>
                   <span className={styles.collabFocus} style={{ fontSize: "0.74rem" }}>
                     <Building size={12} style={{ display: "inline", marginRight: "4px" }} />
-                    {student.institution}
+                    {student.institution || "COMSATS University Islamabad"}
                   </span>
                   {student.email && (
                     <a href={`mailto:${student.email}`} className={styles.collabLinkBtn}>
@@ -1462,10 +1508,10 @@ export function TeamPage() {
           </h3>
 
           <div className={styles.collabGrid} style={{ marginBottom: "48px" }}>
-            {defaultFypProjects
+            {fypProjectsData
               .filter((fyp) => !fyp.isOpportunity && (fyp.institution || "").includes("COMSATS"))
               .map((fyp) => (
-                <article key={fyp.slug} className={styles.collabCard}>
+                <article key={fyp.slug || fyp._id} className={styles.collabCard}>
                   <div className={styles.collabTop}>
                     <div className={styles.collabAvatar} style={{ borderRadius: "8px", width: "48px", height: "48px" }}>
                       <Users size={22} />
@@ -1473,7 +1519,7 @@ export function TeamPage() {
                     <div className={styles.collabMeta}>
                       <h3>{fyp.title}</h3>
                       <span className={styles.collabBadge}>{fyp.programme} · {fyp.session}</span>
-                      <div className={styles.collabDegree}>{fyp.projectType} ({fyp.nature})</div>
+                      <div className={styles.collabDegree}>{fyp.projectType || "Final Year Project"} ({fyp.nature || "Software Security"})</div>
                     </div>
                   </div>
 
@@ -1481,16 +1527,20 @@ export function TeamPage() {
                     <p className={styles.collabFocus} style={{ marginBottom: "12px" }}>
                       {fyp.summary}
                     </p>
-                    <p className={styles.collabTopic} style={{ fontSize: "0.8rem", margin: 0 }}>
-                      <strong>Team Members:</strong>
-                    </p>
-                    <ul style={{ margin: "6px 0 12px 18px", padding: 0, fontSize: "0.78rem", color: "var(--academic-muted)" }}>
-                      {fyp.students.map((st) => (
-                        <li key={st.name}>
-                          <strong>{st.name}</strong> {st.registration && `(${st.registration})`}
-                        </li>
-                      ))}
-                    </ul>
+                    {fyp.students && fyp.students.length > 0 && (
+                      <>
+                        <p className={styles.collabTopic} style={{ fontSize: "0.8rem", margin: 0 }}>
+                          <strong>Team Members:</strong>
+                        </p>
+                        <ul style={{ margin: "6px 0 12px 18px", padding: 0, fontSize: "0.78rem", color: "var(--academic-muted)" }}>
+                          {fyp.students.map((st) => (
+                            <li key={st.name}>
+                              <strong>{st.name}</strong> {st.registration && `(${st.registration})`}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
                     {fyp.supervisor && (
                       <div className={styles.collabFocus} style={{ fontSize: "0.75rem" }}>
                         Supervisor: <strong>{fyp.supervisor}</strong> {fyp.coSupervisor && `| Co-Supervisor: ${fyp.coSupervisor}`}
@@ -1512,7 +1562,7 @@ export function TeamPage() {
           </h3>
 
           <div className={styles.collabGrid}>
-            {supervisedProjects.map((proj) => (
+            {supervisedProjectsData.map((proj) => (
               <article key={`${proj.student}-${proj.title}`} className={styles.collabCard}>
                 <div className={styles.collabTop}>
                   <div className={styles.collabAvatar} style={{ width: "44px", height: "44px", fontSize: "0.9rem", background: "rgba(6, 182, 212, 0.1)", color: "var(--academic-cyan)" }}>
@@ -1549,13 +1599,13 @@ export function TeamPage() {
           </div>
 
           <div className={styles.placementList}>
-            {alumniPlacements.map((placement) => (
+            {alumniPlacementsData.map((placement) => (
               <article key={`${placement.name}-${placement.organization}`}>
                 <div>
                   <h3>{placement.name}</h3>
-                  <p>{placement.organization}</p>
+                  <p>{placement.organization || placement.affiliation}</p>
                 </div>
-                <span>{placement.term}</span>
+                <span>{placement.term || placement.period}</span>
               </article>
             ))}
           </div>
@@ -1577,7 +1627,7 @@ export function TeamPage() {
 
           <div className={styles.partnerRowWrapper}>
             <div className={styles.partnerCardGrid}>
-              {partnerLogos.map((partner) => (
+              {partnerLogosData.map((partner) => (
                 <a
                   key={partner.name}
                   href={partner.href}
@@ -1601,22 +1651,26 @@ export function TeamPage() {
 }
 
 export function EventsPage() {
+  const { siteData } = useAcademicData();
+  const eventHighlightsData = siteData.eventHighlights || eventHighlights;
+  const eventGalleryData = siteData.eventGallery || eventGallery;
+
   const eventsJsonLd = [
     collectionPageSchema({
       name: "SSA Lab — Events & Presentations",
       url: `${SITE_URL}/events`,
       description:
         "Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SSA Research Lab.",
-      items: eventHighlights.map((e) => ({
+      items: eventHighlightsData.map((e) => ({
         name: e.title,
         url: `${SITE_URL}/events`,
-        description: e.description || e.venue,
+        description: e.description || e.summary || e.venue,
       })),
     }),
-    ...eventHighlights.slice(0, 6).map((e) =>
+    ...eventHighlightsData.slice(0, 6).map((e) =>
       eventSchema({
         name: e.title,
-        description: e.description || `${e.type || "Event"} — ${e.venue || "International conference"}`,
+        description: e.description || e.summary || `${e.category || e.badge || "Event"} — ${e.venue || "International conference"}`,
         startDate: e.year ? `${e.year}-01-01` : undefined,
         url: `${SITE_URL}/events`,
       })
@@ -1647,7 +1701,7 @@ export function EventsPage() {
         </div>
 
         <div className={styles.eventList}>
-          {eventHighlights.map((event) => (
+          {eventHighlightsData.map((event) => (
             <article key={event.title} className={styles.eventCardItem}>
               <div className={styles.eventYearBox}>
                 <Calendar size={18} style={{ color: "var(--academic-blue)", marginBottom: "4px" }} />
@@ -1686,20 +1740,20 @@ export function EventsPage() {
         </div>
 
         <div className={styles.eventGalleryGrid}>
-          {eventGallery.map((image) => {
+          {eventGalleryData.map((image) => {
             const isPortrait = image.orientation === "portrait";
             return (
-              <article key={image.src} className={styles.eventGalleryCard}>
+              <article key={image.src || image.image} className={styles.eventGalleryCard}>
                 <div className={`${styles.eventMediaBox} ${isPortrait ? styles.eventMediaPortrait : styles.eventMediaLandscape}`}>
                   <span className={styles.eventTopBadge}>
                     <Sparkles size={12} /> {image.badge}
                   </span>
                   <AcademicImageLightbox
-                    src={image.src}
-                    alt={image.alt}
-                    width={image.width}
-                    height={image.height}
-                    caption={image.caption}
+                    src={image.src || image.image}
+                    alt={image.alt || image.title}
+                    width={image.width || 1280}
+                    height={image.height || 900}
+                    caption={image.caption || image.title}
                     className={styles.eventImageButton}
                     sizes="(max-width: 868px) 100vw, 50vw"
                   />
@@ -1711,7 +1765,7 @@ export function EventsPage() {
                 <div className={styles.eventCardMetaBody}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <span style={{ fontSize: "0.78rem", fontWeight: "600", color: "var(--academic-cyan)" }}>
-                      {image.category} · {image.date}
+                      {image.category} {image.date ? `· ${image.date}` : ""}
                     </span>
                     <span className={styles.eventLocation} style={{ fontSize: "0.78rem" }}>
                       <MapPin size={12} /> {image.location}
@@ -1730,6 +1784,8 @@ export function EventsPage() {
 }
 
 export function ContactPage() {
+  const { siteData } = useAcademicData();
+  const profile = siteData.academicProfile || academicProfile;
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -1787,7 +1843,7 @@ export function ContactPage() {
     {
       question: "What is Dr. Junaid Akram's office location?",
       answer:
-        "H Block, Room 14, COMSATS University Islamabad, Lahore Campus, Defence Road, Off Raiwind Road, Lahore, Pakistan.",
+        `${profile.office || academicProfile.office}, COMSATS University Islamabad, Lahore Campus, Defence Road, Off Raiwind Road, Lahore, Pakistan.`,
     },
   ];
 
@@ -1844,34 +1900,34 @@ export function ContactPage() {
           <div className={styles.contactCard}>
             <Mail size={24} />
             <span>Email</span>
-            <a href={`mailto:${academicProfile.emails[0]}`}>
-              {academicProfile.emails[0]}
+            <a href={`mailto:${profile.emails?.[0] || academicProfile.emails[0]}`}>
+              {profile.emails?.[0] || academicProfile.emails[0]}
             </a>
-            <a href={`mailto:${academicProfile.labEmail}`}>
-              {academicProfile.labEmail}
+            <a href={`mailto:${profile.labEmail || academicProfile.labEmail}`}>
+              {profile.labEmail || academicProfile.labEmail}
             </a>
           </div>
 
           <div className={styles.contactCard}>
             <MapPin size={24} />
             <span>Office Location</span>
-            <strong>{academicProfile.office}</strong>
-            <p>{academicProfile.institution}</p>
+            <strong>{profile.office || academicProfile.office}</strong>
+            <p>{profile.institution || academicProfile.institution}</p>
           </div>
 
           <div className={styles.contactCard}>
             <ExternalLink size={24} />
             <span>Academic Profiles</span>
-            <a href={academicProfile.officialProfile} target="_blank" rel="noreferrer">
+            <a href={profile.officialProfile || academicProfile.officialProfile} target="_blank" rel="noreferrer">
               Official COMSATS profile
             </a>
-            <a href={academicProfile.googleScholar} target="_blank" rel="noreferrer">
+            <a href={profile.googleScholar || academicProfile.googleScholar} target="_blank" rel="noreferrer">
               Google Scholar
             </a>
-            <a href={academicProfile.orcid} target="_blank" rel="noreferrer">
+            <a href={profile.orcid || academicProfile.orcid} target="_blank" rel="noreferrer">
               ORCID profile
             </a>
-            <a href={academicProfile.researchGate} target="_blank" rel="noreferrer">
+            <a href={profile.researchGate || academicProfile.researchGate} target="_blank" rel="noreferrer">
               ResearchGate
             </a>
           </div>

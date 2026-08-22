@@ -36,6 +36,17 @@ Dr. Junaid Akram works on source-code security assessment, software vulnerabilit
 - [Events](/events)
 - [Contact](/contact)
 
+## Core Supervised Projects & Case Studies
+
+- [Software Vulnerability Detection using LLM Model](/supervision/projects/software-vulnerability-detection-llm-model)
+- [Token-Based Semantic Code Clone Detection](/supervision/projects/token-based-semantic-code-clone-detection)
+- [LLM-based Vulnerability Patch Optimizer](/supervision/projects/llm-based-vulnerability-patch-optimizer)
+- [Feature Envy Detection and Refactoring System](/supervision/projects/feature-envy-detection-refactoring-system)
+- [Robust Android Malware Detector](/supervision/projects/robust-android-malware-detector)
+- [XSS Vulnerability Detection & Defense System](/supervision/projects/xss-vulnerability-detection-defense)
+- [Vulnerability Management & Benchmarking System](/supervision/projects/vulnerability-management-benchmarking-system)
+- [Source Code Structure Capturing & Recommendation](/supervision/projects/source-code-structure-capturing-recommendation)
+
 ## Verified Profiles
 
 - LinkedIn: https://www.linkedin.com/in/junaidakram/

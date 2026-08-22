@@ -63,12 +63,17 @@ const Filters = ({ filters, setFilters, onApply }) => {
             }
           >
             <option value="">All Entities</option>
-            <option value="Project">Research Project</option>
-            <option value="FypProject">FYP Project</option>
-            <option value="Enquiry">Enquiry</option>
+            <option value="Publication">Publication</option>
+            <option value="TeamMember">Team Member / Alumni</option>
+            <option value="ResearchDomain">Research Area</option>
+            <option value="EventHighlight">News & Event</option>
+            <option value="LabProfile">Lab Profile & Settings</option>
+            <option value="FypProject">FYP Supervision</option>
+            <option value="Project">Lab Project</option>
+            <option value="Enquiry">Enquiry & Message</option>
             <option value="MediaAsset">Media Asset</option>
-            <option value="User">User</option>
-            <option value="Auth">Auth</option>
+            <option value="User">User Account</option>
+            <option value="Auth">Authentication</option>
           </select>
         </div>
         <div className={`${styles.fieldGroup} ${styles.span2}`}>

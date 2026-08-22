@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Edit3, GripVertical, Plus, Trash2 } from "lucide-react";
+import { Edit3, GripVertical, Plus, Trash2, Eye, EyeOff, Star, ExternalLink } from "lucide-react";
 import toast from "react-hot-toast";
 import AdminLayout from "../../../components/Admin/AdminLayout/AdminLayout";
 import Modal from "../../../components/Admin/Modal/Modal";
@@ -35,6 +35,48 @@ export default function FypAdminPage() {
   useEffect(() => {
     loadProjects();
   }, [loadProjects]);
+
+  // Toggle Published
+  const handleTogglePublished = async (project) => {
+    const nextPublished = project.published === false ? true : false;
+    try {
+      const res = await fetch(`/api/fyp-projects/${project._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ published: nextPublished }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message || "Failed to update status");
+
+      toast.success(nextPublished ? "Project published to website" : "Project set to draft");
+      setProjects((prev) =>
+        prev.map((item) => (item._id === project._id ? { ...item, published: nextPublished } : item))
+      );
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  // Toggle Featured
+  const handleToggleFeatured = async (project) => {
+    const nextFeatured = !project.featured;
+    try {
+      const res = await fetch(`/api/fyp-projects/${project._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ featured: nextFeatured }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message || "Failed to update featured flag");
+
+      toast.success(nextFeatured ? "Marked as Featured Case Study" : "Removed from Featured");
+      setProjects((prev) =>
+        prev.map((item) => (item._id === project._id ? { ...item, featured: nextFeatured } : item))
+      );
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   const saveOrder = async (orderedProjects) => {
     const toastId = toast.loading("Saving project order…");
@@ -101,6 +143,12 @@ export default function FypAdminPage() {
       if (!project.published) return false;
     } else if (statusFilter === "Draft") {
       if (project.published) return false;
+    } else if (statusFilter === "Running") {
+      if (project.status !== "Running" && project.categoryType !== "running") return false;
+    } else if (statusFilter === "Completed") {
+      if (project.status !== "Completed" && project.categoryType !== "completed") return false;
+    } else if (statusFilter === "Opportunities") {
+      if (!project.isOpportunity && project.categoryType !== "future" && project.status !== "Available for Supervision") return false;
     } else if (statusFilter !== "All") {
       if (project.status !== statusFilter) return false;
     }
@@ -125,8 +173,10 @@ export default function FypAdminPage() {
 
   const filterOptions = [
     "All",
-    "In Progress",
+    "Running",
     "Completed",
+    "Opportunities",
+    "In Progress",
     "Archived",
     "Published",
     "Draft",
@@ -243,6 +293,11 @@ export default function FypAdminPage() {
                     <span>{project.status}</span>
                     <span>{project.published ? "Published" : "Draft"}</span>
                     {project.featured ? <strong>Featured</strong> : null}
+                    {project.isOpportunity || project.categoryType === "future" ? (
+                      <span style={{ background: "rgba(147, 51, 234, 0.12)", color: "#7e22ce" }}>
+                        Opportunity
+                      </span>
+                    ) : null}
                   </div>
                   <h2>{project.title}</h2>
                   <p>{project.summary}</p>
@@ -252,11 +307,57 @@ export default function FypAdminPage() {
                   </small>
                 </div>
                 <div className={styles.actions}>
+                  {/* Quick Toggle Featured */}
+                  <button
+                    type="button"
+                    className={styles.actionIconBtn}
+                    onClick={() => handleToggleFeatured(project)}
+                    title={project.featured ? "Remove from Featured" : "Mark as Featured"}
+                    aria-label="Toggle Featured"
+                  >
+                    <Star
+                      size={16}
+                      color={project.featured ? "#eab308" : "currentColor"}
+                      fill={project.featured ? "#eab308" : "none"}
+                    />
+                  </button>
+
+                  {/* Quick Toggle Published */}
+                  <button
+                    type="button"
+                    className={styles.actionIconBtn}
+                    onClick={() => handleTogglePublished(project)}
+                    title={project.published ? "Unpublish (Set to Draft)" : "Publish to Website"}
+                    aria-label="Toggle Published"
+                  >
+                    {project.published ? (
+                      <Eye size={16} color="#16a34a" />
+                    ) : (
+                      <EyeOff size={16} color="#dc2626" />
+                    )}
+                  </button>
+
+                  {/* View on Live Site */}
+                  <a
+                    href={
+                      project.isOpportunity || project.categoryType === "future"
+                        ? `/supervision/opportunities/${project.slug}`
+                        : `/supervision/projects/${project.slug}`
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.actionIconBtn}
+                    title="View Case Study on Public Site"
+                    aria-label="View on Public Site"
+                  >
+                    <ExternalLink size={16} />
+                  </a>
+
                   <Link
                     href={`/admin/fyp/edit/${project._id}`}
                     aria-label={`Edit ${project.title}`}
                   >
-                    <Edit3 size={17} />
+                    <Edit3 size={16} />
                     Edit
                   </Link>
                   <button
@@ -264,7 +365,7 @@ export default function FypAdminPage() {
                     onClick={() => setDeleteProject(project)}
                     aria-label={`Delete ${project.title}`}
                   >
-                    <Trash2 size={17} />
+                    <Trash2 size={16} />
                     Delete
                   </button>
                 </div>

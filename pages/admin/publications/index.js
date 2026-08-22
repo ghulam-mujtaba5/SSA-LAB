@@ -359,6 +359,17 @@ export default function PublicationsAdminPage() {
                     {pub.published !== false ? <Eye size={16} color="#16a34a" /> : <EyeOff size={16} color="#dc2626" />}
                   </button>
 
+                  {/* View on Public Website */}
+                  <a
+                    href="/publications"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.iconButton}
+                    title="View Publications on Live Website"
+                  >
+                    <BookOpen size={16} />
+                  </a>
+
                   {/* View Paper External Link */}
                   {pub.href && (
                     <a
@@ -366,7 +377,7 @@ export default function PublicationsAdminPage() {
                       target="_blank"
                       rel="noreferrer"
                       className={styles.iconButton}
-                      title="Open Paper Link"
+                      title="Open Paper DOI / URL"
                     >
                       <ExternalLink size={16} />
                     </a>

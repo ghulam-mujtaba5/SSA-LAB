@@ -281,21 +281,30 @@ const AnalyticsPage = () => {
               pushSection("KPIs");
               pushHeader(["Metric", "Value"]);
               pushRows([
-                ["Total Articles", stats.kpis?.totalArticles ?? ""],
-                ["Published Articles", stats.kpis?.publishedArticles ?? ""],
+                ["Total Supervised FYPs", stats.kpis?.totalFyp ?? stats.kpis?.totalArticles ?? ""],
+                ["Completed FYPs", stats.kpis?.publishedArticles ?? ""],
                 ["Total Projects", stats.kpis?.totalProjects ?? ""],
                 ["Published Projects", stats.kpis?.publishedProjects ?? ""],
+                ["Total Publications", stats.kpis?.totalPublications ?? ""],
+                ["Total Team Members", stats.kpis?.totalTeam ?? ""],
+                ["Total Research Domains", stats.kpis?.totalDomains ?? ""],
+                ["Total News & Events", stats.kpis?.totalEvents ?? ""],
+                ["Total Student Enquiries", stats.kpis?.totalEnquiries ?? ""],
               ]);
               rows.push([]);
 
               // Trends
-              pushSection("Articles By Date");
+              pushSection("FYP Supervisions By Date");
               pushHeader(["Date", "Count"]);
               pushRows((stats.articlesByDate || []).map((d) => [d._id, d.count]));
               rows.push([]);
               pushSection("Projects By Date");
               pushHeader(["Date", "Count"]);
               pushRows((stats.projectsByDate || []).map((d) => [d._id, d.count]));
+              rows.push([]);
+              pushSection("Publications By Date");
+              pushHeader(["Date", "Count"]);
+              pushRows((stats.pubsByDate || []).map((d) => [d._id, d.count]));
               rows.push([]);
 
               // Tags/Categories
@@ -573,6 +582,64 @@ const AnalyticsPage = () => {
                 <SparklinesLine color="#10b981" className={styles.sparklineNoFill} />
                 <SparklinesSpots size={2} />
                 <SparklinesReferenceLine type="mean" className={styles.sparklineRefMean} />
+              </Sparklines>
+            </div>
+          </motion.div>
+          <motion.div 
+            className={`${styles.kpiCard}`}
+            whileHover={{ y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className={styles.kpiTitle}>
+              <Icon name="book-open" size={16} />
+              Publications
+            </div>
+            <div className={styles.kpiRow}>
+              <h3 className={styles.kpiValue}>
+                {stats?.kpis?.totalPublications ?? "-"}
+              </h3>
+              <span className={`${styles.deltaText} ${styles.deltaPositive}`}>
+                <Icon name="award" size={14} />
+                {stats?.kpis?.publishedPublications ?? 0} published
+              </span>
+            </div>
+            <div className={styles.sparklineWrapper}>
+              <Sparklines
+                data={(stats?.pubsByDate || []).map((d) => d.count)}
+                height={40}
+                margin={5}
+              >
+                <SparklinesLine color="#8b5cf6" className={styles.sparklineNoFill} />
+                <SparklinesSpots size={2} />
+              </Sparklines>
+            </div>
+          </motion.div>
+          <motion.div 
+            className={`${styles.kpiCard}`}
+            whileHover={{ y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className={styles.kpiTitle}>
+              <Icon name="mail" size={16} />
+              Student Inquiries
+            </div>
+            <div className={styles.kpiRow}>
+              <h3 className={styles.kpiValue}>
+                {stats?.kpis?.totalEnquiries ?? "-"}
+              </h3>
+              <span className={`${styles.deltaText} ${styles.deltaPositive}`}>
+                <Icon name="users" size={14} />
+                {stats?.kpis?.totalTeam ?? 0} team members
+              </span>
+            </div>
+            <div className={styles.sparklineWrapper}>
+              <Sparklines
+                data={(stats?.enquiryStats || []).map((d) => d.count)}
+                height={40}
+                margin={5}
+              >
+                <SparklinesLine color="#f59e0b" className={styles.sparklineNoFill} />
+                <SparklinesSpots size={2} />
               </Sparklines>
             </div>
           </motion.div>
