@@ -43,7 +43,7 @@ export default function LoginPage() {
     } else {
       const callbackUrl = router.query?.callbackUrl;
       const destination = callbackUrl ? decodeURIComponent(callbackUrl) : "/admin/dashboard";
-      router.push(destination);
+      window.location.href = destination;
     }
   };
 
