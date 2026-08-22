@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import dbConnect from "../../../lib/mongoose";
 import MediaAsset from "../../../models/MediaAsset";
+import User from "../../../models/User";
 import formidable from "formidable";
 import fs from "fs";
 import mongoose from "mongoose";
