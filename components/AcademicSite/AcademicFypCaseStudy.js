@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import AcademicImageLightbox from "./AcademicImageLightbox";
+import ProjectGallerySlider from "./ProjectGallerySlider";
 import styles from "./AcademicFypCaseStudy.module.css";
 
 const dimensions = {
@@ -230,41 +231,17 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
         </div>
       ) : null}
 
-      {/* Implementation Screenshots (Only if present in project data) */}
+      {/* Implementation Screenshots (Single-Box Interactive Slideshow) */}
       {!isOpportunity && featured.gallery && featured.gallery.length > 0 ? (
         <div className={styles.evidenceSection}>
           <div className={styles.evidenceHeading}>
             <div>
-              <p className={styles.eyebrow}>Implementation evidence</p>
-              <h3>Selected Screenshots & Visuals</h3>
+              <p className={styles.eyebrow}>Implementation evidence & interfaces</p>
+              <h3>Interactive Visual Showcase</h3>
             </div>
-            <p>Click any visual to inspect at full size.</p>
+            <p>Use slideshow controls, arrows, or thumbnails to explore architecture and UI layers.</p>
           </div>
-          <div className={styles.evidenceGrid}>
-            {featured.gallery
-              .slice()
-              .sort((a, b) => (a.order || 0) - (b.order || 0))
-              .map((image, index) => {
-                const [width, height] = getDimensions(image.url);
-                return (
-                  <figure
-                    key={`${image.url}-${index}`}
-                    className={index === 0 || index === 5 ? styles.wideEvidence : undefined}
-                  >
-                    <AcademicImageLightbox
-                      src={image.url}
-                      alt={image.alt || image.caption || featured.title}
-                      width={width}
-                      height={height}
-                      caption={image.caption}
-                      className={styles.evidenceButton}
-                      sizes="(max-width: 780px) 94vw, 42vw"
-                    />
-                    <figcaption>{image.caption}</figcaption>
-                  </figure>
-                );
-              })}
-          </div>
+          <ProjectGallerySlider gallery={featured.gallery} projectTitle={featured.title} />
         </div>
       ) : null}
 

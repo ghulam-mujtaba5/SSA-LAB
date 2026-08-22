@@ -1,0 +1,346 @@
+.sliderContainer {
+  --slider-line: rgba(99, 102, 241, 0.25);
+  --slider-glow: rgba(6, 182, 212, 0.35);
+  width: 100%;
+  margin-top: 24px;
+  border: 1px solid var(--slider-line);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.45);
+}
+
+.sliderHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: rgba(30, 41, 59, 0.5);
+  border-bottom: 1px solid var(--slider-line);
+  gap: 16px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.headerIcon {
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.slideCounter {
+  display: inline-block;
+  padding: 4px 9px;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 999px;
+  color: #a5b4fc;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.captionText {
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.iconBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.mainViewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 580px;
+  background: #020617;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageStage {
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.imageStage:hover .mainImage {
+  transform: scale(1.015);
+}
+
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.navArrow:hover {
+  background: rgba(99, 102, 241, 0.85);
+  border-color: #a5b4fc;
+  box-shadow: 0 0 20px var(--slider-glow);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prevArrow {
+  left: 18px;
+}
+
+.nextArrow {
+  right: 18px;
+}
+
+.thumbnailStrip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(15, 23, 42, 0.8);
+  border-top: 1px solid var(--slider-line);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.4) transparent;
+}
+
+.thumbnailStrip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbnailStrip::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 4px;
+}
+
+.thumbBtn {
+  position: relative;
+  flex: 0 0 110px;
+  height: 64px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background: #020617;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.thumbBtn:hover {
+  opacity: 0.9;
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.activeThumb {
+  opacity: 1;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+  transform: scale(1.03);
+}
+
+.thumbImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbIndex {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  padding: 2px 5px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+/* Lightbox Modal */
+.lightboxBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.92);
+  backdrop-filter: blur(16px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lightboxContent {
+  position: relative;
+  max-width: 94vw;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+}
+
+.lightboxCloseBtn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.lightboxCloseBtn:hover {
+  background: rgba(239, 68, 68, 0.8);
+  border-color: #ef4444;
+}
+
+.lightboxImageWrapper {
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightboxImage {
+  max-width: 90vw;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+.lightboxCaption {
+  margin-top: 14px;
+  text-align: center;
+  color: #f1f5f9;
+}
+
+.lightboxCaption p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.lightboxCaption small {
+  color: #94a3b8;
+  font-size: 0.78rem;
+}
+
+.lightboxArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lightboxArrow:hover {
+  background: rgba(99, 102, 241, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightboxPrev {
+  left: -70px;
+}
+
+.lightboxNext {
+  right: -70px;
+}
+
+@media (max-width: 768px) {
+  .sliderHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 14px;
+  }
+  .headerActions {
+    align-self: flex-end;
+    margin-top: -24px;
+  }
+  .thumbBtn {
+    flex: 0 0 85px;
+    height: 52px;
+  }
+  .lightboxPrev {
+    left: 8px;
+  }
+  .lightboxNext {
+    right: 8px;
+  }
+}
