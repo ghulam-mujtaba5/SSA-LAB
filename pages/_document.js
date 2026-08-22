@@ -47,43 +47,11 @@ class MyDocument extends Document {
           <link rel="dns-prefetch" href="https://scholar.google.com" />
           <link rel="dns-prefetch" href="https://orcid.org" />
 
-          {/* ── LCP images preloaded to avoid render-blocking ─── */}
+          {/* ── Google Fonts ─────────────────────────────────── */}
           <link
-            rel="preload"
-            as="image"
-            href="/academic/illustrations/homepage-hero.webp"
-            type="image/webp"
-          />
-          <link
-            rel="preload"
-            as="image"
-            href="/academic/ssa-research-group-logo.png"
-            type="image/png"
-          />
-
-          {/* ── Google Fonts — preloaded then swapped ─────────── */}
-          <link
-            rel="preload"
-            as="style"
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
-          />
-          <link
-            id="google-fonts-stylesheet"
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
-            media="print"
           />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: "document.getElementById('google-fonts-stylesheet').media='all';",
-            }}
-          />
-          <noscript>
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
-            />
-          </noscript>
 
           {/* ── Security headers ──────────────────────────────── */}
           <meta httpEquiv="X-Content-Type-Options" content="nosniff" />

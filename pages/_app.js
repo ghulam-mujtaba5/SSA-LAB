@@ -147,7 +147,14 @@ function MyApp({ Component, pageProps, session }) {
         document.startViewTransition &&
         window.matchMedia("(prefers-reduced-motion: no-preference)").matches
       ) {
-        document.startViewTransition(callback);
+        try {
+          const transition = document.startViewTransition(callback);
+          if (transition && transition.finished) {
+            transition.finished.catch(() => {});
+          }
+        } catch {
+          callback();
+        }
       } else {
         callback();
       }
