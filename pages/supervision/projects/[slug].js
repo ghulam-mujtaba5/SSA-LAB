@@ -6,7 +6,7 @@ import AcademicFypCaseStudy from "../../../components/AcademicSite/AcademicFypCa
 import { defaultFypProjects } from "../../../data/fypProjects";
 import dbConnect from "../../../lib/mongoose";
 import FypProject from "../../../models/FypProject";
-import { breadcrumbSchema, softwareProjectSchema } from "../../../components/SEO";
+import { breadcrumbSchema, softwareProjectSchema, scholarlyArticleSchema, faqSchema } from "../../../components/SEO";
 import styles from "../../../components/AcademicSite/AcademicSite.module.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ssa-lab.tech";
@@ -118,6 +118,20 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
     "Dr. Junaid Akram"
   ].join(", ");
 
+  const projectCitations = [
+    {
+      title: project.title,
+      authors: [
+        project.supervisor || "Dr. Junaid Akram",
+        ...(project.students || []).map((s) => (typeof s === "string" ? s : s.name)),
+      ].filter(Boolean),
+      year: project.session ? project.session.replace(/[^0-9]/g, "").slice(0, 4) || "2026" : "2026",
+      venue: "COMSATS University Islamabad, Software Security Assessment Lab",
+      href: `${SITE_URL}/supervision/projects/${project.slug}`,
+      pdfUrl: project.reportUrl || undefined,
+    },
+  ];
+
   const projectJsonLd = [
     breadcrumbSchema([
       { name: "Supervision", url: `${SITE_URL}/supervision` },
@@ -131,6 +145,32 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       programmingLanguages: project.technologies || project.techStack || [],
       keywords: projectKeywords,
     }),
+    scholarlyArticleSchema({
+      title: project.title,
+      description: project.summary || `Supervised research case study: ${project.title}`,
+      authors: [
+        project.supervisor || "Dr. Junaid Akram",
+        ...(project.students || []).map((s) => (typeof s === "string" ? s : s.name)),
+      ].filter(Boolean),
+      venue: "COMSATS University Islamabad, SSA Research Lab",
+      year: project.session ? project.session.replace(/[^0-9]/g, "").slice(0, 4) || "2026" : "2026",
+      href: `${SITE_URL}/supervision/projects/${project.slug}`,
+      keywords: projectKeywords,
+    }),
+    faqSchema([
+      {
+        question: `What is the objective of the project "${project.title}"?`,
+        answer: project.summary || `This project investigates ${project.title} within the Software Security Assessment Lab under the supervision of Dr. Junaid Akram.`,
+      },
+      {
+        question: `Who conducted this research project?`,
+        answer: `Supervised by ${project.supervisor || "Dr. Junaid Akram"} at COMSATS University Islamabad, Lahore Campus with student researchers ${(project.students || []).map((s) => (typeof s === "string" ? s : s.name)).join(", ") || "SSA Lab members"}.`,
+      },
+      {
+        question: `What technologies and frameworks were utilized?`,
+        answer: (project.technologies || project.techStack || []).join(", ") || "Python, Machine Learning, Program Analysis",
+      },
+    ]),
   ];
 
   const metaTitle = `${project.title} | Case Study`;
@@ -147,6 +187,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       description={metaDescription}
       keywords={projectKeywords}
       jsonLd={projectJsonLd}
+      citations={projectCitations}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>

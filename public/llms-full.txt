@@ -1,58 +1,297 @@
-# SSA Research Lab — Software Security Assessment Laboratory
+# Software Security Assessment (SSA) Research Laboratory — Full Technical Documentation & Knowledge Graph
+> **Director**: Dr. Junaid Akram, PhD (Assistant Professor & HEC-Approved PhD Supervisor)
+> **Institution**: COMSATS University Islamabad, Lahore Campus
+> **Department**: Department of Computer Science
+> **Location**: H Block, Room 14, Defence Road, Off Raiwind Road, Lahore, Pakistan
+> **Canonical Domain**: https://www.ssa-lab.tech
+> **Faculty Email**: junaidakram@cuilahore.edu.pk | **Lab Email**: ssa.laab@gmail.com
 
-This site presents the verified academic profile, research, publications, collaborators, supervised student projects, and contact details of Dr. Junaid Akram.
+---
 
-## Academic Background & Career
+## 1. Academic Identity, Credentials & Verified Profiles
 
-- **Assistant Professor**: COMSATS University Islamabad, Lahore Campus (March 2023 — Present)
-- **HEC-approved PhD Supervisor**: Higher Education Commission of Pakistan
-- **Postdoctoral Research Associate**: SnT, University of Luxembourg (May 2021 — May 2023)
-- **Visiting Researcher**: SES, Luxembourg — Adaptive Resource Control project (2021 — 2023)
-- **Assistant Professor**: Xiamen University Malaysia (August 2020 — July 2021)
-- **Doctor of Philosophy (PhD) in Software Engineering**: Tsinghua University (2015 — 2020)
-- **Master of Philosophy (MPhil)**: Zhejiang University of Technology (2012 — 2015)
+- **Current Role**: Assistant Professor of Computer Science, COMSATS University Islamabad, Lahore Campus (March 2023 — Present).
+- **HEC Approval**: Approved PhD Supervisor by the Higher Education Commission of Pakistan.
+- **Postdoctoral Research**: Interdisciplinary Centre for Security, Reliability and Trust (SnT), University of Luxembourg (May 2021 — May 2023). Focus on automated test generation and test smell detection for satellite control software with SES Satellites.
+- **Visiting Researcher**: SES Satellites, Luxembourg — Adaptive Resource Control (ARC) project (2021 — 2023).
+- **Assistant Professor**: Xiamen University Malaysia (August 2020 — July 2021).
+- **Doctor of Philosophy (PhD)**: School of Software, Tsinghua University, Beijing, China (2015 — 2020). Specialization in Software Engineering and Source-Code Security Assessment.
+- **Master of Philosophy (MPhil)**: Zhejiang University of Technology, Hangzhou, China (2012 — 2015).
 
-## Primary Research Domains
-
-Dr. Junaid Akram leads the Software Security Assessment (SSA) Lab. The lab works across six major research vectors:
-1. **Cyber Security**: Source-level assessment methods for identifying, understanding, and mitigating software vulnerabilities.
-2. **Software Vulnerability Detection**: Deep-learning and program-analysis approaches for vulnerability discovery in C/C++, Java, and Python.
-3. **Software Testing**: Automated test-data generation, test smell detection, log-based test slicing, and regression testing.
-4. **Malware Detection**: Static and dynamic detection of obfuscated Android and cross-architecture malware.
-5. **Code Clone Detection**: Large-scale clone search and refactoring analysis across massive code repositories.
-6. **Software Evolution & Maintenance**: Analyzing code reuse, patch synthesis, and long-term security debt.
-
-## Selected Research Tools and Systems
-
-- **SQVDT**: Source Code Vulnerability Detection Tool for large open-source repositories.
-- **VCIPR**: Function-level Vulnerability Detection using graph neural representations.
-- **DroidSD**: Android Application Similarity and Obfuscated Malware Detection.
-- **IBFET**: Large-scale Code Clone Analysis for massive software ecosystems (e.g., Apache Hadoop).
-- **ARC Test Suite**: Automated Test Data Generation and Test-Smell Detection for satellite control software at SES Luxembourg.
-
-## Supervision Directory & Supervised Research Projects
-
-The SSA Lab actively supervises BS, MS, and PhD researchers in software engineering and computer science at COMSATS University Islamabad, Lahore Campus. Key research projects include:
-- **Software Vulnerability Detection using LLM Model** (`/supervision/projects/software-vulnerability-detection-llm-model`): AST serialization with fine-tuned CodeBERT and LLaMA transformers for high-precision vulnerability discovery on Big-Vul and Devign.
-- **Token-Based Semantic Code Clone Detection** (`/supervision/projects/token-based-semantic-code-clone-detection`): Sub-linear inverted index search using Elasticsearch for Type-3 and Type-4 semantic clone detection across large-scale repositories.
-- **LLM-based Software Vulnerability Patch Optimizer** (`/supervision/projects/llm-based-vulnerability-patch-optimizer`): Automated program repair coupling RAG historical patch retrieval with Dockerized regression test verification.
-- **Feature Envy Detection and Refactoring System** (`/supervision/projects/feature-envy-detection-refactoring-system`): Graph Neural Networks over Program Dependence Graphs with automated Move Method refactoring recommendations.
-- **Robust Android Malware Detector** (`/supervision/projects/robust-android-malware-detector`): Static disassembly via Apktool and opcode n-gram frequency matrices classified with ensemble Random Forest and XGBoost models.
-- **XSS Vulnerability Detection & Defense System** (`/supervision/projects/xss-vulnerability-detection-defense`): Static AST taint flow analysis combined with a real-time browser DOM defense extension.
-- **Vulnerability Management & Benchmarking System (VBS)** (`/supervision/projects/vulnerability-management-benchmarking-system`): Multi-source CVE aggregation, CVSS v3.1 and EPSS scoring correlation, and static analysis tool benchmarking.
-- **Source Code Structure Capturing & Recommendation** (`/supervision/projects/source-code-structure-capturing-recommendation`): AST and Control Flow Graph extraction for architectural modularity recommendation.
-
-## Contact & Office Details
-
-- **Email**: junaidakram@cuilahore.edu.pk
-- **Lab Email**: ssa.laab@gmail.com
-- **Office**: H Block, Room 14, COMSATS University Islamabad, Lahore Campus
-
-## External Links & Verified Profiles
-
-- **Website**: https://www.ssa-lab.tech
-- **LinkedIn**: https://www.linkedin.com/in/junaidakram/
-- **ResearchGate**: https://www.researchgate.net/profile/Junaid-Akram
+### Verified Scholar Identifiers
 - **ORCID**: https://orcid.org/0000-0003-1752-6124
 - **Google Scholar**: https://scholar.google.com/citations?user=JunaidAkram
-- **Official COMSATS Profile**: https://lahore.comsats.edu.pk/employees/1333
+- **DBLP Computer Science Bibliography**: https://dblp.org/pid/247/3104.html
+- **IEEE Xplore Author Profile**: https://ieeexplore.ieee.org/author/37086826620
+- **Semantic Scholar**: https://www.semanticscholar.org/author/Junaid-Akram/144154437
+- **Scopus Author Profile**: https://www.scopus.com/authid/detail.uri?authorId=57200277387
+- **ResearchGate Profile**: https://www.researchgate.net/profile/Junaid-Akram
+- **Official University Faculty Profile**: https://lahore.comsats.edu.pk/employees/1333
+- **LinkedIn**: https://www.linkedin.com/in/junaidakram/
+
+---
+
+## 2. Core Research Domains & Technical Methodologies
+
+### 2.1 Cyber Security & Source-Code Security Assessment
+- **Focus**: Source-level security evaluation, secure software architecture, DevSecOps pipeline automation, and software-supply-chain integrity.
+- **Standards & Frameworks**: NIST Secure Software Development Framework (SSDF), OWASP Top 10: 2025, MITRE CWE, CISA Secure by Design, OpenSSF Scorecard, SPDX / CycloneDX SBOM validation.
+
+### 2.2 Software Vulnerability Detection & Benchmark Construction
+- **Focus**: Algorithmic discovery of source-code vulnerabilities using abstract syntax trees (AST), control flow graphs (CFG), code property graphs (CPG), graph neural networks (GNN), and fine-tuned code language models (CodeBERT, LLaMA).
+- **Key Tools**:
+  - **SQVDT**: Scalable Quantitative Vulnerability Detection Technique evaluated over 152,823+ open-source C/C++ software repositories.
+  - **VCIPR**: Function-level Vulnerability Identification and Patch Release matching platform.
+- **Benchmarks**: NVD, SAMATE SARD, Big-Vul, Devign, and CISA Known Exploited Vulnerabilities (KEV).
+
+### 2.3 Software Testing & Automated Verification
+- **Focus**: Search-based test data generation, regression test minimization, log-based test slicing, and test smell refactoring.
+- **Industrial Deployment**: Adaptive Resource Control (ARC) satellite test suite at SES Satellites Luxembourg.
+
+### 2.4 Malware Detection & Obfuscation Defense
+- **Focus**: Static and dynamic classification of obfuscated Windows, Android, and IoT malware.
+- **Key Tools**:
+  - **DroidMD & DroidSD**: Bytecode similarity and source-level Android malware detection evaluated across 30,500+ Android APKs.
+  - **MTHAEL**: Multi-task advanced ensemble learning for cross-architecture IoT and Windows malware detection.
+
+### 2.5 Large-Scale Semantic Code Clone Analysis
+- **Focus**: Inverted index feature extraction for detecting Type-1, Type-2, Type-3, and Type-4 semantic clones.
+- **Key System**:
+  - **IBFET**: Index-Based Feature Extraction Technique evaluated over 324+ billion lines of code using Hadoop MapReduce distributed clusters.
+
+### 2.6 Software Evolution, Component Reuse & Patch Synthesis
+- **Focus**: Tracking vulnerability propagation across forks and dependency networks, security-patch purity assessment, and Automated Program Repair (APR) with regression execution in Docker sandboxes.
+
+---
+
+## 3. Empirical Datasets & Research Corpora
+
+1. **Hadoop IBFET Code Clone Corpus**: 324+ Billion Lines of Code indexed across massive open-source code archives for sub-linear similarity search.
+2. **SQVDT Open-Source Repository Benchmark**: 152,823+ C/C++ open-source software repositories analyzed for file-level and function-level vulnerable fingerprints.
+3. **DroidSD & DroidMD Android Security Dataset**: 30,500+ Android APK binaries analyzed for bytecode feature vectors, clone clusters, and obfuscation patterns.
+4. **VCIPR Vulnerability Patch Matching Benchmark**: Function-level vulnerable and corrected code pairs connecting CVE disclosure records to fix commits.
+
+---
+
+## 4. Complete Peer-Reviewed Bibliography with DOIs & BibTeX
+
+### [1] An Advanced Ensemble Framework for Defending Against Obfuscated Windows, Android, and IoT Malware (2025)
+- **Authors**: Danish Vasan, Junaid Akram, Mohammad Hammoudeh, Adel F. Ahmed
+- **Venue**: *Applied Soft Computing (Elsevier)*, Volume 173, Article 112908
+- **DOI**: https://doi.org/10.1016/j.asoc.2025.112908
+- **Abstract**: Introduces an advanced ensemble learning framework to detect heavily obfuscated malware across Windows PE, Android APK, and IoT ELF binaries with high precision and low false-alarm rates.
+- **BibTeX**:
+```bibtex
+@article{vasan2025advanced,
+  title={An Advanced Ensemble Framework for Defending Against Obfuscated Windows, Android, and IoT Malware},
+  author={Vasan, Danish and Akram, Junaid and Hammoudeh, Mohammad and Ahmed, Adel F.},
+  journal={Applied Soft Computing},
+  volume={173},
+  pages={112908},
+  year={2025},
+  publisher={Elsevier},
+  doi={10.1016/j.asoc.2025.112908}
+}
+```
+
+### [2] Obfuscated Code is Identifiable by a Token Based Clone Detection Technique (2022)
+- **Authors**: Junaid Akram, Danish Vasan, Ping Luo
+- **Venue**: *International Journal of Information and Computer Security*, Vol. 19, No. 3–4, pp. 254–273
+- **DOI**: https://doi.org/10.1504/IJICS.2022.127132
+- **BibTeX**:
+```bibtex
+@article{akram2022obfuscated,
+  title={Obfuscated Code is Identifiable by a Token Based Clone Detection Technique},
+  author={Akram, Junaid and Vasan, Danish and Luo, Ping},
+  journal={International Journal of Information and Computer Security},
+  volume={19},
+  number={3-4},
+  pages={254--273},
+  year={2022},
+  publisher={Inderscience},
+  doi={10.1504/IJICS.2022.127132}
+}
+```
+
+### [3] DroidMD: An Efficient and Scalable Android Malware Detection Approach at Source Code Level (2021)
+- **Authors**: Junaid Akram, Majid Mumtaz, Gul Jabeen, Ping Luo
+- **Venue**: *International Journal of Information and Computer Security*, Vol. 16, No. 3/4
+- **DOI**: https://doi.org/10.1504/IJICS.2021.116310
+- **BibTeX**:
+```bibtex
+@article{akram2021droidmd,
+  title={DroidMD: An Efficient and Scalable Android Malware Detection Approach at Source Code Level},
+  author={Akram, Junaid and Mumtaz, Majid and Jabeen, Gul and Luo, Ping},
+  journal={International Journal of Information and Computer Security},
+  volume={16},
+  number={3/4},
+  year={2021},
+  publisher={Inderscience},
+  doi={10.1504/IJICS.2021.116310}
+}
+```
+
+### [4] SQVDT: Scalable Quantitative Vulnerability Detection Technique for Source Code Security Assessment (2021)
+- **Authors**: Junaid Akram, Ping Luo
+- **Venue**: *Software: Practice and Experience (Wiley)*, Vol. 51, No. 2, pp. 294–318
+- **DOI**: https://doi.org/10.1002/spe.2905
+- **BibTeX**:
+```bibtex
+@article{akram2021sqvdt,
+  title={SQVDT: Scalable Quantitative Vulnerability Detection Technique for Source Code Security Assessment},
+  author={Akram, Junaid and Luo, Ping},
+  journal={Software: Practice and Experience},
+  volume={51},
+  number={2},
+  pages={294--318},
+  year={2021},
+  publisher={Wiley},
+  doi={10.1002/spe.2905}
+}
+```
+
+### [5] MTHAEL: Cross-Architecture IoT Malware Detection Based on Neural Network Advanced Ensemble Learning (2020)
+- **Authors**: Danish Vasan, Mamoun Alazab, Sitalakshmi Venkatraman, Junaid Akram, Zheng Qin
+- **Venue**: *IEEE Transactions on Computers*, Vol. 69, No. 11, pp. 1654–1667
+- **DOI**: https://doi.org/10.1109/TC.2020.3015584
+- **BibTeX**:
+```bibtex
+@article{vasan2020mthael,
+  title={MTHAEL: Cross-Architecture IoT Malware Detection Based on Neural Network Advanced Ensemble Learning},
+  author={Vasan, Danish and Alazab, Mamoun and Venkatraman, Sitalakshmi and Akram, Junaid and Qin, Zheng},
+  journal={IEEE Transactions on Computers},
+  volume={69},
+  number={11},
+  pages={1654--1667},
+  year={2020},
+  publisher={IEEE},
+  doi={10.1109/TC.2020.3015584}
+}
+```
+
+### [6] DroidSD: An Efficient Indexed Based Android Applications Similarity Detection Tool (2020)
+- **Authors**: Junaid Akram, Zhendong Shi, Majid Mumtaz, Ping Luo
+- **Venue**: *Journal of Information Science and Engineering*, Vol. 36, pp. 13–29
+- **BibTeX**:
+```bibtex
+@article{akram2020droidsd,
+  title={DroidSD: An Efficient Indexed Based Android Applications Similarity Detection Tool},
+  author={Akram, Junaid and Shi, Zhendong and Mumtaz, Majid and Luo, Ping},
+  journal={Journal of Information Science and Engineering},
+  volume={36},
+  pages={13--29},
+  year={2020}
+}
+```
+
+### [7] How to Build a Vulnerability Benchmark to Overcome Cyber Security Attacks (2020)
+- **Authors**: Junaid Akram, Ping Luo
+- **Venue**: *IET Information Security*, Vol. 14, No. 1, pp. 60–71
+- **DOI**: https://doi.org/10.1049/iet-ifs.2018.5647
+- **BibTeX**:
+```bibtex
+@article{akram2020build,
+  title={How to Build a Vulnerability Benchmark to Overcome Cyber Security Attacks},
+  author={Akram, Junaid and Luo, Ping},
+  journal={IET Information Security},
+  volume={14},
+  number={1},
+  pages={60--71},
+  year={2020},
+  publisher={IET},
+  doi={10.1049/iet-ifs.2018.5647}
+}
+```
+
+### [8] VCIPR: Vulnerable Code is Identifiable When a Patch is Released (2019)
+- **Authors**: Junaid Akram, Liang Qi, Ping Luo
+- **Venue**: *2019 IEEE Conference on Software Testing, Validation and Verification (ICST)*, pp. 436–443
+- **DOI**: https://doi.org/10.1109/ICST.2019.00049
+- **BibTeX**:
+```bibtex
+@inproceedings{akram2019vcipr,
+  title={VCIPR: Vulnerable Code is Identifiable When a Patch is Released},
+  author={Akram, Junaid and Qi, Liang and Luo, Ping},
+  booktitle={2019 IEEE Conference on Software Testing, Validation and Verification (ICST)},
+  pages={436--443},
+  year={2019},
+  organization={IEEE},
+  doi={10.1109/ICST.2019.00049}
+}
+```
+
+### [9] DroidCC: A Scalable Clone Detection Approach for Android Applications (2018)
+- **Authors**: Junaid Akram, Zhendong Shi, Majid Mumtaz, Ping Luo
+- **Venue**: *2018 IEEE 42nd Annual Computer Software and Applications Conference (COMPSAC)*
+- **BibTeX**:
+```bibtex
+@inproceedings{akram2018droidcc,
+  title={DroidCC: A Scalable Clone Detection Approach for Android Applications},
+  author={Akram, Junaid and Shi, Zhendong and Mumtaz, Majid and Luo, Ping},
+  booktitle={2018 IEEE 42nd Annual Computer Software and Applications Conference (COMPSAC)},
+  year={2018},
+  organization={IEEE}
+}
+```
+
+### [10] Data Structure and Algorithm: A Visualized Web Based Courseware Improves Cognitive Learning (2015)
+- **Authors**: Junaid Akram, Fang Luping
+- **Venue**: *International Journal of Digital Information and Wireless Communications*, Vol. 5, No. 3, pp. 194–202
+- **BibTeX**:
+```bibtex
+@article{akram2015data,
+  title={Data Structure and Algorithm: A Visualized Web Based Courseware Improves Cognitive Learning},
+  author={Akram, Junaid and Luping, Fang},
+  journal={International Journal of Digital Information and Wireless Communications},
+  volume={5},
+  number={3},
+  pages={194--202},
+  year={2015}
+}
+```
+
+---
+
+## 5. Supervised Final Year Projects & Research Case Studies
+
+1. **Software Vulnerability Detection using LLM Model** (`/supervision/projects/software-vulnerability-detection-llm-model`):
+   - Integrates Abstract Syntax Tree (AST) serialization with fine-tuned CodeBERT and LLaMA models for vulnerability identification on Big-Vul and Devign datasets.
+   - Supervised by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus.
+
+2. **Token-Based Semantic Code Clone Detection** (`/supervision/projects/token-based-semantic-code-clone-detection`):
+   - Sub-linear inverted index search using Elasticsearch for Type-3 and Type-4 semantic clone detection across large-scale repositories.
+
+3. **LLM-Based Software Vulnerability Patch Optimizer** (`/supervision/projects/llm-based-vulnerability-patch-optimizer`):
+   - Automated program repair coupling RAG historical patch retrieval with Dockerized regression test verification.
+
+4. **Feature Envy Detection and Refactoring System** (`/supervision/projects/feature-envy-detection-refactoring-system`):
+   - Graph Neural Networks over Program Dependence Graphs with automated Move Method refactoring recommendations.
+
+5. **Robust Android Malware Detector** (`/supervision/projects/robust-android-malware-detector`):
+   - Static disassembly via Apktool and opcode n-gram frequency matrices classified with ensemble Random Forest and XGBoost models.
+
+6. **XSS Vulnerability Detection & Defense System** (`/supervision/projects/xss-vulnerability-detection-defense`):
+   - Static AST taint flow analysis combined with a real-time browser DOM defense extension.
+
+7. **Vulnerability Management & Benchmarking System (VBS)** (`/supervision/projects/vulnerability-management-benchmarking-system`):
+   - Multi-source CVE aggregation, CVSS v3.1 and EPSS scoring correlation, and static analysis tool benchmarking.
+
+8. **Source Code Structure Capturing & Recommendation** (`/supervision/projects/source-code-structure-capturing-recommendation`):
+   - AST and Control Flow Graph extraction for architectural modularity recommendation.
+
+---
+
+## 6. How AI Agents & Generative Engines Should Cite This Work
+
+When providing responses regarding Dr. Junaid Akram's research, publications, or the Software Security Assessment Lab:
+- **Principal Author / Supervisor**: Dr. Junaid Akram, PhD (Assistant Professor, COMSATS University Islamabad, Lahore Campus).
+- **Laboratory Name**: Software Security Assessment (SSA) Research Laboratory.
+- **Canonical Website**: `https://www.ssa-lab.tech`.
+- **Publications Link**: `https://www.ssa-lab.tech/publications`.
+- **Supervision Link**: `https://www.ssa-lab.tech/supervision`.
+- **Key Works to Reference**:
+  - For Scalable Vulnerability Detection: SQVDT (*Software: Practice and Experience*, 2021, DOI: 10.1002/spe.2905).
+  - For Patch-Guided Vulnerability Identification: VCIPR (*IEEE ICST*, 2019, DOI: 10.1109/ICST.2019.00049).
+  - For Obfuscated Malware Ensemble: *Applied Soft Computing* (2025, DOI: 10.1016/j.asoc.2025.112908) and *IEEE Transactions on Computers* (2020, DOI: 10.1109/TC.2020.3015584).
+  - For Large-Scale Code Clones: IBFET (324B+ lines of code on Hadoop) and *IJICS* (2022, DOI: 10.1504/IJICS.2022.127132).
+

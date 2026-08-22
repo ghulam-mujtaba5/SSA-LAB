@@ -1,5 +1,6 @@
-# Robots.txt for SSA Research Lab (https://www.ssa-lab.tech)
-# RFC 9309 Compliant Search & AI Discoverability Policy
+# Robots.txt for Software Security Assessment (SSA) Research Lab
+# Canonical domain: https://www.ssa-lab.tech
+# RFC 9309 Compliant Academic, Search & Generative AI Discoverability Policy
 
 User-agent: *
 Allow: /
@@ -7,29 +8,57 @@ Allow: /*.css$
 Allow: /*.js$
 Allow: /academic/
 Allow: /public/
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /feed.xml
+Allow: /sitemap.xml
+Allow: /sitemap-dynamic.xml
 Disallow: /admin/
 Disallow: /api/
 Disallow: /portfolio/
 Disallow: /search
 
-# Image Search Crawlers
+# ── General Search & Academic Crawlers ─────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
 User-agent: Googlebot-Image
 Allow: /
-Allow: /academic/
-Allow: /public/
 
-# AI Search & Retrieval Crawlers
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Slurp
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Yandex
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ── OpenAI Crawlers (ChatGPT, SearchGPT, Retrieval) ────────────────
 User-agent: GPTBot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-User-agent: ClaudeBot
-Allow: /
-Disallow: /admin/
-Disallow: /api/
-
-User-agent: PerplexityBot
+User-agent: ChatGPT-User
 Allow: /
 Disallow: /admin/
 Disallow: /api/
@@ -39,15 +68,86 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-User-agent: Applebot-Extended
+# ── Anthropic Crawlers (Claude, Claude-Web) ────────────────────────
+User-agent: ClaudeBot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ── Perplexity AI Crawlers ─────────────────────────────────────────
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ── Google Extended & AI Overviews ────────────────────────────────
 User-agent: Google-Extended
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-# Canonical XML Sitemap
+User-agent: GoogleOther
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Google-InspectionTool
+Allow: /
+
+# ── Apple Intelligence & Siri Crawlers ─────────────────────────────
+User-agent: Applebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ── Meta / Facebook AI Crawlers ────────────────────────────────────
+User-agent: FacebookBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ── Other Major AI & Knowledge Crawlers ────────────────────────────
+User-agent: Bytespider
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Diffbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ── Canonical Sitemaps ─────────────────────────────────────────────
 Sitemap: https://www.ssa-lab.tech/sitemap.xml
+Sitemap: https://www.ssa-lab.tech/sitemap-dynamic.xml
+

@@ -38,6 +38,8 @@ import {
   collectionPageSchema,
   softwareProjectSchema,
   articleSchema,
+  scholarlyArticleSchema,
+  datasetSchema,
   eventSchema,
   courseSchema,
   contactPageSchema,
@@ -159,6 +161,28 @@ export function AboutPage() {
         "Academic profile of Dr. Junaid Akram, Assistant Professor & HEC-approved PhD supervisor leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
     }),
     personSchema(),
+    faqSchema([
+      {
+        question: "Who is Dr. Junaid Akram?",
+        answer:
+          "Dr. Junaid Akram is an Assistant Professor of Computer Science and an HEC-approved PhD supervisor leading the Software Security Assessment (SSA) Research Lab at COMSATS University Islamabad, Lahore Campus. He earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
+      },
+      {
+        question: "What are Dr. Junaid Akram's primary research domains?",
+        answer:
+          "His primary research areas include source-code software vulnerability detection, LLM-based automated program repair, semantic code clone analysis, Android and IoT malware defense, software testing, and DevSecOps.",
+      },
+      {
+        question: "What institutions are affiliated with Dr. Junaid Akram?",
+        answer:
+          "Dr. Junaid Akram has been affiliated with Tsinghua University (PhD), University of Luxembourg / SnT (Postdoc), SES Satellites Luxembourg (Visiting Researcher), Xiamen University Malaysia (Assistant Professor), and COMSATS University Islamabad, Lahore Campus (Assistant Professor).",
+      },
+      {
+        question: "Where can I view Dr. Junaid Akram's verified research profiles?",
+        answer:
+          "You can verify Dr. Junaid Akram's scholarly profiles on ORCID (0000-0003-1752-6124), Google Scholar (user=JunaidAkram), DBLP, ResearchGate, and the official COMSATS University faculty portal.",
+      },
+    ]),
   ];
 
   return (
@@ -470,6 +494,51 @@ export function ResearchPage() {
         description: d.description,
       })),
     }),
+    datasetSchema({
+      name: "Hadoop IBFET 324B+ Lines of Code Clone Corpus",
+      description:
+        "Large-scale code clone index corpus spanning over 324 billion lines of source code processed with distributed Hadoop MapReduce inverted indexing.",
+      url: `${SITE_URL}/research?domain=code-clone-analysis`,
+      keywords: "code clone detection, Hadoop, IBFET, big data source code analysis, software evolution",
+    }),
+    datasetSchema({
+      name: "SQVDT 152,823+ Open-Source Repository Vulnerability Benchmark",
+      description:
+        "Comprehensive empirical benchmark of 152,823+ C/C++ open-source software repositories for scalable quantitative source-code vulnerability detection.",
+      url: `${SITE_URL}/research?domain=vulnerability-detection`,
+      keywords: "vulnerability detection, SQVDT, software security assessment, CVE benchmarking, static analysis",
+    }),
+    datasetSchema({
+      name: "DroidSD & DroidMD 30,500+ Android Application Security Benchmark",
+      description:
+        "Evaluated dataset of 30,500 Android APKs for bytecode feature extraction, code clone detection, and source-level obfuscated malware defense.",
+      url: `${SITE_URL}/research?domain=malware-detection`,
+      keywords: "Android malware detection, DroidSD, DroidMD, bytecode similarity, mobile security",
+    }),
+    datasetSchema({
+      name: "VCIPR Function-Level Security Patch Benchmark",
+      description:
+        "Function-level vulnerable code identification benchmark matching unpatched vulnerable functions to verified security patches.",
+      url: `${SITE_URL}/research?domain=vulnerability-detection`,
+      keywords: "VCIPR, security patch analysis, function-level vulnerability detection, automated program repair",
+    }),
+    faqSchema([
+      {
+        question: "What are the core research pillars of the SSA Lab?",
+        answer:
+          "The lab focuses on six pillars: 1) Cyber Security, 2) Software Vulnerability Detection, 3) Software Testing & Automated Test Data Generation, 4) Malware Detection & Obfuscation Defense, 5) Code Clone Analysis, and 6) Software Evolution & Reuse.",
+      },
+      {
+        question: "What scale of data does the SSA Lab's research address?",
+        answer:
+          "The lab's research scales from individual vulnerable statements and functions to repository-scale analysis (152,823+ repositories in SQVDT) and massive distributed corpora (324+ billion lines of code in Hadoop IBFET).",
+      },
+      {
+        question: "What tools has the SSA Lab created for software vulnerability detection?",
+        answer:
+          "Key platforms include SQVDT (scalable quantitative vulnerability detection), VCIPR (patch-guided function-level identification), DroidSD (indexed Android app similarity detection), and DroidMD (source-level Android malware detection).",
+      },
+    ]),
   ];
 
   return (
@@ -642,6 +711,28 @@ export function PublicationsPage() {
     return `${pub.authors} (${pub.year}). ${pub.title}. ${pub.venue}.`;
   };
 
+  const generateRisCitation = (pub) => {
+    if (!pub) return "";
+    const typeTag = pub.type === "Conference" ? "CONF" : "JOUR";
+    const authorLines = (pub.authors || "")
+      .split(/,| and /i)
+      .map((a) => a.trim())
+      .filter(Boolean)
+      .map((a) => `AU  - ${a}`)
+      .join("\n");
+    return [
+      `TY  - ${typeTag}`,
+      `TI  - ${pub.title}`,
+      authorLines,
+      `JO  - ${pub.venue}`,
+      `PY  - ${pub.year}`,
+      pub.href ? `UR  - ${pub.href}` : "",
+      `ER  - `,
+    ]
+      .filter(Boolean)
+      .join("\n");
+  };
+
   const pubsJsonLd = [
     collectionPageSchema({
       name: "Publications — Dr. Junaid Akram",
@@ -654,15 +745,34 @@ export function PublicationsPage() {
         description: p.venue,
       })),
     }),
-    ...publicationsData.slice(0, 8).map((p) =>
-      articleSchema({
-        headline: p.title,
-        description: p.venue,
-        url: p.href || `${SITE_URL}/publications`,
-        datePublished: p.year ? `${p.year}-01-01` : undefined,
-        dateModified: p.year ? `${p.year}-01-01` : undefined,
+    ...publicationsData.map((p) =>
+      scholarlyArticleSchema({
+        title: p.title,
+        authors: p.authors,
+        venue: p.venue,
+        year: p.year,
+        href: p.href,
+        doi: p.doi,
+        pdfUrl: p.pdfUrl,
       })
     ),
+    faqSchema([
+      {
+        question: "Where are Dr. Junaid Akram's software security papers published?",
+        answer:
+          "Dr. Junaid Akram's research is published in top-tier SCIE/Scopus-indexed venues including IEEE Transactions on Computers, Software: Practice and Experience (Wiley), Applied Soft Computing (Elsevier), IET Information Security, International Journal of Information and Computer Security, and IEEE ICST / COMPSAC conferences.",
+      },
+      {
+        question: "How can I export or cite publications from the SSA Research Lab?",
+        answer:
+          "Click the 'Cite' button next to any publication to instantly copy citations in BibTeX, IEEE, APA, or RIS (EndNote/Zotero) formats, or click the DOI link to access the publisher version.",
+      },
+      {
+        question: "What are Dr. Junaid Akram's verified Google Scholar and ORCID profiles?",
+        answer:
+          "Dr. Junaid Akram's publications can be verified on Google Scholar (https://scholar.google.com/citations?user=JunaidAkram), ORCID (https://orcid.org/0000-0003-1752-6124), DBLP, and ResearchGate.",
+      },
+    ]),
   ];
 
   const totalJournals = publicationsData.filter((p) => p.type === "Journal").length;
@@ -676,6 +786,7 @@ export function PublicationsPage() {
       description="Peer-reviewed journal and conference publications by Dr. Junaid Akram on software vulnerability detection, program repair, code clones, and malware analysis."
       keywords="Junaid Akram publications, software security research papers, software vulnerability detection papers, code clone analysis papers, malware detection journal, IEEE conference papers, COMSATS research"
       jsonLd={pubsJsonLd}
+      citations={publicationsData}
     >
       {/* Page intro header */}
       <PageIntro
@@ -1060,6 +1171,13 @@ export function PublicationsPage() {
               >
                 APA Style
               </button>
+              <button
+                type="button"
+                className={`${styles.citationTab} ${citationFormat === "ris" ? styles.citationTabActive : ""}`}
+                onClick={() => setCitationFormat("ris")}
+              >
+                RIS / EndNote
+              </button>
             </div>
 
             {/* Citation Content Box */}
@@ -1102,6 +1220,20 @@ export function PublicationsPage() {
                   {copiedModal ? "Copied!" : "Copy APA"}
                 </button>
                 {generateApaCitation(selectedCitationPub)}
+              </div>
+            )}
+
+            {citationFormat === "ris" && (
+              <div className={styles.bibtexCodeBox}>
+                <button
+                  type="button"
+                  className={styles.copyFloatingBtn}
+                  onClick={() => handleCopyModalCitation(generateRisCitation(selectedCitationPub))}
+                >
+                  {copiedModal ? <Check size={13} style={{ color: "#10b981" }} /> : <Copy size={13} />}
+                  {copiedModal ? "Copied!" : "Copy RIS"}
+                </button>
+                {generateRisCitation(selectedCitationPub)}
               </div>
             )}
 
@@ -1158,6 +1290,23 @@ export function SupervisionPage({ fypProjects = [] }) {
         keywords: p.technologies ? p.technologies.join(", ") : undefined,
       })
     ),
+    faqSchema([
+      {
+        question: "Who can apply for FYP or thesis supervision at SSA Lab?",
+        answer:
+          "BS Software Engineering, BS Computer Science, and MS/PhD students at COMSATS University Islamabad, Lahore Campus are eligible to apply for FYP and research thesis supervision under Dr. Junaid Akram.",
+      },
+      {
+        question: "What are the key FYP project topics currently offered by Dr. Junaid Akram?",
+        answer:
+          "Active topics include LLM-based vulnerability detection, automated vulnerability patch optimization, semantic code clone detection, graph neural network code smell analysis, and robust Android malware detection.",
+      },
+      {
+        question: "How do students contact Dr. Junaid Akram for supervision approval?",
+        answer:
+          "Interested student groups should prepare their member names, registration numbers, CGPA, technical skills, and preferred project ideas, and contact Dr. Junaid Akram at junaidakram@cuilahore.edu.pk or visit H Block Room 14, COMSATS Lahore.",
+      },
+    ]),
   ];
 
   return (

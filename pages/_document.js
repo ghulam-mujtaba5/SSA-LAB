@@ -46,6 +46,15 @@ class MyDocument extends Document {
           <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
           <link rel="dns-prefetch" href="https://scholar.google.com" />
           <link rel="dns-prefetch" href="https://orcid.org" />
+          <link rel="dns-prefetch" href="https://doi.org" />
+          <link rel="dns-prefetch" href="https://ieeexplore.ieee.org" />
+          <link rel="dns-prefetch" href="https://www.sciencedirect.com" />
+
+          {/* ── LLM / AI Search Discoverability ──────────────── */}
+          <link rel="llms" href="https://www.ssa-lab.tech/llms.txt" />
+          <link rel="llms-full" href="https://www.ssa-lab.tech/llms-full.txt" />
+          <link rel="alternate" type="text/markdown" href="https://www.ssa-lab.tech/llms.txt" title="LLM Summary Context" />
+          <link rel="alternate" type="text/markdown" href="https://www.ssa-lab.tech/llms-full.txt" title="LLM Full Context" />
 
           {/* ── Google Fonts ─────────────────────────────────── */}
           <link

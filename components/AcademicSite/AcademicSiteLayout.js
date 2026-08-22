@@ -72,6 +72,7 @@ export default function AcademicSiteLayout({
   jsonLd,
   image,
   type,
+  citations,
 }) {
   const router = useRouter();
   const { siteData } = useAcademicData();
@@ -129,6 +130,7 @@ export default function AcademicSiteLayout({
         canonical={canonical}
         keywords={keywords}
         jsonLd={allSchemas}
+        {...(citations ? { citations } : {})}
         {...(image ? { image } : {})}
         {...(type ? { type } : {})}
       />

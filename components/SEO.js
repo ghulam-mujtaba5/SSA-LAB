@@ -1,3 +1,4 @@
+import React from "react";
 import Head from "next/head";
 
 const SITE_URL =
@@ -30,18 +31,35 @@ export default function SEO({
   modifiedTime,
   jsonLd,
   // Academic citation fields
+  citations = [],
   citationTitle,
   citationAuthor = PERSON_NAME,
+  citationAuthors = [],
   citationYear,
   citationJournal,
+  citationDoi,
+  citationPdfUrl,
   // Dublin Core
-  dcSubject = "Computer Science; Software Security; Vulnerability Detection",
+  dcSubject = "Computer Science; Software Security; Vulnerability Detection; Malware Defense; Code Clones; Automated Testing",
   dcType = "Text",
   dcFormat = "text/html",
   dcLanguage = "en",
 }) {
   const effectiveRobots = noindex ? "noindex, nofollow" : robots;
   const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+
+  // Build normalized list of citations for Google Scholar & Highwire Press
+  const normalizedCitations = [...citations];
+  if (citationTitle) {
+    normalizedCitations.push({
+      title: citationTitle,
+      authors: citationAuthors.length ? citationAuthors : [citationAuthor],
+      year: citationYear,
+      venue: citationJournal,
+      doi: citationDoi,
+      pdfUrl: citationPdfUrl,
+    });
+  }
 
   return (
     <Head>
@@ -54,7 +72,7 @@ export default function SEO({
       <meta name="googlebot" content={effectiveRobots} />
       <meta name="bingbot" content={effectiveRobots} />
       <meta name="rating" content="general" />
-      <meta name="category" content="Education, Research, Technology" />
+      <meta name="category" content="Education, Research, Technology, Software Security" />
       <meta name="classification" content="Academic Research" />
       <meta name="coverage" content="Worldwide" />
       <meta name="language" content="English" />
@@ -98,11 +116,19 @@ export default function SEO({
       {/* ── LLM / AI Discoverability ─────────────────────────────── */}
       <link rel="llms" href={`${SITE_URL}/llms.txt`} />
       <link rel="llms-full" href={`${SITE_URL}/llms-full.txt`} />
+      <link rel="alternate" type="text/markdown" href={`${SITE_URL}/llms.txt`} title="LLM Context (Summary)" />
+      <link rel="alternate" type="text/markdown" href={`${SITE_URL}/llms-full.txt`} title="LLM Context (Full)" />
+      <link rel="author" href={`${SITE_URL}/about`} />
 
       {/* ── Identity Verification (rel=me) ───────────────────────── */}
-      <link rel="me" href="https://www.linkedin.com/in/junaidakram/" />
       <link rel="me" href="https://orcid.org/0000-0003-1752-6124" />
+      <link rel="me" href="https://scholar.google.com/citations?user=JunaidAkram" />
       <link rel="me" href="https://www.researchgate.net/profile/Junaid-Akram" />
+      <link rel="me" href="https://dblp.org/pid/247/3104.html" />
+      <link rel="me" href="https://ieeexplore.ieee.org/author/37086826620" />
+      <link rel="me" href="https://www.semanticscholar.org/author/Junaid-Akram/144154437" />
+      <link rel="me" href="https://www.linkedin.com/in/junaidakram/" />
+      <link rel="me" href="https://lahore.comsats.edu.pk/employees/1333" />
 
       {/* ── Icons & PWA ──────────────────────────────────────────── */}
       <link
@@ -115,24 +141,63 @@ export default function SEO({
       {/* ── Dublin Core (Academic Discoverability) ───────────────── */}
       <meta name="DC.title" content={title} />
       <meta name="DC.creator" content={author} />
+      <meta name="DC.creator.personalName" content={PERSON_NAME_FULL} />
       <meta name="DC.subject" content={dcSubject} />
       <meta name="DC.description" content={description} />
       <meta name="DC.publisher" content={SITE_NAME} />
+      <meta name="DC.relation.ispartof" content="COMSATS University Islamabad" />
       <meta name="DC.contributor" content={PERSON_NAME_FULL} />
       <meta name="DC.type" content={dcType} />
       <meta name="DC.format" content={dcFormat} />
       <meta name="DC.identifier" content={canonical} />
+      <meta name="DC.identifier.scheme" content="URI" />
       <meta name="DC.language" content={dcLanguage} />
       <meta name="DC.rights" content={`© ${new Date().getFullYear()} ${PERSON_NAME_FULL}`} />
 
-      {/* ── Google Scholar / Academic Citation Meta ───────────────── */}
-      <meta name="citation_author" content={citationAuthor} />
-      <meta name="citation_author_institution" content={AFFILIATION} />
-      <meta name="citation_language" content="en" />
-      {citationTitle && <meta name="citation_title" content={citationTitle} />}
-      {citationYear && <meta name="citation_year" content={String(citationYear)} />}
-      {citationJournal && <meta name="citation_journal_title" content={citationJournal} />}
-      <meta name="citation_online_date" content={new Date().toISOString().split("T")[0]} />
+      {/* ── Google Scholar / Highwire Press Citation Meta Tags ────── */}
+      {normalizedCitations.length === 0 ? (
+        <>
+          <meta name="citation_author" content={citationAuthor} />
+          <meta name="citation_author_institution" content={AFFILIATION} />
+          <meta name="citation_language" content="en" />
+          <meta name="citation_online_date" content={new Date().toISOString().split("T")[0]} />
+        </>
+      ) : (
+        normalizedCitations.map((pub, idx) => {
+          const rawAuthors = pub.authors || pub.author || PERSON_NAME;
+          const authorList = Array.isArray(rawAuthors)
+            ? rawAuthors
+            : typeof rawAuthors === "string"
+            ? rawAuthors.split(/,| and /i).map((a) => a.trim()).filter(Boolean)
+            : [PERSON_NAME];
+
+          const cleanDoi = pub.doi || (pub.href?.includes("doi.org/") ? pub.href.replace(/https?:\/\/doi\.org\//, "") : "");
+
+          return (
+            <React.Fragment key={`meta-pub-${idx}`}>
+              <meta name="citation_title" content={pub.title} />
+              {authorList.map((auth, aIdx) => (
+                <meta key={`meta-auth-${idx}-${aIdx}`} name="citation_author" content={auth} />
+              ))}
+              <meta name="citation_author_institution" content={AFFILIATION} />
+              {pub.year && <meta name="citation_publication_date" content={`${pub.year}/01/01`} />}
+              {pub.year && <meta name="citation_date" content={String(pub.year)} />}
+              {pub.type === "Conference" || pub.booktitle ? (
+                <meta name="citation_conference_title" content={pub.venue || pub.booktitle} />
+              ) : (
+                <meta name="citation_journal_title" content={pub.venue || pub.journal} />
+              )}
+              {cleanDoi && <meta name="citation_doi" content={cleanDoi} />}
+              {pub.volume && <meta name="citation_volume" content={String(pub.volume)} />}
+              {pub.issue && <meta name="citation_issue" content={String(pub.issue)} />}
+              {pub.firstpage && <meta name="citation_firstpage" content={String(pub.firstpage)} />}
+              {pub.pdfUrl && <meta name="citation_pdf_url" content={pub.pdfUrl} />}
+              {pub.href && <meta name="citation_abstract_html_url" content={pub.href} />}
+              <meta name="citation_language" content="en" />
+            </React.Fragment>
+          );
+        })
+      )}
 
       {/* ── JSON-LD Structured Data ───────────────────────────────── */}
       {schemas.map((schema, index) => (
@@ -160,12 +225,13 @@ export function personSchema(overrides = {}) {
     name: PERSON_NAME_FULL,
     givenName: "Junaid",
     familyName: "Akram",
+    honorificPrefix: "Dr.",
     honorificSuffix: "PhD",
     url: SITE_URL,
     image: OG_IMAGE,
-    jobTitle: "Assistant Professor",
+    jobTitle: "Assistant Professor & Research Lab Director",
     description:
-      "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
+      "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus. Specializing in LLM vulnerability detection, Android malware analysis, semantic code clones, and automated program testing.",
     email: "mailto:junaidakram@cuilahore.edu.pk",
     worksFor: {
       "@type": "CollegeOrUniversity",
@@ -196,25 +262,57 @@ export function personSchema(overrides = {}) {
       },
     ],
     sameAs: [
-      "https://www.linkedin.com/in/junaidakram/",
-      "https://www.researchgate.net/profile/Junaid-Akram",
       "https://orcid.org/0000-0003-1752-6124",
-      "https://lahore.comsats.edu.pk/employees/1333",
       "https://scholar.google.com/citations?user=JunaidAkram",
+      "https://www.researchgate.net/profile/Junaid-Akram",
+      "https://dblp.org/pid/247/3104.html",
+      "https://ieeexplore.ieee.org/author/37086826620",
+      "https://www.semanticscholar.org/author/Junaid-Akram/144154437",
+      "https://www.scopus.com/authid/detail.uri?authorId=57200277387",
+      "https://dl.acm.org/profile/99659556271",
+      "https://lahore.comsats.edu.pk/employees/1333",
+      "https://www.linkedin.com/in/junaidakram/",
     ],
     knowsAbout: [
       "Cyber Security",
       "Software Vulnerability Detection",
-      "Software Testing",
-      "Malware Detection",
+      "LLM-based Automated Program Repair",
+      "Software Testing and Verification",
+      "Malware Detection and Defense",
       "Code Clone Detection",
       "Software Evolution and Maintenance",
-      "Android Security",
-      "Software Security Assessment",
+      "Android and IoT Security",
+      "DevSecOps and Source Code Analysis",
+    ],
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        name: "PhD in Software Engineering",
+        recognizedBy: {
+          "@type": "CollegeOrUniversity",
+          name: "Tsinghua University",
+        },
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        name: "HEC-Approved PhD Supervisor",
+        recognizedBy: {
+          "@type": "GovernmentOrganization",
+          name: "Higher Education Commission of Pakistan",
+        },
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        name: "Postdoctoral Research in Software Verification",
+        recognizedBy: {
+          "@type": "CollegeOrUniversity",
+          name: "University of Luxembourg / SnT",
+        },
+      },
     ],
     hasOccupation: {
       "@type": "Occupation",
-      name: "Assistant Professor",
+      name: "Assistant Professor of Computer Science",
       occupationLocation: {
         "@type": "City",
         name: "Lahore, Pakistan",
@@ -232,7 +330,7 @@ export function profilePageSchema(overrides = {}) {
     name: `${PERSON_NAME} — Academic Profile`,
     url: SITE_URL,
     description:
-      "Academic profile, research, publications, supervision, and collaborations of Dr. Junaid Akram.",
+      "Academic profile, empirical research, peer-reviewed publications, student supervision, and international collaborations of Dr. Junaid Akram.",
     mainEntity: { "@id": `${SITE_URL}/#person` },
     dateModified: new Date().toISOString().split("T")[0],
     inLanguage: "en-US",
@@ -249,7 +347,7 @@ export function webSiteSchema() {
     url: SITE_URL,
     name: SITE_NAME,
     description:
-      "Research, publications, supervision, and people of the Software Security Assessment Lab.",
+      "Research, publications, student supervision, and software security benchmarks of the Software Security Assessment Lab.",
     publisher: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en-US",
     potentialAction: {
@@ -269,7 +367,12 @@ export function organizationSchema() {
     "@type": "ResearchOrganization",
     "@id": `${SITE_URL}/#organization`,
     name: "Software Security Assessment Lab",
-    alternateName: ["SSA Research Lab", "SSA Lab"],
+    alternateName: [
+      "SSA Research Lab",
+      "SSA Lab",
+      "SCSA Lab",
+      "Software Security Assessment Laboratory",
+    ],
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
@@ -287,13 +390,22 @@ export function organizationSchema() {
       url: "https://lahore.comsats.edu.pk",
     },
     founder: { "@id": `${SITE_URL}/#person` },
-    member: { "@id": `${SITE_URL}/#person` },
+    member: [{ "@id": `${SITE_URL}/#person` }],
+    knowsAbout: [
+      "Software Security Assessment",
+      "Source Code Vulnerability Detection",
+      "Malware Defense",
+      "Semantic Code Clone Detection",
+      "DevSecOps",
+      "Automated Program Repair",
+    ],
     areaServed: {
       "@type": "Country",
-      name: "Pakistan",
+      name: "Worldwide",
     },
     sameAs: [
       "https://lahore.comsats.edu.pk",
+      "https://orcid.org/0000-0003-1752-6124",
     ],
   };
 }
@@ -366,6 +478,102 @@ export function collectionPageSchema({ name, url, description, items = [] }) {
     isPartOf: { "@id": `${SITE_URL}/#website` },
     author: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en-US",
+  };
+}
+
+export function scholarlyArticleSchema({
+  title,
+  headline,
+  description,
+  authors,
+  venue,
+  journal,
+  booktitle,
+  year,
+  doi,
+  href,
+  pdfUrl,
+  keywords,
+}) {
+  const articleTitle = title || headline;
+  const rawAuthors = authors || PERSON_NAME_FULL;
+  const authorList = Array.isArray(rawAuthors)
+    ? rawAuthors
+    : typeof rawAuthors === "string"
+    ? rawAuthors.split(/,| and /i).map((a) => a.trim()).filter(Boolean)
+    : [PERSON_NAME_FULL];
+
+  const cleanDoi = doi || (href?.includes("doi.org/") ? href.replace(/https?:\/\/doi\.org\//, "") : "");
+  const articleUrl = href || `${SITE_URL}/publications`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "@id": cleanDoi ? `https://doi.org/${cleanDoi}` : `${articleUrl}#article`,
+    headline: articleTitle,
+    name: articleTitle,
+    description: description || venue || journal || booktitle,
+    url: articleUrl,
+    author: authorList.map((authName) => ({
+      "@type": "Person",
+      name: authName,
+      ...(authName.includes("Junaid Akram")
+        ? {
+            "@id": `${SITE_URL}/#person`,
+            affiliation: {
+              "@type": "CollegeOrUniversity",
+              name: AFFILIATION,
+            },
+          }
+        : {}),
+    })),
+    datePublished: year ? `${year}-01-01` : undefined,
+    isPartOf: {
+      "@type": booktitle ? "Event" : "Periodical",
+      name: venue || journal || booktitle || "Academic Publication",
+    },
+    ...(cleanDoi ? { identifier: cleanDoi, sameAs: `https://doi.org/${cleanDoi}` } : {}),
+    ...(pdfUrl ? { encoding: { "@type": "MediaObject", contentUrl: pdfUrl, encodingFormat: "application/pdf" } } : {}),
+    ...(keywords ? { keywords } : {}),
+    publisher: {
+      "@type": "Organization",
+      name: "Academic Publisher",
+    },
+    inLanguage: "en-US",
+  };
+}
+
+export function articleSchema(props) {
+  return scholarlyArticleSchema(props);
+}
+
+export function datasetSchema({
+  name,
+  description,
+  url,
+  keywords,
+  creator = PERSON_NAME_FULL,
+  license = "https://creativecommons.org/licenses/by/4.0/",
+  temporalCoverage,
+  spatialCoverage = "Worldwide",
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name,
+    description,
+    url: url || `${SITE_URL}/research`,
+    keywords: keywords || "software security, benchmark dataset, vulnerability detection, source code analysis",
+    creator: {
+      "@id": `${SITE_URL}/#person`,
+    },
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    license,
+    ...(temporalCoverage ? { temporalCoverage } : {}),
+    spatialCoverage,
+    isAccessibleForFree: true,
   };
 }
 
@@ -445,7 +653,10 @@ export function faqSchema(faqs = []) {
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
     })),
   };
 }
@@ -461,35 +672,6 @@ export function speakableSchema({ url, cssSelectors = [] }) {
         ? cssSelectors
         : ["h1", "[data-speakable]", "meta[name='description']"],
     },
-  };
-}
-
-export function articleSchema({
-  headline,
-  description,
-  image,
-  url,
-  datePublished,
-  dateModified,
-  keywords,
-  readingTime,
-  wordCount,
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    headline,
-    description,
-    image: image ? [image] : undefined,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    author: { "@id": `${SITE_URL}/#person` },
-    publisher: { "@id": `${SITE_URL}/#organization` },
-    datePublished,
-    dateModified,
-    keywords,
-    inLanguage: "en-US",
-    ...(readingTime ? { timeRequired: `PT${readingTime}M` } : {}),
-    ...(wordCount ? { wordCount } : {}),
   };
 }
 

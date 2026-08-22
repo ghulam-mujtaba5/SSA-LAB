@@ -26,6 +26,11 @@ import {
 } from "../../data/academicSite";
 import { defaultFypProjects } from "../../data/fypProjects";
 import { useAcademicData } from "../../context/AcademicDataContext";
+import {
+  datasetSchema,
+  faqSchema,
+  profilePageSchema,
+} from "../SEO";
 import styles from "./AcademicSite.module.css";
 
 const impactStats = [
@@ -74,12 +79,56 @@ export default function AcademicHome() {
     .filter((p) => !p.isOpportunity && p.slug !== "megilance-ai-blockchain-freelancing-platform")
     .slice(0, 4);
 
+  const homeJsonLd = [
+    profilePageSchema({
+      name: "Dr. Junaid Akram — SSA Research Lab",
+      description:
+        "Software Security Assessment Lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus. Advancing vulnerability detection, malware analysis, semantic code clone detection, and automated software verification.",
+    }),
+    datasetSchema({
+      name: "Hadoop IBFET 324B+ Lines of Code Clone Corpus",
+      description:
+        "Large-scale code clone index corpus spanning over 324 billion lines of source code processed with distributed Hadoop MapReduce inverted indexing.",
+      keywords: "code clone detection, Hadoop, IBFET, big data source code analysis, software evolution",
+    }),
+    datasetSchema({
+      name: "SQVDT 152,823+ Open-Source Repository Vulnerability Benchmark",
+      description:
+        "Comprehensive empirical benchmark of 152,823+ C/C++ open-source software repositories for scalable quantitative source-code vulnerability detection.",
+      keywords: "vulnerability detection, SQVDT, software security assessment, CVE benchmarking, static analysis",
+    }),
+    faqSchema([
+      {
+        question: "What is the Software Security Assessment (SSA) Lab?",
+        answer:
+          "The SSA Lab is a dedicated academic research laboratory led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus. The lab specializes in source-code vulnerability detection, LLM automated program repair, semantic code clone analysis, malware defense, and software verification.",
+      },
+      {
+        question: "Who directs the SSA Research Lab?",
+        answer:
+          "The lab is directed by Dr. Junaid Akram, Assistant Professor and HEC-approved PhD supervisor, who earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
+      },
+      {
+        question: "What major tools and benchmarks has the SSA Lab created?",
+        answer:
+          "The lab has developed SQVDT (repository-scale vulnerability detection), VCIPR (patch-guided function-level detection), DroidSD (indexed Android app similarity detection), DroidMD (source-level Android malware detection), and IBFET (Hadoop-based 324B+ LOC clone analysis).",
+      },
+      {
+        question: "How to collaborate or apply for student supervision?",
+        answer:
+          "Prospective research collaborators and students at COMSATS University Islamabad can contact Dr. Junaid Akram via email at junaidakram@cuilahore.edu.pk or through the Contact page.",
+      },
+    ]),
+  ];
+
   return (
     <AcademicSiteLayout
       title="Software Security & Source Code Analysis Research"
       path="/"
       description="Software Security Assessment Lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore. Specializing in LLM vulnerability detection, code clone analysis, and malware detection."
       keywords="Software Security Assessment Lab, Dr. Junaid Akram, software vulnerability detection, LLM vulnerability detection, semantic code clone detection, COMSATS University Lahore, malware analysis, automated software testing"
+      jsonLd={homeJsonLd}
+      citations={publicationsData.slice(0, 5)}
     >
       {selectedDomain && (
         <AcademicDomainModal
