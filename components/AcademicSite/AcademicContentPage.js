@@ -600,7 +600,6 @@ export function ResearchPage() {
               </div>
               {domain.image && (
                 <div className={styles.cornerCardIllustration}>
-                  <div className={styles.cornerBadgeDot} />
                   <Image
                     src={domain.image}
                     alt={domain.title}
@@ -2405,7 +2404,6 @@ export function ContactPage() {
             </p>
           </div>
           <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
-            <div className={styles.illustrationGlow} />
             <img
               src="/academic/illustrations/faq-helpdesk.webp"
               alt="SSA Lab FAQs 3D Illustration"

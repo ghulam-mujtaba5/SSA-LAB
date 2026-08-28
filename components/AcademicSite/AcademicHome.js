@@ -17,6 +17,9 @@ import AcademicDomainModal from "./AcademicDomainModal";
 import DomainTechnicalGraphic, { DataInfrastructureGraphic } from "./AcademicTechnicalVisuals";
 import InteractiveCodeScanner from "./InteractiveCodeScanner";
 import AcademicLottie from "./AcademicLottie";
+import HeroRetroGrid from "./HeroRetroGrid";
+import PartnerOrbitMarquee from "./PartnerOrbitMarquee";
+import Magnetic from "../AnimatedUI/Magnetic";
 import {
   academicProfile,
   partnerLogos,
@@ -142,9 +145,10 @@ export default function AcademicHome() {
           onClose={() => setSelectedDomain(null)}
         />
       )}
-      {/* 1. Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
+      {/* 1. Hero Section with Retro Grid & Cyber Depth */}
+      <section className={styles.hero} style={{ position: "relative", overflow: "hidden" }}>
+        <HeroRetroGrid angle={65} opacity={0.35} />
+        <div className={styles.heroInner} style={{ position: "relative", zIndex: 1 }}>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>Software security research & supervision</p>
             <h1>
@@ -162,17 +166,20 @@ export default function AcademicHome() {
             </ul>
 
             <div className={styles.actions}>
-              <Link href="/research" className={styles.primaryButton}>
-                Explore Research <ArrowRight size={17} />
-              </Link>
-              <Link href="/supervision" className={styles.secondaryButton}>
-                Supervision Directory
-              </Link>
+              <Magnetic>
+                <Link href="/research" className={styles.primaryButton}>
+                  Explore Research <ArrowRight size={17} />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link href="/supervision" className={styles.secondaryButton}>
+                  Supervision Directory
+                </Link>
+              </Magnetic>
             </div>
           </div>
 
           <div className={styles.heroIllustrationContainer}>
-            <div className={styles.heroIllustrationGlow} />
             <AcademicImageLightbox
               src="/academic/illustrations/homepage-hero.webp"
               alt="SSA Research Lab — Software Security Assessment Platform"
@@ -301,7 +308,6 @@ export default function AcademicHome() {
                 </span>
               </div>
               <div className={styles.cornerCardIllustrationBottomLeft}>
-                <span className={styles.cornerBadgeDotBottomLeft} />
                 <img
                   src={domainIllustrationMap[domain.id] || "/academic/illustrations/homepage-hero.webp"}
                   alt={`${domain.title} 3D Illustration`}
@@ -400,50 +406,15 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* Academic Partners (Above Footer) */}
+      {/* Academic & Industrial Partners Network Showcase (Infinite Marquee & Orbit Physics) */}
       <section className={styles.partners}>
         <p className={styles.eyebrow} style={{ textAlign: "center", marginBottom: "6px" }}>
-          Institutional Network
+          Institutional Network & Collaboration
         </p>
-        <h2 style={{ textAlign: "center", marginBottom: "24px", fontSize: "1.45rem", fontWeight: 700 }}>
+        <h2 style={{ textAlign: "center", marginBottom: "20px", fontSize: "1.45rem", fontWeight: 700 }}>
           Academic & Industrial Partners
         </h2>
-        <div className={styles.partnerRowWrapper}>
-          <div className={styles.partnerCardGrid}>
-            {partnerLogosData.map((partner) => {
-              const staticPartnerMap = {
-                "COMSATS University Islamabad": "/academic/comsats-university-islamabad-logo.png",
-                "Tsinghua University": "/academic/tsinghua-university-logo.webp",
-                "University of Luxembourg (SnT)": "/academic/snt-university-luxembourg-logo.png",
-                "SES Satellites": "/academic/ses-logo.png",
-                "King Fahd University (KFUPM)": "/academic/king-fahd-university-logo.png",
-              };
-              const partnerImg = partner.image || staticPartnerMap[partner.name];
-              return (
-                <a
-                  key={partner.name}
-                  href={partner.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.partnerCardBox}
-                  title={partner.name}
-                >
-                  <div className={styles.partnerLogoWrap}>
-                    <Image
-                      src={partnerImg}
-                      alt={partner.name}
-                      width={180}
-                      height={50}
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
-                  <h3>{partner.name}</h3>
-                  <span className={styles.partnerRole}>{partner.role}</span>
-                </a>
-              );
-            })}
-          </div>
-        </div>
+        <PartnerOrbitMarquee partners={partnerLogosData} />
       </section>
     </AcademicSiteLayout>
   );

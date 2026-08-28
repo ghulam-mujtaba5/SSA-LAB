@@ -158,8 +158,7 @@ const ServicesFrame = () => {
           </header>
 
           {category.illustration && (
-            <div className={commonStyles.cornerCardIllustrationBottomLeft} style={{ position: "relative", overflow: "hidden" }}>
-              <span className={commonStyles.cornerBadgeDotBottomLeft} />
+            <div className={commonStyles.cornerCardIllustrationBottomLeft}>
               {category.lottie ? (
                 <div style={{ width: "90px", height: "90px", position: "relative" }}>
                   <HoverLottie

@@ -124,6 +124,7 @@ export default function InteractiveCodeScanner() {
   return (
     <div
       style={{
+        position: "relative",
         background: "#0d131f",
         borderRadius: "14px",
         border: "1px solid #1e293b",
