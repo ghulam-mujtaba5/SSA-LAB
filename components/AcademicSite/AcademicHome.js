@@ -16,8 +16,10 @@ import AcademicPipelineHero from "./AcademicPipelineHero";
 import AcademicDomainModal from "./AcademicDomainModal";
 import DomainTechnicalGraphic, { DataInfrastructureGraphic } from "./AcademicTechnicalVisuals";
 import InteractiveCodeScanner from "./InteractiveCodeScanner";
-import AcademicLottie from "./AcademicLottie";
 import HeroRetroGrid from "./HeroRetroGrid";
+import BorderBeam from "./BorderBeam";
+import SpotlightBentoCard from "./SpotlightBentoCard";
+import NumberTicker from "./NumberTicker";
 import PartnerOrbitMarquee from "./PartnerOrbitMarquee";
 import Magnetic from "../AnimatedUI/Magnetic";
 import {
@@ -195,12 +197,13 @@ export default function AcademicHome() {
               imageClassName={styles.heroIllustrationImg}
               sizes="(max-width: 780px) 100vw, 45vw"
             />
-            <div className={styles.heroProfileCard}>
-              <div className={styles.heroProfileCardHeader}>
+            <div className={styles.heroProfileCard} style={{ position: "relative", overflow: "hidden" }}>
+              <BorderBeam size={160} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
+              <div className={styles.heroProfileCardHeader} style={{ position: "relative", zIndex: 2 }}>
                 <div className={styles.heroProfileStatusDot} />
                 <span className={styles.heroProfileCardTitle}>PROFILES</span>
               </div>
-              <div className={styles.heroProfileButtons}>
+              <div className={styles.heroProfileButtons} style={{ position: "relative", zIndex: 2 }}>
                 <a
                   href={academicProfileData.googleScholar}
                   target="_blank"
@@ -230,11 +233,11 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* 2. Verified Research Impact Statistics Bar */}
+      {/* 2. Verified Research Impact Statistics Bar with Spring Physics NumberTicker */}
       <section className={styles.impactStrip} aria-label="Research Impact Statistics">
         <div className={styles.impactContainer}>
           <div className={styles.impactGrid}>
-            {labImpactStatsData.map((stat) => (
+            {labImpactStatsData.map((stat, idx) => (
               <div key={stat.label} className={styles.impactItem}>
                 {stat.image && (
                   <img
@@ -245,7 +248,9 @@ export default function AcademicHome() {
                     style={{ objectFit: 'contain', marginBottom: '8px' }}
                   />
                 )}
-                <strong>{stat.value}</strong>
+                <strong>
+                  <NumberTicker value={stat.value} delay={idx * 0.1} />
+                </strong>
                 <span>{stat.label}</span>
                 <small>{stat.detail || stat.note}</small>
               </div>
@@ -264,16 +269,13 @@ export default function AcademicHome() {
               Explore real-world CVE vulnerability patterns and their verified secure remediations across multiple programming languages.
             </p>
           </div>
-          <div className={styles.lottieCard} style={{ maxWidth: "280px", width: "100%", height: "180px", minHeight: "150px", flexShrink: 0, padding: "8px", overflow: "hidden" }}>
-            <AcademicLottie src="/lottie/web-coding.json" ariaLabel="Live Vulnerability Inspection Animation" speed={0.85} />
-          </div>
         </div>
         <div style={{ width: "100%" }}>
           <InteractiveCodeScanner />
         </div>
       </section>
 
-      {/* 3. Main Research Domains with AI PNG Images & Bottom-Left Pop Corner Hover Effect */}
+      {/* 3. Main Research Domains with SpotlightBentoCard & Pop Corner Hover Effect */}
       <section className={styles.section} id="domains">
         <div className={styles.sectionHeading}>
           <div>
@@ -286,7 +288,7 @@ export default function AcademicHome() {
         </div>
         <div className={styles.domainGrid}>
           {researchDomainsData.map((domain, index) => (
-            <article
+            <SpotlightBentoCard
               key={domain.title}
               className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
               onClick={() => setSelectedDomain(domain)}
@@ -296,22 +298,17 @@ export default function AcademicHome() {
                   setSelectedDomain(domain);
                 }
               }}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-                e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-              }}
               tabIndex={0}
               role="button"
-              aria-label={`Open detailed panel for ${domain.title}`}
+              ariaLabel={`Open detailed panel for ${domain.title}`}
             >
-              <div className={styles.domainItemHeader}>
+              <div className={styles.domainItemHeader} style={{ position: "relative", zIndex: 2 }}>
                 <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
                 <span className={styles.domainClickBadge}>
                   Explore Roadmap <ArrowRight size={13} />
                 </span>
               </div>
-              <div className={styles.cornerCardIllustrationBottomLeft}>
+              <div className={styles.cornerCardIllustrationBottomLeft} style={{ position: "relative", zIndex: 2 }}>
                 <img
                   src={domainIllustrationMap[domain.id] || "/academic/illustrations/homepage-hero.webp"}
                   alt={`${domain.title} 3D Illustration`}
@@ -319,9 +316,9 @@ export default function AcademicHome() {
                   loading="lazy"
                 />
               </div>
-              <h3>{domain.title}</h3>
-              <p>{domain.description}</p>
-            </article>
+              <h3 style={{ position: "relative", zIndex: 2 }}>{domain.title}</h3>
+              <p style={{ position: "relative", zIndex: 2 }}>{domain.description}</p>
+            </SpotlightBentoCard>
           ))}
         </div>
       </section>

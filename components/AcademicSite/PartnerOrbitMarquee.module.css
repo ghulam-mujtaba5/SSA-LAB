@@ -1,0 +1,168 @@
+.marqueeContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scrollTrack 35s linear infinite;
+  will-change: transform;
+}
+
+.marqueeContainer:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+.marqueeFadeLeft,
+.marqueeFadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marqueeFadeLeft {
+  left: 0;
+  background: linear-gradient(to right, var(--academic-paper, #ffffff), transparent);
+}
+
+:global([data-theme="dark"]) .marqueeFadeLeft {
+  background: linear-gradient(to right, var(--academic-paper, #090d16), transparent);
+}
+
+.marqueeFadeRight {
+  right: 0;
+  background: linear-gradient(to left, var(--academic-paper, #ffffff), transparent);
+}
+
+:global([data-theme="dark"]) .marqueeFadeRight {
+  background: linear-gradient(to left, var(--academic-paper, #090d16), transparent);
+}
+
+.partnerCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--academic-soft, #f8fafc);
+  border: 1px solid var(--academic-line, #e2e8f0);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--academic-ink, #0f172a);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+  flex-shrink: 0;
+  min-width: 280px;
+}
+
+:global([data-theme="dark"]) .partnerCard {
+  background: rgba(17, 24, 39, 0.65);
+  border-color: rgba(56, 189, 248, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.partnerCard:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--brand-primary, #0284c7);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.18);
+}
+
+:global([data-theme="dark"]) .partnerCard:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.25);
+}
+
+.partnerLogoWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 40px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="dark"]) .partnerLogoWrap {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.partnerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.partnerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.partnerTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.partnerName {
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.externalIcon {
+  color: var(--academic-muted, #64748b);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.partnerCard:hover .externalIcon {
+  transform: translate(1px, -1px);
+  color: var(--brand-primary, #0284c7);
+}
+
+.partnerRoleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--brand-primary, #0284c7);
+  font-weight: 500;
+}
+
+:global([data-theme="dark"]) .partnerRoleBadge {
+  color: #38bdf8;
+}
+
+.sparkleIcon {
+  color: #f59e0b;
+}
+
+@keyframes scrollTrack {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+    overflow-x: auto;
+  }
+}

@@ -1,0 +1,43 @@
+.spotlightCard {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--academic-paper, #ffffff);
+  border: 1px solid var(--academic-line, #e2e8f0);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+:global([data-theme="dark"]) .spotlightCard {
+  background: rgba(17, 24, 39, 0.7);
+  border-color: rgba(56, 189, 248, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.spotlightCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.15);
+}
+
+:global([data-theme="dark"]) .spotlightCard:hover {
+  box-shadow: 0 12px 36px rgba(56, 189, 248, 0.2);
+}
+
+.spotlightEffect {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    400px circle at var(--spotlight-x, 0px) var(--spotlight-y, 0px),
+    var(--spotlight-color, rgba(56, 189, 248, 0.18)),
+    transparent 70%
+  );
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.spotlightCard:focus-visible {
+  outline: 2px solid var(--brand-primary, #0284c7);
+  outline-offset: 2px;
+}

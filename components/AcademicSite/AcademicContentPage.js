@@ -57,6 +57,12 @@ import AcademicLottie from "./AcademicLottie";
 import AcademicResearchPipeline from "./AcademicResearchPipeline";
 import AcademicFypListing from "./AcademicFypListing";
 import AcademicDomainModal from "./AcademicDomainModal";
+import HeroRetroGrid from "./HeroRetroGrid";
+import BorderBeam from "./BorderBeam";
+import SpotlightBentoCard from "./SpotlightBentoCard";
+import NumberTicker from "./NumberTicker";
+import PartnerOrbitMarquee from "./PartnerOrbitMarquee";
+import Magnetic from "../AnimatedUI/Magnetic";
 import { useRouter } from "next/router";
 import PlexusCanvas from "../Backgrounds/PlexusCanvas";
 import {
@@ -83,8 +89,9 @@ import styles from "./AcademicSite.module.css";
 
 function PageIntro({ eyebrow, title, lead, illustration = null, action = null }) {
   return (
-    <section className={styles.pageIntro}>
-      <div className={styles.pageIntroInner}>
+    <section className={styles.pageIntro} style={{ position: "relative", overflow: "hidden" }}>
+      <HeroRetroGrid angle={65} opacity={0.25} />
+      <div className={styles.pageIntroInner} style={{ position: "relative", zIndex: 1 }}>
         <div className={styles.pageIntroText}>
           {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
           <h1>{title}</h1>
@@ -211,8 +218,9 @@ export function AboutPage() {
         />
         {coInvestigatorsData[0] && (
           <div className={styles.aboutDirectorCardBanner}>
-            <aside className={styles.aboutDirectorCard}>
-              <div className={styles.aboutDirectorAvatar}>
+            <aside className={styles.aboutDirectorCard} style={{ position: "relative", overflow: "hidden" }}>
+              <BorderBeam size={140} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
+              <div className={styles.aboutDirectorAvatar} style={{ position: "relative", zIndex: 2 }}>
                 <Image
                   src={coInvestigatorsData[0].image || "/academic/co-investigators/dr-junaid-akram.webp"}
                   alt={coInvestigatorsData[0].name}
@@ -220,7 +228,7 @@ export function AboutPage() {
                   height={72}
                 />
               </div>
-              <div className={styles.aboutDirectorInfo}>
+              <div className={styles.aboutDirectorInfo} style={{ position: "relative", zIndex: 2 }}>
                 <h3 className={styles.aboutDirectorName}>{coInvestigatorsData[0].name}</h3>
                 <span className={styles.aboutDirectorTitle}>Assistant Professor & HEC PhD Supervisor</span>
                 <span className={styles.aboutDirectorMeta}>
@@ -252,7 +260,7 @@ export function AboutPage() {
         )}
       </div>
 
-      {/* 2. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (SINGLE ROW SHOWCASE - ONE ROW ONLY) */}
+      {/* 2. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (INFINITE ORBIT MARQUEE) */}
       <section className={styles.section} style={{ paddingTop: 0, paddingBottom: "24px" }}>
         <div className={styles.sectionHeading} style={{ marginBottom: "16px" }}>
           <div>
@@ -263,36 +271,17 @@ export function AboutPage() {
             Global research partnerships driving joint security assessments, satellite testing, and vulnerability remediation.
           </p>
         </div>
-        <div className={styles.partnerRowWrapper}>
-          <div className={styles.partnerCardGrid}>
-            {partnerLogosData.map((partner) => {
-              const partnerImg = partner.image || staticPartnerMap[partner.name];
-              return (
-                <a
-                  key={partner.name}
-                  href={partner.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.partnerCardBox}
-                >
-                  <div className={styles.partnerLogoWrap}>
-                    <Image src={partnerImg} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
-                  </div>
-                  <h3>{partner.name}</h3>
-                  <span className={styles.partnerRole}>{partner.role}</span>
-                </a>
-              );
-            })}
-          </div>
-        </div>
+        <PartnerOrbitMarquee partners={partnerLogosData} />
       </section>
 
       {/* 3. LAB IMPACT METRICS COUNTER GRID */}
       <section className={styles.section} style={{ paddingTop: 0 }}>
         <div className={styles.statsGrid}>
-          {labImpactStatsData.map((stat) => (
+          {labImpactStatsData.map((stat, sIdx) => (
             <div key={stat.label} className={styles.statCard}>
-              <div className={styles.statValue}>{stat.value}</div>
+              <div className={styles.statValue}>
+                <NumberTicker value={stat.value} delay={sIdx * 0.1} />
+              </div>
               <div className={styles.statLabel}>{stat.label}</div>
               <div className={styles.statNote}>{stat.note || stat.detail}</div>
             </div>
@@ -575,7 +564,7 @@ export function ResearchPage() {
 
         <div className={styles.domainGrid}>
           {researchDomainsData.map((domain, index) => (
-            <article
+            <SpotlightBentoCard
               key={domain.id || domain.slug || domain.title}
               className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
               onClick={() => setSelectedDomain(domain)}
@@ -585,23 +574,18 @@ export function ResearchPage() {
                   setSelectedDomain(domain);
                 }
               }}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-                e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
-              }}
               tabIndex={0}
               role="button"
-              aria-label={`Open detailed panel for ${domain.title}`}
+              ariaLabel={`Open detailed panel for ${domain.title}`}
             >
-              <div className={styles.domainItemHeader}>
+              <div className={styles.domainItemHeader} style={{ position: "relative", zIndex: 2 }}>
                 <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
                 <span className={styles.domainClickBadge}>
                   Explore Roadmap <ArrowRight size={13} />
                 </span>
               </div>
               {domain.image && (
-                <div className={styles.cornerCardIllustration}>
+                <div className={styles.cornerCardIllustration} style={{ position: "relative", zIndex: 2 }}>
                   <Image
                     src={domain.image}
                     alt={domain.title}
@@ -611,9 +595,9 @@ export function ResearchPage() {
                   />
                 </div>
               )}
-              <h2>{domain.title}</h2>
-              <p>{domain.description}</p>
-            </article>
+              <h2 style={{ position: "relative", zIndex: 2 }}>{domain.title}</h2>
+              <p style={{ position: "relative", zIndex: 2 }}>{domain.description}</p>
+            </SpotlightBentoCard>
           ))}
         </div>
       </section>
@@ -1882,28 +1866,7 @@ export function TeamPage() {
             </p>
           </div>
 
-          <div className={styles.partnerRowWrapper}>
-            <div className={styles.partnerCardGrid}>
-              {partnerLogosData.map((partner) => {
-                const partnerImg = partner.image || staticPartnerMap[partner.name];
-                return (
-                  <a
-                    key={partner.name}
-                    href={partner.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.partnerCardBox}
-                  >
-                    <div className={styles.partnerLogoWrap}>
-                      <Image src={partnerImg} alt={partner.name} width={180} height={50} style={{ objectFit: "contain" }} />
-                    </div>
-                    <h3>{partner.name}</h3>
-                    <span className={styles.partnerRole}>{partner.role}</span>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
+          <PartnerOrbitMarquee partners={partnerLogosData} />
         </section>
       )}
     </AcademicSiteLayout>

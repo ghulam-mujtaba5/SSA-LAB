@@ -6,6 +6,7 @@ import {
   Check,
   Code2,
 } from "lucide-react";
+import BorderBeam from "./BorderBeam";
 
 const SAMPLES = [
   {
@@ -136,6 +137,7 @@ export default function InteractiveCodeScanner() {
         width: "100%",
       }}
     >
+      <BorderBeam size={240} duration={14} colorFrom="#0284c7" colorTo="#38bdf8" />
       {/* 1. Header with Language Selector Tabs */}
       <div
         style={{

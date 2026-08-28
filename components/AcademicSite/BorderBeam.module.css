@@ -1,0 +1,37 @@
+.borderBeam {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: var(--border-width, 1.5px) solid transparent;
+  mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+  mask-clip: padding-box, border-box;
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+}
+
+.borderBeam::after {
+  content: "";
+  position: absolute;
+  aspect-ratio: 1;
+  width: var(--size, 180px);
+  background: linear-gradient(to left, var(--color-from, #0284c7), var(--color-to, #38bdf8), transparent);
+  offset-anchor: calc(var(--size, 180px) / 2) 50%;
+  offset-path: rect(0 auto auto 0 round var(--size, 180px));
+  animation: beamAnimation var(--duration, 12s) infinite linear;
+  animation-delay: var(--delay, 0s);
+  filter: drop-shadow(0 0 10px var(--color-to, #38bdf8));
+}
+
+@keyframes beamAnimation {
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .borderBeam::after {
+    animation: none;
+    offset-distance: 25%;
+  }
+}

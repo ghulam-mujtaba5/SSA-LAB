@@ -1,0 +1,62 @@
+.gridWrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--grid-opacity, 0.45);
+}
+
+.gridPerspective {
+  position: absolute;
+  inset: 0;
+  perspective: 450px;
+  transform-style: preserve-3d;
+}
+
+.gridPlane {
+  position: absolute;
+  inset: -60% 0 0 0;
+  height: 200%;
+  width: 100%;
+  transform: rotateX(var(--grid-angle, 65deg));
+  transform-origin: 50% 0;
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.12) 1px, transparent 1px);
+  background-size: 56px 56px;
+  animation: gridMove 24s linear infinite;
+  will-change: transform;
+}
+
+:global([data-theme="dark"]) .gridPlane {
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.18) 1px, transparent 1px);
+}
+
+.gridGradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 10%, transparent 20%, var(--academic-paper, #ffffff) 85%);
+  pointer-events: none;
+}
+
+:global([data-theme="dark"]) .gridGradientOverlay {
+  background: radial-gradient(circle at 50% 10%, transparent 15%, var(--academic-paper, #090d16) 80%);
+}
+
+@keyframes gridMove {
+  0% {
+    transform: rotateX(var(--grid-angle, 65deg)) translateY(0);
+  }
+  100% {
+    transform: rotateX(var(--grid-angle, 65deg)) translateY(56px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gridPlane {
+    animation: none;
+  }
+}
