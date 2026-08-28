@@ -343,40 +343,206 @@
   margin-top: 32px;
 }
 
+/* ==========================================================================
+   MAXLAB-INSPIRED 3D TACTILE BUTTONS & SHINE HOVER SUITE
+   ========================================================================== */
+
+@property --hbg-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes hbg-rotate {
+  to {
+    --hbg-angle: 360deg;
+  }
+}
+
+@keyframes shineSweep {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.btnOrbitWrap {
+  position: relative;
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 2px;
+  background: transparent;
+  vertical-align: middle;
+}
+
+.btnOrbitWrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: conic-gradient(
+    from var(--hbg-angle),
+    transparent 60%,
+    #0284c7 75%,
+    #38bdf8 85%,
+    #0ea5e9 92%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.btnOrbitWrap:hover::before {
+  opacity: 1;
+  animation: hbg-rotate 2.2s linear infinite;
+}
+
 .primaryButton,
 .secondaryButton {
+  position: relative;
   min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  border-radius: 7px;
-  padding: 0 19px;
-  font-size: 0.86rem;
-  font-weight: 700;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 0 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+  user-select: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Light-sweep shine reflection overlay (Maxlab Clone) */
+.primaryButton::after,
+.secondaryButton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(120deg, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 75%);
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 2;
+}
+
+.primaryButton:hover::after,
+.secondaryButton:hover::after {
+  animation: shineSweep 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── 3D Tactile Primary Button ── */
 .primaryButton {
-  background: var(--academic-navy);
-  color: white;
-  border: 1px solid var(--academic-navy);
+  color: #ffffff !important;
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 
+    0px -3px 0px 0px #075985 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.45) inset, 
+    0px 2.77px 2.21px 0px rgba(2, 132, 199, 0.12), 
+    0px 6.65px 5.32px 0px rgba(2, 132, 199, 0.15), 
+    0px 12.5px 10px 0px rgba(2, 132, 199, 0.18), 
+    0px 3px 3px 0px rgba(0, 0, 0, 0.14);
 }
 
+:global([data-theme="dark"]) .primaryButton {
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 
+    0px -3px 0px 0px #0369a1 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.5) inset, 
+    0px 3px 6px 0px rgba(0, 0, 0, 0.35),
+    0px 8px 20px 0px rgba(2, 132, 199, 0.3);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: 
+    0px -3px 0px 0px #0284c7 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.65) inset, 
+    0px 6px 16px -2px rgba(2, 132, 199, 0.4), 
+    0px 12px 28px -4px rgba(2, 132, 199, 0.35);
+}
+
+.primaryButton:active {
+  transform: translateY(1.5px) scale(0.985);
+  box-shadow: 
+    0px -1px 0px 0px #075985 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.3) inset, 
+    0px 2px 6px rgba(2, 132, 199, 0.2);
+}
+
+/* ── 3D Tactile Secondary Button ── */
 .secondaryButton {
-  background: transparent;
-  color: var(--academic-navy);
-  border: 1px solid #9db0bb;
+  color: var(--academic-ink, #0f172a);
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  box-shadow: 
+    0px -3px 0px 0px #e2e8f0 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.85) inset, 
+    0px 2.77px 2.21px 0px rgba(0, 0, 0, 0.04), 
+    0px 3px 6px 0px rgba(0, 0, 0, 0.06);
 }
 
-.primaryButton:hover,
+:global([data-theme="dark"]) .secondaryButton {
+  color: #f8fafc;
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0px -3px 0px 0px #020617 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.18) inset, 
+    0px 2.77px 2.21px 0px rgba(0, 0, 0, 0.25), 
+    0px 3px 6px 0px rgba(0, 0, 0, 0.35);
+}
+
 .secondaryButton:hover {
   transform: translateY(-2px);
+  color: var(--academic-blue, #0284c7);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 
+    0px -3px 0px 0px #cbd5e1 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.95) inset, 
+    0px 4px 14px rgba(0, 0, 0, 0.08);
 }
 
-.secondaryButton:hover {
-  background: var(--academic-soft);
+:global([data-theme="dark"]) .secondaryButton:hover {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 
+    0px -3px 0px 0px #090d16 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.28) inset, 
+    0px 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+.secondaryButton:active {
+  transform: translateY(1.5px) scale(0.985);
+  box-shadow: 
+    0px -1px 0px 0px #cbd5e1 inset, 
+    0px 1px 0px 0px rgba(255, 255, 255, 0.5) inset, 
+    0px 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Arrow / Icon Hover Spring Animation */
+.primaryButton svg,
+.secondaryButton svg {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.primaryButton:hover svg,
+.secondaryButton:hover svg {
+  transform: translateX(4px);
 }
 
 .heroPortrait {
@@ -585,49 +751,65 @@
 }
 
 .heroProfileBtn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 10px;
-  border-radius: 8px;
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0px -2px 0px 0px #090e17 inset, 0px 1px 0px 0px rgba(255, 255, 255, 0.2) inset, 0 2px 5px rgba(0, 0, 0, 0.2);
   color: #f1f5f9;
-  font-size: 0.77rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: all 0.18s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  overflow: hidden;
 }
 
 :global([data-theme="light"]) .heroProfileBtn {
-  background: rgba(241, 245, 249, 0.95);
-  border: 1px solid rgba(203, 213, 225, 0.9);
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+  border: 1px solid rgba(203, 213, 225, 0.95);
+  box-shadow: 0px -2px 0px 0px #e2e8f0 inset, 0px 1px 0px 0px rgba(255, 255, 255, 0.85) inset, 0 1px 3px rgba(0, 0, 0, 0.05);
   color: #0f172a;
 }
 
 .heroProfileBtn:hover {
-  background: rgba(56, 189, 248, 0.16);
-  border-color: rgba(56, 189, 248, 0.55);
-  color: #38bdf8;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 8px rgba(56, 189, 248, 0.2);
+  transform: translateY(-1.5px);
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(56, 189, 248, 0.25) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+  border-color: rgba(56, 189, 248, 0.6);
+  color: #ffffff !important;
+  box-shadow: 0px -2px 0px 0px #075985 inset, 0px 1px 0px 0px rgba(255, 255, 255, 0.45) inset, 0 4px 12px rgba(2, 132, 199, 0.35);
 }
 
 :global([data-theme="light"]) .heroProfileBtn:hover {
-  background: rgba(2, 132, 199, 0.08);
-  border-color: rgba(2, 132, 199, 0.5);
-  color: #0369a1;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
+  background: radial-gradient(62.56% 62.56% at 28.14% -10.42%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+  border-color: rgba(2, 132, 199, 0.6);
+  color: #ffffff !important;
+  box-shadow: 0px -2px 0px 0px #075985 inset, 0px 1px 0px 0px rgba(255, 255, 255, 0.4) inset, 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+
+.heroProfileBtn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0px -1px 0px 0px #075985 inset, 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .heroProfileBtnIcon {
   color: #38bdf8;
   flex-shrink: 0;
+  transition: color 0.2s ease;
 }
 
 :global([data-theme="light"]) .heroProfileBtnIcon {
   color: #0284c7;
+}
+
+.heroProfileBtn:hover .heroProfileBtnIcon,
+:global([data-theme="light"]) .heroProfileBtn:hover .heroProfileBtnIcon {
+  color: #ffffff;
 }
 
 .heroProfileBtnExternal {
@@ -637,12 +819,12 @@
 }
 
 .heroProfileBtn:hover .heroProfileBtnExternal {
-  color: #38bdf8;
+  color: #ffffff;
   transform: translate(1px, -1px);
 }
 
 :global([data-theme="light"]) .heroProfileBtn:hover .heroProfileBtnExternal {
-  color: #0369a1;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {

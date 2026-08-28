@@ -1295,7 +1295,7 @@ export const coInvestigators = [
     role: "Research Collaborator",
     affiliation: "Saudi Aramco Cybersecurity Chair Professor, KFUPM / Manchester Met Chair",
     specialization: "Cybersecurity, IoT Security & Ensemble Learning",
-    image: "/academic/mohammad-hammoudeh.png",
+    image: "/academic/mohammad-hammoudeh.jpg",
     email: "mohammad.hammoudeh@kfupm.edu.sa",
     googleScholar: "https://scholar.google.co.uk/citations?user=gy9CfrUAAAAJ",
     orcid: "https://orcid.org/0000-0003-1058-0996",

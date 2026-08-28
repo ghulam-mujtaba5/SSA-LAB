@@ -452,9 +452,11 @@ export function AboutPage() {
         </div>
 
         <div style={{ textAlign: "center", marginTop: "28px" }}>
-          <Link href="/team" className={styles.primaryButton}>
-            View Complete People & Partners Directory <ArrowRight size={16} />
-          </Link>
+          <div className={styles.btnOrbitWrap}>
+            <Link href="/team" className={styles.primaryButton}>
+              View Complete People & Partners Directory <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -636,9 +638,11 @@ export function ResearchPage() {
             All empirical research findings, platforms (SQVDT, VCIPR, DroidSD, DroidMD), and datasets are published with full DOI links and citations in our Publications directory.
           </p>
         </div>
-        <Link href="/publications" className={styles.primaryButton}>
-          View Publications & Papers <ArrowRight size={17} />
-        </Link>
+        <div className={styles.btnOrbitWrap}>
+          <Link href="/publications" className={styles.primaryButton}>
+            View Publications & Papers <ArrowRight size={17} />
+          </Link>
+        </div>
       </section>
     </AcademicSiteLayout>
   );
@@ -1272,9 +1276,11 @@ export function PublicationsPage() {
           <p className={styles.eyebrow}>Research Collaboration</p>
           <h2>Interested in co-authoring or reviewing research?</h2>
         </div>
-        <Link href="/contact" className={styles.primaryButton}>
-          Contact Dr Junaid <ArrowRight size={17} />
-        </Link>
+        <div className={styles.btnOrbitWrap}>
+          <Link href="/contact" className={styles.primaryButton}>
+            Contact Dr Junaid <ArrowRight size={17} />
+          </Link>
+        </div>
       </section>
     </AcademicSiteLayout>
   );
@@ -1367,9 +1373,11 @@ export function SupervisionPage({ fypProjects = [] }) {
             <li>Selected FYP opportunity title or proposed original research topic</li>
             <li>Technical background (programming languages, frameworks, security/ML interest)</li>
           </ul>
-          <Link href="/contact" className={styles.primaryButton}>
-            Submit Supervision Inquiry <ArrowRight size={17} />
-          </Link>
+          <div className={styles.btnOrbitWrap}>
+            <Link href="/contact" className={styles.primaryButton}>
+              Submit Supervision Inquiry <ArrowRight size={17} />
+            </Link>
+          </div>
         </div>
       </section>
     </AcademicSiteLayout>
@@ -1378,7 +1386,7 @@ export function SupervisionPage({ fypProjects = [] }) {
 
 const staticCoInvestigatorMap = {
   "Prof. Ping Luo": "/academic/ping-luo.jpg",
-  "Dr. Mohammad Hammoudeh": "/academic/mohammad-hammoudeh.png",
+  "Dr. Mohammad Hammoudeh": "/academic/mohammad-hammoudeh.jpg",
   "Dr. Junaid Akram": "/academic/junaid-akram-professor.jpg",
   "Dr. Danish Vasan": "/academic/danish-vassan.jpg",
   "Dr. Majid Mumtaz": "/academic/majid-mumtaz.png",
@@ -2363,9 +2371,11 @@ export function ContactPage() {
                 />
               </div>
 
-              <button type="submit" disabled={isSubmitting} className={styles.primaryButton} style={{ justifySelf: "start", opacity: isSubmitting ? 0.7 : 1 }}>
-                {isSubmitting ? "Sending Enquiry..." : "Submit Enquiry"} <Send size={15} />
-              </button>
+              <div className={styles.btnOrbitWrap} style={{ justifySelf: "start" }}>
+                <button type="submit" disabled={isSubmitting} className={styles.primaryButton} style={{ opacity: isSubmitting ? 0.7 : 1 }}>
+                  {isSubmitting ? "Sending Enquiry..." : "Submit Enquiry"} <Send size={15} />
+                </button>
+              </div>
             </form>
 
             <aside className={styles.enquirySidebarCard}>

@@ -166,16 +166,20 @@ export default function AcademicHome() {
             </ul>
 
             <div className={styles.actions}>
-              <Magnetic>
-                <Link href="/research" className={styles.primaryButton}>
-                  Explore Research <ArrowRight size={17} />
-                </Link>
-              </Magnetic>
-              <Magnetic>
-                <Link href="/supervision" className={styles.secondaryButton}>
-                  Supervision Directory
-                </Link>
-              </Magnetic>
+              <div className={styles.btnOrbitWrap}>
+                <Magnetic>
+                  <Link href="/research" className={styles.primaryButton}>
+                    Explore Research <ArrowRight size={17} />
+                  </Link>
+                </Magnetic>
+              </div>
+              <div className={styles.btnOrbitWrap}>
+                <Magnetic>
+                  <Link href="/supervision" className={styles.secondaryButton}>
+                    Supervision Directory
+                  </Link>
+                </Magnetic>
+              </div>
             </div>
           </div>
 
@@ -400,9 +404,11 @@ export default function AcademicHome() {
           <p style={{ maxWidth: "640px", margin: "12px auto 24px" }}>
             Dr Junaid Akram supervises BS, MS, and PhD students in software vulnerability detection, automated testing, malware analysis, and code clone research.
           </p>
-          <Link href="/contact" className={styles.primaryButton}>
-            Contact the lab <ArrowRight size={17} />
-          </Link>
+          <div className={styles.btnOrbitWrap} style={{ margin: "0 auto" }}>
+            <Link href="/contact" className={styles.primaryButton}>
+              Contact the lab <ArrowRight size={17} />
+            </Link>
+          </div>
         </div>
       </section>
 
