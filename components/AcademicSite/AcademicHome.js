@@ -20,7 +20,6 @@ import HeroRetroGrid from "./HeroRetroGrid";
 import BorderBeam from "./BorderBeam";
 import SpotlightBentoCard from "./SpotlightBentoCard";
 import NumberTicker from "./NumberTicker";
-import PartnerOrbitMarquee from "./PartnerOrbitMarquee";
 import Magnetic from "../AnimatedUI/Magnetic";
 import {
   academicProfile,
@@ -414,15 +413,32 @@ export default function AcademicHome() {
         </div>
       </section>
 
-      {/* Academic & Industrial Partners Network Showcase (Infinite Marquee & Orbit Physics) */}
-      <section className={styles.partners}>
-        <p className={styles.eyebrow} style={{ textAlign: "center", marginBottom: "6px" }}>
-          Institutional Network & Collaboration
-        </p>
-        <h2 style={{ textAlign: "center", marginBottom: "20px", fontSize: "1.45rem", fontWeight: 700 }}>
-          Academic & Industrial Partners
-        </h2>
-        <PartnerOrbitMarquee partners={partnerLogosData} />
+      {/* Academic & Industrial Partners Network Showcase */}
+      <section className={styles.partners} aria-label="Academic and research affiliations">
+        <p>Academic and Research Affiliations</p>
+        <div className={styles.partnerGrid}>
+          {partnerLogosData.map((partner) => {
+            const partnerImg = partner.image || "/academic/comsats-university-islamabad-logo.png";
+            return (
+              <figure key={partner.name}>
+                <a
+                  href={partner.href || "#"}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={partner.name}
+                >
+                  <Image
+                    src={partnerImg}
+                    alt={partner.name}
+                    width={200}
+                    height={60}
+                    style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
+                  />
+                </a>
+              </figure>
+            );
+          })}
+        </div>
       </section>
     </AcademicSiteLayout>
   );

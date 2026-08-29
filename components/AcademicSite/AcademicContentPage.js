@@ -61,7 +61,6 @@ import HeroRetroGrid from "./HeroRetroGrid";
 import BorderBeam from "./BorderBeam";
 import SpotlightBentoCard from "./SpotlightBentoCard";
 import NumberTicker from "./NumberTicker";
-import PartnerOrbitMarquee from "./PartnerOrbitMarquee";
 import Magnetic from "../AnimatedUI/Magnetic";
 import { useRouter } from "next/router";
 import PlexusCanvas from "../Backgrounds/PlexusCanvas";
@@ -370,18 +369,32 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* 5. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (INFINITE ORBIT MARQUEE) */}
-      <section className={styles.section} style={{ paddingTop: "12px", paddingBottom: "24px" }}>
-        <div className={styles.sectionHeading} style={{ marginBottom: "16px" }}>
-          <div>
-            <p className={styles.eyebrow}>Institutional Network</p>
-            <h2>Academic & Industrial Partners</h2>
-          </div>
-          <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.85rem", margin: 0 }}>
-            Global research partnerships driving joint security assessments, satellite testing, and vulnerability remediation.
-          </p>
+      {/* 5. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS */}
+      <section className={styles.partners} aria-label="Academic and research affiliations" style={{ margin: "40px auto 0", borderRadius: "18px" }}>
+        <p>Academic & Research Partner Universities</p>
+        <div className={styles.partnerGrid}>
+          {partnerLogosData.map((partner) => {
+            const partnerImg = partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
+            return (
+              <figure key={partner.name}>
+                <a
+                  href={partner.href || "#"}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={partner.name}
+                >
+                  <Image
+                    src={partnerImg}
+                    alt={partner.name}
+                    width={200}
+                    height={60}
+                    style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
+                  />
+                </a>
+              </figure>
+            );
+          })}
         </div>
-        <PartnerOrbitMarquee partners={partnerLogosData} />
       </section>
 
       {/* 6. PEOPLE & RESEARCH COMMUNITY (WITH NEW 3D CLAYMORPHISM ICONS) */}
@@ -1900,18 +1913,31 @@ export function TeamPage() {
 
       {/* 5. INSTITUTIONAL PARTNERS & ACADEMIC AFFILIATIONS */}
       {showPartners && (
-        <section className={styles.section}>
-          <div className={styles.sectionHeading}>
-            <div>
-              <p className={styles.eyebrow}>Institutional Network</p>
-              <h2>Academic & Industry Partners</h2>
-            </div>
-            <p style={{ maxWidth: "540px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Institutional affiliations and research partnerships driving joint security assessments and program repair.
-            </p>
+        <section className={styles.partners} aria-label="Academic and research affiliations" style={{ marginTop: "48px", borderRadius: "18px" }}>
+          <p>Academic & Research Partner Universities</p>
+          <div className={styles.partnerGrid}>
+            {partnerLogosData.map((partner) => {
+              const partnerImg = partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
+              return (
+                <figure key={partner.name}>
+                  <a
+                    href={partner.href || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={partner.name}
+                  >
+                    <Image
+                      src={partnerImg}
+                      alt={partner.name}
+                      width={200}
+                      height={60}
+                      style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
+                    />
+                  </a>
+                </figure>
+              );
+            })}
           </div>
-
-          <PartnerOrbitMarquee partners={partnerLogosData} />
         </section>
       )}
     </AcademicSiteLayout>

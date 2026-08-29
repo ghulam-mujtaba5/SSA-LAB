@@ -1338,55 +1338,81 @@
 }
 
 .partners {
-  padding: 44px max(20px, calc((100% - 1180px) / 2));
-  background: var(--academic-soft);
-  border-top: 1px solid var(--academic-line);
+  padding: clamp(36px, 5vw, 52px) max(20px, calc((100% - 1180px) / 2));
+  background: var(--academic-soft, #f8fafc);
+  border-top: 1px solid var(--academic-line, #e2e8f0);
+  text-align: center;
+}
+
+:global([data-theme="dark"]) .partners {
+  background: #070b14;
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .partners > p {
   margin: 0 0 28px;
-  color: var(--academic-muted);
-  font-size: 0.72rem;
+  color: var(--academic-muted, #64748b);
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
 }
 
+:global([data-theme="dark"]) .partners > p {
+  color: #94a3b8;
+}
+
 .partners > div:not(.partnerRowWrapper),
 .partnerGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
   align-items: center;
-  gap: 16px;
-  min-width: 860px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(20px, 3.5vw, 44px);
+  max-width: 1180px;
+  margin: 0 auto;
 }
 
 .partners figure,
 .partnerGrid figure {
   margin: 0;
-  text-align: center;
-}
-
-.partners img,
-.partnerGrid img {
-  max-width: 100%;
-  max-height: 40px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  opacity: 1;
-  transition: transform 160ms ease, opacity 160ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .partners a,
 .partnerGrid a {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: transparent;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.partners a:hover,
+.partnerGrid a:hover {
+  transform: translateY(-3px);
+}
+
+.partners img,
+.partnerGrid img {
+  max-width: 190px;
+  max-height: 48px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.95;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .partners a:hover img,
 .partnerGrid a:hover img {
-  transform: translateY(-3px);
+  opacity: 1;
+  transform: scale(1.04);
 }
 
 .partnerGrid figcaption {
