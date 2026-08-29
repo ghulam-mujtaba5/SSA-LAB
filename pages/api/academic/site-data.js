@@ -56,7 +56,13 @@ export default async function handler(req, res) {
       : staticAcademicData.academicProfile;
 
     const labMilestones = profileDoc?.milestones?.length ? profileDoc.milestones : staticAcademicData.labMilestones;
-    const labPillars = profileDoc?.pillars?.length ? profileDoc.pillars : staticAcademicData.labPillars;
+    const labPillars = (profileDoc?.pillars?.length ? profileDoc.pillars : staticAcademicData.labPillars).map((p) => {
+      const staticMatch = staticAcademicData.labPillars.find((sp) => sp.id === p.id || sp.title === p.title);
+      return {
+        ...p,
+        image: p.image || staticMatch?.image || `/academic/illustrations/${p.id || 'source-level-vulnerability-intelligence'}.webp`,
+      };
+    });
     const labImpactStats = profileDoc?.impactStats?.length ? profileDoc.impactStats : staticAcademicData.labImpactStats;
     const partnerLogos = profileDoc?.partnerLogos?.length ? profileDoc.partnerLogos : staticAcademicData.partnerLogos;
 
@@ -85,6 +91,15 @@ export default async function handler(req, res) {
       ? teamDocs.filter((t) => isCollaborator(t.category))
       : staticAcademicData.collaborators;
 
+    const domainIllustrationMap = {
+      "cyber-security": "/academic/illustrations/cyber-security.webp",
+      "vulnerability-detection": "/academic/illustrations/vulnerability-detection.webp",
+      "software-testing": "/academic/illustrations/software-testing.webp",
+      "malware-detection": "/academic/illustrations/malware-detection.webp",
+      "code-clone-analysis": "/academic/illustrations/code-cloning.webp",
+      "software-evolution-reuse": "/academic/illustrations/software-evolution-reuse.webp",
+    };
+
     // Format research domains
     const researchDomains = domainDocs?.length
       ? domainDocs.map((d) => ({
@@ -93,7 +108,7 @@ export default async function handler(req, res) {
           number: d.number,
           graphicKey: d.graphicKey || d.domainId || d.slug,
           title: d.title,
-          image: d.image,
+          image: domainIllustrationMap[d.domainId || d.slug] || d.image || "/academic/illustrations/cyber-security.webp",
           description: d.description,
           overview: d.overview || d.description,
           keyProblems: d.keyProblems || [],

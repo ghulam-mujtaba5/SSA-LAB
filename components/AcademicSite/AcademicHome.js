@@ -310,9 +310,14 @@ export default function AcademicHome() {
               </div>
               <div className={styles.cornerCardIllustrationBottomLeft} style={{ position: "relative", zIndex: 2 }}>
                 <img
-                  src={domainIllustrationMap[domain.id] || "/academic/illustrations/homepage-hero.webp"}
+                  src={domainIllustrationMap[domain.id || domain.slug] || domain.image || "/academic/illustrations/cyber-security.webp"}
                   alt={`${domain.title} 3D Illustration`}
-                  style={{ maxHeight: "110px", width: "auto", objectFit: "contain" }}
+                  style={{
+                    maxHeight: "110px",
+                    width: "auto",
+                    objectFit: "contain",
+                    filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))",
+                  }}
                   loading="lazy"
                 />
               </div>

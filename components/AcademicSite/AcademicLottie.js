@@ -11,9 +11,15 @@ export default function AcademicLottie({
   className,
   ariaLabel,
   speed = 0.85,
+  autoplay = true,
+  hoverPlay = false,
+  isHovered = false,
+  loop = true,
+  style = {},
 }) {
   const [animationData, setAnimationData] = useState(directData || null);
   const [isLoading, setIsLoading] = useState(!directData && !!src);
+  const [localHover, setLocalHover] = useState(false);
 
   const containerRef = useRef(null);
   const lottieRef = useRef(null);
@@ -56,15 +62,28 @@ export default function AcademicLottie({
     };
   }, [src, directData]);
 
-  // Set Speed and ensure active continuous playback
+  const activeHover = hoverPlay ? (isHovered || localHover) : true;
+
+  // Control playback based on hoverPlay & activeHover
   useEffect(() => {
-    if (lottieRef.current) {
-      try {
-        lottieRef.current.setSpeed(speed);
-        lottieRef.current.play();
-      } catch (_) {}
-    }
-  }, [safeAnimationData, speed]);
+    if (!lottieRef.current) return;
+    try {
+      lottieRef.current.setSpeed(speed);
+      if (hoverPlay) {
+        if (activeHover && !reduceMotion) {
+          lottieRef.current.play();
+        } else {
+          lottieRef.current.goToAndStop(0, true);
+        }
+      } else {
+        if (autoplay && !reduceMotion) {
+          lottieRef.current.play();
+        } else {
+          lottieRef.current.pause();
+        }
+      }
+    } catch (_) {}
+  }, [safeAnimationData, speed, hoverPlay, activeHover, autoplay, reduceMotion]);
 
   return (
     <div
@@ -72,6 +91,8 @@ export default function AcademicLottie({
       className={className}
       role={ariaLabel ? "img" : undefined}
       aria-label={ariaLabel}
+      onMouseEnter={() => setLocalHover(true)}
+      onMouseLeave={() => setLocalHover(false)}
       style={{
         position: "relative",
         width: "100%",
@@ -80,6 +101,8 @@ export default function AcademicLottie({
         alignItems: "center",
         justifyContent: "center",
         userSelect: "none",
+        background: "transparent",
+        ...style,
       }}
     >
       {/* Loading Skeleton */}
@@ -92,46 +115,39 @@ export default function AcademicLottie({
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: "var(--academic-soft, #f8fafc)",
-            borderRadius: "12px",
+            background: "transparent",
             color: "var(--academic-blue, #0284c7)",
             gap: "8px",
           }}
         >
-          <Sparkles size={22} style={{ opacity: 0.6 }} />
-          <span style={{ fontSize: "0.75rem", fontWeight: 600, opacity: 0.8 }}>
-            Loading Animation...
-          </span>
+          <Sparkles size={20} style={{ opacity: 0.5 }} />
         </div>
       )}
 
-      {/* Main Lottie Player — Always continuously loops without pause or stop */}
+      {/* Main Lottie Player */}
       {safeAnimationData ? (
         <Lottie
           lottieRef={lottieRef}
           animationData={safeAnimationData}
-          autoplay={true}
-          loop={true}
-          style={{ width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%" }}
+          autoplay={hoverPlay ? false : autoplay}
+          loop={loop}
+          style={{ width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%", background: "transparent" }}
         />
       ) : !isLoading ? (
-        /* Fallback Graphic if JSON not loaded */
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "24px",
+            padding: "16px",
             color: "var(--academic-blue, #0284c7)",
             textAlign: "center",
-            gap: "12px",
+            gap: "8px",
+            background: "transparent",
           }}
         >
-          <Shield size={48} strokeWidth={1.5} />
-          <span style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--academic-ink, #0f172a)" }}>
-            Software Security Assessment
-          </span>
+          <Shield size={36} strokeWidth={1.5} />
         </div>
       ) : null}
     </div>

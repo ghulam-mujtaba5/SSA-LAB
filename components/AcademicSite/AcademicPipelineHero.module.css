@@ -3,8 +3,9 @@
 .canvas {
   position: relative;
   width: 100%;
-  max-width: 760px;
-  aspect-ratio: 1.5 / 1;
+  max-width: 800px;
+  min-height: 480px;
+  aspect-ratio: 1.35 / 1;
   z-index: 2;
   overflow: visible;
   user-select: none;
@@ -51,39 +52,45 @@
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   backdrop-filter: blur(8px);
   pointer-events: auto;
 }
 
+:global([data-theme="dark"]) .card {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
 .coreWrapPosition {
-  left: 36%;
-  top: 31%;
-  width: min(200px, 29%);
+  left: 35%;
+  top: 29%;
+  width: min(204px, 30%);
 }
 
 .cardInput {
   left: 0%;
-  top: 31%;
+  top: 29%;
   width: min(190px, 27%);
 }
 
 .cardTool {
   left: 69%;
-  top: 4%;
-  width: min(196px, 29%);
+  top: 2%;
+  width: min(200px, 29%);
 }
 
 .cardPub {
   left: 69%;
-  top: 36%;
-  width: min(196px, 29%);
+  top: 34%;
+  width: min(200px, 29%);
 }
 
 .cardAlumni {
   left: 69%;
-  top: 68%;
-  width: min(196px, 29%);
+  top: 67%;
+  width: min(200px, 29%);
 }
 
 .cardHeader {

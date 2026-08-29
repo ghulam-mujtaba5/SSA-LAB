@@ -133,30 +133,33 @@ export function AboutPage() {
     stats: {},
   };
 
-  const renderPillarIcon = (name, image) => {
-    if (image) {
-      return (
-        <img
-          src={image}
-          alt={name}
-          width={54}
-          height={54}
-          style={{ objectFit: "contain", maxHeight: "54px" }}
-        />
-      );
-    }
-    switch (name) {
-      case "ShieldCheck":
-        return <ShieldCheck size={24} />;
-      case "Sparkles":
-        return <Sparkles size={24} />;
-      case "Cpu":
-        return <Cpu size={24} />;
-      case "Zap":
-        return <Zap size={24} />;
-      default:
-        return <BookOpen size={24} />;
-    }
+  const pillarIllustrationMap = {
+    vulnerability: "/academic/illustrations/source-level-vulnerability-intelligence.webp",
+    "ai-repair": "/academic/illustrations/ai-llm-program-repair.webp",
+    testing: "/academic/illustrations/automated-verification-testing.webp",
+    malware: "/academic/illustrations/obfuscation-malware-defense.webp",
+  };
+
+  const renderPillarIcon = (pillar) => {
+    const imgSrc =
+      pillar.image ||
+      pillarIllustrationMap[pillar.id] ||
+      "/academic/illustrations/source-level-vulnerability-intelligence.webp";
+    return (
+      <img
+        src={imgSrc}
+        alt={pillar.title || "Research Pillar"}
+        width={72}
+        height={72}
+        style={{
+          objectFit: "contain",
+          maxHeight: "72px",
+          filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))",
+          background: "transparent",
+        }}
+        loading="lazy"
+      />
+    );
   };
 
   const aboutJsonLd = [
@@ -209,7 +212,7 @@ export function AboutPage() {
           illustration={
             <div className={styles.aboutHeroLottieWrap}>
               <AcademicLottie
-                src="/lottie/ai-brain.json"
+                src="/academic/lottie/ai-analysis.json"
                 ariaLabel="AI Software Security Inspection Animation"
                 speed={0.8}
               />
@@ -260,22 +263,8 @@ export function AboutPage() {
         )}
       </div>
 
-      {/* 2. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (INFINITE ORBIT MARQUEE) */}
+      {/* 2. LAB IMPACT METRICS COUNTER GRID */}
       <section className={styles.section} style={{ paddingTop: 0, paddingBottom: "24px" }}>
-        <div className={styles.sectionHeading} style={{ marginBottom: "16px" }}>
-          <div>
-            <p className={styles.eyebrow}>Institutional Network</p>
-            <h2>Academic & Industrial Partners</h2>
-          </div>
-          <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.85rem", margin: 0 }}>
-            Global research partnerships driving joint security assessments, satellite testing, and vulnerability remediation.
-          </p>
-        </div>
-        <PartnerOrbitMarquee partners={partnerLogosData} />
-      </section>
-
-      {/* 3. LAB IMPACT METRICS COUNTER GRID */}
-      <section className={styles.section} style={{ paddingTop: 0 }}>
         <div className={styles.statsGrid}>
           {labImpactStatsData.map((stat, sIdx) => (
             <div key={stat.label} className={styles.statCard}>
@@ -301,7 +290,7 @@ export function AboutPage() {
           {labPillarsData.map((pillar) => (
             <article key={pillar.id || pillar.title} className={styles.pillarCard}>
               <div className={styles.pillarIconWrap}>
-                {renderPillarIcon(pillar.iconName, pillar.image)}
+                {renderPillarIcon(pillar)}
               </div>
               <h3>{pillar.title}</h3>
               <p>{pillar.desc || pillar.description}</p>
@@ -381,7 +370,21 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* 5. PEOPLE & RESEARCH COMMUNITY CALLOUT (STREAMLINED SUMMARY LINKING TO /team) */}
+      {/* 5. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (INFINITE ORBIT MARQUEE) */}
+      <section className={styles.section} style={{ paddingTop: "12px", paddingBottom: "24px" }}>
+        <div className={styles.sectionHeading} style={{ marginBottom: "16px" }}>
+          <div>
+            <p className={styles.eyebrow}>Institutional Network</p>
+            <h2>Academic & Industrial Partners</h2>
+          </div>
+          <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.85rem", margin: 0 }}>
+            Global research partnerships driving joint security assessments, satellite testing, and vulnerability remediation.
+          </p>
+        </div>
+        <PartnerOrbitMarquee partners={partnerLogosData} />
+      </section>
+
+      {/* 6. PEOPLE & RESEARCH COMMUNITY (WITH NEW 3D CLAYMORPHISM ICONS) */}
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
@@ -394,9 +397,17 @@ export function AboutPage() {
         </div>
 
         <div className={styles.aboutTeamSpotlightGrid}>
+          {/* Card 1: Faculty & Co-Investigators */}
           <div className={styles.aboutTeamSpotlightCard}>
-            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "rgba(59, 130, 246, 0.12)", color: "#3b82f6" }}>
-              <Users size={24} />
+            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "transparent", padding: 0 }}>
+              <img
+                src="/academic/3d/Faculty and Co Investigators.png"
+                alt="Faculty & Co-Investigators 3D Icon"
+                width={58}
+                height={58}
+                style={{ objectFit: "contain", filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))" }}
+                loading="lazy"
+              />
             </div>
             <div className={styles.aboutTeamSpotlightContent}>
               <h3>Faculty & Co-Investigators ({coInvestigatorsData.length})</h3>
@@ -409,9 +420,17 @@ export function AboutPage() {
             </div>
           </div>
 
+          {/* Card 2: Postgraduate MS & PhD Theses */}
           <div className={styles.aboutTeamSpotlightCard}>
-            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "rgba(6, 182, 212, 0.12)", color: "var(--academic-cyan)" }}>
-              <GraduationCap size={24} />
+            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "transparent", padding: 0 }}>
+              <img
+                src="/academic/3d/Postgraduate MS  PhD Theses.png"
+                alt="Postgraduate MS & PhD Theses 3D Icon"
+                width={58}
+                height={58}
+                style={{ objectFit: "contain", filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))" }}
+                loading="lazy"
+              />
             </div>
             <div className={styles.aboutTeamSpotlightContent}>
               <h3>Postgraduate MS & PhD Theses ({pgResearchersData.length})</h3>
@@ -424,9 +443,17 @@ export function AboutPage() {
             </div>
           </div>
 
+          {/* Card 3: Alumni Placements */}
           <div className={styles.aboutTeamSpotlightCard}>
-            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "rgba(16, 185, 129, 0.12)", color: "#10b981" }}>
-              <Building size={24} />
+            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "transparent", padding: 0 }}>
+              <img
+                src="/academic/3d/Alumni Placements.png"
+                alt="Alumni Placements 3D Icon"
+                width={58}
+                height={58}
+                style={{ objectFit: "contain", filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))" }}
+                loading="lazy"
+              />
             </div>
             <div className={styles.aboutTeamSpotlightContent}>
               <h3>Alumni Placements ({alumniPlacementsData.length})</h3>
@@ -532,6 +559,15 @@ export function ResearchPage() {
     ]),
   ];
 
+  const domainIllustrationMap = {
+    "cyber-security": "/academic/illustrations/cyber-security.webp",
+    "vulnerability-detection": "/academic/illustrations/vulnerability-detection.webp",
+    "software-testing": "/academic/illustrations/software-testing.webp",
+    "malware-detection": "/academic/illustrations/malware-detection.webp",
+    "code-clone-analysis": "/academic/illustrations/code-cloning.webp",
+    "software-evolution-reuse": "/academic/illustrations/software-evolution-reuse.webp",
+  };
+
   return (
     <AcademicSiteLayout
       title="Software Security Research Domains & Frameworks"
@@ -540,7 +576,7 @@ export function ResearchPage() {
       keywords="software security research, software vulnerability detection, malware analysis, code clone detection, software testing, source code security, COMSATS Lahore"
       jsonLd={researchJsonLd}
     >
-          {selectedDomain && (
+      {selectedDomain && (
         <AcademicDomainModal
           domain={selectedDomain}
           onClose={() => setSelectedDomain(null)}
@@ -563,42 +599,51 @@ export function ResearchPage() {
         </div>
 
         <div className={styles.domainGrid}>
-          {researchDomainsData.map((domain, index) => (
-            <SpotlightBentoCard
-              key={domain.id || domain.slug || domain.title}
-              className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
-              onClick={() => setSelectedDomain(domain)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setSelectedDomain(domain);
-                }
-              }}
-              tabIndex={0}
-              role="button"
-              ariaLabel={`Open detailed panel for ${domain.title}`}
-            >
-              <div className={styles.domainItemHeader} style={{ position: "relative", zIndex: 2 }}>
-                <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
-                <span className={styles.domainClickBadge}>
-                  Explore Roadmap <ArrowRight size={13} />
-                </span>
-              </div>
-              {domain.image && (
-                <div className={styles.cornerCardIllustration} style={{ position: "relative", zIndex: 2 }}>
-                  <Image
-                    src={domain.image}
-                    alt={domain.title}
-                    width={135}
-                    height={135}
-                    className={styles.illustrationImage}
+          {researchDomainsData.map((domain, index) => {
+            const domainImg =
+              domainIllustrationMap[domain.id || domain.slug] ||
+              domain.image ||
+              "/academic/illustrations/cyber-security.webp";
+
+            return (
+              <SpotlightBentoCard
+                key={domain.id || domain.slug || domain.title}
+                className={`${styles.domainItem} ${styles.interactiveDomainItem}`}
+                onClick={() => setSelectedDomain(domain)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedDomain(domain);
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                ariaLabel={`Open detailed panel for ${domain.title}`}
+              >
+                <div className={styles.domainItemHeader} style={{ position: "relative", zIndex: 2 }}>
+                  <span>{domain.number || String(index + 1).padStart(2, "0")}</span>
+                  <span className={styles.domainClickBadge}>
+                    Explore Roadmap <ArrowRight size={13} />
+                  </span>
+                </div>
+                <div className={styles.cornerCardIllustrationBottomLeft} style={{ position: "relative", zIndex: 2 }}>
+                  <img
+                    src={domainImg}
+                    alt={`${domain.title} 3D Illustration`}
+                    style={{
+                      maxHeight: "110px",
+                      width: "auto",
+                      objectFit: "contain",
+                      filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))",
+                    }}
+                    loading="lazy"
                   />
                 </div>
-              )}
-              <h2 style={{ position: "relative", zIndex: 2 }}>{domain.title}</h2>
-              <p style={{ position: "relative", zIndex: 2 }}>{domain.description}</p>
-            </SpotlightBentoCard>
-          ))}
+                <h3 style={{ position: "relative", zIndex: 2 }}>{domain.title}</h3>
+                <p style={{ position: "relative", zIndex: 2 }}>{domain.description}</p>
+              </SpotlightBentoCard>
+            );
+          })}
         </div>
       </section>
 
@@ -2403,17 +2448,24 @@ export function ContactPage() {
       {/* Map Section */}
       <section className={`${styles.section} ${styles.campusSection}`}>
         <div className={styles.campusCopy}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '16px' }}>
             <img
               src="/academic/illustrations/ai-chatbot-assistant.webp"
               alt="Lab Directions & Assistance 3D Avatar"
-              width={56}
-              height={56}
-              style={{ objectFit: 'contain' }}
+              width={115}
+              height={115}
+              style={{
+                objectFit: 'contain',
+                width: '115px',
+                height: '115px',
+                flexShrink: 0,
+                filter: 'drop-shadow(0 8px 18px rgba(0, 0, 0, 0.16))',
+              }}
+              loading="lazy"
             />
             <div>
               <p className={styles.eyebrow} style={{ margin: 0 }}>Visit the campus</p>
-              <h2 style={{ margin: 0, fontSize: "1.4rem" }}>COMSATS University Islamabad, Lahore Campus</h2>
+              <h2 style={{ margin: 0, fontSize: "1.45rem", lineHeight: "1.25" }}>COMSATS University Islamabad, Lahore Campus</h2>
             </div>
           </div>
           <p>

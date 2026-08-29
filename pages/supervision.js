@@ -5,7 +5,7 @@ import FypProject from "../models/FypProject";
 
 export default SupervisionPage;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     await dbConnect();
     const projects = await FypProject.find({ published: true })
@@ -18,13 +18,15 @@ export async function getServerSideProps() {
           JSON.stringify(projects.length ? projects : defaultFypProjects),
         ),
       },
+      revalidate: 60,
     };
   } catch (error) {
-    console.error("Supervision FYP data fallback:", error?.message || error);
+    console.warn("Supervision FYP static data fallback:", error?.message || error);
     return {
       props: {
         fypProjects: defaultFypProjects,
       },
+      revalidate: 60,
     };
   }
 }

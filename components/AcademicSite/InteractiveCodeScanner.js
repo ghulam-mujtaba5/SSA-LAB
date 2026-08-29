@@ -7,6 +7,7 @@ import {
   Code2,
 } from "lucide-react";
 import BorderBeam from "./BorderBeam";
+import styles from "./InteractiveCodeScanner.module.css";
 
 const SAMPLES = [
   {
@@ -123,37 +124,13 @@ export default function InteractiveCodeScanner() {
   };
 
   return (
-    <div
-      style={{
-        position: "relative",
-        background: "#0d131f",
-        borderRadius: "14px",
-        border: "1px solid #1e293b",
-        overflow: "hidden",
-        boxShadow: "0 18px 36px -12px rgba(0, 0, 0, 0.45)",
-        margin: "18px 0",
-        fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-        color: "#e2e8f0",
-        width: "100%",
-      }}
-    >
+    <div className={styles.scannerCard}>
       <BorderBeam size={240} duration={14} colorFrom="#0284c7" colorTo="#38bdf8" />
       {/* 1. Header with Language Selector Tabs */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "10px 16px",
-          background: "#080c16",
-          borderBottom: "1px solid #1e293b",
-          flexWrap: "wrap",
-          gap: "10px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <Code2 size={16} color="#38bdf8" />
-          <span style={{ fontSize: "0.82rem", fontWeight: 700, color: "#cbd5e1" }}>
+      <div className={styles.scannerHeader}>
+        <div className={styles.scannerTitleGroup}>
+          <Code2 size={16} color="var(--brand-primary, #0284c7)" />
+          <span className={styles.scannerTitle}>
             Vulnerability Inspector
           </span>
         </div>
@@ -162,7 +139,7 @@ export default function InteractiveCodeScanner() {
         <div
           role="tablist"
           aria-label="Code vulnerability language samples"
-          style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}
+          className={styles.langTabsList}
         >
           {SAMPLES.map((s, idx) => {
             const isActive = activeIdx === idx;
@@ -172,17 +149,7 @@ export default function InteractiveCodeScanner() {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActiveIdx(idx)}
-                style={{
-                  padding: "5px 12px",
-                  borderRadius: "6px",
-                  fontSize: "0.76rem",
-                  fontWeight: 600,
-                  background: isActive ? "rgba(56, 189, 248, 0.15)" : "transparent",
-                  color: isActive ? "#38bdf8" : "#94a3b8",
-                  border: isActive ? "1px solid rgba(56, 189, 248, 0.4)" : "1px solid rgba(255, 255, 255, 0.06)",
-                  cursor: "pointer",
-                  transition: "all 0.15s ease",
-                }}
+                className={`${styles.langTab} ${isActive ? styles.langTabActive : ""}`}
               >
                 {s.title}
               </button>
@@ -192,82 +159,39 @@ export default function InteractiveCodeScanner() {
       </div>
 
       {/* 2. Metadata & View Controls */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "8px 16px",
-          background: "#0a0f1d",
-          borderBottom: "1px solid #1e293b",
-          fontSize: "0.78rem",
-          flexWrap: "wrap",
-          gap: "10px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+      <div className={styles.metadataBar}>
+        <div className={styles.metaInfoGroup}>
           <span
-            style={{
-              padding: "2px 7px",
-              borderRadius: "4px",
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              background: sample.severity === "CRITICAL" ? "rgba(239, 68, 68, 0.18)" : "rgba(245, 158, 11, 0.18)",
-              color: sample.severity === "CRITICAL" ? "#f87171" : "#fbbf24",
-              border: sample.severity === "CRITICAL" ? "1px solid rgba(239, 68, 68, 0.3)" : "1px solid rgba(245, 158, 11, 0.3)",
-            }}
+            className={
+              sample.severity === "CRITICAL"
+                ? styles.severityBadgeCritical
+                : styles.severityBadgeHigh
+            }
           >
             {sample.severity} {sample.cvss}
           </span>
-          <span style={{ color: "#f8fafc", fontWeight: 600 }}>{sample.cve}</span>
-          <span style={{ color: "#94a3b8" }}>— {sample.cwe}</span>
+          <span className={styles.cveCode}>{sample.cve}</span>
+          <span className={styles.cweDesc}>— {sample.cwe}</span>
         </div>
 
         {/* View Switcher & Copy */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <div style={{ display: "flex", background: "#060911", padding: "2px", borderRadius: "6px", border: "1px solid #1e293b" }}>
+        <div className={styles.controlsGroup}>
+          <div className={styles.viewModeToggle}>
             <button
               onClick={() => setViewMode("split")}
-              style={{
-                padding: "4px 9px",
-                borderRadius: "4px",
-                fontSize: "0.72rem",
-                fontWeight: 600,
-                background: viewMode === "split" ? "rgba(56, 189, 248, 0.2)" : "transparent",
-                color: viewMode === "split" ? "#38bdf8" : "#64748b",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className={`${styles.viewBtn} ${viewMode === "split" ? styles.viewBtnSplitActive : ""}`}
             >
               Split View
             </button>
             <button
               onClick={() => setViewMode("vulnerable")}
-              style={{
-                padding: "4px 9px",
-                borderRadius: "4px",
-                fontSize: "0.72rem",
-                fontWeight: 600,
-                background: viewMode === "vulnerable" ? "rgba(239, 68, 68, 0.2)" : "transparent",
-                color: viewMode === "vulnerable" ? "#fca5a5" : "#64748b",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className={`${styles.viewBtn} ${viewMode === "vulnerable" ? styles.viewBtnVulnActive : ""}`}
             >
               Vulnerable
             </button>
             <button
               onClick={() => setViewMode("patched")}
-              style={{
-                padding: "4px 9px",
-                borderRadius: "4px",
-                fontSize: "0.72rem",
-                fontWeight: 600,
-                background: viewMode === "patched" ? "rgba(16, 185, 129, 0.2)" : "transparent",
-                color: viewMode === "patched" ? "#6ee7b7" : "#64748b",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className={`${styles.viewBtn} ${viewMode === "patched" ? styles.viewBtnPatchActive : ""}`}
             >
               Remediated
             </button>
@@ -276,154 +200,74 @@ export default function InteractiveCodeScanner() {
           <button
             onClick={handleCopy}
             title="Copy current code"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "4px",
-              padding: "4px 9px",
-              borderRadius: "6px",
-              background: "#1e293b",
-              color: copied ? "#34d399" : "#cbd5e1",
-              border: "1px solid #334155",
-              fontSize: "0.72rem",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
+            className={styles.copyBtn}
           >
-            {copied ? <Check size={12} /> : <Copy size={12} />}
+            {copied ? <Check size={12} color="#10b981" /> : <Copy size={12} />}
             <span>{copied ? "Copied" : "Copy"}</span>
           </button>
         </div>
       </div>
 
       {/* 3. Code Display Area */}
-      <div style={{ overflowX: "auto" }}>
+      <div className={styles.codeArea}>
         {viewMode === "split" ? (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              background: "#080c14",
-            }}
-          >
+          <div className={styles.splitGrid}>
             {/* Vulnerable Code */}
-            <div style={{ padding: "14px 18px", borderRight: "1px solid #1e293b", background: "rgba(239, 68, 68, 0.02)" }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: "8px",
-                  fontSize: "0.72rem",
-                  fontWeight: 700,
-                  color: "#f87171",
-                }}
-              >
+            <div className={styles.vulnerableColumn}>
+              <div className={styles.columnHeaderVuln}>
                 <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                   <AlertTriangle size={13} />
                   <span>VULNERABLE CODE</span>
                 </div>
               </div>
-              <pre
-                style={{
-                  margin: 0,
-                  fontSize: "0.8rem",
-                  lineHeight: "1.6",
-                  color: "#fca5a5",
-                  fontFamily: "inherit",
-                  whiteSpace: "pre-wrap",
-                }}
-              >
+              <pre className={styles.vulnerablePre}>
                 <code>{sample.vulnerable}</code>
               </pre>
             </div>
 
             {/* Patched Code */}
-            <div style={{ padding: "14px 18px", background: "rgba(16, 185, 129, 0.02)" }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: "8px",
-                  fontSize: "0.72rem",
-                  fontWeight: 700,
-                  color: "#34d399",
-                }}
-              >
+            <div className={styles.remediatedColumn}>
+              <div className={styles.columnHeaderRemediated}>
                 <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                   <ShieldCheck size={13} />
                   <span>REMEDIATED CODE</span>
                 </div>
               </div>
-              <pre
-                style={{
-                  margin: 0,
-                  fontSize: "0.8rem",
-                  lineHeight: "1.6",
-                  color: "#a7f3d0",
-                  fontFamily: "inherit",
-                  whiteSpace: "pre-wrap",
-                }}
-              >
+              <pre className={styles.remediatedPre}>
                 <code>{sample.patched}</code>
               </pre>
             </div>
           </div>
         ) : (
-          <div
-            style={{
-              padding: "16px 20px",
-              background: viewMode === "vulnerable" ? "rgba(239, 68, 68, 0.03)" : "rgba(16, 185, 129, 0.03)",
-            }}
-          >
-            <pre
-              style={{
-                margin: 0,
-                fontSize: "0.82rem",
-                lineHeight: "1.65",
-                color: viewMode === "vulnerable" ? "#fca5a5" : "#a7f3d0",
-                fontFamily: "inherit",
-                whiteSpace: "pre-wrap",
-              }}
-            >
+          <div className={styles.singleCodeWrap}>
+            <pre className={viewMode === "vulnerable" ? styles.vulnerablePre : styles.remediatedPre}>
               <code>{viewMode === "vulnerable" ? sample.vulnerable : sample.patched}</code>
             </pre>
           </div>
         )}
       </div>
 
-      {/* 4. Streamlined Summary Banner (Uncluttered) */}
-      <div
-        style={{
-          padding: "12px 16px",
-          background: "#080c16",
-          borderTop: "1px solid #1e293b",
-          fontSize: "0.76rem",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "12px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
-          <AlertTriangle size={14} color="#f87171" style={{ marginTop: "2px", flexShrink: 0 }} />
+      {/* 4. Streamlined Summary Banner */}
+      <div className={styles.summaryBanner}>
+        <div className={styles.summaryItem}>
+          <AlertTriangle size={14} color="#dc2626" style={{ marginTop: "2px", flexShrink: 0 }} />
           <div>
-            <span style={{ fontSize: "0.7rem", color: "#f87171", fontWeight: 700, display: "block" }}>
+            <span className={styles.summaryTitleVuln}>
               Identified Vulnerability
             </span>
-            <span style={{ color: "#cbd5e1", fontSize: "0.74rem", lineHeight: "1.4" }}>
+            <span className={styles.summaryText}>
               {sample.vulnerabilityNote}
             </span>
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
-          <ShieldCheck size={14} color="#34d399" style={{ marginTop: "2px", flexShrink: 0 }} />
+        <div className={styles.summaryItem}>
+          <ShieldCheck size={14} color="#059669" style={{ marginTop: "2px", flexShrink: 0 }} />
           <div>
-            <span style={{ fontSize: "0.7rem", color: "#34d399", fontWeight: 700, display: "block" }}>
+            <span className={styles.summaryTitleRemediated}>
               Applied Remediation
             </span>
-            <span style={{ color: "#cbd5e1", fontSize: "0.74rem", lineHeight: "1.4" }}>
+            <span className={styles.summaryText}>
               {sample.remediationNote}
             </span>
           </div>
