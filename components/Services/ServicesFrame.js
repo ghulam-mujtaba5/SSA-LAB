@@ -20,7 +20,7 @@ const ServicesFrame = () => {
       id: "uiux",
       title: "UI & UX Designing",
       titleicon: "/ui-ux-design-service-icon.svg",
-      illustration: "/ai-chatgpt/laptop-code-v1.png",
+      illustration: "/ai-chatgpt/laptop-code-v1.webp",
       lottie: "/lottie/web-coding.json",
       skills: [
         {
@@ -41,7 +41,7 @@ const ServicesFrame = () => {
       id: "development",
       title: "Development",
       titleicon: "/software-development-service-icon.svg",
-      illustration: "/ai-chatgpt/server-stack.png",
+      illustration: "/ai-chatgpt/server-stack.webp",
       lottie: "/lottie/mobile-app.json",
       skills: [
         {
@@ -62,7 +62,7 @@ const ServicesFrame = () => {
       id: "datascience",
       title: "Data Science & AI",
       titleicon: "/data-science-ai-service-icon.svg",
-      illustration: "/ai-chatgpt/ai-brain-v1.png",
+      illustration: "/ai-chatgpt/ai-brain-v1.webp",
       lottie: "/lottie/ai-brain.json",
       skills: [
         { name: "Data Scraping", icon: "/data-scraping-service-icon.svg" },

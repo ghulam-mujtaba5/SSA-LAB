@@ -1,23 +1,58 @@
+# VCS & Caches
 .git
 .git/**
 .next
 .next/**
 node_modules
 node_modules/**
+.cache
+.cache/**
+.swc
+.swc/**
+
+# AI tools & workspace settings
 .gemini
 .gemini/**
 .agents
 .agents/**
+agents
+agents/**
+.claude
+.claude/**
+.codex
+.codex/**
+.playwright-mcp
+.playwright-mcp/**
+
+# Local Scratch, Documentation & Temp
 scratch
 scratch/**
 docs
 docs/**
 tmp
 tmp/**
+
+# Tests & Scripts (not needed in production deployment)
+tests
+tests/**
+test
+test/**
+scripts
+scripts/**
+jest.config.js
+jest.setup.js
+
+# Raw archives, heavy media & documents
 *.log
+*.log*
 *.zip
 *.docx
-public/ai chatgpt
-public/ai chatgpt/**
-public/ai-chatgpt
-public/ai-chatgpt/**
+*.pptx
+*.xlsx
+Past Projects*
+Running Projects*
+
+# Local environment & secret files
+.env*.local
+atlas-credential-sssa-lab.env
+

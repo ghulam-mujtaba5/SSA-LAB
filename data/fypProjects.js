@@ -59,7 +59,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Vulnerability Detection", "Large Language Models", "Source Code Security", "AST Parsing"],
     technologies: ["Python", "PyTorch", "Hugging Face Transformers", "Tree-sitter", "CodeBERT", "LLaMA", "Docker"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp",
     coverAlt: "Software Vulnerability Detection using LLM Model Research Poster",
     problem: "Traditional static application security testing (SAST) tools rely heavily on heuristic rule matching and abstract syntax tree patterns, yielding unacceptably high false-positive rates exceeding 40% and missing complex multi-line semantic vulnerabilities. While deep learning models offer promise, they frequently struggle with long-range code dependencies, syntax boundary preservation, and token budget constraints. Addressing critical vulnerabilities such as buffer overflows (CWE-120), SQL injection (CWE-89), and improper input validation (CWE-20) requires an intelligent system capable of interpreting full syntactic context alongside developer intent.",
     solution: "This research project develops an end-to-end vulnerability detection pipeline that fuses Abstract Syntax Tree (AST) serialization with fine-tuned Large Language Models (LLMs). Using Tree-sitter, source code is parsed into normalized syntax trees and function-level control flow graphs. We design an AST-guided prompt engineering and tokenization strategy that injects structural code invariants directly into Transformer attention heads. The model is fine-tuned on benchmark corpora including Devign, Big-Vul, and curated real-world CVEs, optimizing for precision and low false alarm rates across C/C++, Java, and Python source repositories.",
@@ -86,7 +86,7 @@ export const defaultFypProjects = [
       "Sensitivity to token truncation on functions extending beyond standard model context windows."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "Software Vulnerability Detection LLM Research Poster", order: 1 },
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "Software Vulnerability Detection LLM Research Poster", order: 1 },
       { url: "/academic/vulnerability-detection-workflow.jpg", caption: "AST Prompting & Model Fine-Tuning Pipeline", order: 2 },
       { url: "/academic/vulnerability-detection-dashboard.png", caption: "Interactive Vulnerability Scanner & CWE Classification Interface", order: 3 }
     ],
@@ -115,7 +115,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Code Clone Detection", "Semantic Analysis", "Software Quality", "Information Retrieval"],
     technologies: ["Python", "AST Parsing", "Tokenization", "Elasticsearch", "FastAPI", "Next.js"],
-    coverImage: "/academic/fyp/source-code-structure-poster.png",
+    coverImage: "/academic/fyp/source-code-structure-poster.webp",
     coverAlt: "Token-Based Semantic Code Clone Detection Research Poster",
     problem: "Code duplication is a major source of technical debt and security vulnerability propagation across software systems. While Type-1 (identical) and Type-2 (renamed identifier) code clones are easily discovered by traditional string matchers, Type-3 (modified statements) and Type-4 (syntactically distinct but semantically identical) clones remain notoriously difficult to detect at scale. Existing graph-based semantic clone detection techniques suffer from exponential computational complexity, making them impractical for multi-million-line repositories such as the Linux kernel or large enterprise software suites.",
     solution: "This project implements an efficient, scalable token-based semantic code clone detection framework that captures subtle semantic similarities without graph isomorphism bottlenecks. The pipeline tokenizes source code into normalized token streams, generates multi-scale n-gram shingles, and constructs an inverted Elasticsearch index for rapid sub-linear search. For candidate pairs, the framework computes weighted Jaccard similarity and semantic token frequency distributions, enabling real-time discovery of Type-3 and Type-4 clones across heterogeneous source trees with high recall and precision.",
@@ -141,7 +141,7 @@ export const defaultFypProjects = [
       "Lower recall on complex Type-4 clones involving algorithmic transformations with zero lexical overlap."
     ],
     gallery: [
-      { url: "/academic/fyp/source-code-structure-poster.png", caption: "Token-Based Code Clone Detection Research Poster", order: 1 },
+      { url: "/academic/fyp/source-code-structure-poster.webp", caption: "Token-Based Code Clone Detection Research Poster", order: 1 },
       { url: "/academic/vulnerability-detection-dashboard.png", caption: "Type-3 & Type-4 Code Clone Analysis Dashboard", order: 2 }
     ],
     published: true,
@@ -169,7 +169,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Vulnerability Patching", "Program Repair", "LLM Optimization", "Docker Sandboxing"],
     technologies: ["Python", "LLM Fine-tuning", "Git Diff Parser", "Docker", "PyTorch", "FastAPI"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp",
     coverAlt: "LLM Vulnerability Patch Recommendation Poster",
     problem: "When security vulnerabilities are discovered in production software, manual patch creation is slow, error-prone, and requires deep security domain expertise. Automated Program Repair (APR) tools frequently generate plausibly compilable patches that nonetheless introduce regression bugs or fail to completely neutralize the security defect. Furthermore, existing patch generation systems lack automated verification pipelines to test patch correctness in secure, sandboxed execution environments before production deployment.",
     solution: "This project builds an automated vulnerability patch synthesis and optimization engine that couples Large Language Models with automated regression verification. When supplied with a vulnerable function and its corresponding CVE description, the optimizer retrieves relevant security patch patterns from a historical knowledge base using Retrieval-Augmented Generation (RAG). The LLM generates candidate patches that preserve original code invariants. Each candidate is automatically compiled and evaluated inside isolated Docker containers against targeted security test vectors and regression test suites.",
@@ -195,7 +195,7 @@ export const defaultFypProjects = [
       "Limited to vulnerabilities with existing automated test suites capable of validating patch efficacy."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "LLM Vulnerability Patch Recommendation Poster", order: 1 },
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "LLM Vulnerability Patch Recommendation Poster", order: 1 },
       { url: "/academic/vulnerability-detection-dashboard.png", caption: "RAG & LLM Security Patch Synthesis Engine", order: 2 }
     ],
     published: true,
@@ -222,7 +222,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Feature Envy Detection", "Graph Neural Networks", "Code Refactoring", "Visual Analytics"],
     technologies: ["Python", "PyTorch Geometric", "AST Parsing", "React", "D3.js", "Tree-sitter"],
-    coverImage: "/academic/fyp/code-smell-detection-poster.png",
+    coverImage: "/academic/fyp/code-smell-detection-poster.webp",
     coverAlt: "Feature Envy Code Smell Detection Research Poster",
     problem: "Code smells such as Feature Envy—where a method accesses data or methods of another class more than its host class—severely degrade software modularity, increase coupling, and complicate long-term maintenance. Traditional metric-based detection rules (e.g., Access to Foreign Data and Locality of Data) produce excessive false positives because they fail to capture rich graph-level relationships between methods and attributes across complex object-oriented systems.",
     solution: "This project presents an intelligent code smell detection and automated refactoring suite powered by Graph Neural Networks (GNNs) and Program Dependence Graphs (PDGs). Source code is transformed into typed dependency graphs where nodes represent classes, methods, and fields, and edges represent call and access relationships. A Graph Convolutional Network (GCN) predicts Feature Envy instances with high confidence and automatically generates safe 'Move Method' refactoring suggestions. An interactive visual analytics dashboard visualizes the class coupling graph before and after refactoring.",
@@ -248,7 +248,7 @@ export const defaultFypProjects = [
       "Currently restricted to object-oriented architectures where methods have clear target candidate classes."
     ],
     gallery: [
-      { url: "/academic/fyp/code-smell-detection-poster.png", caption: "Feature Envy Code Smell Detection Research Poster", order: 1 },
+      { url: "/academic/fyp/code-smell-detection-poster.webp", caption: "Feature Envy Code Smell Detection Research Poster", order: 1 },
       { url: "/academic/vulnerability-detection-workflow.jpg", caption: "GNN Program Dependence Graph Workflow", order: 2 },
       { url: "/academic/vulnerability-detection-dashboard.png", caption: "Interactive Refactoring Visualization Dashboard", order: 3 }
     ],
@@ -275,10 +275,10 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["AI Healthcare", "Computer Vision", "Psychological Screening"],
     technologies: ["Python", "OpenCV", "TensorFlow", "Next.js", "TailwindCSS"],
-    coverImage: "/academic/fyp/ai-dermatologist-poster.png",
+    coverImage: "/academic/fyp/ai-dermatologist-poster.webp",
     coverAlt: "MultiSense AI Screening Project Visual",
     gallery: [
-      { url: "/academic/fyp/ai-dermatologist-poster.png", caption: "MultiSense AI Multi-Modal Screening Poster", order: 1 }
+      { url: "/academic/fyp/ai-dermatologist-poster.webp", caption: "MultiSense AI Multi-Modal Screening Poster", order: 1 }
     ],
     published: true,
     featured: true,
@@ -302,7 +302,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Android Malware", "Apktool Disassembly", "Random Forest Classifier", "XGBoost"],
     technologies: ["Python", "Apktool", "Androguard", "Scikit-learn", "XGBoost", "FastAPI"],
-    coverImage: "/academic/fyp/test-data-generation-poster.png",
+    coverImage: "/academic/fyp/test-data-generation-poster.webp",
     coverAlt: "Robust Android Malware Detector Poster",
     problem: "Android malware represents a pervasive threat to mobile users and enterprise devices, with malicious apps constantly evolving through code obfuscation, dynamic payload loading, and API reflection to evade signature-based antivirus scanners. Modern malware detection frameworks need to reliably distinguish between benign and malicious APK files based on intrinsic opcode execution patterns without requiring time-consuming runtime emulation.",
     solution: "This supervised project implements an end-to-end static Android malware classification platform. APK files are decompiled using Apktool and Androguard to extract Dalvik bytecode (Smali) opcode sequences, declared permissions, and intent filters. The system generates high-dimensional opcode n-gram frequency matrices and trains an ensemble machine learning classifier (combining Random Forest, Extra Trees, and XGBoost). The resulting model achieves robust classification resilience against common code obfuscation and identifier renaming techniques.",
@@ -328,7 +328,7 @@ export const defaultFypProjects = [
       "Cannot detect zero-day malware that downloads and executes encrypted native payloads dynamically at runtime."
     ],
     gallery: [
-      { url: "/academic/fyp/test-data-generation-poster.png", caption: "Robust Android Malware Detector Research Poster", order: 1 }
+      { url: "/academic/fyp/test-data-generation-poster.webp", caption: "Robust Android Malware Detector Research Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -350,10 +350,10 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Medical Image AI", "Convolutional Neural Networks", "Cell Classification"],
     technologies: ["Python", "TensorFlow", "OpenCV", "Flask / React"],
-    coverImage: "/academic/fyp/ai-dermatologist-poster.png",
+    coverImage: "/academic/fyp/ai-dermatologist-poster.webp",
     coverAlt: "HemaAI Diagnostic Intelligence Poster",
     gallery: [
-      { url: "/academic/fyp/ai-dermatologist-poster.png", caption: "HemaAI Diagnostic Intelligence Poster", order: 1 }
+      { url: "/academic/fyp/ai-dermatologist-poster.webp", caption: "HemaAI Diagnostic Intelligence Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -375,7 +375,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["XSS Defense", "Web Security Auditing", "Browser Extension Security", "Taint Analysis"],
     technologies: ["JavaScript", "Python", "DOM Analysis", "Node.js", "Chrome Extension API"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp",
     coverAlt: "XSS Vulnerability Detection & Defense Poster",
     problem: "Cross-Site Scripting (XSS)—encompassing Stored, Reflected, and DOM-based variants—consistently ranks among the most prevalent OWASP Top 10 web vulnerabilities. Web applications frequently employ flawed regular expressions or incomplete HTML sanitization routines that sophisticated attackers can bypass with polyglot payloads, leading to session hijacking, credential theft, and unauthorized actions.",
     solution: "This completed project delivers a dual-layer XSS security ecosystem: an automated static code scanner that audits server-side and client-side JavaScript/HTML for insecure data sinks (e.g., innerHTML, eval, document.write), and a lightweight browser defense extension that monitors runtime DOM mutations and enforces strict Contextual Content Security Policies (CSP). By intercepting taint flows before execution, the system prevents payload detonation with zero noticeable browser latency.",
@@ -400,7 +400,7 @@ export const defaultFypProjects = [
       "Browser extension defense requires client installation and does not replace the necessity of server-side sanitization."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "XSS Vulnerability Detection & Defense Poster", order: 1 }
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "XSS Vulnerability Detection & Defense Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -422,10 +422,10 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Computer Vision", "YOLO Object Tracking", "Sports Analytics"],
     technologies: ["Python", "OpenCV", "YOLOv8", "Streamlit"],
-    coverImage: "/academic/fyp/test-data-generation-poster.png",
+    coverImage: "/academic/fyp/test-data-generation-poster.webp",
     coverAlt: "Cric-Craft AI Analysis Poster",
     gallery: [
-      { url: "/academic/fyp/test-data-generation-poster.png", caption: "Cric-Craft AI Performance Analytics Poster", order: 1 }
+      { url: "/academic/fyp/test-data-generation-poster.webp", caption: "Cric-Craft AI Performance Analytics Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -447,10 +447,10 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Biomedical Signal Processing", "Acoustic Classification", "Real-Time Monitoring"],
     technologies: ["Python", "Librosa", "Signal Processing", "React Native"],
-    coverImage: "/academic/fyp/apneaguard-poster.png",
+    coverImage: "/academic/fyp/apneaguard-poster.webp",
     coverAlt: "ApneaGuard AI Project Poster",
     gallery: [
-      { url: "/academic/fyp/apneaguard-poster.png", caption: "ApneaGuard AI Nocturnal Sleep Monitoring System Poster", order: 1 }
+      { url: "/academic/fyp/apneaguard-poster.webp", caption: "ApneaGuard AI Nocturnal Sleep Monitoring System Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -472,7 +472,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["CVE Management", "Vulnerability Benchmarking", "Security Dashboard", "CVSS Scoring"],
     technologies: ["Python", "Django", "PostgreSQL", "NVD API", "React"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.png",
+    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp",
     coverAlt: "Vulnerability Management & Benchmarking System Poster",
     problem: "Modern software development teams grapple with thousands of reported Common Vulnerabilities and Exposures (CVEs) across third-party dependencies and internal codebases. Security teams lack unified platforms that can aggregate multi-source vulnerability feeds, compute realistic contextual exploitability scores, track patch remediation lifecycles, and benchmark tool detection efficacy against standard ground-truth corpora.",
     solution: "The Vulnerability Management & Benchmarking System (VBS) is an enterprise-grade academic platform that integrates with the National Vulnerability Database (NVD), GitHub Security Advisories, and CVE repositories. VBS normalizes vulnerability advisories, calculates Common Vulnerability Scoring System (CVSS v3.1) metrics alongside Exploit Prediction Scoring System (EPSS) probabilities, and tracks remediation SLAs across connected repositories with automated vulnerability benchmarking.",
@@ -498,7 +498,7 @@ export const defaultFypProjects = [
       "Dependent on upstream availability and update latency of public CVE and NVD feeds."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.png", caption: "Vulnerability Management & Benchmarking System Poster", order: 1 }
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "Vulnerability Management & Benchmarking System Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -520,7 +520,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Code Smells", "AST Analysis", "Automated Refactoring", "Software Metrics"],
     technologies: ["Java", "Spoon AST", "Python", "React", "Tree-sitter"],
-    coverImage: "/academic/fyp/code-smell-detection-poster.png",
+    coverImage: "/academic/fyp/code-smell-detection-poster.webp",
     coverAlt: "Code Smell Detection and Refactoring System Poster",
     problem: "Structural code smells like God Classes, Long Methods, and Spaghetti Code heavily increase code complexity and defect propensity while complicating software testing and maintenance. Developers frequently overlook these smells during code reviews due to lack of automated diagnostic tools capable of proposing safe, compile-verifiable refactorings.",
     solution: "This project provides an automated static analysis suite built on Spoon AST and Tree-sitter. It evaluates software metrics (Cyclomatic Complexity, LCOM, WMC) to pinpoint critical structural code smells and automatically synthesizes Extract Method and Move Method refactoring diffs verified against test suites.",
@@ -561,7 +561,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["AST Structure", "CFG Extraction", "Architecture Recommendation", "Modularity"],
     technologies: ["Python", "Tree-sitter", "Graphviz", "Next.js", "NetworkX"],
-    coverImage: "/academic/fyp/source-code-structure-poster.png",
+    coverImage: "/academic/fyp/source-code-structure-poster.webp",
     coverAlt: "Source Code Structure Capturing & Recommendation Poster",
     problem: "As software systems expand over years of continuous development, architectural decay occurs: module boundaries blur, cyclic dependencies proliferate, and component coupling increases. Developers lack automated tools that can visualize high-level structural patterns from raw source code and recommend actionable refactoring strategies to restore clean architectural integrity.",
     solution: "This project constructs an automated architectural analysis engine that extracts Abstract Syntax Trees (AST) and Control Flow Graphs (CFG) from large multi-package codebases. The tool maps inter-package communication, identifies cyclic dependencies and god classes, and applies hierarchical clustering algorithms to recommend modular component reorganizations that improve cohesion while minimizing cross-boundary couplings.",
@@ -587,7 +587,7 @@ export const defaultFypProjects = [
       "Requires manual domain review to ensure recommended component groupings match business domain boundaries."
     ],
     gallery: [
-      { url: "/academic/fyp/source-code-structure-poster.png", caption: "Source Code Structure Capturing & Recommendation Poster", order: 1 }
+      { url: "/academic/fyp/source-code-structure-poster.webp", caption: "Source Code Structure Capturing & Recommendation Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -609,7 +609,7 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram",
     specializations: ["Computer Vision", "Lesion Segmentation", "Dermatology AI"],
     technologies: ["Python", "PyTorch", "EfficientNet", "Flask"],
-    coverImage: "/academic/fyp/ai-dermatologist-poster.png",
+    coverImage: "/academic/fyp/ai-dermatologist-poster.webp",
     coverAlt: "AI Dermatologist project poster",
     published: true,
     featured: false,

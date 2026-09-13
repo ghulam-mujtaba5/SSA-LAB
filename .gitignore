@@ -36,7 +36,13 @@ scratch/
 *.zip
 *.docx
 *.pptx
+*.xlsx
 Past Projects*
 Running Projects*
 .agents/
 agents/
+.playwright-mcp/
+.claude/
+.codex/
+atlas-credential-sssa-lab.env
+
