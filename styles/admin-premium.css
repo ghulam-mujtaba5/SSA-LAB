@@ -6,11 +6,11 @@
 /* ========== ADMIN CSS CUSTOM PROPERTIES ========== */
 :root {
   /* Primary Brand Colors */
-  --admin-primary: #0284c7;
-  --admin-primary-light: rgba(2, 132, 199, 0.12);
-  --admin-primary-dark: #0369a1;
-  --admin-primary-darker: #075985;
-  --admin-primary-rgb: 2, 132, 199;
+  --admin-primary: #0369a1;
+  --admin-primary-light: rgba(3, 105, 161, 0.12);
+  --admin-primary-dark: #075985;
+  --admin-primary-darker: #0c4a6e;
+  --admin-primary-rgb: 3, 105, 161;
   --admin-primary-gradient: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
   --admin-primary-gradient-vivid: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #7dd3fc 100%);
   
@@ -128,6 +128,8 @@
 
 /* ========== DARK THEME OVERRIDES ========== */
 :root[data-theme="dark"] {
+  --admin-primary: #38bdf8;
+  --admin-primary-light: rgba(56, 189, 248, 0.16);
   --admin-glass-bg: rgba(24, 30, 42, 0.92);
   --admin-glass-border: rgba(75, 85, 99, 0.25);
   --admin-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);

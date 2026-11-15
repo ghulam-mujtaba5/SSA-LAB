@@ -735,6 +735,7 @@ export default function SiteSettingsAdminPage() {
                         className={styles.formInput}
                         style={{ flex: 2 }}
                         placeholder="Pillar Title (e.g. Scientific Rigor)"
+                        aria-label={`Pillar ${idx + 1} Title`}
                         value={pil.title || ''}
                         onChange={(e) => {
                           const next = [...profile.pillars];
@@ -745,6 +746,7 @@ export default function SiteSettingsAdminPage() {
                       <select
                         className={styles.formSelect}
                         style={{ flex: 1 }}
+                        aria-label={`Pillar ${idx + 1} Icon`}
                         value={pil.iconName || 'ShieldCheck'}
                         onChange={(e) => {
                           const next = [...profile.pillars];

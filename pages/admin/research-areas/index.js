@@ -161,6 +161,7 @@ export default function ResearchAreasAdminPage() {
             <input
               type="text"
               placeholder="Search research domains by title, key problem, or description..."
+              aria-label="Search research domains by title, key problem, or description"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -176,6 +177,8 @@ export default function ResearchAreasAdminPage() {
             )}
           </div>
         </div>
+
+        <h2 className="sr-only">Research Areas Management List</h2>
 
         {loading ? (
           <div className={styles.loadingSpinner}>Loading research domains...</div>

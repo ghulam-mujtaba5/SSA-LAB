@@ -142,6 +142,11 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
 User-agent: CCBot
 Allow: /
 Disallow: /admin/

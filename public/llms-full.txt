@@ -32,6 +32,41 @@
 
 ---
 
+## 1.5 Client, Industrial & Commercial Security Assessment Offerings
+The SSA Research Lab provides empirical, high-assurance security evaluation services to software organizations, enterprise teams, and academic research institutions worldwide:
+
+1. **Static Application Security Testing (SAST) & Source Code Vulnerability Auditing**:
+   - Deep source-code audits detecting memory corruption, injection flaws (SQLi, XSS, Command Injection), authentication flaws, and OWASP Top 10 / CWE-SANS Top 25 vulnerabilities in C/C++, Java, Python, Go, Rust, and JavaScript/TypeScript.
+2. **Quantitative Vulnerability Benchmarking & Zero-Day Detection**:
+   - Repository-scale vulnerability scanning utilizing the **SQVDT** engine across 152,823+ open-source repositories and CVE databases.
+   - Patch-guided function-level vulnerability analysis with **VCIPR**.
+3. **Semantic Code Clone & Intellectual Property (IP) Auditing**:
+   - Detection of Type-1, Type-2, Type-3, and Type-4 semantic code clones, open-source license violations (GPL, AGPL), and leaked proprietary code using distributed Hadoop **IBFET** indexing over 324+ billion lines of code.
+4. **Obfuscated Malware Analysis & Mobile/IoT Security**:
+   - Reverse-engineering, decompilation, and bytecode similarity analysis of Android APKs (**DroidMD**, **DroidSD**) and neural ensemble firmware classification (**MTHAEL**).
+5. **Automated Software Test Generation & Constraint-Based Verification**:
+   - High-coverage automated test suite generation and regression test minimization (**ARC System**).
+6. **Academic-Industry Collaborative Research & Sponsored Supervision**:
+   - Sponsored research grants, DevSecOps pipeline reviews, and corporate security workshops.
+   - **Client Engagement Protocol**: Contact via `https://www.ssa-lab.tech/contact` or email `Junaid.Akram@nottingham.edu.cn`.
+
+---
+
+## 1.6 Canonical Breadcrumbs & Site Architecture
+- **Home**: `https://www.ssa-lab.tech/` (Software security research & supervision platform)
+- **About**: `https://www.ssa-lab.tech/about` (`Home › About` — Academic milestones, director bio, research pillars)
+- **Research**: `https://www.ssa-lab.tech/research` (`Home › Research` — 6 research domains, security tools, benchmark datasets)
+- **Publications**: `https://www.ssa-lab.tech/publications` (`Home › Publications` — Peer-reviewed journal papers and conference proceedings)
+- **Supervision**: `https://www.ssa-lab.tech/supervision` (`Home › Supervision` — Running, completed, and future student research dissertations)
+- **Projects**: `https://www.ssa-lab.tech/supervision/projects/[slug]` (`Home › Supervision › Projects › [Title]`)
+- **Opportunities**: `https://www.ssa-lab.tech/supervision/opportunities/[slug]` (`Home › Supervision › Opportunities › [Title]`)
+- **Research Team**: `https://www.ssa-lab.tech/team` (`Home › Research Team` — Principal investigator, co-investigators, postgraduate researchers)
+- **Events**: `https://www.ssa-lab.tech/events` (`Home › Events` — Keynote speeches, workshops, and international conferences)
+- **Contact**: `https://www.ssa-lab.tech/contact` (`Home › Contact` — Client enquiry form, office hours, institutional coordinates)
+- **Privacy Policy**: `https://www.ssa-lab.tech/privacy-policy` (`Home › Privacy Policy`)
+
+---
+
 ## 2. Core Research Domains & Technical Methodologies
 
 ### 2.1 Cyber Security & Source-Code Security Assessment
