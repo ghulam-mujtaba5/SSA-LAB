@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "node scripts/generate-sitemap-paths.js",
+    "postbuild": "node -e \"if (require('fs').existsSync('./scripts/generate-sitemap-paths.js')) { require('./scripts/generate-sitemap-paths.js'); }\"",
     "test": "jest --forceExit",
     "test:watch": "jest --watch"
   },

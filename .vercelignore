@@ -32,13 +32,11 @@ docs/**
 tmp
 tmp/**
 
-# Tests & Scripts (not needed in production deployment)
+# Tests (not needed in production deployment)
 tests
 tests/**
 test
 test/**
-scripts
-scripts/**
 jest.config.js
 jest.setup.js
 
