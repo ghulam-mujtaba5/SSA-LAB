@@ -16,7 +16,7 @@ const emptyProject = {
   session: "",
   institution: "COMSATS University Islamabad, Lahore Campus",
   students: [],
-  supervisor: "Dr. Junaid Akram",
+  supervisor: "Dr. Junaid Akram, PhD",
   coSupervisor: "",
   specializations: [],
   sdgs: [],
