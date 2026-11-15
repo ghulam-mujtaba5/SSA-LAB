@@ -74,7 +74,17 @@ const dimensions = {
 };
 
 function getDimensions(src, fallback = [1600, 900]) {
-  return dimensions[src] || fallback;
+  if (!src) return fallback;
+  const clean = src.split("?")[0];
+  return dimensions[clean] || dimensions[src] || fallback;
+}
+
+function getAssetUrl(url) {
+  if (!url) return "";
+  if (url.startsWith("/academic/fyp/") && !url.includes("?")) {
+    return `${url}?v=2`;
+  }
+  return url;
 }
 
 export default function AcademicFypCaseStudy({ projects = [] }) {
@@ -124,7 +134,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
         {featured.coverImage ? (
           <div className={styles.poster}>
             <AcademicImageLightbox
-              src={featured.coverImage}
+              src={getAssetUrl(featured.coverImage)}
               alt={featured.coverAlt || featured.title}
               width={coverWidth}
               height={coverHeight}
@@ -301,7 +311,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
       ) : null}
 
       {/* Implementation Screenshots (Single-Box Interactive Slideshow - excludes redundant cover poster) */}
-      {!isOpportunity && featured.gallery && featured.gallery.filter((g) => g.url !== featured.coverImage).length > 0 ? (
+      {!isOpportunity && featured.gallery && featured.gallery.filter((g) => (g.url || "").split("?")[0] !== (featured.coverImage || "").split("?")[0]).length > 0 ? (
         <div className={styles.evidenceSection}>
           <div className={styles.evidenceHeading}>
             <div>
@@ -311,7 +321,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
             <p>Use slideshow controls, arrows, or thumbnails to explore architecture and UI layers.</p>
           </div>
           <ProjectGallerySlider
-            gallery={featured.gallery.filter((g) => g.url !== featured.coverImage)}
+            gallery={featured.gallery.filter((g) => (g.url || "").split("?")[0] !== (featured.coverImage || "").split("?")[0])}
             projectTitle={featured.title}
           />
         </div>

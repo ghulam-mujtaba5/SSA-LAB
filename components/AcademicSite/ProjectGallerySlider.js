@@ -71,7 +71,17 @@ const defaultDimensions = {
 };
 
 function getDimensions(src) {
-  return defaultDimensions[src] || [1920, 1080];
+  if (!src) return [1920, 1080];
+  const clean = src.split("?")[0];
+  return defaultDimensions[clean] || defaultDimensions[src] || [1920, 1080];
+}
+
+function getAssetUrl(url) {
+  if (!url) return "";
+  if (url.startsWith("/academic/fyp/") && !url.includes("?")) {
+    return `${url}?v=2`;
+  }
+  return url;
 }
 
 export default function ProjectGallerySlider({ gallery = [], projectTitle = "Project" }) {
@@ -80,9 +90,10 @@ export default function ProjectGallerySlider({ gallery = [], projectTitle = "Pro
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const thumbnailRailRef = useRef(null);
 
-  // Filter out any invalid items
+  // Filter out any invalid items and ensure asset versioning
   const items = (gallery || [])
     .filter((item) => item && item.url)
+    .map((item) => ({ ...item, url: getAssetUrl(item.url) }))
     .sort((a, b) => (a.order || 0) - (b.order || 0));
 
   const total = items.length;
