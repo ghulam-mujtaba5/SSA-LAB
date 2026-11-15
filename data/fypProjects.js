@@ -60,7 +60,7 @@ export const defaultFypProjects = [
     specializations: ["Vulnerability Detection", "Large Language Models", "Source Code Security", "AST Parsing"],
     technologies: ["Python", "PyTorch", "Hugging Face Transformers", "Tree-sitter", "CodeBERT", "LLaMA", "Docker"],
     coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp",
-    coverAlt: "Software Vulnerability Detection using LLM Model Research Poster",
+    coverAlt: "Software Vulnerability Detection using LLM Model Poster",
     problem: "Traditional static application security testing (SAST) tools rely heavily on heuristic rule matching and abstract syntax tree patterns, yielding unacceptably high false-positive rates exceeding 40% and missing complex multi-line semantic vulnerabilities. While deep learning models offer promise, they frequently struggle with long-range code dependencies, syntax boundary preservation, and token budget constraints. Addressing critical vulnerabilities such as buffer overflows (CWE-120), SQL injection (CWE-89), and improper input validation (CWE-20) requires an intelligent system capable of interpreting full syntactic context alongside developer intent.",
     solution: "This research project develops an end-to-end vulnerability detection pipeline that fuses Abstract Syntax Tree (AST) serialization with fine-tuned Large Language Models (LLMs). Using Tree-sitter, source code is parsed into normalized syntax trees and function-level control flow graphs. We design an AST-guided prompt engineering and tokenization strategy that injects structural code invariants directly into Transformer attention heads. The model is fine-tuned on benchmark corpora including Devign, Big-Vul, and curated real-world CVEs, optimizing for precision and low false alarm rates across C/C++, Java, and Python source repositories.",
     architecture: [
@@ -86,9 +86,10 @@ export const defaultFypProjects = [
       "Sensitivity to token truncation on functions extending beyond standard model context windows."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "Software Vulnerability Detection LLM Research Poster", order: 1 },
-      { url: "/academic/vulnerability-detection-workflow.jpg", caption: "AST Prompting & Model Fine-Tuning Pipeline", order: 2 },
-      { url: "/academic/vulnerability-detection-dashboard.png", caption: "Interactive Vulnerability Scanner & CWE Classification Interface", order: 3 }
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "Software Vulnerability Detection Using LLM Model Research Poster", order: 1 },
+      { url: "/academic/fyp/vuln-detect-llm-pipeline.webp", caption: "LLM-Guided Source Code Vulnerability Detection Pipeline", order: 2 },
+      { url: "/academic/fyp/vuln-detect-ast-prompt-tuning.webp", caption: "AST-Guided Prompt Construction & Sliced Code Context Assembly", order: 3 },
+      { url: "/academic/fyp/vuln-detect-benchmark-evaluation.webp", caption: "Cross-Language CVE Vulnerability Detection Benchmark & Precision Matrix", order: 4 }
     ],
     published: true,
     featured: true,
@@ -116,7 +117,7 @@ export const defaultFypProjects = [
     specializations: ["Code Clone Detection", "Semantic Analysis", "Software Quality", "Information Retrieval"],
     technologies: ["Python", "AST Parsing", "Tokenization", "Elasticsearch", "FastAPI", "Next.js"],
     coverImage: "/academic/fyp/source-code-structure-poster.webp",
-    coverAlt: "Token-Based Semantic Code Clone Detection Research Poster",
+    coverAlt: "Token Based Semantic Code Clone Detection Poster",
     problem: "Code duplication is a major source of technical debt and security vulnerability propagation across software systems. While Type-1 (identical) and Type-2 (renamed identifier) code clones are easily discovered by traditional string matchers, Type-3 (modified statements) and Type-4 (syntactically distinct but semantically identical) clones remain notoriously difficult to detect at scale. Existing graph-based semantic clone detection techniques suffer from exponential computational complexity, making them impractical for multi-million-line repositories such as the Linux kernel or large enterprise software suites.",
     solution: "This project implements an efficient, scalable token-based semantic code clone detection framework that captures subtle semantic similarities without graph isomorphism bottlenecks. The pipeline tokenizes source code into normalized token streams, generates multi-scale n-gram shingles, and constructs an inverted Elasticsearch index for rapid sub-linear search. For candidate pairs, the framework computes weighted Jaccard similarity and semantic token frequency distributions, enabling real-time discovery of Type-3 and Type-4 clones across heterogeneous source trees with high recall and precision.",
     architecture: [
@@ -141,8 +142,10 @@ export const defaultFypProjects = [
       "Lower recall on complex Type-4 clones involving algorithmic transformations with zero lexical overlap."
     ],
     gallery: [
-      { url: "/academic/fyp/source-code-structure-poster.webp", caption: "Token-Based Code Clone Detection Research Poster", order: 1 },
-      { url: "/academic/vulnerability-detection-dashboard.png", caption: "Type-3 & Type-4 Code Clone Analysis Dashboard", order: 2 }
+      { url: "/academic/fyp/source-code-structure-poster.webp", caption: "Token-Based Semantic Code Clone Detection Research Poster", order: 1 },
+      { url: "/academic/fyp/code-clone-token-pipeline.webp", caption: "Token-Based Lexical & Semantic Code Clone Detection Pipeline", order: 2 },
+      { url: "/academic/fyp/code-clone-ast-similarity.webp", caption: "Abstract Syntax Tree (AST) Subtree Isomorphism & Vector Embedding", order: 3 },
+      { url: "/academic/fyp/code-clone-semantic-benchmark.webp", caption: "BigCloneBench Evaluation & Semantic Type-4 Clone Classification Matrix", order: 4 }
     ],
     published: true,
     featured: true,
@@ -170,7 +173,7 @@ export const defaultFypProjects = [
     specializations: ["Vulnerability Patching", "Program Repair", "LLM Optimization", "Docker Sandboxing"],
     technologies: ["Python", "LLM Fine-tuning", "Git Diff Parser", "Docker", "PyTorch", "FastAPI"],
     coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp",
-    coverAlt: "LLM Vulnerability Patch Recommendation Poster",
+    coverAlt: "LLM-based Software Vulnerability Patch Optimizer",
     problem: "When security vulnerabilities are discovered in production software, manual patch creation is slow, error-prone, and requires deep security domain expertise. Automated Program Repair (APR) tools frequently generate plausibly compilable patches that nonetheless introduce regression bugs or fail to completely neutralize the security defect. Furthermore, existing patch generation systems lack automated verification pipelines to test patch correctness in secure, sandboxed execution environments before production deployment.",
     solution: "This project builds an automated vulnerability patch synthesis and optimization engine that couples Large Language Models with automated regression verification. When supplied with a vulnerable function and its corresponding CVE description, the optimizer retrieves relevant security patch patterns from a historical knowledge base using Retrieval-Augmented Generation (RAG). The LLM generates candidate patches that preserve original code invariants. Each candidate is automatically compiled and evaluated inside isolated Docker containers against targeted security test vectors and regression test suites.",
     architecture: [
@@ -196,7 +199,9 @@ export const defaultFypProjects = [
     ],
     gallery: [
       { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "LLM Vulnerability Patch Recommendation Poster", order: 1 },
-      { url: "/academic/vulnerability-detection-dashboard.png", caption: "RAG & LLM Security Patch Synthesis Engine", order: 2 }
+      { url: "/academic/fyp/llm-patch-prompt-architecture.webp", caption: "Few-Shot Prompt Engineering & AST-Constrained Patch Generation Architecture", order: 2 },
+      { url: "/academic/fyp/llm-patch-docker-validation.webp", caption: "Containerized Automated Test Execution & Patch Verification Harness", order: 3 },
+      { url: "/academic/fyp/llm-patch-cve-repair-benchmarks.webp", caption: "Multi-Benchmark CVE Repair Precision & Semantic Plausibility Evaluation", order: 4 }
     ],
     published: true,
     featured: true,
@@ -223,7 +228,7 @@ export const defaultFypProjects = [
     specializations: ["Feature Envy Detection", "Graph Neural Networks", "Code Refactoring", "Visual Analytics"],
     technologies: ["Python", "PyTorch Geometric", "AST Parsing", "React", "D3.js", "Tree-sitter"],
     coverImage: "/academic/fyp/code-smell-detection-poster.webp",
-    coverAlt: "Feature Envy Code Smell Detection Research Poster",
+    coverAlt: "Feature Envy Detection and Refactoring System Poster",
     problem: "Code smells such as Feature Envy—where a method accesses data or methods of another class more than its host class—severely degrade software modularity, increase coupling, and complicate long-term maintenance. Traditional metric-based detection rules (e.g., Access to Foreign Data and Locality of Data) produce excessive false positives because they fail to capture rich graph-level relationships between methods and attributes across complex object-oriented systems.",
     solution: "This project presents an intelligent code smell detection and automated refactoring suite powered by Graph Neural Networks (GNNs) and Program Dependence Graphs (PDGs). Source code is transformed into typed dependency graphs where nodes represent classes, methods, and fields, and edges represent call and access relationships. A Graph Convolutional Network (GCN) predicts Feature Envy instances with high confidence and automatically generates safe 'Move Method' refactoring suggestions. An interactive visual analytics dashboard visualizes the class coupling graph before and after refactoring.",
     architecture: [
@@ -248,9 +253,10 @@ export const defaultFypProjects = [
       "Currently restricted to object-oriented architectures where methods have clear target candidate classes."
     ],
     gallery: [
-      { url: "/academic/fyp/code-smell-detection-poster.webp", caption: "Feature Envy Code Smell Detection Research Poster", order: 1 },
-      { url: "/academic/vulnerability-detection-workflow.jpg", caption: "GNN Program Dependence Graph Workflow", order: 2 },
-      { url: "/academic/vulnerability-detection-dashboard.png", caption: "Interactive Refactoring Visualization Dashboard", order: 3 }
+      { url: "/academic/fyp/code-smell-detection-poster.webp", caption: "Feature Envy Detection & Automated Refactoring System Poster", order: 1 },
+      { url: "/academic/fyp/feature-envy-gnn-architecture.webp", caption: "Graph Neural Network (GNN) Feature Envy Detection Architecture", order: 2 },
+      { url: "/academic/fyp/feature-envy-ast-refactoring-graph.webp", caption: "Class Dependency Call-Graph & Method-Level Distance Heatmap", order: 3 },
+      { url: "/academic/fyp/feature-envy-detection-matrix.webp", caption: "Automated Move Method Refactoring Recommendation & Quality Verification Matrix", order: 4 }
     ],
     published: true,
     featured: true,
@@ -275,10 +281,12 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["AI Healthcare", "Computer Vision", "Psychological Screening"],
     technologies: ["Python", "OpenCV", "TensorFlow", "Next.js", "TailwindCSS"],
-    coverImage: "/academic/fyp/ai-dermatologist-poster.webp",
-    coverAlt: "MultiSense AI Screening Project Visual",
+    coverImage: "/academic/fyp/multisense-screening-dashboard.webp",
+    coverAlt: "MultiSense Multimodal Psychological Disorder Screening Platform",
     gallery: [
-      { url: "/academic/fyp/ai-dermatologist-poster.webp", caption: "MultiSense AI Multi-Modal Screening Poster", order: 1 }
+      { url: "/academic/fyp/multisense-screening-dashboard.webp", caption: "MultiSense Multimodal Psychological Disorder Screening & Assessment Platform", order: 1 },
+      { url: "/academic/fyp/multisense-video-landmark-attention.webp", caption: "Facial Action Unit & Micro-Expression Vision Attention Network", order: 2 },
+      { url: "/academic/fyp/multisense-acoustic-biomarkers.webp", caption: "Acoustic Spectrogram & Vocal Prosody Biomarker Feature Extraction", order: 3 }
     ],
     published: true,
     featured: true,
@@ -408,7 +416,7 @@ export const defaultFypProjects = [
     specializations: ["XSS Defense", "Web Security Auditing", "Browser Extension Security", "Taint Analysis", "XSStrike ML Filter"],
     technologies: ["JavaScript", "Python", "DOM Analysis", "Node.js", "Chrome Extension API", "Machine Learning"],
     coverImage: "/academic/fyp/xss-vulnerability-poster.webp",
-    coverAlt: "XSSNIPER Machine Learning Enhanced XSS Scanner Poster",
+    coverAlt: "XSSNIPER — ML-Enhanced XSS Scanner Research Poster",
     problem: "Cross-Site Scripting (XSS)—encompassing Stored, Reflected, and DOM-based variants—consistently ranks among the most prevalent OWASP Top 10 web vulnerabilities. Web applications frequently employ flawed regular expressions or incomplete HTML sanitization routines that sophisticated attackers can bypass with polyglot payloads, leading to session hijacking, credential theft, and unauthorized actions.",
     solution: "This completed project delivers a dual-layer XSS security ecosystem: an automated static code scanner that audits server-side and client-side JavaScript/HTML for insecure data sinks (e.g., innerHTML, eval, document.write), and a lightweight browser defense extension that monitors runtime DOM mutations and enforces strict Contextual Content Security Policies (CSP). By intercepting taint flows before execution, the system prevents payload detonation with zero noticeable browser latency.",
     architecture: [
@@ -432,7 +440,10 @@ export const defaultFypProjects = [
       "Browser extension defense requires client installation and does not replace the necessity of server-side sanitization."
     ],
     gallery: [
-      { url: "/academic/fyp/xss-vulnerability-poster.webp", caption: "XSSNIPER — ML-Enhanced XSS Scanner Research Poster", order: 1 }
+      { url: "/academic/fyp/xss-vulnerability-poster.webp", caption: "XSSNIPER — ML-Enhanced XSS Scanner Research Poster", order: 1 },
+      { url: "/academic/fyp/xss-sniper-dashboard.webp", caption: "XSS Sniper Interactive Web Vulnerability Analysis & Scanning Dashboard", order: 2 },
+      { url: "/academic/fyp/xss-sniper-attack-analysis.webp", caption: "Payload Mutation & Exploitation Vector Deep-Dive Analysis", order: 3 },
+      { url: "/academic/fyp/xss-sniper-scan-results.webp", caption: "Real-time Attack Telemetry, Sanitization Verification & Severity Breakdown", order: 4 }
     ],
     published: true,
     featured: false,
@@ -458,10 +469,12 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Computer Vision", "YOLO Object Tracking", "Sports Analytics"],
     technologies: ["Python", "OpenCV", "YOLOv8", "Streamlit"],
-    coverImage: "/academic/fyp/test-data-generation-poster.webp",
-    coverAlt: "Cric-Craft AI Analysis Poster",
+    coverImage: "/academic/fyp/cric-craft-vision-analytics.webp",
+    coverAlt: "Cric-Craft Computer Vision Analytics Overview",
     gallery: [
-      { url: "/academic/fyp/test-data-generation-poster.webp", caption: "Cric-Craft AI Performance Analytics Poster", order: 1 }
+      { url: "/academic/fyp/cric-craft-vision-analytics.webp", caption: "Cric-Craft Computer Vision Pipeline & Automated Player Motion Tracking", order: 1 },
+      { url: "/academic/fyp/cric-craft-player-biomechanics.webp", caption: "Batting Stance Biomechanical Kinematics & Pose Estimation Matrix", order: 2 },
+      { url: "/academic/fyp/cric-craft-video-annotation.webp", caption: "Multi-Angle Match Footage Annotation & Stroke Execution Analysis", order: 3 }
     ],
     published: true,
     featured: false,
@@ -490,7 +503,10 @@ export const defaultFypProjects = [
     coverImage: "/academic/fyp/apneaguard-poster.webp",
     coverAlt: "ApneaGuard AI Project Poster",
     gallery: [
-      { url: "/academic/fyp/apneaguard-poster.webp", caption: "ApneaGuard AI Nocturnal Sleep Monitoring System Poster", order: 1 }
+      { url: "/academic/fyp/apneaguard-poster.webp", caption: "ApneaGuard AI Nocturnal Sleep Monitoring System Poster", order: 1 },
+      { url: "/academic/fyp/apneaguard-dashboard.webp", caption: "ApneaGuard Real-Time Clinical SpO2 and Heart Rate Monitoring Dashboard", order: 2 },
+      { url: "/academic/fyp/apneaguard-telemetry-monitor.webp", caption: "Continuous Pulse Oximeter Sensor Telemetry & SpO2 Risk Profiling", order: 3 },
+      { url: "/academic/fyp/apneaguard-mobile-interface.webp", caption: "ApneaGuard Mobile Companion Application & On-Device Alerting System", order: 4 }
     ],
     published: true,
     featured: false,
@@ -542,7 +558,10 @@ export const defaultFypProjects = [
       "Dependent on upstream availability and update latency of public CVE and NVD feeds."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "Vulnerability Management & Benchmarking System Poster", order: 1 }
+      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "Vulnerability Management & Benchmarking System Poster", order: 1 },
+      { url: "/academic/fyp/vbs-patch-pipeline.webp", caption: "Automated Vulnerability Management & Patch Recommendation Architecture", order: 2 },
+      { url: "/academic/fyp/vbs-benchmark-dashboard.webp", caption: "CVE Vulnerability Benchmark Repository & Semantic Similarity Search", order: 3 },
+      { url: "/academic/fyp/vbs-cve-evaluation.webp", caption: "Security Fix Validation & Automated Regression Evaluation Matrix", order: 4 }
     ],
     published: true,
     featured: false,
@@ -588,6 +607,12 @@ export const defaultFypProjects = [
     ],
     limitations: [
       "Large refactorings spanning multiple interdependent packages require human validation."
+    ],
+        gallery: [
+      { url: "/academic/fyp/code-smell-detection-poster.webp", caption: "Code Smell Detection and Refactoring System Research Poster", order: 1 },
+      { url: "/academic/fyp/code-smell-analysis-pipeline.webp", caption: "Multi-Language Static Code Smell Detection & AST Traversal Architecture", order: 2 },
+      { url: "/academic/fyp/code-smell-refactoring-engine.webp", caption: "Automated Safe Refactoring Engine & Code Transformation Pipeline", order: 3 },
+      { url: "/academic/fyp/code-smell-evaluation-dashboard.webp", caption: "Code Smell Severity Distribution & Refactoring Impact Dashboard", order: 4 }
     ],
     published: true,
     featured: false,
@@ -635,7 +660,10 @@ export const defaultFypProjects = [
       "Requires manual domain review to ensure recommended component groupings match business domain boundaries."
     ],
     gallery: [
-      { url: "/academic/fyp/source-code-structure-poster.webp", caption: "Source Code Structure Capturing & Recommendation Poster", order: 1 }
+      { url: "/academic/fyp/source-code-structure-poster.webp", caption: "Source Code Structure Capturing & Recommendation Poster", order: 1 },
+      { url: "/academic/fyp/source-structure-architecture.webp", caption: "Source Code Structural Graph Extraction & Dependency Parsing Architecture", order: 2 },
+      { url: "/academic/fyp/source-structure-dependency-graph.webp", caption: "Cross-Module Call Graph & Intra-Project Dependency Visualization", order: 3 },
+      { url: "/academic/fyp/source-structure-component-map.webp", caption: "Architectural Component Cohesion & Modular Refactoring Recommendation", order: 4 }
     ],
     published: true,
     featured: false,
@@ -997,6 +1025,14 @@ export const defaultFypProjects = [
       "Benchmark test suite report"
     ],
     technologies: ["Python", "Java", "Z3 SMT Solver", "Mutation Engines", "JUnit", "Coverage.py"],
+    coverImage: "/academic/fyp/test-data-generation-poster.webp",
+    coverAlt: "Automatic Test Data Generation for Data Processing Systems Poster",
+        gallery: [
+      { url: "/academic/fyp/test-data-generation-poster.webp", caption: "Automatic Test Data Generation for Data Processing Systems Poster", order: 1 },
+      { url: "/academic/fyp/test-data-gen-architecture.webp", caption: "Automated Constraint-Guided Test Data Synthesis Pipeline Architecture", order: 2 },
+      { url: "/academic/fyp/test-data-gen-coverage-dashboard.webp", caption: "Branch & Condition Coverage Telemetry Analytics Dashboard", order: 3 },
+      { url: "/academic/fyp/test-data-gen-mutation-synthesis.webp", caption: "Evolutionary Algorithm Mutation & Edge-Case Boundary Test Synthesis", order: 4 }
+    ],
     published: true,
     featured: false,
     displayOrder: 26
