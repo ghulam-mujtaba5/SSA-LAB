@@ -36,10 +36,9 @@ export default function Custom404() {
         <Image
           src="/academic/ssa-research-group-full-logo.png"
           alt="SSA Research Lab — Software Security Assessment Lab"
-          width={320}
-          height={150}
+          width={220}
+          height={200}
           className={styles.logo}
-          style={{ width: "auto", maxHeight: "120px", objectFit: "contain" }}
           priority
         />
       </motion.div>

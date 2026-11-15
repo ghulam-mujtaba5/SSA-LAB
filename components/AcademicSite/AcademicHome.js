@@ -125,7 +125,7 @@ export default function AcademicHome() {
       {
         question: "Who directs the SSA Research Lab?",
         answer:
-          "The lab is directed by Dr. Junaid Akram, Assistant Professor at University of Nottingham Ningbo China (UNNC), who earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
+          "The lab is directed by Dr. Junaid Akram, Assistant Professor at University of Nottingham Ningbo China (UNNC), who completed postdoctoral research at SnT, University of Luxembourg and earned his PhD in Software Engineering from Tsinghua University.",
       },
       {
         question: "What major tools and benchmarks has the SSA Lab created?",
@@ -170,7 +170,7 @@ export default function AcademicHome() {
               Advancing software security through source-code analysis, testing, and vulnerability research.
             </h1>
             <p className={styles.heroLead}>
-              Led by Dr Junaid Akram, the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
+              Led by Dr. Junaid Akram, the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
             </p>
             <ul className={styles.credentialList}>
               {(academicProfileData.credentials || []).map((credential) => (
@@ -202,11 +202,11 @@ export default function AcademicHome() {
             <div className={styles.heroPortraitBackdropGlow} aria-hidden="true" />
             <AcademicImageLightbox
               src="/academic/junaid-akram-hero-transparent.webp"
-              alt="Dr. Junaid Akram, PhD — Assistant Professor at University of Nottingham Ningbo China & Director of SSA Research Lab"
+              alt="Dr. Junaid Akram — Assistant Professor at University of Nottingham Ningbo China & Director of SSA Research Lab"
               width={777}
               height={1000}
               priority
-              caption="Dr. Junaid Akram, PhD — Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), Former Postdoctoral Researcher at SnT Luxembourg, PhD from Tsinghua University, and Director of the Software Security Assessment (SSA) Research Lab."
+              caption="Dr. Junaid Akram — Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC) and Director of the Software Security Assessment (SSA) Research Lab."
               className={styles.heroIllustrationLightbox}
               imageClassName={styles.heroIllustrationImg}
               sizes="(max-width: 780px) 100vw, 45vw"
@@ -216,7 +216,7 @@ export default function AcademicHome() {
               <BorderBeam size={160} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
               <div className={styles.heroProfileCardHeader} style={{ position: "relative", zIndex: 2 }}>
                 <div className={styles.heroProfileStatusDot} />
-                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram, PhD</span>
+                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram</span>
               </div>
               <div className={styles.heroProfileButtons} style={{ position: "relative", zIndex: 2 }}>
                 <a

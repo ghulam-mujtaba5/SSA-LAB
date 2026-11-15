@@ -452,6 +452,43 @@ function EnquiriesPage() {
                 </div>
               </div>
 
+              {/* Attached Document / CV */}
+              {selectedEnquiry.attachment?.filename && (
+                <div style={{ marginBottom: "20px", background: "var(--bg-elev-2)", padding: "14px", borderRadius: "8px", border: "1px solid var(--border)" }}>
+                  <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block", marginBottom: "6px" }}>ATTACHED DOCUMENT / CV</span>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+                    <div>
+                      <strong style={{ color: "var(--text)", fontSize: "0.95rem" }}>&#128206; {selectedEnquiry.attachment.filename}</strong>
+                      {selectedEnquiry.attachment.size > 0 && (
+                        <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginLeft: "8px" }}>
+                          ({(selectedEnquiry.attachment.size / (1024 * 1024)).toFixed(2)} MB)
+                        </span>
+                      )}
+                    </div>
+                    {selectedEnquiry.attachment.data && (
+                      <a
+                        href={selectedEnquiry.attachment.data}
+                        download={selectedEnquiry.attachment.filename}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          padding: "6px 14px",
+                          borderRadius: "6px",
+                          background: "var(--primary, #0284c7)",
+                          color: "#ffffff",
+                          textDecoration: "none",
+                          fontSize: "0.85rem",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Download Attachment
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* Status Change Buttons */}
               <div style={{ marginBottom: "20px" }}>
                 <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block", marginBottom: "8px" }}>UPDATE STATUS</span>

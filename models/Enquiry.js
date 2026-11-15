@@ -45,6 +45,12 @@ const EnquirySchema = new mongoose.Schema(
       enum: ["new", "read", "replied", "archived"],
       default: "new",
     },
+    attachment: {
+      filename: { type: String, default: "" },
+      contentType: { type: String, default: "" },
+      size: { type: Number, default: 0 },
+      data: { type: String, default: "" },
+    },
     adminNotes: {
       type: String,
       default: "",

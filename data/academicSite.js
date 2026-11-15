@@ -21,8 +21,8 @@ export const academicProfile = {
   sourceSite: "https://www.ssa-lab.tech",
   credentials: [
     "Assistant Professor, School of Computer Science, University of Nottingham Ningbo China",
-    "Postdoctoral research at SnT, University of Luxembourg",
-    "PhD from Tsinghua University",
+    "Former Postdoctoral Researcher at SnT, University of Luxembourg",
+    "PhD in Software Engineering from Tsinghua University",
     "HEC-approved PhD Supervisor",
   ],
   experience: [
@@ -1050,7 +1050,7 @@ export const fypOpportunities = [
     targetAudience: "BSc / BEng Computer Science, MSc Software Engineering, and AI/Security researchers.",
     suitability: {
       idealCandidate: "Students passionate about automated program repair (APR), syntax tree transformations, and applying AI to software maintenance.",
-      academicAlignment: "Direct continuation of Dr. Junaid Akram's core research in clone detection and automated security patch propagation.",
+      academicAlignment: "Direct continuation of Dr. Junaid Akram, PhD's core research in clone detection and automated security patch propagation.",
       careerImpact: "High-demand specialization at the intersection of automated code refactoring, compiler toolchains, and LLM-assisted software engineering."
     },
     summary:
@@ -1102,7 +1102,7 @@ export const fypOpportunities = [
     targetAudience: "BSc / BEng Computer Science, MSc Software Engineering & CPS Verification students.",
     suitability: {
       idealCandidate: "Students interested in formal verification, search-based testing, constraint programming (SMT solvers), and aerospace/satellite CPS quality.",
-      academicAlignment: "Directly extends Dr. Junaid Akram's postdoctoral satellite CPS verification research conducted with SES Satellites and SnT Luxembourg.",
+      academicAlignment: "Directly extends Dr. Junaid Akram, PhD's postdoctoral satellite CPS verification research conducted with SES Satellites and SnT Luxembourg.",
       careerImpact: "Rare, highly prized expertise in automated testing of safety-critical and high-reliability data systems."
     },
     summary:
@@ -1176,9 +1176,9 @@ export const eventHighlights = [
 export const eventGallery = [
   {
     src: "/academic/events/event-01.jpg",
-    alt: "Dr. Junaid Akram presenting at the IPBG Annual Workshop at SnT",
+    alt: "Dr. Junaid Akram, PhD presenting at the IPBG Annual Workshop at SnT",
     title: "IPBG Annual Workshop Presentation",
-    caption: "Dr. Junaid Akram delivering research presentation on automated software testing at SnT, Luxembourg",
+    caption: "Dr. Junaid Akram, PhD delivering research presentation on automated software testing during postdoctoral research at SnT, Luxembourg",
     badge: "Oral Presentation",
     category: "Workshop",
     date: "2022",
@@ -1189,7 +1189,7 @@ export const eventGallery = [
   },
   {
     src: "/academic/events/event-02.jpg",
-    alt: "Dr. Junaid Akram presenting automated test data generation research poster",
+    alt: "Dr. Junaid Akram, PhD presenting automated test data generation research poster",
     title: "Search-Based Test Generation Poster Session",
     caption: "Interactive poster session on automated test-data generation — IPBG Annual Workshop at SnT",
     badge: "Poster Exhibition",
@@ -1312,9 +1312,9 @@ export const pgResearchers = [
 
 export const coInvestigators = [
   {
-    name: "Dr. Junaid Akram",
+    name: "Dr. Junaid Akram, PhD",
     role: "Lab Director & Principal Investigator",
-    affiliation: "University of Nottingham Ningbo China / SnT Luxembourg Postdoc / Tsinghua PhD",
+    affiliation: "University of Nottingham Ningbo China · Postdoc (SnT Luxembourg) · PhD (Tsinghua University)",
     specialization: "Source Code Security, Vulnerability Repair, Code Clone Detection, Software Testing",
     image: "/academic/junaid-akram-professor.jpg",
     email: "Junaid.Akram@nottingham.edu.cn",
@@ -1323,7 +1323,7 @@ export const coInvestigators = [
     orcid: "https://orcid.org/0000-0003-1752-6124",
     researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
     officialProfile: "https://www.nottingham.edu.cn/",
-    bio: "Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC) and Director of SSA Lab. Former Assistant Professor & Program Incharge at COMSATS Lahore, Postdoctoral Researcher at SnT Luxembourg & SES Satellites, PhD from Tsinghua University.",
+    bio: "Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC) and Director of SSA Lab. Former Postdoctoral Researcher at SnT Luxembourg & SES Satellites, PhD in Software Engineering from Tsinghua University, and former Assistant Professor & Program Incharge at COMSATS Lahore.",
     badge: "Lab Director",
   },
   {

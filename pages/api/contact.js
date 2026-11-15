@@ -2,6 +2,14 @@ import dbConnect from "../../lib/mongoose";
 import Enquiry from "../../models/Enquiry";
 import { sendEmail, buildEnquiryEmailHtml } from "../../lib/resend";
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "6mb",
+    },
+  },
+};
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
@@ -9,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, degree, enquiryType, topic, message } = req.body || {};
+    const { name, email, degree, enquiryType, topic, message, attachment } = req.body || {};
 
     // Validate required fields
     if (!name || !name.trim()) {
@@ -20,6 +28,36 @@ export default async function handler(req, res) {
     }
     if (!message || !message.trim()) {
       return res.status(400).json({ success: false, message: "Message content is required." });
+    }
+
+    // Validate attachment if provided
+    let cleanAttachment = null;
+    let emailAttachments = [];
+
+    if (attachment && attachment.data && attachment.filename) {
+      // Validate file size (max 5.5MB for base64 string)
+      if (attachment.size && attachment.size > 5.5 * 1024 * 1024) {
+        return res.status(400).json({
+          success: false,
+          message: "Attached document exceeds the 5MB size limit. Please upload a smaller file.",
+        });
+      }
+
+      const rawBase64 = attachment.data.includes(",")
+        ? attachment.data.split(",")[1]
+        : attachment.data;
+
+      cleanAttachment = {
+        filename: attachment.filename.replace(/[^a-zA-Z0-9._-]/g, "_"),
+        contentType: attachment.contentType || "application/octet-stream",
+        size: attachment.size || 0,
+        data: attachment.data, // Stores dataUrl for download
+      };
+
+      emailAttachments.push({
+        filename: cleanAttachment.filename,
+        content: rawBase64,
+      });
     }
 
     await dbConnect();
@@ -38,13 +76,14 @@ export default async function handler(req, res) {
       enquiryType: enquiryType || "General",
       topic: topic ? topic.trim() : "",
       message: message.trim(),
+      attachment: cleanAttachment || undefined,
       ipAddress: Array.isArray(ipAddress) ? ipAddress[0] : ipAddress,
       status: "new",
     });
 
     // 2. Dispatch Email via Resend to recipient
     const recipientEmail = process.env.CONTACT_NOTIFICATION_EMAIL || "jnd.akram@hotmail.com";
-    const emailSubject = `[SSA Lab] ${newEnquiry.enquiryType}: ${newEnquiry.name} ${newEnquiry.topic ? `- ${newEnquiry.topic}` : ""}`;
+    const emailSubject = `[SSA Lab] ${newEnquiry.enquiryType}: ${newEnquiry.name} ${newEnquiry.topic ? `- ${newEnquiry.topic}` : ""}${cleanAttachment ? " [📎 Attachment]" : ""}`;
     const emailHtml = buildEnquiryEmailHtml({
       name: newEnquiry.name,
       email: newEnquiry.email,
@@ -53,6 +92,8 @@ export default async function handler(req, res) {
       topic: newEnquiry.topic,
       message: newEnquiry.message,
       createdAt: newEnquiry.createdAt,
+      attachmentName: cleanAttachment?.filename,
+      attachmentSize: cleanAttachment?.size,
     });
 
     // Asynchronously or await email dispatch
@@ -60,6 +101,7 @@ export default async function handler(req, res) {
       to: recipientEmail,
       subject: emailSubject,
       html: emailHtml,
+      attachments: emailAttachments,
     });
 
     return res.status(201).json({
@@ -69,6 +111,7 @@ export default async function handler(req, res) {
         id: newEnquiry._id,
         createdAt: newEnquiry.createdAt,
         emailSent: emailResult.success,
+        hasAttachment: Boolean(cleanAttachment),
       },
     });
   } catch (error) {

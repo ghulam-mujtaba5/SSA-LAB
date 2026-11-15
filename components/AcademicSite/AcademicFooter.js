@@ -44,7 +44,7 @@ export default function AcademicFooter() {
   ];
 
   const labLinks = [
-    { href: "/about", label: "About Dr. Junaid Akram" },
+    { href: "/about", label: "About Dr. Junaid Akram, PhD" },
     { href: "/events", label: "Research Seminars & Events" },
     { href: profile.officialProfile || academicProfile.officialProfile, label: "Official COMSATS Profile", external: true },
     { href: "/contact", label: "Office Hours & Location" },
@@ -74,15 +74,18 @@ export default function AcademicFooter() {
         <div className={styles.content}>
           {/* Brand Identity Column */}
           <div className={styles.brand}>
-            <Link href="/" className={styles.brandLogoWrap} aria-label="SSA Research Lab Home">
+            <Link href="/" className={styles.logoWrap} aria-label="SSA Research Lab Home">
               <Image
-                src="/academic/ssa-official-logo.webp"
-                alt="SSA Research Lab — Software Security Assessment"
-                width={220}
-                height={103}
-                className={styles.brandLogoImg}
+                src="/academic/ssa-research-group-logo.png"
+                alt="SSA Research Lab"
+                width={90}
+                height={60}
+                className={styles.logoImage}
                 itemProp="logo"
               />
+              <div className={styles.brandTitle}>
+                <strong itemProp="name">{profile.labShort || profile.lab}</strong>
+              </div>
             </Link>
             <p className={styles.brandDesc} itemProp="description">
               Advancing source-code vulnerability detection, automated software
@@ -90,7 +93,7 @@ export default function AcademicFooter() {
               at scale.
             </p>
             <div className={styles.metaRow}>
-              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
+              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor · Postdoc (SnT Luxembourg)
             </div>
           </div>
 

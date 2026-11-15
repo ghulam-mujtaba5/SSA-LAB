@@ -27,6 +27,8 @@ import {
   LayoutGrid,
   List,
   FileText,
+  Paperclip,
+  Upload,
   X,
   Quote,
   HelpCircle,
@@ -170,9 +172,9 @@ export function AboutPage() {
     profilePageSchema({
       url: `${SITE_URL}/about`,
       "@id": `${SITE_URL}/about`,
-      name: "Dr. Junaid Akram — Academic Profile & SSA Research Lab",
+      name: "Dr. Junaid Akram, PhD — Academic Profile & SSA Research Lab",
       description:
-        "Academic profile of Dr. Junaid Akram, Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), leading the Software Security Assessment Lab.",
+        "Academic profile of Dr. Junaid Akram, PhD (former Postdoctoral Researcher at SnT Luxembourg, PhD Tsinghua University), Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), leading the Software Security Assessment Lab.",
     }),
     personSchema(),
     speakableSchema({
@@ -181,34 +183,34 @@ export function AboutPage() {
     }),
     faqSchema([
       {
-        question: "Who is Dr. Junaid Akram?",
+        question: "Who is Dr. Junaid Akram, PhD?",
         answer:
-          "Dr. Junaid Akram is an Assistant Professor in the School of Computer Science at the University of Nottingham Ningbo China (UNNC) and an HEC-approved PhD supervisor leading the Software Security Assessment (SSA) Research Lab. He earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
+          "Dr. Junaid Akram, PhD is an Assistant Professor in the School of Computer Science at the University of Nottingham Ningbo China (UNNC), former Postdoctoral Researcher at SnT, University of Luxembourg, and an HEC-approved PhD supervisor leading the Software Security Assessment (SSA) Research Lab. He completed postdoctoral research at SnT, University of Luxembourg and earned his PhD in Software Engineering from Tsinghua University.",
       },
       {
-        question: "What are Dr. Junaid Akram's primary research domains?",
+        question: "What are Dr. Junaid Akram, PhD's primary research domains?",
         answer:
           "His primary research areas include source-code software vulnerability detection, LLM-based automated program repair, semantic code clone analysis, Android and IoT malware defense, software testing, and DevSecOps.",
       },
       {
-        question: "What institutions are affiliated with Dr. Junaid Akram?",
+        question: "What institutions are affiliated with Dr. Junaid Akram, PhD?",
         answer:
-          "Dr. Junaid Akram is currently an Assistant Professor at University of Nottingham Ningbo China (UNNC). He previously held academic and research positions at COMSATS University Islamabad (Assistant Professor & Program Incharge), University of Luxembourg / SnT (Postdoctoral Researcher), SES Satellites Luxembourg (Visiting Researcher), Xiamen University Malaysia (Assistant Professor), and Tsinghua University (PhD).",
+          "Dr. Junaid Akram, PhD is currently an Assistant Professor at University of Nottingham Ningbo China (UNNC). He previously held academic and research positions at COMSATS University Islamabad (Assistant Professor & Program Incharge), University of Luxembourg / SnT (Postdoctoral Researcher), SES Satellites Luxembourg (Visiting Researcher), Xiamen University Malaysia (Assistant Professor), and Tsinghua University (PhD).",
       },
       {
-        question: "Where can I view Dr. Junaid Akram's verified research profiles?",
+        question: "Where can I view Dr. Junaid Akram, PhD's verified research profiles?",
         answer:
-          "You can verify Dr. Junaid Akram's scholarly profiles on ORCID (0000-0003-1752-6124), Google Scholar (user=JunaidAkram), DBLP, ResearchGate, and the University of Nottingham faculty directory.",
+          "You can verify Dr. Junaid Akram, PhD's scholarly profiles on ORCID (0000-0003-1752-6124), Google Scholar (user=JunaidAkram), DBLP, ResearchGate, and the University of Nottingham faculty directory.",
       },
     ]),
   ];
 
   return (
     <AcademicSiteLayout
-      title="Dr. Junaid Akram — Academic Profile & SSA Lab"
+      title="Dr. Junaid Akram, PhD — Academic Profile & SSA Lab"
       path="/about"
-      description="Academic profile of Dr. Junaid Akram, Assistant Professor at University of Nottingham Ningbo China (UNNC), leading the Software Security Assessment Lab."
-      keywords="Dr Junaid Akram, Junaid Akram PhD, University of Nottingham Ningbo China, UNNC, SSA Research Lab, Tsinghua University PhD, University of Luxembourg postdoc, software security researcher"
+      description="Academic profile of Dr. Junaid Akram, PhD, Assistant Professor at University of Nottingham Ningbo China (UNNC), former Postdoc at SnT Luxembourg, leading the Software Security Assessment Lab."
+      keywords="Dr Junaid Akram, Dr Junaid Akram PhD, Junaid Akram PhD, University of Nottingham Ningbo China, UNNC, SSA Research Lab, Tsinghua University PhD, University of Luxembourg postdoc, software security researcher"
       jsonLd={aboutJsonLd}
     >
       {/* 1. HERO & LAB MISSION OVERVIEW WITH DIRECTOR CARD */}
@@ -243,7 +245,7 @@ export function AboutPage() {
                 <h2 className={styles.aboutDirectorName}>{coInvestigatorsData[0].name}</h2>
                 <span className={styles.aboutDirectorTitle}>Assistant Professor & HEC PhD Supervisor</span>
                 <span className={styles.aboutDirectorMeta}>
-                  Tsinghua University PhD · SnT Luxembourg Postdoc
+                  Postdoc at SnT Luxembourg · PhD from Tsinghua University
                 </span>
                 <div className={styles.aboutDirectorLinks}>
                   <a
@@ -448,7 +450,7 @@ export function ResearchPage() {
       name: "SSA Research Lab — Software Security Research",
       url: `${SITE_URL}/research`,
       description:
-        "Research areas, domain roadmaps, and analysis workflows developed by Dr. Junaid Akram and the SSA Lab.",
+        "Research areas, domain roadmaps, and analysis workflows developed by Dr. Junaid Akram, PhD and the SSA Lab.",
       items: researchDomainsData.map((d) => ({
         name: d.title,
         url: `${SITE_URL}/research?domain=${d.id || d.slug}`,
@@ -530,7 +532,7 @@ export function ResearchPage() {
     <AcademicSiteLayout
       title="Software Security Research Domains & Frameworks"
       path="/research"
-      description="Explore software security research domains, vulnerability detection roadmaps, code clone detection, and analysis workflows developed by Dr. Junaid Akram at SSA Lab."
+      description="Explore software security research domains, vulnerability detection roadmaps, code clone detection, and analysis workflows developed by Dr. Junaid Akram, PhD at SSA Lab."
       keywords="software security research, software vulnerability detection, malware analysis, code clone detection, software testing, source code security, University of Nottingham Ningbo China, UNNC"
       jsonLd={researchJsonLd}
     >
@@ -725,10 +727,10 @@ export function PublicationsPage() {
 
   const pubsJsonLd = [
     collectionPageSchema({
-      name: "Publications — Dr. Junaid Akram",
+      name: "Publications — Dr. Junaid Akram, PhD",
       url: `${SITE_URL}/publications`,
       description:
-        "Peer-reviewed journal and conference publications by Dr. Junaid Akram in software security, testing, malware, and code analysis.",
+        "Peer-reviewed journal and conference publications by Dr. Junaid Akram, PhD in software security, testing, malware, and code analysis.",
       items: publicationsData.map((p) => ({
         name: p.title,
         url: p.href || `${SITE_URL}/publications`,
@@ -752,9 +754,9 @@ export function PublicationsPage() {
     }),
     faqSchema([
       {
-        question: "Where are Dr. Junaid Akram's software security papers published?",
+        question: "Where are Dr. Junaid Akram, PhD's software security papers published?",
         answer:
-          "Dr. Junaid Akram's research is published in top-tier SCIE/Scopus-indexed venues including IEEE Transactions on Computers, Software: Practice and Experience (Wiley), Applied Soft Computing (Elsevier), IET Information Security, International Journal of Information and Computer Security, and IEEE ICST / COMPSAC conferences.",
+          "Dr. Junaid Akram, PhD's research is published in top-tier SCIE/Scopus-indexed venues including IEEE Transactions on Computers, Software: Practice and Experience (Wiley), Applied Soft Computing (Elsevier), IET Information Security, International Journal of Information and Computer Security, and IEEE ICST / COMPSAC conferences.",
       },
       {
         question: "How can I export or cite publications from the SSA Research Lab?",
@@ -762,9 +764,9 @@ export function PublicationsPage() {
           "Click the 'Cite' button next to any publication to instantly copy citations in BibTeX, IEEE, APA, or RIS (EndNote/Zotero) formats, or click the DOI link to access the publisher version.",
       },
       {
-        question: "What are Dr. Junaid Akram's verified Google Scholar and ORCID profiles?",
+        question: "What are Dr. Junaid Akram, PhD's verified Google Scholar and ORCID profiles?",
         answer:
-          "Dr. Junaid Akram's publications can be verified on Google Scholar (https://scholar.google.com/citations?user=JunaidAkram), ORCID (https://orcid.org/0000-0003-1752-6124), DBLP, and ResearchGate.",
+          "Dr. Junaid Akram, PhD's publications can be verified on Google Scholar (https://scholar.google.com/citations?user=JunaidAkram), ORCID (https://orcid.org/0000-0003-1752-6124), DBLP, and ResearchGate.",
       },
     ]),
   ];
@@ -777,8 +779,8 @@ export function PublicationsPage() {
     <AcademicSiteLayout
       title="Software Security Publications & Research Papers"
       path="/publications"
-      description="Peer-reviewed journal and conference publications by Dr. Junaid Akram on software vulnerability detection, program repair, code clones, and malware analysis."
-      keywords="Junaid Akram publications, software security research papers, software vulnerability detection papers, code clone analysis papers, malware detection journal, IEEE conference papers, University of Nottingham Ningbo China, UNNC"
+      description="Peer-reviewed journal and conference publications by Dr. Junaid Akram, PhD on software vulnerability detection, program repair, code clones, and malware analysis."
+      keywords="Dr Junaid Akram PhD publications, Junaid Akram publications, software security research papers, software vulnerability detection papers, code clone analysis papers, malware detection journal, IEEE conference papers, University of Nottingham Ningbo China, UNNC"
       jsonLd={pubsJsonLd}
       citations={publicationsData}
     >
@@ -1281,10 +1283,10 @@ export function PublicationsPage() {
 export function SupervisionPage({ fypProjects = [] }) {
   const supervisionJsonLd = [
     collectionPageSchema({
-      name: "FYP Supervision — Dr. Junaid Akram",
+      name: "FYP Supervision — Dr. Junaid Akram, PhD",
       url: `${SITE_URL}/supervision`,
       description:
-        "Supervised student dissertations, FYP opportunities, and research projects under Dr. Junaid Akram at University of Nottingham Ningbo China (UNNC) and SSA Research Lab.",
+        "Supervised student dissertations, FYP opportunities, and research projects under Dr. Junaid Akram, PhD at University of Nottingham Ningbo China (UNNC) and SSA Research Lab.",
       items: supervisedProjects.map((p) => ({
         name: p.title,
         url: `${SITE_URL}/supervision`,
@@ -1294,7 +1296,7 @@ export function SupervisionPage({ fypProjects = [] }) {
     ...supervisedProjects.slice(0, 6).map((p) =>
       softwareProjectSchema({
         name: p.title,
-        description: `Final-year supervised research project by ${p.student} at ${p.institution}, supervised by Dr. Junaid Akram.`,
+        description: `Final-year supervised research project by ${p.student} at ${p.institution}, supervised by Dr. Junaid Akram, PhD.`,
         url: `${SITE_URL}/supervision`,
         keywords: p.technologies ? p.technologies.join(", ") : undefined,
       })
@@ -1307,17 +1309,17 @@ export function SupervisionPage({ fypProjects = [] }) {
       {
         question: "Who can apply for FYP, dissertation, or thesis supervision at SSA Lab?",
         answer:
-          "Undergraduate (BSc/BEng Computer Science), postgraduate (MSc), and PhD researchers at University of Nottingham Ningbo China (UNNC), as well as collaborative students from partner institutions, are eligible to apply for research and dissertation supervision under Dr. Junaid Akram.",
+          "Undergraduate (BSc/BEng Computer Science), postgraduate (MSc), and PhD researchers at University of Nottingham Ningbo China (UNNC), as well as collaborative students from partner institutions, are eligible to apply for research and dissertation supervision under Dr. Junaid Akram, PhD.",
       },
       {
-        question: "What are the key research and dissertation topics currently offered by Dr. Junaid Akram?",
+        question: "What are the key research and dissertation topics currently offered by Dr. Junaid Akram, PhD?",
         answer:
           "Active topics include source-level vulnerability benchmarks, multi-project dependency analysis, semantic code clone detection, automated security patch synthesis, AST-guided vulnerability prediction, and cyber-physical systems testing.",
       },
       {
-        question: "How do students contact Dr. Junaid Akram for supervision approval?",
+        question: "How do students contact Dr. Junaid Akram, PhD for supervision approval?",
         answer:
-          "Interested students and researchers should email Dr. Junaid Akram at Junaid.Akram@nottingham.edu.cn with their academic background, CV, transcripts, technical proficiencies, and proposed or selected research topics.",
+          "Interested students and researchers should email Dr. Junaid Akram, PhD at Junaid.Akram@nottingham.edu.cn with their academic background, CV, transcripts, technical proficiencies, and proposed or selected research topics.",
       },
     ]),
   ];
@@ -1326,14 +1328,14 @@ export function SupervisionPage({ fypProjects = [] }) {
     <AcademicSiteLayout
       title="Computer Science & Software Engineering Supervision & Research Opportunities"
       path="/supervision"
-      description="Explore Computer Science & Software Engineering research supervision, running projects, and dissertation opportunities led by Dr. Junaid Akram at University of Nottingham Ningbo China (UNNC)."
+      description="Explore Computer Science & Software Engineering research supervision, running projects, and dissertation opportunities led by Dr. Junaid Akram, PhD at University of Nottingham Ningbo China (UNNC)."
       keywords="Computer Science Dissertation Supervision, UNNC FYP projects, University of Nottingham Ningbo China, software security research, cybersecurity research topics, Dr Junaid Akram supervision"
       jsonLd={supervisionJsonLd}
     >
       <PageIntro
         eyebrow="Research & FYP Supervision"
         title="Supervised research projects and dissertation opportunities."
-        lead="Explore open research dissertation topics alongside completed student projects supervised under Dr Junaid Akram's SSA Laboratory."
+        lead="Explore open research dissertation topics alongside completed student projects supervised under Dr. Junaid Akram, PhD's SSA Laboratory."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
@@ -1361,7 +1363,7 @@ export function SupervisionPage({ fypProjects = [] }) {
         </div>
         <div style={{ maxWidth: "780px", lineHeight: "1.7" }}>
           <p>
-            Computer Science and Software Engineering students interested in research supervision, final-year dissertations, or graduate study under Dr. Junaid Akram at University of Nottingham Ningbo China should send an email with the following details:
+            Computer Science and Software Engineering students interested in research supervision, final-year dissertations, or graduate study under Dr. Junaid Akram, PhD at University of Nottingham Ningbo China should send an email with the following details:
           </p>
           <ul style={{ margin: "16px 0 24px 20px" }}>
             <li>Group member names and registration numbers</li>
@@ -1383,6 +1385,7 @@ export function SupervisionPage({ fypProjects = [] }) {
 const staticCoInvestigatorMap = {
   "Prof. Ping Luo": "/academic/ping-luo.jpg",
   "Dr. Mohammad Hammoudeh": "/academic/mohammad-hammoudeh.jpg",
+  "Dr. Junaid Akram, PhD": "/academic/junaid-akram-professor.jpg",
   "Dr. Junaid Akram": "/academic/junaid-akram-professor.jpg",
   "Dr. Danish Vasan": "/academic/danish-vassan.jpg",
   "Dr. Majid Mumtaz": "/academic/majid-mumtaz.png",
@@ -1449,7 +1452,7 @@ export function TeamPage() {
       name: "SSA Lab — Research Team & Collaborators",
       url: `${SITE_URL}/team`,
       description:
-        "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, and alumni of SSA Lab.",
+        "Dr. Junaid Akram, PhD, international co-investigators, MS/PhD researchers, BS engineering teams, and alumni of SSA Lab.",
       items: [
         ...allPersonnel.map((p) => ({ name: p.name, url: `${SITE_URL}/team` })),
       ],
@@ -1484,7 +1487,7 @@ export function TeamPage() {
     <AcademicSiteLayout
       title="Research Team & Collaborators"
       path="/team"
-      description="Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab."
+      description="Dr. Junaid Akram, PhD, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab."
       keywords="SSA Lab team, software security researchers, University of Nottingham Ningbo China, UNNC computer science, international collaborators, PhD students software security"
       jsonLd={teamJsonLd}
     >
@@ -1629,7 +1632,7 @@ export function TeamPage() {
               <h2>MS Computer Science Thesis Researchers</h2>
             </div>
             <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Master of Science (MS CS) researchers working on vulnerability repair, AST/CFG code summarizers, Graph Neural Networks, and search-based testing under Dr. Junaid Akram's supervision.
+              Master of Science (MS CS) researchers working on vulnerability repair, AST/CFG code summarizers, Graph Neural Networks, and search-based testing under Dr. Junaid Akram, PhD's supervision.
             </p>
           </div>
 
@@ -1864,7 +1867,7 @@ export function TeamPage() {
                       <strong>Research Project:</strong> {projectTitle}
                     </p>
                     <div className={styles.collabFocus} style={{ fontSize: "0.78rem", color: "var(--academic-muted)" }}>
-                      Supervisor: <strong style={{ color: "var(--academic-text)" }}>Dr. Junaid Akram</strong>
+                      Supervisor: <strong style={{ color: "var(--academic-text)" }}>Dr. Junaid Akram, PhD</strong>
                     </div>
                   </div>
                 </article>
@@ -1924,7 +1927,7 @@ export function EventsPage() {
       name: "SSA Lab — Events & Presentations",
       url: `${SITE_URL}/events`,
       description:
-        "Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SSA Research Lab.",
+        "Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram, PhD and SSA Research Lab.",
       items: eventHighlightsData.map((e) => ({
         name: e.title,
         url: `${SITE_URL}/events`,
@@ -1937,9 +1940,9 @@ export function EventsPage() {
     }),
     faqSchema([
       {
-        question: "Does Dr. Junaid Akram deliver keynotes and invited research talks?",
+        question: "Does Dr. Junaid Akram, PhD deliver keynotes and invited research talks?",
         answer:
-          "Yes. Dr. Junaid Akram delivers invited keynote speeches, tutorials, and workshop sessions at international cybersecurity, software engineering, and artificial intelligence conferences worldwide.",
+          "Yes. Dr. Junaid Akram, PhD delivers invited keynote speeches, tutorials, and workshop sessions at international cybersecurity, software engineering, and artificial intelligence conferences worldwide.",
       },
       {
         question: "What technical themes are covered in SSA Lab presentations?",
@@ -1947,9 +1950,9 @@ export function EventsPage() {
           "Presentations focus on static application security testing, deep learning for vulnerability prediction, empirical benchmark curation, Android/IoT malware defenses, and large-scale code clone indexing.",
       },
       {
-        question: "How can conference organizers invite Dr. Junaid Akram as a speaker?",
+        question: "How can conference organizers invite Dr. Junaid Akram, PhD as a speaker?",
         answer:
-          "Organizers may contact Dr. Junaid Akram directly via email at Junaid.Akram@nottingham.edu.cn with the event overview, dates, and proposed session topics.",
+          "Organizers may contact Dr. Junaid Akram, PhD directly via email at Junaid.Akram@nottingham.edu.cn with the event overview, dates, and proposed session topics.",
       },
     ]),
     ...eventHighlightsData.slice(0, 6).map((e) =>
@@ -1966,14 +1969,14 @@ export function EventsPage() {
     <AcademicSiteLayout
       title="Events & Presentations"
       path="/events"
-      description="Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram and SSA Research Lab."
+      description="Selected international conference keynotes, workshops, and research presentations led by Dr. Junaid Akram, PhD and SSA Research Lab."
       keywords="Junaid Akram keynote, software security conference, SSA Lab events, international research workshops, Pakistan cybersecurity conference"
       jsonLd={eventsJsonLd}
     >
       <PageIntro
         eyebrow="International Events & Keynotes"
         title="Research presented and shared on global stages."
-        lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr Junaid Akram and SSA Research Lab."
+        lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr. Junaid Akram, PhD and SSA Research Lab."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
@@ -2086,6 +2089,8 @@ export function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [attachment, setAttachment] = useState(null);
+  const [attachmentError, setAttachmentError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -2094,6 +2099,48 @@ export function ContactPage() {
     topic: "",
     message: "",
   });
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    setAttachmentError("");
+    if (!file) return;
+
+    // Check size (5MB max)
+    const MAX_SIZE = 5 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      setAttachmentError("File size exceeds 5MB limit. Please upload a smaller document.");
+      e.target.value = "";
+      return;
+    }
+
+    // Supported extensions: pdf, doc, docx, txt, rtf
+    const validExtensions = [".pdf", ".doc", ".docx", ".txt", ".rtf"];
+    const ext = "." + file.name.split(".").pop().toLowerCase();
+    if (!validExtensions.includes(ext)) {
+      setAttachmentError("Unsupported file type. Please upload a PDF, DOC, DOCX, or TXT file.");
+      e.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setAttachment({
+        filename: file.name,
+        contentType: file.type || "application/octet-stream",
+        size: file.size,
+        data: reader.result, // base64 Data URL
+      });
+    };
+    reader.onerror = () => {
+      setAttachmentError("Failed to read the file. Please try again.");
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeAttachment = () => {
+    setAttachment(null);
+    setAttachmentError("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -2104,7 +2151,10 @@ export function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          attachment: attachment || undefined,
+        }),
       });
 
       const data = await res.json();
@@ -2123,7 +2173,7 @@ export function ContactPage() {
 
   const CONTACT_FAQS = [
     {
-      question: "How can I apply for research or dissertation supervision by Dr. Junaid Akram?",
+      question: "How can I apply for research or dissertation supervision by Dr. Junaid Akram, PhD?",
       answer:
         "Email Junaid.Akram@nottingham.edu.cn with your academic background, CV, transcripts, selected research topic, and technical proficiencies.",
     },
@@ -2138,12 +2188,12 @@ export function ContactPage() {
         "The SSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
     },
     {
-      question: "Is Dr. Junaid Akram an HEC-approved PhD supervisor?",
+      question: "Is Dr. Junaid Akram, PhD an HEC-approved PhD supervisor?",
       answer:
-        "Yes. Dr. Junaid Akram is an HEC-approved PhD supervisor with an active track record of supervising doctoral, masters, and undergraduate engineering research.",
+        "Yes. Dr. Junaid Akram, PhD is an HEC-approved PhD supervisor with an active track record of supervising doctoral, masters, and undergraduate engineering research.",
     },
     {
-      question: "What is Dr. Junaid Akram's office location and institution?",
+      question: "What is Dr. Junaid Akram, PhD's office location and institution?",
       answer:
         `${profile.office || academicProfile.office}. (Former affiliation: Assistant Professor & Program Incharge, COMSATS University Islamabad, Lahore Campus).`,
     },
@@ -2170,7 +2220,7 @@ export function ContactPage() {
     serviceSchema({
       name: "Software Security Assessment & Research Collaboration",
       description:
-        "Dr. Junaid Akram accepts client security assessment contracts, collaboration requests, research proposals, and student supervision enquiries in software security, vulnerability detection, and automated testing.",
+        "Dr. Junaid Akram, PhD accepts client security assessment contracts, collaboration requests, research proposals, and student supervision enquiries in software security, vulnerability detection, and automated testing.",
       serviceType: "Software Security Assessment & Academic Research Supervision",
       url: `${SITE_URL}/contact`,
     }),
@@ -2181,7 +2231,7 @@ export function ContactPage() {
     <AcademicSiteLayout
       title="Contact SSA Research Lab"
       path="/contact"
-      description="Contact Dr. Junaid Akram and the SSA Research Lab at University of Nottingham Ningbo China for research collaborations and student supervision inquiries."
+      description="Contact Dr. Junaid Akram, PhD and the SSA Research Lab at University of Nottingham Ningbo China for research collaborations and student supervision inquiries."
       keywords="contact Junaid Akram, SSA Lab contact, University of Nottingham Ningbo China, UNNC faculty contact, software security collaboration"
       jsonLd={contactJsonLd}
     >
@@ -2258,7 +2308,7 @@ export function ContactPage() {
             <p className={styles.eyebrow}>Send an enquiry</p>
             <h2>Supervision & Research Enquiry Form</h2>
             <p className={styles.sectionLead}>
-              Submit your research interests, FYP supervision requests, or collaboration inquiries directly to Dr. Junaid Akram.
+              Submit your research interests, FYP supervision requests, or collaboration inquiries directly to Dr. Junaid Akram, PhD.
             </p>
           </div>
         </div>
@@ -2286,6 +2336,8 @@ export function ContactPage() {
               style={{ marginTop: "16px" }}
               onClick={() => {
                 setFormSubmitted(false);
+                setAttachment(null);
+                setAttachmentError("");
                 setFormData({
                   name: "",
                   email: "",
@@ -2416,6 +2468,101 @@ export function ContactPage() {
                 />
               </div>
 
+              {/* Attach Document or CV */}
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                  <label htmlFor="cvAttachment" style={{ fontSize: "0.85rem", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}>
+                    <Paperclip size={15} style={{ color: "var(--academic-blue, #4f46e5)" }} />
+                    Attach Document / CV (Optional)
+                  </label>
+                  <span style={{ fontSize: "0.75rem", color: "var(--academic-muted, #64748b)" }}>
+                    PDF, DOC, DOCX up to 5MB
+                  </span>
+                </div>
+
+                {attachment ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 14px",
+                      borderRadius: "10px",
+                      background: "rgba(79, 70, 229, 0.08)",
+                      border: "1px solid rgba(79, 70, 229, 0.25)",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", overflow: "hidden" }}>
+                      <FileText size={20} style={{ color: "var(--academic-blue, #4f46e5)", flexShrink: 0 }} />
+                      <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        <strong style={{ fontSize: "0.85rem", display: "block", overflow: "hidden", textOverflow: "ellipsis" }}>
+                          {attachment.filename}
+                        </strong>
+                        <span style={{ fontSize: "0.75rem", color: "var(--academic-muted, #64748b)" }}>
+                          {(attachment.size / (1024 * 1024)).toFixed(2)} MB &bull; Ready to send
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={removeAttachment}
+                      disabled={isSubmitting}
+                      aria-label="Remove attachment"
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: isSubmitting ? "not-allowed" : "pointer",
+                        color: "var(--academic-muted, #64748b)",
+                        padding: "4px",
+                        display: "flex",
+                        alignItems: "center",
+                        borderRadius: "4px",
+                      }}
+                      title="Remove file"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <label
+                      htmlFor="cvAttachment"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "8px",
+                        padding: "14px",
+                        border: "1.5px dashed var(--academic-line, #cbd5e1)",
+                        borderRadius: "10px",
+                        background: "var(--academic-soft, #f8fafc)",
+                        cursor: isSubmitting ? "not-allowed" : "pointer",
+                        transition: "all 0.2s ease",
+                        textAlign: "center",
+                        fontSize: "0.85rem",
+                      }}
+                    >
+                      <Upload size={16} style={{ color: "var(--academic-blue, #4f46e5)" }} />
+                      <span>Click to upload CV, transcript, or research proposal</span>
+                    </label>
+                    <input
+                      id="cvAttachment"
+                      type="file"
+                      disabled={isSubmitting}
+                      accept=".pdf,.doc,.docx,.txt,.rtf"
+                      onChange={handleFileChange}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                )}
+
+                {attachmentError && (
+                  <p style={{ margin: "6px 0 0", fontSize: "0.8rem", color: "#ef4444" }}>
+                    {attachmentError}
+                  </p>
+                )}
+              </div>
+
               <div className={styles.btnOrbitWrap} style={{ justifySelf: "start" }}>
                 <button type="submit" disabled={isSubmitting} className={styles.primaryButton} style={{ opacity: isSubmitting ? 0.7 : 1 }}>
                   {isSubmitting ? "Sending Enquiry..." : "Submit Enquiry"} <Send size={15} />
@@ -2437,7 +2584,7 @@ export function ContactPage() {
               <div className={styles.enquirySidebarDetails}>
                 <h3>Direct Consultation</h3>
                 <p>
-                  Submit your research background, degree program, or collaboration inquiry directly to Dr. Junaid Akram for research and FYP assessment.
+                  Submit your research background, degree program, or collaboration inquiry directly to Dr. Junaid Akram, PhD for research and FYP assessment.
                 </p>
                 <div className={styles.enquirySidebarBadge}>
                   <ShieldCheck size={16} /> 24–48h Response Window
@@ -2536,7 +2683,7 @@ export function PrivacyPage() {
     <AcademicSiteLayout
       title="Privacy Policy"
       path="/privacy-policy"
-      description="Privacy policy for the academic website of Dr. Junaid Akram and the Software Security Assessment (SSA) Research Lab."
+      description="Privacy policy for the academic website of Dr. Junaid Akram, PhD and the Software Security Assessment (SSA) Research Lab."
     >
       <PageIntro
         eyebrow="Privacy"
@@ -2546,7 +2693,7 @@ export function PrivacyPage() {
       <section className={`${styles.section} ${styles.prose}`}>
         <h2>Information you provide</h2>
         <p>
-          If you contact Dr. Junaid Akram or the SSA Lab by email or form, the information you send is used only to respond to your enquiry, research proposal, collaboration request, or supervision question.
+          If you contact Dr. Junaid Akram, PhD or the SSA Lab by email or form, the information you send is used only to respond to your enquiry, research proposal, collaboration request, or supervision question.
         </p>
         <h3>Analytics and essential operation</h3>
         <p>
