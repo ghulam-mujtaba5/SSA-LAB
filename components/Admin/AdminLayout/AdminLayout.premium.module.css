@@ -665,11 +665,16 @@
   flex: 1;
   border: none;
   background: transparent;
-  color: var(--text-muted);
+  color: #475569;
   font-size: var(--admin-text-sm);
   outline: none;
   min-width: 0;
   text-align: left;
+}
+
+:global([data-theme="dark"]) .searchBar input,
+:global([data-theme="dark"]) .searchBar .searchPlaceholder {
+  color: #94a3b8;
 }
 
 .searchBar input::placeholder {

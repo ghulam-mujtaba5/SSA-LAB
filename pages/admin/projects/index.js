@@ -399,8 +399,10 @@ const ProjectsPage = () => {
             Filters & Search
           </h2>
           <button 
+            type="button"
             className={styles.toggleButton}
             onClick={() => toggleSection('filters')}
+            aria-label={expandedSections.filters ? "Collapse Filters & Search section" : "Expand Filters & Search section"}
           >
             <Icon name={expandedSections.filters ? "chevron-up" : "chevron-down"} size={20} />
           </button>
@@ -431,8 +433,10 @@ const ProjectsPage = () => {
             Projects
           </h2>
           <button 
+            type="button"
             className={styles.toggleButton}
             onClick={() => toggleSection('projects')}
+            aria-label={expandedSections.projects ? "Collapse Projects section" : "Expand Projects section"}
           >
             <Icon name={expandedSections.projects ? "chevron-up" : "chevron-down"} size={20} />
           </button>

@@ -2110,9 +2110,9 @@
   gap: 5px;
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--brand-primary, #0284c7);
-  background: rgba(2, 132, 199, 0.08);
-  border: 1px solid rgba(2, 132, 199, 0.2);
+  color: #0369a1;
+  background: rgba(3, 105, 161, 0.08);
+  border: 1px solid rgba(3, 105, 161, 0.2);
   padding: 3px 8px;
   border-radius: 6px;
 }
