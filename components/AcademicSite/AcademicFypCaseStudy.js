@@ -24,6 +24,10 @@ const dimensions = {
   "/academic/fyp/megilance-admin-command-center.png": [1909, 891],
   "/academic/fyp/megilance-ai-matching.png": [1916, 893],
   "/academic/fyp/megilance-ai-features.png": [2520, 1080],
+  "/academic/fyp/robust-android-malware-detector-poster.webp": [1200, 3000],
+  "/academic/fyp/robust-android-malware-security-dashboard.webp": [1524, 1184],
+  "/academic/fyp/robust-android-malware-uploaded-apps.webp": [1538, 1166],
+  "/academic/fyp/robust-android-malware-risk-analysis.webp": [1502, 1548],
 };
 
 function getDimensions(src, fallback = [1600, 900]) {
@@ -96,8 +100,8 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
           <span>{isOpportunity ? "Availability" : "Students"}</span>
           {isOpportunity ? (
             <p>
-              <strong>Open for BS Supervision</strong>
-              <small>COMSATS University Islamabad, Lahore</small>
+              <strong>{featured.availability || "Open for Supervision"}</strong>
+              <small>{featured.targetAudience || featured.programme || "BSc / BEng / MSc / PhD Supervision"}</small>
             </p>
           ) : studentsList.length > 0 ? (
             studentsList.map((student) => (
@@ -133,7 +137,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
           <span>Institution</span>
           <p>
             <strong>{featured.nature || "Software Security Research"}</strong>
-            <small>{featured.institution || "COMSATS University Islamabad, Lahore Campus"}</small>
+            <small>{featured.institution || (isOpportunity ? "University of Nottingham Ningbo China" : "SSA Research Lab")}</small>
           </p>
         </article>
       </div>

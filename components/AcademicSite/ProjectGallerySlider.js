@@ -21,6 +21,10 @@ const defaultDimensions = {
   "/academic/fyp/megilance-admin-command-center.png": [1909, 891],
   "/academic/fyp/megilance-ai-matching.png": [1916, 893],
   "/academic/fyp/megilance-ai-features.png": [2520, 1080],
+  "/academic/fyp/robust-android-malware-detector-poster.webp": [1200, 3000],
+  "/academic/fyp/robust-android-malware-security-dashboard.webp": [1524, 1184],
+  "/academic/fyp/robust-android-malware-uploaded-apps.webp": [1538, 1166],
+  "/academic/fyp/robust-android-malware-risk-analysis.webp": [1502, 1548],
 };
 
 function getDimensions(src) {

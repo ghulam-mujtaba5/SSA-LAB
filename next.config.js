@@ -51,7 +51,7 @@ const nextConfig = {
     minimumCacheTTL: 2592000,
     // Allow SVG with content disposition
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
+    contentDispositionType: "inline",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
