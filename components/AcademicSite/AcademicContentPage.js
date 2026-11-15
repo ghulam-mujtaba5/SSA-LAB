@@ -223,7 +223,7 @@ export function AboutPage() {
         />
         {coInvestigatorsData[0] && (
           <div className={styles.aboutDirectorCardBanner}>
-            <aside className={styles.aboutDirectorCard} style={{ position: "relative", overflow: "hidden" }}>
+            <div className={styles.aboutDirectorCard} style={{ position: "relative", overflow: "hidden" }}>
               <BorderBeam size={140} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
               <div className={styles.aboutDirectorAvatar} style={{ position: "relative", zIndex: 2 }}>
                 <Image
@@ -234,7 +234,7 @@ export function AboutPage() {
                 />
               </div>
               <div className={styles.aboutDirectorInfo} style={{ position: "relative", zIndex: 2 }}>
-                <h3 className={styles.aboutDirectorName}>{coInvestigatorsData[0].name}</h3>
+                <h2 className={styles.aboutDirectorName}>{coInvestigatorsData[0].name}</h2>
                 <span className={styles.aboutDirectorTitle}>Assistant Professor & HEC PhD Supervisor</span>
                 <span className={styles.aboutDirectorMeta}>
                   Tsinghua University PhD · SnT Luxembourg Postdoc
@@ -260,7 +260,7 @@ export function AboutPage() {
                   )}
                 </div>
               </div>
-            </aside>
+            </div>
           </div>
         )}
       </div>
@@ -1698,7 +1698,7 @@ export function TeamPage() {
                 Looking for technical project architectures & case studies?
               </strong>
               <span style={{ color: "var(--academic-muted)", fontSize: "0.85rem" }}>
-                All 26 supervised engineering projects and running research topics are maintained in our central Supervision Directory.
+                All supervised engineering projects and running research topics are maintained in our central Supervision Directory.
               </span>
             </div>
             <Link href="/supervision" className={styles.primaryButton} style={{ padding: "8px 18px", fontSize: "0.85rem" }}>
@@ -2085,7 +2085,7 @@ export function ContactPage() {
     {
       question: "What is Dr. Junaid Akram's office location and institution?",
       answer:
-        `${profile.office || academicProfile.office}, ${profile.institution || academicProfile.institution}, 199 Taikang East Road, Ningbo, Zhejiang, 315100, China. (Former affiliation: Assistant Professor & Program Incharge, COMSATS University Islamabad, Lahore Campus).`,
+        `${profile.office || academicProfile.office}. (Former affiliation: Assistant Professor & Program Incharge, COMSATS University Islamabad, Lahore Campus).`,
     },
     {
       question: "What is his official phone contact?",
@@ -2152,10 +2152,14 @@ export function ContactPage() {
             <MapPin size={24} />
             <span>Office Location</span>
             <strong>{profile.office || academicProfile.office}</strong>
-            <p>{profile.institution || academicProfile.institution}</p>
-            <p style={{ fontSize: "0.82rem", color: "var(--academic-muted)", marginTop: "4px" }}>
-              199 Taikang East Road, Ningbo, 315100, China
-            </p>
+            {!(profile.office || academicProfile.office)?.includes(profile.institution || academicProfile.institution) && (
+              <p>{profile.institution || academicProfile.institution}</p>
+            )}
+            {!(profile.office || academicProfile.office)?.includes("199 Taikang East Road") && (
+              <p style={{ fontSize: "0.82rem", color: "var(--academic-muted)", marginTop: "4px" }}>
+                199 Taikang East Road, Ningbo, 315100, China
+              </p>
+            )}
           </div>
 
           <div className={styles.contactCard}>

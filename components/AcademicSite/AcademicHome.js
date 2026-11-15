@@ -386,7 +386,7 @@ export default function AcademicHome() {
             </p>
           </div>
           <Link href="/supervision" className={styles.textLink}>
-            Explore all {fypProjectsData.length} projects <ArrowRight size={16} />
+            Explore all projects <ArrowRight size={16} />
           </Link>
         </div>
         <div className={styles.studentGrid}>
@@ -404,7 +404,7 @@ export default function AcademicHome() {
         <div style={{ textAlign: "center", marginTop: "32px" }}>
           <div className={styles.btnOrbitWrap} style={{ margin: "0 auto" }}>
             <Link href="/supervision" className={styles.primaryButton}>
-              View Complete Supervision Directory ({fypProjectsData.length} Projects) <ArrowRight size={16} />
+              View Complete Supervision Directory <ArrowRight size={16} />
             </Link>
           </div>
         </div>

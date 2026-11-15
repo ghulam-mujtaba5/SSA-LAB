@@ -74,25 +74,20 @@ export default function AcademicFooter() {
         <div className={styles.content}>
           {/* Brand Identity Column */}
           <div className={styles.brand}>
-            <Link href="/" className={styles.logoWrap} aria-label="SSA Research Lab Home">
+            <Link href="/" className={styles.brandLogoWrap} aria-label="SSA Research Lab Home">
               <Image
-                src="/academic/ssa-research-group-logo.png"
-                alt="SSA Research Lab Emblem"
-                width={70}
-                height={62}
-                className={styles.logoImage}
+                src="/academic/ssa-official-logo.webp"
+                alt="SSA Research Lab — Software Security Assessment"
+                width={220}
+                height={103}
+                className={styles.brandLogoImg}
                 itemProp="logo"
               />
-              <div className={styles.brandTitle}>
-                <span className={styles.brandRowMain} itemProp="name">SSA</span>
-                <span className={styles.brandRowSub}>RESEARCH LAB</span>
-                <span className={styles.brandDivider} />
-                <span className={styles.brandRowDesc}>SOFTWARE SECURITY ASSESSMENT</span>
-              </div>
             </Link>
             <p className={styles.brandDesc} itemProp="description">
               Advancing source-code vulnerability detection, automated software
-              testing, and malware analysis at COMSATS University Islamabad.
+              testing, LLM-based program repair, and semantic code-clone intelligence
+              at scale.
             </p>
             <div className={styles.metaRow}>
               <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
@@ -101,7 +96,7 @@ export default function AcademicFooter() {
 
           {/* Column 2: Research Quick Links */}
           <nav className={styles.col} aria-label="Research Links">
-            <h4 className={styles.colHeading}>Research</h4>
+            <h3 className={styles.colHeading}>Research</h3>
             <ul className={styles.linkList}>
               {RESEARCH_LINKS.map((link) => (
                 <li key={link.href}>
@@ -116,7 +111,7 @@ export default function AcademicFooter() {
 
           {/* Column 3: Supervision */}
           <nav className={styles.col} aria-label="Supervision Links">
-            <h4 className={styles.colHeading}>Supervision</h4>
+            <h3 className={styles.colHeading}>Supervision</h3>
             <ul className={styles.linkList}>
               {supervisionLinks.map((link) => (
                 <li key={link.label}>
@@ -138,7 +133,7 @@ export default function AcademicFooter() {
 
           {/* Column 4: Contact & Office */}
           <div className={styles.col}>
-            <h4 className={styles.colHeading}>Contact & Office</h4>
+            <h3 className={styles.colHeading}>Contact & Office</h3>
             <div className={styles.contactItem}>
               <Mail size={15} />
               <a href={`mailto:${profile.emails?.[0] || 'Junaid.Akram@nottingham.edu.cn'}`} itemProp="email">
@@ -202,9 +197,6 @@ export default function AcademicFooter() {
             © {new Date().getFullYear()} {profile.name || academicProfile.name} · {profile.lab || academicProfile.lab}. All rights reserved.
           </p>
           <div className={styles.bottomLinks}>
-            <span style={{ color: "var(--academic-muted)", fontSize: "0.82rem" }}>
-              {profile.office || academicProfile.office}, {profile.institution || academicProfile.institution}
-            </span>
             <Link
               href="/admin/login"
               rel="nofollow"
@@ -229,9 +221,9 @@ export default function AcademicFooter() {
       </motion.div>
 
       {/* Oversized subtle background watermark */}
-      <div className={styles.watermark} aria-hidden="true">
-        SSA LAB
-      </div>
+      <svg className={styles.watermark} aria-hidden="true" role="presentation" viewBox="0 0 540 160">
+        <text x="10" y="130" fill="currentColor">SSA LAB</text>
+      </svg>
     </footer>
   );
 }

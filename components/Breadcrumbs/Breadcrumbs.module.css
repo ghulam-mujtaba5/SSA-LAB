@@ -1,0 +1,116 @@
+.breadcrumbNav {
+  width: 100%;
+  border-bottom: 1px solid var(--academic-line, #e2e8f0);
+  background: var(--academic-paper, #ffffff);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  z-index: 10;
+}
+
+:global([data-theme="dark"]) .breadcrumbNav {
+  background: var(--academic-paper, #090d16);
+  border-bottom-color: var(--academic-line, #1e293b);
+}
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--academic-muted, #64748b);
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  max-width: 320px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--academic-muted, #64748b);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--brand-primary, #0284c7);
+  background: rgba(2, 132, 199, 0.06);
+}
+
+:global([data-theme="dark"]) .link:hover,
+:global([data-theme="dark"]) .link:focus-visible {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.current {
+  display: inline-block;
+  color: var(--academic-ink, #0f172a);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 280px;
+}
+
+:global([data-theme="dark"]) .current {
+  color: #f1f5f9;
+}
+
+.separator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--academic-line, #cbd5e1);
+  user-select: none;
+  margin: 0 1px;
+}
+
+:global([data-theme="dark"]) .separator {
+  color: #334155;
+}
+
+.homeIcon {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 28px);
+    padding: 8px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .container::-webkit-scrollbar {
+    display: none;
+  }
+  .list {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  .current {
+    max-width: 180px;
+  }
+}

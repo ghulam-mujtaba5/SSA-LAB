@@ -66,15 +66,15 @@
 }
 
 .button {
-  background: var(--brand-primary, #0284c7);
+  background: var(--brand-primary-hover, #0369a1);
   color: #ffffff;
   border: none;
   border-radius: 6px;
   padding: 0.35rem 0.85rem;
-  font-size: 0.78125rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+  box-shadow: 0 2px 8px rgba(3, 105, 161, 0.25);
   transition: all 0.15s ease;
   outline: none;
   white-space: nowrap;

@@ -139,20 +139,15 @@ export default function AcademicSiteLayout({
         <header className={styles.header}>
           <div className={styles.headerInner}>
             <Link href="/" className={styles.brand} aria-label="SSA Research Lab Home">
-              <span className={styles.logoWrap}>
+              <span className={styles.brandLogoWrap}>
                 <Image
-                  src="/academic/ssa-research-group-logo.png"
-                  alt="SSA Research Lab Emblem"
-                  width={68}
-                  height={56}
+                  src="/academic/ssa-official-logo.webp"
+                  alt="SSA Research Lab — Software Security Assessment"
+                  width={210}
+                  height={99}
+                  className={styles.brandLogoImg}
                   priority
                 />
-              </span>
-              <span className={styles.brandText}>
-                <span className={styles.brandRowMain}>SSA</span>
-                <span className={styles.brandRowSub}>RESEARCH LAB</span>
-                <span className={styles.brandDivider} />
-                <span className={styles.brandRowDesc}>SOFTWARE SECURITY ASSESSMENT</span>
               </span>
             </Link>
 

@@ -9,7 +9,7 @@
 }
 
 .link {
-  color: var(--brand-primary, #0284c7);
+  color: var(--brand-primary-hover, #0369a1);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
