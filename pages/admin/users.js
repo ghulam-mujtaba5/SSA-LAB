@@ -456,19 +456,14 @@ const UsersPage = () => {
 
           <motion.div 
             className={`${commonStyles.sectionCard}`}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            <motion.h2 
-              className={commonStyles.sectionTitle}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-            >
+            <h2 className={commonStyles.sectionTitle}>
               <Icon name="user-plus" size={20} />
               Create New User
-            </motion.h2>
+            </h2>
             <motion.form 
               onSubmit={handleCreateUser} 
               aria-busy={creating}
@@ -555,27 +550,22 @@ const UsersPage = () => {
 
           <motion.div 
             className={`${commonStyles.sectionCard}`}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.7 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            <motion.h2 
-              className={commonStyles.sectionTitle}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.8 }}
-            >
+            <h2 className={commonStyles.sectionTitle}>
               <Icon name="users" size={20} />
               All Users
               <span style={{ 
                 fontSize: '0.875rem', 
                 fontWeight: 'normal', 
-                color: 'var(--text-muted)', 
+                color: 'var(--text-muted, #475569)', 
                 marginLeft: '0.5rem' 
               }}>
                 ({filteredUsers.length} users)
               </span>
-            </motion.h2>
+            </h2>
             {loading && (
               <motion.div 
                 style={{ padding: "1.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}

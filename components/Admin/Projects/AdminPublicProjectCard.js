@@ -42,14 +42,21 @@ const AdminPublicProjectCard = ({
         </label>
         <div className={styles.actionsSection}>
           <Tooltip content="Edit">
-            <button onClick={() => onEdit && onEdit(id)} className={styles.actionButton}>
+            <button 
+              type="button"
+              onClick={() => onEdit && onEdit(id)} 
+              className={styles.actionButton}
+              aria-label="Edit project"
+            >
               <Icon name="edit" size={16} />
             </button>
           </Tooltip>
           <Tooltip content="Delete">
             <button
+              type="button"
               onClick={() => onDelete && onDelete(id)}
               className={`${styles.actionButton} ${styles.actionButtonDanger}`}
+              aria-label="Delete project"
               disabled={deleting}
             >
               {deleting ? <Spinner size="sm" label="Deleting" /> : <Icon name="trash" size={16} />}
@@ -57,6 +64,7 @@ const AdminPublicProjectCard = ({
           </Tooltip>
           <Tooltip content={project?.pinned ? "Unpin" : "Pin"}>
             <button
+              type="button"
               onClick={() => onPin && onPin(project)}
               className={styles.actionButton}
               aria-pressed={!!project?.pinned}
@@ -68,9 +76,11 @@ const AdminPublicProjectCard = ({
           </Tooltip>
           <Tooltip content={project.featuredOnHome ? "Remove from Home" : "Feature on Home"}>
             <button
+              type="button"
               onClick={() => onFeatureToggle(project._id, !project.featuredOnHome)}
               disabled={featuring}
               className={`${styles.actionButton} ${project.featuredOnHome ? styles.actionButtonActive : ''}`}
+              aria-label={project.featuredOnHome ? "Remove from Home page" : "Feature on Home page"}
             >
               {featuring ? <Spinner size="sm" /> : <Icon name="home" size={16} />}
             </button>
@@ -82,6 +92,7 @@ const AdminPublicProjectCard = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.actionButton}
+                aria-label="View live project"
               >
                 <Icon name="externalLink" size={16} />
               </a>

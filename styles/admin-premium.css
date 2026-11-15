@@ -28,12 +28,12 @@
   
   --admin-warning: #f59e0b;
   --admin-warning-light: rgba(245, 158, 11, 0.12);
-  --admin-warning-dark: #d97706;
+  --admin-warning-dark: #92400e;
   --admin-warning-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
   
   --admin-error: #ef4444;
   --admin-error-light: rgba(239, 68, 68, 0.12);
-  --admin-error-dark: #dc2626;
+  --admin-error-dark: #b91c1c;
   --admin-error-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
   
   --admin-info: #06b6d4;

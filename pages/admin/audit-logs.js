@@ -80,11 +80,12 @@ const Filters = ({ filters, setFilters, onApply }) => {
           </select>
         </div>
         <div className={`${styles.fieldGroup} ${styles.span2}`}>
-          <label className={styles.label}>
+          <label htmlFor="filter-from" className={styles.label}>
             <Icon name="calendar" size={16} />
             From
           </label>
           <input
+            id="filter-from"
             type="date"
             className={styles.formControl}
             value={filters.from}
@@ -94,11 +95,12 @@ const Filters = ({ filters, setFilters, onApply }) => {
           />
         </div>
         <div className={`${styles.fieldGroup} ${styles.span2}`}>
-          <label className={styles.label}>
+          <label htmlFor="filter-to" className={styles.label}>
             <Icon name="calendar" size={16} />
             To
           </label>
           <input
+            id="filter-to"
             type="date"
             className={styles.formControl}
             value={filters.to}

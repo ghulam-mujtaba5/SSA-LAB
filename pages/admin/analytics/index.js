@@ -189,7 +189,8 @@ const AnalyticsPage = () => {
 
   if (loading)
     return (
-      <AdminLayout>
+      <AdminLayout title="Analytics">
+        <h1 className="sr-only">Analytics Dashboard</h1>
         <div className={styles.loadingState}>
           <InlineSpinner sizePx={20} />
           <span>Loading analytics dashboard...</span>
@@ -198,10 +199,10 @@ const AnalyticsPage = () => {
     );
   if (error)
     return (
-      <AdminLayout>
+      <AdminLayout title="Analytics">
         <div className={styles.errorState}>
           <Icon name="alert-triangle" size={48} />
-          <h3>Error Loading Analytics</h3>
+          <h1>Error Loading Analytics</h1>
           <p>{error}</p>
           <button 
             onClick={() => window.location.reload()} 

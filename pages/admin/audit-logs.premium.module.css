@@ -175,17 +175,20 @@
 
 .badge_success {
   background: var(--admin-success-light);
-  color: var(--admin-success);
+  color: #065f46 !important;
+  font-weight: 600;
 }
 
 .badge_danger {
   background: var(--admin-error-light);
-  color: var(--admin-error);
+  color: #991b1b !important;
+  font-weight: 600;
 }
 
 .badge_warning {
   background: var(--admin-warning-light);
-  color: var(--admin-warning);
+  color: #92400e !important;
+  font-weight: 600;
 }
 
 .code {

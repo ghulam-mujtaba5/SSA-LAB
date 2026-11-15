@@ -84,19 +84,22 @@
 }
 
 .badge_success {
-  background: rgba(5, 150, 105, 0.15);
-  color: var(--success);
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--success-dark, #047857);
   border: 1px solid rgba(5, 150, 105, 0.3);
+  font-weight: 600;
 }
 
 .badge_warning {
-  background: rgba(217, 119, 6, 0.15);
-  color: var(--warning);
+  background: rgba(217, 119, 6, 0.12);
+  color: var(--warning-dark, #b45309);
   border: 1px solid rgba(217, 119, 6, 0.3);
+  font-weight: 600;
 }
 
 .badge_danger {
-  background: rgba(220, 38, 38, 0.15);
-  color: var(--danger);
+  background: rgba(220, 38, 38, 0.12);
+  color: var(--danger-dark, #be123c);
   border: 1px solid rgba(220, 38, 38, 0.3);
+  font-weight: 600;
 }

@@ -2061,7 +2061,7 @@ export function EventsPage() {
 
                 <div className={styles.eventCardMetaBody}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: "0.78rem", fontWeight: "600", color: "var(--academic-cyan)" }}>
+                    <span style={{ fontSize: "0.78rem", fontWeight: "600", color: "var(--academic-blue, #0369a1)" }}>
                       {image.category} {image.date ? `· ${image.date}` : ""}
                     </span>
                     <span className={styles.eventLocation} style={{ fontSize: "0.78rem" }}>

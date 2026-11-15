@@ -1,0 +1,117 @@
+[
+  {
+    "page": "Home",
+    "path": "/",
+    "violations": []
+  },
+  {
+    "page": "About",
+    "path": "/about",
+    "violations": []
+  },
+  {
+    "page": "Research",
+    "path": "/research",
+    "violations": []
+  },
+  {
+    "page": "Publications",
+    "path": "/publications",
+    "violations": []
+  },
+  {
+    "page": "Projects",
+    "path": "/projects",
+    "violations": []
+  },
+  {
+    "page": "FYP",
+    "path": "/fyp",
+    "violations": []
+  },
+  {
+    "page": "Team",
+    "path": "/team",
+    "violations": []
+  },
+  {
+    "page": "Alumni",
+    "path": "/alumni",
+    "violations": []
+  },
+  {
+    "page": "Events",
+    "path": "/events",
+    "violations": []
+  },
+  {
+    "page": "Contact",
+    "path": "/contact",
+    "violations": []
+  },
+  {
+    "page": "Services",
+    "path": "/services",
+    "violations": []
+  },
+  {
+    "page": "Search",
+    "path": "/search",
+    "violations": []
+  },
+  {
+    "page": "Privacy Policy",
+    "path": "/privacy-policy",
+    "violations": []
+  },
+  {
+    "page": "Admin Login",
+    "path": "/admin/login",
+    "violations": []
+  },
+  {
+    "page": "Admin Dashboard",
+    "path": "/admin/dashboard",
+    "violations": []
+  },
+  {
+    "page": "Admin Publications",
+    "path": "/admin/publications",
+    "violations": []
+  },
+  {
+    "page": "Admin Projects",
+    "path": "/admin/projects",
+    "violations": []
+  },
+  {
+    "page": "Admin FYP",
+    "path": "/admin/fyp",
+    "violations": []
+  },
+  {
+    "page": "Admin Team",
+    "path": "/admin/team",
+    "violations": []
+  },
+  {
+    "page": "Admin Events",
+    "path": "/admin/events",
+    "violations": []
+  },
+  {
+    "page": "Admin Users",
+    "path": "/admin/users",
+    "violations": []
+  },
+  {
+    "page": "Admin Analytics",
+    "path": "/admin/analytics",
+    "violations": []
+  },
+  {
+    "page": "Admin Audit Logs",
+    "path": "/admin/audit-logs",
+    "violations": []
+  }
+]

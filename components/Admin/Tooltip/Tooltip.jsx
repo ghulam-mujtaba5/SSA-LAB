@@ -72,11 +72,11 @@ const Tooltip = ({
   return (
     <span 
       className={styles.wrapper}
-      role="tooltip"
     >
       {trigger}
       <span 
         id={id} 
+        role="tooltip"
         className={`${styles.tooltip} ${styles[placement]} ${isVisible ? styles.visible : ''}`}
         role="tooltip"
         aria-hidden={!isVisible}

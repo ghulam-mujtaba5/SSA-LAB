@@ -8,7 +8,6 @@ import {
   Microscope,
   ShieldCheck,
   ExternalLink,
-  Sparkles,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import AcademicImageLightbox from "./AcademicImageLightbox";
@@ -201,10 +200,6 @@ export default function AcademicHome() {
 
           <div className={styles.heroIllustrationContainer}>
             <div className={styles.heroPortraitBackdropGlow} aria-hidden="true" />
-            <div className={styles.heroFloatingSupervisorBadge}>
-              <Sparkles size={13} className={styles.sparkleIcon} />
-              <span>HEC-Approved PhD Supervisor</span>
-            </div>
             <AcademicImageLightbox
               src="/academic/junaid-akram-hero-transparent.webp"
               alt="Dr. Junaid Akram, PhD — Assistant Professor at University of Nottingham Ningbo China & Director of SSA Research Lab"

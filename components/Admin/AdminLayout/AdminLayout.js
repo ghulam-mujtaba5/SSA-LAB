@@ -302,7 +302,7 @@ export default function AdminLayoutPremium({ children, title }) {
         </div>
 
         {/* Navigation */}
-        <nav className={styles.nav}>
+        <nav className={styles.nav} aria-label="Admin Navigation">
           <ul>
             {nav.primary.map((item) => {
               const ItemIcon = item.icon;

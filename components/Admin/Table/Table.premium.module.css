@@ -27,7 +27,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--text-muted, var(--admin-text-secondary));
+  color: #334155;
   background: var(--bg-elev-1, var(--admin-bg-secondary));
   border-bottom: 1px solid var(--border, var(--admin-border));
   white-space: nowrap;
@@ -35,6 +35,10 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+:global([data-theme="dark"]) .th {
+  color: #cbd5e1;
 }
 
 .td {

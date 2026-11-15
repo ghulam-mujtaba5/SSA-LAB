@@ -2,7 +2,7 @@
   --academic-ink: #0f172a;
   --academic-navy: #0f172a;
   --academic-blue: #0369a1;
-  --academic-cyan: #0284c7;
+  --academic-cyan: #0369a1;
   --academic-paper: #ffffff;
   --academic-soft: #f8fafc;
   --academic-line: #e2e8f0;
@@ -886,6 +886,8 @@
   gap: 6px;
   padding-right: 8px;
   border-right: 1px solid rgba(148, 163, 184, 0.22);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 :global([data-theme="light"]) .heroProfileCardHeader {
@@ -925,6 +927,8 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #94a3b8;
+  white-space: nowrap;
+  word-break: keep-all;
 }
 
 :global([data-theme="light"]) .heroProfileCardTitle {
@@ -1031,6 +1035,7 @@
     margin-bottom: 2px;
     width: 100%;
     justify-content: center;
+    white-space: nowrap;
   }
 
   .heroProfileButtons {
