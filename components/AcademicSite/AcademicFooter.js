@@ -77,15 +77,17 @@ export default function AcademicFooter() {
             <Link href="/" className={styles.logoWrap} aria-label="SSA Research Lab Home">
               <Image
                 src="/academic/ssa-research-group-logo.png"
-                alt="SSA Research Group"
-                width={90}
-                height={60}
+                alt="SSA Research Lab Emblem"
+                width={70}
+                height={62}
                 className={styles.logoImage}
                 itemProp="logo"
               />
               <div className={styles.brandTitle}>
-                <strong itemProp="name">{profile.labShort || profile.lab}</strong>
-                <span itemProp="founder">{profile.name}</span>
+                <span className={styles.brandRowMain} itemProp="name">SSA</span>
+                <span className={styles.brandRowSub}>RESEARCH LAB</span>
+                <span className={styles.brandDivider} />
+                <span className={styles.brandRowDesc}>SOFTWARE SECURITY ASSESSMENT</span>
               </div>
             </Link>
             <p className={styles.brandDesc} itemProp="description">
@@ -139,8 +141,8 @@ export default function AcademicFooter() {
             <h4 className={styles.colHeading}>Contact & Office</h4>
             <div className={styles.contactItem}>
               <Mail size={15} />
-              <a href={`mailto:${profile.emails?.[0] || profile.labEmail || 'Junaid.Akram@nottingham.edu.cn'}`} itemProp="email">
-                {profile.emails?.[0] || profile.labEmail}
+              <a href={`mailto:${profile.emails?.[0] || 'Junaid.Akram@nottingham.edu.cn'}`} itemProp="email">
+                {profile.emails?.[0] || 'Junaid.Akram@nottingham.edu.cn'}
               </a>
             </div>
             <div className={styles.contactItem}>

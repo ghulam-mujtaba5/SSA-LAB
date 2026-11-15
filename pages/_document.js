@@ -59,7 +59,7 @@ class MyDocument extends Document {
           {/* ── Google Fonts ─────────────────────────────────── */}
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
           />
 
           {/* ── Security headers ──────────────────────────────── */}

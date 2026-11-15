@@ -389,6 +389,8 @@ export function AboutPage() {
               ? "/academic/nottingham-university-logo-dark.svg"
               : !isDark && partner.imageLight
               ? partner.imageLight
+              : !isDark && isNottingham
+              ? "/academic/nottingham-university-logo-light.svg"
               : partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
             return (
               <figure key={partner.name}>
@@ -1374,7 +1376,6 @@ const staticPartnerMap = {
   "Tsinghua University": "/academic/tsinghua-university-logo.webp",
   "University of Luxembourg (SnT)": "/academic/snt-university-luxembourg-logo.png",
   "SES Satellites": "/academic/ses-logo.png",
-  "King Fahd University (KFUPM)": "/academic/king-fahd-university-logo.png",
 };
 
 const staticStudentMap = {
@@ -1407,8 +1408,6 @@ export function TeamPage() {
   const showPi = activeTab === "all" || activeTab === "pi";
   const showMs = activeTab === "all" || activeTab === "ms";
   const showBs = activeTab === "all" || activeTab === "bs";
-  const showAlumni = activeTab === "all" || activeTab === "alumni";
-  const showPartners = activeTab === "all" || activeTab === "partners";
 
   const allPersonnel = [
     ...coInvestigatorsData.map((c) => ({ ...c, type: "Faculty & Investigator" })),
@@ -1417,10 +1416,10 @@ export function TeamPage() {
 
   const teamJsonLd = [
     collectionPageSchema({
-      name: "SSA Lab — People & Partners",
+      name: "SSA Lab — Research Team & Collaborators",
       url: `${SITE_URL}/team`,
       description:
-        "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab.",
+        "Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, and alumni of SSA Lab.",
       items: [
         ...allPersonnel.map((p) => ({ name: p.name, url: `${SITE_URL}/team` })),
       ],
@@ -1504,20 +1503,6 @@ export function TeamPage() {
             onClick={() => setActiveTab("bs")}
           >
             💻 Undergraduate Team — BS Engineering ({fypProjectsData.filter((p) => !p.isOpportunity && (p.institution || "").includes("COMSATS")).length + supervisedProjectsData.length})
-          </button>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeTab === "alumni" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveTab("alumni")}
-          >
-            💼 Alumni & Placements ({alumniPlacementsData.length})
-          </button>
-          <button
-            type="button"
-            className={`${styles.collabTab} ${activeTab === "partners" ? styles.activeCollabTab : ""}`}
-            onClick={() => setActiveTab("partners")}
-          >
-            🏛️ Institutional Partners ({partnerLogosData.length})
           </button>
         </div>
       </section>
@@ -1808,10 +1793,25 @@ export function TeamPage() {
 
           <div className={styles.collabGrid}>
             {supervisedProjectsData.map((proj, pIdx) => {
-              const studentName = proj.student || proj.name || proj.author || "Supervised Researcher";
-              const studentTerm = proj.term || proj.session || proj.period || proj.year || "Supervised Project";
-              const projectTitle = proj.title || proj.projectTitle || proj.topic || "Supervised Research Project";
-              const institutionName = proj.institution || "Xiamen University Malaysia";
+              const staticMatch = (supervisedProjects || []).find(
+                (sp) => sp.title?.trim().toLowerCase() === (proj.title || proj.projectTitle || "").trim().toLowerCase()
+              );
+              const studentName =
+                (proj.student && proj.student !== "Supervised Researcher")
+                  ? proj.student
+                  : (Array.isArray(proj.students) && proj.students.length > 0)
+                  ? proj.students.join(", ")
+                  : (proj.name && proj.name !== "Supervised Researcher")
+                  ? proj.name
+                  : staticMatch?.student || "Student Researcher";
+              const studentTerm =
+                (proj.term && proj.term !== "Supervised Project")
+                  ? proj.term
+                  : (proj.period && proj.period !== "Supervised Project")
+                  ? proj.period
+                  : staticMatch?.term || "Research Supervision";
+              const projectTitle = proj.title || proj.projectTitle || proj.topic || staticMatch?.title || "Supervised Research Project";
+              const institutionName = proj.institution || proj.organization || staticMatch?.institution || "Xiamen University Malaysia";
 
               return (
                 <article key={`${studentName}-${pIdx}`} className={styles.collabCard}>
@@ -1840,69 +1840,42 @@ export function TeamPage() {
         </section>
       )}
 
-      {/* 4. ALUMNI & CAREER PLACEMENTS */}
-      {showAlumni && (
-        <section className={`${styles.section} ${styles.softSection}`}>
-          <div className={styles.sectionHeading}>
-            <div>
-              <p className={styles.eyebrow}>Career Outcomes</p>
-              <h2>Supervised Alumni Placements & Industrial Careers</h2>
-            </div>
-            <p style={{ maxWidth: "540px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Graduates mentored in the lab progressing to top global advisories, software tech leaders, and corporate research centers.
-            </p>
-          </div>
-
-          <div className={styles.placementList}>
-            {alumniPlacementsData.map((placement) => (
-              <article key={`${placement.name}-${placement.organization}`}>
-                <div>
-                  <h3>{placement.name}</h3>
-                  <p>{placement.organization || placement.affiliation}</p>
-                </div>
-                <span>{placement.term || placement.period}</span>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 5. INSTITUTIONAL PARTNERS & ACADEMIC AFFILIATIONS */}
-      {showPartners && (
-        <section className={styles.partners} aria-label="Academic and research affiliations" style={{ marginTop: "48px", borderRadius: "18px" }}>
-          <p>Academic & Research Partner Universities</p>
-          <div className={styles.partnerGrid}>
-            {partnerLogosData.map((partner) => {
-              const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
-              const partnerImg = isDark && partner.imageDark
-                ? partner.imageDark
-                : isDark && isNottingham
-                ? "/academic/nottingham-university-logo-dark.svg"
-                : !isDark && partner.imageLight
-                ? partner.imageLight
-                : partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
-              return (
-                <figure key={partner.name}>
-                  <a
-                    href={partner.href || "#"}
-                    target="_blank"
-                    rel="noreferrer"
-                    title={partner.name}
-                  >
-                    <Image
-                      src={partnerImg}
-                      alt={partner.name}
-                      width={200}
-                      height={60}
-                      style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
-                    />
-                  </a>
-                </figure>
-              );
-            })}
-          </div>
-        </section>
-      )}
+      {/* 4. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS */}
+      <section className={styles.partners} aria-label="Academic and research affiliations" style={{ marginTop: "48px", borderRadius: "18px" }}>
+        <p>Academic & Research Partner Universities</p>
+        <div className={styles.partnerGrid}>
+          {partnerLogosData.map((partner) => {
+            const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
+            const partnerImg = isDark && partner.imageDark
+              ? partner.imageDark
+              : isDark && isNottingham
+              ? "/academic/nottingham-university-logo-dark.svg"
+              : !isDark && partner.imageLight
+              ? partner.imageLight
+              : !isDark && isNottingham
+              ? "/academic/nottingham-university-logo-light.svg"
+              : partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
+            return (
+              <figure key={partner.name}>
+                <a
+                  href={partner.href || "#"}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={partner.name}
+                >
+                  <Image
+                    src={partnerImg}
+                    alt={partner.name}
+                    width={200}
+                    height={60}
+                    style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
+                  />
+                </a>
+              </figure>
+            );
+          })}
+        </div>
+      </section>
     </AcademicSiteLayout>
   );
 }
@@ -2160,9 +2133,16 @@ export function ContactPage() {
             <a href={`mailto:${profile.emails?.[0] || academicProfile.emails[0]}`}>
               {profile.emails?.[0] || academicProfile.emails[0]}
             </a>
-            <a href={`mailto:${profile.labEmail || academicProfile.labEmail}`}>
-              {profile.labEmail || academicProfile.labEmail}
-            </a>
+            {(profile.emails?.[1] || academicProfile.emails[1]) && (
+              <a href={`mailto:${profile.emails?.[1] || academicProfile.emails[1]}`}>
+                {profile.emails?.[1] || academicProfile.emails[1]}
+              </a>
+            )}
+            {(profile.labEmail || academicProfile.labEmail) ? (
+              <a href={`mailto:${profile.labEmail || academicProfile.labEmail}`}>
+                {profile.labEmail || academicProfile.labEmail}
+              </a>
+            ) : null}
             <p style={{ marginTop: "6px", fontSize: "0.85rem", color: "var(--academic-text)" }}>
               Tel: <a href="tel:+8657488180000">{profile.phone || academicProfile.phone}</a>
             </p>
@@ -2224,7 +2204,7 @@ export function ContactPage() {
               <h3 style={{ color: "#10b981", margin: 0, fontSize: "1.2rem" }}>Enquiry Submitted Successfully</h3>
             </div>
             <p style={{ marginTop: "12px", lineHeight: "1.6" }}>
-              Thank you, <strong>{formData.name}</strong>. Your enquiry has been received and saved into our research database. An email notification with your details has also been dispatched to the lab director at <strong>jnd.akram@hotmail.com</strong>.
+              Thank you, <strong>{formData.name}</strong>. Your enquiry has been received and saved into our research database. An email notification with your details has also been dispatched to the lab director at <strong>Junaid.Akram@nottingham.edu.cn</strong>.
             </p>
             <button
               type="button"

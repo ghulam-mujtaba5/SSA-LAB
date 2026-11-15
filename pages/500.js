@@ -36,9 +36,10 @@ export default function Custom500() {
         <Image
           src="/academic/ssa-research-group-full-logo.png"
           alt="SSA Research Lab — Software Security Assessment Lab"
-          width={220}
-          height={200}
+          width={320}
+          height={150}
           className={styles.logo}
+          style={{ width: "auto", maxHeight: "120px", objectFit: "contain" }}
           priority
         />
       </motion.div>

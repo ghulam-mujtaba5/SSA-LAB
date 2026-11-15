@@ -59,12 +59,13 @@ export default function AcademicDomainModal({ domain, onClose }) {
       }
     };
 
+    const prevOverflow = document.body.style.overflow;
     document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = prevOverflow || "auto";
       // Restore focus to trigger element
       if (triggerRef.current && typeof triggerRef.current.focus === "function") {
         triggerRef.current.focus();
@@ -76,9 +77,11 @@ export default function AcademicDomainModal({ domain, onClose }) {
 
   const scrollToSection = (sectionId) => {
     setActiveTab(sectionId);
+    const container = modalRef.current?.querySelector(`.${styles.modalBody}`);
     const element = document.getElementById(`modal-section-${sectionId}`);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (container && element) {
+      const topOffset = element.offsetTop - container.offsetTop;
+      container.scrollTo({ top: Math.max(0, topOffset - 12), behavior: "smooth" });
     }
   };
 

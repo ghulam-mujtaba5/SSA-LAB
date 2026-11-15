@@ -32,7 +32,7 @@ const navigation = [
     hasDropdown: true,
     children: supervisionSubItems,
   },
-  { label: "People & Partners", href: "/team" },
+  { label: "Research Team", href: "/team" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },
 ];
@@ -138,19 +138,21 @@ export default function AcademicSiteLayout({
       <div className={styles.site}>
         <header className={styles.header}>
           <div className={styles.headerInner}>
-            <Link href="/" className={styles.brand} aria-label="SSA home">
+            <Link href="/" className={styles.brand} aria-label="SSA Research Lab Home">
               <span className={styles.logoWrap}>
                 <Image
                   src="/academic/ssa-research-group-logo.png"
-                  alt="SSA Research Group"
-                  width={90}
-                  height={60}
+                  alt="SSA Research Lab Emblem"
+                  width={68}
+                  height={56}
                   priority
                 />
               </span>
               <span className={styles.brandText}>
-                <strong>{academicProfile.labShort}</strong>
-                <small>{academicProfile.shortName}</small>
+                <span className={styles.brandRowMain}>SSA</span>
+                <span className={styles.brandRowSub}>RESEARCH LAB</span>
+                <span className={styles.brandDivider} />
+                <span className={styles.brandRowDesc}>SOFTWARE SECURITY ASSESSMENT</span>
               </span>
             </Link>
 

@@ -6,10 +6,10 @@ export const academicProfile = {
   institution: "University of Nottingham Ningbo China",
   lab: "Software Security Assessment Lab",
   labShort: "SSA Research Lab",
-  office: "School of Computer Science (Ext. 6424)",
+  office: "School of Computer Science, University of Nottingham Ningbo China, 199 Taikang East Road, Ningbo, 315100, China (Ext. 6424)",
   phone: "+86 (0) 574 88180000 (Ext. 6424)",
-  emails: ["Junaid.Akram@nottingham.edu.cn", "junaid.tsinghua@yahoo.com", "junaidakram@cuilahore.edu.pk"],
-  labEmail: "ssa.laab@gmail.com",
+  emails: ["Junaid.Akram@nottingham.edu.cn", "junaid.tsinghua@yahoo.com"],
+  labEmail: "",
   googleScholar: "https://scholar.google.com/citations?user=JunaidAkram",
   linkedin: "https://www.linkedin.com/in/junaidakram/",
   researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
@@ -1204,6 +1204,14 @@ export const eventGallery = [
 
 export const partnerLogos = [
   {
+    name: "University of Nottingham Ningbo China",
+    image: "/academic/nottingham-university-logo.svg",
+    imageDark: "/academic/nottingham-university-logo-dark.svg",
+    imageLight: "/academic/nottingham-university-logo-light.svg",
+    href: "https://www.nottingham.edu.cn/",
+    role: "Current Academic Affiliation & Host Institution",
+  },
+  {
     name: "Tsinghua University",
     image: "/academic/tsinghua-university-logo.webp",
     href: "https://www.tsinghua.edu.cn/en/",
@@ -1226,14 +1234,6 @@ export const partnerLogos = [
     image: "/academic/comsats-university-islamabad-logo.png",
     href: "https://lahore.comsats.edu.pk/",
     role: "Former Host University & Research Partner",
-  },
-  {
-    name: "University of Nottingham Ningbo China",
-    image: "/academic/nottingham-university-logo.svg",
-    imageDark: "/academic/nottingham-university-logo-dark.svg",
-    imageLight: "/academic/nottingham-university-logo-light.svg",
-    href: "https://www.nottingham.edu.cn/",
-    role: "Current Academic Affiliation & Host Institution",
   },
 ];
 

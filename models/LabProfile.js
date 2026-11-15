@@ -56,6 +56,8 @@ const PartnerLogoSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     image: { type: String, required: true, trim: true },
+    imageDark: { type: String, default: "", trim: true },
+    imageLight: { type: String, default: "", trim: true },
     href: { type: String, default: "", trim: true },
     role: { type: String, default: "", trim: true },
   },
@@ -87,7 +89,7 @@ const LabProfileSchema = new mongoose.Schema(
     office: { type: String, default: "School of Computer Science (Ext. 6424)", trim: true },
     phone: { type: String, default: "+86 (0) 574 88180000 (Ext. 6424)", trim: true },
     emails: { type: [String], default: ["Junaid.Akram@nottingham.edu.cn", "junaid.tsinghua@yahoo.com"] },
-    labEmail: { type: String, default: "ssa.laab@gmail.com", trim: true },
+    labEmail: { type: String, default: "", trim: true },
     googleScholar: { type: String, default: "", trim: true },
     linkedin: { type: String, default: "", trim: true },
     researchGate: { type: String, default: "", trim: true },

@@ -1,11 +1,12 @@
-import { TeamPage } from "../components/AcademicSite/AcademicContentPage";
-
 export default function AlumniRoutePage() {
-  return <TeamPage />;
+  return null;
 }
 
 export async function getServerSideProps() {
   return {
-    props: {},
+    redirect: {
+      destination: "/team",
+      permanent: true,
+    },
   };
 }

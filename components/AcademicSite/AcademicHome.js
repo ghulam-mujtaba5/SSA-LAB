@@ -96,7 +96,7 @@ export default function AcademicHome() {
     profilePageSchema({
       name: "Dr. Junaid Akram — SSA Research Lab",
       description:
-        "Software Security Assessment Lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus. Advancing vulnerability detection, malware analysis, semantic code clone detection, and automated software verification.",
+        "Software Security Assessment Lab led by Dr. Junaid Akram at University of Nottingham Ningbo China. Advancing vulnerability detection, malware analysis, semantic code clone detection, and automated software verification.",
     }),
     datasetSchema({
       name: "Hadoop IBFET 324B+ Lines of Code Clone Corpus",
@@ -202,18 +202,6 @@ export default function AcademicHome() {
             <div className={styles.heroProfileCard} style={{ position: "relative", overflow: "hidden" }}>
               <BorderBeam size={160} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
               <div className={styles.heroProfileCardHeader} style={{ position: "relative", zIndex: 2 }}>
-                <Image
-                  src="/academic/junaid-akram-professor.jpg"
-                  alt="Dr. Junaid Akram"
-                  width={32}
-                  height={32}
-                  style={{
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    border: "1.5px solid var(--academic-cyan, #06b6d4)",
-                    flexShrink: 0,
-                  }}
-                />
                 <div className={styles.heroProfileStatusDot} />
                 <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram</span>
               </div>
@@ -417,22 +405,22 @@ export default function AcademicHome() {
       </section>
 
       {/* Final Contact CTA */}
-      <section className={styles.ctaBand} style={{ textAlign: "center", padding: "48px 24px" }}>
+      <section className={styles.ctaBand}>
         <div>
-          <p className={styles.eyebrow} style={{ fontSize: "1rem", letterSpacing: "0.14em", marginBottom: "12px", textTransform: "uppercase" }}>
+          <p className={styles.eyebrow} style={{ fontSize: "0.88rem", letterSpacing: "0.12em", marginBottom: "8px", textTransform: "uppercase" }}>
             Collaborate with SSA Lab
           </p>
-          <h2 style={{ fontSize: "clamp(1.85rem, 3.5vw, 2.75rem)", fontWeight: 700, margin: "0 auto", maxWidth: "800px" }}>
+          <h2 style={{ fontSize: "clamp(1.45rem, 2.5vw, 2.15rem)", fontWeight: 700, margin: 0, lineHeight: 1.25, maxWidth: "760px" }}>
             If you are interested in software security, software testing, or code analysis
           </h2>
-          <p style={{ maxWidth: "680px", margin: "16px auto 28px", fontSize: "1.05rem", lineHeight: "1.65", color: "var(--academic-muted)" }}>
+          <p style={{ margin: "10px 0 0 0", color: "var(--academic-muted)", fontSize: "0.98rem", lineHeight: 1.6 }}>
             We supervise BS, MS, PhD, and Postdoc researchers.
           </p>
-          <div className={styles.btnOrbitWrap} style={{ margin: "0 auto" }}>
-            <Link href="/contact" className={styles.primaryButton}>
-              Contact Us <ArrowRight size={17} />
-            </Link>
-          </div>
+        </div>
+        <div className={styles.btnOrbitWrap} style={{ flexShrink: 0 }}>
+          <Link href="/contact" className={styles.primaryButton}>
+            Contact Us <ArrowRight size={17} />
+          </Link>
         </div>
       </section>
 
@@ -448,6 +436,8 @@ export default function AcademicHome() {
               ? "/academic/nottingham-university-logo-dark.svg"
               : !isDark && partner.imageLight
               ? partner.imageLight
+              : !isDark && isNottingham
+              ? "/academic/nottingham-university-logo-light.svg"
               : partner.image || "/academic/comsats-university-islamabad-logo.png";
             return (
               <figure key={partner.name}>

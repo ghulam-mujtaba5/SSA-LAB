@@ -117,7 +117,85 @@
 .brandTitle {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  justify-content: center;
+  line-height: 1;
+  user-select: none;
+}
+
+.brandRowMain {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.58rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+  color: #042044;
+  -webkit-text-stroke: 1.6px #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+:global([data-theme="dark"]) .brandRowMain {
+  color: #042044;
+  -webkit-text-stroke: 1.8px #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.95));
+}
+
+.brandRowSub {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  color: #042044;
+  text-transform: uppercase;
+  margin-top: 3px;
+  -webkit-text-stroke: 1.1px #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.85));
+}
+
+:global([data-theme="dark"]) .brandRowSub {
+  color: #042044;
+  -webkit-text-stroke: 1.2px #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 2.5px rgba(255, 255, 255, 0.9));
+}
+
+.brandDivider {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #042044;
+  margin: 3.5px 0;
+  border-radius: 1px;
+  outline: 0.75px solid #ffffff;
+}
+
+:global([data-theme="dark"]) .brandDivider {
+  background: #042044;
+  outline: 0.85px solid #ffffff;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+}
+
+.brandRowDesc {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: #0284c7;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+:global([data-theme="dark"]) .brandRowDesc {
+  color: #38bdf8;
+}
+
+.logoWrap:hover .brandRowMain {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 1));
 }
 
 .brandTitle strong {

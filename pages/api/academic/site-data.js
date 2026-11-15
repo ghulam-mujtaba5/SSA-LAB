@@ -64,7 +64,31 @@ export default async function handler(req, res) {
       };
     });
     const labImpactStats = profileDoc?.impactStats?.length ? profileDoc.impactStats : staticAcademicData.labImpactStats;
-    const partnerLogos = profileDoc?.partnerLogos?.length ? profileDoc.partnerLogos : staticAcademicData.partnerLogos;
+    let partnerLogos = profileDoc?.partnerLogos?.length ? profileDoc.partnerLogos : staticAcademicData.partnerLogos;
+    const hasNottingham = partnerLogos.some((p) => p.name?.toLowerCase().includes("nottingham"));
+    if (!hasNottingham) {
+      const nottinghamStatic = (staticAcademicData.partnerLogos || []).find((p) => p.name?.toLowerCase().includes("nottingham")) || {
+        name: "University of Nottingham Ningbo China",
+        image: "/academic/nottingham-university-logo.svg",
+        imageDark: "/academic/nottingham-university-logo-dark.svg",
+        imageLight: "/academic/nottingham-university-logo-light.svg",
+        href: "https://www.nottingham.edu.cn/",
+        role: "Current Academic Affiliation & Host Institution",
+      };
+      partnerLogos = [nottinghamStatic, ...partnerLogos];
+    }
+    partnerLogos = partnerLogos.map((p) => {
+      const isNottingham = p.name?.toLowerCase().includes("nottingham");
+      if (isNottingham) {
+        return {
+          ...p,
+          image: p.image || "/academic/nottingham-university-logo.svg",
+          imageDark: p.imageDark || "/academic/nottingham-university-logo-dark.svg",
+          imageLight: p.imageLight || "/academic/nottingham-university-logo-light.svg",
+        };
+      }
+      return p;
+    });
 
     // Format publications
     const publications = pubDocs?.length ? pubDocs : staticAcademicData.publications;
@@ -140,7 +164,26 @@ export default async function handler(req, res) {
       : staticAcademicData.researchProjects;
 
     const supervisedProjects = projectDocs?.filter((p) => p.projectType === 'Supervised').length
-      ? projectDocs.filter((p) => p.projectType === 'Supervised')
+      ? projectDocs.filter((p) => p.projectType === 'Supervised').map((p) => {
+          const staticMatch = (staticAcademicData.supervisedProjects || []).find(
+            (sp) => sp.title?.trim().toLowerCase() === p.title?.trim().toLowerCase()
+          );
+          const studentName =
+            p.student ||
+            (Array.isArray(p.students) && p.students.length > 0 ? p.students.join(', ') : '') ||
+            staticMatch?.student ||
+            p.name ||
+            '';
+          const term = p.term || p.period || staticMatch?.term || '';
+          const institution = p.institution || p.organization || staticMatch?.institution || 'Xiamen University Malaysia';
+          return {
+            ...p,
+            student: studentName,
+            term,
+            institution,
+            title: p.title || staticMatch?.title || '',
+          };
+        })
       : staticAcademicData.supervisedProjects;
 
     // Format FYP projects & opportunities

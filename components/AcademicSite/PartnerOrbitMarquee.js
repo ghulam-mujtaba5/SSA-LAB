@@ -11,7 +11,6 @@ const defaultStaticPartnerMap = {
   "Tsinghua University": "/academic/tsinghua-university-logo.webp",
   "University of Luxembourg (SnT)": "/academic/snt-university-luxembourg-logo.png",
   "SES Satellites": "/academic/ses-logo.png",
-  "King Fahd University (KFUPM)": "/academic/king-fahd-university-logo.png",
 };
 
 /**
@@ -42,6 +41,8 @@ export default function PartnerOrbitMarquee({ partners = [] }) {
             ? "/academic/nottingham-university-logo-dark.svg"
             : !isDark && partner.imageLight
             ? partner.imageLight
+            : !isDark && isNottingham
+            ? "/academic/nottingham-university-logo-light.svg"
             : partner.image || defaultStaticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
           return (
             <a

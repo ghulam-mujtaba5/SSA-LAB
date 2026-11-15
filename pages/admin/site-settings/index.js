@@ -234,7 +234,7 @@ export default function SiteSettingsAdminPage() {
       ...prev,
       partnerLogos: [
         ...(prev.partnerLogos || []),
-        { name: '', image: '', href: '', role: 'Research Partner' },
+        { name: '', image: '', imageDark: '', imageLight: '', href: '', role: 'Research Partner' },
       ],
     }));
   };
@@ -393,7 +393,7 @@ export default function SiteSettingsAdminPage() {
                       className={styles.formInput}
                       value={profile.labEmail || ''}
                       onChange={(e) => setProfile({ ...profile, labEmail: e.target.value })}
-                      placeholder="e.g. ssa.laab@gmail.com"
+                      placeholder="e.g. contact@ssa-lab.tech"
                     />
                   </div>
                 </div>
@@ -1084,7 +1084,7 @@ export default function SiteSettingsAdminPage() {
 
                       <div style={{ display: 'grid', gap: 8 }}>
                         <label style={{ fontSize: '0.82rem', fontWeight: 600, color: '#334155' }}>
-                          Partner Logo Image
+                          Partner Logo Image (Default)
                         </label>
                         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
                           <input
@@ -1109,6 +1109,40 @@ export default function SiteSettingsAdminPage() {
                           contextTitle={partner.name || 'partner-logo'}
                           imageType="partner-logo"
                         />
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 4 }}>
+                          <div>
+                            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#475569' }}>
+                              Dark Mode Logo (Optional)
+                            </label>
+                            <input
+                              type="text"
+                              className={styles.formInput}
+                              placeholder="e.g. /academic/nottingham-university-logo-dark.svg"
+                              value={partner.imageDark || ''}
+                              onChange={(e) => {
+                                const next = [...profile.partnerLogos];
+                                next[idx].imageDark = e.target.value;
+                                setProfile({ ...profile, partnerLogos: next });
+                              }}
+                            />
+                          </div>
+                          <div>
+                            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#475569' }}>
+                              Light Mode Logo (Optional)
+                            </label>
+                            <input
+                              type="text"
+                              className={styles.formInput}
+                              placeholder="e.g. /academic/nottingham-university-logo-light.svg"
+                              value={partner.imageLight || ''}
+                              onChange={(e) => {
+                                const next = [...profile.partnerLogos];
+                                next[idx].imageLight = e.target.value;
+                                setProfile({ ...profile, partnerLogos: next });
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))

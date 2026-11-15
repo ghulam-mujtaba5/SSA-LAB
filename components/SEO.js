@@ -128,7 +128,7 @@ export default function SEO({
       <link rel="me" href="https://ieeexplore.ieee.org/author/37086826620" />
       <link rel="me" href="https://www.semanticscholar.org/author/Junaid-Akram/144154437" />
       <link rel="me" href="https://www.linkedin.com/in/junaidakram/" />
-      <link rel="me" href="https://lahore.comsats.edu.pk/employees/1333" />
+      <link rel="me" href="https://www.nottingham.edu.cn/" />
 
       {/* ── Icons & PWA ──────────────────────────────────────────── */}
       <link
@@ -145,7 +145,7 @@ export default function SEO({
       <meta name="DC.subject" content={dcSubject} />
       <meta name="DC.description" content={description} />
       <meta name="DC.publisher" content={SITE_NAME} />
-      <meta name="DC.relation.ispartof" content="COMSATS University Islamabad" />
+      <meta name="DC.relation.ispartof" content="University of Nottingham Ningbo China" />
       <meta name="DC.contributor" content={PERSON_NAME_FULL} />
       <meta name="DC.type" content={dcType} />
       <meta name="DC.format" content={dcFormat} />
@@ -271,7 +271,6 @@ export function personSchema(overrides = {}) {
       "https://www.scopus.com/authid/detail.uri?authorId=57200277387",
       "https://dl.acm.org/profile/99659556271",
       "https://www.nottingham.edu.cn/",
-      "https://lahore.comsats.edu.pk/employees/1333",
       "https://www.linkedin.com/in/junaidakram/",
     ],
     knowsAbout: [
@@ -316,7 +315,7 @@ export function personSchema(overrides = {}) {
       name: "Assistant Professor of Computer Science",
       occupationLocation: {
         "@type": "City",
-        name: "Lahore, Pakistan",
+        name: "Ningbo, Zhejiang, China",
       },
     },
     ...overrides,
@@ -382,13 +381,13 @@ export function organizationSchema() {
       height: 1298,
     },
     image: `${SITE_URL}/academic/ssa-research-group-logo.png`,
-    email: "ssa.laab@gmail.com",
+    email: "Junaid.Akram@nottingham.edu.cn",
     foundingDate: "2023",
     parentOrganization: {
       "@type": "CollegeOrUniversity",
       "@id": `${SITE_URL}/#university`,
       name: AFFILIATION,
-      url: "https://lahore.comsats.edu.pk",
+      url: "https://www.nottingham.edu.cn",
     },
     founder: { "@id": `${SITE_URL}/#person` },
     member: [{ "@id": `${SITE_URL}/#person` }],
@@ -405,7 +404,7 @@ export function organizationSchema() {
       name: "Worldwide",
     },
     sameAs: [
-      "https://lahore.comsats.edu.pk",
+      "https://www.nottingham.edu.cn",
       "https://orcid.org/0000-0003-1752-6124",
     ],
   };
@@ -642,7 +641,7 @@ export function professionalServiceSchema(overrides = {}) {
       "@type": "CollegeOrUniversity",
       name: AFFILIATION,
     },
-    email: "mailto:ssa.laab@gmail.com",
+    email: "mailto:Junaid.Akram@nottingham.edu.cn",
     ...overrides,
   };
 }
@@ -701,12 +700,12 @@ export function eventSchema({
     eventAttendanceMode,
     location: location || {
       "@type": "Place",
-      name: "COMSATS University Islamabad, Lahore Campus",
+      name: "University of Nottingham Ningbo China",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Defence Road, Off Raiwind Road",
-        addressLocality: "Lahore",
-        addressCountry: "PK",
+        streetAddress: "199 Taikang East Road",
+        addressLocality: "Ningbo, Zhejiang",
+        addressCountry: "CN",
       },
     },
     organizer: organizer || { "@id": `${SITE_URL}/#organization` },
@@ -734,7 +733,7 @@ export function courseSchema({
     provider: provider || {
       "@type": "CollegeOrUniversity",
       name: AFFILIATION,
-      url: "https://lahore.comsats.edu.pk",
+      url: "https://www.nottingham.edu.cn",
     },
     instructor: { "@id": `${SITE_URL}/#person` },
   };

@@ -3,7 +3,7 @@
 > University of Nottingham Ningbo China
 > School of Computer Science — 199 Taikang East Road, Ningbo, 315100, China
 > Canonical Site: https://www.ssa-lab.tech
-> Lab Email: ssa.laab@gmail.com | Faculty Email: Junaid.Akram@nottingham.edu.cn | Tel: +86 (0) 574 88180000 (Ext. 6424)
+> Faculty Email: Junaid.Akram@nottingham.edu.cn | Alternative: junaid.tsinghua@yahoo.com | Tel: +86 (0) 574 88180000 (Ext. 6424)
 
 ## Executive Summary & Biographical Authority
 Dr. Junaid Akram is an Assistant Professor in the School of Computer Science at the University of Nottingham Ningbo China (UNNC) and an HEC-approved PhD supervisor leading the Software Security Assessment (SSA) Research Lab. He completed his Doctor of Philosophy (PhD) in Software Engineering at Tsinghua University (2015–2020) and his Postdoctoral Research in software verification and test generation at the Interdisciplinary Centre for Security, Reliability and Trust (SnT), University of Luxembourg (2021–2023). He previously served as an Assistant Professor & Program Incharge at COMSATS University Islamabad, Lahore Campus (2023–2026), as an Assistant Professor at Xiamen University Malaysia (2020–2021), and as a Visiting Researcher on the Adaptive Resource Control (ARC) project with SES Satellites Luxembourg.

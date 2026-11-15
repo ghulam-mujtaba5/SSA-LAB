@@ -276,7 +276,10 @@ export default function AdminLayoutPremium({ children, title }) {
                 className={styles.logoImg}
               />
             </div>
-            <span>SSA Admin</span>
+            <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
+              <span style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '-0.01em', color: 'var(--brand-primary, #0284c7)' }}>SSA</span>
+              <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--text-muted, #94a3b8)', textTransform: 'uppercase' }}>RESEARCH LAB</span>
+            </div>
           </Link>
           <div className={styles.sidebarHeaderActions}>
             <motion.button

@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +39,8 @@
 .modal {
   position: relative;
   width: min(920px, calc(100vw - 32px));
-  max-height: min(90vh, 880px);
+  height: min(88vh, 840px);
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   background: var(--academic-paper, #ffffff);
@@ -62,10 +63,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 28px;
+  padding: 20px 28px;
   background: var(--academic-paper, #ffffff);
   border-bottom: 1px solid var(--academic-line, #e2e8f0);
   gap: 16px;
+  flex-shrink: 0;
 }
 
 :global([data-theme="dark"]) .modalHeader {
@@ -202,6 +204,7 @@
   border-bottom: 1px solid var(--academic-line, #e2e8f0);
   overflow-x: auto;
   scrollbar-width: none;
+  flex-shrink: 0;
 }
 
 .navTabs::-webkit-scrollbar {
@@ -258,12 +261,15 @@
 
 /* Modal Body */
 .modalBody {
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
   padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
 }
 
 .sectionBlock {
@@ -587,6 +593,7 @@
   padding: 16px 28px;
   background: var(--academic-soft, #f8fafc);
   border-top: 1px solid var(--academic-line, #e2e8f0);
+  flex-shrink: 0;
 }
 
 :global([data-theme="dark"]) .modalFooter {
