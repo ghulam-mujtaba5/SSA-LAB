@@ -22,58 +22,71 @@ const CATEGORIES = [
 export default function AcademicFypListing({ projects = [] }) {
   const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
-  const [activeType, setActiveType] = useState("all"); // 'all', 'running', 'completed', 'opportunity'
+  const [activeType, setActiveType] = useState("all"); // 'all', 'running', 'completed'
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (router.query.tab) {
       const tabParam = String(router.query.tab).toLowerCase();
-      if (["all", "running", "completed", "complete", "future", "opportunity", "topics"].includes(tabParam)) {
+      if (["all", "running", "completed", "complete"].includes(tabParam)) {
         if (tabParam === "complete") setActiveType("completed");
-        else if (tabParam === "opportunity" || tabParam === "topics") setActiveType("future");
         else setActiveType(tabParam);
       }
     }
   }, [router.query.tab]);
 
-  const { runningProjects, completedProjects, futureProjects } = useMemo(() => {
+  // Clean projects to only include verified supervised projects (no opportunity proposal cards)
+  const validProjects = useMemo(() => {
+    return projects.filter(
+      (p) =>
+        !p.isOpportunity &&
+        p.categoryType !== "future" &&
+        !(p.projectType && (p.projectType.includes("Opportunity") || p.projectType.includes("Future")))
+    );
+  }, [projects]);
+
+  const { runningProjects, completedProjects } = useMemo(() => {
     const running = [];
     const completed = [];
-    const future = [];
-    projects.forEach((p) => {
-      const isRunning = p.categoryType === "running" || p.isRunning || (p.status && p.status.toLowerCase().includes("running"));
-      const isFuture = p.categoryType === "future" || p.isOpportunity || p.isMsPhD || (p.status && p.status.toLowerCase().includes("future")) || (p.projectType && (p.projectType.includes("Opportunity") || p.projectType.includes("MS/PhD") || p.projectType.includes("Future")));
-      
+    validProjects.forEach((p) => {
+      const isRunning =
+        p.categoryType === "running" ||
+        p.isRunning ||
+        (p.status && p.status.toLowerCase().includes("running"));
+
       if (isRunning) {
         running.push(p);
-      } else if (isFuture) {
-        future.push(p);
       } else {
         completed.push(p);
       }
     });
-    return { runningProjects: running, completedProjects: completed, futureProjects: future };
-  }, [projects]);
+    return { runningProjects: running, completedProjects: completed };
+  }, [validProjects]);
 
   const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
-      const isRunning = project.categoryType === "running" || project.isRunning || (project.status && project.status.toLowerCase().includes("running"));
-      const isFuture = project.categoryType === "future" || project.isOpportunity || project.isMsPhD || (project.status && project.status.toLowerCase().includes("future")) || (project.projectType && (project.projectType.includes("Opportunity") || project.projectType.includes("MS/PhD") || project.projectType.includes("Future")));
-      const isCompleted = !isRunning && !isFuture;
+    return validProjects.filter((project) => {
+      const isRunning =
+        project.categoryType === "running" ||
+        project.isRunning ||
+        (project.status && project.status.toLowerCase().includes("running"));
+      const isCompleted = !isRunning;
 
       // Type tab filter
       if (activeType === "running" && !isRunning) return false;
       if (activeType === "completed" && !isCompleted) return false;
-      if (activeType === "future" && !isFuture) return false;
 
       // Category filter
       const matchesCategory =
         activeCategory === "All" ||
         project.category === activeCategory ||
         (activeCategory === "Vulnerability & Security" &&
-          (project.nature?.includes("Security") || project.specializations?.some((s) => s.includes("Security")))) ||
+          (project.nature?.includes("Security") ||
+            project.specializations?.some((s) => s.includes("Security")))) ||
         (activeCategory === "AI & Machine Learning" &&
-          (project.nature?.includes("Research") || project.specializations?.some((s) => s.includes("Intelligence") || s.includes("Learning"))));
+          (project.nature?.includes("Research") ||
+            project.specializations?.some(
+              (s) => s.includes("Intelligence") || s.includes("Learning")
+            )));
 
       // Search filter
       const query = searchQuery.toLowerCase().trim();
@@ -82,13 +95,17 @@ export default function AcademicFypListing({ projects = [] }) {
       const titleMatch = project.title?.toLowerCase().includes(query);
       const summaryMatch = project.summary?.toLowerCase().includes(query);
       const studentMatch = (project.students || []).some(
-        (s) => s.name?.toLowerCase().includes(query) || s.registration?.toLowerCase().includes(query),
+        (s) =>
+          s.name?.toLowerCase().includes(query) ||
+          s.registration?.toLowerCase().includes(query)
       );
-      const techMatch = (project.technologies || []).some((t) => t.toLowerCase().includes(query));
+      const techMatch = (project.technologies || []).some((t) =>
+        t.toLowerCase().includes(query)
+      );
 
       return matchesCategory && (titleMatch || summaryMatch || studentMatch || techMatch);
     });
-  }, [projects, activeCategory, activeType, searchQuery]);
+  }, [validProjects, activeCategory, activeType, searchQuery]);
 
   return (
     <section className={`${styles.section} ${styles.fypListingSection}`}>
@@ -97,7 +114,7 @@ export default function AcademicFypListing({ projects = [] }) {
           <p className={styles.eyebrow}>Supervision Directory</p>
           <h2>Research Supervision & Capstone Projects</h2>
           <p className={styles.sectionLead}>
-            Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram, PhD at SSA Lab.
+            Explore running research projects and completed student capstones led by Dr. Junaid Akram, PhD at SSA Lab.
           </p>
         </div>
       </div>
@@ -113,11 +130,15 @@ export default function AcademicFypListing({ projects = [] }) {
         </span>
         <span className={styles.listingStatsDivider}>·</span>
         <span>
-          <strong>{futureProjects.length}</strong> Future Projects & Topics
-        </span>
-        <span className={styles.listingStatsDivider}>·</span>
-        <span>
-          <ShieldCheck size={14} style={{ display: "inline", verticalAlign: "-2px", color: "var(--brand-primary)" }} /> SSA Lab Verified Directory
+          <ShieldCheck
+            size={14}
+            style={{
+              display: "inline",
+              verticalAlign: "-2px",
+              color: "var(--brand-primary)",
+            }}
+          />{" "}
+          SSA Lab Verified Directory
         </span>
       </div>
 
@@ -129,7 +150,7 @@ export default function AcademicFypListing({ projects = [] }) {
             className={`${styles.filterPill} ${activeType === "all" ? styles.filterPillActive : ""}`}
             onClick={() => setActiveType("all")}
           >
-            All Projects ({projects.length})
+            All Projects ({validProjects.length})
           </button>
           <button
             type="button"
@@ -144,13 +165,6 @@ export default function AcademicFypListing({ projects = [] }) {
             onClick={() => setActiveType("completed")}
           >
             Completed Projects ({completedProjects.length})
-          </button>
-          <button
-            type="button"
-            className={`${styles.filterPill} ${activeType === "future" ? styles.filterPillActive : ""}`}
-            onClick={() => setActiveType("future")}
-          >
-            Future Projects & Topics ({futureProjects.length})
           </button>
         </div>
 
@@ -194,17 +208,13 @@ export default function AcademicFypListing({ projects = [] }) {
       <div className={styles.fypCardGrid}>
         {filteredProjects.length > 0 ? (
           filteredProjects.map((project) => {
-            const isOpp = project.isOpportunity || project.projectType === "Open FYP Opportunity" || project.projectType === "COMSATS FYP Opportunity";
             const isFeatured = project.featured;
-            const detailUrl = isOpp
-              ? `/supervision/opportunities/${project.slug}`
-              : `/supervision/projects/${project.slug}`;
+            const detailUrl = `/supervision/projects/${project.slug}`;
 
             return (
               <article
                 key={project.slug || project._id}
                 className={`${styles.fypCard} ${isFeatured ? styles.fypCardFeatured : ""}`}
-                style={isOpp ? { borderTop: "3px solid var(--brand-accent, #3b82f6)" } : undefined}
                 onMouseMove={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
@@ -213,8 +223,8 @@ export default function AcademicFypListing({ projects = [] }) {
               >
                 <div className={styles.fypCardTop}>
                   <div className={styles.fypCardBadges}>
-                    <span className={styles.categoryBadge} style={isOpp ? { background: "rgba(59,130,246,0.12)", color: "#2563eb" } : undefined}>
-                      {isOpp ? "Open Supervision Topic" : project.category || "Supervised Project"}
+                    <span className={styles.categoryBadge}>
+                      {project.category || "Supervised Project"}
                     </span>
                     {isFeatured ? (
                       <span className={styles.featuredBadge}>
@@ -231,9 +241,18 @@ export default function AcademicFypListing({ projects = [] }) {
 
                 <p className={styles.fypCardSummary}>{project.summary}</p>
 
-                {/* Students list or Opportunity badge */}
-                {!isOpp && project.students && project.students.length > 0 ? (
-                  <div className={styles.fypCardStudents} style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "6px", marginTop: "10px" }}>
+                {/* Students list */}
+                {project.students && project.students.length > 0 ? (
+                  <div
+                    className={styles.fypCardStudents}
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      alignItems: "center",
+                      gap: "6px",
+                      marginTop: "10px",
+                    }}
+                  >
                     {project.students.map((s, idx) => {
                       const staticStudentMap = {
                         "Ghulam Mujtaba": "/academic/students/ghulam-mujtaba.png",
@@ -243,8 +262,28 @@ export default function AcademicFypListing({ projects = [] }) {
                       };
                       const avatar = s.image || staticStudentMap[s.name];
                       return (
-                        <span key={s.name || idx} style={{ display: "inline-flex", alignItems: "center", gap: avatar ? "6px" : "3px", background: "rgba(255,255,255,0.04)", border: "1px solid var(--academic-border)", padding: avatar ? "2px 8px 2px 4px" : "3px 8px", borderRadius: "16px", fontSize: "0.75rem" }}>
-                          {avatar && <img src={avatar} alt={s.name} width={18} height={18} style={{ borderRadius: "50%", objectFit: "cover" }} />}
+                        <span
+                          key={s.name || idx}
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: avatar ? "6px" : "3px",
+                            background: "rgba(255,255,255,0.04)",
+                            border: "1px solid var(--academic-border)",
+                            padding: avatar ? "2px 8px 2px 4px" : "3px 8px",
+                            borderRadius: "16px",
+                            fontSize: "0.75rem",
+                          }}
+                        >
+                          {avatar && (
+                            <img
+                              src={avatar}
+                              alt={s.name}
+                              width={18}
+                              height={18}
+                              style={{ borderRadius: "50%", objectFit: "cover" }}
+                            />
+                          )}
                           {s.profileUrl ? (
                             <a
                               href={s.profileUrl}
@@ -252,24 +291,29 @@ export default function AcademicFypListing({ projects = [] }) {
                               rel="noopener noreferrer"
                               className={styles.studentProfileLink}
                             >
-                              {s.name} <ExternalLink size={10} style={{ display: "inline", verticalAlign: "-1px" }} />
+                              {s.name}{" "}
+                              <ExternalLink
+                                size={10}
+                                style={{ display: "inline", verticalAlign: "-1px" }}
+                              />
                             </a>
                           ) : (
                             <span style={{ fontWeight: 500 }}>{s.name}</span>
                           )}
-                          {s.registration ? <small style={{ opacity: 0.75, marginLeft: "2px" }}>({s.registration})</small> : ""}
+                          {s.registration ? (
+                            <small style={{ opacity: 0.75, marginLeft: "2px" }}>
+                              ({s.registration})
+                            </small>
+                          ) : (
+                            ""
+                          )}
                         </span>
                       );
                     })}
                   </div>
-                ) : isOpp ? (
-                  <div className={styles.fypCardStudents} style={{ color: "var(--brand-primary)" }}>
-                    <BookOpen size={14} className={styles.metaIcon} />
-                    <span>Available for COMSATS BS Supervision</span>
-                  </div>
                 ) : null}
 
-                {/* Technologies / Prerequisites */}
+                {/* Technologies */}
                 <div className={styles.fypCardTech}>
                   {(project.technologies || []).slice(0, 5).map((tech) => (
                     <span key={tech}>{tech}</span>
@@ -279,7 +323,7 @@ export default function AcademicFypListing({ projects = [] }) {
                 {/* Card Actions */}
                 <div className={styles.fypCardActions}>
                   <Link href={detailUrl} className={styles.viewDetailBtn}>
-                    {isOpp ? "View Opportunity Proposal" : "View Case Study"} <ArrowRight size={15} />
+                    View Case Study <ArrowRight size={15} />
                   </Link>
 
                   {project.liveUrl ? (

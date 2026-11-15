@@ -108,6 +108,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/gallery",
+        destination: "/events",
+        permanent: true,
+      },
+      {
         source: "/projects/:slug*",
         destination: "/supervision/projects/:slug*",
         permanent: true,

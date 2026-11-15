@@ -164,7 +164,7 @@ export const defaultFypProjects = [
     students: [
       { name: "Urwa Kamal", registration: "FA23-BSE-190" },
       { name: "Maha Khawar", registration: "FA23-BSE-073" },
-      { name: "Laiba Amir", registration: "FA23-BSE-067" }
+      { name: "Laiba Amir", registration: "FA23-BSE-067" },
     ],
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Vulnerability Patching", "Program Repair", "LLM Optimization", "Docker Sandboxing"],
@@ -217,7 +217,7 @@ export const defaultFypProjects = [
     institution: "COMSATS University Islamabad, Lahore Campus",
     students: [
       { name: "Muhammad Soman Saeed", registration: "FA23-BSE-138" },
-      { name: "Hadeeq Ahmed", registration: "FA23-BSE-205" }
+      { name: "Hadeeq Ahmed", registration: "FA23-BSE-205" },
     ],
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Feature Envy Detection", "Graph Neural Networks", "Code Refactoring", "Visual Analytics"],
@@ -289,7 +289,7 @@ export const defaultFypProjects = [
   {
     title: "Robust Android Malware Detector",
     slug: "robust-android-malware-detector",
-    summary: "Completed supervised project implementing static disassembly analysis, APK opcode feature vectors, and ensemble machine learning classifiers for resilient Android malware detection.",
+    summary: "Completed supervised project implementing static disassembly analysis, APK opcode feature vectors, MobSF sandbox behavioral analysis, and ensemble machine learning classifiers with weighted risk scoring for resilient Android malware detection.",
     status: "Completed",
     categoryType: "completed",
     projectType: "Completed Project",
@@ -298,40 +298,69 @@ export const defaultFypProjects = [
     programme: "BS Software Engineering",
     session: "Spring 2026",
     institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "FA25SE28 Student Group", registration: "FA25SE28" }],
+    students: [
+      {
+        name: "Sunnia Irfan",
+        registration: "FA22-BSE-007",
+        profileUrl: "",
+        image: ""
+      }
+    ],
     supervisor: "Dr. Junaid Akram, PhD",
-    specializations: ["Android Malware", "Apktool Disassembly", "Random Forest Classifier", "XGBoost"],
-    technologies: ["Python", "Apktool", "Androguard", "Scikit-learn", "XGBoost", "FastAPI"],
-    coverImage: "/academic/fyp/test-data-generation-poster.webp",
+    specializations: ["Android Malware", "Apktool Disassembly", "Random Forest Classifier", "XGBoost", "MobSF Sandbox", "Weighted Risk Scoring"],
+    technologies: ["Python", "Apktool", "Androguard", "Scikit-learn", "XGBoost", "MobSF", "VirusTotal API", "FastAPI"],
+    coverImage: "/academic/fyp/robust-android-malware-detector-poster.webp",
     coverAlt: "Robust Android Malware Detector Poster",
-    problem: "Android malware represents a pervasive threat to mobile users and enterprise devices, with malicious apps constantly evolving through code obfuscation, dynamic payload loading, and API reflection to evade signature-based antivirus scanners. Modern malware detection frameworks need to reliably distinguish between benign and malicious APK files based on intrinsic opcode execution patterns without requiring time-consuming runtime emulation.",
-    solution: "This supervised project implements an end-to-end static Android malware classification platform. APK files are decompiled using Apktool and Androguard to extract Dalvik bytecode (Smali) opcode sequences, declared permissions, and intent filters. The system generates high-dimensional opcode n-gram frequency matrices and trains an ensemble machine learning classifier (combining Random Forest, Extra Trees, and XGBoost). The resulting model achieves robust classification resilience against common code obfuscation and identifier renaming techniques.",
+    problem: "Smartphones are now critical endpoints of personal and organizational operations and thus are prime targets for zero-day exploits, evasive malware, and data theft. Existing mobile anti-malware and mobile device management systems rely predominantly on rigid signature-based detection that compromises user privacy and easily fails against code obfuscation, identifier renaming, and dynamic API reflection.",
+    solution: "This supervised research project delivers a privacy-centric hybrid Android malware classification system. Combining on-device machine learning with global threat intelligence, MobSF sandbox-assisted behavioral analysis, and a weighted multi-source risk algorithm, the system extracts Dalvik opcode sequences, dangerous permissions, and API call graphs into dense feature vectors to reliably identify malicious APK packages without requiring time-consuming runtime emulation.",
     architecture: [
-      { title: "APK Decompilation & Manifest Parsing", detail: "Extracts AndroidManifest.xml and disassembles Dalvik bytecode into Smali opcode representations using Apktool and Androguard." },
-      { title: "Static Feature Vector Extraction", detail: "Mines dangerous permission requests, API call graphs, and opcode n-gram frequencies into dense feature vectors." },
-      { title: "Ensemble Machine Learning Pipeline", detail: "Trains and evaluates Random Forest, Extra Trees, and XGBoost classifiers with multi-fold cross-validation." },
-      { title: "Threat Scoring & Risk Reporting", detail: "Generates detailed risk breakdowns identifying suspicious permission combinations and malicious code paths." }
+      { title: "APK Decompilation & Manifest Parsing (AD-05)", detail: "Extracts AndroidManifest.xml and disassembles Dalvik bytecode into Smali opcode representations using Apktool and Androguard." },
+      { title: "Static Feature Vector Extraction & ML Prediction (AD-04)", detail: "Mines dangerous permission requests, API call graphs, and opcode n-gram frequencies into dense feature vectors evaluated by ensemble classifiers (Random Forest, Extra Trees, XGBoost)." },
+      { title: "Sandbox & Dynamic Analysis (AD-06)", detail: "Integrates with MobSF sandbox engine to conduct static and dynamic behavioral inspection, detecting sensitive network calls, dropped payloads, and dangerous intent filters." },
+      { title: "Multi-Engine Scanning (AD-07)", detail: "Queries multi-engine threat intelligence feeds (VirusTotal) to cross-reference known malware signatures across 60+ AV detection engines." },
+      { title: "Weighted Multi-Source Risk Scoring (AD-08)", detail: "Executes a custom weighted risk algorithm combining on-device ML probability, VirusTotal detection rates, static permission risks, and dynamic behavior scores into a normalized 0-100 threat score." }
     ],
     objectives: [
-      "Automate high-throughput static disassembly of Android APK packages.",
+      "Automate high-throughput static disassembly of Android APK packages without root permissions.",
       "Extract discriminative opcode frequency patterns resilient to renaming obfuscation.",
-      "Evaluate detection performance across Drebin and CIC-InvesAndMal2019 malware benchmarks.",
-      "Provide an intuitive web interface for uploading APK files and inspecting threat scores."
+      "Integrate MobSF sandbox analysis and multi-engine threat verification.",
+      "Develop a weighted multi-source risk algorithm (VirusTotal, Static, Dynamic, ML).",
+      "Deploy a responsive web dashboard for real-time app inventory, APK threat scoring, and analysis reporting."
     ],
-    outcome: "Achieved 96.8% detection accuracy with a 1.2% false alarm rate on a benchmark corpus of 12,000 Android APKs, reliably flagging ransomware, adware, and trojan variants.",
+    outcome: "Achieved 96.8% detection accuracy with a 1.2% false alarm rate on a benchmark corpus of 12,000 Android APKs, reliably detecting advanced malware, ransomware, adware, and trojan variants such as NetHunter with comprehensive risk breakdowns.",
     contributions: [
       "Constructed an automated APK disassembly and feature extraction pipeline.",
       "Trained an ensemble classifier optimized for fast inference on modest hardware.",
-      "Authored an in-depth empirical comparison of opcode vs permission-based feature sets."
+      "Implemented a weighted 4-source risk assessment engine integrating VirusTotal and MobSF.",
+      "Built interactive Security Dashboard and Uploaded Apps inspection interfaces."
     ],
     limitations: [
       "Cannot detect zero-day malware that downloads and executes encrypted native payloads dynamically at runtime."
     ],
     gallery: [
-      { url: "/academic/fyp/test-data-generation-poster.webp", caption: "Robust Android Malware Detector Research Poster", order: 1 }
+      {
+        url: "/academic/fyp/robust-android-malware-detector-poster.webp",
+        caption: "Robust Android Malware Detector — Official Final Year Project Research Poster",
+        order: 1
+      },
+      {
+        url: "/academic/fyp/robust-android-malware-security-dashboard.webp",
+        caption: "Security Dashboard — Real-time Android Malware Detection Insights & Device Inventory",
+        order: 2
+      },
+      {
+        url: "/academic/fyp/robust-android-malware-uploaded-apps.webp",
+        caption: "Uploaded Apps Management — MobSF Connected Sandbox APK Analysis & Multi-Engine Verification",
+        order: 3
+      },
+      {
+        url: "/academic/fyp/robust-android-malware-risk-analysis.webp",
+        caption: "Analysis Results — Weighted Multi-Source Risk Algorithm Score (78.5/100 Malicious) & Threat Breakdown",
+        order: 4
+      }
     ],
     published: true,
-    featured: false,
+    featured: true,
     displayOrder: 7
   },
   {
@@ -360,9 +389,9 @@ export const defaultFypProjects = [
     displayOrder: 8
   },
   {
-    title: "XSS Vulnerability Detection & Defense System",
+    title: "XSSNIPER — ML-Enhanced XSS Vulnerability Detection & Defense System",
     slug: "xss-vulnerability-detection-defense",
-    summary: "Completed web security capstone project delivering an automated Cross-Site Scripting (XSS) static code auditor and dynamic browser defense extension.",
+    summary: "Completed web security capstone project delivering an automated Cross-Site Scripting (XSS) static code auditor, ML pre/post filter, and dynamic browser defense extension.",
     status: "Completed",
     categoryType: "completed",
     projectType: "Completed Project",
@@ -371,12 +400,15 @@ export const defaultFypProjects = [
     programme: "BS Computer Science",
     session: "Spring 2026",
     institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "FA25CS21 Student Group", registration: "FA25CS21" }],
+    students: [
+      { name: "Sheheryar Altaf", registration: "FA22-BCS-043" },
+      { name: "Maryam Aasim", registration: "FA22-BCS-141" }
+    ],
     supervisor: "Dr. Junaid Akram, PhD",
-    specializations: ["XSS Defense", "Web Security Auditing", "Browser Extension Security", "Taint Analysis"],
-    technologies: ["JavaScript", "Python", "DOM Analysis", "Node.js", "Chrome Extension API"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp",
-    coverAlt: "XSS Vulnerability Detection & Defense Poster",
+    specializations: ["XSS Defense", "Web Security Auditing", "Browser Extension Security", "Taint Analysis", "XSStrike ML Filter"],
+    technologies: ["JavaScript", "Python", "DOM Analysis", "Node.js", "Chrome Extension API", "Machine Learning"],
+    coverImage: "/academic/fyp/xss-vulnerability-poster.webp",
+    coverAlt: "XSSNIPER Machine Learning Enhanced XSS Scanner Poster",
     problem: "Cross-Site Scripting (XSS)—encompassing Stored, Reflected, and DOM-based variants—consistently ranks among the most prevalent OWASP Top 10 web vulnerabilities. Web applications frequently employ flawed regular expressions or incomplete HTML sanitization routines that sophisticated attackers can bypass with polyglot payloads, leading to session hijacking, credential theft, and unauthorized actions.",
     solution: "This completed project delivers a dual-layer XSS security ecosystem: an automated static code scanner that audits server-side and client-side JavaScript/HTML for insecure data sinks (e.g., innerHTML, eval, document.write), and a lightweight browser defense extension that monitors runtime DOM mutations and enforces strict Contextual Content Security Policies (CSP). By intercepting taint flows before execution, the system prevents payload detonation with zero noticeable browser latency.",
     architecture: [
@@ -400,7 +432,7 @@ export const defaultFypProjects = [
       "Browser extension defense requires client installation and does not replace the necessity of server-side sanitization."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp", caption: "XSS Vulnerability Detection & Defense Poster", order: 1 }
+      { url: "/academic/fyp/xss-vulnerability-poster.webp", caption: "XSSNIPER — ML-Enhanced XSS Scanner Research Poster", order: 1 }
     ],
     published: true,
     featured: false,
@@ -418,7 +450,11 @@ export const defaultFypProjects = [
     programme: "BS Software Engineering",
     session: "Fall 2025",
     institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "SP25SE22 Student Group", registration: "SP25SE22" }],
+    students: [
+      { name: "Ehtisham Ahmed Gondal", registration: "SP22-BSE-112" },
+      { name: "Syeda Saleha Khubaib", registration: "SP22-BSE-100" },
+      { name: "Hafiz Mutahar Hashmi", registration: "SP22-BSE-030" }
+    ],
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Computer Vision", "YOLO Object Tracking", "Sports Analytics"],
     technologies: ["Python", "OpenCV", "YOLOv8", "Streamlit"],
@@ -443,7 +479,11 @@ export const defaultFypProjects = [
     programme: "BS Computer Science",
     session: "Fall 2025",
     institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "SP25CS03 Student Group", registration: "SP25CS03" }],
+    students: [
+      { name: "Husnain Sardar", registration: "SP22-BCS-087" },
+      { name: "Taha Waheed", registration: "SP22-BCS-012" },
+      { name: "Rida Zahra", registration: "SP22-BCS-105" }
+    ],
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Biomedical Signal Processing", "Acoustic Classification", "Real-Time Monitoring"],
     technologies: ["Python", "Librosa", "Signal Processing", "React Native"],
@@ -468,7 +508,11 @@ export const defaultFypProjects = [
     programme: "BS Software Engineering",
     session: "Fall 2025",
     institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "SP25SE17 Student Group", registration: "SP25SE17" }],
+    students: [
+      { name: "Mustafa Tariq", registration: "SP22-BSE-119" },
+      { name: "Abdul Rehman", registration: "SP22-BSE-014" },
+      { name: "Syed Muhammad Umer Ijaz", registration: "SP22-BSE-049" }
+    ],
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["CVE Management", "Vulnerability Benchmarking", "Security Dashboard", "CVSS Scoring"],
     technologies: ["Python", "Django", "PostgreSQL", "NVD API", "React"],
@@ -516,7 +560,11 @@ export const defaultFypProjects = [
     programme: "BS Software Engineering",
     session: "Fall 2025",
     institution: "COMSATS University Islamabad, Lahore Campus",
-    students: [{ name: "SP25SE15 Student Group", registration: "SP25SE15" }],
+    students: [
+      { name: "Yaseen Nazir", registration: "SP22-BSE-111" },
+      { name: "Haider Abbas", registration: "SP22-BSE-022" },
+      { name: "Muhammad Ubaidullah", registration: "SP22-BSE-133" }
+    ],
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Code Smells", "AST Analysis", "Automated Refactoring", "Software Metrics"],
     technologies: ["Java", "Spoon AST", "Python", "React", "Tree-sitter"],
@@ -735,6 +783,7 @@ export const defaultFypProjects = [
     featured: false,
     displayOrder: 21
   },
+
 
   // ── 3. OPEN FYP SUPERVISION OPPORTUNITIES (FUTURE TOPICS) ──
   {

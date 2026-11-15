@@ -1286,7 +1286,7 @@ export function SupervisionPage({ fypProjects = [] }) {
       name: "FYP Supervision — Dr. Junaid Akram, PhD",
       url: `${SITE_URL}/supervision`,
       description:
-        "Supervised student dissertations, FYP opportunities, and research projects under Dr. Junaid Akram, PhD at University of Nottingham Ningbo China (UNNC) and SSA Research Lab.",
+        "Supervised student dissertations, capstone projects, and research projects under Dr. Junaid Akram, PhD at University of Nottingham Ningbo China (UNNC) and SSA Research Lab.",
       items: supervisedProjects.map((p) => ({
         name: p.title,
         url: `${SITE_URL}/supervision`,
@@ -1312,35 +1312,35 @@ export function SupervisionPage({ fypProjects = [] }) {
           "Undergraduate (BSc/BEng Computer Science), postgraduate (MSc), and PhD researchers at University of Nottingham Ningbo China (UNNC), as well as collaborative students from partner institutions, are eligible to apply for research and dissertation supervision under Dr. Junaid Akram, PhD.",
       },
       {
-        question: "What are the key research and dissertation topics currently offered by Dr. Junaid Akram, PhD?",
+        question: "What are the key research areas supervised by Dr. Junaid Akram, PhD?",
         answer:
-          "Active topics include source-level vulnerability benchmarks, multi-project dependency analysis, semantic code clone detection, automated security patch synthesis, AST-guided vulnerability prediction, and cyber-physical systems testing.",
+          "Active research areas include source-level vulnerability detection, multi-project dependency analysis, semantic code clone detection, automated security patch synthesis, AST-guided vulnerability prediction, and cyber-physical systems testing.",
       },
       {
         question: "How do students contact Dr. Junaid Akram, PhD for supervision approval?",
         answer:
-          "Interested students and researchers should email Dr. Junaid Akram, PhD at Junaid.Akram@nottingham.edu.cn with their academic background, CV, transcripts, technical proficiencies, and proposed or selected research topics.",
+          "Interested students and researchers should email Dr. Junaid Akram, PhD at Junaid.Akram@nottingham.edu.cn with their academic background, CV, transcripts, technical proficiencies, and proposed research area.",
       },
     ]),
   ];
 
   return (
     <AcademicSiteLayout
-      title="Computer Science & Software Engineering Supervision & Research Opportunities"
+      title="Computer Science & Software Engineering Supervision & Research Dissertations"
       path="/supervision"
-      description="Explore Computer Science & Software Engineering research supervision, running projects, and dissertation opportunities led by Dr. Junaid Akram, PhD at University of Nottingham Ningbo China (UNNC)."
+      description="Explore Computer Science & Software Engineering research supervision, running projects, and dissertation capstones led by Dr. Junaid Akram, PhD at University of Nottingham Ningbo China (UNNC)."
       keywords="Computer Science Dissertation Supervision, UNNC FYP projects, University of Nottingham Ningbo China, software security research, cybersecurity research topics, Dr Junaid Akram supervision"
       jsonLd={supervisionJsonLd}
     >
       <PageIntro
         eyebrow="Research & FYP Supervision"
-        title="Supervised research projects and dissertation opportunities."
-        lead="Explore open research dissertation topics alongside completed student projects supervised under Dr. Junaid Akram, PhD's SSA Laboratory."
+        title="Supervised research projects and student dissertations."
+        lead="Explore completed and ongoing student projects and capstone dissertations supervised under Dr. Junaid Akram, PhD's SSA Laboratory."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
               src="/academic/illustrations/supervision-hero.webp"
-              alt="Supervised final-year projects and research opportunities"
+              alt="Supervised final-year projects and dissertations"
               width={280}
               height={280}
               priority
@@ -1368,7 +1368,7 @@ export function SupervisionPage({ fypProjects = [] }) {
           <ul style={{ margin: "16px 0 24px 20px" }}>
             <li>Group member names and registration numbers</li>
             <li>Current CGPA and transcript highlight</li>
-            <li>Selected FYP opportunity title or proposed original research topic</li>
+            <li>Proposed research topic or area of interest</li>
             <li>Technical background (programming languages, frameworks, security/ML interest)</li>
           </ul>
           <div className={styles.btnOrbitWrap}>
@@ -1518,28 +1518,28 @@ export function TeamPage() {
             className={`${styles.collabTab} ${activeTab === "all" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("all")}
           >
-            🌟 All Categories
+            🌟 All Members
           </button>
           <button
             type="button"
             className={`${styles.collabTab} ${activeTab === "pi" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("pi")}
           >
-            👨‍🏫 Research Team & Collaborators ({coInvestigatorsData.length})
+            👨‍🏫 Faculty & Investigators ({coInvestigatorsData.length})
           </button>
           <button
             type="button"
             className={`${styles.collabTab} ${activeTab === "ms" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("ms")}
           >
-            🎓 Postgraduate Team — MS & PhD ({pgResearchersData.length})
+            🎓 Postgraduate Researchers ({pgResearchersData.length})
           </button>
           <button
             type="button"
             className={`${styles.collabTab} ${activeTab === "bs" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("bs")}
           >
-            💻 Undergraduate Team — BS Engineering ({fypProjectsData.filter((p) => !p.isOpportunity && (p.institution || "").includes("COMSATS")).length + supervisedProjectsData.length})
+            💻 Undergraduate Researchers ({fypProjectsData.filter((p) => !p.isOpportunity && (p.institution || "").includes("COMSATS")).length + supervisedProjectsData.length})
           </button>
         </div>
       </section>
@@ -1549,11 +1549,11 @@ export function TeamPage() {
         <section className={styles.section}>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Research Team</p>
-              <h2>Research Team and Collaborators</h2>
+              <p className={styles.eyebrow}>Faculty & Leadership</p>
+              <h2>Principal Investigators & Research Collaborators</h2>
             </div>
             <p style={{ maxWidth: "540px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Leading research across University of Nottingham Ningbo China, COMSATS, SnT Luxembourg, Tsinghua University, and KFUPM.
+              Leading research across University of Nottingham Ningbo China, COMSATS University Islamabad, SnT Luxembourg, Tsinghua University, and KFUPM.
             </p>
           </div>
 
@@ -1628,11 +1628,11 @@ export function TeamPage() {
         <section className={`${styles.section} ${styles.softSection}`}>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Postgraduate Research Team</p>
-              <h2>MS Computer Science Thesis Researchers</h2>
+              <p className={styles.eyebrow}>Graduate Studies</p>
+              <h2>Postgraduate Researchers & MS/PhD Scholars</h2>
             </div>
             <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Master of Science (MS CS) researchers working on vulnerability repair, AST/CFG code summarizers, Graph Neural Networks, and search-based testing under Dr. Junaid Akram, PhD's supervision.
+              Master of Science (MS CS) and graduate scholars working on vulnerability repair, AST/CFG code summarizers, Graph Neural Networks, and search-based testing under Dr. Junaid Akram, PhD's supervision.
             </p>
           </div>
 
@@ -1709,11 +1709,11 @@ export function TeamPage() {
         <section className={styles.section}>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Undergraduate Research Team</p>
-              <h2>BS Software Engineering Teams & Supervised Researchers</h2>
+              <p className={styles.eyebrow}>Undergraduate Supervision</p>
+              <h2>Undergraduate Researchers & Capstone Engineering Teams</h2>
             </div>
             <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Final-year project engineering teams and supervised undergraduate researchers at University of Nottingham Ningbo China, COMSATS University Islamabad, and Xiamen University Malaysia.
+              Final-year capstone engineering teams and supervised undergraduate researchers across partnering institutions including University of Nottingham Ningbo China, COMSATS University Islamabad, and Xiamen University Malaysia.
             </p>
           </div>
 
@@ -1743,9 +1743,14 @@ export function TeamPage() {
             </Link>
           </div>
 
-          <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", marginBottom: "18px" }}>
-            COMSATS BS Final-Year Engineering Teams
-          </h3>
+          <div style={{ marginBottom: "20px" }}>
+            <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", fontWeight: 600, color: "var(--academic-text)", margin: "0 0 6px 0" }}>
+              Final-Year Engineering Projects (COMSATS University Islamabad)
+            </h3>
+            <p style={{ color: "var(--academic-muted)", fontSize: "0.85rem", margin: 0 }}>
+              Supervised BS Software Engineering final-year capstone teams and defense-ready research systems.
+            </p>
+          </div>
 
           <div className={styles.collabGrid} style={{ marginBottom: "48px" }}>
             {fypProjectsData
@@ -1824,9 +1829,14 @@ export function TeamPage() {
               ))}
           </div>
 
-          <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", marginBottom: "18px" }}>
-            International Supervised Student Projects (Xiamen University)
-          </h3>
+          <div style={{ marginTop: "48px", marginBottom: "20px" }}>
+            <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", fontWeight: 600, color: "var(--academic-text)", margin: "0 0 6px 0" }}>
+              International Supervised Student Projects (Xiamen University Malaysia)
+            </h3>
+            <p style={{ color: "var(--academic-muted)", fontSize: "0.85rem", margin: 0 }}>
+              Supervised undergraduate research projects, machine learning models, and security evaluation studies.
+            </p>
+          </div>
 
           <div className={styles.collabGrid}>
             {supervisedProjectsData.map((proj, pIdx) => {

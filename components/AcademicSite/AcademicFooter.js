@@ -106,7 +106,7 @@ export default function AcademicFooter() {
               at scale.
             </p>
             <div className={styles.metaRow}>
-              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor · Postdoc (SnT Luxembourg)
+              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
             </div>
           </div>
 

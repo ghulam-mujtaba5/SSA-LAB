@@ -186,8 +186,11 @@ export default async function handler(req, res) {
         })
       : staticAcademicData.supervisedProjects;
 
-    // Format FYP projects & opportunities
-    const fypProjects = fypDocs?.length ? fypDocs : staticFypProjects;
+    // Format FYP projects (only verified supervised student projects)
+    const rawFyp = fypDocs?.length ? fypDocs : staticFypProjects;
+    const fypProjects = rawFyp.filter(
+      (p) => !p.isOpportunity && p.categoryType !== 'future'
+    );
 
     const dynamicOpportunities = fypDocs?.filter(
       (p) => p.isOpportunity || p.categoryType === 'future' || p.status === 'Available for Supervision'
