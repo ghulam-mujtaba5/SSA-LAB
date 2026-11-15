@@ -329,7 +329,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
             </article>
           ) : null}
         </div>
-      )}
+      ) : null}
     </section>
   );
 }
