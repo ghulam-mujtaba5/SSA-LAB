@@ -52,8 +52,9 @@ export default function LoginPage() {
       <Head>
         <title>Admin Login | SSA Research Lab</title>
       </Head>
-      <motion.div 
+      <motion.main 
         className={`${styles.loginContainer}`}
+        id="main-content"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -230,7 +231,7 @@ export default function LoginPage() {
             ← Return to Main Website
           </Link>
         </motion.div>
-      </motion.div>
+      </motion.main>
     </>
   );
 }

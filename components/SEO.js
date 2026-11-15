@@ -6,15 +6,50 @@ const SITE_URL =
   "https://www.ssa-lab.tech";
 const SITE_NAME = "SSA Research Lab";
 const PERSON_NAME = "Junaid Akram";
-const PERSON_NAME_FULL = "Junaid Akram, PhD";
+const PERSON_NAME_FULL = "Dr. Junaid Akram, PhD";
 const TWITTER_HANDLE = "@JunaidAkramPhD";
 const TWITTER_SITE = "@SSALab";
 const OG_IMAGE = `${SITE_URL}/academic/junaid-akram-professor.jpg`;
+const LOGO_IMAGE = `${SITE_URL}/academic/ssa-research-group-logo.png`;
 const AFFILIATION = "University of Nottingham Ningbo China";
+
+/**
+ * Normalizes an array of schemas into a single Schema.org @graph container
+ */
+function buildUnifiedJsonLdGraph(schemas) {
+  if (!schemas || schemas.length === 0) return null;
+  const flat = [];
+
+  for (const item of schemas) {
+    if (!item) continue;
+    if (item["@graph"] && Array.isArray(item["@graph"])) {
+      flat.push(...item["@graph"]);
+    } else {
+      const { "@context": _ctx, ...rest } = item;
+      flat.push(rest);
+    }
+  }
+
+  // Deduplicate schemas sharing the same @id
+  const seenIds = new Set();
+  const deduplicated = [];
+  for (const node of flat) {
+    if (node["@id"]) {
+      if (seenIds.has(node["@id"])) continue;
+      seenIds.add(node["@id"]);
+    }
+    deduplicated.push(node);
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": deduplicated,
+  };
+}
 
 export default function SEO({
   title = `SSA Research Lab | Software Security Research`,
-  description = "Academic profile of Dr. Junaid Akram and the Software Security Assessment Lab at University of Nottingham Ningbo China.",
+  description = "Software Security Assessment (SSA) Lab led by Dr. Junaid Akram at University of Nottingham Ningbo China. Static code analysis, vulnerability detection, malware defense, code clone auditing, and automated software testing.",
   url = SITE_URL,
   image = OG_IMAGE,
   imageWidth = 755,
@@ -22,7 +57,7 @@ export default function SEO({
   imageAlt = "Dr. Junaid Akram — SSA Research Lab",
   type = "website",
   canonical = url,
-  keywords,
+  keywords = "Software Security Assessment, Vulnerability Detection, Static Application Security Testing, SAST, Code Audit, Malware Detection, Code Clone Analysis, Automated Software Testing, Dr Junaid Akram, University of Nottingham Ningbo China, UNNC",
   author = PERSON_NAME_FULL,
   locale = "en_US",
   robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
@@ -40,13 +75,14 @@ export default function SEO({
   citationDoi,
   citationPdfUrl,
   // Dublin Core
-  dcSubject = "Computer Science; Software Security; Vulnerability Detection; Malware Defense; Code Clones; Automated Testing",
+  dcSubject = "Computer Science; Software Security; Vulnerability Detection; Malware Defense; Code Clones; Automated Testing; SAST; Code Auditing; DevSecOps",
   dcType = "Text",
   dcFormat = "text/html",
   dcLanguage = "en",
 }) {
   const effectiveRobots = noindex ? "noindex, nofollow" : robots;
   const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+  const consolidatedGraph = buildUnifiedJsonLdGraph(schemas);
 
   // Build normalized list of citations for Google Scholar & Highwire Press
   const normalizedCitations = [...citations];
@@ -63,7 +99,7 @@ export default function SEO({
 
   return (
     <Head>
-      {/* ── Primary ──────────────────────────────────────────────── */}
+      {/* ── Primary Search Engine Directives ──────────────────────── */}
       <title>{title}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
@@ -72,13 +108,31 @@ export default function SEO({
       <meta name="googlebot" content={effectiveRobots} />
       <meta name="bingbot" content={effectiveRobots} />
       <meta name="rating" content="general" />
-      <meta name="category" content="Education, Research, Technology, Software Security" />
-      <meta name="classification" content="Academic Research" />
+      <meta
+        name="category"
+        content="Education, Research, Technology, Software Security, Cybersecurity, Code Auditing"
+      />
+      <meta name="classification" content="Academic Research & Software Security Assessment" />
       <meta name="coverage" content="Worldwide" />
       <meta name="language" content="English" />
       <meta name="target" content="all" />
 
-      {/* ── Open Graph ────────────────────────────────────────────── */}
+      {/* ── Geographic & Regional Metadata ────────────────────────── */}
+      <meta name="geo.region" content="CN-33" />
+      <meta name="geo.placename" content="Ningbo, Zhejiang, China" />
+      <meta name="geo.position" content="29.8000;121.5600" />
+      <meta name="ICBM" content="29.8000, 121.5600" />
+
+      {/* ── Topical & AI Discoverability ─────────────────────────── */}
+      <meta
+        name="subject"
+        content="Software Security Assessment, Vulnerability Detection, Malware Analysis, Code Clone Detection, Automated Software Testing"
+      />
+      <meta name="topic" content="Software Security Research & Vulnerability Assessment" />
+      <meta name="summary" content={description} />
+      <meta name="abstract" content={description} />
+
+      {/* ── Open Graph (Facebook, LinkedIn, Discord) ──────────────── */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
@@ -113,11 +167,21 @@ export default function SEO({
       <link rel="alternate" hrefLang="en-us" href={canonical} />
       <link rel="alternate" hrefLang="x-default" href={canonical} />
 
-      {/* ── LLM / AI Discoverability ─────────────────────────────── */}
+      {/* ── LLM / AI Engine Discoverability ───────────────────────── */}
       <link rel="llms" href={`${SITE_URL}/llms.txt`} />
       <link rel="llms-full" href={`${SITE_URL}/llms-full.txt`} />
-      <link rel="alternate" type="text/markdown" href={`${SITE_URL}/llms.txt`} title="LLM Context (Summary)" />
-      <link rel="alternate" type="text/markdown" href={`${SITE_URL}/llms-full.txt`} title="LLM Context (Full)" />
+      <link
+        rel="alternate"
+        type="text/markdown"
+        href={`${SITE_URL}/llms.txt`}
+        title="LLM Context (Summary)"
+      />
+      <link
+        rel="alternate"
+        type="text/markdown"
+        href={`${SITE_URL}/llms-full.txt`}
+        title="LLM Context (Full)"
+      />
       <link rel="author" href={`${SITE_URL}/about`} />
 
       {/* ── Identity Verification (rel=me) ───────────────────────── */}
@@ -127,6 +191,8 @@ export default function SEO({
       <link rel="me" href="https://dblp.org/pid/247/3104.html" />
       <link rel="me" href="https://ieeexplore.ieee.org/author/37086826620" />
       <link rel="me" href="https://www.semanticscholar.org/author/Junaid-Akram/144154437" />
+      <link rel="me" href="https://www.scopus.com/authid/detail.uri?authorId=57200277387" />
+      <link rel="me" href="https://dl.acm.org/profile/99659556271" />
       <link rel="me" href="https://www.linkedin.com/in/junaidakram/" />
       <link rel="me" href="https://www.nottingham.edu.cn/" />
 
@@ -138,20 +204,25 @@ export default function SEO({
       />
       <link rel="manifest" href="/manifest.json" />
 
-      {/* ── Dublin Core (Academic Discoverability) ───────────────── */}
+      {/* ── Dublin Core (Academic & Commercial Discoverability) ───── */}
       <meta name="DC.title" content={title} />
       <meta name="DC.creator" content={author} />
       <meta name="DC.creator.personalName" content={PERSON_NAME_FULL} />
       <meta name="DC.subject" content={dcSubject} />
       <meta name="DC.description" content={description} />
       <meta name="DC.publisher" content={SITE_NAME} />
-      <meta name="DC.relation.ispartof" content="University of Nottingham Ningbo China" />
+      <meta name="DC.relation.ispartof" content={AFFILIATION} />
       <meta name="DC.contributor" content={PERSON_NAME_FULL} />
       <meta name="DC.type" content={dcType} />
       <meta name="DC.format" content={dcFormat} />
       <meta name="DC.identifier" content={canonical} />
       <meta name="DC.identifier.scheme" content="URI" />
       <meta name="DC.language" content={dcLanguage} />
+      <meta name="DC.coverage" content="Worldwide" />
+      <meta
+        name="DC.audience"
+        content="Academic Researchers, Computer Scientists, Software Engineers, Cybersecurity Professionals, Enterprise Clients"
+      />
       <meta name="DC.rights" content={`© ${new Date().getFullYear()} ${PERSON_NAME_FULL}`} />
 
       {/* ── Google Scholar / Highwire Press Citation Meta Tags ────── */}
@@ -171,55 +242,85 @@ export default function SEO({
             ? rawAuthors.split(/,| and /i).map((a) => a.trim()).filter(Boolean)
             : [PERSON_NAME];
 
-          const cleanDoi = pub.doi || (pub.href?.includes("doi.org/") ? pub.href.replace(/https?:\/\/doi\.org\//, "") : "");
+          const cleanDoi =
+            pub.doi ||
+            (pub.href?.includes("doi.org/")
+              ? pub.href.replace(/https?:\/\/doi\.org\//, "")
+              : "");
 
           return (
             <React.Fragment key={`meta-pub-${idx}`}>
               <meta name="citation_title" content={pub.title} />
               {authorList.map((auth, aIdx) => (
-                <meta key={`meta-auth-${idx}-${aIdx}`} name="citation_author" content={auth} />
+                <meta
+                  key={`meta-auth-${idx}-${aIdx}`}
+                  name="citation_author"
+                  content={auth}
+                />
               ))}
               <meta name="citation_author_institution" content={AFFILIATION} />
-              {pub.year && <meta name="citation_publication_date" content={`${pub.year}/01/01`} />}
-              {pub.year && <meta name="citation_date" content={String(pub.year)} />}
+              {pub.year && (
+                <meta
+                  name="citation_publication_date"
+                  content={`${pub.year}/01/01`}
+                />
+              )}
+              {pub.year && (
+                <meta name="citation_date" content={String(pub.year)} />
+              )}
               {pub.type === "Conference" || pub.booktitle ? (
-                <meta name="citation_conference_title" content={pub.venue || pub.booktitle} />
+                <meta
+                  name="citation_conference_title"
+                  content={pub.venue || pub.booktitle}
+                />
               ) : (
-                <meta name="citation_journal_title" content={pub.venue || pub.journal} />
+                <meta
+                  name="citation_journal_title"
+                  content={pub.venue || pub.journal}
+                />
               )}
               {cleanDoi && <meta name="citation_doi" content={cleanDoi} />}
-              {pub.volume && <meta name="citation_volume" content={String(pub.volume)} />}
-              {pub.issue && <meta name="citation_issue" content={String(pub.issue)} />}
-              {pub.firstpage && <meta name="citation_firstpage" content={String(pub.firstpage)} />}
+              {pub.volume && (
+                <meta name="citation_volume" content={String(pub.volume)} />
+              )}
+              {pub.issue && (
+                <meta name="citation_issue" content={String(pub.issue)} />
+              )}
+              {pub.firstpage && (
+                <meta name="citation_firstpage" content={String(pub.firstpage)} />
+              )}
               {pub.pdfUrl && <meta name="citation_pdf_url" content={pub.pdfUrl} />}
-              {pub.href && <meta name="citation_abstract_html_url" content={pub.href} />}
+              {pub.href && (
+                <meta
+                  name="citation_abstract_html_url"
+                  content={pub.href}
+                />
+              )}
               <meta name="citation_language" content="en" />
             </React.Fragment>
           );
         })
       )}
 
-      {/* ── JSON-LD Structured Data ───────────────────────────────── */}
-      {schemas.map((schema, index) => (
+      {/* ── JSON-LD Structured Data Graph (Schema.org / Google Search) ─ */}
+      {consolidatedGraph && (
         <script
-          key={`jsonld-${index}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(consolidatedGraph).replace(/</g, "\\u003c"),
           }}
         />
-      ))}
+      )}
     </Head>
   );
 }
 
 /* ================================================================
-   SCHEMA HELPERS
+   SCHEMA HELPERS (Rich Entity Graph for Search & Answer Engines)
    ================================================================ */
 
 export function personSchema(overrides = {}) {
   return {
-    "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${SITE_URL}/#person`,
     name: PERSON_NAME_FULL,
@@ -231,8 +332,9 @@ export function personSchema(overrides = {}) {
     image: OG_IMAGE,
     jobTitle: "Assistant Professor & Research Lab Director",
     description:
-      "Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab. Specializing in LLM vulnerability detection, Android malware analysis, semantic code clones, and automated program testing.",
+      "Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab. Specializing in source code vulnerability detection, LLM automated program repair, Android malware analysis, semantic code clones, and automated program testing.",
     email: "mailto:Junaid.Akram@nottingham.edu.cn",
+    telephone: "+86 (0) 574 88180000",
     worksFor: {
       "@type": "CollegeOrUniversity",
       "@id": `${SITE_URL}/#university`,
@@ -275,7 +377,9 @@ export function personSchema(overrides = {}) {
     ],
     knowsAbout: [
       "Cyber Security",
-      "Software Vulnerability Detection",
+      "Software Security Assessment",
+      "Static Application Security Testing (SAST)",
+      "Source Code Vulnerability Detection",
       "LLM-based Automated Program Repair",
       "Software Testing and Verification",
       "Malware Detection and Defense",
@@ -283,6 +387,7 @@ export function personSchema(overrides = {}) {
       "Software Evolution and Maintenance",
       "Android and IoT Security",
       "DevSecOps and Source Code Analysis",
+      "Software Bill of Materials (SBOM) Validation",
     ],
     hasCredential: [
       {
@@ -303,7 +408,7 @@ export function personSchema(overrides = {}) {
       },
       {
         "@type": "EducationalOccupationalCredential",
-        name: "Postdoctoral Research in Software Verification",
+        name: "Postdoctoral Research in Software Verification & Testing",
         recognizedBy: {
           "@type": "CollegeOrUniversity",
           name: "University of Luxembourg / SnT",
@@ -324,13 +429,12 @@ export function personSchema(overrides = {}) {
 
 export function profilePageSchema(overrides = {}) {
   return {
-    "@context": "https://schema.org",
     "@type": "ProfilePage",
     "@id": `${SITE_URL}/#profilepage`,
-    name: `${PERSON_NAME} — Academic Profile`,
+    name: `${PERSON_NAME_FULL} — Academic & Research Profile`,
     url: SITE_URL,
     description:
-      "Academic profile, empirical research, peer-reviewed publications, student supervision, and international collaborations of Dr. Junaid Akram.",
+      "Academic profile, empirical research, peer-reviewed publications, student supervision, and software security assessment capabilities of Dr. Junaid Akram.",
     mainEntity: { "@id": `${SITE_URL}/#person` },
     dateModified: new Date().toISOString().split("T")[0],
     inLanguage: "en-US",
@@ -341,14 +445,14 @@ export function profilePageSchema(overrides = {}) {
 
 export function webSiteSchema() {
   return {
-    "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     url: SITE_URL,
     name: SITE_NAME,
     description:
-      "Research, publications, student supervision, and software security benchmarks of the Software Security Assessment Lab.",
-    publisher: { "@id": `${SITE_URL}/#person` },
+      "Research, publications, student supervision, software security assessments, and vulnerability benchmarks of the Software Security Assessment Lab.",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    creator: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en-US",
     potentialAction: {
       "@type": "SearchAction",
@@ -363,7 +467,6 @@ export function webSiteSchema() {
 
 export function organizationSchema() {
   return {
-    "@context": "https://schema.org",
     "@type": "ResearchOrganization",
     "@id": `${SITE_URL}/#organization`,
     name: "Software Security Assessment Lab",
@@ -376,12 +479,13 @@ export function organizationSchema() {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/academic/ssa-research-group-logo.png`,
+      url: LOGO_IMAGE,
       width: 1098,
       height: 1298,
     },
-    image: `${SITE_URL}/academic/ssa-research-group-logo.png`,
+    image: LOGO_IMAGE,
     email: "Junaid.Akram@nottingham.edu.cn",
+    telephone: "+86 (0) 574 88180000",
     foundingDate: "2023",
     parentOrganization: {
       "@type": "CollegeOrUniversity",
@@ -391,22 +495,161 @@ export function organizationSchema() {
     },
     founder: { "@id": `${SITE_URL}/#person` },
     member: [{ "@id": `${SITE_URL}/#person` }],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "199 Taikang East Road, School of Computer Science",
+      addressLocality: "Ningbo",
+      addressRegion: "Zhejiang",
+      postalCode: "315100",
+      addressCountry: "CN",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+86-574-88180000",
+        contactType: "Software Security Assessment & Research Inquiries",
+        email: "Junaid.Akram@nottingham.edu.cn",
+        availableLanguage: ["English", "Chinese"],
+        areaServed: "Worldwide",
+      },
+    ],
     knowsAbout: [
       "Software Security Assessment",
+      "Static Application Security Testing (SAST)",
       "Source Code Vulnerability Detection",
-      "Malware Defense",
+      "Malware Defense and Obfuscation Analysis",
       "Semantic Code Clone Detection",
-      "DevSecOps",
+      "DevSecOps Automation",
       "Automated Program Repair",
+      "Software Testing and Constraint Verification",
+      "Software Bill of Materials (SBOM) Quality",
+      "Open Source Vulnerability Benchmarking",
     ],
     areaServed: {
       "@type": "Country",
       name: "Worldwide",
     },
+    hasOfferCatalog: {
+      "@id": `${SITE_URL}/#services`,
+    },
     sameAs: [
       "https://www.nottingham.edu.cn",
       "https://orcid.org/0000-0003-1752-6124",
+      "https://scholar.google.com/citations?user=JunaidAkram",
+      "https://dblp.org/pid/247/3104.html",
+      "https://www.linkedin.com/in/junaidakram/",
     ],
+  };
+}
+
+/**
+ * Dedicated schema for Software Security Assessment Client & Industry Services
+ * Enables search engine ranking for commercial & institutional client acquisitions
+ */
+export function clientServicesSchema() {
+  return {
+    "@type": ["ProfessionalService", "ResearchOrganization"],
+    "@id": `${SITE_URL}/#services`,
+    name: "Software Security Assessment & Code Audit Services — SSA Lab",
+    alternateName: "SSA Security Consulting & Vulnerability Assessment",
+    url: `${SITE_URL}/research`,
+    image: LOGO_IMAGE,
+    description:
+      "Expert software security assessment, static application security testing (SAST), vulnerability benchmark auditing, proprietary code clone detection, obfuscated Android/IoT malware analysis, and automated test generation for industry clients and research partners.",
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: {
+      "@type": "AdministrativeArea",
+      name: "Worldwide",
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "199 Taikang East Road, School of Computer Science",
+      addressLocality: "Ningbo",
+      addressRegion: "Zhejiang",
+      postalCode: "315100",
+      addressCountry: "CN",
+    },
+    email: "mailto:Junaid.Akram@nottingham.edu.cn",
+    telephone: "+86-574-88180000",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Software Security Assessment & Research Offerings",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Static Application Security Testing (SAST) & Source Code Vulnerability Audit",
+            description:
+              "Deep empirical source code auditing identifying memory corruption, injection flaws, OWASP Top 10 vulnerabilities, and authorization defects in C/C++, Java, Python, Go, and TypeScript.",
+            serviceType: "Security Assessment & Code Audit",
+            provider: { "@id": `${SITE_URL}/#organization` },
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Quantitative Vulnerability Detection & Benchmark Analysis (SQVDT & VCIPR)",
+            description:
+              "Repository-scale automated vulnerability scanning and patch validation leveraging SQVDT and VCIPR benchmark platforms across massive codebases.",
+            serviceType: "Vulnerability Scanning & Benchmarking",
+            provider: { "@id": `${SITE_URL}/#organization` },
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Semantic Code Clone & Proprietary Code Leakage Audit",
+            description:
+              "Detection of Type-1 through Type-4 semantic code clones, open-source license violations (GPL/AGPL), and proprietary intellectual property leakage using distributed Hadoop IBFET indexing.",
+            serviceType: "Code Clone & Intellectual Property Audit",
+            provider: { "@id": `${SITE_URL}/#organization` },
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Obfuscated Android Malware & IoT Binary Analysis",
+            description:
+              "Advanced decompilation, bytecode similarity analysis, and neural ensemble malware classification for Android APKs (DroidMD, DroidSD) and IoT firmware binaries (MTHAEL).",
+            serviceType: "Malware Analysis & Mobile Security",
+            provider: { "@id": `${SITE_URL}/#organization` },
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Automated Software Test Generation & Constraint-Based Verification",
+            description:
+              "Constraint-based and search-based automated test-data generation, test-smell identification, and mission-critical software verification (ARC System).",
+            serviceType: "Automated Software Testing & Verification",
+            provider: { "@id": `${SITE_URL}/#organization` },
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Academic-Industry Collaborative Research & Sponsored Supervision",
+            description:
+              "Joint R&D grant proposals, corporate DevSecOps training, and postgraduate research supervision (PhD, Master's) in software security.",
+            serviceType: "Academic Research & Sponsored Supervision",
+            provider: { "@id": `${SITE_URL}/#organization` },
+          },
+        },
+      ],
+    },
+  };
+}
+
+export function professionalServiceSchema(overrides = {}) {
+  return {
+    ...clientServicesSchema(),
+    ...overrides,
   };
 }
 
@@ -421,7 +664,6 @@ export function navigationSchema() {
     ["Contact", "/contact"],
   ];
   return {
-    "@context": "https://schema.org",
     "@type": "ItemList",
     "@id": `${SITE_URL}/#navigation`,
     name: "Primary Navigation",
@@ -437,8 +679,8 @@ export function navigationSchema() {
 
 export function breadcrumbSchema(items = []) {
   return {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${SITE_URL}/#breadcrumb`,
     itemListElement: [
       {
         "@type": "ListItem",
@@ -449,8 +691,14 @@ export function breadcrumbSchema(items = []) {
       ...items.map((item, index) => ({
         "@type": "ListItem",
         position: index + 2,
-        name: item.name,
-        item: item.url,
+        name: item.name || item.label,
+        item:
+          item.url ||
+          (item.href
+            ? item.href.startsWith("http")
+              ? item.href
+              : `${SITE_URL}${item.href}`
+            : `${SITE_URL}/`),
       })),
     ],
   };
@@ -458,7 +706,6 @@ export function breadcrumbSchema(items = []) {
 
 export function collectionPageSchema({ name, url, description, items = [] }) {
   return {
-    "@context": "https://schema.org",
     "@type": "CollectionPage",
     name,
     url,
@@ -503,11 +750,14 @@ export function scholarlyArticleSchema({
     ? rawAuthors.split(/,| and /i).map((a) => a.trim()).filter(Boolean)
     : [PERSON_NAME_FULL];
 
-  const cleanDoi = doi || (href?.includes("doi.org/") ? href.replace(/https?:\/\/doi\.org\//, "") : "");
+  const cleanDoi =
+    doi ||
+    (href?.includes("doi.org/")
+      ? href.replace(/https?:\/\/doi\.org\//, "")
+      : "");
   const articleUrl = href || `${SITE_URL}/publications`;
 
   return {
-    "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
     "@id": cleanDoi ? `https://doi.org/${cleanDoi}` : `${articleUrl}#article`,
     headline: articleTitle,
@@ -532,8 +782,18 @@ export function scholarlyArticleSchema({
       "@type": booktitle ? "Event" : "Periodical",
       name: venue || journal || booktitle || "Academic Publication",
     },
-    ...(cleanDoi ? { identifier: cleanDoi, sameAs: `https://doi.org/${cleanDoi}` } : {}),
-    ...(pdfUrl ? { encoding: { "@type": "MediaObject", contentUrl: pdfUrl, encodingFormat: "application/pdf" } } : {}),
+    ...(cleanDoi
+      ? { identifier: cleanDoi, sameAs: `https://doi.org/${cleanDoi}` }
+      : {}),
+    ...(pdfUrl
+      ? {
+          encoding: {
+            "@type": "MediaObject",
+            contentUrl: pdfUrl,
+            encodingFormat: "application/pdf",
+          },
+        }
+      : {}),
     ...(keywords ? { keywords } : {}),
     publisher: {
       "@type": "Organization",
@@ -558,12 +818,13 @@ export function datasetSchema({
   spatialCoverage = "Worldwide",
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": "Dataset",
     name,
     description,
     url: url || `${SITE_URL}/research`,
-    keywords: keywords || "software security, benchmark dataset, vulnerability detection, source code analysis",
+    keywords:
+      keywords ||
+      "software security, benchmark dataset, vulnerability detection, source code analysis",
     creator: {
       "@id": `${SITE_URL}/#person`,
     },
@@ -588,7 +849,6 @@ export function softwareProjectSchema({
   keywords,
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": "ResearchProject",
     name,
     description,
@@ -616,39 +876,18 @@ export function serviceSchema({
   url,
 } = {}) {
   return {
-    "@context": "https://schema.org",
     "@type": "Service",
     name,
     description,
     serviceType: serviceType || name,
     provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: areaServed || { "@type": "Country", name: "Pakistan" },
+    areaServed: areaServed || { "@type": "AdministrativeArea", name: "Worldwide" },
     ...(url ? { url } : {}),
-  };
-}
-
-export function professionalServiceSchema(overrides = {}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ResearchOrganization",
-    "@id": `${SITE_URL}/#research-lab`,
-    name: "Software Security Assessment Lab",
-    url: SITE_URL,
-    image: `${SITE_URL}/academic/ssa-research-group-logo.png`,
-    description:
-      "Research group focused on source-code security assessment, vulnerability detection, software testing, malware analysis, and code-clone detection.",
-    parentOrganization: {
-      "@type": "CollegeOrUniversity",
-      name: AFFILIATION,
-    },
-    email: "mailto:Junaid.Akram@nottingham.edu.cn",
-    ...overrides,
   };
 }
 
 export function faqSchema(faqs = []) {
   return {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
@@ -663,7 +902,6 @@ export function faqSchema(faqs = []) {
 
 export function speakableSchema({ url, cssSelectors = [] }) {
   return {
-    "@context": "https://schema.org",
     "@type": "WebPage",
     url,
     speakable: {
@@ -688,7 +926,6 @@ export function eventSchema({
   eventAttendanceMode = "https://schema.org/OfflineEventAttendanceMode",
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": "Event",
     name,
     description,
@@ -722,7 +959,6 @@ export function courseSchema({
   inLanguage = "en",
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": "Course",
     name,
     description,
@@ -748,7 +984,6 @@ export function personMemberSchema({
   researchArea,
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": "Person",
     name,
     jobTitle: role,
@@ -765,12 +1000,11 @@ export function personMemberSchema({
 
 export function contactPageSchema({ url }) {
   return {
-    "@context": "https://schema.org",
     "@type": "ContactPage",
     url,
     name: "Contact SSA Research Lab",
     description:
-      "Get in touch with Dr. Junaid Akram and the Software Security Assessment Lab for research collaboration, student supervision, or general inquiries.",
+      "Get in touch with Dr. Junaid Akram and the Software Security Assessment Lab for research collaboration, client software security assessment, code audits, or student supervision.",
     mainEntity: { "@id": `${SITE_URL}/#person` },
     isPartOf: { "@id": `${SITE_URL}/#website` },
   };
@@ -778,7 +1012,6 @@ export function contactPageSchema({ url }) {
 
 export function academicResearchPageSchema({ url, name, description }) {
   return {
-    "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": url,
     url,

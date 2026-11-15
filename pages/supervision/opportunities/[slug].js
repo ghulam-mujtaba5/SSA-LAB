@@ -51,6 +51,11 @@ export default function FypOpportunityDetailPage({ project }) {
       path={`/supervision/opportunities/${project.slug}`}
       description={project.summary || `Open Supervision Opportunity under Dr. Junaid Akram: ${project.title}`}
       jsonLd={oppJsonLd}
+      breadcrumbs={[
+        { label: "Supervision", href: "/supervision" },
+        { label: "Opportunities", href: "/supervision?tab=future" },
+        { label: project.title },
+      ]}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>

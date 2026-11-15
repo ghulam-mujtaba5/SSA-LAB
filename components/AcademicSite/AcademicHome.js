@@ -35,6 +35,8 @@ import {
   datasetSchema,
   faqSchema,
   profilePageSchema,
+  clientServicesSchema,
+  speakableSchema,
 } from "../SEO";
 import styles from "./AcademicSite.module.css";
 
@@ -98,6 +100,11 @@ export default function AcademicHome() {
       description:
         "Software Security Assessment Lab led by Dr. Junaid Akram at University of Nottingham Ningbo China. Advancing vulnerability detection, malware analysis, semantic code clone detection, and automated software verification.",
     }),
+    clientServicesSchema(),
+    speakableSchema({
+      url: "https://www.ssa-lab.tech/",
+      cssSelectors: ["h1", "p[class*='heroLead']", "meta[name='description']"],
+    }),
     datasetSchema({
       name: "Hadoop IBFET 324B+ Lines of Code Clone Corpus",
       description:
@@ -127,9 +134,14 @@ export default function AcademicHome() {
           "The lab has developed SQVDT (repository-scale vulnerability detection), VCIPR (patch-guided function-level detection), DroidSD (indexed Android app similarity detection), DroidMD (source-level Android malware detection), and IBFET (Hadoop-based 324B+ LOC clone analysis).",
       },
       {
-        question: "How to collaborate or apply for student supervision?",
+        question: "Does the SSA Lab offer security assessment and code auditing services for industry clients?",
         answer:
-          "Prospective research collaborators and students can contact Dr. Junaid Akram via email at Junaid.Akram@nottingham.edu.cn or through the Contact page.",
+          "Yes. The SSA Research Lab conducts industrial static application security testing (SAST), zero-day vulnerability audits, semantic code clone detection to protect intellectual property, and Android/IoT malware security assessments for corporate and government partners.",
+      },
+      {
+        question: "How can clients, organizations, or prospective students collaborate with the SSA Lab?",
+        answer:
+          "Prospective research collaborators, clients, and students can contact Dr. Junaid Akram via email at Junaid.Akram@nottingham.edu.cn or through the Contact page.",
       },
     ]),
   ];

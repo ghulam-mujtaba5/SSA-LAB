@@ -205,6 +205,7 @@ export default function FypAdminPage() {
             <input
               type="text"
               placeholder="Search FYP projects by title, summary, student, technology..."
+              aria-label="Search FYP projects by title, summary, student, technology"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className={styles.searchInput}

@@ -188,6 +188,11 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       keywords={projectKeywords}
       jsonLd={projectJsonLd}
       citations={projectCitations}
+      breadcrumbs={[
+        { label: "Supervision", href: "/supervision" },
+        { label: "Projects", href: "/supervision?tab=running" },
+        { label: project.title },
+      ]}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>

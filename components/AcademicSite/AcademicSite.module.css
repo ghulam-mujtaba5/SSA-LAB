@@ -15,6 +15,27 @@
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+.skipToContent {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 99999;
+  padding: 0.65rem 1.25rem;
+  background: var(--academic-blue, #0369a1);
+  color: #ffffff !important;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: top 0.2s ease;
+}
+
+.skipToContent:focus {
+  top: 1rem;
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
 :global([data-theme="dark"]) .site {
   --academic-ink: #f8fafc;
   --academic-navy: #38bdf8;
@@ -4075,7 +4096,9 @@
   flex-shrink: 0;
 }
 
-.timelineTabMeta h4 {
+.timelineTabMeta h4,
+.timelineTabMeta .timelineTabYear {
+  display: block;
   font-size: 0.9rem;
   font-weight: 700;
   margin: 0 0 2px;

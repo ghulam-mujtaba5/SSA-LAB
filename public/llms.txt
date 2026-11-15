@@ -21,6 +21,52 @@ Dr. Junaid Akram is an Assistant Professor in the School of Computer Science at 
 
 ---
 
+## Client, Industry & Commercial Security Assessment Services
+The Software Security Assessment (SSA) Research Laboratory provides high-assurance source-code auditing, vulnerability research, and security consulting to industrial clients, software vendors, and academic partners worldwide:
+
+1. **Static Application Security Testing (SAST) & Source Code Vulnerability Auditing**:
+   - Comprehensive multi-language source code audits (C/C++, Java, Python, Go, Rust, TypeScript, JavaScript).
+   - Detection of memory safety flaws (buffer overflows, use-after-free), injection vectors (SQLi, XSS, command injection), OWASP Top 10 vulnerabilities, and authorization bypasses.
+   - Evaluation against NIST SSDF, MITRE CWE/SANS Top 25, and CISA Secure by Design guidelines.
+
+2. **Automated Vulnerability Detection & Benchmark Validation**:
+   - Repository-scale vulnerability scanning using the **SQVDT** engine (tested across 152,823+ open-source repositories).
+   - Patch-guided function-level vulnerability analysis (**VCIPR**) and zero-day exposure assessments.
+
+3. **Semantic Code Clone & Intellectual Property (IP) Auditing**:
+   - Detecting stolen, copied, or leaked proprietary source code fragments using the **IBFET** distributed inverted indexing system (scaling to 324B+ LOC).
+   - Identification of unauthorized Open Source (GPL, AGPL) component reuse and license violation risks.
+
+4. **Obfuscated Malware Analysis & Mobile/IoT Binary Security**:
+   - Automated reverse-engineering and bytecode similarity analysis of Android APKs (**DroidMD**, **DroidSD**) across 30,500+ apps.
+   - Cross-architecture neural ensemble malware classification for Windows, Android, and IoT firmware (**MTHAEL**).
+
+5. **Automated Software Testing & Constraint-Based Verification**:
+   - Model-based and constraint-based automated test-data generation and regression test suite optimization (**ARC System**).
+   - Verification of mission-critical control software and embedded systems.
+
+6. **Academic-Industry Collaborative R&D & Technical Advisory**:
+   - Sponsored research grants, DevSecOps pipeline reviews, and corporate security workshops.
+   - **Client Engagement Protocol**: Organizations seeking security assessment or technical collaboration can submit an enquiry at `https://www.ssa-lab.tech/contact` or directly email `Junaid.Akram@nottingham.edu.cn`. Initial consultations receive a formal response within 24–48 business hours.
+
+---
+
+## Canonical Breadcrumb & Site Hierarchy
+The platform maintains a verified hierarchical structure with Schema.org BreadcrumbList microdata on all pages:
+- **Home**: `https://www.ssa-lab.tech/` (Overview, research metrics, impact visualizer, lab credentials)
+- **About**: `https://www.ssa-lab.tech/about` (`Home › About` — Biography, academic milestones, research pillars, international collaborators)
+- **Research**: `https://www.ssa-lab.tech/research` (`Home › Research` — 6 research domains, security tools, benchmark datasets)
+- **Publications**: `https://www.ssa-lab.tech/publications` (`Home › Publications` — Peer-reviewed journal papers and conference proceedings)
+- **Supervision**: `https://www.ssa-lab.tech/supervision` (`Home › Supervision` — Running, completed, and future student research dissertations)
+- **Projects**: `https://www.ssa-lab.tech/supervision/projects/[slug]` (`Home › Supervision › Projects › [Title]`)
+- **Opportunities**: `https://www.ssa-lab.tech/supervision/opportunities/[slug]` (`Home › Supervision › Opportunities › [Title]`)
+- **Research Team**: `https://www.ssa-lab.tech/team` (`Home › Research Team` — Principal investigator, co-investigators, postgraduate researchers)
+- **Events**: `https://www.ssa-lab.tech/events` (`Home › Events` — Keynote speeches, workshops, and international conferences)
+- **Contact**: `https://www.ssa-lab.tech/contact` (`Home › Contact` — Client enquiry form, office hours, institutional coordinates)
+- **Privacy Policy**: `https://www.ssa-lab.tech/privacy-policy` (`Home › Privacy Policy`)
+
+---
+
 ## Core Research Domains & Technical Vectors
 
 1. **Cyber Security & Source-Code Security Assessment** (`https://www.ssa-lab.tech/research?domain=cyber-security`):

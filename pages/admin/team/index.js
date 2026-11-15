@@ -206,6 +206,7 @@ export default function TeamAdminPage() {
             <input
               type="text"
               placeholder="Search by name, role, research topic, specialization, or affiliation..."
+              aria-label="Search by name, role, research topic, specialization, or affiliation"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -240,6 +241,8 @@ export default function TeamAdminPage() {
             </button>
           ))}
         </div>
+
+        <h2 className="sr-only">Team Members Management List</h2>
 
         {loading ? (
           <div className={styles.loadingSpinner}>Loading team members...</div>

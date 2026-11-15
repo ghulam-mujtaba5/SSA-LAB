@@ -6,9 +6,11 @@ import { Menu, X, ExternalLink, ChevronDown } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
 import { useAcademicData } from "../../context/AcademicDataContext";
 import AcademicFooter from "./AcademicFooter";
+import Breadcrumbs, { generateBreadcrumbsFromPath } from "../Breadcrumbs/Breadcrumbs";
 import SEO, {
   webSiteSchema,
   organizationSchema,
+  clientServicesSchema,
   personSchema,
   navigationSchema,
   breadcrumbSchema,
@@ -42,23 +44,35 @@ const SITE_URL =
   "https://www.ssa-lab.tech";
 
 /** Build the base JSON-LD schemas injected on every page */
-function buildBaseSchemas(path, extraSchemas = []) {
+function buildBaseSchemas(path, extraSchemas = [], breadcrumbs = [], pageTitle = "") {
   const schemas = [
     webSiteSchema(),
     organizationSchema(),
+    clientServicesSchema(),
     personSchema(),
     navigationSchema(),
   ];
   // Breadcrumb for all inner pages
-  if (path && path !== "/" && path !== "") {
-    const pathLabel = path
-      .replace(/^\//, "")
-      .replace(/-/g, " ")
-      .replace(/\//g, " › ")
-      .replace(/\b\w/g, (l) => l.toUpperCase());
-    schemas.push(
-      breadcrumbSchema([{ name: pathLabel, url: `${SITE_URL}${path}` }])
-    );
+  if (path && path !== "/" && !path.startsWith("/admin")) {
+    const rawCrumbs =
+      breadcrumbs && breadcrumbs.length > 0
+        ? breadcrumbs
+        : generateBreadcrumbsFromPath(path, pageTitle);
+
+    if (rawCrumbs.length > 0) {
+      schemas.push(
+        breadcrumbSchema(
+          rawCrumbs.map((c) => ({
+            name: c.label || c.name,
+            url: c.href
+              ? c.href.startsWith("http")
+                ? c.href
+                : `${SITE_URL}${c.href}`
+              : `${SITE_URL}${path.split("?")[0].split("#")[0]}`,
+          }))
+        )
+      );
+    }
   }
   return [...schemas, ...extraSchemas];
 }
@@ -73,6 +87,8 @@ export default function AcademicSiteLayout({
   image,
   type,
   citations,
+  breadcrumbs,
+  hideBreadcrumbs = false,
 }) {
   const router = useRouter();
   const { siteData } = useAcademicData();
@@ -87,7 +103,7 @@ export default function AcademicSiteLayout({
     : `${labName} | Software Security Research`;
   const canonical = `${SITE_URL}${path}`;
   const extraSchemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
-  const allSchemas = buildBaseSchemas(path, extraSchemas);
+  const allSchemas = buildBaseSchemas(path, extraSchemas, breadcrumbs, title);
 
   const handleMouseEnter = () => {
     if (dropdownTimeoutRef.current) {
@@ -136,6 +152,9 @@ export default function AcademicSiteLayout({
       />
 
       <div className={styles.site}>
+        <a href="#main-content" className={styles.skipToContent}>
+          Skip to main content
+        </a>
         <header className={styles.header}>
           <div className={styles.headerInner}>
             <Link href="/" className={styles.brand} aria-label="SSA Research Lab Home">
@@ -258,7 +277,11 @@ export default function AcademicSiteLayout({
           )}
         </header>
 
-        <main>{children}</main>
+        {!hideBreadcrumbs && path && path !== "/" && !path.startsWith("/admin") && (
+          <Breadcrumbs items={breadcrumbs} path={path} pageTitle={title} />
+        )}
+
+        <main id="main-content">{children}</main>
 
         <AcademicFooter />
       </div>

@@ -45,6 +45,8 @@ import {
   contactPageSchema,
   faqSchema,
   serviceSchema,
+  clientServicesSchema,
+  speakableSchema,
   breadcrumbSchema,
   personMemberSchema,
 } from "../SEO";
@@ -173,6 +175,10 @@ export function AboutPage() {
         "Academic profile of Dr. Junaid Akram, Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), leading the Software Security Assessment Lab.",
     }),
     personSchema(),
+    speakableSchema({
+      url: `${SITE_URL}/about`,
+      cssSelectors: ["h1", "p[class*='leadText']", "meta[name='description']"],
+    }),
     faqSchema([
       {
         question: "Who is Dr. Junaid Akram?",
@@ -327,7 +333,7 @@ export function AboutPage() {
                 >
                   <span className={styles.timelineTabNum}>0{idx + 1}</span>
                   <div className={styles.timelineTabMeta}>
-                    <h4>{ms.year}</h4>
+                    <strong className={styles.timelineTabYear}>{ms.year}</strong>
                     <span>{ms.badge}</span>
                   </div>
                 </button>
@@ -449,6 +455,11 @@ export function ResearchPage() {
         description: d.description,
       })),
     }),
+    clientServicesSchema(),
+    speakableSchema({
+      url: `${SITE_URL}/research`,
+      cssSelectors: ["h1", "p[class*='leadText']", "meta[name='description']"],
+    }),
     datasetSchema({
       name: "Hadoop IBFET 324B+ Lines of Code Clone Corpus",
       description:
@@ -492,6 +503,16 @@ export function ResearchPage() {
         question: "What tools has the SSA Lab created for software vulnerability detection?",
         answer:
           "Key platforms include SQVDT (scalable quantitative vulnerability detection), VCIPR (patch-guided function-level identification), DroidSD (indexed Android app similarity detection), and DroidMD (source-level Android malware detection).",
+      },
+      {
+        question: "Can industry clients and technology organizations contract SSA Lab for software security assessments and code audits?",
+        answer:
+          "Yes. The SSA Research Lab conducts industrial static code analysis, vulnerability assessments, code clone audits, and malware evaluations for enterprise partners and software vendors. Inquiries can be submitted via the Contact page.",
+      },
+      {
+        question: "What programming languages and frameworks are supported in SSA Lab security audits?",
+        answer:
+          "The lab's static analysis and benchmark tools support C, C++, Java, Python, Go, Rust, TypeScript, JavaScript, Android APK bytecode, and IoT firmware binaries.",
       },
     ]),
   ];
@@ -725,6 +746,10 @@ export function PublicationsPage() {
         pdfUrl: p.pdfUrl,
       })
     ),
+    speakableSchema({
+      url: `${SITE_URL}/publications`,
+      cssSelectors: ["h1", "p[class*='lead']", "meta[name='description']"],
+    }),
     faqSchema([
       {
         question: "Where are Dr. Junaid Akram's software security papers published?",
@@ -939,6 +964,7 @@ export function PublicationsPage() {
         </div>
 
         {/* 3. Publications Output (Grid Cards vs Compact Rows) */}
+        <h2 className="sr-only">Publication Directory & Articles</h2>
         {filteredPubs.length > 0 ? (
           viewMode === "grid" ? (
             <div className={styles.pubCardGrid}>
@@ -1273,6 +1299,10 @@ export function SupervisionPage({ fypProjects = [] }) {
         keywords: p.technologies ? p.technologies.join(", ") : undefined,
       })
     ),
+    speakableSchema({
+      url: `${SITE_URL}/supervision`,
+      cssSelectors: ["h1", "p[class*='lead']", "meta[name='description']"],
+    }),
     faqSchema([
       {
         question: "Who can apply for FYP, dissertation, or thesis supervision at SSA Lab?",
@@ -1425,6 +1455,10 @@ export function TeamPage() {
       ],
     }),
     personSchema(),
+    speakableSchema({
+      url: `${SITE_URL}/team`,
+      cssSelectors: ["h1", "p[class*='lead']", "meta[name='description']"],
+    }),
     ...coInvestigatorsData.slice(0, 4).map((m) =>
       personMemberSchema({
         name: m.name,
@@ -1624,7 +1658,7 @@ export function TeamPage() {
                     <div className={styles.collabMeta}>
                       <h3>{student.name}</h3>
                       <span className={styles.collabBadge}>{student.degree} {student.id ? `· ${student.id}` : student.memberId ? `· ${student.memberId}` : ""}</span>
-                      <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(16,185,129,0.1)", color: "#10b981" }}>
+                      <div className={styles.collabBadge} style={{ marginTop: "4px", background: "rgba(5, 150, 105, 0.12)", color: "#047857" }}>
                         {student.status}
                       </div>
                     </div>
@@ -1897,6 +1931,27 @@ export function EventsPage() {
         description: e.description || e.summary || e.venue,
       })),
     }),
+    speakableSchema({
+      url: `${SITE_URL}/events`,
+      cssSelectors: ["h1", "p[class*='lead']", "meta[name='description']"],
+    }),
+    faqSchema([
+      {
+        question: "Does Dr. Junaid Akram deliver keynotes and invited research talks?",
+        answer:
+          "Yes. Dr. Junaid Akram delivers invited keynote speeches, tutorials, and workshop sessions at international cybersecurity, software engineering, and artificial intelligence conferences worldwide.",
+      },
+      {
+        question: "What technical themes are covered in SSA Lab presentations?",
+        answer:
+          "Presentations focus on static application security testing, deep learning for vulnerability prediction, empirical benchmark curation, Android/IoT malware defenses, and large-scale code clone indexing.",
+      },
+      {
+        question: "How can conference organizers invite Dr. Junaid Akram as a speaker?",
+        answer:
+          "Organizers may contact Dr. Junaid Akram directly via email at Junaid.Akram@nottingham.edu.cn with the event overview, dates, and proposed session topics.",
+      },
+    ]),
     ...eventHighlightsData.slice(0, 6).map((e) =>
       eventSchema({
         name: e.title,
@@ -2073,6 +2128,11 @@ export function ContactPage() {
         "Email Junaid.Akram@nottingham.edu.cn with your academic background, CV, transcripts, selected research topic, and technical proficiencies.",
     },
     {
+      question: "Can corporate or government clients request a software security audit or vulnerability assessment?",
+      answer:
+        "Yes. The SSA Research Lab conducts industrial static application security testing (SAST), zero-day vulnerability audits, semantic code clone detection to protect intellectual property, and Android/IoT malware security assessments for corporate and government partners.",
+    },
+    {
       question: "What research areas does the SSA Lab focus on?",
       answer:
         "The SSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
@@ -2092,16 +2152,26 @@ export function ContactPage() {
       answer:
         `${profile.phone || academicProfile.phone || "+86 (0) 574 88180000 (Ext. 6424)"}`,
     },
+    {
+      question: "What is the expected turnaround for client security assessment and research proposals?",
+      answer:
+        "Formal client assessment and research collaboration inquiries submitted via the portal or direct email receive a response within 24 to 48 business hours.",
+    },
   ];
 
   const contactJsonLd = [
     contactPageSchema({ url: `${SITE_URL}/contact` }),
     personSchema(),
+    clientServicesSchema(),
+    speakableSchema({
+      url: `${SITE_URL}/contact`,
+      cssSelectors: ["h1", "p[class*='lead']", "meta[name='description']"],
+    }),
     serviceSchema({
-      name: "Research Collaboration & Student Supervision",
+      name: "Software Security Assessment & Research Collaboration",
       description:
-        "Dr. Junaid Akram accepts collaboration requests, research proposals, and student supervision enquiries in software security, vulnerability detection, and automated testing.",
-      serviceType: "Academic Research Supervision",
+        "Dr. Junaid Akram accepts client security assessment contracts, collaboration requests, research proposals, and student supervision enquiries in software security, vulnerability detection, and automated testing.",
+      serviceType: "Software Security Assessment & Academic Research Supervision",
       url: `${SITE_URL}/contact`,
     }),
     faqSchema(CONTACT_FAQS),
@@ -2353,7 +2423,7 @@ export function ContactPage() {
               </div>
             </form>
 
-            <aside className={styles.enquirySidebarCard}>
+            <div className={styles.enquirySidebarCard}>
               <div className={styles.enquiryIllustrationBox}>
                 <img
                   src="/academic/illustrations/contact-hero.webp"
@@ -2373,7 +2443,7 @@ export function ContactPage() {
                   <ShieldCheck size={16} /> 24–48h Response Window
                 </div>
               </div>
-            </aside>
+            </div>
           </div>
         )}
       </section>

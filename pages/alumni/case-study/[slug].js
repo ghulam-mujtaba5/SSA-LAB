@@ -34,6 +34,11 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       title={`${project.title} — Supervised FYP Case Study`}
       path={`/alumni/case-study/${project.slug}`}
       description={project.summary || `Supervised Final Year Project case study: ${project.title}`}
+      breadcrumbs={[
+        { label: "Supervision", href: "/supervision" },
+        { label: "Case Studies", href: "/supervision?tab=completed" },
+        { label: project.title },
+      ]}
     >
       {/* Top Navigation & Breadcrumb */}
       <div className={styles.detailBreadcrumbBand}>

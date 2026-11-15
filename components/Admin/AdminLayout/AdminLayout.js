@@ -437,29 +437,17 @@ export default function AdminLayoutPremium({ children, title }) {
           </div>
 
           <div className={styles.topBarCenter}>
-            <div
+            <button
+              type="button"
               className={styles.searchBar}
-              role="button"
-              tabIndex={0}
               onClick={() => openCommandPalette('')}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openCommandPalette('');
-                }
-              }}
               aria-label="Open command palette"
               title="Search / Commands (Ctrl+K)"
             >
               <Icons.search />
-              <input
-                type="text"
-                readOnly
-                value=""
-                placeholder="Search or run a command..."
-              />
+              <span className={styles.searchPlaceholder}>Search or run a command...</span>
               <kbd className={styles.searchKbd}>Ctrl K</kbd>
-            </div>
+            </button>
           </div>
 
           <div className={styles.topBarRight}>
@@ -525,6 +513,8 @@ export default function AdminLayoutPremium({ children, title }) {
         type="button"
         onClick={() => setIsQuickCreateOpen(true)}
         className={styles.quickCreateButton}
+        aria-label="Quick Create New Item"
+        title="Quick Create"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ scale: 0, opacity: 0 }}

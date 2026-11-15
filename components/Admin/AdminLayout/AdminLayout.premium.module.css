@@ -660,14 +660,16 @@
   box-shadow: 0 0 0 3px rgba(var(--admin-primary-rgb), 0.1);
 }
 
-.searchBar input {
+.searchBar input,
+.searchBar .searchPlaceholder {
   flex: 1;
   border: none;
   background: transparent;
-  color: var(--text);
+  color: var(--text-muted);
   font-size: var(--admin-text-sm);
   outline: none;
   min-width: 0;
+  text-align: left;
 }
 
 .searchBar input::placeholder {
@@ -699,7 +701,7 @@
   padding: 6px 14px;
   font-size: var(--admin-text-sm);
   font-weight: var(--admin-font-medium);
-  color: var(--admin-primary);
+  color: var(--admin-primary-dark, #0369a1);
   background: var(--admin-primary-light);
   border: 1px solid transparent;
   border-radius: var(--admin-radius-md);

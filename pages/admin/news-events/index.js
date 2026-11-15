@@ -197,6 +197,7 @@ export default function NewsEventsAdminPage() {
             <input
               type="text"
               placeholder="Search news & events by title, location, or summary..."
+              aria-label="Search news & events by title, location, or summary"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -229,6 +230,8 @@ export default function NewsEventsAdminPage() {
             </button>
           ))}
         </div>
+
+        <h2 className="sr-only">Events & Gallery Management List</h2>
 
         {loading ? (
           <div className={styles.loadingSpinner}>Loading events...</div>

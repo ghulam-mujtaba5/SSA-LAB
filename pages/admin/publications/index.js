@@ -240,6 +240,7 @@ export default function PublicationsAdminPage() {
             <input
               type="text"
               placeholder="Search publications by title, authors, venue, or tags..."
+              aria-label="Search publications by title, authors, venue, or tags"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -259,6 +260,7 @@ export default function PublicationsAdminPage() {
             <select
               className={styles.formSelect}
               style={{ minWidth: 130 }}
+              aria-label="Filter publications by year"
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
             >
@@ -283,6 +285,8 @@ export default function PublicationsAdminPage() {
             </button>
           ))}
         </div>
+
+        <h2 className="sr-only">Publications Management List</h2>
 
         {loading ? (
           <div className={styles.loadingSpinner}>Loading publications...</div>

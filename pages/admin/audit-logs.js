@@ -18,11 +18,12 @@ const Filters = ({ filters, setFilters, onApply }) => {
     <div className={styles.filterBar}>
       <div className={styles.filtersGrid}>
         <div className={`${styles.fieldGroup} ${styles.span4}`}>
-          <label className={styles.label}>
+          <label htmlFor="filter-q" className={styles.label}>
             <Icon name="search" size={16} />
             Search
           </label>
           <input
+            id="filter-q"
             className={styles.formControl}
             placeholder="user, details, entityId"
             value={filters.q}
@@ -30,11 +31,12 @@ const Filters = ({ filters, setFilters, onApply }) => {
           />
         </div>
         <div className={`${styles.fieldGroup} ${styles.span2}`}>
-          <label className={styles.label}>
+          <label htmlFor="filter-action" className={styles.label}>
             <Icon name="activity" size={16} />
             Action
           </label>
           <select
+            id="filter-action"
             className={`${styles.formControl} ${styles.select}`}
             value={filters.action}
             onChange={(e) =>
@@ -51,11 +53,12 @@ const Filters = ({ filters, setFilters, onApply }) => {
           </select>
         </div>
         <div className={`${styles.fieldGroup} ${styles.span2}`}>
-          <label className={styles.label}>
+          <label htmlFor="filter-entity" className={styles.label}>
             <Icon name="database" size={16} />
             Entity
           </label>
           <select
+            id="filter-entity"
             className={`${styles.formControl} ${styles.select}`}
             value={filters.entity}
             onChange={(e) =>

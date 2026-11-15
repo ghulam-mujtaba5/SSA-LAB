@@ -205,6 +205,7 @@ function EnquiriesPage() {
           <input
             type="text"
             placeholder="Search by sender name, email, or topic..."
+            aria-label="Search by sender name, email, or topic"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={{
@@ -222,6 +223,7 @@ function EnquiriesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
+            aria-label="Filter enquiries by status"
             style={{
               padding: "10px 14px",
               borderRadius: "8px",
@@ -242,6 +244,7 @@ function EnquiriesPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
+            aria-label="Filter enquiries by type"
             style={{
               padding: "10px 14px",
               borderRadius: "8px",

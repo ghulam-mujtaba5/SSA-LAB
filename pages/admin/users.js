@@ -423,11 +423,13 @@ const UsersPage = () => {
             </div>
             
             <div className={commonStyles.filterGroup}>
-              <label className={commonStyles.filterLabel}>
+              <label htmlFor="filter_role" className={commonStyles.filterLabel}>
                 <Icon name="user" size={16} />
                 Role
               </label>
               <select
+                id="filter_role"
+                aria-label="Filter users by role"
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value)}
                 className={commonStyles.formControl}

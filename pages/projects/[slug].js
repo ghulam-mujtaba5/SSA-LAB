@@ -35,6 +35,11 @@ export default function ProjectSlugPage({ project }) {
       title={`${project.title} — Project Case Study`}
       path={`/projects/${project.slug}`}
       description={project.summary || project.description || `Case study for ${project.title}`}
+      breadcrumbs={[
+        { label: "Supervision", href: "/supervision" },
+        { label: "Projects", href: "/supervision" },
+        { label: project.title },
+      ]}
     >
       <ProjectDetail project={project} />
     </AcademicSiteLayout>
