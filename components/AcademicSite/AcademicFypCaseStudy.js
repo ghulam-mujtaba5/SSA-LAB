@@ -117,7 +117,7 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
           <GraduationCap size={22} />
           <span>Supervision</span>
           <p>
-            <strong>{featured.supervisor || "Dr. Junaid Akram, PhD"}</strong>
+            <strong>{featured.supervisor || "Dr. Junaid Akram"}</strong>
             <small>Lead Supervisor</small>
           </p>
           {featured.coSupervisor ? (

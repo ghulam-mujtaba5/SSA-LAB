@@ -44,7 +44,7 @@ export default function AcademicFooter() {
   ];
 
   const labLinks = [
-    { href: "/about", label: "About Dr. Junaid Akram, PhD" },
+    { href: "/about", label: "About Dr. Junaid Akram" },
     { href: "/events", label: "Research Seminars & Events" },
     { href: profile.officialProfile || academicProfile.officialProfile, label: "Official COMSATS Profile", external: true },
     { href: "/contact", label: "Office Hours & Location" },
@@ -93,7 +93,7 @@ export default function AcademicFooter() {
               at scale.
             </p>
             <div className={styles.metaRow}>
-              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor · Postdoc (SnT Luxembourg)
+              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
             </div>
           </div>
 

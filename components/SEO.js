@@ -57,7 +57,7 @@ export default function SEO({
   imageAlt = "Dr. Junaid Akram — SSA Research Lab",
   type = "website",
   canonical = url,
-  keywords = "Software Security Assessment, Vulnerability Detection, Static Application Security Testing, SAST, Code Audit, Malware Detection, Code Clone Analysis, Automated Software Testing, Dr Junaid Akram, University of Nottingham Ningbo China, UNNC",
+  keywords = "Software Security Assessment, Vulnerability Detection, Static Application Security Testing, SAST, Code Audit, Malware Detection, Code Clone Analysis, Automated Software Testing, Dr Junaid Akram, Dr Junaid Akram PhD, Postdoc SnT Luxembourg, Tsinghua University PhD, University of Nottingham Ningbo China, UNNC",
   author = PERSON_NAME_FULL,
   locale = "en_US",
   robots = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
@@ -434,7 +434,7 @@ export function profilePageSchema(overrides = {}) {
     name: `${PERSON_NAME_FULL} — Academic & Research Profile`,
     url: SITE_URL,
     description:
-      "Academic profile, empirical research, peer-reviewed publications, student supervision, and software security assessment capabilities of Dr. Junaid Akram.",
+      "Academic profile, empirical research, peer-reviewed publications, student supervision, and software security assessment capabilities of Dr. Junaid Akram, PhD.",
     mainEntity: { "@id": `${SITE_URL}/#person` },
     dateModified: new Date().toISOString().split("T")[0],
     inLanguage: "en-US",
@@ -1004,7 +1004,7 @@ export function contactPageSchema({ url }) {
     url,
     name: "Contact SSA Research Lab",
     description:
-      "Get in touch with Dr. Junaid Akram and the Software Security Assessment Lab for research collaboration, client software security assessment, code audits, or student supervision.",
+      "Get in touch with Dr. Junaid Akram, PhD and the Software Security Assessment Lab for research collaboration, client software security assessment, code audits, or student supervision.",
     mainEntity: { "@id": `${SITE_URL}/#person` },
     isPartOf: { "@id": `${SITE_URL}/#website` },
   };

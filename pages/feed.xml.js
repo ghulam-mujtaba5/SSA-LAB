@@ -56,7 +56,7 @@ export async function getServerSideProps({ res }) {
     <link>${SITE_URL}</link>
     <description>Research, publications, and supervision updates from the Software Security Assessment Lab at University of Nottingham Ningbo China. Led by Dr. Junaid Akram.</description>
     <language>en-us</language>
-    <managingEditor>Junaid.Akram@nottingham.edu.cn (Junaid Akram)</managingEditor>
+    <managingEditor>Junaid.Akram@nottingham.edu.cn (Dr. Junaid Akram)</managingEditor>
     <webMaster>Junaid.Akram@nottingham.edu.cn (SSA Lab)</webMaster>
     <lastBuildDate>${buildDate}</lastBuildDate>
     <ttl>60</ttl>

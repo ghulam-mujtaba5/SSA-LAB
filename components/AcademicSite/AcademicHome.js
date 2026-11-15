@@ -95,9 +95,9 @@ export default function AcademicHome() {
 
   const homeJsonLd = [
     profilePageSchema({
-      name: "Dr. Junaid Akram — SSA Research Lab",
+      name: "Dr. Junaid Akram, PhD — SSA Research Lab",
       description:
-        "Software Security Assessment Lab led by Dr. Junaid Akram at University of Nottingham Ningbo China. Advancing vulnerability detection, malware analysis, semantic code clone detection, and automated software verification.",
+        "Software Security Assessment Lab led by Dr. Junaid Akram, PhD (former Postdoctoral Researcher at SnT Luxembourg, PhD Tsinghua University) at University of Nottingham Ningbo China. Advancing vulnerability detection, malware analysis, semantic code clone detection, and automated software verification.",
     }),
     clientServicesSchema(),
     speakableSchema({
@@ -120,12 +120,12 @@ export default function AcademicHome() {
       {
         question: "What is the Software Security Assessment (SSA) Lab?",
         answer:
-          "The SSA Lab is a dedicated academic research laboratory led by Dr. Junaid Akram. The lab specializes in source-code vulnerability detection, LLM automated program repair, semantic code clone analysis, malware defense, and software verification.",
+          "The SSA Lab is a dedicated academic research laboratory led by Dr. Junaid Akram, PhD. The lab specializes in source-code vulnerability detection, LLM automated program repair, semantic code clone analysis, malware defense, and software verification.",
       },
       {
         question: "Who directs the SSA Research Lab?",
         answer:
-          "The lab is directed by Dr. Junaid Akram, Assistant Professor at University of Nottingham Ningbo China (UNNC), who completed postdoctoral research at SnT, University of Luxembourg and earned his PhD in Software Engineering from Tsinghua University.",
+          "The lab is directed by Dr. Junaid Akram, PhD, Assistant Professor at University of Nottingham Ningbo China (UNNC), who completed postdoctoral research at SnT, University of Luxembourg and earned his PhD in Software Engineering from Tsinghua University.",
       },
       {
         question: "What major tools and benchmarks has the SSA Lab created?",
@@ -140,7 +140,7 @@ export default function AcademicHome() {
       {
         question: "How can clients, organizations, or prospective students collaborate with the SSA Lab?",
         answer:
-          "Prospective research collaborators, clients, and students can contact Dr. Junaid Akram via email at Junaid.Akram@nottingham.edu.cn or through the Contact page.",
+          "Prospective research collaborators, clients, and students can contact Dr. Junaid Akram, PhD via email at Junaid.Akram@nottingham.edu.cn or through the Contact page.",
       },
     ]),
   ];
@@ -149,8 +149,8 @@ export default function AcademicHome() {
     <AcademicSiteLayout
       title="Software Security & Source Code Analysis Research"
       path="/"
-      description="Software Security Assessment Lab led by Dr. Junaid Akram at University of Nottingham Ningbo China. Specializing in source code security, LLM vulnerability detection, code clone analysis, and malware defense."
-      keywords="Software Security Assessment Lab, Dr. Junaid Akram, software vulnerability detection, LLM vulnerability detection, semantic code clone detection, University of Nottingham Ningbo China, UNNC, malware analysis, automated software testing"
+      description="Software Security Assessment Lab led by Dr. Junaid Akram, PhD (former Postdoctoral Researcher at SnT Luxembourg, PhD Tsinghua University) at University of Nottingham Ningbo China. Specializing in source code security, LLM vulnerability detection, code clone analysis, and malware defense."
+      keywords="Software Security Assessment Lab, Dr. Junaid Akram, PhD, Postdoc, software vulnerability detection, LLM vulnerability detection, semantic code clone detection, University of Nottingham Ningbo China, UNNC, malware analysis, automated software testing"
       jsonLd={homeJsonLd}
       citations={publicationsData.slice(0, 5)}
     >
@@ -170,7 +170,7 @@ export default function AcademicHome() {
               Advancing software security through source-code analysis, testing, and vulnerability research.
             </h1>
             <p className={styles.heroLead}>
-              Led by Dr. Junaid Akram, the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
+              Led by Dr. Junaid Akram, PhD (former Postdoctoral Researcher at SnT, University of Luxembourg), the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
             </p>
             <ul className={styles.credentialList}>
               {(academicProfileData.credentials || []).map((credential) => (
@@ -202,11 +202,11 @@ export default function AcademicHome() {
             <div className={styles.heroPortraitBackdropGlow} aria-hidden="true" />
             <AcademicImageLightbox
               src="/academic/junaid-akram-hero-transparent.webp"
-              alt="Dr. Junaid Akram — Assistant Professor at University of Nottingham Ningbo China & Director of SSA Research Lab"
+              alt="Dr. Junaid Akram, PhD — Assistant Professor at University of Nottingham Ningbo China & Director of SSA Research Lab"
               width={777}
               height={1000}
               priority
-              caption="Dr. Junaid Akram — Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC) and Director of the Software Security Assessment (SSA) Research Lab."
+              caption="Dr. Junaid Akram, PhD — Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), Former Postdoctoral Researcher at SnT Luxembourg, PhD from Tsinghua University, and Director of the Software Security Assessment (SSA) Research Lab."
               className={styles.heroIllustrationLightbox}
               imageClassName={styles.heroIllustrationImg}
               sizes="(max-width: 780px) 100vw, 45vw"
@@ -216,7 +216,7 @@ export default function AcademicHome() {
               <BorderBeam size={160} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
               <div className={styles.heroProfileCardHeader} style={{ position: "relative", zIndex: 2 }}>
                 <div className={styles.heroProfileStatusDot} />
-                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram</span>
+                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram, PhD</span>
               </div>
               <div className={styles.heroProfileButtons} style={{ position: "relative", zIndex: 2 }}>
                 <a
@@ -389,7 +389,7 @@ export default function AcademicHome() {
             <p className={styles.eyebrow}>Supervision Directory Preview</p>
             <h2>Featured Student Research & Capstone Projects</h2>
             <p style={{ maxWidth: "640px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: "6px 0 0 0" }}>
-              A curated preview of active software security, LLM vulnerability repair, and student engineering projects supervised under Dr. Junaid Akram at SSA Lab.
+              A curated preview of active software security, LLM vulnerability repair, and student engineering projects supervised under Dr. Junaid Akram, PhD at SSA Lab.
             </p>
           </div>
           <Link href="/supervision" className={styles.textLink}>

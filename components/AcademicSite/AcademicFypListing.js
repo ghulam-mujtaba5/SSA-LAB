@@ -97,7 +97,7 @@ export default function AcademicFypListing({ projects = [] }) {
           <p className={styles.eyebrow}>Supervision Directory</p>
           <h2>Research Supervision & Capstone Projects</h2>
           <p className={styles.sectionLead}>
-            Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram, PhD at SSA Lab.
+            Explore running research projects, completed student capstones, and future MS/PhD research topics led by Dr. Junaid Akram at SSA Lab.
           </p>
         </div>
       </div>
