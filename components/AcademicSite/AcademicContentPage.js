@@ -607,6 +607,124 @@ export function ResearchPage() {
         </div>
       </section>
 
+      {/* Contextual Evidence & Benchmarks Matrix */}
+      <section className={`${styles.section} ${styles.softSection}`}>
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>Empirical Evidence & Benchmarks</p>
+            <h2>Research Areas & Peer-Reviewed Evidence</h2>
+            <p style={{ maxWidth: "680px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: "6px 0 0 0" }}>
+              Direct pathways connecting our core research problems to published methodologies, empirical benchmarks, and open-source systems.
+            </p>
+          </div>
+        </div>
+
+        <div style={{ overflowX: "auto", borderRadius: "12px", border: "1px solid var(--academic-border)", background: "var(--academic-card)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.88rem", textAlign: "left" }}>
+            <thead>
+              <tr style={{ borderBottom: "1px solid var(--academic-border)", background: "rgba(255,255,255,0.02)" }}>
+                <th style={{ padding: "14px 18px", color: "var(--academic-text)", fontWeight: 600 }}>Research Area</th>
+                <th style={{ padding: "14px 18px", color: "var(--academic-text)", fontWeight: 600 }}>Core Problem & Contribution</th>
+                <th style={{ padding: "14px 18px", color: "var(--academic-text)", fontWeight: 600 }}>Verified Tool / Benchmark</th>
+                <th style={{ padding: "14px 18px", color: "var(--academic-text)", fontWeight: 600 }}>Primary Evidence Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--academic-border)" }}>
+                <td style={{ padding: "14px 18px", fontWeight: 600, color: "var(--academic-text)" }}>
+                  Vulnerability Detection
+                </td>
+                <td style={{ padding: "14px 18px", color: "var(--academic-muted)" }}>
+                  Scalable file- and function-level source code security assessment across 152K+ repositories.
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <span style={{ padding: "2px 8px", borderRadius: "4px", background: "rgba(2, 132, 199, 0.1)", color: "#0284c7", fontWeight: 500, fontSize: "0.8rem" }}>
+                    SQVDT Platform
+                  </span>
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <a href="https://doi.org/10.1002/spe.2905" target="_blank" rel="noreferrer" style={{ color: "var(--brand-primary, #0284c7)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                    Read Paper (SPE 2021) <ExternalLink size={12} />
+                  </a>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--academic-border)" }}>
+                <td style={{ padding: "14px 18px", fontWeight: 600, color: "var(--academic-text)" }}>
+                  Code Clone Detection
+                </td>
+                <td style={{ padding: "14px 18px", color: "var(--academic-muted)" }}>
+                  Distributed token-based inverted index scaling clone search across 324B+ lines of code.
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <span style={{ padding: "2px 8px", borderRadius: "4px", background: "rgba(2, 132, 199, 0.1)", color: "#0284c7", fontWeight: 500, fontSize: "0.8rem" }}>
+                    IBFET & DroidSD
+                  </span>
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <Link href="/publications" style={{ color: "var(--brand-primary, #0284c7)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                    View Clone Publications <ArrowRight size={12} />
+                  </Link>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--academic-border)" }}>
+                <td style={{ padding: "14px 18px", fontWeight: 600, color: "var(--academic-text)" }}>
+                  Android & IoT Malware
+                </td>
+                <td style={{ padding: "14px 18px", color: "var(--academic-muted)" }}>
+                  Ensemble machine learning classifiers defending against bytecode obfuscation and cross-architecture threats.
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <span style={{ padding: "2px 8px", borderRadius: "4px", background: "rgba(2, 132, 199, 0.1)", color: "#0284c7", fontWeight: 500, fontSize: "0.8rem" }}>
+                    MTHAEL & DroidMD
+                  </span>
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <a href="https://doi.org/10.1109/TC.2020.3015584" target="_blank" rel="noreferrer" style={{ color: "var(--brand-primary, #0284c7)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                    IEEE Trans. Computers (2020) <ExternalLink size={12} />
+                  </a>
+                </td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--academic-border)" }}>
+                <td style={{ padding: "14px 18px", fontWeight: 600, color: "var(--academic-text)" }}>
+                  AI-Assisted Patch Repair
+                </td>
+                <td style={{ padding: "14px 18px", color: "var(--academic-muted)" }}>
+                  Coupling LLM reasoning with compiler verification to synthesize compile-safe security patches.
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <span style={{ padding: "2px 8px", borderRadius: "4px", background: "rgba(2, 132, 199, 0.1)", color: "#0284c7", fontWeight: 500, fontSize: "0.8rem" }}>
+                    LLM Patch Optimizer
+                  </span>
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <Link href="/supervision/projects/llm-based-vulnerability-patch-optimizer" style={{ color: "var(--brand-primary, #0284c7)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                    View Case Study <ArrowRight size={12} />
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td style={{ padding: "14px 18px", fontWeight: 600, color: "var(--academic-text)" }}>
+                  Software & CPS Testing
+                </td>
+                <td style={{ padding: "14px 18px", color: "var(--academic-muted)" }}>
+                  Automated constraint-based test data generation and test-smell slicing for cyber-physical satellite control.
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <span style={{ padding: "2px 8px", borderRadius: "4px", background: "rgba(2, 132, 199, 0.1)", color: "#0284c7", fontWeight: 500, fontSize: "0.8rem" }}>
+                    ARC CPS Generator
+                  </span>
+                </td>
+                <td style={{ padding: "14px 18px" }}>
+                  <Link href="/about" style={{ color: "var(--brand-primary, #0284c7)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                    SnT / SES Satellite Research <ArrowRight size={12} />
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       {/* Full Interactive Research Workflow Pipeline */}
       <section className={`${styles.section} ${styles.pipelineSection}`}>
         <div className={styles.sectionHeading}>
@@ -2578,6 +2696,11 @@ export function ContactPage() {
                   {isSubmitting ? "Sending Enquiry..." : "Submit Enquiry"} <Send size={15} />
                 </button>
               </div>
+
+              <p style={{ margin: "12px 0 0", fontSize: "0.78rem", color: "var(--academic-muted, #64748b)", lineHeight: 1.5 }}>
+                <ShieldCheck size={13} style={{ display: "inline", verticalAlign: "-2px", color: "var(--brand-primary, #0284c7)" }} />
+                {" "}Privacy Notice: Documents and personal details submitted through this form are handled with strict academic confidentiality and evaluated solely for supervision and research assessment. See our <Link href="/privacy-policy" style={{ color: "var(--brand-primary, #0284c7)", textDecoration: "underline" }}>Privacy Policy</Link>.
+              </p>
             </form>
 
             <div className={styles.enquirySidebarCard}>
@@ -2597,7 +2720,7 @@ export function ContactPage() {
                   Submit your research background, degree program, or collaboration inquiry directly to Dr. Junaid Akram, PhD for research and FYP assessment.
                 </p>
                 <div className={styles.enquirySidebarBadge}>
-                  <ShieldCheck size={16} /> 24–48h Response Window
+                  <ShieldCheck size={16} /> Academic Review: 2–3 Business Days
                 </div>
               </div>
             </div>

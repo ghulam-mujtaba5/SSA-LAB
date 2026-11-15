@@ -196,6 +196,8 @@ async function main() {
         venue: pub.venue,
         href: pub.href || "",
         bibtex: pub.bibtex || "",
+        abstract: pub.abstract || "",
+        tags: pub.tags || [],
         displayOrder: idx,
         published: true,
       };

@@ -4,7 +4,7 @@ import { ShieldCheck, Cpu, Lock, Activity } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import styles from "./LoadingAnimation.module.css";
 
-const DEFAULT_LOGO = "/academic/scsa-research-group-logo.webp";
+const DEFAULT_LOGO = "/academic/ssa-research-group-logo.png";
 
 const LoadingAnimation = ({
   visible = true,

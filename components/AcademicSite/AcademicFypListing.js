@@ -22,59 +22,67 @@ const CATEGORIES = [
 export default function AcademicFypListing({ projects = [] }) {
   const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
-  const [activeType, setActiveType] = useState("all"); // 'all', 'running', 'completed'
+  const [activeType, setActiveType] = useState("all"); // 'all', 'running', 'completed', 'future'
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (router.query.tab) {
       const tabParam = String(router.query.tab).toLowerCase();
-      if (["all", "running", "completed", "complete"].includes(tabParam)) {
+      if (["all", "running", "completed", "complete", "future", "opportunities", "open"].includes(tabParam)) {
         if (tabParam === "complete") setActiveType("completed");
+        else if (["future", "opportunities", "open"].includes(tabParam)) setActiveType("future");
         else setActiveType(tabParam);
       }
     }
   }, [router.query.tab]);
 
-  // Clean projects to only include verified supervised projects (no opportunity proposal cards)
-  const validProjects = useMemo(() => {
-    return projects.filter(
-      (p) =>
-        !p.isOpportunity &&
-        p.categoryType !== "future" &&
-        !(p.projectType && (p.projectType.includes("Opportunity") || p.projectType.includes("Future")))
-    );
-  }, [projects]);
-
-  const { runningProjects, completedProjects } = useMemo(() => {
+  // Partition all projects into running, completed, and open future opportunities
+  const { runningProjects, completedProjects, futureProjects, allSupervised } = useMemo(() => {
     const running = [];
     const completed = [];
-    validProjects.forEach((p) => {
-      const isRunning =
-        p.categoryType === "running" ||
-        p.isRunning ||
-        (p.status && p.status.toLowerCase().includes("running"));
+    const future = [];
+    const supervised = [];
 
-      if (isRunning) {
-        running.push(p);
+    projects.forEach((p) => {
+      const isOpp =
+        p.isOpportunity ||
+        p.categoryType === "future" ||
+        (p.projectType && (p.projectType.includes("Opportunity") || p.projectType.includes("Future") || p.projectType.includes("Open"))) ||
+        (p.status && p.status.toLowerCase().includes("available"));
+
+      if (isOpp) {
+        future.push(p);
       } else {
-        completed.push(p);
+        supervised.push(p);
+        const isRunning =
+          p.categoryType === "running" ||
+          p.isRunning ||
+          (p.status && p.status.toLowerCase().includes("running"));
+
+        if (isRunning) {
+          running.push(p);
+        } else {
+          completed.push(p);
+        }
       }
     });
-    return { runningProjects: running, completedProjects: completed };
-  }, [validProjects]);
+
+    return {
+      runningProjects: running,
+      completedProjects: completed,
+      futureProjects: future,
+      allSupervised: supervised,
+    };
+  }, [projects]);
 
   const filteredProjects = useMemo(() => {
-    return validProjects.filter((project) => {
-      const isRunning =
-        project.categoryType === "running" ||
-        project.isRunning ||
-        (project.status && project.status.toLowerCase().includes("running"));
-      const isCompleted = !isRunning;
+    let baseList = [];
+    if (activeType === "running") baseList = runningProjects;
+    else if (activeType === "completed") baseList = completedProjects;
+    else if (activeType === "future") baseList = futureProjects;
+    else baseList = [...runningProjects, ...completedProjects];
 
-      // Type tab filter
-      if (activeType === "running" && !isRunning) return false;
-      if (activeType === "completed" && !isCompleted) return false;
-
+    return baseList.filter((project) => {
       // Category filter
       const matchesCategory =
         activeCategory === "All" ||
@@ -102,10 +110,12 @@ export default function AcademicFypListing({ projects = [] }) {
       const techMatch = (project.technologies || []).some((t) =>
         t.toLowerCase().includes(query)
       );
+      const instMatch = project.institution?.toLowerCase().includes(query);
+      const prereqMatch = project.prerequisites?.toLowerCase().includes(query);
 
-      return matchesCategory && (titleMatch || summaryMatch || studentMatch || techMatch);
+      return matchesCategory && (titleMatch || summaryMatch || studentMatch || techMatch || instMatch || prereqMatch);
     });
-  }, [validProjects, activeCategory, activeType, searchQuery]);
+  }, [runningProjects, completedProjects, futureProjects, activeCategory, activeType, searchQuery]);
 
   return (
     <section className={`${styles.section} ${styles.fypListingSection}`}>
@@ -114,7 +124,7 @@ export default function AcademicFypListing({ projects = [] }) {
           <p className={styles.eyebrow}>Supervision Directory</p>
           <h2>Research Supervision & Capstone Projects</h2>
           <p className={styles.sectionLead}>
-            Explore running research projects and completed student capstones led by Dr. Junaid Akram, PhD at SSA Lab.
+            Explore running research projects, completed student capstones, and open supervision dissertation topics led by Dr. Junaid Akram, PhD at SSA Lab.
           </p>
         </div>
       </div>
@@ -127,6 +137,10 @@ export default function AcademicFypListing({ projects = [] }) {
         <span className={styles.listingStatsDivider}>·</span>
         <span>
           <strong>{completedProjects.length}</strong> Completed Projects
+        </span>
+        <span className={styles.listingStatsDivider}>·</span>
+        <span>
+          <strong>{futureProjects.length}</strong> Open Supervision Topics
         </span>
         <span className={styles.listingStatsDivider}>·</span>
         <span>
@@ -150,7 +164,7 @@ export default function AcademicFypListing({ projects = [] }) {
             className={`${styles.filterPill} ${activeType === "all" ? styles.filterPillActive : ""}`}
             onClick={() => setActiveType("all")}
           >
-            All Projects ({validProjects.length})
+            All Supervised ({allSupervised.length})
           </button>
           <button
             type="button"
@@ -165,6 +179,13 @@ export default function AcademicFypListing({ projects = [] }) {
             onClick={() => setActiveType("completed")}
           >
             Completed Projects ({completedProjects.length})
+          </button>
+          <button
+            type="button"
+            className={`${styles.filterPill} ${activeType === "future" ? styles.filterPillActive : ""}`}
+            onClick={() => setActiveType("future")}
+          >
+            Open Topics ({futureProjects.length})
           </button>
         </div>
 
@@ -209,7 +230,13 @@ export default function AcademicFypListing({ projects = [] }) {
         {filteredProjects.length > 0 ? (
           filteredProjects.map((project) => {
             const isFeatured = project.featured;
-            const detailUrl = `/supervision/projects/${project.slug}`;
+            const isOpp =
+              project.isOpportunity ||
+              project.categoryType === "future" ||
+              (project.projectType && (project.projectType.includes("Opportunity") || project.projectType.includes("Open")));
+            const detailUrl = isOpp
+              ? `/supervision/opportunities/${project.slug}`
+              : `/supervision/projects/${project.slug}`;
 
             return (
               <article
@@ -224,7 +251,7 @@ export default function AcademicFypListing({ projects = [] }) {
                 <div className={styles.fypCardTop}>
                   <div className={styles.fypCardBadges}>
                     <span className={styles.categoryBadge}>
-                      {project.category || "Supervised Project"}
+                      {isOpp ? "Open Supervision Topic" : (project.category || "Supervised Project")}
                     </span>
                     {isFeatured ? (
                       <span className={styles.featuredBadge}>
@@ -232,7 +259,9 @@ export default function AcademicFypListing({ projects = [] }) {
                       </span>
                     ) : null}
                   </div>
-                  <span className={styles.sessionBadge}>{project.session}</span>
+                  <span className={styles.sessionBadge}>
+                    {isOpp ? "Available for Supervision" : project.session}
+                  </span>
                 </div>
 
                 <h3 className={styles.fypCardTitle}>
@@ -241,8 +270,28 @@ export default function AcademicFypListing({ projects = [] }) {
 
                 <p className={styles.fypCardSummary}>{project.summary}</p>
 
-                {/* Students list */}
-                {project.students && project.students.length > 0 ? (
+                {/* Open Opportunity Meta (Eligibility & Institution) */}
+                {isOpp ? (
+                  <div style={{ margin: "10px 0", fontSize: "0.8rem", color: "var(--academic-muted)", lineHeight: 1.5 }}>
+                    <div>
+                      <strong style={{ color: "var(--academic-text)" }}>Eligibility: </strong>
+                      {project.programme || "BSc (Hons) Computer Science / Software Engineering / MSc Dissertations"}
+                    </div>
+                    <div style={{ marginTop: "3px" }}>
+                      <strong style={{ color: "var(--academic-text)" }}>Institution: </strong>
+                      {project.institution || "University of Nottingham Ningbo China"}
+                    </div>
+                    {project.prerequisites && (
+                      <div style={{ marginTop: "3px" }}>
+                        <strong style={{ color: "var(--academic-text)" }}>Prerequisites: </strong>
+                        {project.prerequisites}
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+
+                {/* Students list for supervised projects */}
+                {!isOpp && project.students && project.students.length > 0 ? (
                   <div
                     className={styles.fypCardStudents}
                     style={{
@@ -323,10 +372,17 @@ export default function AcademicFypListing({ projects = [] }) {
                 {/* Card Actions */}
                 <div className={styles.fypCardActions}>
                   <Link href={detailUrl} className={styles.viewDetailBtn}>
-                    View Case Study <ArrowRight size={15} />
+                    {isOpp ? "View Topic Details" : "View Case Study"} <ArrowRight size={15} />
                   </Link>
 
-                  {project.liveUrl ? (
+                  {isOpp ? (
+                    <Link
+                      href="/contact"
+                      className={styles.liveDemoBtn}
+                    >
+                      Apply / Inquire <ExternalLink size={14} />
+                    </Link>
+                  ) : project.liveUrl ? (
                     <a
                       href={project.liveUrl}
                       target="_blank"

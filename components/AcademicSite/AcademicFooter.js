@@ -38,15 +38,15 @@ export default function AcademicFooter() {
   const supervisionLinks = [
     { href: "/supervision?tab=running", label: "Running Projects" },
     { href: "/supervision?tab=completed", label: "Completed Projects" },
-    { href: "/supervision?tab=future", label: "Future Projects & Topics" },
+    { href: "/supervision?tab=future", label: "Open Supervision Topics" },
     { href: "/team", label: "People & Lab Members" },
-    { href: profile.officialFypIdeas || academicProfile.officialFypIdeas, label: "COMSATS Supervision Topics", external: true },
+    { href: "/supervision?tab=future", label: "Research Opportunities" },
   ];
 
   const labLinks = [
     { href: "/about", label: "About Dr. Junaid Akram, PhD" },
     { href: "/events", label: "Research Seminars & Events" },
-    { href: profile.officialProfile || academicProfile.officialProfile, label: "Official COMSATS Profile", external: true },
+    { href: profile.officialProfile || academicProfile.officialProfile, label: "Faculty Directory (UNNC)", external: true },
     { href: "/contact", label: "Office Hours & Location" },
     { href: "/admin/login", label: "Admin Portal" },
   ];

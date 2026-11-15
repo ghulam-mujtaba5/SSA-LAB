@@ -23,7 +23,7 @@ const ThemeToggleIcon = () => {
   }, [theme, isInView, styles]);
 
   const iconSrc = useMemo(() => {
-    return "/scsa-logo.png";
+    return "/academic/ssa-research-group-logo.png";
   }, []);
 
   const checkInView = () => {

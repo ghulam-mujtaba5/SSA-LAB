@@ -13,19 +13,19 @@ const SAMPLES = [
   {
     id: "buffer-overflow",
     title: "C / C++",
-    cve: "CVE-2015-7547",
-    cwe: "CWE-120: Buffer Copy without Checking Size",
+    cve: "CWE-120 Benchmark",
+    cwe: "Buffer Copy without Checking Size (Stack Buffer Overflow)",
     severity: "CRITICAL",
     cvss: "9.8",
     lang: "C / C++",
-    vulnerable: `// Vulnerable: Unbounded string copy
+    vulnerable: `// Vulnerable: Unbounded string copy into fixed stack buffer
 void parse_input(char *user_str) {
     char buffer[64];
-    // Risk: Stack buffer overflow
+    // Risk: Stack buffer overflow (CWE-120)
     strcpy(buffer, user_str); 
     process_data(buffer);
 }`,
-    patched: `// Patched: Bounded copy with size check
+    patched: `// Patched: Bounded copy with strict size limit
 void parse_input(const char *user_str) {
     char buffer[64];
     if (snprintf(buffer, sizeof(buffer), "%s", user_str) >= sizeof(buffer)) {
@@ -34,18 +34,18 @@ void parse_input(const char *user_str) {
     }
     process_data(buffer);
 }`,
-    vulnerabilityNote: "strcpy() copies untrusted input without bounds checking, leading to stack corruption.",
-    remediationNote: "Replaced with bounded snprintf() and strict length verification.",
+    vulnerabilityNote: "strcpy() copies untrusted input without bounds verification, creating a classic stack buffer overflow.",
+    remediationNote: "Replaced with bounded snprintf() and explicit truncation check, enforcing strict buffer boundary safety.",
   },
   {
     id: "sql-injection",
     title: "Python",
-    cve: "CVE-2022-31188",
-    cwe: "CWE-89: SQL Injection",
+    cve: "CWE-89 Benchmark",
+    cwe: "Improper Neutralization of Special Elements used in SQL Command",
     severity: "HIGH",
     cvss: "8.8",
     lang: "Python",
-    vulnerable: `# Vulnerable: Dynamic string formatting in query
+    vulnerable: `# Vulnerable: Dynamic string formatting into SQL query
 def get_user_profile(user_id):
     query = f"SELECT * FROM users WHERE id = '{user_id}'"
     return db.execute(query)`,
@@ -53,14 +53,14 @@ def get_user_profile(user_id):
 def get_user_profile(user_id):
     query = "SELECT * FROM users WHERE id = %s"
     return db.execute(query, (user_id,))`,
-    vulnerabilityNote: "Direct f-string interpolation allows arbitrary SQL query modification.",
-    remediationNote: "Uses parameterized query placeholders (%s) preventing SQL injection.",
+    vulnerabilityNote: "Direct f-string interpolation allows attackers to break out of data context and execute arbitrary SQL commands.",
+    remediationNote: "Uses database parameter placeholders (%s) ensuring strict separation between SQL logic and user data.",
   },
   {
     id: "java-deserialization",
     title: "Java",
-    cve: "CVE-2015-4852",
-    cwe: "CWE-502: Deserialization of Untrusted Data",
+    cve: "CWE-502 Benchmark",
+    cwe: "Deserialization of Untrusted Data",
     severity: "CRITICAL",
     cvss: "9.8",
     lang: "Java",
@@ -75,14 +75,14 @@ public Object receivePayload(byte[] stream) throws Exception {
     ois.accept(UserProfileDTO.class, SecurityContext.class);
     return ois.readObject();
 }`,
-    vulnerabilityNote: "Unfiltered ObjectInputStream enables remote code execution via gadget chains.",
-    remediationNote: "Implements ValidatingObjectInputStream with an explicit class whitelist.",
+    vulnerabilityNote: "Unfiltered ObjectInputStream enables remote code execution via malicious gadget chain payloads.",
+    remediationNote: "Implements ValidatingObjectInputStream with an explicit class whitelist before deserialization occurs.",
   },
   {
     id: "node-cmd-injection",
     title: "Node.js",
-    cve: "CVE-2021-21315",
-    cwe: "CWE-78: OS Command Injection",
+    cve: "CWE-78 Benchmark",
+    cwe: "Improper Neutralization of Special Elements in OS Command",
     severity: "HIGH",
     cvss: "8.6",
     lang: "Node.js",
@@ -102,8 +102,8 @@ function pingServer(userHost) {
         sendResponse(stdout);
     });
 }`,
-    vulnerabilityNote: "String concatenation into exec() allows command chaining and shell takeover.",
-    remediationNote: "Replaced with execFile() using an arguments array, avoiding shell execution.",
+    vulnerabilityNote: "String concatenation into child_process.exec() invokes a shell, permitting command chaining via metacharacters.",
+    remediationNote: "Replaced with execFile() using an isolated arguments array, bypassing shell interpretation entirely.",
   },
 ];
 

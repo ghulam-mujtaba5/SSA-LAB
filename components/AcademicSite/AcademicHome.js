@@ -45,24 +45,32 @@ const impactStats = [
     label: "Lines of Code Analyzed",
     detail: "Indexed on Hadoop MapReduce",
     image: "/academic/illustrations/billion-lines-code.webp",
+    evidenceLabel: "View IBFET Methodology",
+    evidenceUrl: "/publications",
   },
   {
     value: "152,823+",
     label: "Open-Source Repos Scanned",
     detail: "SQVDT Vulnerability Engine",
     image: "/academic/illustrations/repo-analyzed.webp",
+    evidenceLabel: "Read SQVDT Paper (SPE)",
+    evidenceUrl: "https://doi.org/10.1002/spe.2905",
   },
   {
     value: "15+",
     label: "High-Impact Publications",
     detail: "Applied Soft Computing, IEEE, IET",
     image: "/academic/illustrations/publications-hero.webp",
+    evidenceLabel: "View All Publications",
+    evidenceUrl: "/publications",
   },
   {
     value: "50+",
     label: "Researchers & Students Mentored",
     detail: "PhD, MS & BS Engineering Graduates",
     image: "/academic/illustrations/team-hero.webp",
+    evidenceLabel: "Explore Team & Alumni",
+    evidenceUrl: "/team",
   },
 ];
 
@@ -133,9 +141,9 @@ export default function AcademicHome() {
           "The lab has developed SQVDT (repository-scale vulnerability detection), VCIPR (patch-guided function-level detection), DroidSD (indexed Android app similarity detection), DroidMD (source-level Android malware detection), and IBFET (Hadoop-based 324B+ LOC clone analysis).",
       },
       {
-        question: "Does the SSA Lab offer security assessment and code auditing services for industry clients?",
+        question: "Does the SSA Lab offer security assessment and research collaboration for industry partners?",
         answer:
-          "Yes. The SSA Research Lab conducts industrial static application security testing (SAST), zero-day vulnerability audits, semantic code clone detection to protect intellectual property, and Android/IoT malware security assessments for corporate and government partners.",
+          "Yes. The SSA Research Lab conducts collaborative research, empirical software security assessment, source-code audits, and automated verification projects with academic and industrial partners (such as past satellite CPS verification research with SES Satellites and SnT Luxembourg). Organizations interested in applied research collaborations or security evaluations can contact the lab via the Contact page.",
       },
       {
         question: "How can clients, organizations, or prospective students collaborate with the SSA Lab?",
@@ -268,6 +276,29 @@ export default function AcademicHome() {
                 </strong>
                 <span>{stat.label}</span>
                 <small>{stat.detail || stat.note}</small>
+                {(stat.evidenceUrl || stat.evidenceLabel) && (
+                  <div style={{ marginTop: "6px" }}>
+                    {stat.evidenceUrl?.startsWith("http") ? (
+                      <a
+                        href={stat.evidenceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ fontSize: "0.74rem", color: "var(--brand-primary, #0284c7)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "3px" }}
+                        title={`View evidence for ${stat.label}`}
+                      >
+                        {stat.evidenceLabel || "Read paper"} <ExternalLink size={10} />
+                      </a>
+                    ) : (
+                      <Link
+                        href={stat.evidenceUrl || "/publications"}
+                        style={{ fontSize: "0.74rem", color: "var(--brand-primary, #0284c7)", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "3px" }}
+                        title={`View methodology for ${stat.label}`}
+                      >
+                        {stat.evidenceLabel || "View methodology"} <ArrowRight size={10} />
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -281,7 +312,7 @@ export default function AcademicHome() {
             <p className={styles.eyebrow}>Interactive Vulnerability Inspection</p>
             <h2>Code Vulnerability & Remediation Analysis</h2>
             <p style={{ color: "var(--academic-muted, #64748b)", fontSize: "0.92rem", marginTop: "6px", maxWidth: "680px" }}>
-              Explore real-world CVE vulnerability patterns and their verified secure remediations across multiple programming languages.
+              Explore source-code CWE security benchmark patterns and their verified secure remediations across multiple programming languages.
             </p>
           </div>
         </div>

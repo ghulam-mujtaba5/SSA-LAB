@@ -186,7 +186,7 @@ export default function SEO({
 
       {/* ── Identity Verification (rel=me) ───────────────────────── */}
       <link rel="me" href="https://orcid.org/0000-0003-1752-6124" />
-      <link rel="me" href="https://scholar.google.com/citations?user=JunaidAkram" />
+      <link rel="me" href="https://scholar.google.com/citations?user=Jmlx3rkAAAAJ" />
       <link rel="me" href="https://www.researchgate.net/profile/Junaid-Akram" />
       <link rel="me" href="https://dblp.org/pid/247/3104.html" />
       <link rel="me" href="https://ieeexplore.ieee.org/author/37086826620" />
@@ -365,14 +365,14 @@ export function personSchema(overrides = {}) {
     ],
     sameAs: [
       "https://orcid.org/0000-0003-1752-6124",
-      "https://scholar.google.com/citations?user=JunaidAkram",
+      "https://scholar.google.com/citations?user=Jmlx3rkAAAAJ",
       "https://www.researchgate.net/profile/Junaid-Akram",
       "https://dblp.org/pid/247/3104.html",
       "https://ieeexplore.ieee.org/author/37086826620",
       "https://www.semanticscholar.org/author/Junaid-Akram/144154437",
       "https://www.scopus.com/authid/detail.uri?authorId=57200277387",
       "https://dl.acm.org/profile/99659556271",
-      "https://www.nottingham.edu.cn/",
+      "https://www.nottingham.edu.cn/en/Science-Engineering/Department/CS/People.aspx",
       "https://www.linkedin.com/in/junaidakram/",
     ],
     knowsAbout: [
@@ -535,7 +535,7 @@ export function organizationSchema() {
     sameAs: [
       "https://www.nottingham.edu.cn",
       "https://orcid.org/0000-0003-1752-6124",
-      "https://scholar.google.com/citations?user=JunaidAkram",
+      "https://scholar.google.com/citations?user=Jmlx3rkAAAAJ",
       "https://dblp.org/pid/247/3104.html",
       "https://www.linkedin.com/in/junaidakram/",
     ],
@@ -770,6 +770,7 @@ export function scholarlyArticleSchema({
       ...(authName.includes("Junaid Akram")
         ? {
             "@id": `${SITE_URL}/#person`,
+            sameAs: "https://orcid.org/0000-0003-1752-6124",
             affiliation: {
               "@type": "CollegeOrUniversity",
               name: AFFILIATION,

@@ -10,32 +10,23 @@ export async function getStaticProps() {
     await dbConnect();
     const projects = await FypProject.find({
       published: true,
-      isOpportunity: { $ne: true },
-      categoryType: { $ne: "future" },
     })
       .sort({ displayOrder: 1, createdAt: -1 })
       .lean();
 
-    const sanitizedDefaults = defaultFypProjects.filter(
-      (p) => !p.isOpportunity && p.categoryType !== "future"
-    );
-
     return {
       props: {
         fypProjects: JSON.parse(
-          JSON.stringify(projects.length ? projects : sanitizedDefaults),
+          JSON.stringify(projects.length ? projects : defaultFypProjects),
         ),
       },
       revalidate: 60,
     };
   } catch (error) {
     console.warn("Supervision FYP static data fallback:", error?.message || error);
-    const sanitizedDefaults = defaultFypProjects.filter(
-      (p) => !p.isOpportunity && p.categoryType !== "future"
-    );
     return {
       props: {
-        fypProjects: sanitizedDefaults,
+        fypProjects: defaultFypProjects,
       },
       revalidate: 60,
     };
