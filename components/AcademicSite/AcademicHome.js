@@ -188,22 +188,28 @@ export default function AcademicHome() {
           </div>
 
           <div className={styles.heroIllustrationContainer}>
+            <div className={styles.heroPortraitBackdropGlow} aria-hidden="true" />
+            <div className={styles.heroFloatingSupervisorBadge}>
+              <Sparkles size={13} className={styles.sparkleIcon} />
+              <span>HEC-Approved PhD Supervisor</span>
+            </div>
             <AcademicImageLightbox
-              src="/academic/illustrations/homepage-hero.webp"
-              alt="SSA Research Lab — Software Security Assessment Platform"
-              width={800}
-              height={800}
+              src="/academic/junaid-akram-hero-transparent.webp"
+              alt="Dr. Junaid Akram, PhD — Assistant Professor at University of Nottingham Ningbo China & Director of SSA Research Lab"
+              width={777}
+              height={1000}
               priority
-              caption="SSA Research Lab — Advancing Software Security through Source-Code Analysis, Testing, and Vulnerability Research"
+              caption="Dr. Junaid Akram, PhD — Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), Former Postdoctoral Researcher at SnT Luxembourg, PhD from Tsinghua University, and Director of the Software Security Assessment (SSA) Research Lab."
               className={styles.heroIllustrationLightbox}
               imageClassName={styles.heroIllustrationImg}
               sizes="(max-width: 780px) 100vw, 45vw"
+              showZoomHint={false}
             />
             <div className={styles.heroProfileCard} style={{ position: "relative", overflow: "hidden" }}>
               <BorderBeam size={160} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
               <div className={styles.heroProfileCardHeader} style={{ position: "relative", zIndex: 2 }}>
                 <div className={styles.heroProfileStatusDot} />
-                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram</span>
+                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram, PhD</span>
               </div>
               <div className={styles.heroProfileButtons} style={{ position: "relative", zIndex: 2 }}>
                 <a
