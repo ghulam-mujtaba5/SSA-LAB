@@ -42,7 +42,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
             <ArrowLeft size={16} /> Back to Supervised FYP List
           </Link>
           <div className={styles.breadcrumbMeta}>
-            <span>{project.session || "COMSATS FYP"}</span>
+            <span>{project.session || project.institution || "Supervised Project"}</span>
             <span>·</span>
             <span>{project.supervisor || "Dr. Junaid Akram"}</span>
           </div>

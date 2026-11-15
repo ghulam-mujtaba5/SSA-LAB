@@ -30,8 +30,8 @@ const stages = [
   },
   {
     label: "Stage 05 — Transfer",
-    title: "Publications & Supervised Projects",
-    detail: "Q1 journal papers, open-source tools deployment & student supervision",
+    title: "Publications & Project Deliverables",
+    detail: "Q1 journal papers, open-source tools deployment & student project deliverables",
     image: "/academic/illustrations/stage-5.webp",
   },
 ];

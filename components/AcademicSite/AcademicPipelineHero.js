@@ -58,7 +58,7 @@ const STAGES = [
   {
     id: "all",
     label: "Complete Pipeline",
-    desc: "Full automated flow from code collection to publication & project deployment",
+    desc: "",
   },
   {
     id: "input",
@@ -68,7 +68,7 @@ const STAGES = [
   {
     id: "core",
     label: "2. SSA Core Engine",
-    desc: "Static analysis, clone detection, identifier renaming & obfuscation parsing",
+    desc: "Static and dynamic analysis, clone detection, identifier renaming & obfuscation parsing",
   },
   {
     id: "tools",
@@ -245,7 +245,7 @@ export default function AcademicPipelineHero() {
               <span className={styles.dotLive} />
             </div>
             <p className={styles.cardBody}>
-              Static Analysis · Vulnerability Scanning · Clone Detection
+              Static & Dynamic Analysis · Vulnerability Scanning · Clone Detection
             </p>
             <div className={styles.coreBadge}>
               <ShieldCheck size={12} /> 324B+ Lines Indexed
@@ -304,7 +304,7 @@ export default function AcademicPipelineHero() {
             <p className={styles.cardBody}>
               Applied Soft Computing & IEEE Security papers
             </p>
-            <div className={styles.monoLine}>25+ Papers Published</div>
+            <div className={styles.monoLine}>15+ Papers Published</div>
           </FloatCard>
 
           {/* Outcome 3: Innovation & Impact */}
@@ -341,7 +341,7 @@ export default function AcademicPipelineHero() {
             <span className={styles.dotLive} />
           </div>
           <p className={styles.cardBody}>
-            Static Analysis · Vulnerability Scanning · Clone Detection
+            Static & Dynamic Analysis · Vulnerability Scanning · Clone Detection
           </p>
           <div className={styles.coreBadge}>
             <ShieldCheck size={12} /> 324B+ Lines Indexed
@@ -379,7 +379,7 @@ export default function AcademicPipelineHero() {
           <p className={styles.cardBody}>
             Applied Soft Computing & IEEE Security papers
           </p>
-          <div className={styles.monoLine}>25+ Papers Published</div>
+          <div className={styles.monoLine}>15+ Papers Published</div>
         </div>
 
         <div className={styles.mobileCard}>
@@ -396,7 +396,7 @@ export default function AcademicPipelineHero() {
       </div>
 
       {/* Stage Detail Callout Banner */}
-      {activeStageInfo && (
+      {activeStage !== "all" && activeStageInfo && activeStageInfo.desc && (
         <div className={styles.stageDescriptionBanner}>
           <Sparkles size={16} color="var(--academic-blue)" />
           <span>{activeStageInfo.desc}</span>

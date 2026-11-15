@@ -114,7 +114,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
     ...(project.specializations || []),
     ...(project.technologies || []),
     project.nature || "Software Security Research",
-    "COMSATS FYP Supervision",
+    `${project.institution || "Research"} Supervision`,
     "Dr. Junaid Akram"
   ].join(", ");
 
@@ -126,7 +126,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
         ...(project.students || []).map((s) => (typeof s === "string" ? s : s.name)),
       ].filter(Boolean),
       year: project.session ? project.session.replace(/[^0-9]/g, "").slice(0, 4) || "2026" : "2026",
-      venue: "COMSATS University Islamabad, Software Security Assessment Lab",
+      venue: `${project.institution || "Software Security Assessment Lab"}, SSA Research Lab`,
       href: `${SITE_URL}/supervision/projects/${project.slug}`,
       pdfUrl: project.reportUrl || undefined,
     },
@@ -152,7 +152,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
         project.supervisor || "Dr. Junaid Akram",
         ...(project.students || []).map((s) => (typeof s === "string" ? s : s.name)),
       ].filter(Boolean),
-      venue: "COMSATS University Islamabad, SSA Research Lab",
+      venue: `${project.institution || "Software Security Assessment Lab"}, SSA Research Lab`,
       year: project.session ? project.session.replace(/[^0-9]/g, "").slice(0, 4) || "2026" : "2026",
       href: `${SITE_URL}/supervision/projects/${project.slug}`,
       keywords: projectKeywords,
@@ -164,7 +164,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       },
       {
         question: `Who conducted this research project?`,
-        answer: `Supervised by ${project.supervisor || "Dr. Junaid Akram"} at COMSATS University Islamabad, Lahore Campus with student researchers ${(project.students || []).map((s) => (typeof s === "string" ? s : s.name)).join(", ") || "SSA Lab members"}.`,
+        answer: `Supervised by ${project.supervisor || "Dr. Junaid Akram"} at ${project.institution || "University of Nottingham Ningbo China / SSA Research Lab"} with student researchers ${(project.students || []).map((s) => (typeof s === "string" ? s : s.name)).join(", ") || "SSA Lab members"}.`,
       },
       {
         question: `What technologies and frameworks were utilized?`,
@@ -196,7 +196,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
             <ArrowLeft size={16} /> Back to Supervision Directory
           </Link>
           <div className={styles.breadcrumbMeta}>
-            <span>{project.session || "COMSATS Supervision"}</span>
+            <span>{project.session || project.institution || "Supervised Research"}</span>
             <span>·</span>
             <span>{project.supervisor || "Dr. Junaid Akram"}</span>
           </div>

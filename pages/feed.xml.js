@@ -54,9 +54,9 @@ export async function getServerSideProps({ res }) {
   <channel>
     <title>SSA Research Lab — Software Security Assessment</title>
     <link>${SITE_URL}</link>
-    <description>Research, publications, and supervision updates from the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus. Led by Dr. Junaid Akram.</description>
+    <description>Research, publications, and supervision updates from the Software Security Assessment Lab at University of Nottingham Ningbo China. Led by Dr. Junaid Akram.</description>
     <language>en-us</language>
-    <managingEditor>junaidakram@cuilahore.edu.pk (Junaid Akram)</managingEditor>
+    <managingEditor>Junaid.Akram@nottingham.edu.cn (Junaid Akram)</managingEditor>
     <webMaster>ssa.laab@gmail.com (SSA Lab)</webMaster>
     <lastBuildDate>${buildDate}</lastBuildDate>
     <ttl>60</ttl>

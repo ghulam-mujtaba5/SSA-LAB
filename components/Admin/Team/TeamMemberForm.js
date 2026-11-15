@@ -347,7 +347,7 @@ export default function TeamMemberForm({
             <input
               id="email"
               type="email"
-              placeholder="researcher@cuilahore.edu.pk"
+              placeholder="researcher@nottingham.edu.cn"
               {...register('email')}
             />
           </div>

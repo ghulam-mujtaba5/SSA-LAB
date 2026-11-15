@@ -84,6 +84,7 @@ import {
 } from "../../data/academicSite";
 import { defaultFypProjects } from "../../data/fypProjects";
 import { useAcademicData } from "../../context/AcademicDataContext";
+import { useTheme } from "../../context/ThemeContext";
 import styles from "./AcademicSite.module.css";
 
 function PageIntro({ eyebrow, title, lead, illustration = null, action = null }) {
@@ -108,6 +109,8 @@ function PageIntro({ eyebrow, title, lead, illustration = null, action = null })
 }
 
 export function AboutPage() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const { siteData } = useAcademicData();
   const labMilestonesData = siteData.labMilestones || labMilestones;
   const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
@@ -167,14 +170,14 @@ export function AboutPage() {
       "@id": `${SITE_URL}/about`,
       name: "Dr. Junaid Akram — Academic Profile & SSA Research Lab",
       description:
-        "Academic profile of Dr. Junaid Akram, Assistant Professor & HEC-approved PhD supervisor leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
+        "Academic profile of Dr. Junaid Akram, Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), leading the Software Security Assessment Lab.",
     }),
     personSchema(),
     faqSchema([
       {
         question: "Who is Dr. Junaid Akram?",
         answer:
-          "Dr. Junaid Akram is an Assistant Professor of Computer Science and an HEC-approved PhD supervisor leading the Software Security Assessment (SSA) Research Lab at COMSATS University Islamabad, Lahore Campus. He earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
+          "Dr. Junaid Akram is an Assistant Professor in the School of Computer Science at the University of Nottingham Ningbo China (UNNC) and an HEC-approved PhD supervisor leading the Software Security Assessment (SSA) Research Lab. He earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
       },
       {
         question: "What are Dr. Junaid Akram's primary research domains?",
@@ -184,12 +187,12 @@ export function AboutPage() {
       {
         question: "What institutions are affiliated with Dr. Junaid Akram?",
         answer:
-          "Dr. Junaid Akram has been affiliated with Tsinghua University (PhD), University of Luxembourg / SnT (Postdoc), SES Satellites Luxembourg (Visiting Researcher), Xiamen University Malaysia (Assistant Professor), and COMSATS University Islamabad, Lahore Campus (Assistant Professor).",
+          "Dr. Junaid Akram is currently an Assistant Professor at University of Nottingham Ningbo China (UNNC). He previously held academic and research positions at COMSATS University Islamabad (Assistant Professor & Program Incharge), University of Luxembourg / SnT (Postdoctoral Researcher), SES Satellites Luxembourg (Visiting Researcher), Xiamen University Malaysia (Assistant Professor), and Tsinghua University (PhD).",
       },
       {
         question: "Where can I view Dr. Junaid Akram's verified research profiles?",
         answer:
-          "You can verify Dr. Junaid Akram's scholarly profiles on ORCID (0000-0003-1752-6124), Google Scholar (user=JunaidAkram), DBLP, ResearchGate, and the official COMSATS University faculty portal.",
+          "You can verify Dr. Junaid Akram's scholarly profiles on ORCID (0000-0003-1752-6124), Google Scholar (user=JunaidAkram), DBLP, ResearchGate, and the University of Nottingham faculty directory.",
       },
     ]),
   ];
@@ -198,8 +201,8 @@ export function AboutPage() {
     <AcademicSiteLayout
       title="Dr. Junaid Akram — Academic Profile & SSA Lab"
       path="/about"
-      description="Academic profile of Dr. Junaid Akram, Assistant Professor & HEC PhD supervisor leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore."
-      keywords="Dr Junaid Akram, Junaid Akram PhD, SSA Research Lab, COMSATS Lahore, Tsinghua University PhD, University of Luxembourg postdoc, HEC PhD supervisor, software security researcher"
+      description="Academic profile of Dr. Junaid Akram, Assistant Professor at University of Nottingham Ningbo China (UNNC), leading the Software Security Assessment Lab."
+      keywords="Dr Junaid Akram, Junaid Akram PhD, University of Nottingham Ningbo China, UNNC, SSA Research Lab, Tsinghua University PhD, University of Luxembourg postdoc, software security researcher"
       jsonLd={aboutJsonLd}
     >
       {/* 1. HERO & LAB MISSION OVERVIEW WITH DIRECTOR CARD */}
@@ -305,7 +308,7 @@ export function AboutPage() {
             <p className={styles.eyebrow}>Lab Evolution & Story</p>
             <h2>Research Journey & Key Milestones</h2>
             <p style={{ maxWidth: "600px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: 0 }}>
-              Explore how SSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg and AI-driven program repair at COMSATS.
+              Explore how SSA Lab evolved from big-data source analytics at Tsinghua University to satellite CPS testing at SnT Luxembourg, program repair at COMSATS, and global cybersecurity at University of Nottingham Ningbo China.
             </p>
           </div>
         </div>
@@ -358,23 +361,35 @@ export function AboutPage() {
 
             {currentMilestone.stats && (
               <div className={styles.timelineStatsRow}>
-                {Object.entries(currentMilestone.stats).map(([k, v]) => (
-                  <div key={k} className={styles.timelineStatBadge}>
-                    {k.toUpperCase()}: <strong>{v}</strong>
-                  </div>
-                ))}
+                {Object.entries(currentMilestone.stats)
+                  .filter(([k, v]) => !k.toLowerCase().includes("journal") && !String(v).toLowerCase().includes("elsevier"))
+                  .map(([k, v]) => {
+                    const label = k.replace(/([A-Z])/g, " $1").trim().toUpperCase();
+                    return (
+                      <div key={k} className={styles.timelineStatBadge}>
+                        {label}: <strong>{v}</strong>
+                      </div>
+                    );
+                  })}
               </div>
             )}
           </div>
         </div>
       </section>
 
-      {/* 5. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS */}
-      <section className={styles.partners} aria-label="Academic and research affiliations" style={{ margin: "40px auto 0", borderRadius: "18px" }}>
-        <p>Academic & Research Partner Universities</p>
+      {/* 5. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (ABOVE FOOTER) */}
+      <section className={styles.partners} aria-label="Academic and research affiliations">
+        <p>Academic and Research Affiliations</p>
         <div className={styles.partnerGrid}>
           {partnerLogosData.map((partner) => {
-            const partnerImg = partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
+            const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
+            const partnerImg = isDark && partner.imageDark
+              ? partner.imageDark
+              : isDark && isNottingham
+              ? "/academic/nottingham-university-logo-dark.svg"
+              : !isDark && partner.imageLight
+              ? partner.imageLight
+              : partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
             return (
               <figure key={partner.name}>
                 <a
@@ -396,99 +411,6 @@ export function AboutPage() {
           })}
         </div>
       </section>
-
-      {/* 6. PEOPLE & RESEARCH COMMUNITY (WITH NEW 3D CLAYMORPHISM ICONS) */}
-      <section className={`${styles.section} ${styles.softSection}`}>
-        <div className={styles.sectionHeading}>
-          <div>
-            <p className={styles.eyebrow}>Team & Networks</p>
-            <h2>Research Personnel & Global Collaborators</h2>
-          </div>
-          <Link href="/team" className={styles.textLink}>
-            Explore full directory <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        <div className={styles.aboutTeamSpotlightGrid}>
-          {/* Card 1: Faculty & Co-Investigators */}
-          <div className={styles.aboutTeamSpotlightCard}>
-            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "transparent", padding: 0 }}>
-              <img
-                src="/academic/3d/Faculty and Co Investigators.png"
-                alt="Faculty & Co-Investigators 3D Icon"
-                width={58}
-                height={58}
-                style={{ objectFit: "contain", filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))" }}
-                loading="lazy"
-              />
-            </div>
-            <div className={styles.aboutTeamSpotlightContent}>
-              <h3>Faculty & Co-Investigators ({coInvestigatorsData.length})</h3>
-              <p>
-                International academic partnerships spanning COMSATS Lahore, Tsinghua University, SnT Luxembourg, and KFUPM.
-              </p>
-              <Link href="/team?tab=pi" className={styles.aboutTeamLink}>
-                View Faculty & Co-Investigators <ArrowRight size={13} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Card 2: Postgraduate MS & PhD Theses */}
-          <div className={styles.aboutTeamSpotlightCard}>
-            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "transparent", padding: 0 }}>
-              <img
-                src="/academic/3d/Postgraduate MS  PhD Theses.png"
-                alt="Postgraduate MS & PhD Theses 3D Icon"
-                width={58}
-                height={58}
-                style={{ objectFit: "contain", filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))" }}
-                loading="lazy"
-              />
-            </div>
-            <div className={styles.aboutTeamSpotlightContent}>
-              <h3>Postgraduate MS & PhD Theses ({pgResearchersData.length})</h3>
-              <p>
-                Active Master of Science (MS CS) researchers working on LLM vulnerability detection, program repair, and GNNs.
-              </p>
-              <Link href="/team?tab=ms" className={styles.aboutTeamLink}>
-                View MS & PhD Researchers <ArrowRight size={13} />
-              </Link>
-            </div>
-          </div>
-
-          {/* Card 3: Alumni Placements */}
-          <div className={styles.aboutTeamSpotlightCard}>
-            <div className={styles.aboutTeamSpotlightIcon} style={{ background: "transparent", padding: 0 }}>
-              <img
-                src="/academic/3d/Alumni Placements.png"
-                alt="Alumni Placements 3D Icon"
-                width={58}
-                height={58}
-                style={{ objectFit: "contain", filter: "drop-shadow(0 6px 14px rgba(0, 0, 0, 0.15))" }}
-                loading="lazy"
-              />
-            </div>
-            <div className={styles.aboutTeamSpotlightContent}>
-              <h3>Alumni Placements ({alumniPlacementsData.length})</h3>
-              <p>
-                Graduates transitioning into top global technology advisories, cybersecurity firms, and enterprise software teams.
-              </p>
-              <Link href="/team?tab=alumni" className={styles.aboutTeamLink}>
-                View Supervised Alumni <ArrowRight size={13} />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div style={{ textAlign: "center", marginTop: "28px" }}>
-          <div className={styles.btnOrbitWrap}>
-            <Link href="/team" className={styles.primaryButton}>
-              View Complete People & Partners Directory <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
     </AcademicSiteLayout>
   );
 }
@@ -586,7 +508,7 @@ export function ResearchPage() {
       title="Software Security Research Domains & Frameworks"
       path="/research"
       description="Explore software security research domains, vulnerability detection roadmaps, code clone detection, and analysis workflows developed by Dr. Junaid Akram at SSA Lab."
-      keywords="software security research, software vulnerability detection, malware analysis, code clone detection, software testing, source code security, COMSATS Lahore"
+      keywords="software security research, software vulnerability detection, malware analysis, code clone detection, software testing, source code security, University of Nottingham Ningbo China, UNNC"
       jsonLd={researchJsonLd}
     >
       {selectedDomain && (
@@ -829,7 +751,7 @@ export function PublicationsPage() {
       title="Software Security Publications & Research Papers"
       path="/publications"
       description="Peer-reviewed journal and conference publications by Dr. Junaid Akram on software vulnerability detection, program repair, code clones, and malware analysis."
-      keywords="Junaid Akram publications, software security research papers, software vulnerability detection papers, code clone analysis papers, malware detection journal, IEEE conference papers, COMSATS research"
+      keywords="Junaid Akram publications, software security research papers, software vulnerability detection papers, code clone analysis papers, malware detection journal, IEEE conference papers, University of Nottingham Ningbo China, UNNC"
       jsonLd={pubsJsonLd}
       citations={publicationsData}
     >
@@ -1334,7 +1256,7 @@ export function SupervisionPage({ fypProjects = [] }) {
       name: "FYP Supervision — Dr. Junaid Akram",
       url: `${SITE_URL}/supervision`,
       description:
-        "Supervised final-year student projects, FYP opportunities, and student research under Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus.",
+        "Supervised student dissertations, FYP opportunities, and research projects under Dr. Junaid Akram at University of Nottingham Ningbo China (UNNC) and SSA Research Lab.",
       items: supervisedProjects.map((p) => ({
         name: p.title,
         url: `${SITE_URL}/supervision`,
@@ -1351,35 +1273,35 @@ export function SupervisionPage({ fypProjects = [] }) {
     ),
     faqSchema([
       {
-        question: "Who can apply for FYP or thesis supervision at SSA Lab?",
+        question: "Who can apply for FYP, dissertation, or thesis supervision at SSA Lab?",
         answer:
-          "BS Software Engineering, BS Computer Science, and MS/PhD students at COMSATS University Islamabad, Lahore Campus are eligible to apply for FYP and research thesis supervision under Dr. Junaid Akram.",
+          "Undergraduate (BSc/BEng Computer Science), postgraduate (MSc), and PhD researchers at University of Nottingham Ningbo China (UNNC), as well as collaborative students from partner institutions, are eligible to apply for research and dissertation supervision under Dr. Junaid Akram.",
       },
       {
-        question: "What are the key FYP project topics currently offered by Dr. Junaid Akram?",
+        question: "What are the key research and dissertation topics currently offered by Dr. Junaid Akram?",
         answer:
-          "Active topics include LLM-based vulnerability detection, automated vulnerability patch optimization, semantic code clone detection, graph neural network code smell analysis, and robust Android malware detection.",
+          "Active topics include source-level vulnerability benchmarks, multi-project dependency analysis, semantic code clone detection, automated security patch synthesis, AST-guided vulnerability prediction, and cyber-physical systems testing.",
       },
       {
         question: "How do students contact Dr. Junaid Akram for supervision approval?",
         answer:
-          "Interested student groups should prepare their member names, registration numbers, CGPA, technical skills, and preferred project ideas, and contact Dr. Junaid Akram at junaidakram@cuilahore.edu.pk or visit H Block Room 14, COMSATS Lahore.",
+          "Interested students and researchers should email Dr. Junaid Akram at Junaid.Akram@nottingham.edu.cn with their academic background, CV, transcripts, technical proficiencies, and proposed or selected research topics.",
       },
     ]),
   ];
 
   return (
     <AcademicSiteLayout
-      title="Software Engineering FYP Supervision & Research Projects"
+      title="Computer Science & Software Engineering Supervision & Research Opportunities"
       path="/supervision"
-      description="Explore BS & MS Software Engineering FYP supervision, running projects, and research opportunities led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore."
-      keywords="Software Engineering FYP Supervision, COMSATS FYP projects, software security research, cybersecurity FYP ideas, BS software engineering projects, Dr Junaid Akram supervision"
+      description="Explore Computer Science & Software Engineering research supervision, running projects, and dissertation opportunities led by Dr. Junaid Akram at University of Nottingham Ningbo China (UNNC)."
+      keywords="Computer Science Dissertation Supervision, UNNC FYP projects, University of Nottingham Ningbo China, software security research, cybersecurity research topics, Dr Junaid Akram supervision"
       jsonLd={supervisionJsonLd}
     >
       <PageIntro
-        eyebrow="FYP Supervision"
-        title="Supervised final-year projects and research opportunities."
-        lead="Explore open COMSATS final-year project topics alongside completed student projects supervised under Dr Junaid Akram's SSA Laboratory."
+        eyebrow="Research & FYP Supervision"
+        title="Supervised research projects and dissertation opportunities."
+        lead="Explore open research dissertation topics alongside completed student projects supervised under Dr Junaid Akram's SSA Laboratory."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
@@ -1402,12 +1324,12 @@ export function SupervisionPage({ fypProjects = [] }) {
         <div className={styles.sectionHeading}>
           <div>
             <p className={styles.eyebrow}>How to apply</p>
-            <h2>Supervision Guidance for Students</h2>
+            <h2>Supervision Guidance for Students & Researchers</h2>
           </div>
         </div>
         <div style={{ maxWidth: "780px", lineHeight: "1.7" }}>
           <p>
-            BS Software Engineering and BS Computer Science students interested in FYP supervision at COMSATS University Islamabad, Lahore Campus should email Dr Junaid Akram with the following details:
+            Computer Science and Software Engineering students interested in research supervision, final-year dissertations, or graduate study under Dr. Junaid Akram at University of Nottingham Ningbo China should send an email with the following details:
           </p>
           <ul style={{ margin: "16px 0 24px 20px" }}>
             <li>Group member names and registration numbers</li>
@@ -1446,6 +1368,8 @@ const staticPgMap = {
 };
 
 const staticPartnerMap = {
+  "University of Nottingham Ningbo China": "/academic/nottingham-university-logo.svg",
+  "University of Nottingham": "/academic/nottingham-university-logo.svg",
   "COMSATS University Islamabad": "/academic/comsats-university-islamabad-logo.png",
   "Tsinghua University": "/academic/tsinghua-university-logo.webp",
   "University of Luxembourg (SnT)": "/academic/snt-university-luxembourg-logo.png",
@@ -1461,6 +1385,8 @@ const staticStudentMap = {
 };
 
 export function TeamPage() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const { siteData } = useAcademicData();
   const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
   const pgResearchersData = siteData.pgResearchers || pgResearchers;
@@ -1523,22 +1449,22 @@ export function TeamPage() {
 
   return (
     <AcademicSiteLayout
-      title="People & Partners"
+      title="Research Team & Collaborators"
       path="/team"
       description="Dr. Junaid Akram, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab."
-      keywords="SSA Lab team, software security researchers, COMSATS research group members, PhD students software security, international collaborators Pakistan"
+      keywords="SSA Lab team, software security researchers, University of Nottingham Ningbo China, UNNC computer science, international collaborators, PhD students software security"
       jsonLd={teamJsonLd}
     >
       {/* PAGE INTRO HEADER */}
       <PageIntro
         eyebrow="SSA Research & Development Team"
-        title="People, Collaborators & Institutional Partners"
+        title="Research Team & Collaborators"
         lead="Connecting principal investigators, international co-investigators, postgraduate MS & PhD thesis researchers, undergraduate BS engineering teams, and institutional partner organizations across software security and program repair."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
               src="/academic/illustrations/team-hero.webp"
-              alt="People, Collaborators & Institutional Partners 3D Illustration"
+              alt="Research Team & Collaborators 3D Illustration"
               width={280}
               height={280}
               priority
@@ -1563,7 +1489,7 @@ export function TeamPage() {
             className={`${styles.collabTab} ${activeTab === "pi" ? styles.activeCollabTab : ""}`}
             onClick={() => setActiveTab("pi")}
           >
-            👨‍🏫 Faculty & Co-Investigators ({coInvestigatorsData.length})
+            👨‍🏫 Research Team & Collaborators ({coInvestigatorsData.length})
           </button>
           <button
             type="button"
@@ -1601,11 +1527,11 @@ export function TeamPage() {
         <section className={styles.section}>
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Core Leadership & Faculty</p>
-              <h2>Principal Investigators & Co-Investigators</h2>
+              <p className={styles.eyebrow}>Research Team</p>
+              <h2>Research Team and Collaborators</h2>
             </div>
             <p style={{ maxWidth: "540px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Leading research across COMSATS, SnT Luxembourg, Tsinghua University, and KFUPM.
+              Leading research across University of Nottingham Ningbo China, COMSATS, SnT Luxembourg, Tsinghua University, and KFUPM.
             </p>
           </div>
 
@@ -1765,8 +1691,34 @@ export function TeamPage() {
               <h2>BS Software Engineering Teams & Supervised Researchers</h2>
             </div>
             <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
-              Final-year project engineering teams and supervised undergraduate researchers at COMSATS University Islamabad and Xiamen University Malaysia.
+              Final-year project engineering teams and supervised undergraduate researchers at University of Nottingham Ningbo China, COMSATS University Islamabad, and Xiamen University Malaysia.
             </p>
+          </div>
+
+          {/* Supervision Directory Cross-Link Banner */}
+          <div style={{
+            background: "rgba(2, 132, 199, 0.06)",
+            border: "1px solid rgba(2, 132, 199, 0.2)",
+            borderRadius: "12px",
+            padding: "16px 20px",
+            marginBottom: "32px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "12px",
+          }}>
+            <div>
+              <strong style={{ display: "block", color: "var(--academic-text)", fontSize: "0.95rem" }}>
+                Looking for technical project architectures & case studies?
+              </strong>
+              <span style={{ color: "var(--academic-muted)", fontSize: "0.85rem" }}>
+                All 26 supervised engineering projects and running research topics are maintained in our central Supervision Directory.
+              </span>
+            </div>
+            <Link href="/supervision" className={styles.primaryButton} style={{ padding: "8px 18px", fontSize: "0.85rem" }}>
+              Explore Supervision Directory <ArrowRight size={14} />
+            </Link>
           </div>
 
           <h3 style={{ fontFamily: "Poppins, sans-serif", fontSize: "1.2rem", marginBottom: "18px" }}>
@@ -1790,11 +1742,8 @@ export function TeamPage() {
                   </div>
 
                   <div className={styles.collabBody}>
-                    <p className={styles.collabFocus} style={{ marginBottom: "12px" }}>
-                      {fyp.summary}
-                    </p>
                     {fyp.students && fyp.students.length > 0 && (
-                      <div style={{ marginTop: "12px", marginBottom: "14px" }}>
+                      <div style={{ marginBottom: "14px" }}>
                         <p className={styles.collabTopic} style={{ fontSize: "0.8rem", marginBottom: "8px" }}>
                           <strong>Team Members:</strong>
                         </p>
@@ -1838,15 +1787,15 @@ export function TeamPage() {
                       </div>
                     )}
                     {fyp.supervisor && (
-                      <div className={styles.collabFocus} style={{ fontSize: "0.75rem" }}>
-                        Supervisor: <strong>{fyp.supervisor}</strong> {fyp.coSupervisor && `| Co-Supervisor: ${fyp.coSupervisor}`}
+                      <div className={styles.collabFocus} style={{ fontSize: "0.75rem", color: "var(--academic-muted)" }}>
+                        Supervisor: <strong style={{ color: "var(--academic-text)" }}>{fyp.supervisor}</strong> {fyp.coSupervisor && `| Co-Supervisor: ${fyp.coSupervisor}`}
                       </div>
                     )}
                   </div>
 
                   <div className={styles.collabFooter}>
                     <Link href={`/supervision/projects/${fyp.slug}`} className={styles.collabLinkBtn}>
-                      View FYP Details <ArrowRight size={13} />
+                      View in Supervision Directory <ArrowRight size={13} />
                     </Link>
                   </div>
                 </article>
@@ -1858,28 +1807,35 @@ export function TeamPage() {
           </h3>
 
           <div className={styles.collabGrid}>
-            {supervisedProjectsData.map((proj) => (
-              <article key={`${proj.student}-${proj.title}`} className={styles.collabCard}>
-                <div className={styles.collabTop}>
-                  <div className={styles.collabAvatar} style={{ width: "44px", height: "44px", fontSize: "0.9rem", background: "rgba(6, 182, 212, 0.1)", color: "var(--academic-cyan)" }}>
-                    <GraduationCap size={22} />
+            {supervisedProjectsData.map((proj, pIdx) => {
+              const studentName = proj.student || proj.name || proj.author || "Supervised Researcher";
+              const studentTerm = proj.term || proj.session || proj.period || proj.year || "Supervised Project";
+              const projectTitle = proj.title || proj.projectTitle || proj.topic || "Supervised Research Project";
+              const institutionName = proj.institution || "Xiamen University Malaysia";
+
+              return (
+                <article key={`${studentName}-${pIdx}`} className={styles.collabCard}>
+                  <div className={styles.collabTop}>
+                    <div className={styles.collabAvatar} style={{ width: "44px", height: "44px", fontSize: "0.9rem", background: "rgba(6, 182, 212, 0.1)", color: "var(--academic-cyan)" }}>
+                      <GraduationCap size={22} />
+                    </div>
+                    <div className={styles.collabMeta}>
+                      <h3 style={{ fontSize: "1.05rem", fontWeight: 600 }}>{studentName}</h3>
+                      <span className={styles.collabBadge}>{studentTerm}</span>
+                      <div className={styles.collabDegree}>{institutionName}</div>
+                    </div>
                   </div>
-                  <div className={styles.collabMeta}>
-                    <h3 style={{ fontSize: "1.05rem", fontWeight: 600 }}>{proj.student}</h3>
-                    <span className={styles.collabBadge}>{proj.term}</span>
-                    <div className={styles.collabDegree}>{proj.institution}</div>
+                  <div className={styles.collabBody}>
+                    <p className={styles.collabFocus} style={{ marginBottom: "8px" }}>
+                      <strong>Research Project:</strong> {projectTitle}
+                    </p>
+                    <div className={styles.collabFocus} style={{ fontSize: "0.78rem", color: "var(--academic-muted)" }}>
+                      Supervisor: <strong style={{ color: "var(--academic-text)" }}>Dr. Junaid Akram</strong>
+                    </div>
                   </div>
-                </div>
-                <div className={styles.collabBody}>
-                  <p className={styles.collabFocus} style={{ marginBottom: "8px" }}>
-                    <strong>Research Project:</strong> {proj.title}
-                  </p>
-                  <div className={styles.collabFocus} style={{ fontSize: "0.78rem", color: "var(--academic-muted)" }}>
-                    Supervisor: <strong style={{ color: "var(--academic-text)" }}>Dr. Junaid Akram</strong>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </section>
       )}
@@ -1917,7 +1873,14 @@ export function TeamPage() {
           <p>Academic & Research Partner Universities</p>
           <div className={styles.partnerGrid}>
             {partnerLogosData.map((partner) => {
-              const partnerImg = partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
+              const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
+              const partnerImg = isDark && partner.imageDark
+                ? partner.imageDark
+                : isDark && isNottingham
+                ? "/academic/nottingham-university-logo-dark.svg"
+                : !isDark && partner.imageLight
+                ? partner.imageLight
+                : partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
               return (
                 <figure key={partner.name}>
                   <a
@@ -2132,9 +2095,9 @@ export function ContactPage() {
 
   const CONTACT_FAQS = [
     {
-      question: "How can I apply for FYP supervision by Dr. Junaid Akram?",
+      question: "How can I apply for research or dissertation supervision by Dr. Junaid Akram?",
       answer:
-        "Email junaidakram@cuilahore.edu.pk with your group members' names, registration numbers, current CGPA, selected FYP topic, and technical background.",
+        "Email Junaid.Akram@nottingham.edu.cn with your academic background, CV, transcripts, selected research topic, and technical proficiencies.",
     },
     {
       question: "What research areas does the SSA Lab focus on?",
@@ -2144,12 +2107,17 @@ export function ContactPage() {
     {
       question: "Is Dr. Junaid Akram an HEC-approved PhD supervisor?",
       answer:
-        "Yes. Dr. Junaid Akram is an HEC-approved PhD supervisor at COMSATS University Islamabad, Lahore Campus.",
+        "Yes. Dr. Junaid Akram is an HEC-approved PhD supervisor with an active track record of supervising doctoral, masters, and undergraduate engineering research.",
     },
     {
-      question: "What is Dr. Junaid Akram's office location?",
+      question: "What is Dr. Junaid Akram's office location and institution?",
       answer:
-        `${profile.office || academicProfile.office}, COMSATS University Islamabad, Lahore Campus, Defence Road, Off Raiwind Road, Lahore, Pakistan.`,
+        `${profile.office || academicProfile.office}, ${profile.institution || academicProfile.institution}, 199 Taikang East Road, Ningbo, Zhejiang, 315100, China. (Former affiliation: Assistant Professor & Program Incharge, COMSATS University Islamabad, Lahore Campus).`,
+    },
+    {
+      question: "What is his official phone contact?",
+      answer:
+        `${profile.phone || academicProfile.phone || "+86 (0) 574 88180000 (Ext. 6424)"}`,
     },
   ];
 
@@ -2170,8 +2138,8 @@ export function ContactPage() {
     <AcademicSiteLayout
       title="Contact SSA Research Lab"
       path="/contact"
-      description="Contact Dr. Junaid Akram and the SSA Research Lab at COMSATS University Islamabad, Lahore Campus for research collaborations and student supervision inquiries."
-      keywords="contact Junaid Akram, SSA Lab contact, COMSATS Lahore faculty contact, PhD supervision enquiry Pakistan, software security collaboration"
+      description="Contact Dr. Junaid Akram and the SSA Research Lab at University of Nottingham Ningbo China for research collaborations and student supervision inquiries."
+      keywords="contact Junaid Akram, SSA Lab contact, University of Nottingham Ningbo China, UNNC faculty contact, software security collaboration"
       jsonLd={contactJsonLd}
     >
       <PageIntro
@@ -2185,33 +2153,19 @@ export function ContactPage() {
           <PlexusCanvas maxNodes={54} maxDistance={105} speed={0.18} intensity={0.35} />
         </div>
 
-        <div className={styles.contactVisual}>
-          <div className={styles.lottieCard}>
-            <AcademicLottie
-              src="/academic/lottie/security-research.json"
-              ariaLabel="Animated software security shield"
-              className={styles.securityLottie}
-            />
-          </div>
-          <div className={styles.contactVisualCopy}>
-            <p className={styles.eyebrow}>SSA Research Lab</p>
-            <h2>Software security, testing, and student research.</h2>
-            <p>
-              Include your research topic, degree programme, or collaboration objective so the enquiry can be assessed efficiently.
-            </p>
-          </div>
-        </div>
-
         <div className={styles.contactGrid}>
           <div className={styles.contactCard}>
             <Mail size={24} />
-            <span>Email</span>
+            <span>Email & Phone</span>
             <a href={`mailto:${profile.emails?.[0] || academicProfile.emails[0]}`}>
               {profile.emails?.[0] || academicProfile.emails[0]}
             </a>
             <a href={`mailto:${profile.labEmail || academicProfile.labEmail}`}>
               {profile.labEmail || academicProfile.labEmail}
             </a>
+            <p style={{ marginTop: "6px", fontSize: "0.85rem", color: "var(--academic-text)" }}>
+              Tel: <a href="tel:+8657488180000">{profile.phone || academicProfile.phone}</a>
+            </p>
           </div>
 
           <div className={styles.contactCard}>
@@ -2219,13 +2173,16 @@ export function ContactPage() {
             <span>Office Location</span>
             <strong>{profile.office || academicProfile.office}</strong>
             <p>{profile.institution || academicProfile.institution}</p>
+            <p style={{ fontSize: "0.82rem", color: "var(--academic-muted)", marginTop: "4px" }}>
+              199 Taikang East Road, Ningbo, 315100, China
+            </p>
           </div>
 
           <div className={styles.contactCard}>
             <ExternalLink size={24} />
             <span>Academic Profiles</span>
             <a href={profile.officialProfile || academicProfile.officialProfile} target="_blank" rel="noreferrer">
-              Official COMSATS profile
+              Official university profile
             </a>
             <a href={profile.googleScholar || academicProfile.googleScholar} target="_blank" rel="noreferrer">
               Google Scholar
@@ -2491,15 +2448,15 @@ export function ContactPage() {
             />
             <div>
               <p className={styles.eyebrow} style={{ margin: 0 }}>Visit the campus</p>
-              <h2 style={{ margin: 0, fontSize: "1.45rem", lineHeight: "1.25" }}>COMSATS University Islamabad, Lahore Campus</h2>
+              <h2 style={{ margin: 0, fontSize: "1.45rem", lineHeight: "1.25" }}>University of Nottingham Ningbo China</h2>
             </div>
           </div>
           <p>
-            1.5 KM Defence Road, Off Raiwind Road, Lahore, Pakistan. Room 14 is located in H Block. Meetings should be arranged in advance via email.
+            School of Computer Science, 199 Taikang East Road, Ningbo, Zhejiang, 315100, China. Extension 6424. Campus visits or in-person meetings should be arranged in advance via email.
           </p>
           <a
             className={styles.textLink}
-            href="https://www.google.com/maps/search/?api=1&query=COMSATS+University+Islamabad+Lahore+Campus"
+            href="https://www.google.com/maps/search/?api=1&query=University+of+Nottingham+Ningbo+China"
             target="_blank"
             rel="noreferrer"
           >
@@ -2508,8 +2465,8 @@ export function ContactPage() {
         </div>
         <div className={styles.campusMap}>
           <iframe
-            title="Map of COMSATS University Islamabad, Lahore Campus"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.9950334812693!2d74.2660163750567!3d31.417409952044813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190209632870bb%3A0x6e788c7f7ec49e48!2sCOMSATS%20University%20Islamabad%2C%20Lahore%20Campus!5e0!3m2!1sen!2s!4v1724261700000!5m2!1sen!2s"
+            title="Map of University of Nottingham Ningbo China"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3459.7340058864817!2d121.55831507632616!3d29.79975797505089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x344d650ea3e6183d%3A0xebe775e51bf4756!2sUniversity%20of%20Nottingham%20Ningbo%20China!5e0!3m2!1sen!2scn!4v1710000000000!5m2!1sen!2scn"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
@@ -2525,7 +2482,7 @@ export function PrivacyPage() {
     <AcademicSiteLayout
       title="Privacy Policy"
       path="/privacy-policy"
-      description="Privacy policy for the academic website of Dr. Junaid Akram and the Software Security Assessment (SSA) Research Lab at COMSATS University Islamabad."
+      description="Privacy policy for the academic website of Dr. Junaid Akram and the Software Security Assessment (SSA) Research Lab."
     >
       <PageIntro
         eyebrow="Privacy"

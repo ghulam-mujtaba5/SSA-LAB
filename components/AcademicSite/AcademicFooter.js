@@ -14,6 +14,7 @@ import {
   BookOpen,
   GraduationCap,
   ShieldCheck,
+  Globe,
 } from "lucide-react";
 import { academicProfile } from "../../data/academicSite";
 import { useAcademicData } from "../../context/AcademicDataContext";
@@ -138,7 +139,7 @@ export default function AcademicFooter() {
             <h4 className={styles.colHeading}>Contact & Office</h4>
             <div className={styles.contactItem}>
               <Mail size={15} />
-              <a href={`mailto:${profile.emails?.[0] || profile.labEmail || 'junaidakram@cuilahore.edu.pk'}`} itemProp="email">
+              <a href={`mailto:${profile.emails?.[0] || profile.labEmail || 'Junaid.Akram@nottingham.edu.cn'}`} itemProp="email">
                 {profile.emails?.[0] || profile.labEmail}
               </a>
             </div>
@@ -173,10 +174,21 @@ export default function AcademicFooter() {
                 target="_blank"
                 rel="noreferrer"
                 className={styles.socialBtn}
-                title="COMSATS Official Profile"
+                title="University Official Profile"
+                aria-label="University Profile"
                 itemProp="sameAs"
               >
-                <Github size={18} />
+                <Globe size={16} />
+              </a>
+              <a
+                href={profile.github || "https://github.com/ssalab"}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.socialBtn}
+                title="GitHub Organization & Code"
+                aria-label="GitHub"
+              >
+                <Github size={16} />
               </a>
             </div>
           </div>
@@ -189,7 +201,7 @@ export default function AcademicFooter() {
           </p>
           <div className={styles.bottomLinks}>
             <span style={{ color: "var(--academic-muted)", fontSize: "0.82rem" }}>
-              {profile.office || academicProfile.office}, COMSATS Lahore
+              {profile.office || academicProfile.office}, {profile.institution || academicProfile.institution}
             </span>
             <Link
               href="/admin/login"

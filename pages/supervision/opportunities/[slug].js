@@ -41,7 +41,7 @@ export default function FypOpportunityDetailPage({ project }) {
       name: project.title,
       description: project.summary || `Open Supervision Opportunity under Dr. Junaid Akram: ${project.title}`,
       url: `${SITE_URL}/supervision/opportunities/${project.slug}`,
-      keywords: "Final Year Project, FYP Supervision, COMSATS University Lahore, Software Security",
+      keywords: `Dissertation Opportunity, Research Supervision, ${project.institution || "University of Nottingham Ningbo China"}, Software Security, Dr. Junaid Akram`,
     }),
   ];
 
@@ -59,9 +59,9 @@ export default function FypOpportunityDetailPage({ project }) {
             <ArrowLeft size={16} /> Back to Supervision Directory
           </Link>
           <div className={styles.breadcrumbMeta}>
-            <span>COMSATS Supervision Topic</span>
+            <span>{project.opportunityType || project.type || `${project.institution || "UNNC"} Supervision Topic`}</span>
             <span>·</span>
-            <span>Supervisor: Dr. Junaid Akram</span>
+            <span>Supervisor: {project.supervisor || "Dr. Junaid Akram"}</span>
           </div>
         </div>
       </div>

@@ -2,20 +2,25 @@ export const academicProfile = {
   name: "Junaid Akram, PhD",
   shortName: "Junaid Akram",
   role: "Assistant Professor",
-  institution: "COMSATS University Islamabad, Lahore Campus",
+  department: "School of Computer Science",
+  institution: "University of Nottingham Ningbo China",
   lab: "Software Security Assessment Lab",
   labShort: "SSA Research Lab",
-  office: "H Block — Room 14",
-  emails: ["junaidakram@cuilahore.edu.pk", "junaid.tsinghua@yahoo.com"],
+  office: "School of Computer Science (Ext. 6424)",
+  phone: "+86 (0) 574 88180000 (Ext. 6424)",
+  emails: ["Junaid.Akram@nottingham.edu.cn", "junaid.tsinghua@yahoo.com", "junaidakram@cuilahore.edu.pk"],
   labEmail: "ssa.laab@gmail.com",
   googleScholar: "https://scholar.google.com/citations?user=JunaidAkram",
   linkedin: "https://www.linkedin.com/in/junaidakram/",
   researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
   orcid: "https://orcid.org/0000-0003-1752-6124",
-  officialProfile: "https://lahore.comsats.edu.pk/employees/1333",
-  officialFypIdeas: "https://lahore.comsats.edu.pk/cs/fyp/IdeasforStudents.aspx",
+  officialProfile: "https://www.nottingham.edu.cn/",
+  image: "/academic/junaid-akram-professor.jpg",
+  avatar: "/academic/junaid-akram-professor.jpg",
+  officialFypIdeas: "https://www.ssa-lab.tech/supervision/opportunities",
   sourceSite: "https://www.ssa-lab.tech",
   credentials: [
+    "Assistant Professor, School of Computer Science, University of Nottingham Ningbo China",
     "Postdoctoral research at SnT, University of Luxembourg",
     "PhD from Tsinghua University",
     "HEC-approved PhD Supervisor",
@@ -23,8 +28,13 @@ export const academicProfile = {
   experience: [
     {
       role: "Assistant Professor",
+      organization: "University of Nottingham Ningbo China (UNNC), School of Computer Science",
+      period: "November 2026 — present",
+    },
+    {
+      role: "Assistant Professor & Program Incharge (Software Engineering)",
       organization: "COMSATS University Islamabad, Lahore Campus",
-      period: "March 2023 — present",
+      period: "March 2023 — 2026",
     },
     {
       role: "Postdoctoral Research Associate",
@@ -44,8 +54,8 @@ export const academicProfile = {
   ],
   education: [
     {
-      qualification: "Postdoctoral Research",
-      institution: "University of Luxembourg",
+      qualification: "Postdoctoral Research in Software Verification & Testing",
+      institution: "University of Luxembourg / SnT",
       period: "2021 — 2023",
     },
     {
@@ -54,7 +64,7 @@ export const academicProfile = {
       period: "2015 — 2020",
     },
     {
-      qualification: "MPhil",
+      qualification: "MPhil in Computer Science & Technology",
       institution: "Zhejiang University of Technology",
       period: "2012 — 2015",
     },
@@ -979,28 +989,50 @@ export const alumniPlacements = [
 export const fypOpportunities = [
   {
     title: "Building a Benchmark of Vulnerable Source Code",
-    type: "COMSATS Listed Supervision Topic",
+    type: "Supervision Topic & Research Opportunity",
+    institution: "University of Nottingham Ningbo China",
     availability: "Available for supervision",
-    prerequisites: "Software security, C/C++/Java, Git API",
-    source: "Official COMSATS Supervision Listing",
-    lastVerified: "July 2026",
+    prerequisites: "Software security, C/C++/Java, Git API, Python",
+    source: "SSA Research Lab & UNNC Academic Mentorship",
+    lastVerified: "November 2026",
+    targetAudience: "BSc / BEng Computer Science (Year 3/4 Final-Year Projects), MSc Computer Science, and prospective PhD researchers.",
+    suitability: {
+      idealCandidate: "Students with strong software engineering fundamentals interested in vulnerability datasets, empirical studies, and static analysis tooling.",
+      academicAlignment: "Directly aligns with UNNC School of Computer Science research themes in Software Engineering, Program Analysis, and Cybersecurity.",
+      careerImpact: "Exceptional preparation for graduate research (PhD/MSc) or elite application security (AppSec) engineering roles."
+    },
     summary:
       "Extract vulnerable code from patch files at function, file, and component levels, analyse repair patterns, and build a reusable benchmark for vulnerability research.",
+    problem:
+      "Modern automated vulnerability analysis and AI-based program repair models depend on high-quality, ground-truth vulnerability datasets. However, real-world CVE disclosures frequently conflate security fixes with incidental refactoring and feature additions. This project addresses the critical shortage of clean, multi-granularity vulnerability benchmarks by systematically extracting isolated vulnerable code fragments and verifying them against real-world commits.",
+    solution:
+      "Design an automated parsing and filtering engine that processes CVE commits across top open-source C/C++, Java, and Python repositories. The system maps git diffs to Abstract Syntax Trees (ASTs) via Tree-sitter, categorizes CWE classifications, isolates minimal vulnerable-to-fixed function pairs, and packages a standardized, reproducible benchmark suite with evaluation scripts for the research community.",
     expectedDeliverables: [
       "Automated diff parser for CVE patch commits",
       "Function and file granularity vulnerable code dataset",
-      "Benchmark evaluation report and GitHub repo",
+      "Benchmark evaluation report and GitHub repository",
     ],
   },
   {
     title: "Intra-Project vs Inter-Project Software Dependency Analysis",
-    type: "COMSATS Listed Supervision Topic",
+    type: "Supervision Topic & Research Opportunity",
+    institution: "University of Nottingham Ningbo China",
     availability: "Available for supervision",
-    prerequisites: "Software evolution, dependency graphs, Python/C++",
-    source: "Official COMSATS Supervision Listing",
-    lastVerified: "July 2026",
+    prerequisites: "Software evolution, dependency graphs, Python/C++, Clang",
+    source: "SSA Research Lab & UNNC Academic Mentorship",
+    lastVerified: "November 2026",
+    targetAudience: "BSc Computer Science / Software Engineering dissertations, MSc advanced software systems students.",
+    suitability: {
+      idealCandidate: "Students interested in large-scale system architecture, operating systems codebases, graph theory, and software supply chain evolution.",
+      academicAlignment: "Fits UNNC software systems research; explores multi-version code reuse and dependency tracking across millions of lines of code.",
+      careerImpact: "Provides deep competence in AST analysis, compiler frontend tooling (Clang/LLVM), and enterprise repository architecture."
+    },
     summary:
       "Measure cloned-code and dependency ratios across related software systems and multiple versions of the same system, using Linux kernel releases as an empirical case study.",
+    problem:
+      "Complex systems like operating system kernels and large distributed frameworks constantly reuse components across versions and sister forks. Unmonitored code duplication and silent dependency propagation cause critical security flaws and architectural bloat to cascade unnoticed into downstream releases.",
+    solution:
+      "Develop a graph-based code dependency and clone quantification pipeline. By analyzing call graphs, symbol resolution, and token-based similarity across sequential Linux kernel releases and related open-source subsystems, the tool computes precise intra-project and inter-project coupling metrics to visualize structural evolution and vulnerability propagation.",
     expectedDeliverables: [
       "Cross-repository dependency mapping tool",
       "Cloned code propagation metrics across versions",
@@ -1009,13 +1041,24 @@ export const fypOpportunities = [
   },
   {
     title: "Automatic Patching of Similar Code Fragments",
-    type: "COMSATS Listed Supervision Topic",
+    type: "Supervision Topic & Research Opportunity",
+    institution: "University of Nottingham Ningbo China",
     availability: "Available for supervision",
-    prerequisites: "AST diffing, Tree-sitter, Python, Code Clones",
-    source: "Official COMSATS Supervision Listing",
-    lastVerified: "July 2026",
+    prerequisites: "AST diffing, Tree-sitter, Python, Code Clones, Program Repair",
+    source: "SSA Research Lab & UNNC Academic Mentorship",
+    lastVerified: "November 2026",
+    targetAudience: "BSc / BEng Computer Science, MSc Software Engineering, and AI/Security researchers.",
+    suitability: {
+      idealCandidate: "Students passionate about automated program repair (APR), syntax tree transformations, and applying AI to software maintenance.",
+      academicAlignment: "Direct continuation of Dr. Junaid Akram's core research in clone detection and automated security patch propagation.",
+      careerImpact: "High-demand specialization at the intersection of automated code refactoring, compiler toolchains, and LLM-assisted software engineering."
+    },
     summary:
       "Develop a tool that propagates an approved security patch to matching vulnerable fragments across repositories that reuse the affected source code.",
+    problem:
+      "When a vulnerability patch is issued for an open-source library, identical or near-identical code fragments (clones) residing in downstream projects or fork repositories remain unpatched for months or years. Manually locating and adapting the patch to varying local naming conventions and syntax structures is tedious and error-prone.",
+    solution:
+      "Construct a semantic patch transfer engine that takes an authorized patch commit, extracts the syntax diff transformation rules using Tree-sitter AST abstractions, identifies cloned target sites across indexed repositories, and automatically adapts variable bindings and indentation to synthesize verified localized patches.",
     expectedDeliverables: [
       "AST-level clone matcher and patch synthesizer",
       "Automated patch propagation engine",
@@ -1024,13 +1067,24 @@ export const fypOpportunities = [
   },
   {
     title: "Software Vulnerability Prediction Model",
-    type: "COMSATS Listed Supervision Topic",
+    type: "Supervision Topic & Research Opportunity",
+    institution: "University of Nottingham Ningbo China",
     availability: "Available for supervision",
-    prerequisites: "Machine learning, software security, Python/Scikit-learn",
-    source: "Official COMSATS Supervision Listing",
-    lastVerified: "July 2026",
+    prerequisites: "Machine learning, software security, Python/Scikit-learn, PyTorch",
+    source: "SSA Research Lab & UNNC Academic Mentorship",
+    lastVerified: "November 2026",
+    targetAudience: "BSc Computer Science / Data Science / AI students, MSc Machine Learning & Software Engineering candidates.",
+    suitability: {
+      idealCandidate: "Students eager to apply deep learning, graph neural networks, and NLP to source-code vulnerability forecasting.",
+      academicAlignment: "Interdisciplinary focus bridging AI/ML and software security, a key research frontier at UNNC School of Computer Science.",
+      careerImpact: "Demonstrable portfolio piece in applied ML for cyber defense and DevSecOps predictive analytics."
+    },
     summary:
       "Learn repair patterns from vulnerability patches and predict the existence or likely number of vulnerable fragments in open-source software.",
+    problem:
+      "Static code analysis tools flood development teams with thousands of low-confidence warnings, causing alert fatigue. Conversely, runtime vulnerabilities go undetected until exploited. An effective early-warning predictive model is needed to proactively flag high-risk software components before deployment.",
+    solution:
+      "Build a multimodal vulnerability prediction framework that combines code complexity metrics, developer commit history, and AST token embeddings. By training regularized gradient boosting and transformer models on historical CVE fix timelines, the system estimates the vulnerability probability of incoming code changes with actionable confidence intervals.",
     expectedDeliverables: [
       "Feature extraction pipeline from source code ASTs",
       "Vulnerability prediction model",
@@ -1039,13 +1093,24 @@ export const fypOpportunities = [
   },
   {
     title: "Automatic Test Data Generation for Data Processing Systems",
-    type: "COMSATS Listed Supervision Topic",
+    type: "Supervision Topic & Research Opportunity",
+    institution: "University of Nottingham Ningbo China",
     availability: "Available for supervision",
-    prerequisites: "Software testing, constraint solving, Python/Java",
-    source: "Official COMSATS Supervision Listing",
-    lastVerified: "July 2026",
+    prerequisites: "Software testing, constraint solving, Python/Java, Z3 SMT",
+    source: "SSA Research Lab & UNNC Academic Mentorship",
+    lastVerified: "November 2026",
+    targetAudience: "BSc / BEng Computer Science, MSc Software Engineering & CPS Verification students.",
+    suitability: {
+      idealCandidate: "Students interested in formal verification, search-based testing, constraint programming (SMT solvers), and aerospace/satellite CPS quality.",
+      academicAlignment: "Directly extends Dr. Junaid Akram's postdoctoral satellite CPS verification research conducted with SES Satellites and SnT Luxembourg.",
+      careerImpact: "Rare, highly prized expertise in automated testing of safety-critical and high-reliability data systems."
+    },
     summary:
       "Generate valid and faulty test inputs for complex data processing systems using constraints and mutation operators, reducing the cost of manual input-space exploration.",
+    problem:
+      "Data processing and cyber-physical systems (such as satellite resource controllers and financial engines) enforce intricate input domain rules. Manually creating thorough test suites is prohibitively expensive, while naive random fuzzing fails because inputs violate basic structural preconditions.",
+    solution:
+      "Implement a model-based test data generator combining the Z3 SMT constraint solver with mutation operators. The engine converts input schema specifications into first-order logic formulas, solves for valid boundary test cases, and applies targeted mutations to generate fault-revealing edge-case vectors with maximal branch coverage.",
     expectedDeliverables: [
       "Model-based test data generator",
       "Mutation and constraint-based test vector synthesizer",
@@ -1063,7 +1128,7 @@ export const collaborators = [
   },
   {
     name: "Majid Mumtaz, PhD",
-    details: "Assistant Professor; PhD from Tsinghua University.",
+    details: "Senior Lecturer / Assistant Professor, University of the West of England (UWE Bristol), UK; PhD from Tsinghua University.",
     email: "mmumtaz@ciitwah.edu.pk",
     image: "/academic/majid-mumtaz.png",
   },
@@ -1139,12 +1204,6 @@ export const eventGallery = [
 
 export const partnerLogos = [
   {
-    name: "COMSATS University Islamabad",
-    image: "/academic/comsats-university-islamabad-logo.png",
-    href: "https://lahore.comsats.edu.pk/",
-    role: "Host University & Research Base",
-  },
-  {
     name: "Tsinghua University",
     image: "/academic/tsinghua-university-logo.webp",
     href: "https://www.tsinghua.edu.cn/en/",
@@ -1163,10 +1222,18 @@ export const partnerLogos = [
     role: "Industrial Satellite Systems Partner",
   },
   {
-    name: "King Fahd University of Petroleum & Minerals",
-    image: "/academic/king-fahd-university-logo.png",
-    href: "https://www.kfupm.edu.sa/",
-    role: "International Research Collaborator",
+    name: "COMSATS University Islamabad",
+    image: "/academic/comsats-university-islamabad-logo.png",
+    href: "https://lahore.comsats.edu.pk/",
+    role: "Former Host University & Research Partner",
+  },
+  {
+    name: "University of Nottingham Ningbo China",
+    image: "/academic/nottingham-university-logo.svg",
+    imageDark: "/academic/nottingham-university-logo-dark.svg",
+    imageLight: "/academic/nottingham-university-logo-light.svg",
+    href: "https://www.nottingham.edu.cn/",
+    role: "Current Academic Affiliation & Host Institution",
   },
 ];
 
@@ -1247,15 +1314,16 @@ export const coInvestigators = [
   {
     name: "Dr. Junaid Akram",
     role: "Lab Director & Principal Investigator",
-    affiliation: "COMSATS University Islamabad / SnT Luxembourg Postdoc / Tsinghua PhD",
+    affiliation: "University of Nottingham Ningbo China / SnT Luxembourg Postdoc / Tsinghua PhD",
     specialization: "Source Code Security, Vulnerability Repair, Code Clone Detection, Software Testing",
     image: "/academic/junaid-akram-professor.jpg",
-    email: "junaidakram@cuilahore.edu.pk",
+    email: "Junaid.Akram@nottingham.edu.cn",
+    phone: "+86 (0) 574 88180000 (Ext. 6424)",
     googleScholar: "https://scholar.google.com/citations?user=JunaidAkram",
     orcid: "https://orcid.org/0000-0003-1752-6124",
     researchGate: "https://www.researchgate.net/profile/Junaid-Akram",
-    officialProfile: "https://lahore.comsats.edu.pk/employees/1333",
-    bio: "Assistant Professor & HEC-Approved PhD Supervisor leading SSA Lab. Former Postdoc at SnT Luxembourg & SES Satellites. PhD from Tsinghua University.",
+    officialProfile: "https://www.nottingham.edu.cn/",
+    bio: "Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC) and Director of SSA Lab. Former Assistant Professor & Program Incharge at COMSATS Lahore, Postdoctoral Researcher at SnT Luxembourg & SES Satellites, PhD from Tsinghua University.",
     badge: "Lab Director",
   },
   {
@@ -1271,7 +1339,7 @@ export const coInvestigators = [
   {
     name: "Dr. Majid Mumtaz",
     role: "Co-Investigator & Academic Partner",
-    affiliation: "Assistant Professor, CUI Wah / Tsinghua PhD",
+    affiliation: "University of the West of England (UWE Bristol), UK / Tsinghua PhD",
     specialization: "Software Security & System Architecture",
     image: "/academic/majid-mumtaz.png",
     email: "mmumtaz@ciitwah.edu.pk",
@@ -1353,35 +1421,36 @@ export const labMilestones = [
     stats: { system: "ARC CPS", partner: "SES Satellites", venue: "SnT Luxembourg" }
   },
   {
-    year: "2023 – Present",
+    year: "2023 – 2026",
     era: "Phase 3",
-    title: "SSA Research Lab Establishment & AI Transformation",
+    title: "SSA Research Lab Establishment & Expansion",
     location: "COMSATS University Islamabad, Lahore Campus",
-    tag: "Current SSA Era",
+    tag: "COMSATS Era",
     badge: "AI & Program Repair",
     summary: "Established the Software Security Assessment (SSA) Research Lab at COMSATS Lahore, uniting source code analysis, LLM patch synthesis, GNN refactoring, and student mentorship.",
     achievements: [
-      "Supervising 7+ active MS/PhD theses spanning LLM patch synthesis, AST/CFG code summarizers, and GNN feature envy.",
-      "Supervising 12+ BS Software Engineering researchers across high-impact projects like MegiLance.",
+      "Supervised 7+ active MS/PhD theses spanning LLM patch synthesis, AST/CFG code summarizers, and GNN feature envy.",
+      "Supervised 20+ BS Software Engineering researchers across high-impact projects like MegiLance.",
       "Approved as HEC PhD Supervisor and established state-of-the-art vulnerability detection benchmarks.",
       "Formed joint research teams with international co-investigators from KFUPM and Tsinghua University."
     ],
-    stats: { msStudents: "7 Active", supervisedTeams: "4 Teams", grants: "HEC Approved" }
+    stats: { msStudents: "7 Mentored", supervisedTeams: "4 Teams", grants: "HEC Approved" }
   },
   {
-    year: "2025 – Beyond",
+    year: "2026 – Present",
     era: "Phase 4",
-    title: "Autonomous Security Agents & Multimodal Defense",
-    location: "Global SSA Ecosystem (COMSATS, KFUPM, SnT, Tsinghua)",
-    tag: "Future Vision",
-    badge: "Next-Gen Security",
-    summary: "Expanding into autonomous LLM security agents, multi-architecture malware ensemble defense, and real-time continuous vulnerability patch synthesis.",
+    title: "UNNC Era — Global Cyber Security & Intelligent Systems",
+    location: "University of Nottingham Ningbo China (UNNC), School of Computer Science",
+    tag: "UNNC Era",
+    badge: "Global Cyber Security",
+    summary: "Expanded SSA Lab to the University of Nottingham Ningbo China (UNNC), driving next-generation AI security agents, multi-architecture malware defense, and international cross-border student supervision.",
     achievements: [
-      "Published groundbreaking ensemble malware defense framework in Applied Soft Computing (Elsevier 2025).",
-      "Building continuous automated security assessment pipelines for open-source ecosystem patch verification.",
-      "Scaling international student exchange, industry security audits, and open-source vulnerability benchmarks."
+      "Appointed Assistant Professor at University of Nottingham Ningbo China (UNNC) School of Computer Science.",
+      "Established international research collaboration between UNNC, Tsinghua, KFUPM, and SnT Luxembourg.",
+      "Directing advanced research in CVE patch diff analysis, LLM security agents, and autonomous program repair.",
+      "Supervising undergraduate, postgraduate, and international researchers across high-impact software security domains."
     ],
-    stats: { journal: "Elsevier '25", paradigm: "AI Security Agents", scope: "Autonomous Repair" }
+    stats: { affiliation: "UNNC", role: "Assistant Professor", scope: "Autonomous AI & Security" }
   }
 ];
 

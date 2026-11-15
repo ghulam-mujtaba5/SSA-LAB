@@ -1,6 +1,6 @@
 # SSA Research Lab — Software Security Assessment Laboratory
 
-A high-performance, responsive academic web platform for **Dr. Junaid Akram** (Assistant Professor, HEC-approved PhD supervisor) and the **Software Security Assessment (SSA) Research Laboratory** at COMSATS University Islamabad, Lahore Campus.
+A high-performance, responsive academic web platform for **Dr. Junaid Akram** (Assistant Professor, School of Computer Science, University of Nottingham Ningbo China) and the **Software Security Assessment (SSA) Research Laboratory**.
 
 ---
 

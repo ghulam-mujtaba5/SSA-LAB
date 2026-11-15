@@ -344,7 +344,7 @@ export default function SiteSettingsAdminPage() {
                       className={styles.formInput}
                       value={profile.institution || ''}
                       onChange={(e) => setProfile({ ...profile, institution: e.target.value })}
-                      placeholder="e.g. COMSATS University Islamabad, Lahore Campus"
+                      placeholder="e.g. University of Nottingham Ningbo China"
                     />
                   </div>
                 </div>
@@ -393,7 +393,7 @@ export default function SiteSettingsAdminPage() {
                       className={styles.formInput}
                       value={profile.labEmail || ''}
                       onChange={(e) => setProfile({ ...profile, labEmail: e.target.value })}
-                      placeholder="e.g. ssalab@cuilahore.edu.pk"
+                      placeholder="e.g. ssa.laab@gmail.com"
                     />
                   </div>
                 </div>
@@ -417,7 +417,7 @@ export default function SiteSettingsAdminPage() {
                           .filter(Boolean),
                       })
                     }
-                    placeholder="e.g. junaidakram@cuilahore.edu.pk, contact@ssalab.com"
+                    placeholder="e.g. Junaid.Akram@nottingham.edu.cn, junaid.tsinghua@yahoo.com"
                   />
                 </div>
               </div>
@@ -480,7 +480,7 @@ export default function SiteSettingsAdminPage() {
                       className={styles.formInput}
                       value={profile.officialProfile || ''}
                       onChange={(e) => setProfile({ ...profile, officialProfile: e.target.value })}
-                      placeholder="https://lahore.comsats.edu.pk/faculty/..."
+                      placeholder="https://www.nottingham.edu.cn/..."
                     />
                   </div>
                   <div className={styles.formGroup}>

@@ -35,7 +35,7 @@ export default function NumberTicker({
   });
 
   const [displayNumber, setDisplayNumber] = useState(
-    direction === "down" ? targetNumber.toLocaleString() : "0"
+    targetNumber ? targetNumber.toLocaleString() : "0"
   );
 
   useEffect(() => {

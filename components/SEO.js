@@ -10,11 +10,11 @@ const PERSON_NAME_FULL = "Junaid Akram, PhD";
 const TWITTER_HANDLE = "@JunaidAkramPhD";
 const TWITTER_SITE = "@SSALab";
 const OG_IMAGE = `${SITE_URL}/academic/junaid-akram-professor.jpg`;
-const AFFILIATION = "COMSATS University Islamabad, Lahore Campus";
+const AFFILIATION = "University of Nottingham Ningbo China";
 
 export default function SEO({
   title = `SSA Research Lab | Software Security Research`,
-  description = "Academic profile of Dr. Junaid Akram and the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus.",
+  description = "Academic profile of Dr. Junaid Akram and the Software Security Assessment Lab at University of Nottingham Ningbo China.",
   url = SITE_URL,
   image = OG_IMAGE,
   imageWidth = 755,
@@ -231,13 +231,13 @@ export function personSchema(overrides = {}) {
     image: OG_IMAGE,
     jobTitle: "Assistant Professor & Research Lab Director",
     description:
-      "Assistant Professor, HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab at COMSATS University Islamabad, Lahore Campus. Specializing in LLM vulnerability detection, Android malware analysis, semantic code clones, and automated program testing.",
-    email: "mailto:junaidakram@cuilahore.edu.pk",
+      "Assistant Professor in the School of Computer Science at University of Nottingham Ningbo China (UNNC), HEC-approved PhD Supervisor, and software-security researcher leading the Software Security Assessment Lab. Specializing in LLM vulnerability detection, Android malware analysis, semantic code clones, and automated program testing.",
+    email: "mailto:Junaid.Akram@nottingham.edu.cn",
     worksFor: {
       "@type": "CollegeOrUniversity",
       "@id": `${SITE_URL}/#university`,
       name: AFFILIATION,
-      url: "https://lahore.comsats.edu.pk",
+      url: "https://www.nottingham.edu.cn",
     },
     affiliation: {
       "@type": "ResearchOrganization",
@@ -270,6 +270,7 @@ export function personSchema(overrides = {}) {
       "https://www.semanticscholar.org/author/Junaid-Akram/144154437",
       "https://www.scopus.com/authid/detail.uri?authorId=57200277387",
       "https://dl.acm.org/profile/99659556271",
+      "https://www.nottingham.edu.cn/",
       "https://lahore.comsats.edu.pk/employees/1333",
       "https://www.linkedin.com/in/junaidakram/",
     ],

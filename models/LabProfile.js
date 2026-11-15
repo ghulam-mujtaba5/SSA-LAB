@@ -70,7 +70,12 @@ const LabProfileSchema = new mongoose.Schema(
     role: { type: String, default: "Assistant Professor", trim: true },
     institution: {
       type: String,
-      default: "COMSATS University Islamabad, Lahore Campus",
+      default: "University of Nottingham Ningbo China",
+      trim: true,
+    },
+    department: {
+      type: String,
+      default: "School of Computer Science",
       trim: true,
     },
     lab: {
@@ -79,8 +84,9 @@ const LabProfileSchema = new mongoose.Schema(
       trim: true,
     },
     labShort: { type: String, default: "SSA Research Lab", trim: true },
-    office: { type: String, default: "H Block — Room 14", trim: true },
-    emails: { type: [String], default: ["junaidakram@cuilahore.edu.pk", "junaid.tsinghua@yahoo.com"] },
+    office: { type: String, default: "School of Computer Science (Ext. 6424)", trim: true },
+    phone: { type: String, default: "+86 (0) 574 88180000 (Ext. 6424)", trim: true },
+    emails: { type: [String], default: ["Junaid.Akram@nottingham.edu.cn", "junaid.tsinghua@yahoo.com"] },
     labEmail: { type: String, default: "ssa.laab@gmail.com", trim: true },
     googleScholar: { type: String, default: "", trim: true },
     linkedin: { type: String, default: "", trim: true },

@@ -85,6 +85,7 @@ export async function getServerSideProps({ req, res }) {
     const isOpp =
       p.isOpportunity ||
       p.projectType === "Open FYP Opportunity" ||
+      p.projectType === "Open Supervision Topic" ||
       p.projectType === "COMSATS FYP Opportunity";
     const path = isOpp
       ? `/supervision/opportunities/${p.slug}`

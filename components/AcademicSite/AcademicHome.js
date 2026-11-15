@@ -30,6 +30,7 @@ import {
 } from "../../data/academicSite";
 import { defaultFypProjects } from "../../data/fypProjects";
 import { useAcademicData } from "../../context/AcademicDataContext";
+import { useTheme } from "../../context/ThemeContext";
 import {
   datasetSchema,
   faqSchema,
@@ -74,6 +75,8 @@ const domainIllustrationMap = {
 };
 
 export default function AcademicHome() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const { siteData } = useAcademicData();
   const academicProfileData = siteData.academicProfile || academicProfile;
   const researchDomainsData = siteData.researchDomains || researchDomains;
@@ -84,9 +87,9 @@ export default function AcademicHome() {
   const labImpactStatsData = (siteData.labImpactStats?.length ? siteData.labImpactStats : impactStats).slice(0, 4);
   const [selectedDomain, setSelectedDomain] = useState(null);
 
-  // Filter top Tier A research projects for the homepage showcase
+  // Filter top Tier A research projects for the homepage showcase (curated preview)
   const topProjects = fypProjectsData
-    .filter((p) => !p.isOpportunity && p.slug !== "megilance-ai-blockchain-freelancing-platform")
+    .filter((p) => !p.isOpportunity)
     .slice(0, 4);
 
   const homeJsonLd = [
@@ -111,12 +114,12 @@ export default function AcademicHome() {
       {
         question: "What is the Software Security Assessment (SSA) Lab?",
         answer:
-          "The SSA Lab is a dedicated academic research laboratory led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore Campus. The lab specializes in source-code vulnerability detection, LLM automated program repair, semantic code clone analysis, malware defense, and software verification.",
+          "The SSA Lab is a dedicated academic research laboratory led by Dr. Junaid Akram. The lab specializes in source-code vulnerability detection, LLM automated program repair, semantic code clone analysis, malware defense, and software verification.",
       },
       {
         question: "Who directs the SSA Research Lab?",
         answer:
-          "The lab is directed by Dr. Junaid Akram, Assistant Professor and HEC-approved PhD supervisor, who earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
+          "The lab is directed by Dr. Junaid Akram, Assistant Professor at University of Nottingham Ningbo China (UNNC), who earned his PhD in Software Engineering from Tsinghua University and completed postdoctoral research at SnT, University of Luxembourg.",
       },
       {
         question: "What major tools and benchmarks has the SSA Lab created?",
@@ -126,7 +129,7 @@ export default function AcademicHome() {
       {
         question: "How to collaborate or apply for student supervision?",
         answer:
-          "Prospective research collaborators and students at COMSATS University Islamabad can contact Dr. Junaid Akram via email at junaidakram@cuilahore.edu.pk or through the Contact page.",
+          "Prospective research collaborators and students can contact Dr. Junaid Akram via email at Junaid.Akram@nottingham.edu.cn or through the Contact page.",
       },
     ]),
   ];
@@ -135,8 +138,8 @@ export default function AcademicHome() {
     <AcademicSiteLayout
       title="Software Security & Source Code Analysis Research"
       path="/"
-      description="Software Security Assessment Lab led by Dr. Junaid Akram at COMSATS University Islamabad, Lahore. Specializing in LLM vulnerability detection, code clone analysis, and malware detection."
-      keywords="Software Security Assessment Lab, Dr. Junaid Akram, software vulnerability detection, LLM vulnerability detection, semantic code clone detection, COMSATS University Lahore, malware analysis, automated software testing"
+      description="Software Security Assessment Lab led by Dr. Junaid Akram at University of Nottingham Ningbo China. Specializing in source code security, LLM vulnerability detection, code clone analysis, and malware defense."
+      keywords="Software Security Assessment Lab, Dr. Junaid Akram, software vulnerability detection, LLM vulnerability detection, semantic code clone detection, University of Nottingham Ningbo China, UNNC, malware analysis, automated software testing"
       jsonLd={homeJsonLd}
       citations={publicationsData.slice(0, 5)}
     >
@@ -156,7 +159,7 @@ export default function AcademicHome() {
               Advancing software security through source-code analysis, testing, and vulnerability research.
             </h1>
             <p className={styles.heroLead}>
-              Led by Dr Junaid Akram at COMSATS University Islamabad, Lahore Campus, the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
+              Led by Dr Junaid Akram, the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
             </p>
             <ul className={styles.credentialList}>
               {(academicProfileData.credentials || []).map((credential) => (
@@ -199,8 +202,20 @@ export default function AcademicHome() {
             <div className={styles.heroProfileCard} style={{ position: "relative", overflow: "hidden" }}>
               <BorderBeam size={160} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
               <div className={styles.heroProfileCardHeader} style={{ position: "relative", zIndex: 2 }}>
+                <Image
+                  src="/academic/junaid-akram-professor.jpg"
+                  alt="Dr. Junaid Akram"
+                  width={32}
+                  height={32}
+                  style={{
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    border: "1.5px solid var(--academic-cyan, #06b6d4)",
+                    flexShrink: 0,
+                  }}
+                />
                 <div className={styles.heroProfileStatusDot} />
-                <span className={styles.heroProfileCardTitle}>PROFILES</span>
+                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram</span>
               </div>
               <div className={styles.heroProfileButtons} style={{ position: "relative", zIndex: 2 }}>
                 <a
@@ -220,10 +235,10 @@ export default function AcademicHome() {
                   target="_blank"
                   rel="noreferrer"
                   className={styles.heroProfileBtn}
-                  title="View COMSATS Official Faculty Profile"
+                  title="View Faculty Profile"
                 >
                   <BookOpen size={14} className={styles.heroProfileBtnIcon} />
-                  <span>COMSATS</span>
+                  <span>Faculty Profile</span>
                   <ExternalLink size={11} className={styles.heroProfileBtnExternal} />
                 </a>
               </div>
@@ -340,11 +355,6 @@ export default function AcademicHome() {
           <div className={styles.pipelineVisualizer}>
             <AcademicPipelineHero />
           </div>
-          <div style={{ textAlign: "center", marginTop: "24px" }}>
-            <Link href="/research" className={styles.textLink}>
-              View complete research architecture <ArrowRight size={15} />
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -352,8 +362,8 @@ export default function AcademicHome() {
       <section className={styles.section}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Publications</p>
-            <h2>Selected research output</h2>
+            <p className={styles.eyebrow}>Publications & Research</p>
+            <h2>Current Research Projects</h2>
           </div>
           <Link href="/publications" className={styles.textLink}>
             View all publications <ArrowRight size={16} />
@@ -362,7 +372,6 @@ export default function AcademicHome() {
         <div className={styles.compactList}>
           {publicationsData.slice(0, 4).map((publication) => (
             <article key={publication.title}>
-              <span>{publication.year}</span>
               <div>
                 <h3>{publication.title}</h3>
                 <p>{publication.venue}</p>
@@ -376,11 +385,14 @@ export default function AcademicHome() {
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Supervision</p>
-            <h2>Research Project Supervision</h2>
+            <p className={styles.eyebrow}>Supervision Directory Preview</p>
+            <h2>Featured Student Research & Capstone Projects</h2>
+            <p style={{ maxWidth: "640px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: "6px 0 0 0" }}>
+              A curated preview of active software security, LLM vulnerability repair, and student engineering projects supervised under Dr. Junaid Akram at SSA Lab.
+            </p>
           </div>
           <Link href="/supervision" className={styles.textLink}>
-            Explore supervision directory <ArrowRight size={16} />
+            Explore all {fypProjectsData.length} projects <ArrowRight size={16} />
           </Link>
         </div>
         <div className={styles.studentGrid}>
@@ -395,19 +407,30 @@ export default function AcademicHome() {
             </article>
           ))}
         </div>
+        <div style={{ textAlign: "center", marginTop: "32px" }}>
+          <div className={styles.btnOrbitWrap} style={{ margin: "0 auto" }}>
+            <Link href="/supervision" className={styles.primaryButton}>
+              View Complete Supervision Directory ({fypProjectsData.length} Projects) <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Final Contact CTA */}
       <section className={styles.ctaBand} style={{ textAlign: "center", padding: "48px 24px" }}>
         <div>
-          <p className={styles.eyebrow}>Collaborate with SSA Lab</p>
-          <h2>Interested in software security research or student supervision?</h2>
-          <p style={{ maxWidth: "640px", margin: "12px auto 24px" }}>
-            Dr Junaid Akram supervises BS, MS, and PhD students in software vulnerability detection, automated testing, malware analysis, and code clone research.
+          <p className={styles.eyebrow} style={{ fontSize: "1rem", letterSpacing: "0.14em", marginBottom: "12px", textTransform: "uppercase" }}>
+            Collaborate with SSA Lab
+          </p>
+          <h2 style={{ fontSize: "clamp(1.85rem, 3.5vw, 2.75rem)", fontWeight: 700, margin: "0 auto", maxWidth: "800px" }}>
+            If you are interested in software security, software testing, or code analysis
+          </h2>
+          <p style={{ maxWidth: "680px", margin: "16px auto 28px", fontSize: "1.05rem", lineHeight: "1.65", color: "var(--academic-muted)" }}>
+            We supervise BS, MS, PhD, and Postdoc researchers.
           </p>
           <div className={styles.btnOrbitWrap} style={{ margin: "0 auto" }}>
             <Link href="/contact" className={styles.primaryButton}>
-              Contact the lab <ArrowRight size={17} />
+              Contact Us <ArrowRight size={17} />
             </Link>
           </div>
         </div>
@@ -418,7 +441,14 @@ export default function AcademicHome() {
         <p>Academic and Research Affiliations</p>
         <div className={styles.partnerGrid}>
           {partnerLogosData.map((partner) => {
-            const partnerImg = partner.image || "/academic/comsats-university-islamabad-logo.png";
+            const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
+            const partnerImg = isDark && partner.imageDark
+              ? partner.imageDark
+              : isDark && isNottingham
+              ? "/academic/nottingham-university-logo-dark.svg"
+              : !isDark && partner.imageLight
+              ? partner.imageLight
+              : partner.image || "/academic/comsats-university-islamabad-logo.png";
             return (
               <figure key={partner.name}>
                 <a

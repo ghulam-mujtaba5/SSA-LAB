@@ -179,6 +179,28 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
             </article>
           ) : null}
 
+          {featured.suitability ? (
+            <article>
+              <p className={styles.eyebrow}>Candidate & Project Suitability</p>
+              <h3>Project Suitability & Academic Fit</h3>
+              <p>
+                {typeof featured.suitability === "string"
+                  ? featured.suitability
+                  : featured.suitability.idealCandidate || featured.suitability.background}
+              </p>
+              {typeof featured.suitability === "object" && featured.suitability.academicAlignment && (
+                <p style={{ marginTop: "10px", fontSize: "0.95rem" }}>
+                  <strong>Academic Alignment:</strong> {featured.suitability.academicAlignment}
+                </p>
+              )}
+              {typeof featured.suitability === "object" && featured.suitability.careerImpact && (
+                <p style={{ marginTop: "8px", fontSize: "0.95rem" }}>
+                  <strong>Career & Research Impact:</strong> {featured.suitability.careerImpact}
+                </p>
+              )}
+            </article>
+          ) : null}
+
           <article>
             <p className={styles.eyebrow}>Supervision prerequisites</p>
             <h3>Recommended Prerequisites</h3>
@@ -194,10 +216,10 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
             <p className={styles.eyebrow}>Source & Verification</p>
             <h3>Official Listing Details</h3>
             <p>
-              <strong>Source:</strong> {featured.source || "Official COMSATS Supervision Listing"}
+              <strong>Source:</strong> {featured.source || "SSA Research Lab & UNNC Academic Mentorship"}
             </p>
             <p style={{ marginTop: "6px" }}>
-              <strong>Last Verified:</strong> {featured.lastVerified || "July 2026"}
+              <strong>Last Verified:</strong> {featured.lastVerified || "November 2026"}
             </p>
             <div style={{ marginTop: "16px" }}>
               <Link href="/contact" className={styles.liveLink}>
@@ -208,12 +230,12 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
         </div>
       )}
 
-      {/* System Architecture Section (Only if present in project data) */}
-      {!isOpportunity && featured.architecture && featured.architecture.length > 0 ? (
+      {/* System Architecture Section */}
+      {featured.architecture && featured.architecture.length > 0 ? (
         <div className={styles.architectureSection}>
           <div className={styles.architectureHeading}>
             <p className={styles.eyebrow}>System architecture</p>
-            <h3>System Design & Component Layers</h3>
+            <h3>{isOpportunity ? "Proposed System Architecture" : "System Design & Component Layers"}</h3>
             <p>
               System breakdown and design separation between application engine, intelligence services, and data models.
             </p>
@@ -231,8 +253,8 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
         </div>
       ) : null}
 
-      {/* Implementation Screenshots (Single-Box Interactive Slideshow) */}
-      {!isOpportunity && featured.gallery && featured.gallery.length > 0 ? (
+      {/* Implementation Screenshots (Single-Box Interactive Slideshow - excludes redundant cover poster) */}
+      {!isOpportunity && featured.gallery && featured.gallery.filter((g) => g.url !== featured.coverImage).length > 0 ? (
         <div className={styles.evidenceSection}>
           <div className={styles.evidenceHeading}>
             <div>
@@ -241,16 +263,19 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
             </div>
             <p>Use slideshow controls, arrows, or thumbnails to explore architecture and UI layers.</p>
           </div>
-          <ProjectGallerySlider gallery={featured.gallery} projectTitle={featured.title} />
+          <ProjectGallerySlider
+            gallery={featured.gallery.filter((g) => g.url !== featured.coverImage)}
+            projectTitle={featured.title}
+          />
         </div>
       ) : null}
 
-      {/* Completed Project Details Grid */}
-      {!isOpportunity && (
+      {/* Project Objectives & Outcomes Grid */}
+      {(featured.objectives && featured.objectives.length > 0) || (!isOpportunity && featured.outcome) ? (
         <div className={styles.detailGrid}>
           {featured.objectives && featured.objectives.length > 0 ? (
             <article>
-              <p className={styles.eyebrow}>Project objectives</p>
+              <p className={styles.eyebrow}>{isOpportunity ? "Research objectives" : "Project objectives"}</p>
               <ul>
                 {featured.objectives.map((item) => (
                   <li key={item}>

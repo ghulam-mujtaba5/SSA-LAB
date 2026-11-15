@@ -150,7 +150,7 @@ export default async function handler(req, res) {
       (p) => p.isOpportunity || p.categoryType === 'future' || p.status === 'Available for Supervision'
     ).map((p) => ({
       title: p.title,
-      type: p.opportunityType || p.type || "COMSATS Listed Supervision Topic",
+      type: p.opportunityType || p.type || "Supervision Topic & Research Opportunity",
       availability: p.availability || (p.published ? "Available for supervision" : "Pending"),
       prerequisites: p.prerequisites || (p.technologies || []).join(', ') || "Software security, Python/C++",
       source: p.source || "SSA Research Lab",
