@@ -544,9 +544,9 @@ export function ResearchPage() {
       )}
 
       <PageIntro
-        eyebrow="SSA Research Roadmaps"
-        title="Software Security Research with Practical Reach"
-        lead="The lab studies source-code vulnerabilities, Android & IoT malware, code clones, software evolution, and testing at scales ranging from individual functions to 324+ billion lines of code."
+        eyebrow="Research"
+        title="Software security research with practical reach."
+        lead="The lab studies vulnerabilities, malware, code clones, software evolution, and testing at scales ranging from individual functions to billions of lines of code."
       />
 
       {/* Research Domains Visual Cards */}
@@ -904,14 +904,14 @@ export function PublicationsPage() {
     >
       {/* Page intro header */}
       <PageIntro
-        eyebrow="Peer-Reviewed Literature"
-        title="Publications & Research Output"
-        lead="Discover empirical research spanning source-code vulnerability assessment, Android malware analysis, code clones, and automated software verification."
+        eyebrow="Publications"
+        title="Peer-reviewed research output."
+        lead="Research spanning source-code vulnerability detection, Android malware and clone analysis, software testing, and scalable code assessment."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
               src="/academic/illustrations/publications-hero.webp"
-              alt="Publications & Research Output Illustration"
+              alt="Peer-reviewed research output"
               width={280}
               height={280}
               priority
@@ -1451,14 +1451,14 @@ export function SupervisionPage({ fypProjects = [] }) {
       jsonLd={supervisionJsonLd}
     >
       <PageIntro
-        eyebrow="Research & FYP Supervision"
-        title="Supervised research projects and student dissertations."
-        lead="Explore completed and ongoing student projects and capstone dissertations supervised under Dr. Junaid Akram, PhD's SSA Laboratory."
+        eyebrow="FYP Supervision"
+        title="Supervised final-year projects and research opportunities."
+        lead="Explore open research dissertation topics alongside completed student projects supervised under Dr. Junaid Akram, PhD's SSA Laboratory."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
               src="/academic/illustrations/supervision-hero.webp"
-              alt="Supervised final-year projects and dissertations"
+              alt="Supervised final-year projects and research opportunities"
               width={280}
               height={280}
               priority
@@ -2102,14 +2102,14 @@ export function EventsPage() {
       jsonLd={eventsJsonLd}
     >
       <PageIntro
-        eyebrow="International Events & Keynotes"
-        title="Research presented and shared on global stages."
-        lead="Selected international workshops, keynotes, peer-reviewed conference presentations, and academic partnership events featuring Dr. Junaid Akram, PhD and SSA Research Lab."
+        eyebrow="Events"
+        title="Research presented and shared internationally."
+        lead="Selected international workshops, conferences, and academic partnership events led or attended by Dr. Junaid Akram, PhD and SSA Research Lab."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
               src="/academic/illustrations/event-hero.webp"
-              alt="International Events & Keynotes 3D Illustration"
+              alt="Research presented and shared internationally"
               width={280}
               height={280}
               priority

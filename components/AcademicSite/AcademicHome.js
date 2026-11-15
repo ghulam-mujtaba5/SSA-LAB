@@ -394,8 +394,8 @@ export default function AcademicHome() {
       <section className={styles.section}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Publications & Research</p>
-            <h2>Current Research Projects</h2>
+            <p className={styles.eyebrow}>Publications</p>
+            <h2>Selected research output</h2>
           </div>
           <Link href="/publications" className={styles.textLink}>
             View all publications <ArrowRight size={16} />
@@ -417,8 +417,8 @@ export default function AcademicHome() {
       <section className={`${styles.section} ${styles.softSection}`}>
         <div className={styles.sectionHeading}>
           <div>
-            <p className={styles.eyebrow}>Supervision Directory Preview</p>
-            <h2>Featured Student Research & Capstone Projects</h2>
+            <p className={styles.eyebrow}>Supervision</p>
+            <h2>Research project supervision</h2>
             <p style={{ maxWidth: "640px", color: "var(--academic-muted)", fontSize: "0.9rem", margin: "6px 0 0 0" }}>
               A curated preview of active software security, LLM vulnerability repair, and student engineering projects supervised under Dr. Junaid Akram, PhD at SSA Lab.
             </p>
