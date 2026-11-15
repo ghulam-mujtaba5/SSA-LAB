@@ -56,7 +56,7 @@ const FypProjectSchema = new mongoose.Schema(
     session: { type: String, default: "", trim: true },
     institution: { type: String, default: "COMSATS University Islamabad, Lahore Campus", trim: true },
     students: { type: [StudentSchema], default: [] },
-    supervisor: { type: String, default: "Dr. Junaid Akram", trim: true },
+    supervisor: { type: String, default: "Dr. Junaid Akram, PhD", trim: true },
     coSupervisor: { type: String, default: "", trim: true },
     specializations: { type: [String], default: [] },
     sdgs: { type: [String], default: [] },

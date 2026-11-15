@@ -39,9 +39,9 @@ export default function FypOpportunityDetailPage({ project }) {
     ]),
     courseSchema({
       name: project.title,
-      description: project.summary || `Open Supervision Opportunity under Dr. Junaid Akram: ${project.title}`,
+      description: project.summary || `Open Supervision Opportunity under Dr. Junaid Akram, PhD: ${project.title}`,
       url: `${SITE_URL}/supervision/opportunities/${project.slug}`,
-      keywords: `Dissertation Opportunity, Research Supervision, ${project.institution || "University of Nottingham Ningbo China"}, Software Security, Dr. Junaid Akram`,
+      keywords: `Dissertation Opportunity, Research Supervision, ${project.institution || "University of Nottingham Ningbo China"}, Software Security, Dr. Junaid Akram, PhD`,
     }),
   ];
 
@@ -49,7 +49,7 @@ export default function FypOpportunityDetailPage({ project }) {
     <AcademicSiteLayout
       title={`${project.title} — Open Opportunity`}
       path={`/supervision/opportunities/${project.slug}`}
-      description={project.summary || `Open Supervision Opportunity under Dr. Junaid Akram: ${project.title}`}
+      description={project.summary || `Open Supervision Opportunity under Dr. Junaid Akram, PhD: ${project.title}`}
       jsonLd={oppJsonLd}
       breadcrumbs={[
         { label: "Supervision", href: "/supervision" },
@@ -66,7 +66,7 @@ export default function FypOpportunityDetailPage({ project }) {
           <div className={styles.breadcrumbMeta}>
             <span>{project.opportunityType || project.type || `${project.institution || "UNNC"} Supervision Topic`}</span>
             <span>·</span>
-            <span>Supervisor: {project.supervisor || "Dr. Junaid Akram"}</span>
+            <span>Supervisor: {project.supervisor || "Dr. Junaid Akram, PhD"}</span>
           </div>
         </div>
       </div>

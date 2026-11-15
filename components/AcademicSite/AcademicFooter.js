@@ -44,7 +44,7 @@ export default function AcademicFooter() {
   ];
 
   const labLinks = [
-    { href: "/about", label: "About Dr. Junaid Akram" },
+    { href: "/about", label: "About Dr. Junaid Akram, PhD" },
     { href: "/events", label: "Research Seminars & Events" },
     { href: profile.officialProfile || academicProfile.officialProfile, label: "Official COMSATS Profile", external: true },
     { href: "/contact", label: "Office Hours & Location" },
@@ -83,8 +83,21 @@ export default function AcademicFooter() {
                 className={styles.logoImage}
                 itemProp="logo"
               />
-              <div className={styles.brandTitle}>
-                <strong itemProp="name">{profile.labShort || profile.lab}</strong>
+              <div className={styles.brandWordmarkWrap}>
+                <Image
+                  src="/academic/ssa-wordmark-dark.svg"
+                  alt="SSA Research Lab - Software Security Assessment"
+                  width={220}
+                  height={60}
+                  className={styles.wordmarkDark}
+                />
+                <Image
+                  src="/academic/ssa-wordmark-light.svg"
+                  alt="SSA Research Lab - Software Security Assessment"
+                  width={220}
+                  height={60}
+                  className={styles.wordmarkLight}
+                />
               </div>
             </Link>
             <p className={styles.brandDesc} itemProp="description">
@@ -93,7 +106,7 @@ export default function AcademicFooter() {
               at scale.
             </p>
             <div className={styles.metaRow}>
-              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
+              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor · Postdoc (SnT Luxembourg)
             </div>
           </div>
 

@@ -15,7 +15,7 @@ export default function Custom404() {
         <title>Page Not Found — SSA Research Lab</title>
         <meta
           name="description"
-          content="This page does not exist. Explore Dr. Junaid Akram's research, publications, supervision, or contact information."
+          content="This page does not exist. Explore Dr. Junaid Akram, PhD's research, publications, supervision, or contact information."
         />
         <meta name="robots" content="noindex, nofollow" />
       </Head>

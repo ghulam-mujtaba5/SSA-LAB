@@ -8,8 +8,8 @@ const STATIC_PAGES = [
     lastmod: "2026-08-14",
     image: {
       loc: "/academic/junaid-akram-professor.jpg",
-      title: "Dr. Junaid Akram — SSA Research Lab",
-      caption: "Dr. Junaid Akram, Assistant Professor and Head of SSA Research Lab",
+      title: "Dr. Junaid Akram, PhD — SSA Research Lab",
+      caption: "Dr. Junaid Akram, PhD, Assistant Professor and Head of SSA Research Lab",
     },
   },
   {

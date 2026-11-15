@@ -115,14 +115,14 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
     ...(project.technologies || []),
     project.nature || "Software Security Research",
     `${project.institution || "Research"} Supervision`,
-    "Dr. Junaid Akram"
+    "Dr. Junaid Akram, PhD"
   ].join(", ");
 
   const projectCitations = [
     {
       title: project.title,
       authors: [
-        project.supervisor || "Dr. Junaid Akram",
+        project.supervisor || "Dr. Junaid Akram, PhD",
         ...(project.students || []).map((s) => (typeof s === "string" ? s : s.name)),
       ].filter(Boolean),
       year: project.session ? project.session.replace(/[^0-9]/g, "").slice(0, 4) || "2026" : "2026",
@@ -149,7 +149,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
       title: project.title,
       description: project.summary || `Supervised research case study: ${project.title}`,
       authors: [
-        project.supervisor || "Dr. Junaid Akram",
+        project.supervisor || "Dr. Junaid Akram, PhD",
         ...(project.students || []).map((s) => (typeof s === "string" ? s : s.name)),
       ].filter(Boolean),
       venue: `${project.institution || "Software Security Assessment Lab"}, SSA Research Lab`,
@@ -160,11 +160,11 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
     faqSchema([
       {
         question: `What is the objective of the project "${project.title}"?`,
-        answer: project.summary || `This project investigates ${project.title} within the Software Security Assessment Lab under the supervision of Dr. Junaid Akram.`,
+        answer: project.summary || `This project investigates ${project.title} within the Software Security Assessment Lab under the supervision of Dr. Junaid Akram, PhD.`,
       },
       {
         question: `Who conducted this research project?`,
-        answer: `Supervised by ${project.supervisor || "Dr. Junaid Akram"} at ${project.institution || "University of Nottingham Ningbo China / SSA Research Lab"} with student researchers ${(project.students || []).map((s) => (typeof s === "string" ? s : s.name)).join(", ") || "SSA Lab members"}.`,
+        answer: `Supervised by ${project.supervisor || "Dr. Junaid Akram, PhD"} at ${project.institution || "University of Nottingham Ningbo China / SSA Research Lab"} with student researchers ${(project.students || []).map((s) => (typeof s === "string" ? s : s.name)).join(", ") || "SSA Lab members"}.`,
       },
       {
         question: `What technologies and frameworks were utilized?`,
@@ -178,7 +178,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
     ? project.summary.length > 155
       ? `${project.summary.substring(0, 152)}...`
       : project.summary
-    : `Research case study for ${project.title} supervised by Dr. Junaid Akram at SSA Research Lab.`;
+    : `Research case study for ${project.title} supervised by Dr. Junaid Akram, PhD at SSA Research Lab.`;
 
   return (
     <AcademicSiteLayout
@@ -203,7 +203,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
           <div className={styles.breadcrumbMeta}>
             <span>{project.session || project.institution || "Supervised Research"}</span>
             <span>·</span>
-            <span>{project.supervisor || "Dr. Junaid Akram"}</span>
+            <span>{project.supervisor || "Dr. Junaid Akram, PhD"}</span>
           </div>
         </div>
       </div>

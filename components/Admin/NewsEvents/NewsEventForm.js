@@ -246,7 +246,7 @@ export default function NewsEventForm({
             <input
               id="caption"
               type="text"
-              placeholder="e.g. Dr. Junaid Akram delivering keynote address in Luxembourg"
+              placeholder="e.g. Dr. Junaid Akram, PhD delivering keynote address in Luxembourg"
               {...register('caption')}
             />
           </div>

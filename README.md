@@ -1,6 +1,6 @@
 # SSA Research Lab — Software Security Assessment Laboratory
 
-A high-performance, responsive academic web platform for **Dr. Junaid Akram** (Assistant Professor, School of Computer Science, University of Nottingham Ningbo China) and the **Software Security Assessment (SSA) Research Laboratory**.
+A high-performance, responsive academic web platform for **Dr. Junaid Akram, PhD** (Assistant Professor, School of Computer Science, University of Nottingham Ningbo China; former Postdoctoral Researcher at SnT, University of Luxembourg) and the **Software Security Assessment (SSA) Research Laboratory**.
 
 ---
 

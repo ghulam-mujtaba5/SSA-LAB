@@ -14,7 +14,7 @@ const entries = [
     title: "Selected Publications",
     path: "/publications",
     description:
-      "Selected journal and conference publications by Dr. Junaid Akram.",
+      "Selected journal and conference publications by Dr. Junaid Akram, PhD.",
     category: "Publications",
   },
   {
@@ -54,9 +54,9 @@ export async function getServerSideProps({ res }) {
   <channel>
     <title>SSA Research Lab — Software Security Assessment</title>
     <link>${SITE_URL}</link>
-    <description>Research, publications, and supervision updates from the Software Security Assessment Lab at University of Nottingham Ningbo China. Led by Dr. Junaid Akram.</description>
+    <description>Research, publications, and supervision updates from the Software Security Assessment Lab at University of Nottingham Ningbo China. Led by Dr. Junaid Akram, PhD.</description>
     <language>en-us</language>
-    <managingEditor>Junaid.Akram@nottingham.edu.cn (Dr. Junaid Akram)</managingEditor>
+    <managingEditor>Junaid.Akram@nottingham.edu.cn (Dr. Junaid Akram, PhD)</managingEditor>
     <webMaster>Junaid.Akram@nottingham.edu.cn (SSA Lab)</webMaster>
     <lastBuildDate>${buildDate}</lastBuildDate>
     <ttl>60</ttl>

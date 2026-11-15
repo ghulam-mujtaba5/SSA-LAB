@@ -2,7 +2,7 @@
   "id": "https://www.ssa-lab.tech/",
   "name": "SSA Research Lab — Software Security Assessment Lab",
   "short_name": "SSA Lab",
-  "description": "Academic website of Dr. Junaid Akram and the Software Security Assessment Lab at University of Nottingham Ningbo China. Software vulnerability detection, testing, and malware research.",
+  "description": "Academic website of Dr. Junaid Akram, PhD (former Postdoc at SnT Luxembourg) and the Software Security Assessment Lab at University of Nottingham Ningbo China. Software vulnerability detection, testing, and malware research.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -57,7 +57,7 @@
       "name": "Contact",
       "short_name": "Contact",
       "url": "/contact",
-      "description": "Contact Dr. Junaid Akram and SSA Lab"
+      "description": "Contact Dr. Junaid Akram, PhD and SSA Lab"
     }
   ],
   "related_applications": []

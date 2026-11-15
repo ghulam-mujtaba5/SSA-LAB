@@ -49,7 +49,7 @@ export default function FypCaseStudyDetailPage({ project, relatedProjects = [] }
           <div className={styles.breadcrumbMeta}>
             <span>{project.session || project.institution || "Supervised Project"}</span>
             <span>·</span>
-            <span>{project.supervisor || "Dr. Junaid Akram"}</span>
+            <span>{project.supervisor || "Dr. Junaid Akram, PhD"}</span>
           </div>
         </div>
       </div>

@@ -49,12 +49,12 @@ function buildUnifiedJsonLdGraph(schemas) {
 
 export default function SEO({
   title = `SSA Research Lab | Software Security Research`,
-  description = "Software Security Assessment (SSA) Lab led by Dr. Junaid Akram at University of Nottingham Ningbo China. Static code analysis, vulnerability detection, malware defense, code clone auditing, and automated software testing.",
+  description = "Software Security Assessment (SSA) Lab led by Dr. Junaid Akram, PhD (former Postdoc at SnT, University of Luxembourg) at University of Nottingham Ningbo China. Static code analysis, vulnerability detection, malware defense, code clone auditing, and automated software testing.",
   url = SITE_URL,
   image = OG_IMAGE,
   imageWidth = 755,
   imageHeight = 716,
-  imageAlt = "Dr. Junaid Akram — SSA Research Lab",
+  imageAlt = "Dr. Junaid Akram, PhD — SSA Research Lab",
   type = "website",
   canonical = url,
   keywords = "Software Security Assessment, Vulnerability Detection, Static Application Security Testing, SAST, Code Audit, Malware Detection, Code Clone Analysis, Automated Software Testing, Dr Junaid Akram, Dr Junaid Akram PhD, Postdoc SnT Luxembourg, Tsinghua University PhD, University of Nottingham Ningbo China, UNNC",

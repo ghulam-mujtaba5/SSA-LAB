@@ -216,7 +216,7 @@ export default function AcademicHome() {
               <BorderBeam size={160} duration={10} colorFrom="#0284c7" colorTo="#38bdf8" />
               <div className={styles.heroProfileCardHeader} style={{ position: "relative", zIndex: 2 }}>
                 <div className={styles.heroProfileStatusDot} />
-                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram, PhD</span>
+                <span className={styles.heroProfileCardTitle}>Dr. Junaid Akram</span>
               </div>
               <div className={styles.heroProfileButtons} style={{ position: "relative", zIndex: 2 }}>
                 <a

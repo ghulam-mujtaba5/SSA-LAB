@@ -167,8 +167,23 @@ export default function AcademicSiteLayout({
                   priority
                 />
               </span>
-              <span className={styles.brandText}>
-                <strong>{academicProfile.labShort}</strong>
+              <span className={styles.brandWordmarkWrap}>
+                <Image
+                  src="/academic/ssa-wordmark-dark.svg"
+                  alt="SSA Research Lab - Software Security Assessment"
+                  width={220}
+                  height={60}
+                  className={styles.wordmarkDark}
+                  priority
+                />
+                <Image
+                  src="/academic/ssa-wordmark-light.svg"
+                  alt="SSA Research Lab - Software Security Assessment"
+                  width={220}
+                  height={60}
+                  className={styles.wordmarkLight}
+                  priority
+                />
               </span>
             </Link>
 

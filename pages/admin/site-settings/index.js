@@ -311,7 +311,7 @@ export default function SiteSettingsAdminPage() {
                       className={styles.formInput}
                       value={profile.name || ''}
                       onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                      placeholder="e.g. Dr. Junaid Akram"
+                      placeholder="e.g. Dr. Junaid Akram, PhD"
                     />
                   </div>
                   <div className={styles.formGroup}>
