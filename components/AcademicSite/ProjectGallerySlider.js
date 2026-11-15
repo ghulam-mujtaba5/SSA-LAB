@@ -141,6 +141,7 @@ export default function ProjectGallerySlider({ gallery = [], projectTitle = "Pro
             height={currHeight}
             className={styles.mainImage}
             priority={currentIndex === 0}
+            unoptimized={typeof currentItem.url === "string" && currentItem.url.startsWith("/academic/fyp/")}
           />
         </div>
 
@@ -187,6 +188,7 @@ export default function ProjectGallerySlider({ gallery = [], projectTitle = "Pro
                 width={120}
                 height={68}
                 className={styles.thumbImage}
+                unoptimized={typeof item.url === "string" && item.url.startsWith("/academic/fyp/")}
               />
               <span className={styles.thumbIndex}>{idx + 1}</span>
             </button>
@@ -218,6 +220,7 @@ export default function ProjectGallerySlider({ gallery = [], projectTitle = "Pro
                 width={currWidth}
                 height={currHeight}
                 className={styles.lightboxImage}
+                unoptimized={typeof currentItem.url === "string" && currentItem.url.startsWith("/academic/fyp/")}
               />
             </div>
             <div className={styles.lightboxCaption}>

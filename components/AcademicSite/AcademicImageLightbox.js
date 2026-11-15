@@ -69,6 +69,7 @@ export default function AcademicImageLightbox({
                   width={width}
                   height={height}
                   sizes="95vw"
+                  unoptimized={typeof src === "string" && src.startsWith("/academic/fyp/")}
                 />
               </div>
               {caption && <p>{caption}</p>}
@@ -94,6 +95,7 @@ export default function AcademicImageLightbox({
           priority={priority}
           sizes={sizes}
           className={imageClassName}
+          unoptimized={typeof src === "string" && src.startsWith("/academic/fyp/")}
         />
         {showZoomHint && (
           <span className={styles.zoomHint}>
