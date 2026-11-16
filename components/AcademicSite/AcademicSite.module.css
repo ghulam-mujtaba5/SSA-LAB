@@ -331,15 +331,58 @@
 
 .heroInner {
   width: min(1180px, calc(100% - 40px));
-  min-height: 640px;
+  min-height: 560px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
   align-items: center;
-  gap: clamp(40px, 6vw, 80px);
-  padding: clamp(60px, 8vh, 88px) 0;
+  gap: clamp(36px, 5vw, 68px);
+  padding: clamp(52px, 6.5vh, 76px) 0;
   position: relative;
   z-index: 1;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  margin: 0 0 18px;
+  border-radius: 999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--academic-blue);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: fit-content;
+  box-shadow: 0 2px 10px rgba(56, 189, 248, 0.06);
+}
+
+:global([data-theme="light"]) .heroBadge {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: rgba(2, 132, 199, 0.2);
+  color: #0369a1;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.06);
+}
+
+.heroBadgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: heroPulseDot 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+:global([data-theme="light"]) .heroBadgeDot {
+  background: #0284c7;
+  box-shadow: 0 0 8px #0284c7;
 }
 
 .eyebrow {
@@ -351,7 +394,6 @@
   text-transform: uppercase;
 }
 
-.heroCopy h1,
 .pageIntro h1 {
   max-width: 860px;
   margin: 0;
@@ -363,12 +405,91 @@
   text-wrap: balance;
 }
 
+.heroCopy h1 {
+  max-width: 760px;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.16;
+  text-wrap: balance;
+  color: var(--academic-ink);
+}
+
+.heroHighlight {
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 55%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:global([data-theme="dark"]) .heroHighlight {
+  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 55%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .heroLead {
-  max-width: 680px;
-  margin: 28px 0 0;
+  max-width: 640px;
+  margin: 18px 0 0;
   color: var(--academic-muted);
-  font-size: clamp(1rem, 1.4vw, 1.12rem);
-  line-height: 1.75;
+  font-size: clamp(0.96rem, 1.2vw, 1.06rem);
+  line-height: 1.68;
+}
+
+.credentialChips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 0;
+  margin: 20px 0 0;
+  list-style: none;
+}
+
+.credentialChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: 999px;
+  font-size: 0.79rem;
+  font-weight: 500;
+  color: var(--academic-ink);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+:global([data-theme="light"]) .credentialChip {
+  background: rgba(241, 245, 249, 0.75);
+  border-color: rgba(2, 132, 199, 0.2);
+  color: #334155;
+}
+
+.credentialChip:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.08);
+  transform: translateY(-1px);
+}
+
+:global([data-theme="light"]) .credentialChip:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+  background: rgba(2, 132, 199, 0.06);
+}
+
+.credentialChipIcon {
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+:global([data-theme="light"]) .credentialChipIcon {
+  color: #0284c7;
 }
 
 .credentialList {
@@ -397,7 +518,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 /* ==========================================================================
@@ -674,27 +795,39 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 .heroPortraitBackdropGlow {
   position: absolute;
-  top: 45%;
+  top: 46%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 92%;
-  height: 92%;
-  max-width: 460px;
-  max-height: 460px;
+  width: 100%;
+  height: 100%;
+  max-width: 520px;
+  max-height: 520px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.24) 0%, rgba(14, 165, 233, 0.1) 45%, transparent 72%);
+  background: radial-gradient(
+    ellipse 65% 65% at 50% 45%,
+    rgba(56, 189, 248, 0.22) 0%,
+    rgba(99, 102, 241, 0.12) 35%,
+    rgba(14, 165, 233, 0.04) 55%,
+    transparent 72%
+  );
   pointer-events: none;
   z-index: 0;
-  filter: blur(34px);
+  filter: blur(48px);
 }
 
 :global([data-theme="light"]) .heroPortraitBackdropGlow {
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.16) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 72%);
-  filter: blur(38px);
+  background: radial-gradient(
+    ellipse 65% 65% at 50% 45%,
+    rgba(2, 132, 199, 0.12) 0%,
+    rgba(99, 102, 241, 0.06) 38%,
+    transparent 72%
+  );
+  filter: blur(52px);
 }
 
 .heroFloatingSupervisorBadge {
@@ -735,7 +868,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 540px;
+  max-width: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -743,22 +876,24 @@
   border: none !important;
   padding: 0 !important;
   box-shadow: none !important;
-  cursor: zoom-in;
+  overflow: visible !important;
 }
 
 .heroIllustrationImg {
   width: auto !important;
   max-width: 100% !important;
   height: auto !important;
-  max-height: 520px;
+  max-height: 500px;
   object-fit: contain !important;
-  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 24px rgba(56, 189, 248, 0.18));
+  mask-image: linear-gradient(to bottom, #000 78%, rgba(0, 0, 0, 0.8) 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, rgba(0, 0, 0, 0.8) 88%, transparent 100%);
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 20px rgba(56, 189, 248, 0.14));
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
   animation: heroFloatAnim 6s ease-in-out infinite;
 }
 
 :global([data-theme="light"]) .heroIllustrationImg {
-  filter: drop-shadow(0 20px 30px rgba(15, 23, 42, 0.14)) drop-shadow(0 0 20px rgba(2, 132, 199, 0.12));
+  filter: drop-shadow(0 14px 24px rgba(15, 23, 42, 0.09)) drop-shadow(0 0 16px rgba(2, 132, 199, 0.08));
 }
 
 @keyframes heroFloatAnim {
@@ -772,32 +907,32 @@
 
 .heroIllustrationLightbox:hover .heroIllustrationImg {
   transform: translateY(-8px) scale(1.02);
-  filter: drop-shadow(0 26px 42px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 30px rgba(56, 189, 248, 0.28));
+  filter: drop-shadow(0 22px 36px rgba(0, 0, 0, 0.32)) drop-shadow(0 0 26px rgba(56, 189, 248, 0.24));
 }
 
 .heroProfileCard {
   position: relative;
   z-index: 10;
-  margin-top: -12px;
+  margin-top: -20px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 10px;
-  border-radius: 14px;
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(56, 189, 248, 0.1);
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32), 0 0 16px rgba(56, 189, 248, 0.1);
   max-width: 100%;
   box-sizing: border-box;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 :global([data-theme="light"]) .heroProfileCard {
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(2, 132, 199, 0.28);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08), 0 0 12px rgba(2, 132, 199, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(2, 132, 199, 0.22);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07), 0 0 12px rgba(2, 132, 199, 0.06);
 }
 
 .heroProfileCard:hover {
@@ -2707,7 +2842,8 @@
     width: min(100% - 32px, 1180px);
     min-height: 0;
     grid-template-columns: 1fr;
-    padding: 58px 0 76px;
+    gap: 36px;
+    padding: 44px 0 56px;
   }
 
   .heroCopy h1,

@@ -75,7 +75,7 @@ export default async function handler(req, res) {
         href: "https://www.nottingham.edu.cn/",
         role: "Current Academic Affiliation & Host Institution",
       };
-      partnerLogos = [nottinghamStatic, ...partnerLogos];
+      partnerLogos = [...partnerLogos, nottinghamStatic];
     }
     partnerLogos = partnerLogos.map((p) => {
       const isNottingham = p.name?.toLowerCase().includes("nottingham");

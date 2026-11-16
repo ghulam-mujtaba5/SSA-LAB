@@ -39,6 +39,15 @@ import {
 } from "../SEO";
 import styles from "./AcademicSite.module.css";
 
+const formatCredentialLabel = (cred) => {
+  if (!cred) return "";
+  if (cred.includes("Nottingham")) return "Assistant Professor, UNNC";
+  if (cred.includes("Luxembourg")) return "Ex-Postdoc, SnT Luxembourg";
+  if (cred.includes("Tsinghua")) return "PhD, Tsinghua University";
+  if (cred.includes("HEC")) return "HEC PhD Supervisor";
+  return cred;
+};
+
 const impactStats = [
   {
     value: "324B+",
@@ -173,17 +182,22 @@ export default function AcademicHome() {
         <HeroRetroGrid angle={65} opacity={0.35} />
         <div className={styles.heroInner} style={{ position: "relative", zIndex: 1 }}>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Software security research & supervision</p>
+            <div className={styles.heroBadge} aria-label="Affiliation">
+              <span className={styles.heroBadgeDot} aria-hidden="true" />
+              <span>Software Security Assessment Research Lab</span>
+            </div>
             <h1>
-              Advancing software security through source-code analysis, testing, and vulnerability research.
+              Advancing software security through{" "}
+              <span className={styles.heroHighlight}>source-code analysis</span>, testing, and vulnerability research.
             </h1>
             <p className={styles.heroLead}>
-              Led by Dr. Junaid Akram, PhD (former Postdoctoral Researcher at SnT, University of Luxembourg), the SSA Lab develops practical methods and tools for vulnerability detection, malware analysis, code-clone analysis, and automated software testing.
+              Directed by Dr. Junaid Akram at University of Nottingham Ningbo China, the SSA Lab pioneers automated vulnerability detection, LLM security, and large-scale code analysis.
             </p>
-            <ul className={styles.credentialList}>
+            <ul className={styles.credentialChips} aria-label="Academic Affiliations & Credentials">
               {(academicProfileData.credentials || []).map((credential) => (
-                <li key={credential}>
-                  <ShieldCheck size={18} /> {credential}
+                <li key={credential} className={styles.credentialChip} title={credential}>
+                  <ShieldCheck size={14} className={styles.credentialChipIcon} aria-hidden="true" />
+                  <span>{formatCredentialLabel(credential)}</span>
                 </li>
               ))}
             </ul>

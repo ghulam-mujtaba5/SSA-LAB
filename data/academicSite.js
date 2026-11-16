@@ -1308,14 +1308,6 @@ export const eventGallery = [
 
 export const partnerLogos = [
   {
-    name: "University of Nottingham Ningbo China",
-    image: "/academic/nottingham-university-logo.svg",
-    imageDark: "/academic/nottingham-university-logo-dark.svg",
-    imageLight: "/academic/nottingham-university-logo-light.svg",
-    href: "https://www.nottingham.edu.cn/",
-    role: "Current Academic Affiliation & Host Institution",
-  },
-  {
     name: "Tsinghua University",
     image: "/academic/tsinghua-university-logo.webp",
     href: "https://www.tsinghua.edu.cn/en/",
@@ -1338,6 +1330,14 @@ export const partnerLogos = [
     image: "/academic/comsats-university-islamabad-logo.png",
     href: "https://lahore.comsats.edu.pk/",
     role: "Former Host University & Research Partner",
+  },
+  {
+    name: "University of Nottingham Ningbo China",
+    image: "/academic/nottingham-university-logo.svg",
+    imageDark: "/academic/nottingham-university-logo-dark.svg",
+    imageLight: "/academic/nottingham-university-logo-light.svg",
+    href: "https://www.nottingham.edu.cn/",
+    role: "Current Academic Affiliation & Host Institution",
   },
 ];
 
