@@ -6,7 +6,6 @@ import {
   BookOpen,
   GraduationCap,
   Microscope,
-  ShieldCheck,
   ExternalLink,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
@@ -39,14 +38,64 @@ import {
 } from "../SEO";
 import styles from "./AcademicSite.module.css";
 
-const formatCredentialLabel = (cred) => {
-  if (!cred) return "";
-  if (cred.includes("Nottingham")) return "Assistant Professor, UNNC";
-  if (cred.includes("Luxembourg")) return "Ex-Postdoc, SnT Luxembourg";
-  if (cred.includes("Tsinghua")) return "PhD, Tsinghua University";
-  if (cred.includes("HEC")) return "HEC PhD Supervisor";
-  return cred;
-};
+const HERO_CREDENTIAL_PILLS = [
+  {
+    id: "unnc",
+    label: "Assistant Professor, UNNC",
+    fullTitle: "Assistant Professor in the School of Computer Science, University of Nottingham Ningbo China",
+    period: "2026 — Present",
+    org: "University of Nottingham Ningbo China",
+    isCurrent: true,
+    logoDark: "/academic/emblems/nottingham-shield.svg",
+    logoLight: "/academic/emblems/nottingham-shield.svg",
+    logoDefault: "/academic/emblems/nottingham-shield.svg",
+    logoAlt: "University of Nottingham Castle Shield Crest",
+  },
+  {
+    id: "comsats",
+    label: "Assistant Professor, COMSATS Lahore",
+    fullTitle: "Assistant Professor & Program Incharge (Software Engineering), COMSATS University Islamabad, Lahore Campus",
+    period: "2023 — 2026",
+    org: "COMSATS University Islamabad, Lahore Campus",
+    logoDark: "/academic/emblems/comsats-crest.png",
+    logoLight: "/academic/emblems/comsats-crest.png",
+    logoDefault: "/academic/emblems/comsats-crest.png",
+    logoAlt: "COMSATS University Islamabad Circular Seal",
+  },
+  {
+    id: "snt",
+    label: "Postdoc, SnT Luxembourg",
+    fullTitle: "Postdoctoral Research Associate, Interdisciplinary Centre for Security, Reliability and Trust (SnT), University of Luxembourg",
+    period: "2021 — 2023",
+    org: "University of Luxembourg (SnT)",
+    logoDark: "/academic/emblems/snt-emblem.png",
+    logoLight: "/academic/emblems/snt-emblem.png",
+    logoDefault: "/academic/emblems/snt-emblem.png",
+    logoAlt: "SnT University of Luxembourg Emblem",
+  },
+  {
+    id: "ses",
+    label: "Visiting Researcher, SES Luxembourg",
+    fullTitle: "Visiting Researcher, SES Satellites Luxembourg — Adaptive Resource Control project",
+    period: "2021 — 2023",
+    org: "SES Satellites Luxembourg",
+    logoDark: "/academic/emblems/ses-icon.svg",
+    logoLight: "/academic/emblems/ses-icon.svg",
+    logoDefault: "/academic/emblems/ses-icon.svg",
+    logoAlt: "SES Satellites Orbital Symbol Icon",
+  },
+  {
+    id: "tsinghua",
+    label: "PhD, Tsinghua University",
+    fullTitle: "PhD in Software Engineering, School of Software, Tsinghua University",
+    period: "2015 — 2020",
+    org: "Tsinghua University",
+    logoDark: "/academic/emblems/tsinghua-seal.png",
+    logoLight: "/academic/emblems/tsinghua-seal.png",
+    logoDefault: "/academic/emblems/tsinghua-seal.png",
+    logoAlt: "Tsinghua University Circular Seal Emblem",
+  },
+];
 
 const impactStats = [
   {
@@ -193,13 +242,39 @@ export default function AcademicHome() {
             <p className={styles.heroLead}>
               Directed by Dr. Junaid Akram at University of Nottingham Ningbo China, the SSA Lab pioneers automated vulnerability detection, LLM security, and large-scale code analysis.
             </p>
-            <ul className={styles.credentialChips} aria-label="Academic Affiliations & Credentials">
-              {(academicProfileData.credentials || []).map((credential) => (
-                <li key={credential} className={styles.credentialChip} title={credential}>
-                  <ShieldCheck size={14} className={styles.credentialChipIcon} aria-hidden="true" />
-                  <span>{formatCredentialLabel(credential)}</span>
-                </li>
-              ))}
+            <ul className={styles.credentialChips} aria-label="Academic Affiliations & Career Timeline">
+              {HERO_CREDENTIAL_PILLS.map((pill) => {
+                const logoSrc =
+                  isDark && pill.logoDark
+                    ? pill.logoDark
+                    : !isDark && pill.logoLight
+                    ? pill.logoLight
+                    : pill.logoDefault;
+                return (
+                  <li
+                    key={pill.id}
+                    className={`${styles.credentialChip} ${pill.isCurrent ? styles.credentialChipCurrent : ""}`}
+                    title={`${pill.fullTitle} (${pill.period})`}
+                  >
+                    <span className={styles.credentialChipLogoWrap} aria-hidden="true">
+                      <img
+                        src={logoSrc}
+                        alt={pill.logoAlt}
+                        className={styles.credentialChipLogo}
+                        loading="eager"
+                      />
+                    </span>
+                    <span className={styles.credentialChipText}>{pill.label}</span>
+                    {pill.isCurrent && (
+                      <span
+                        className={styles.credentialChipLiveDot}
+                        title="Current active appointment"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </li>
+                );
+              })}
             </ul>
 
             <div className={styles.actions}>

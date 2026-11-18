@@ -82,6 +82,7 @@ import {
   supervisedProjects,
   pgResearchers,
   coInvestigators,
+  juniorCollaborators,
   labMilestones,
   labPillars,
   labImpactStats,
@@ -1536,11 +1537,19 @@ const staticStudentMap = {
   "Hafiz Muhammad Shams ul Huda": "/academic/students/hafiz-shams-ul-huda.png",
 };
 
+const staticJuniorMap = {
+  "Ms. Yella Mehroze": "/academic/collaborators/yella-mehroze.jpg",
+  "Ms. Rabail Asghar": "/academic/collaborators/rabail-asghar.jpg",
+  "Mr. Tahir Muhammad": "/academic/collaborators/tahir-muhammad.jpg",
+  "Mr. Zaheer Ahmad Gondal": "/academic/collaborators/zaheer-ahmad-gondal.jpg",
+};
+
 export function TeamPage() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const { siteData } = useAcademicData();
   const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
+  const juniorCollaboratorsData = siteData.juniorCollaborators || juniorCollaborators;
   const pgResearchersData = siteData.pgResearchers || pgResearchers;
   const alumniPlacementsData = siteData.alumniPlacements || alumniPlacements;
   const partnerLogosData = siteData.partnerLogos || partnerLogos;
@@ -1557,11 +1566,13 @@ export function TeamPage() {
   }, [router.query.tab]);
 
   const showPi = activeTab === "all" || activeTab === "pi";
+  const showJunior = activeTab === "all" || activeTab === "junior";
   const showMs = activeTab === "all" || activeTab === "ms";
   const showBs = activeTab === "all" || activeTab === "bs";
 
   const allPersonnel = [
     ...coInvestigatorsData.map((c) => ({ ...c, type: "Faculty & Investigator" })),
+    ...juniorCollaboratorsData.map((j) => ({ ...j, type: "Junior Research Collaborator" })),
     ...pgResearchersData.map((p) => ({ ...p, type: "Postgraduate MS/PhD Researcher" })),
   ];
 
@@ -1570,7 +1581,7 @@ export function TeamPage() {
       name: "SSA Lab — Research Team & Collaborators",
       url: `${SITE_URL}/team`,
       description:
-        "Dr. Junaid Akram, PhD, international co-investigators, MS/PhD researchers, BS engineering teams, and alumni of SSA Lab.",
+        "Dr. Junaid Akram, PhD, international co-investigators, junior research collaborators, MS/PhD researchers, BS engineering teams, and alumni of SSA Lab.",
       items: [
         ...allPersonnel.map((p) => ({ name: p.name, url: `${SITE_URL}/team` })),
       ],
@@ -1590,6 +1601,16 @@ export function TeamPage() {
         researchArea: m.researchArea,
       })
     ),
+    ...juniorCollaboratorsData.map((m) =>
+      personMemberSchema({
+        name: m.name,
+        role: m.role || "Junior Research Collaborator",
+        image: m.image ? (m.image.startsWith("http") ? m.image : `${SITE_URL}${m.image}`) : undefined,
+        url: m.officialProfile || m.googleScholar || `${SITE_URL}/team`,
+        university: m.institution || "COMSATS University Islamabad, Lahore Campus",
+        researchArea: m.specialization,
+      })
+    ),
     ...pgResearchersData.slice(0, 4).map((m) =>
       personMemberSchema({
         name: m.name,
@@ -1605,15 +1626,15 @@ export function TeamPage() {
     <AcademicSiteLayout
       title="Research Team & Collaborators"
       path="/team"
-      description="Dr. Junaid Akram, PhD, international co-investigators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab."
-      keywords="SSA Lab team, software security researchers, University of Nottingham Ningbo China, UNNC computer science, international collaborators, PhD students software security"
+      description="Dr. Junaid Akram, PhD, international co-investigators, junior research collaborators, MS/PhD researchers, BS engineering teams, alumni, and partner institutions of SSA Lab."
+      keywords="SSA Lab team, software security researchers, University of Nottingham Ningbo China, UNNC computer science, junior research collaborators, COMSATS University, international collaborators, PhD students software security"
       jsonLd={teamJsonLd}
     >
       {/* PAGE INTRO HEADER */}
       <PageIntro
         eyebrow="SSA Research & Development Team"
         title="Research Team & Collaborators"
-        lead="Connecting principal investigators, international co-investigators, postgraduate MS & PhD thesis researchers, undergraduate BS engineering teams, and institutional partner organizations across software security and program repair."
+        lead="Connecting principal investigators, international co-investigators, junior research collaborators, postgraduate MS & PhD thesis researchers, undergraduate BS engineering teams, and institutional partner organizations across software security and program repair."
         illustration={
           <div className={styles.pageHeroIllustrationWrap}>
             <Image
@@ -1644,6 +1665,13 @@ export function TeamPage() {
             onClick={() => setActiveTab("pi")}
           >
             👨‍🏫 Faculty & Investigators ({coInvestigatorsData.length})
+          </button>
+          <button
+            type="button"
+            className={`${styles.collabTab} ${activeTab === "junior" ? styles.activeCollabTab : ""}`}
+            onClick={() => setActiveTab("junior")}
+          >
+            🤝 Junior Research Collaborators ({juniorCollaboratorsData.length})
           </button>
           <button
             type="button"
@@ -1741,7 +1769,102 @@ export function TeamPage() {
         </section>
       )}
 
-      {/* 2. POSTGRADUATE RESEARCHERS (MS & PHD STUDENTS) */}
+      {/* 2. JUNIOR RESEARCH COLLABORATORS */}
+      {showJunior && (
+        <section className={`${styles.section} ${styles.softSection}`}>
+          <div className={styles.sectionHeading}>
+            <div>
+              <p className={styles.eyebrow}>Faculty & Academic Collaboration</p>
+              <h2>Junior Research Collaborators</h2>
+            </div>
+            <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
+              Faculty lecturers and emerging research collaborators at COMSATS University Islamabad, Lahore Campus partnering with SSA Lab on automated software testing, AI-driven healthcare prediction, cybersecurity, privacy preservation, and applied machine learning.
+            </p>
+          </div>
+
+          <div className={styles.collabGrid}>
+            {juniorCollaboratorsData.map((collab) => {
+              const collabImage = collab.image || staticJuniorMap[collab.name];
+              return (
+                <article key={collab.name} className={styles.collabCard}>
+                  <div className={styles.collabTop}>
+                    <div className={styles.collabAvatar} style={{ border: "2.5px solid var(--academic-blue, #0284c7)" }}>
+                      {collabImage ? (
+                        <AcademicImageLightbox
+                          src={collabImage}
+                          alt={collab.name}
+                          width={120}
+                          height={120}
+                          caption={`${collab.name} — ${collab.role}`}
+                          showZoomHint={false}
+                        />
+                      ) : (
+                        <span style={{ color: "var(--academic-blue, #0284c7)", fontSize: "0.95rem" }}>
+                          {collab.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                        </span>
+                      )}
+                    </div>
+                    <div className={styles.collabMeta}>
+                      <h3>{collab.name}</h3>
+                      <span className={styles.collabBadge}>{collab.badge || "Junior Collaborator"}</span>
+                      <div className={styles.collabDegree}>{collab.designation || collab.role}</div>
+                      <div className={styles.collabFocus} style={{ marginTop: "4px" }}>
+                        {collab.affiliation || collab.institution}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles.collabBody}>
+                    {collab.education && (
+                      <p className={styles.collabTopic} style={{ marginBottom: "8px" }}>
+                        <strong>Education:</strong> {collab.education}
+                      </p>
+                    )}
+                    <p className={styles.collabTopic} style={{ marginBottom: "8px" }}>
+                      <strong>Specialization:</strong> {collab.specialization}
+                    </p>
+                    {collab.bio && <p className={styles.collabFocus}>{collab.bio}</p>}
+                  </div>
+
+                  <div className={styles.collabFooter}>
+                    <span className={styles.collabFocus} style={{ fontSize: "0.74rem" }}>
+                      <Building size={12} style={{ display: "inline", marginRight: "4px" }} />
+                      {collab.institution || "COMSATS University Islamabad"}
+                    </span>
+                    {collab.email && (
+                      <a href={`mailto:${collab.email}`} className={styles.collabLinkBtn}>
+                        <Mail size={13} /> Email
+                      </a>
+                    )}
+                    {collab.googleScholar && (
+                      <a href={collab.googleScholar} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> Scholar
+                      </a>
+                    )}
+                    {collab.officialProfile && (
+                      <a href={collab.officialProfile} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> Official Profile
+                      </a>
+                    )}
+                    {collab.publicationUrl && (
+                      <a href={collab.publicationUrl} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <ExternalLink size={13} /> Publication
+                      </a>
+                    )}
+                    {collab.messagePortal && !collab.email && (
+                      <a href={collab.messagePortal} target="_blank" rel="noreferrer" className={styles.collabLinkBtn}>
+                        <Mail size={13} /> Contact
+                      </a>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* 3. POSTGRADUATE RESEARCHERS (MS & PHD STUDENTS) */}
       {showMs && (
         <section className={`${styles.section} ${styles.softSection}`}>
           <div className={styles.sectionHeading}>

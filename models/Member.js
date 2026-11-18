@@ -10,6 +10,8 @@ const MemberSchema = new mongoose.Schema(
       enum: [
         "co-investigator",
         "co_investigator",
+        "junior-collaborator",
+        "junior_collaborator",
         "pg-researcher",
         "pg_researcher",
         "collaborator",

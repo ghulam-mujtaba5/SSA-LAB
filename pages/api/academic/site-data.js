@@ -95,6 +95,7 @@ export default async function handler(req, res) {
 
     // Format team members by category
     const isPgResearcher = (c) => c === 'pg_researcher' || c === 'pg-researcher';
+    const isJuniorCollaborator = (c) => c === 'junior_collaborator' || c === 'junior-collaborator';
     const isCoInvestigator = (c) => c === 'co_investigator' || c === 'co-investigator' || c === 'faculty';
     const isAlumni = (c) => c === 'alumnus' || c === 'alumni';
     const isCollaborator = (c) => c === 'collaborator';
@@ -102,6 +103,10 @@ export default async function handler(req, res) {
     const pgResearchers = teamDocs?.filter((t) => isPgResearcher(t.category)).length
       ? teamDocs.filter((t) => isPgResearcher(t.category))
       : staticAcademicData.pgResearchers;
+
+    const juniorCollaborators = teamDocs?.filter((t) => isJuniorCollaborator(t.category)).length
+      ? teamDocs.filter((t) => isJuniorCollaborator(t.category))
+      : staticAcademicData.juniorCollaborators;
 
     const coInvestigators = teamDocs?.filter((t) => isCoInvestigator(t.category)).length
       ? teamDocs.filter((t) => isCoInvestigator(t.category))
@@ -227,8 +232,9 @@ export default async function handler(req, res) {
         eventHighlights,
         eventGallery,
         partnerLogos,
-        pgResearchers,
         coInvestigators,
+        juniorCollaborators,
+        pgResearchers,
         labMilestones,
         labPillars,
         labImpactStats,

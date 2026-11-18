@@ -44,6 +44,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "github.com",
       },
+      {
+        protocol: "https",
+        hostname: "lahore.comsats.edu.pk",
+      },
+      {
+        protocol: "https",
+        hostname: "*.comsats.edu.pk",
+      },
     ],
     // Serve modern formats, fallback to original
     formats: ["image/avif", "image/webp"],

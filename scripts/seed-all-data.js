@@ -307,6 +307,29 @@ async function main() {
       });
     });
 
+    // 5.1b Junior Research Collaborators (4)
+    (academicSite.juniorCollaborators || []).forEach((jc, idx) => {
+      memberList.push({
+        name: jc.name,
+        slug: slugify(jc.name + "-junior-collaborator"),
+        role: jc.role || "Junior Research Collaborator",
+        category: "junior-collaborator",
+        affiliation: jc.affiliation || "",
+        institution: jc.institution || "",
+        degree: jc.education || "",
+        specialization: jc.specialization || "",
+        image: jc.image || "",
+        email: jc.email || "",
+        phone: jc.phone || "",
+        googleScholar: jc.googleScholar || "",
+        officialProfile: jc.officialProfile || "",
+        bio: jc.bio || "",
+        badge: jc.badge || "Junior Collaborator",
+        displayOrder: idx + 6,
+        published: true,
+      });
+    });
+
     // 5.2 PG Researchers (7)
     (academicSite.pgResearchers || []).forEach((pg, idx) => {
       memberList.push({

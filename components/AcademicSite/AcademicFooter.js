@@ -74,29 +74,23 @@ export default function AcademicFooter() {
         <div className={styles.content}>
           {/* Brand Identity Column */}
           <div className={styles.brand}>
-            <Link href="/" className={styles.logoWrap} aria-label="SSA Research Lab Home">
-              <Image
-                src="/academic/ssa-research-group-logo.png"
-                alt="SSA Research Lab"
-                width={90}
-                height={60}
-                className={styles.logoImage}
-                itemProp="logo"
-              />
-              <div className={styles.brandWordmarkWrap}>
+            <Link href="/" className={styles.brandBannerLink} aria-label="SSA Research Lab Home">
+              <div className={styles.brandBannerWrap}>
                 <Image
-                  src="/academic/ssa-wordmark-dark.svg"
+                  src="/academic/ssa-banner-dark.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={220}
-                  height={60}
-                  className={styles.wordmarkDark}
+                  width={230}
+                  height={78}
+                  className={styles.bannerDark}
+                  itemProp="logo"
                 />
                 <Image
-                  src="/academic/ssa-wordmark-light.svg"
+                  src="/academic/ssa-banner-light.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={220}
-                  height={60}
-                  className={styles.wordmarkLight}
+                  width={230}
+                  height={78}
+                  className={styles.bannerLight}
+                  itemProp="logo"
                 />
               </div>
             </Link>
