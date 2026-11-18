@@ -79,16 +79,16 @@ export default function AcademicFooter() {
                 <Image
                   src="/academic/ssa-banner-dark.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={230}
-                  height={78}
+                  width={260}
+                  height={88}
                   className={styles.bannerDark}
                   itemProp="logo"
                 />
                 <Image
                   src="/academic/ssa-banner-light.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={230}
-                  height={78}
+                  width={260}
+                  height={88}
                   className={styles.bannerLight}
                   itemProp="logo"
                 />

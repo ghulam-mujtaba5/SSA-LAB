@@ -162,16 +162,16 @@ export default function AcademicSiteLayout({
                 <Image
                   src="/academic/ssa-banner-dark.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={210}
-                  height={70}
+                  width={240}
+                  height={80}
                   className={styles.bannerDark}
                   priority
                 />
                 <Image
                   src="/academic/ssa-banner-light.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={210}
-                  height={70}
+                  width={240}
+                  height={80}
                   className={styles.bannerLight}
                   priority
                 />
