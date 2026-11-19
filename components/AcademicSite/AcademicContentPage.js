@@ -75,7 +75,6 @@ import {
   eventGallery,
   eventHighlights,
   fypOpportunities,
-  partnerLogos,
   publications,
   researchDomains,
   researchProjects,
@@ -89,7 +88,6 @@ import {
 } from "../../data/academicSite";
 import { defaultFypProjects } from "../../data/fypProjects";
 import { useAcademicData } from "../../context/AcademicDataContext";
-import { useTheme } from "../../context/ThemeContext";
 import styles from "./AcademicSite.module.css";
 
 function PageIntro({ eyebrow, title, lead, illustration = null, action = null }) {
@@ -114,12 +112,9 @@ function PageIntro({ eyebrow, title, lead, illustration = null, action = null })
 }
 
 export function AboutPage() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
   const { siteData } = useAcademicData();
   const labMilestonesData = siteData.labMilestones || labMilestones;
   const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
-  const partnerLogosData = siteData.partnerLogos || partnerLogos;
   const labImpactStatsData = (siteData.labImpactStats || labImpactStats).slice(0, 4);
   const labPillarsData = siteData.labPillars || labPillars;
   const alumniPlacementsData = siteData.alumniPlacements || alumniPlacements;
@@ -383,43 +378,6 @@ export function AboutPage() {
               </div>
             )}
           </div>
-        </div>
-      </section>
-
-      {/* 5. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS (ABOVE FOOTER) */}
-      <section className={styles.partners} aria-label="Academic and research affiliations">
-        <p>Academic and Research Affiliations</p>
-        <div className={styles.partnerGrid}>
-          {partnerLogosData.map((partner) => {
-            const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
-            const partnerImg = isDark && partner.imageDark
-              ? partner.imageDark
-              : isDark && isNottingham
-              ? "/academic/nottingham-university-logo-dark.svg"
-              : !isDark && partner.imageLight
-              ? partner.imageLight
-              : !isDark && isNottingham
-              ? "/academic/nottingham-university-logo-light.svg"
-              : partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
-            return (
-              <figure key={partner.name}>
-                <a
-                  href={partner.href || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  title={partner.name}
-                >
-                  <Image
-                    src={partnerImg}
-                    alt={partner.name}
-                    width={200}
-                    height={60}
-                    style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
-                  />
-                </a>
-              </figure>
-            );
-          })}
         </div>
       </section>
     </AcademicSiteLayout>
@@ -1521,15 +1479,6 @@ const staticPgMap = {
   "Hafsa Butt": "/academic/hafsa-butt.png",
 };
 
-const staticPartnerMap = {
-  "University of Nottingham Ningbo China": "/academic/nottingham-university-logo.svg",
-  "University of Nottingham": "/academic/nottingham-university-logo.svg",
-  "COMSATS University Islamabad": "/academic/comsats-university-islamabad-logo.png",
-  "Tsinghua University": "/academic/tsinghua-university-logo.webp",
-  "University of Luxembourg (SnT)": "/academic/snt-university-luxembourg-logo.png",
-  "SES Satellites": "/academic/ses-logo.png",
-};
-
 const staticStudentMap = {
   "Ghulam Mujtaba": "/academic/students/ghulam-mujtaba.png",
   "Muhammad Waqar Ul Mulk": "/academic/students/muhammad-waqar-ul-mulk.png",
@@ -1538,21 +1487,19 @@ const staticStudentMap = {
 };
 
 const staticJuniorMap = {
+  "Mr. Zaheer Ahmad Gondal": "/academic/collaborators/zaheer-ahmad-gondal.jpg",
+  "Mr. Tahir Muhammad": "/academic/collaborators/tahir-muhammad.jpg",
+  "Mr. Muhammad Ali Hassan": "/academic/collaborators/ali-hassan.jpg",
   "Ms. Yella Mehroze": "/academic/collaborators/yella-mehroze.jpg",
   "Ms. Rabail Asghar": "/academic/collaborators/rabail-asghar.jpg",
-  "Mr. Tahir Muhammad": "/academic/collaborators/tahir-muhammad.jpg",
-  "Mr. Zaheer Ahmad Gondal": "/academic/collaborators/zaheer-ahmad-gondal.jpg",
 };
 
 export function TeamPage() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
   const { siteData } = useAcademicData();
   const coInvestigatorsData = siteData.coInvestigators || coInvestigators;
   const juniorCollaboratorsData = siteData.juniorCollaborators || juniorCollaborators;
   const pgResearchersData = siteData.pgResearchers || pgResearchers;
   const alumniPlacementsData = siteData.alumniPlacements || alumniPlacements;
-  const partnerLogosData = siteData.partnerLogos || partnerLogos;
   const supervisedProjectsData = siteData.supervisedProjects || supervisedProjects;
   const fypProjectsData = siteData.fypProjects || defaultFypProjects;
 
@@ -2127,43 +2074,6 @@ export function TeamPage() {
           </div>
         </section>
       )}
-
-      {/* 4. GLOBAL INSTITUTIONAL & UNIVERSITY PARTNERS */}
-      <section className={styles.partners} aria-label="Academic and research affiliations" style={{ marginTop: "48px", borderRadius: "18px" }}>
-        <p>Academic & Research Partner Universities</p>
-        <div className={styles.partnerGrid}>
-          {partnerLogosData.map((partner) => {
-            const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
-            const partnerImg = isDark && partner.imageDark
-              ? partner.imageDark
-              : isDark && isNottingham
-              ? "/academic/nottingham-university-logo-dark.svg"
-              : !isDark && partner.imageLight
-              ? partner.imageLight
-              : !isDark && isNottingham
-              ? "/academic/nottingham-university-logo-light.svg"
-              : partner.image || staticPartnerMap[partner.name] || "/academic/comsats-university-islamabad-logo.png";
-            return (
-              <figure key={partner.name}>
-                <a
-                  href={partner.href || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  title={partner.name}
-                >
-                  <Image
-                    src={partnerImg}
-                    alt={partner.name}
-                    width={200}
-                    height={60}
-                    style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
-                  />
-                </a>
-              </figure>
-            );
-          })}
-        </div>
-      </section>
     </AcademicSiteLayout>
   );
 }

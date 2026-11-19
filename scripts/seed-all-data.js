@@ -307,7 +307,7 @@ async function main() {
       });
     });
 
-    // 5.1b Junior Research Collaborators (4)
+    // 5.1b Junior Research Collaborators (5)
     (academicSite.juniorCollaborators || []).forEach((jc, idx) => {
       memberList.push({
         name: jc.name,

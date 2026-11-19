@@ -21,14 +21,12 @@ import NumberTicker from "./NumberTicker";
 import Magnetic from "../AnimatedUI/Magnetic";
 import {
   academicProfile,
-  partnerLogos,
   publications,
   researchDomains,
   supervisedProjects,
 } from "../../data/academicSite";
 import { defaultFypProjects } from "../../data/fypProjects";
 import { useAcademicData } from "../../context/AcademicDataContext";
-import { useTheme } from "../../context/ThemeContext";
 import {
   datasetSchema,
   faqSchema,
@@ -46,10 +44,6 @@ const HERO_CREDENTIAL_PILLS = [
     period: "2026 — Present",
     org: "University of Nottingham Ningbo China",
     isCurrent: true,
-    logoDark: "/academic/emblems/nottingham-shield.svg",
-    logoLight: "/academic/emblems/nottingham-shield.svg",
-    logoDefault: "/academic/emblems/nottingham-shield.svg",
-    logoAlt: "University of Nottingham Castle Shield Crest",
   },
   {
     id: "comsats",
@@ -57,10 +51,6 @@ const HERO_CREDENTIAL_PILLS = [
     fullTitle: "Assistant Professor & Program Incharge (Software Engineering), COMSATS University Islamabad, Lahore Campus",
     period: "2023 — 2026",
     org: "COMSATS University Islamabad, Lahore Campus",
-    logoDark: "/academic/emblems/comsats-crest.png",
-    logoLight: "/academic/emblems/comsats-crest.png",
-    logoDefault: "/academic/emblems/comsats-crest.png",
-    logoAlt: "COMSATS University Islamabad Circular Seal",
   },
   {
     id: "snt",
@@ -68,10 +58,6 @@ const HERO_CREDENTIAL_PILLS = [
     fullTitle: "Postdoctoral Research Associate, Interdisciplinary Centre for Security, Reliability and Trust (SnT), University of Luxembourg",
     period: "2021 — 2023",
     org: "University of Luxembourg (SnT)",
-    logoDark: "/academic/emblems/snt-emblem.png",
-    logoLight: "/academic/emblems/snt-emblem.png",
-    logoDefault: "/academic/emblems/snt-emblem.png",
-    logoAlt: "SnT University of Luxembourg Emblem",
   },
   {
     id: "ses",
@@ -79,10 +65,6 @@ const HERO_CREDENTIAL_PILLS = [
     fullTitle: "Visiting Researcher, SES Satellites Luxembourg — Adaptive Resource Control project",
     period: "2021 — 2023",
     org: "SES Satellites Luxembourg",
-    logoDark: "/academic/emblems/ses-icon.svg",
-    logoLight: "/academic/emblems/ses-icon.svg",
-    logoDefault: "/academic/emblems/ses-icon.svg",
-    logoAlt: "SES Satellites Orbital Symbol Icon",
   },
   {
     id: "tsinghua",
@@ -90,10 +72,6 @@ const HERO_CREDENTIAL_PILLS = [
     fullTitle: "PhD in Software Engineering, School of Software, Tsinghua University",
     period: "2015 — 2020",
     org: "Tsinghua University",
-    logoDark: "/academic/emblems/tsinghua-seal.png",
-    logoLight: "/academic/emblems/tsinghua-seal.png",
-    logoDefault: "/academic/emblems/tsinghua-seal.png",
-    logoAlt: "Tsinghua University Circular Seal Emblem",
   },
 ];
 
@@ -142,13 +120,10 @@ const domainIllustrationMap = {
 };
 
 export default function AcademicHome() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
   const { siteData } = useAcademicData();
   const academicProfileData = siteData.academicProfile || academicProfile;
   const researchDomainsData = siteData.researchDomains || researchDomains;
   const publicationsData = siteData.publications || publications;
-  const partnerLogosData = siteData.partnerLogos || partnerLogos;
   const supervisedProjectsData = siteData.supervisedProjects || supervisedProjects;
   const fypProjectsData = siteData.fypProjects || defaultFypProjects;
   const labImpactStatsData = (siteData.labImpactStats?.length ? siteData.labImpactStats : impactStats).slice(0, 4);
@@ -243,38 +218,22 @@ export default function AcademicHome() {
               Directed by Dr. Junaid Akram at University of Nottingham Ningbo China, the SSA Lab pioneers automated vulnerability detection, LLM security, and large-scale code analysis.
             </p>
             <ul className={styles.credentialChips} aria-label="Academic Affiliations & Career Timeline">
-              {HERO_CREDENTIAL_PILLS.map((pill) => {
-                const logoSrc =
-                  isDark && pill.logoDark
-                    ? pill.logoDark
-                    : !isDark && pill.logoLight
-                    ? pill.logoLight
-                    : pill.logoDefault;
-                return (
-                  <li
-                    key={pill.id}
-                    className={`${styles.credentialChip} ${pill.isCurrent ? styles.credentialChipCurrent : ""}`}
-                    title={`${pill.fullTitle} (${pill.period})`}
-                  >
-                    <span className={styles.credentialChipLogoWrap} aria-hidden="true">
-                      <img
-                        src={logoSrc}
-                        alt={pill.logoAlt}
-                        className={styles.credentialChipLogo}
-                        loading="eager"
-                      />
-                    </span>
-                    <span className={styles.credentialChipText}>{pill.label}</span>
-                    {pill.isCurrent && (
-                      <span
-                        className={styles.credentialChipLiveDot}
-                        title="Current active appointment"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </li>
-                );
-              })}
+              {HERO_CREDENTIAL_PILLS.map((pill) => (
+                <li
+                  key={pill.id}
+                  className={`${styles.credentialChip} ${pill.isCurrent ? styles.credentialChipCurrent : ""}`}
+                  title={`${pill.fullTitle} (${pill.period})`}
+                >
+                  <span className={styles.credentialChipText}>{pill.label}</span>
+                  {pill.isCurrent && (
+                    <span
+                      className={styles.credentialChipLiveDot}
+                      title="Current active appointment"
+                      aria-hidden="true"
+                    />
+                  )}
+                </li>
+              ))}
             </ul>
 
             <div className={styles.actions}>
@@ -554,43 +513,6 @@ export default function AcademicHome() {
           <Link href="/contact" className={styles.primaryButton}>
             Contact Us <ArrowRight size={17} />
           </Link>
-        </div>
-      </section>
-
-      {/* Academic & Industrial Partners Network Showcase */}
-      <section className={styles.partners} aria-label="Academic and research affiliations">
-        <p>Academic and Research Affiliations</p>
-        <div className={styles.partnerGrid}>
-          {partnerLogosData.map((partner) => {
-            const isNottingham = partner.name?.toLowerCase().includes("nottingham") || partner.image?.toLowerCase().includes("nottingham");
-            const partnerImg = isDark && partner.imageDark
-              ? partner.imageDark
-              : isDark && isNottingham
-              ? "/academic/nottingham-university-logo-dark.svg"
-              : !isDark && partner.imageLight
-              ? partner.imageLight
-              : !isDark && isNottingham
-              ? "/academic/nottingham-university-logo-light.svg"
-              : partner.image || "/academic/comsats-university-islamabad-logo.png";
-            return (
-              <figure key={partner.name}>
-                <a
-                  href={partner.href || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  title={partner.name}
-                >
-                  <Image
-                    src={partnerImg}
-                    alt={partner.name}
-                    width={200}
-                    height={60}
-                    style={{ objectFit: "contain", maxHeight: "46px", width: "auto" }}
-                  />
-                </a>
-              </figure>
-            );
-          })}
         </div>
       </section>
     </AcademicSiteLayout>
