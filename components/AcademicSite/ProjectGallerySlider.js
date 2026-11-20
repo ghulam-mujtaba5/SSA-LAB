@@ -17,6 +17,7 @@ const defaultDimensions = {
   "/academic/fyp/apneaguard-mobile-interface.webp": [720, 1472],
   "/academic/fyp/apneaguard-poster.webp": [730, 1718],
   "/academic/fyp/apneaguard-telemetry-monitor.webp": [1024, 559],
+  "/academic/fyp/code-clone-architecture.webp": [1163, 372],
   "/academic/fyp/code-clone-ast-similarity.webp": [1262, 1346],
   "/academic/fyp/code-clone-semantic-benchmark.webp": [1682, 1822],
   "/academic/fyp/code-clone-token-pipeline.webp": [1024, 768],
@@ -33,6 +34,7 @@ const defaultDimensions = {
   "/academic/fyp/llm-patch-cve-repair-benchmarks.webp": [1019, 818],
   "/academic/fyp/llm-patch-docker-validation.webp": [1263, 1280],
   "/academic/fyp/llm-patch-prompt-architecture.webp": [1260, 428],
+  "/academic/fyp/llm-patch-system-architecture.webp": [1260, 428],
   "/academic/fyp/megilance-admin-command-center.png": [1909, 891],
   "/academic/fyp/megilance-ai-features.png": [2520, 1080],
   "/academic/fyp/megilance-ai-fraud-analysis.png": [980, 1024],
@@ -43,7 +45,10 @@ const defaultDimensions = {
   "/academic/fyp/megilance-landing-page.png": [1075, 876],
   "/academic/fyp/megilance-system-architecture.png": [974, 1713],
   "/academic/fyp/multisense-acoustic-biomarkers.webp": [1536, 1024],
+  "/academic/fyp/multisense-model-training.webp": [1536, 1024],
+  "/academic/fyp/multisense-platform-architecture.webp": [1536, 1024],
   "/academic/fyp/multisense-screening-dashboard.webp": [1672, 941],
+  "/academic/fyp/multisense-screening-pipeline.webp": [1536, 1024],
   "/academic/fyp/multisense-video-landmark-attention.webp": [1536, 1024],
   "/academic/fyp/robust-android-malware-detector-poster.webp": [4800, 12000],
   "/academic/fyp/robust-android-malware-risk-analysis.webp": [1502, 1548],
@@ -78,8 +83,9 @@ function getDimensions(src) {
 
 function getAssetUrl(url) {
   if (!url) return "";
-  if (url.startsWith("/academic/fyp/") && !url.includes("?")) {
-    return `${url}?v=2`;
+  const clean = url.split("?")[0];
+  if (clean.startsWith("/academic/fyp/")) {
+    return `${clean}?v=3`;
   }
   return url;
 }
