@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: path.join(__dirname, "..", ".env.local") });
 
 async function seedFypProjects() {
   if (!process.env.MONGODB_URI) {

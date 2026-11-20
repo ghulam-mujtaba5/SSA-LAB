@@ -20,22 +20,29 @@ const dimensions = {
   "/academic/fyp/apneaguard-mobile-interface.webp": [720, 1472],
   "/academic/fyp/apneaguard-poster.webp": [730, 1718],
   "/academic/fyp/apneaguard-telemetry-monitor.webp": [1024, 559],
-  "/academic/fyp/code-clone-ast-similarity.webp": [1262, 1346],
-  "/academic/fyp/code-clone-semantic-benchmark.webp": [1682, 1822],
-  "/academic/fyp/code-clone-token-pipeline.webp": [1024, 768],
+  "/academic/fyp/code-clone-architecture.webp": [1163, 372],
+  "/academic/fyp/code-clone-ast-similarity.webp": [1400, 800],
+  "/academic/fyp/code-clone-semantic-benchmark.webp": [1400, 800],
+  "/academic/fyp/code-clone-token-pipeline.webp": [1400, 800],
+  "/academic/fyp/code-smell-analysis-dashboard.webp": [1268, 664],
   "/academic/fyp/code-smell-analysis-pipeline.webp": [1920, 909],
+  "/academic/fyp/code-smell-code-inspector.webp": [1268, 659],
+  "/academic/fyp/code-smell-dataset-pipeline.webp": [1271, 620],
   "/academic/fyp/code-smell-detection-poster.webp": [1312, 3264],
   "/academic/fyp/code-smell-evaluation-dashboard.webp": [1920, 909],
   "/academic/fyp/code-smell-refactoring-engine.webp": [1920, 909],
+  "/academic/fyp/cric-craft-ball-analysis.webp": [1867, 836],
+  "/academic/fyp/cric-craft-match-scorecard.webp": [1901, 853],
   "/academic/fyp/cric-craft-player-biomechanics.webp": [1880, 906],
   "/academic/fyp/cric-craft-video-annotation.webp": [1919, 782],
   "/academic/fyp/cric-craft-vision-analytics.webp": [3840, 2160],
-  "/academic/fyp/feature-envy-ast-refactoring-graph.webp": [1166, 1776],
-  "/academic/fyp/feature-envy-detection-matrix.webp": [1492, 1660],
+  "/academic/fyp/feature-envy-ast-refactoring-graph.webp": [1400, 800],
+  "/academic/fyp/feature-envy-detection-matrix.webp": [1400, 800],
   "/academic/fyp/feature-envy-gnn-architecture.webp": [1336, 530],
   "/academic/fyp/llm-patch-cve-repair-benchmarks.webp": [1019, 818],
-  "/academic/fyp/llm-patch-docker-validation.webp": [1263, 1280],
-  "/academic/fyp/llm-patch-prompt-architecture.webp": [1260, 428],
+  "/academic/fyp/llm-patch-docker-validation.webp": [1019, 818],
+  "/academic/fyp/llm-patch-prompt-architecture.webp": [901, 782],
+  "/academic/fyp/llm-patch-system-architecture.webp": [901, 782],
   "/academic/fyp/megilance-admin-command-center.png": [1909, 891],
   "/academic/fyp/megilance-ai-features.png": [2520, 1080],
   "/academic/fyp/megilance-ai-fraud-analysis.png": [980, 1024],
@@ -46,7 +53,10 @@ const dimensions = {
   "/academic/fyp/megilance-landing-page.png": [1075, 876],
   "/academic/fyp/megilance-system-architecture.png": [974, 1713],
   "/academic/fyp/multisense-acoustic-biomarkers.webp": [1536, 1024],
+  "/academic/fyp/multisense-model-training.webp": [1159, 690],
+  "/academic/fyp/multisense-platform-architecture.webp": [1220, 625],
   "/academic/fyp/multisense-screening-dashboard.webp": [1672, 941],
+  "/academic/fyp/multisense-screening-pipeline.webp": [1536, 1024],
   "/academic/fyp/multisense-video-landmark-attention.webp": [1536, 1024],
   "/academic/fyp/robust-android-malware-detector-poster.webp": [4800, 12000],
   "/academic/fyp/robust-android-malware-risk-analysis.webp": [1502, 1548],
@@ -54,6 +64,7 @@ const dimensions = {
   "/academic/fyp/robust-android-malware-uploaded-apps.webp": [1538, 1166],
   "/academic/fyp/source-code-structure-poster.webp": [3000, 7500],
   "/academic/fyp/source-structure-architecture.webp": [3840, 2160],
+  "/academic/fyp/source-structure-cfg-graph.webp": [1168, 622],
   "/academic/fyp/source-structure-component-map.webp": [1724, 909],
   "/academic/fyp/source-structure-dependency-graph.webp": [1744, 906],
   "/academic/fyp/test-data-gen-architecture.webp": [2048, 1152],
@@ -63,8 +74,8 @@ const dimensions = {
   "/academic/fyp/vbs-benchmark-dashboard.webp": [1920, 909],
   "/academic/fyp/vbs-cve-evaluation.webp": [1920, 909],
   "/academic/fyp/vbs-patch-pipeline.webp": [1920, 1080],
-  "/academic/fyp/vuln-detect-ast-prompt-tuning.webp": [1224, 1698],
-  "/academic/fyp/vuln-detect-benchmark-evaluation.webp": [1335, 1484],
+  "/academic/fyp/vuln-detect-ast-prompt-tuning.webp": [1400, 800],
+  "/academic/fyp/vuln-detect-benchmark-evaluation.webp": [1400, 800],
   "/academic/fyp/vuln-detect-llm-pipeline.webp": [1045, 669],
   "/academic/fyp/vulnerability-patch-recommendation-poster.webp": [2304, 5760],
   "/academic/fyp/xss-sniper-attack-analysis.webp": [1917, 943],
@@ -310,22 +321,31 @@ export default function AcademicFypCaseStudy({ projects = [] }) {
         </div>
       ) : null}
 
-      {/* Implementation Screenshots (Single-Box Interactive Slideshow - excludes redundant cover poster) */}
-      {!isOpportunity && featured.gallery && featured.gallery.filter((g) => (g.url || "").split("?")[0] !== (featured.coverImage || "").split("?")[0]).length > 0 ? (
-        <div className={styles.evidenceSection}>
-          <div className={styles.evidenceHeading}>
-            <div>
-              <p className={styles.eyebrow}>Implementation evidence & interfaces</p>
-              <h3>Interactive Visual Showcase</h3>
+      {/* Implementation Screenshots (Single-Box Interactive Slideshow - excludes redundant cover poster when alternatives exist) */}
+      {(() => {
+        if (isOpportunity || !featured.gallery || !featured.gallery.length) return null;
+        const filteredGallery = featured.gallery.filter(
+          (g) => (g.url || "").split("?")[0] !== (featured.coverImage || "").split("?")[0]
+        );
+        const displayGallery = filteredGallery.length > 0 ? filteredGallery : featured.gallery;
+        if (!displayGallery.length) return null;
+
+        return (
+          <div className={styles.evidenceSection}>
+            <div className={styles.evidenceHeading}>
+              <div>
+                <p className={styles.eyebrow}>Implementation evidence & interfaces</p>
+                <h3>Interactive Visual Showcase</h3>
+              </div>
+              <p>Use slideshow controls, arrows, or thumbnails to explore architecture and UI layers.</p>
             </div>
-            <p>Use slideshow controls, arrows, or thumbnails to explore architecture and UI layers.</p>
+            <ProjectGallerySlider
+              gallery={displayGallery}
+              projectTitle={featured.title}
+            />
           </div>
-          <ProjectGallerySlider
-            gallery={featured.gallery.filter((g) => (g.url || "").split("?")[0] !== (featured.coverImage || "").split("?")[0])}
-            projectTitle={featured.title}
-          />
-        </div>
-      ) : null}
+        );
+      })()}
 
       {/* Project Objectives & Outcomes Grid */}
       {(featured.objectives && featured.objectives.length > 0) || (!isOpportunity && featured.outcome) ? (

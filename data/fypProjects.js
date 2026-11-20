@@ -189,6 +189,16 @@ export const defaultFypProjects = [
         "url": "/academic/fyp/vuln-detect-llm-pipeline.webp?v=3",
         "caption": "Source Code Vulnerability Detection & AI Model Inference Pipeline Architecture",
         "order": 1
+      },
+      {
+        "url": "/academic/fyp/vuln-detect-ast-prompt-tuning.webp?v=3",
+        "caption": "AST-Guided Prompt Construction & Sliced Code Context Assembly",
+        "order": 2
+      },
+      {
+        "url": "/academic/fyp/vuln-detect-benchmark-evaluation.webp?v=3",
+        "caption": "Cross-Language CVE Vulnerability Detection Benchmark & Precision Matrix",
+        "order": 3
       }
     ],
     "published": true,
@@ -278,8 +288,23 @@ export const defaultFypProjects = [
     "gallery": [
       {
         "url": "/academic/fyp/code-clone-architecture.webp?v=3",
-        "caption": "Token-Based Semantic Code Clone Detection & LLM Embedding Pipeline Architecture",
+        "caption": "Token-Based Semantic Code Clone Detection System Architecture Overview",
         "order": 1
+      },
+      {
+        "url": "/academic/fyp/code-clone-token-pipeline.webp?v=3",
+        "caption": "Token-Based Lexical & Semantic Code Clone Detection Pipeline",
+        "order": 2
+      },
+      {
+        "url": "/academic/fyp/code-clone-ast-similarity.webp?v=3",
+        "caption": "Abstract Syntax Tree (AST) Subtree Isomorphism & Vector Embedding",
+        "order": 3
+      },
+      {
+        "url": "/academic/fyp/code-clone-semantic-benchmark.webp?v=3",
+        "caption": "BigCloneBench Evaluation & Semantic Type-4 Clone Classification Matrix",
+        "order": 4
       }
     ],
     "published": true,
@@ -372,9 +397,19 @@ export const defaultFypProjects = [
         "order": 1
       },
       {
+        "url": "/academic/fyp/llm-patch-prompt-architecture.webp?v=3",
+        "caption": "Few-Shot Prompt Engineering & AST-Constrained Patch Generation Architecture",
+        "order": 2
+      },
+      {
+        "url": "/academic/fyp/llm-patch-docker-validation.webp?v=3",
+        "caption": "Containerized Automated Test Execution & Patch Verification Harness",
+        "order": 3
+      },
+      {
         "url": "/academic/fyp/llm-patch-cve-repair-benchmarks.webp?v=3",
         "caption": "LLM-Guided Remediation & Candidate Patch Generation Workflow",
-        "order": 2
+        "order": 4
       }
     ],
     "published": true,
@@ -461,6 +496,16 @@ export const defaultFypProjects = [
         "url": "/academic/fyp/feature-envy-gnn-architecture.webp?v=3",
         "caption": "Feature Envy Detection, AST/CFG Feature Extraction & Refactoring Workflow",
         "order": 1
+      },
+      {
+        "url": "/academic/fyp/feature-envy-ast-refactoring-graph.webp?v=3",
+        "caption": "Class Dependency Call-Graph & Method-Level Distance Heatmap",
+        "order": 2
+      },
+      {
+        "url": "/academic/fyp/feature-envy-detection-matrix.webp?v=3",
+        "caption": "Automated Move Method Refactoring Recommendation & Quality Verification Matrix",
+        "order": 3
       }
     ],
     "published": true,
