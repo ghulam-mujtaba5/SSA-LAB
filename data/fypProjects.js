@@ -59,8 +59,8 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Vulnerability Detection", "Large Language Models", "Source Code Security", "AST Parsing"],
     technologies: ["Python", "PyTorch", "Hugging Face Transformers", "Tree-sitter", "CodeBERT", "LLaMA", "Docker"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp?v=3",
-    coverAlt: "Software Vulnerability Detection using LLM Model Poster",
+    coverImage: "/academic/fyp/vuln-detect-llm-pipeline.webp?v=3",
+    coverAlt: "Software Vulnerability Detection using LLM Model Architecture",
     problem: "Traditional static application security testing (SAST) tools rely heavily on heuristic rule matching and abstract syntax tree patterns, yielding unacceptably high false-positive rates exceeding 40% and missing complex multi-line semantic vulnerabilities. While deep learning models offer promise, they frequently struggle with long-range code dependencies, syntax boundary preservation, and token budget constraints. Addressing critical vulnerabilities such as buffer overflows (CWE-120), SQL injection (CWE-89), and improper input validation (CWE-20) requires an intelligent system capable of interpreting full syntactic context alongside developer intent.",
     solution: "This research project develops an end-to-end vulnerability detection pipeline that fuses Abstract Syntax Tree (AST) serialization with fine-tuned Large Language Models (LLMs). Using Tree-sitter, source code is parsed into normalized syntax trees and function-level control flow graphs. We design an AST-guided prompt engineering and tokenization strategy that injects structural code invariants directly into Transformer attention heads. The model is fine-tuned on benchmark corpora including Devign, Big-Vul, and curated real-world CVEs, optimizing for precision and low false alarm rates across C/C++, Java, and Python source repositories.",
     architecture: [
@@ -85,12 +85,7 @@ export const defaultFypProjects = [
       "High GPU inference latency when analyzing massive monolithic codebases exceeding 100k lines of code simultaneously.",
       "Sensitivity to token truncation on functions extending beyond standard model context windows."
     ],
-    gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp?v=3", caption: "Software Vulnerability Detection Using LLM Model Research Poster", order: 1 },
-      { url: "/academic/fyp/vuln-detect-llm-pipeline.webp?v=3", caption: "LLM-Guided Source Code Vulnerability Detection Pipeline", order: 2 },
-      { url: "/academic/fyp/vuln-detect-ast-prompt-tuning.webp?v=3", caption: "AST-Guided Prompt Construction & Sliced Code Context Assembly", order: 3 },
-      { url: "/academic/fyp/vuln-detect-benchmark-evaluation.webp?v=3", caption: "Cross-Language CVE Vulnerability Detection Benchmark & Precision Matrix", order: 4 }
-    ],
+    gallery: [],
     published: true,
     featured: true,
     displayOrder: 2
@@ -141,12 +136,7 @@ export const defaultFypProjects = [
     limitations: [
       "Lower recall on complex Type-4 clones involving algorithmic transformations with zero lexical overlap."
     ],
-    gallery: [
-      { url: "/academic/fyp/code-clone-architecture.webp?v=3", caption: "Token-Based Code Clone Architecture & Inverted Search Engine", order: 1 },
-      { url: "/academic/fyp/code-clone-token-pipeline.webp?v=3", caption: "Token-Based Lexical & Semantic Code Clone Detection Pipeline", order: 2 },
-      { url: "/academic/fyp/code-clone-ast-similarity.webp?v=3", caption: "Abstract Syntax Tree (AST) Subtree Isomorphism & Vector Embedding", order: 3 },
-      { url: "/academic/fyp/code-clone-semantic-benchmark.webp?v=3", caption: "BigCloneBench Evaluation & Semantic Type-4 Clone Classification Matrix", order: 4 }
-    ],
+    gallery: [],
     published: true,
     featured: true,
     displayOrder: 3
@@ -172,8 +162,8 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Vulnerability Patching", "Program Repair", "LLM Optimization", "Docker Sandboxing"],
     technologies: ["Python", "LLM Fine-tuning", "Git Diff Parser", "Docker", "PyTorch", "FastAPI"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp?v=3",
-    coverAlt: "LLM-based Software Vulnerability Patch Optimizer",
+    coverImage: "/academic/fyp/llm-patch-system-architecture.webp?v=3",
+    coverAlt: "LLM-based Software Vulnerability Patch Optimizer Architecture",
     problem: "When security vulnerabilities are discovered in production software, manual patch creation is slow, error-prone, and requires deep security domain expertise. Automated Program Repair (APR) tools frequently generate plausibly compilable patches that nonetheless introduce regression bugs or fail to completely neutralize the security defect. Furthermore, existing patch generation systems lack automated verification pipelines to test patch correctness in secure, sandboxed execution environments before production deployment.",
     solution: "This project builds an automated vulnerability patch synthesis and optimization engine that couples Large Language Models with automated regression verification. When supplied with a vulnerable function and its corresponding CVE description, the optimizer retrieves relevant security patch patterns from a historical knowledge base using Retrieval-Augmented Generation (RAG). The LLM generates candidate patches that preserve original code invariants. Each candidate is automatically compiled and evaluated inside isolated Docker containers against targeted security test vectors and regression test suites.",
     architecture: [
@@ -197,12 +187,7 @@ export const defaultFypProjects = [
     limitations: [
       "Limited to vulnerabilities with existing automated test suites capable of validating patch efficacy."
     ],
-    gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp?v=3", caption: "LLM Vulnerability Patch Recommendation Poster", order: 1 },
-      { url: "/academic/fyp/llm-patch-prompt-architecture.webp?v=3", caption: "Few-Shot Prompt Engineering & AST-Constrained Patch Generation Architecture", order: 2 },
-      { url: "/academic/fyp/llm-patch-docker-validation.webp?v=3", caption: "Containerized Automated Test Execution & Patch Verification Harness", order: 3 },
-      { url: "/academic/fyp/llm-patch-cve-repair-benchmarks.webp?v=3", caption: "Multi-Benchmark CVE Repair Precision & Semantic Plausibility Evaluation", order: 4 }
-    ],
+    gallery: [],
     published: true,
     featured: true,
     displayOrder: 4
@@ -227,8 +212,8 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Feature Envy Detection", "Graph Neural Networks", "Code Refactoring", "Visual Analytics"],
     technologies: ["Python", "PyTorch Geometric", "AST Parsing", "React", "D3.js", "Tree-sitter"],
-    coverImage: "/academic/fyp/code-smell-detection-poster.webp?v=3",
-    coverAlt: "Feature Envy Detection and Refactoring System Poster",
+    coverImage: "/academic/fyp/feature-envy-gnn-architecture.webp?v=3",
+    coverAlt: "Feature Envy Detection and Refactoring System Architecture",
     problem: "Code smells such as Feature Envy—where a method accesses data or methods of another class more than its host class—severely degrade software modularity, increase coupling, and complicate long-term maintenance. Traditional metric-based detection rules (e.g., Access to Foreign Data and Locality of Data) produce excessive false positives because they fail to capture rich graph-level relationships between methods and attributes across complex object-oriented systems.",
     solution: "This project presents an intelligent code smell detection and automated refactoring suite powered by Graph Neural Networks (GNNs) and Program Dependence Graphs (PDGs). Source code is transformed into typed dependency graphs where nodes represent classes, methods, and fields, and edges represent call and access relationships. A Graph Convolutional Network (GCN) predicts Feature Envy instances with high confidence and automatically generates safe 'Move Method' refactoring suggestions. An interactive visual analytics dashboard visualizes the class coupling graph before and after refactoring.",
     architecture: [
@@ -252,12 +237,7 @@ export const defaultFypProjects = [
     limitations: [
       "Currently restricted to object-oriented architectures where methods have clear target candidate classes."
     ],
-    gallery: [
-      { url: "/academic/fyp/code-smell-detection-poster.webp?v=3", caption: "Feature Envy Detection & Automated Refactoring System Poster", order: 1 },
-      { url: "/academic/fyp/feature-envy-gnn-architecture.webp?v=3", caption: "Graph Neural Network (GNN) Feature Envy Detection Architecture", order: 2 },
-      { url: "/academic/fyp/feature-envy-ast-refactoring-graph.webp?v=3", caption: "Class Dependency Call-Graph & Method-Level Distance Heatmap", order: 3 },
-      { url: "/academic/fyp/feature-envy-detection-matrix.webp?v=3", caption: "Automated Move Method Refactoring Recommendation & Quality Verification Matrix", order: 4 }
-    ],
+    gallery: [],
     published: true,
     featured: true,
     displayOrder: 5
@@ -387,11 +367,9 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Medical Image AI", "Convolutional Neural Networks", "Cell Classification"],
     technologies: ["Python", "TensorFlow", "OpenCV", "Flask / React"],
-    coverImage: "/academic/fyp/ai-dermatologist-poster.webp?v=3",
-    coverAlt: "HemaAI Diagnostic Intelligence Poster",
-    gallery: [
-      { url: "/academic/fyp/ai-dermatologist-poster.webp?v=3", caption: "HemaAI Diagnostic Intelligence Poster", order: 1 }
-    ],
+    coverImage: null,
+    coverAlt: null,
+    gallery: [],
     published: true,
     featured: false,
     displayOrder: 8
@@ -469,12 +447,13 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["Computer Vision", "YOLO Object Tracking", "Sports Analytics"],
     technologies: ["Python", "OpenCV", "YOLOv8", "Streamlit"],
-    coverImage: "/academic/fyp/cric-craft-vision-analytics.webp?v=3",
-    coverAlt: "Cric-Craft Computer Vision Analytics Overview",
+    coverImage: "/academic/fyp/cric-craft-poster.webp?v=3",
+    coverAlt: "Cric-Craft Official Final Year Project Poster",
     gallery: [
-      { url: "/academic/fyp/cric-craft-vision-analytics.webp?v=3", caption: "Cric-Craft Computer Vision Pipeline & Automated Player Motion Tracking", order: 1 },
-      { url: "/academic/fyp/cric-craft-player-biomechanics.webp?v=3", caption: "Batting Stance Biomechanical Kinematics & Pose Estimation Matrix", order: 2 },
-      { url: "/academic/fyp/cric-craft-video-annotation.webp?v=3", caption: "Multi-Angle Match Footage Annotation & Stroke Execution Analysis", order: 3 }
+      { url: "/academic/fyp/cric-craft-poster.webp?v=3", caption: "Cric-Craft Official FYP Project Poster", order: 1 },
+      { url: "/academic/fyp/cric-craft-vision-analytics.webp?v=3", caption: "Cric-Craft Computer Vision Pipeline & Automated Player Motion Tracking", order: 2 },
+      { url: "/academic/fyp/cric-craft-player-biomechanics.webp?v=3", caption: "Batting Stance Biomechanical Kinematics & Pose Estimation Matrix", order: 3 },
+      { url: "/academic/fyp/cric-craft-video-annotation.webp?v=3", caption: "Multi-Angle Match Footage Annotation & Stroke Execution Analysis", order: 4 }
     ],
     published: true,
     featured: false,
@@ -532,8 +511,8 @@ export const defaultFypProjects = [
     supervisor: "Dr. Junaid Akram, PhD",
     specializations: ["CVE Management", "Vulnerability Benchmarking", "Security Dashboard", "CVSS Scoring"],
     technologies: ["Python", "Django", "PostgreSQL", "NVD API", "React"],
-    coverImage: "/academic/fyp/vulnerability-patch-recommendation-poster.webp?v=3",
-    coverAlt: "Vulnerability Management & Benchmarking System Poster",
+    coverImage: "/academic/fyp/vbs-poster.webp?v=3",
+    coverAlt: "Vulnerability Management & Benchmarking System (VBS) Poster",
     problem: "Modern software development teams grapple with thousands of reported Common Vulnerabilities and Exposures (CVEs) across third-party dependencies and internal codebases. Security teams lack unified platforms that can aggregate multi-source vulnerability feeds, compute realistic contextual exploitability scores, track patch remediation lifecycles, and benchmark tool detection efficacy against standard ground-truth corpora.",
     solution: "The Vulnerability Management & Benchmarking System (VBS) is an enterprise-grade academic platform that integrates with the National Vulnerability Database (NVD), GitHub Security Advisories, and CVE repositories. VBS normalizes vulnerability advisories, calculates Common Vulnerability Scoring System (CVSS v3.1) metrics alongside Exploit Prediction Scoring System (EPSS) probabilities, and tracks remediation SLAs across connected repositories with automated vulnerability benchmarking.",
     architecture: [
@@ -558,7 +537,7 @@ export const defaultFypProjects = [
       "Dependent on upstream availability and update latency of public CVE and NVD feeds."
     ],
     gallery: [
-      { url: "/academic/fyp/vulnerability-patch-recommendation-poster.webp?v=3", caption: "Vulnerability Management & Benchmarking System Poster", order: 1 },
+      { url: "/academic/fyp/vbs-poster.webp?v=3", caption: "Vulnerability Management & Benchmarking System (VBS) Official Poster", order: 1 },
       { url: "/academic/fyp/vbs-patch-pipeline.webp?v=3", caption: "Automated Vulnerability Management & Patch Recommendation Architecture", order: 2 },
       { url: "/academic/fyp/vbs-benchmark-dashboard.webp?v=3", caption: "CVE Vulnerability Benchmark Repository & Semantic Similarity Search", order: 3 },
       { url: "/academic/fyp/vbs-cve-evaluation.webp?v=3", caption: "Security Fix Validation & Automated Regression Evaluation Matrix", order: 4 }
