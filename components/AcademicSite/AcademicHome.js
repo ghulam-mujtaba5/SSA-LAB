@@ -255,7 +255,6 @@ export default function AcademicHome() {
           </div>
 
           <div className={styles.heroIllustrationContainer}>
-            <div className={styles.heroPortraitBackdropGlow} aria-hidden="true" />
             <AcademicImageLightbox
               src="/academic/junaid-akram-hero-transparent.webp"
               alt="Dr. Junaid Akram, PhD — Assistant Professor at University of Nottingham Ningbo China & Director of SSA Research Lab"
