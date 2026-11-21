@@ -37,7 +37,9 @@ async function handler(req, res) {
 
       if (category && category !== "all") {
         const cat = category.toLowerCase();
-        if (cat === "pg_researcher" || cat === "pg-researcher") {
+        if (cat === "junior" || cat === "junior_collaborator" || cat === "junior-collaborator" || cat === "junior-researcher" || cat === "junior_researcher") {
+          query.category = { $in: ["junior-collaborator", "junior_collaborator", "junior-researcher", "junior_researcher"] };
+        } else if (cat === "pg_researcher" || cat === "pg-researcher") {
           query.category = { $in: ["pg_researcher", "pg-researcher"] };
         } else if (cat === "co_investigator" || cat === "co-investigator" || cat === "faculty") {
           query.category = { $in: ["co_investigator", "co-investigator", "faculty"] };

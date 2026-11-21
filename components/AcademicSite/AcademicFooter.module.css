@@ -87,7 +87,7 @@
 .brand {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .brandBannerLink {
@@ -95,25 +95,26 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
+  transform-origin: left center;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .brandBannerLink:hover {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .brandBannerWrap {
   display: inline-flex;
   align-items: center;
-  height: 70px;
+  height: 84px;
   width: auto;
   position: relative;
 }
 
 .brandBannerWrap img {
-  height: 66px;
+  height: 80px;
   width: auto;
-  max-width: 280px;
+  max-width: 320px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 2px 10px rgba(34, 211, 238, 0.25));
@@ -122,6 +123,14 @@
 
 .brandBannerLink:hover .brandBannerWrap img {
   filter: drop-shadow(0 4px 18px rgba(56, 189, 248, 0.45));
+}
+
+:global([data-theme="light"]) .brandBannerWrap img {
+  filter: drop-shadow(0 2px 8px rgba(15, 23, 42, 0.08));
+}
+
+:global([data-theme="light"]) .brandBannerLink:hover .brandBannerWrap img {
+  filter: drop-shadow(0 4px 14px rgba(15, 23, 42, 0.12));
 }
 
 .bannerDark {
@@ -235,25 +244,6 @@
   max-width: 320px;
 }
 
-.metaRow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--academic-navy, #1e1b4b);
-  background: var(--academic-soft, #f8fafc);
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--academic-line, #e2e8f0);
-  width: fit-content;
-}
-
-:global([data-theme="dark"]) .metaRow {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--academic-ink, #f8fafc);
-  border-color: var(--academic-line, #1e293b);
-}
 
 /* Nav & Contact Columns */
 .col {
@@ -460,15 +450,22 @@
     grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
+  .brandBannerWrap {
+    height: 78px;
+  }
+  .brandBannerWrap img {
+    height: 74px;
+    max-width: 290px;
+  }
 }
 
 @media (max-width: 600px) {
   .brandBannerWrap {
-    height: 54px;
+    height: 68px;
   }
   .brandBannerWrap img {
-    height: 50px;
-    max-width: 215px;
+    height: 64px;
+    max-width: min(260px, 100%);
   }
   .content {
     grid-template-columns: 1fr;

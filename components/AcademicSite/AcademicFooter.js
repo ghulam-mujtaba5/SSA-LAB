@@ -79,16 +79,16 @@ export default function AcademicFooter() {
                 <Image
                   src="/academic/ssa-banner-dark.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={260}
-                  height={88}
+                  width={300}
+                  height={100}
                   className={styles.bannerDark}
                   itemProp="logo"
                 />
                 <Image
                   src="/academic/ssa-banner-light.png"
                   alt="SSA Research Lab - Software Security Assessment"
-                  width={260}
-                  height={88}
+                  width={300}
+                  height={100}
                   className={styles.bannerLight}
                   itemProp="logo"
                 />
@@ -99,9 +99,6 @@ export default function AcademicFooter() {
               testing, LLM-based program repair, and semantic code-clone intelligence
               at scale.
             </p>
-            <div className={styles.metaRow}>
-              <ShieldCheck size={15} /> HEC-Approved PhD Supervisor
-            </div>
           </div>
 
           {/* Column 2: Research Quick Links */}

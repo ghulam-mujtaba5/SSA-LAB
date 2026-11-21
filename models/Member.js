@@ -12,6 +12,8 @@ const MemberSchema = new mongoose.Schema(
         "co_investigator",
         "junior-collaborator",
         "junior_collaborator",
+        "junior-researcher",
+        "junior_researcher",
         "pg-researcher",
         "pg_researcher",
         "collaborator",

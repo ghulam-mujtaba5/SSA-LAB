@@ -1,7 +1,7 @@
 [
   {
     "loc": "/supervision/projects/automated-test-data-generation-for-the-arc-system",
-    "lastmod": "2026-08-22T06:15:16.846Z",
+    "lastmod": "2026-11-21T09:16:09.373Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -13,7 +13,7 @@
   },
   {
     "loc": "/supervision/projects/test-smell-detection-in-the-arc-system",
-    "lastmod": "2026-08-22T06:15:17.002Z",
+    "lastmod": "2026-11-21T09:16:09.564Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -25,7 +25,7 @@
   },
   {
     "loc": "/supervision/projects/log-based-test-case-slicing",
-    "lastmod": "2026-08-22T06:15:17.163Z",
+    "lastmod": "2026-11-21T09:16:09.788Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -37,7 +37,7 @@
   },
   {
     "loc": "/supervision/projects/obfuscated-code-detection-in-android-applications",
-    "lastmod": "2026-08-22T06:15:17.316Z",
+    "lastmod": "2026-11-21T09:16:10.006Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -49,7 +49,7 @@
   },
   {
     "loc": "/supervision/projects/sqvdt-source-code-vulnerability-detection",
-    "lastmod": "2026-08-22T06:15:17.466Z",
+    "lastmod": "2026-11-21T09:16:10.212Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -61,7 +61,7 @@
   },
   {
     "loc": "/supervision/projects/vcipr-vulnerability-detection-at-function-level",
-    "lastmod": "2026-08-22T06:15:17.620Z",
+    "lastmod": "2026-11-21T09:16:10.411Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -73,7 +73,7 @@
   },
   {
     "loc": "/supervision/projects/patch-analysis-and-vulnerability-research",
-    "lastmod": "2026-08-22T06:15:17.776Z",
+    "lastmod": "2026-11-21T09:16:10.629Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
@@ -85,13 +85,13 @@
   },
   {
     "loc": "/supervision/projects/droidsd-android-similarity-detection",
-    "lastmod": "2026-08-22T06:15:17.923Z",
+    "lastmod": "2026-11-21T09:16:10.843Z",
     "changefreq": "monthly",
     "priority": 0.8
   },
   {
     "loc": "/supervision/projects/ibfet-large-scale-code-clone-detection",
-    "lastmod": "2026-08-22T06:15:18.069Z",
+    "lastmod": "2026-11-21T09:16:11.037Z",
     "changefreq": "monthly",
     "priority": 0.8
   }

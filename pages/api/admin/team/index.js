@@ -13,7 +13,9 @@ export default async function handler(req, res) {
       const query = {};
       if (req.query.category && req.query.category !== 'all') {
         const cat = req.query.category;
-        if (cat === 'pg_researcher' || cat === 'pg-researcher') {
+        if (cat === 'junior' || cat === 'junior_collaborator' || cat === 'junior-collaborator' || cat === 'junior-researcher' || cat === 'junior_researcher') {
+          query.category = { $in: ['junior-collaborator', 'junior_collaborator', 'junior-researcher', 'junior_researcher'] };
+        } else if (cat === 'pg_researcher' || cat === 'pg-researcher') {
           query.category = { $in: ['pg_researcher', 'pg-researcher'] };
         } else if (cat === 'co_investigator' || cat === 'co-investigator' || cat === 'faculty') {
           query.category = { $in: ['co_investigator', 'co-investigator', 'faculty'] };

@@ -140,6 +140,7 @@ export default function TeamMemberForm({
           <div className={styles.field}>
             <label htmlFor="category">Personnel Category *</label>
             <select id="category" {...register('category')}>
+              <option value="junior-collaborator">Lecturer & Junior Research Collaborator (Lecturer)</option>
               <option value="pg_researcher">Postgraduate Researcher (MS/PhD)</option>
               <option value="co_investigator">Faculty / Co-Investigator</option>
               <option value="supervised-project">Supervised Thesis / Project</option>
@@ -158,9 +159,22 @@ export default function TeamMemberForm({
             <input
               id="role"
               type="text"
-              placeholder="e.g. PhD Scholar / Assistant Professor / Research Assistant"
+              list="role-suggestions"
+              placeholder="e.g. Lecturer & Junior Research Collaborator"
               {...register('role')}
             />
+            <datalist id="role-suggestions">
+              <option value="Lecturer & Junior Research Collaborator" />
+              <option value="Lecturer (PhD Scholar)" />
+              <option value="Lecturer" />
+              <option value="Lab Director & Principal Investigator" />
+              <option value="Senior Co-Investigator & International Collaborator" />
+              <option value="Co-Investigator & Academic Partner" />
+              <option value="Academic Mentor & Research Collaborator" />
+              <option value="Postgraduate Researcher" />
+              <option value="Supervised Student" />
+              <option value="Alumnus" />
+            </datalist>
           </div>
 
           <div className={styles.field}>

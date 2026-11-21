@@ -66,6 +66,10 @@ describe("Milestone 2 API Validations & Endpoint Unit Tests", () => {
   describe("Harmonized Team Member Category Validation", () => {
     test("accepts both hyphenated and underscore category representations", () => {
       const categories = [
+        "junior-collaborator",
+        "junior_collaborator",
+        "junior-researcher",
+        "junior_researcher",
         "pg-researcher",
         "pg_researcher",
         "co-investigator",

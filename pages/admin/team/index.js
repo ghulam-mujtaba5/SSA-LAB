@@ -130,6 +130,11 @@ export default function TeamAdminPage() {
 
   const getCategoryLabel = (cat) => {
     switch (cat) {
+      case 'junior-collaborator':
+      case 'junior_collaborator':
+      case 'junior-researcher':
+      case 'junior_researcher':
+        return 'Junior Researcher';
       case 'pg-researcher':
       case 'pg_researcher':
         return 'PG Researcher';
@@ -163,7 +168,13 @@ export default function TeamAdminPage() {
     const cat = m.category?.toLowerCase();
     let matchesCat = true;
 
-    if (selectedCategory === 'pg') {
+    if (selectedCategory === 'junior') {
+      matchesCat =
+        cat === 'junior-collaborator' ||
+        cat === 'junior_collaborator' ||
+        cat === 'junior-researcher' ||
+        cat === 'junior_researcher';
+    } else if (selectedCategory === 'pg') {
       matchesCat = cat === 'pg-researcher' || cat === 'pg_researcher';
     } else if (selectedCategory === 'faculty') {
       matchesCat = cat === 'co-investigator' || cat === 'co_investigator' || cat === 'faculty';
@@ -190,7 +201,7 @@ export default function TeamAdminPage() {
             <p>Academic CMS</p>
             <h1>Team & Personnel</h1>
             <span>
-              Manage postgraduate researchers, faculty co-investigators, supervised theses, alumni
+              Manage junior researchers, postgraduate researchers, faculty co-investigators, supervised theses, alumni
               placements, and international collaborators.
             </span>
           </div>
@@ -226,6 +237,7 @@ export default function TeamAdminPage() {
         <div className={styles.filterTabs}>
           {[
             { id: 'all', label: 'All Personnel' },
+            { id: 'junior', label: 'Junior Researchers' },
             { id: 'pg', label: 'PG Researchers' },
             { id: 'faculty', label: 'Faculty / Co-Investigators' },
             { id: 'theses', label: 'Supervised Theses' },

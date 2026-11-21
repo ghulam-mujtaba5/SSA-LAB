@@ -31,7 +31,6 @@ import {
   Upload,
   X,
   Quote,
-  HelpCircle,
 } from "lucide-react";
 import AcademicSiteLayout from "./AcademicSiteLayout";
 import {
@@ -1488,6 +1487,7 @@ const staticStudentMap = {
 
 const staticJuniorMap = {
   "Mr. Zaheer Ahmad Gondal": "/academic/collaborators/zaheer-ahmad-gondal.jpg",
+  "Mr. Muhammad Nasir": "/academic/collaborators/muhammad-nasir.jpg",
   "Mr. Tahir Muhammad": "/academic/collaborators/tahir-muhammad.jpg",
   "Mr. Muhammad Ali Hassan": "/academic/collaborators/ali-hassan.jpg",
   "Ms. Yella Mehroze": "/academic/collaborators/yella-mehroze.jpg",
@@ -2332,44 +2332,6 @@ export function ContactPage() {
     }
   };
 
-  const CONTACT_FAQS = [
-    {
-      question: "How can I apply for research or dissertation supervision by Dr. Junaid Akram, PhD?",
-      answer:
-        "Email Junaid.Akram@nottingham.edu.cn with your academic background, CV, transcripts, selected research topic, and technical proficiencies.",
-    },
-    {
-      question: "Can corporate or government clients request a software security audit or vulnerability assessment?",
-      answer:
-        "Yes. The SSA Research Lab conducts industrial static application security testing (SAST), zero-day vulnerability audits, semantic code clone detection to protect intellectual property, and Android/IoT malware security assessments for corporate and government partners.",
-    },
-    {
-      question: "What research areas does the SSA Lab focus on?",
-      answer:
-        "The SSA Lab focuses on software vulnerability detection, code clone analysis, malware detection, automated software testing, and software evolution.",
-    },
-    {
-      question: "Is Dr. Junaid Akram, PhD an HEC-approved PhD supervisor?",
-      answer:
-        "Yes. Dr. Junaid Akram, PhD is an HEC-approved PhD supervisor with an active track record of supervising doctoral, masters, and undergraduate engineering research.",
-    },
-    {
-      question: "What is Dr. Junaid Akram, PhD's office location and institution?",
-      answer:
-        `${profile.office || academicProfile.office}. (Former affiliation: Assistant Professor & Program Incharge, COMSATS University Islamabad, Lahore Campus).`,
-    },
-    {
-      question: "What is his official phone contact?",
-      answer:
-        `${profile.phone || academicProfile.phone || "+86 (0) 574 88180000 (Ext. 6424)"}`,
-    },
-    {
-      question: "What is the expected turnaround for client security assessment and research proposals?",
-      answer:
-        "Formal client assessment and research collaboration inquiries submitted via the portal or direct email receive a response within 24 to 48 business hours.",
-    },
-  ];
-
   const contactJsonLd = [
     contactPageSchema({ url: `${SITE_URL}/contact` }),
     personSchema(),
@@ -2385,7 +2347,6 @@ export function ContactPage() {
       serviceType: "Software Security Assessment & Academic Research Supervision",
       url: `${SITE_URL}/contact`,
     }),
-    faqSchema(CONTACT_FAQS),
   ];
 
   return (
@@ -2759,40 +2720,6 @@ export function ContactPage() {
             </div>
           </div>
         )}
-      </section>
-
-      {/* ── FAQ Section (Visible matching FAQPage Schema) ── */}
-      <section className={styles.section}>
-        <div className={styles.sectionHeading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
-          <div style={{ flex: '1 1 min(100%, 600px)' }}>
-            <p className={styles.eyebrow}>Frequently Asked Questions</p>
-            <h2>Supervision & Research FAQs</h2>
-            <p className={styles.sectionLead}>
-              Common questions about SSA Lab student requirements, research tools, thesis topics, and meeting schedules.
-            </p>
-          </div>
-          <div className={styles.projectIllustrationCard} style={{ flexShrink: 0, margin: '0 auto', padding: '12px 18px' }}>
-            <img
-              src="/academic/illustrations/faq-helpdesk.webp"
-              alt="SSA Lab FAQs 3D Illustration"
-              width={160}
-              height={140}
-              style={{ objectFit: 'contain', maxHeight: '130px' }}
-              className={styles.illustrationImage}
-            />
-          </div>
-        </div>
-        <div className={styles.faqGrid}>
-          {CONTACT_FAQS.map((faq, index) => (
-            <div key={index} className={styles.faqCard}>
-              <h3 className={styles.faqQuestion}>
-                <HelpCircle size={18} className={styles.faqIcon} />
-                {faq.question}
-              </h3>
-              <p className={styles.faqAnswer}>{faq.answer}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* Map Section */}
