@@ -4,8 +4,26 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { eventHighlightSchema } from '../../../lib/validation/schemas';
 import { Save, ArrowLeft, Calendar, Image as ImageIcon, ExternalLink, MapPin, Tag } from 'lucide-react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 import ImageUploader from '../ImageUploader/ImageUploader';
 import styles from './NewsEventForm.module.css';
+
+const EVENT_CATEGORIES = {
+  news: 'News',
+  workshop: 'Workshop',
+  conference: 'Conference',
+  seminar: 'Seminar',
+  exhibition: 'Exhibition',
+  award: 'Award',
+  'poster session': 'Poster Session',
+  other: 'Other',
+};
+
+function normalizeEventCategory(cat) {
+  if (!cat) return 'News';
+  const key = String(cat).trim().toLowerCase();
+  return EVENT_CATEGORIES[key] || cat;
+}
 
 export default function NewsEventForm({
   initialData = {},
@@ -13,6 +31,27 @@ export default function NewsEventForm({
   isSubmitting = false,
   isEdit = false,
 }) {
+  const buildDefaults = (data = {}) => ({
+    title: data.title || '',
+    slug: data.slug || '',
+    year: data.year || new Date().getFullYear().toString(),
+    date: data.date || data.dateDisplay || '',
+    badge: data.badge || 'News',
+    category: normalizeEventCategory(data.category),
+    venue: data.venue || '',
+    location: data.location || '',
+    summary: data.summary || '',
+    content: data.content || data.details || '',
+    image: data.image || data.src || '',
+    alt: data.alt || '',
+    caption: data.caption || data.galleryCaption || '',
+    orientation: data.orientation || 'landscape',
+    isGalleryItem: Boolean(data.isGalleryItem),
+    published: data.published !== false,
+    featured: Boolean(data.featured),
+    displayOrder: Number(data.displayOrder) || 0,
+  });
+
   const {
     register,
     handleSubmit,
@@ -23,50 +62,12 @@ export default function NewsEventForm({
     reset,
   } = useForm({
     resolver: zodResolver(eventHighlightSchema),
-    defaultValues: {
-      title: initialData.title || '',
-      slug: initialData.slug || '',
-      year: initialData.year || new Date().getFullYear().toString(),
-      date: initialData.date || initialData.dateDisplay || '',
-      badge: initialData.badge || 'News',
-      category: initialData.category || 'News',
-      venue: initialData.venue || '',
-      location: initialData.location || '',
-      summary: initialData.summary || '',
-      content: initialData.content || initialData.details || '',
-      image: initialData.image || initialData.src || '',
-      alt: initialData.alt || '',
-      caption: initialData.caption || initialData.galleryCaption || '',
-      orientation: initialData.orientation || 'landscape',
-      isGalleryItem: Boolean(initialData.isGalleryItem),
-      published: initialData.published !== false,
-      featured: Boolean(initialData.featured),
-      displayOrder: Number(initialData.displayOrder) || 0,
-    },
+    defaultValues: buildDefaults(initialData),
   });
 
   useEffect(() => {
     if (initialData && Object.keys(initialData).length > 0) {
-      reset({
-        title: initialData.title || '',
-        slug: initialData.slug || '',
-        year: initialData.year || new Date().getFullYear().toString(),
-        date: initialData.date || initialData.dateDisplay || '',
-        badge: initialData.badge || 'News',
-        category: initialData.category || 'News',
-        venue: initialData.venue || '',
-        location: initialData.location || '',
-        summary: initialData.summary || '',
-        content: initialData.content || initialData.details || '',
-        image: initialData.image || initialData.src || '',
-        alt: initialData.alt || '',
-        caption: initialData.caption || initialData.galleryCaption || '',
-        orientation: initialData.orientation || 'landscape',
-        isGalleryItem: Boolean(initialData.isGalleryItem),
-        published: initialData.published !== false,
-        featured: Boolean(initialData.featured),
-        displayOrder: Number(initialData.displayOrder) || 0,
-      });
+      reset(buildDefaults(initialData));
     }
   }, [initialData, reset]);
 
@@ -81,8 +82,13 @@ export default function NewsEventForm({
     onSubmit(payload);
   };
 
+  const handleFormError = (formErrors) => {
+    const firstErr = Object.values(formErrors)[0];
+    toast.error(firstErr?.message || 'Please check the required fields before saving.');
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit, handleFormError)} noValidate>
       {/* Top Bar */}
       <div className={styles.topBar}>
         <Link href="/admin/news-events" className={styles.backLink}>

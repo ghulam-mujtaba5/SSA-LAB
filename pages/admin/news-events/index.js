@@ -96,14 +96,19 @@ export default function NewsEventsAdminPage() {
   };
 
   // Reorder Handler (Move item up/down)
-  const handleMoveOrder = async (index, direction) => {
-    const targetIndex = index + direction;
-    if (targetIndex < 0 || targetIndex >= events.length) return;
+  const handleMoveOrder = async (filteredIndex, direction) => {
+    const targetFilteredIndex = filteredIndex + direction;
+    if (targetFilteredIndex < 0 || targetFilteredIndex >= filtered.length) return;
+
+    const currentItem = filtered[filteredIndex];
+    const targetItem = filtered[targetFilteredIndex];
+    const indexA = events.findIndex((e) => e._id === currentItem._id);
+    const indexB = events.findIndex((e) => e._id === targetItem._id);
+    if (indexA === -1 || indexB === -1) return;
 
     const reordered = [...events];
-    const temp = reordered[index];
-    reordered[index] = reordered[targetIndex];
-    reordered[targetIndex] = temp;
+    reordered[indexA] = events[indexB];
+    reordered[indexB] = events[indexA];
 
     const itemsPayload = reordered.map((item, idx) => ({
       id: item._id,

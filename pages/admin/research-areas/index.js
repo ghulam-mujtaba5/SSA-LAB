@@ -73,14 +73,19 @@ export default function ResearchAreasAdminPage() {
   };
 
   // Reorder Handler (Move item up/down)
-  const handleMoveOrder = async (index, direction) => {
-    const targetIndex = index + direction;
-    if (targetIndex < 0 || targetIndex >= domains.length) return;
+  const handleMoveOrder = async (filteredIndex, direction) => {
+    const targetFilteredIndex = filteredIndex + direction;
+    if (targetFilteredIndex < 0 || targetFilteredIndex >= filtered.length) return;
+
+    const currentItem = filtered[filteredIndex];
+    const targetItem = filtered[targetFilteredIndex];
+    const indexA = domains.findIndex((d) => d._id === currentItem._id);
+    const indexB = domains.findIndex((d) => d._id === targetItem._id);
+    if (indexA === -1 || indexB === -1) return;
 
     const reordered = [...domains];
-    const temp = reordered[index];
-    reordered[index] = reordered[targetIndex];
-    reordered[targetIndex] = temp;
+    reordered[indexA] = domains[indexB];
+    reordered[indexB] = domains[indexA];
 
     const itemsPayload = reordered.map((item, idx) => ({
       id: item._id,

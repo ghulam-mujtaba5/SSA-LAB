@@ -4,7 +4,25 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { publicationSchema } from '../../../lib/validation/schemas';
 import { Save, ArrowLeft, Sparkles, BookOpen, ExternalLink, FileText, Code, Tag } from 'lucide-react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 import styles from './PublicationForm.module.css';
+
+const PUB_TYPES = {
+  journal: 'Journal',
+  conference: 'Conference',
+  'book chapter': 'Book Chapter',
+  book: 'Book Chapter',
+  preprint: 'Preprint',
+  workshop: 'Workshop',
+  patent: 'Patent',
+  other: 'Other',
+};
+
+function normalizePubType(type) {
+  if (!type) return 'Journal';
+  const key = String(type).trim().toLowerCase();
+  return PUB_TYPES[key] || type;
+}
 
 // Simple client-side BibTeX parser helper
 function parseBibtexString(bibtex) {
@@ -50,6 +68,24 @@ export default function PublicationForm({
 }) {
   const [tagInput, setTagInput] = useState('');
 
+  const buildDefaults = (data = {}) => ({
+    title: data.title || '',
+    slug: data.slug || '',
+    year: data.year ? String(data.year) : new Date().getFullYear().toString(),
+    type: normalizePubType(data.type),
+    authors: data.authors || '',
+    venue: data.venue || '',
+    href: data.href || '',
+    bibtex: data.bibtex || '',
+    abstract: data.abstract || '',
+    pdfUrl: data.pdfUrl || '',
+    codeUrl: data.codeUrl || '',
+    featured: Boolean(data.featured),
+    published: data.published !== false,
+    displayOrder: Number(data.displayOrder) || 0,
+    tags: Array.isArray(data.tags) ? data.tags : [],
+  });
+
   const {
     register,
     handleSubmit,
@@ -60,44 +96,12 @@ export default function PublicationForm({
     reset,
   } = useForm({
     resolver: zodResolver(publicationSchema),
-    defaultValues: {
-      title: initialData.title || '',
-      slug: initialData.slug || '',
-      year: initialData.year ? String(initialData.year) : new Date().getFullYear().toString(),
-      type: initialData.type || 'Journal',
-      authors: initialData.authors || '',
-      venue: initialData.venue || '',
-      href: initialData.href || '',
-      bibtex: initialData.bibtex || '',
-      abstract: initialData.abstract || '',
-      pdfUrl: initialData.pdfUrl || '',
-      codeUrl: initialData.codeUrl || '',
-      featured: Boolean(initialData.featured),
-      published: initialData.published !== false,
-      displayOrder: Number(initialData.displayOrder) || 0,
-      tags: Array.isArray(initialData.tags) ? initialData.tags : [],
-    },
+    defaultValues: buildDefaults(initialData),
   });
 
   useEffect(() => {
     if (initialData && Object.keys(initialData).length > 0) {
-      reset({
-        title: initialData.title || '',
-        slug: initialData.slug || '',
-        year: initialData.year ? String(initialData.year) : new Date().getFullYear().toString(),
-        type: initialData.type || 'Journal',
-        authors: initialData.authors || '',
-        venue: initialData.venue || '',
-        href: initialData.href || '',
-        bibtex: initialData.bibtex || '',
-        abstract: initialData.abstract || '',
-        pdfUrl: initialData.pdfUrl || '',
-        codeUrl: initialData.codeUrl || '',
-        featured: Boolean(initialData.featured),
-        published: initialData.published !== false,
-        displayOrder: Number(initialData.displayOrder) || 0,
-        tags: Array.isArray(initialData.tags) ? initialData.tags : [],
-      });
+      reset(buildDefaults(initialData));
     }
   }, [initialData, reset]);
 
@@ -145,8 +149,13 @@ export default function PublicationForm({
     onSubmit(payload);
   };
 
+  const handleFormError = (formErrors) => {
+    const firstErr = Object.values(formErrors)[0];
+    toast.error(firstErr?.message || 'Please check the required fields before saving.');
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit, handleFormError)} noValidate>
       {/* Top Header Controls */}
       <div className={styles.topBar}>
         <Link href="/admin/publications" className={styles.backLink}>

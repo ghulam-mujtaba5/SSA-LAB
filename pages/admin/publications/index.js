@@ -101,14 +101,19 @@ export default function PublicationsAdminPage() {
   };
 
   // Reorder Handler (Move item up/down)
-  const handleMoveOrder = async (index, direction) => {
-    const targetIndex = index + direction;
-    if (targetIndex < 0 || targetIndex >= publications.length) return;
+  const handleMoveOrder = async (filteredIndex, direction) => {
+    const targetFilteredIndex = filteredIndex + direction;
+    if (targetFilteredIndex < 0 || targetFilteredIndex >= filtered.length) return;
+
+    const currentItem = filtered[filteredIndex];
+    const targetItem = filtered[targetFilteredIndex];
+    const indexA = publications.findIndex((p) => p._id === currentItem._id);
+    const indexB = publications.findIndex((p) => p._id === targetItem._id);
+    if (indexA === -1 || indexB === -1) return;
 
     const reordered = [...publications];
-    const temp = reordered[index];
-    reordered[index] = reordered[targetIndex];
-    reordered[targetIndex] = temp;
+    reordered[indexA] = publications[indexB];
+    reordered[indexB] = publications[indexA];
 
     // Assign display orders
     const itemsPayload = reordered.map((item, idx) => ({

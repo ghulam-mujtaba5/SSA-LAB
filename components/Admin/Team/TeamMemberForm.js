@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { memberSchema } from '../../../lib/validation/schemas';
 import { Save, ArrowLeft, User, Mail, Linkedin, Globe, Github, Award, BookOpen, Building } from 'lucide-react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 import ImageUploader from '../ImageUploader/ImageUploader';
 import styles from './TeamMemberForm.module.css';
 
@@ -101,8 +102,13 @@ export default function TeamMemberForm({
     onSubmit(payload);
   };
 
+  const handleFormError = (formErrors) => {
+    const firstErr = Object.values(formErrors)[0];
+    toast.error(firstErr?.message || 'Please check the required fields before saving.');
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)} noValidate>
+    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit, handleFormError)} noValidate>
       {/* Top Controls */}
       <div className={styles.topBar}>
         <Link href="/admin/team" className={styles.backLink}>

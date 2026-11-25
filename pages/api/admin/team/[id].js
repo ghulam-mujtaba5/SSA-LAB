@@ -24,39 +24,16 @@ export default async function handler(req, res) {
 
   if (req.method === 'PUT') {
     try {
-      const { name, category, role, degree, university, affiliation, period, placement, currentPosition, year, topic, focus, researchGroup, expertise, collaborationArea, country, bio, image, socialLinks, publications, published, displayOrder } = req.body;
       const updateData = {
-        name,
-        category: category || 'pg_researcher',
-        role: role || '',
-        degree: degree || '',
-        university: university || '',
-        affiliation: affiliation || '',
-        period: period || '',
-        placement: placement || '',
-        currentPosition: currentPosition || '',
-        year: year || '',
-        topic: topic || '',
-        focus: focus || '',
-        researchGroup: researchGroup || '',
-        collaborationArea: collaborationArea || '',
-        country: country || '',
-        bio: bio || '',
-        image: image || '',
-        socialLinks: socialLinks || {},
-        published: published !== undefined ? Boolean(published) : true,
-        displayOrder: Number(displayOrder) || 0,
+        ...req.body,
+        category: req.body.category || 'pg-researcher',
+        published: req.body.published !== undefined ? Boolean(req.body.published) : true,
+        featured: Boolean(req.body.featured),
+        displayOrder: Number(req.body.displayOrder) || 0,
         adminModified: true,
       };
 
-      if (expertise !== undefined) {
-        updateData.expertise = Array.isArray(expertise) ? expertise : typeof expertise === 'string' ? expertise.split(',').map((e) => e.trim()).filter(Boolean) : [];
-      }
-      if (publications !== undefined) {
-        updateData.publications = Array.isArray(publications) ? publications : typeof publications === 'string' ? publications.split('\n').map((p) => p.trim()).filter(Boolean) : [];
-      }
-
-      const updated = await TeamMember.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+      const updated = await TeamMember.findByIdAndUpdate(id, { $set: updateData }, { new: true, runValidators: true });
       if (!updated) return res.status(404).json({ success: false, message: 'Team member not found' });
 
       await createAuditLog({
