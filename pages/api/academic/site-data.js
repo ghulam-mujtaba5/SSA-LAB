@@ -95,7 +95,11 @@ export default async function handler(req, res) {
 
     // Format team members by category
     const isPgResearcher = (c) => c === 'pg_researcher' || c === 'pg-researcher';
-    const isJuniorCollaborator = (c) => c === 'junior_collaborator' || c === 'junior-collaborator';
+    const isJuniorCollaborator = (c) =>
+      c === 'junior_collaborator' ||
+      c === 'junior-collaborator' ||
+      c === 'junior-researcher' ||
+      c === 'junior_researcher';
     const isCoInvestigator = (c) => c === 'co_investigator' || c === 'co-investigator' || c === 'faculty';
     const isAlumni = (c) => c === 'alumnus' || c === 'alumni';
     const isCollaborator = (c) => c === 'collaborator';

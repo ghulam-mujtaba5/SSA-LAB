@@ -78,14 +78,19 @@ export default function TeamAdminPage() {
   };
 
   // Reorder Handler (Move item up/down)
-  const handleMoveOrder = async (index, direction) => {
-    const targetIndex = index + direction;
-    if (targetIndex < 0 || targetIndex >= members.length) return;
+  const handleMoveOrder = async (filteredIndex, direction) => {
+    const targetFilteredIndex = filteredIndex + direction;
+    if (targetFilteredIndex < 0 || targetFilteredIndex >= filtered.length) return;
+
+    const currentItem = filtered[filteredIndex];
+    const targetItem = filtered[targetFilteredIndex];
+    const indexA = members.findIndex((m) => m._id === currentItem._id);
+    const indexB = members.findIndex((m) => m._id === targetItem._id);
+    if (indexA === -1 || indexB === -1) return;
 
     const reordered = [...members];
-    const temp = reordered[index];
-    reordered[index] = reordered[targetIndex];
-    reordered[targetIndex] = temp;
+    reordered[indexA] = members[indexB];
+    reordered[indexB] = members[indexA];
 
     const itemsPayload = reordered.map((item, idx) => ({
       id: item._id,

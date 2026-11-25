@@ -7,12 +7,70 @@ import Link from 'next/link';
 import ImageUploader from '../ImageUploader/ImageUploader';
 import styles from './TeamMemberForm.module.css';
 
+const CATEGORY_ALIASES = {
+  'junior_collaborator': 'junior-collaborator',
+  'junior-collaborator': 'junior-collaborator',
+  'junior_researcher': 'junior-collaborator',
+  'junior-researcher': 'junior-collaborator',
+  'pg_researcher': 'pg-researcher',
+  'pg-researcher': 'pg-researcher',
+  'co_investigator': 'co-investigator',
+  'co-investigator': 'co-investigator',
+  'supervised-project': 'supervised-project',
+  'supervisor': 'supervised-project',
+  'alumnus': 'alumni',
+  'alumni': 'alumni',
+  'collaborator': 'collaborator',
+  'faculty': 'faculty',
+  'core-team': 'core-team',
+  'other': 'other',
+};
+
+function normalizeCategory(cat) {
+  if (!cat) return 'pg-researcher';
+  const key = String(cat).trim().toLowerCase();
+  return CATEGORY_ALIASES[key] || key;
+}
+
 export default function TeamMemberForm({
   initialData = {},
   onSubmit,
   isSubmitting = false,
   isEdit = false,
 }) {
+  const buildFormValues = (data = {}) => ({
+    name: data.name || '',
+    slug: data.slug || '',
+    category: normalizeCategory(data.category),
+    role: data.role || '',
+    memberId: data.memberId || '',
+    degree: data.degree || '',
+    affiliation: data.affiliation || '',
+    institution: data.institution || '',
+    specialization: data.specialization || '',
+    topic: data.topic || '',
+    focus: data.focus || '',
+    status: data.status || 'Active',
+    bio: data.bio || '',
+    badge: data.badge || '',
+    image: data.image || '',
+    email: data.email || data.socialLinks?.email || '',
+    phone: data.phone || '',
+    googleScholar: data.googleScholar || data.socialLinks?.scholar || '',
+    orcid: data.orcid || '',
+    researchGate: data.researchGate || '',
+    officialProfile: data.officialProfile || '',
+    linkedin: data.linkedin || data.socialLinks?.linkedin || '',
+    github: data.github || data.socialLinks?.github || '',
+    term: data.term || data.period || '',
+    organization: data.organization || data.placement || '',
+    projectTitle: data.projectTitle || '',
+    details: data.details || '',
+    published: data.published !== false,
+    featured: Boolean(data.featured),
+    displayOrder: Number(data.displayOrder) || 0,
+  });
+
   const {
     register,
     handleSubmit,
@@ -23,74 +81,12 @@ export default function TeamMemberForm({
     reset,
   } = useForm({
     resolver: zodResolver(memberSchema),
-    defaultValues: {
-      name: initialData.name || '',
-      slug: initialData.slug || '',
-      category: initialData.category || 'pg_researcher',
-      role: initialData.role || '',
-      memberId: initialData.memberId || '',
-      degree: initialData.degree || '',
-      affiliation: initialData.affiliation || '',
-      institution: initialData.institution || '',
-      specialization: initialData.specialization || '',
-      topic: initialData.topic || '',
-      focus: initialData.focus || '',
-      status: initialData.status || 'Active',
-      bio: initialData.bio || '',
-      badge: initialData.badge || '',
-      image: initialData.image || '',
-      email: initialData.email || initialData.socialLinks?.email || '',
-      phone: initialData.phone || '',
-      googleScholar: initialData.googleScholar || initialData.socialLinks?.scholar || '',
-      orcid: initialData.orcid || '',
-      researchGate: initialData.researchGate || '',
-      officialProfile: initialData.officialProfile || '',
-      linkedin: initialData.linkedin || initialData.socialLinks?.linkedin || '',
-      github: initialData.github || initialData.socialLinks?.github || '',
-      term: initialData.term || initialData.period || '',
-      organization: initialData.organization || initialData.placement || '',
-      projectTitle: initialData.projectTitle || '',
-      details: initialData.details || '',
-      published: initialData.published !== false,
-      featured: Boolean(initialData.featured),
-      displayOrder: Number(initialData.displayOrder) || 0,
-    },
+    defaultValues: buildFormValues(initialData),
   });
 
   useEffect(() => {
     if (initialData && Object.keys(initialData).length > 0) {
-      reset({
-        name: initialData.name || '',
-        slug: initialData.slug || '',
-        category: initialData.category || 'pg_researcher',
-        role: initialData.role || '',
-        memberId: initialData.memberId || '',
-        degree: initialData.degree || '',
-        affiliation: initialData.affiliation || '',
-        institution: initialData.institution || '',
-        specialization: initialData.specialization || '',
-        topic: initialData.topic || '',
-        focus: initialData.focus || '',
-        status: initialData.status || 'Active',
-        bio: initialData.bio || '',
-        badge: initialData.badge || '',
-        image: initialData.image || '',
-        email: initialData.email || initialData.socialLinks?.email || '',
-        phone: initialData.phone || '',
-        googleScholar: initialData.googleScholar || initialData.socialLinks?.scholar || '',
-        orcid: initialData.orcid || '',
-        researchGate: initialData.researchGate || '',
-        officialProfile: initialData.officialProfile || '',
-        linkedin: initialData.linkedin || initialData.socialLinks?.linkedin || '',
-        github: initialData.github || initialData.socialLinks?.github || '',
-        term: initialData.term || initialData.period || '',
-        organization: initialData.organization || initialData.placement || '',
-        projectTitle: initialData.projectTitle || '',
-        details: initialData.details || '',
-        published: initialData.published !== false,
-        featured: Boolean(initialData.featured),
-        displayOrder: Number(initialData.displayOrder) || 0,
-      });
+      reset(buildFormValues(initialData));
     }
   }, [initialData, reset]);
 
@@ -106,7 +102,7 @@ export default function TeamMemberForm({
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)} noValidate>
       {/* Top Controls */}
       <div className={styles.topBar}>
         <Link href="/admin/team" className={styles.backLink}>
@@ -140,13 +136,14 @@ export default function TeamMemberForm({
           <div className={styles.field}>
             <label htmlFor="category">Personnel Category *</label>
             <select id="category" {...register('category')}>
-              <option value="junior-collaborator">Lecturer & Junior Research Collaborator (Lecturer)</option>
-              <option value="pg_researcher">Postgraduate Researcher (MS/PhD)</option>
-              <option value="co_investigator">Faculty / Co-Investigator</option>
+              <option value="junior-collaborator">Lecturer, Junior Research Collaborator</option>
+              <option value="pg-researcher">Postgraduate Researcher (MS/PhD)</option>
+              <option value="co-investigator">Faculty / Co-Investigator</option>
               <option value="supervised-project">Supervised Thesis / Project</option>
-              <option value="alumnus">Alumni Placement</option>
+              <option value="alumni">Alumni Placement</option>
               <option value="collaborator">International Collaborator</option>
               <option value="faculty">Core Faculty</option>
+              <option value="core-team">Core Lab Team</option>
               <option value="other">Other Contributor</option>
             </select>
             {errors.category && <span className={styles.errorText}>{errors.category.message}</span>}
@@ -160,11 +157,11 @@ export default function TeamMemberForm({
               id="role"
               type="text"
               list="role-suggestions"
-              placeholder="e.g. Lecturer & Junior Research Collaborator"
+              placeholder="e.g. Lecturer, Junior Research Collaborator"
               {...register('role')}
             />
             <datalist id="role-suggestions">
-              <option value="Lecturer & Junior Research Collaborator" />
+              <option value="Lecturer, Junior Research Collaborator" />
               <option value="Lecturer (PhD Scholar)" />
               <option value="Lecturer" />
               <option value="Lab Director & Principal Investigator" />

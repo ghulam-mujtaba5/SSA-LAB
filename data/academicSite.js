@@ -1419,7 +1419,7 @@ export const pgResearchers = [
 export const juniorCollaborators = [
   {
     name: "Mr. Zaheer Ahmad Gondal",
-    role: "Lecturer & Junior Research Collaborator",
+    role: "Lecturer, Junior Research Collaborator",
     designation: "Lecturer (PhD Scholar)",
     category: "junior-collaborator",
     affiliation: "Department of Computer Science, COMSATS University Islamabad, Lahore Campus",
@@ -1437,7 +1437,7 @@ export const juniorCollaborators = [
   },
   {
     name: "Mr. Muhammad Nasir",
-    role: "Lecturer & Junior Research Collaborator",
+    role: "Lecturer, Junior Research Collaborator",
     designation: "Lecturer",
     category: "junior-collaborator",
     affiliation: "Department of Computer Science, COMSATS University Islamabad, Lahore Campus",
@@ -1455,7 +1455,7 @@ export const juniorCollaborators = [
   },
   {
     name: "Mr. Tahir Muhammad",
-    role: "Lecturer & Junior Research Collaborator",
+    role: "Lecturer, Junior Research Collaborator",
     designation: "Lecturer",
     category: "junior-collaborator",
     affiliation: "Department of Computer Science, COMSATS University Islamabad, Lahore Campus",
@@ -1473,7 +1473,7 @@ export const juniorCollaborators = [
   },
   {
     name: "Mr. Muhammad Ali Hassan",
-    role: "Lecturer & Junior Research Collaborator",
+    role: "Lecturer, Junior Research Collaborator",
     designation: "Lecturer",
     category: "junior-collaborator",
     affiliation: "Department of Computer Science, COMSATS University Islamabad, Lahore Campus",
@@ -1490,7 +1490,7 @@ export const juniorCollaborators = [
   },
   {
     name: "Ms. Yella Mehroze",
-    role: "Lecturer & Junior Research Collaborator",
+    role: "Lecturer, Junior Research Collaborator",
     designation: "Lecturer",
     category: "junior-collaborator",
     affiliation: "Department of Computer Science, COMSATS University Islamabad, Lahore Campus",
@@ -1508,7 +1508,7 @@ export const juniorCollaborators = [
   },
   {
     name: "Ms. Rabail Asghar",
-    role: "Lecturer & Junior Research Collaborator",
+    role: "Lecturer, Junior Research Collaborator",
     designation: "Lecturer",
     category: "junior-collaborator",
     affiliation: "Department of Computer Science, COMSATS University Islamabad, Lahore Campus",

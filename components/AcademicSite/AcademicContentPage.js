@@ -1722,7 +1722,6 @@ export function TeamPage() {
           <div className={styles.sectionHeading}>
             <div>
               <p className={styles.eyebrow}>Faculty & Academic Collaboration</p>
-              <h2>Junior Research Collaborators</h2>
             </div>
             <p style={{ maxWidth: "560px", color: "var(--academic-muted)", fontSize: "0.88rem", margin: 0 }}>
               Faculty lecturers and emerging research collaborators at COMSATS University Islamabad, Lahore Campus partnering with SSA Lab on automated software testing, AI-driven healthcare prediction, cybersecurity, privacy preservation, and applied machine learning.
@@ -1753,7 +1752,6 @@ export function TeamPage() {
                     </div>
                     <div className={styles.collabMeta}>
                       <h3>{collab.name}</h3>
-                      <span className={styles.collabBadge}>{collab.badge || "Junior Collaborator"}</span>
                       <div className={styles.collabDegree}>{collab.designation || collab.role}</div>
                       <div className={styles.collabFocus} style={{ marginTop: "4px" }}>
                         {collab.affiliation || collab.institution}
